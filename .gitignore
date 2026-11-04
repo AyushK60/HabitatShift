@@ -1,0 +1,37 @@
+# ---- Python ----
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+
+# ---- Node ----
+node_modules/
+frontend/dist/
+frontend/.vite/
+
+# ---- Large satellite data (raw windows, GeoTIFF analysis rasters) ----
+data/raw/**
+!data/raw/.gitkeep
+data/processed/**
+!data/processed/.gitkeep
+data/cache/**
+!data/cache/.gitkeep
+
+# ---- Secrets (never commit credentials) ----
+.env
+.env.*
+!.env.example
+
+# ---- OS / editor ----
+Thumbs.db
+desktop.ini
+.DS_Store
+.vscode/
+.idea/
+
+# ---- Local scratch ----
+*.log
+!docs/evidence/m0/*.log
+tmp/
