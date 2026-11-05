@@ -7,7 +7,12 @@ therefore measures valid-data coverage *within the AOI* with the real SCL raster
 
 from __future__ import annotations
 
+import hashlib
+import json
+import logging
+import time
 from dataclasses import dataclass, field
+from pathlib import Path
 from typing import Any
 
 from rasterio.enums import Resampling
@@ -19,6 +24,8 @@ from ..catalog.models import SceneCandidate
 from ..preprocess import masks as mask_mod
 from ..preprocess.aoi import AOI
 from ..preprocess.grid import analysis_window
+
+LOGGER = logging.getLogger(__name__)
 
 
 @dataclass
@@ -72,13 +79,56 @@ def aoi_intersection_fraction(candidate: SceneCandidate, aoi: AOI) -> float:
     return float(scene_geom.intersection(aoi.polygon).area / aoi_area)
 
 
+def _measurement_cache_path(
+    cache_dir: Path, candidate: SceneCandidate, aoi: AOI, resolution: float
+) -> Path:
+    """Name the memo file for one (item, AOI grid, resolution) measurement.
+
+    The key includes the analysis-grid signature, so a different AOI or grid
+    resolution can never reuse an unrelated valid fraction.
+    """
+    signature = ";".join(
+        (
+            candidate.item_id,
+            candidate.asset(config.ASSET_SCL).href,
+            aoi.study_id,
+            f"{resolution:g}",
+            analysis_window(aoi, resolution).signature(),
+        )
+    )
+    digest = hashlib.sha256(signature.encode("utf-8")).hexdigest()[:40]
+    return cache_dir / f"{digest}.json"
+
+
 def measure_aoi_valid_fraction(
     candidate: SceneCandidate,
     aoi: AOI,
     *,
     resolution: float = config.GRID_RESOLUTION,
+    cache_dir: Path | None = None,
 ) -> tuple[float, dict[str, Any]]:
-    """Read the real SCL over the AOI and return its valid fraction."""
+    """Read the real SCL over the AOI and return its valid fraction.
+
+    When ``cache_dir`` is given the result is memoised for
+    :data:`backend.app.config.CACHE_TTL` seconds, so re-running the pipeline
+    does not re-download the same SCL window.  The memo stores the measured
+    fraction together with the mask report, never a fabricated value.
+    """
+    cache_path: Path | None = None
+    if cache_dir is not None:
+        cache_dir = Path(cache_dir)
+        cache_dir.mkdir(parents=True, exist_ok=True)
+        cache_path = _measurement_cache_path(cache_dir, candidate, aoi, resolution)
+        if cache_path.exists():
+            age = time.time() - cache_path.stat().st_mtime
+            if age <= config.CACHE_TTL:
+                try:
+                    memo = json.loads(cache_path.read_text(encoding="utf-8"))
+                    LOGGER.debug("valid-fraction cache hit %s", candidate.item_id)
+                    return float(memo["valid_fraction"]), memo["report"]
+                except (KeyError, ValueError, TypeError):     # pragma: no cover
+                    LOGGER.warning("discarding unreadable cache %s", cache_path)
+
     window = analysis_window(aoi, resolution)
     request = WindowRequest(
         dst_crs=window.crs,
@@ -90,7 +140,33 @@ def measure_aoi_valid_fraction(
     )
     scl = read_window(candidate.asset(config.ASSET_SCL).href, request)
     _, report = mask_mod.build_valid_mask(scl)
+    if cache_path is not None:
+        cache_path.write_text(
+            json.dumps(
+                {"valid_fraction": report.valid_fraction, "report": report.to_dict()},
+                indent=2,
+            ),
+            encoding="utf-8",
+        )
     return report.valid_fraction, report.to_dict()
+
+
+def _pre_rank(candidates: list[SceneCandidate], aoi: AOI) -> list[SceneCandidate]:
+    """Order candidates for *measurement* using metadata only.
+
+    Full-footprint coverage first, then the catalogue's global cloud figure.
+    This ordering only decides which candidates get their SCL measured under a
+    budget; the ranking that selects the scene still uses the measured in-AOI
+    valid fraction, and every unmeasured candidate is recorded as such.
+    """
+    return sorted(
+        candidates,
+        key=lambda c: (
+            -aoi_intersection_fraction(c, aoi),
+            c.cloud_cover if c.cloud_cover is not None else 100.0,
+            c.item_id,
+        ),
+    )
 
 
 def score_candidates(
@@ -99,18 +175,38 @@ def score_candidates(
     *,
     min_valid_fraction: float = config.MIN_SCENE_VALID_FRACTION,
     measure: bool = True,
+    max_measured: int | None = None,
+    cache_dir: Path | None = None,
 ) -> list[SceneScore]:
-    """Score every candidate, ordered best first."""
+    """Score every candidate, ordered best first.
+
+    ``max_measured`` bounds the number of remote SCL reads per search (the
+    expensive step); ``None`` measures every candidate.  Candidates outside the
+    budget are still returned, unmeasured and explicitly marked unusable.
+    """
+    order = _pre_rank(candidates, aoi) if max_measured is not None else list(candidates)
+    budget = len(order) if max_measured is None else max(int(max_measured), 0)
+    measured_ids = {c.item_id for c in order[:budget]}
+
     scores: list[SceneScore] = []
-    for candidate in candidates:
+    for candidate in order:
         intersection = aoi_intersection_fraction(candidate, aoi)
         notes: list[str] = []
         valid: float | None = None
         if intersection < 0.999:
             notes.append(f"AOI only {intersection:.3f} covered by scene footprint")
-        if measure and intersection > 0.05:
+        if candidate.item_id not in measured_ids:
+            notes.append(
+                "in-AOI validity not measured: outside the measurement budget"
+            )
+        elif measure and intersection > 0.05:
             try:
-                valid, _ = measure_aoi_valid_fraction(candidate, aoi)
+                if cache_dir is None:
+                    valid, _ = measure_aoi_valid_fraction(candidate, aoi)
+                else:
+                    valid, _ = measure_aoi_valid_fraction(
+                        candidate, aoi, cache_dir=cache_dir
+                    )
             except Exception as exc:                          # pragma: no cover - net
                 notes.append(f"valid-fraction read failed: {exc}")
         usable = (

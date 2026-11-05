@@ -59,6 +59,11 @@ def normalised_difference(a: np.ndarray, b: np.ndarray) -> np.ndarray:
         result = (first - second) / denominator
     result[np.abs(denominator) < DENOM_EPS] = np.nan
     result[~np.isfinite(result)] = np.nan
+    # For non-negative surface reflectance the index is bounded by [-1, 1].
+    # Values outside that range can only arise from negative reflectance (the
+    # L2A BOA offset on near-dark pixels) and are not interpretable, so they
+    # are excluded rather than allowed to dominate statistics.
+    result[np.abs(result) > 1.0] = np.nan
     return result
 
 

@@ -69,7 +69,6 @@ LOGGER = logging.getLogger("build_primary_study")
 
 STUDY_ID = "coringa_coastal"
 MANIFEST_PATH = config.MANIFEST_DIR / "m0_primary_study.json"
-EVIDENCE_DIR = config.DOCS_DIR / "evidence" / "m0"
 OUT_PROCESSED = config.PROCESSED_DIR / STUDY_ID
 OUT_PREVIEW = config.PREVIEW_DIR / STUDY_ID
 
@@ -117,6 +116,12 @@ def make_aoi(study: dict) -> AOI:
     )
 
 
+def _day_of_year_gap(a: dt.datetime, b: dt.datetime) -> int:
+    """Circular day-of-year distance, so December and January stay 'close'."""
+    gap = abs(a.timetuple().tm_yday - b.timetuple().tm_yday)
+    return min(gap, 366 - gap)
+
+
 def pick_scene(
     client: CatalogClient,
     aoi: AOI,
@@ -124,8 +129,14 @@ def pick_scene(
     window: dict,
     *,
     search_manifest: dict,
+    reference_date: dt.datetime | None = None,
 ) -> SceneCandidate:
-    """Search one period and return the best AOI-valid scene."""
+    """Search one period and return the best AOI-valid scene.
+
+    Among scenes that pass the in-AOI validity threshold the closest
+    season (calendar day) wins, with scene cloud as a tiebreak.  Global cloud
+    percentage alone never decides.
+    """
     start = dt.datetime.fromisoformat(window["start"] + "T00:00:00+00:00")
     end = dt.datetime.fromisoformat(window["end"] + "T23:59:59+00:00")
     request = SearchRequest(
@@ -137,9 +148,23 @@ def pick_scene(
         label=f"{period_id}:{window['start']}..{window['end']}",
     )
     result = client.search(request)
-    scores = score_candidates(result.items, aoi)
+    scores = score_candidates(
+        result.items,
+        aoi,
+        max_measured=config.MAX_MEASURED_CANDIDATES,
+        cache_dir=config.SCL_MEASUREMENT_CACHE_DIR,
+    )
     search_manifest[period_id] = {
         **result.to_dict(),
+        "selection_policy": {
+            "measurement_budget": config.MAX_MEASURED_CANDIDATES,
+            "measured_candidate_count": sum(
+                1 for s in scores if s.aoi_valid_fraction is not None
+            ),
+            "decision_metric": "measured in-AOI SCL valid fraction",
+            "usable_threshold": config.MIN_SCENE_VALID_FRACTION,
+            "unmeasured_candidates_are_unusable": True,
+        },
         "scores": [s.to_dict() for s in scores],
     }
     usable = [s for s in scores if s.usable]
@@ -152,11 +177,23 @@ def pick_scene(
         raise SystemExit(
             f"no usable scene for {period_id}; best candidate: {detail}"
         )
+    by_id = {c.item_id: c for c in result.items}
+    if reference_date is not None:
+        usable.sort(
+            key=lambda s: (
+                _day_of_year_gap(by_id[s.item_id].acquired, reference_date),
+                s.cloud_cover_percent or 0.0,
+            )
+        )
+        LOGGER.info(
+            "%s: seasonal match to %s -> %s (%+d day-of-year gap)",
+            period_id,
+            reference_date.date(),
+            usable[0].item_id,
+            _day_of_year_gap(by_id[usable[0].item_id].acquired, reference_date),
+        )
     chosen = usable[0].item_id
-    for candidate in result.items:
-        if candidate.item_id == chosen:
-            return candidate
-    raise SystemExit(f"internal: chosen item {chosen} vanished")  # pragma: no cover
+    return by_id[chosen]
 
 
 def process_period(
@@ -473,7 +510,15 @@ def build_manifest_sections(
                     "resampling_continuous": "bilinear",
                     "resampling_categorical": "nearest",
                     "scale": config.EXPECTED_SCALE,
-                    "offset": config.EXPECTED_OFFSET,
+                    "offset_policy": {
+                        "pre_04.00": config.NO_OFFSET,
+                        "04.00_or_later_not_baked_in": config.BOA_ADD_OFFSET,
+                        "04.00_or_later_baked_in": config.NO_OFFSET,
+                        "rule": (
+                            "apply raster:bands offset unless "
+                            "earthsearch:boa_offset_applied=true"
+                        ),
+                    },
                     "nodata": config.EXPECTED_NODATA,
                     "scl_accepted": list(config.SCL_VALID_CLASSES),
                     "scl_rejected": list(config.SCL_ALWAYS_INVALID),
@@ -516,6 +561,9 @@ def main(argv: list[str] | None = None) -> int:
         level=logging.DEBUG if args.verbose else logging.INFO,
         format="%(levelname)s %(name)s: %(message)s",
     )
+    # rasterio logs one INFO line per virtual file/session; irrelevant here.
+    logging.getLogger("rasterio").setLevel(logging.WARNING)
+    logging.getLogger("rasterio.session").setLevel(logging.WARNING)
 
     if args.force_refresh:
         for path in config.CACHE_DIR.glob("*.json"):
@@ -551,7 +599,8 @@ def main(argv: list[str] | None = None) -> int:
         client, aoi, "earlier", periods["earlier"], search_manifest=search_manifest
     )
     later_scene = pick_scene(
-        client, aoi, "later", periods["later"], search_manifest=search_manifest
+        client, aoi, "later", periods["later"],
+        search_manifest=search_manifest, reference_date=earlier_scene.acquired,
     )
     if earlier_scene.item_id == later_scene.item_id:
         raise SystemExit("both periods resolved to the same STAC item")
@@ -563,6 +612,10 @@ def main(argv: list[str] | None = None) -> int:
     later.outputs = write_period_outputs(later, window, aoi_mask)
     _, _common, delta_outputs, delta_detail = write_delta(
         earlier, later, window, aoi_mask
+    )
+    legend_png = preview.ndvi_legend(OUT_PREVIEW / "ndvi_legend.png")
+    delta_outputs["ndvi_legend_png"] = manifest_mod.describe_output(
+        legend_png, "preview"
     )
 
     verifications = [

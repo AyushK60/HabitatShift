@@ -1,0 +1,140 @@
+{
+  "study_id": "coringa_coastal",
+  "title": "Coringa / Godavari delta, Andhra Pradesh",
+  "study_type": "coastal_ecotone",
+  "periods": [
+    {
+      "period_id": "earlier",
+      "date": "2020-03-26",
+      "item_id": "S2A_44QPD_20200326_1_L2A",
+      "valid_fraction": 0.999976,
+      "cloud_cover_percent": 0.036885,
+      "ndvi_stats": {
+        "valid_count": 165132,
+        "total_count": 167310,
+        "valid_fraction": 0.986982,
+        "min": -0.995157,
+        "max": 0.999537,
+        "mean": 0.533215,
+        "std": 0.407616,
+        "quantiles": {
+          "p05": -0.231351,
+          "p25": 0.274386,
+          "p50": 0.648567,
+          "p75": 0.887497,
+          "p95": 0.955508
+        }
+      },
+      "png": "data/previews/coringa_coastal/earlier_2020-03-26_true_colour.png",
+      "ndvi_png": "data/previews/coringa_coastal/earlier_2020-03-26_ndvi.png",
+      "mask_png": "data/previews/coringa_coastal/earlier_2020-03-26_valid_mask.png",
+      "reflectance_tif": "data/processed/coringa_coastal/earlier_2020-03-26_reflectance.tif"
+    },
+    {
+      "period_id": "later",
+      "date": "2025-03-25",
+      "item_id": "S2B_44QPD_20250325_0_L2A",
+      "valid_fraction": 0.957962,
+      "cloud_cover_percent": 5.009511,
+      "ndvi_stats": {
+        "valid_count": 158194,
+        "total_count": 167310,
+        "valid_fraction": 0.945514,
+        "min": -0.283133,
+        "max": 0.857544,
+        "mean": 0.443271,
+        "std": 0.268291,
+        "quantiles": {
+          "p05": -0.061571,
+          "p25": 0.26273,
+          "p50": 0.466312,
+          "p75": 0.68968,
+          "p95": 0.786614
+        }
+      },
+      "png": "data/previews/coringa_coastal/later_2025-03-25_true_colour.png",
+      "ndvi_png": "data/previews/coringa_coastal/later_2025-03-25_ndvi.png",
+      "mask_png": "data/previews/coringa_coastal/later_2025-03-25_valid_mask.png",
+      "reflectance_tif": "data/processed/coringa_coastal/later_2025-03-25_reflectance.tif"
+    }
+  ],
+  "delta": {
+    "comparable_valid_fraction": 0.957938,
+    "suitable_for_comparison": true,
+    "threshold": 0.15,
+    "thresholded_areas": {
+      "threshold": 0.15,
+      "valid_pixels": 158190,
+      "decrease_pixels": 67650,
+      "increase_pixels": 16601,
+      "stable_pixels": 73939,
+      "valid_area_ha": 1581.9,
+      "decrease_area_ha": 676.5,
+      "increase_area_ha": 166.01
+    },
+    "delta_stats": {
+      "valid_count": 158190,
+      "total_count": 167310,
+      "valid_fraction": 0.94549,
+      "min": -0.933229,
+      "max": 1.447728,
+      "mean": -0.087687,
+      "std": 0.222697,
+      "quantiles": {
+        "p05": -0.396998,
+        "p25": -0.208682,
+        "p50": -0.12539,
+        "p75": 0.036909,
+        "p95": 0.285217
+      }
+    },
+    "valid_common_pixels": 158190,
+    "aoi_pixels": 165136,
+    "valid_common_area_ha": 1581.9,
+    "label": "observed spectral change (NDVI difference); not a land-cover verdict"
+  },
+  "grid": {
+    "crs": "EPSG:32644",
+    "resolution_m": 10.0,
+    "width": 429,
+    "height": 390,
+    "transform": [
+      10.0,
+      0.0,
+      632700.0,
+      0.0,
+      -10.0,
+      1851790.0
+    ],
+    "bounds": [
+      632700.0,
+      1847890.0,
+      636990.0,
+      1851790.0
+    ],
+    "signature": "ad1601d5620e5f23",
+    "utm_epsg": 32644
+  },
+  "attribution": "Contains modified Copernicus Sentinel data, processed by ESA; L2A products distributed by the Element 84 Earth Search STAC catalogue (AWS Open Data).",
+  "verification": [
+    {
+      "period_id": "earlier",
+      "sample_size": 400,
+      "max_abs_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "within_tolerance": true,
+      "georeferencing_matches_grid": true,
+      "masked_pixels_are_nan": true
+    },
+    {
+      "period_id": "later",
+      "sample_size": 400,
+      "max_abs_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "within_tolerance": true,
+      "georeferencing_matches_grid": true,
+      "masked_pixels_are_nan": true
+    }
+  ],
+  "generated_utc": "2026-11-04T17:11:25.336288+00:00"
+}

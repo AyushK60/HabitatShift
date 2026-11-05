@@ -88,6 +88,8 @@ def rgb_to_png(
         scaled = np.where(valid & np.isfinite(band), scaled, 0.0)
         channels.append((scaled * 255.0).astype(np.uint8))
     stack = np.dstack(channels)
+    stack[~valid] = np.array(INVALID_RGB, dtype=np.uint8)
+    return Image.fromarray(stack, mode="RGB")
 
 
 def _ramp_colour(value: float) -> tuple[int, int, int]:
@@ -180,6 +182,3 @@ def save(image: Image.Image, path: Path) -> Path:
     path.parent.mkdir(parents=True, exist_ok=True)
     image.save(path, optimize=True)
     return path
-
-    stack[~valid] = np.array(INVALID_RGB, dtype=np.uint8)
-    return Image.fromarray(stack, mode="RGB")

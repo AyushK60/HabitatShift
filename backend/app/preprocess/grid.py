@@ -114,7 +114,12 @@ def assert_same_grid(
         )
     if reference.crs != other.crs:
         raise GridError(f"{label} CRS {other.crs} != reference {reference.crs}")
-    if not np.allclose(np.array(reference.transform)[:6], np.array(other.transform)[:6]):
+    if not np.allclose(
+        np.array(reference.transform)[:6],
+        np.array(other.transform)[:6],
+        rtol=0.0,
+        atol=1e-6,
+    ):
         raise GridError(f"{label} transform differs from reference")
 
 

@@ -24,11 +24,19 @@ PROCESSED_DIR = DATA_DIR / "processed"
 PREVIEW_DIR = DATA_DIR / "previews"
 MANIFEST_DIR = DATA_DIR / "manifests"
 CACHE_DIR = DATA_DIR / "cache"
+SCL_MEASUREMENT_CACHE_DIR = CACHE_DIR / "scl_valid"
 
 STUDIES_DIR = PROJECT_ROOT / "studies"
 DOCS_DIR = PROJECT_ROOT / "docs"
 
-for _p in (RAW_DIR, PROCESSED_DIR, PREVIEW_DIR, MANIFEST_DIR, CACHE_DIR):
+for _p in (
+    RAW_DIR,
+    PROCESSED_DIR,
+    PREVIEW_DIR,
+    MANIFEST_DIR,
+    CACHE_DIR,
+    SCL_MEASUREMENT_CACHE_DIR,
+):
     _p.mkdir(parents=True, exist_ok=True)
 
 # --------------------------------------------------------------------------- #
@@ -66,11 +74,20 @@ EXPECTED_GSD = {
 }
 
 #: Digital-number to surface-reflectance transform for Sentinel-2 L2A.
-#: ``reflectance = DN * SCALE + OFFSET``.  Confirmed from item metadata at
-#: runtime by :mod:`backend.app.acquisition.assets`; values here are only the
-#: expected defaults and a mismatch raises.
+#: ``reflectance = DN * SCALE + OFFSET``.
+#:
+#: Baseline 04.00 (25 Jan 2022) introduced ``BOA_ADD_OFFSET = -1000``, i.e. an
+#: offset of -0.1; earlier products carry no offset.  Earth Search baked that
+#: offset into some COGs and records this with
+#: ``earthsearch:boa_offset_applied``; :mod:`backend.app.acquisition.assets`
+#: resolves the offset actually to apply per item and never double-corrects.
 EXPECTED_SCALE = 0.0001
-EXPECTED_OFFSET = 0.0
+BOA_ADD_OFFSET = -0.1
+NO_OFFSET = 0.0
+
+#: Baseline at which the BOA offset was introduced.
+BASELINE_OFFSET_THRESHOLD = 4.0
+
 EXPECTED_NODATA = 0
 
 
@@ -201,3 +218,14 @@ MAX_WINDOW_PIXELS = 4_000_000
 #: unsuitable instead of producing a forced change estimate.
 MIN_SCENE_VALID_FRACTION = 0.60
 MIN_COMPARABLE_VALID_FRACTION = 0.50
+
+# --------------------------------------------------------------------------- #
+# Scene-selection budget
+# --------------------------------------------------------------------------- #
+#: Maximum number of candidate SCL windows actually downloaded per search.
+#: Candidates are pre-ranked on metadata alone (footprint coverage, then global
+#: cloud) and the best ``MAX_MEASURED_CANDIDATES`` get a real in-AOI
+#: measurement.  Everything beyond the budget is returned *unmeasured* and
+#: explicitly unusable, so a large search stays cheap without pretending the
+#: unmeasured scenes were assessed.
+MAX_MEASURED_CANDIDATES = 24

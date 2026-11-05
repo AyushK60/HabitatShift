@@ -1,0 +1,1856 @@
+{
+  "manifest_version": "1.0",
+  "generated_utc": "2026-11-04T17:11:25.280136+00:00",
+  "study": {
+    "study_id": "coringa_coastal",
+    "title": "Coringa / Godavari delta, Andhra Pradesh",
+    "study_type": "coastal_ecotone",
+    "question": "Do surface-water and vegetation signals in the Coringa mangrove creeks differ between seasonally matched 2020 and 2025 observations, and how far can a masked NDVI difference be trusted at this tidal site?",
+    "phenomena": [
+      "mangrove / creek vegetation cover",
+      "surface water extent in tidal creeks"
+    ],
+    "limitations": [
+      "Tidal stage and turbidity are uncontrolled confounders.",
+      "Mixed mangrove/water pixels at 10 m.",
+      "No species or ecological-causation claim."
+    ]
+  },
+  "aoi": {
+    "geojson": {
+      "type": "Feature",
+      "properties": {
+        "study_id": "coringa_coastal",
+        "description": "hand-chosen rectangular working window",
+        "source": "Manually placed over the mangrove/creek complex of Coringa Wildlife Sanctuary south of Kakinada; not the official sanctuary boundary.",
+        "crs": "EPSG:4326",
+        "area_km2": 16.516024,
+        "utm_epsg": 32644
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              82.285,
+              16.71
+            ],
+            [
+              82.285,
+              16.745
+            ],
+            [
+              82.245,
+              16.745
+            ],
+            [
+              82.245,
+              16.71
+            ],
+            [
+              82.285,
+              16.71
+            ]
+          ]
+        ]
+      }
+    },
+    "bounds_4326": [
+      82.245,
+      16.71,
+      82.285,
+      16.745
+    ],
+    "crs": "EPSG:4326",
+    "analysis_crs": "EPSG:32644",
+    "area_km2": 16.516024,
+    "grid": {
+      "resolution_m": 10.0,
+      "transform": [
+        10.0,
+        0.0,
+        632700.0,
+        0.0,
+        -10.0,
+        1851790.0
+      ],
+      "width": 429,
+      "height": 390,
+      "signature": "ad1601d5620e5f23"
+    }
+  },
+  "catalog": {
+    "endpoint": "https://earth-search.aws.element84.com/v1",
+    "collection": "sentinel-2-l2a",
+    "provider": "Element 84 Earth Search (AWS Open Data)",
+    "license": "Copernicus Sentinel data: free, open and unrestricted use with attribution (ESA Copernicus data policy). Catalogue: Element 84 Earth Search, AWS Open Data."
+  },
+  "processing": {
+    "pipeline_version": "0.1.0-m0",
+    "profile": "coastal_ndvi_m0",
+    "operations": [
+      "STAC search with AOI polygon and date range",
+      "in-AOI SCL valid-fraction scoring and selection",
+      "windowed COG read via WarpedVRT (bilinear reflectance, nearest SCL)",
+      "radiometry verification and DN->reflectance scaling (x0.0001)",
+      "SCL masking (classes 0,1,3,8,9,10 rejected)",
+      "NDVI = (B08-B04)/(B08+B04) in float32",
+      "common-valid mask intersection across both dates",
+      "delta NDVI with thresholded area summary"
+    ],
+    "parameters": {
+      "analysis_profile": "coastal_ndvi_m0",
+      "grid_resolution_m": 10.0,
+      "resampling_continuous": "bilinear",
+      "resampling_categorical": "nearest",
+      "scale": 0.0001,
+      "offset_policy": {
+        "pre_04.00": 0.0,
+        "04.00_or_later_not_baked_in": -0.1,
+        "04.00_or_later_baked_in": 0.0,
+        "rule": "apply raster:bands offset unless earthsearch:boa_offset_applied=true"
+      },
+      "nodata": 0,
+      "scl_accepted": [
+        2,
+        4,
+        5,
+        6,
+        7,
+        11
+      ],
+      "scl_rejected": [
+        0,
+        1,
+        3,
+        8,
+        9,
+        10
+      ],
+      "delta_threshold": 0.15,
+      "ndvi_formula": "(NIR - RED) / (NIR + RED)"
+    }
+  },
+  "software": {
+    "python": "3.11.9",
+    "platform": "Windows-10-10.0.26300-SP0",
+    "numpy": "2.2.6",
+    "rasterio": "1.4.3",
+    "pyproj": "3.7.1",
+    "shapely": "2.0.7",
+    "pystac_client": "0.9.0",
+    "gdal": "3.9.3"
+  },
+  "attribution": {
+    "text": "Contains modified Copernicus Sentinel data, processed by ESA; L2A products distributed by the Element 84 Earth Search STAC catalogue (AWS Open Data).",
+    "license": "Copernicus Sentinel data: free, open and unrestricted use with attribution (ESA Copernicus data policy). Catalogue: Element 84 Earth Search, AWS Open Data.",
+    "access_date_utc": "2026-11-04T17:11:25.333636+00:00"
+  },
+  "validity": {
+    "comparable_valid_fraction": 0.957938,
+    "suitable_for_comparison": true
+  },
+  "delta": {
+    "comparable_valid_fraction": 0.957938,
+    "suitable_for_comparison": true,
+    "threshold": 0.15,
+    "thresholded_areas": {
+      "threshold": 0.15,
+      "valid_pixels": 158190,
+      "decrease_pixels": 67650,
+      "increase_pixels": 16601,
+      "stable_pixels": 73939,
+      "valid_area_ha": 1581.9,
+      "decrease_area_ha": 676.5,
+      "increase_area_ha": 166.01
+    },
+    "delta_stats": {
+      "valid_count": 158190,
+      "total_count": 167310,
+      "valid_fraction": 0.94549,
+      "min": -0.933229,
+      "max": 1.447728,
+      "mean": -0.087687,
+      "std": 0.222697,
+      "quantiles": {
+        "p05": -0.396998,
+        "p25": -0.208682,
+        "p50": -0.12539,
+        "p75": 0.036909,
+        "p95": 0.285217
+      }
+    },
+    "valid_common_pixels": 158190,
+    "aoi_pixels": 165136,
+    "valid_common_area_ha": 1581.9,
+    "label": "observed spectral change (NDVI difference); not a land-cover verdict"
+  },
+  "search": {
+    "catalog_endpoint": "https://earth-search.aws.element84.com/v1",
+    "collection": "sentinel-2-l2a",
+    "collection_license": "proprietary",
+    "usable_thresholds": {
+      "min_scene_valid_fraction": 0.6,
+      "min_comparable_valid_fraction": 0.5
+    },
+    "earlier": {
+      "request": {
+        "label": "earlier:2020-01-01..2020-05-31",
+        "collection": "sentinel-2-l2a",
+        "aoi_bounds_4326": [
+          82.245,
+          16.71,
+          82.285,
+          16.745
+        ],
+        "start_utc": "2020-01-01T00:00:00Z",
+        "end_utc": "2020-05-31T23:59:59Z",
+        "max_cloud_cover_percent": 60.0,
+        "limit": 100,
+        "max_items": 200,
+        "request_body": {
+          "collections": [
+            "sentinel-2-l2a"
+          ],
+          "intersects": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  82.285,
+                  16.71
+                ],
+                [
+                  82.285,
+                  16.745
+                ],
+                [
+                  82.245,
+                  16.745
+                ],
+                [
+                  82.245,
+                  16.71
+                ],
+                [
+                  82.285,
+                  16.71
+                ]
+              ]
+            ]
+          },
+          "datetime": "2020-01-01T00:00:00Z/2020-05-31T23:59:59Z",
+          "limit": 100,
+          "query": {
+            "eo:cloud_cover": {
+              "lte": 60.0
+            }
+          }
+        }
+      },
+      "returned_items": 58,
+      "accepted_items": 58,
+      "pages_fetched": 2,
+      "catalog_matched_count": 58,
+      "rejected": [],
+      "selection_policy": {
+        "measurement_budget": 24,
+        "measured_candidate_count": 24,
+        "decision_metric": "measured in-AOI SCL valid fraction",
+        "usable_threshold": 0.6,
+        "unmeasured_candidates_are_unusable": true
+      },
+      "scores": [
+        {
+          "item_id": "S2A_44QPD_20200326_1_L2A",
+          "acquired_utc": "2020-03-26T05:14:04.234000Z",
+          "cloud_cover_percent": 0.036885,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 1.0,
+          "usable": true,
+          "score": 0.999963,
+          "notes": []
+        },
+        {
+          "item_id": "S2B_44QPD_20200331_1_L2A",
+          "acquired_utc": "2020-03-31T05:14:05.482000Z",
+          "cloud_cover_percent": 0.134565,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 1.0,
+          "usable": true,
+          "score": 0.999865,
+          "notes": []
+        },
+        {
+          "item_id": "S2B_44QPD_20200331_0_L2A",
+          "acquired_utc": "2020-03-31T05:14:05.482000Z",
+          "cloud_cover_percent": 0.090297,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 0.999785,
+          "usable": true,
+          "score": 0.999695,
+          "notes": []
+        },
+        {
+          "item_id": "S2A_44QPD_20200415_0_L2A",
+          "acquired_utc": "2020-04-15T05:14:07.496000Z",
+          "cloud_cover_percent": 1.435519,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 0.999737,
+          "usable": true,
+          "score": 0.998301,
+          "notes": []
+        },
+        {
+          "item_id": "S2A_44QPD_20200415_1_L2A",
+          "acquired_utc": "2020-04-15T05:14:07.495000Z",
+          "cloud_cover_percent": 2.051103,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 0.999689,
+          "usable": true,
+          "score": 0.997638,
+          "notes": []
+        },
+        {
+          "item_id": "S2A_44QPD_20200326_0_L2A",
+          "acquired_utc": "2020-03-26T05:14:04.235000Z",
+          "cloud_cover_percent": 0.049474,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 0.997549,
+          "usable": true,
+          "score": 0.9975,
+          "notes": []
+        },
+        {
+          "item_id": "S2A_44QPD_20200316_0_L2A",
+          "acquired_utc": "2020-03-16T05:14:04.290000Z",
+          "cloud_cover_percent": 2.007378,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 0.998864,
+          "usable": true,
+          "score": 0.996857,
+          "notes": []
+        },
+        {
+          "item_id": "S2A_44QPD_20200316_1_L2A",
+          "acquired_utc": "2020-03-16T05:14:04.290000Z",
+          "cloud_cover_percent": 3.69381,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 1.0,
+          "usable": true,
+          "score": 0.996306,
+          "notes": []
+        },
+        {
+          "item_id": "S2A_44QPD_20200215_1_L2A",
+          "acquired_utc": "2020-02-15T05:14:01.448000Z",
+          "cloud_cover_percent": 11.588579,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 0.999187,
+          "usable": true,
+          "score": 0.987599,
+          "notes": []
+        },
+        {
+          "item_id": "S2A_44QPD_20200215_0_L2A",
+          "acquired_utc": "2020-02-15T05:14:01.448000Z",
+          "cloud_cover_percent": 9.544635,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 0.989146,
+          "usable": true,
+          "score": 0.979601,
+          "notes": []
+        },
+        {
+          "item_id": "S2A_44QPD_20200405_0_L2A",
+          "acquired_utc": "2020-04-05T05:14:04.645000Z",
+          "cloud_cover_percent": 2.651452,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 0.965848,
+          "usable": true,
+          "score": 0.963196,
+          "notes": []
+        },
+        {
+          "item_id": "S2A_44QPD_20200405_1_L2A",
+          "acquired_utc": "2020-04-05T05:14:04.644000Z",
+          "cloud_cover_percent": 3.647556,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 0.940482,
+          "usable": true,
+          "score": 0.936834,
+          "notes": []
+        },
+        {
+          "item_id": "S2B_44QPD_20200420_0_L2A",
+          "acquired_utc": "2020-04-20T05:14:02.906000Z",
+          "cloud_cover_percent": 9.880551,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 0.892463,
+          "usable": true,
+          "score": 0.882583,
+          "notes": []
+        },
+        {
+          "item_id": "S2B_44QPD_20200220_0_L2A",
+          "acquired_utc": "2020-02-20T05:14:04.387000Z",
+          "cloud_cover_percent": 10.571467,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 0.880784,
+          "usable": true,
+          "score": 0.870213,
+          "notes": []
+        },
+        {
+          "item_id": "S2B_44QPD_20200420_1_L2A",
+          "acquired_utc": "2020-04-20T05:14:02.906000Z",
+          "cloud_cover_percent": 13.971424,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 0.832353,
+          "usable": true,
+          "score": 0.818382,
+          "notes": []
+        },
+        {
+          "item_id": "S2A_44QPD_20200126_0_L2A",
+          "acquired_utc": "2020-01-26T05:14:01.126000Z",
+          "cloud_cover_percent": 7.886519,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 0.821266,
+          "usable": true,
+          "score": 0.813379,
+          "notes": []
+        },
+        {
+          "item_id": "S2A_44QPD_20200126_1_L2A",
+          "acquired_utc": "2020-01-26T05:14:01.125000Z",
+          "cloud_cover_percent": 11.363716,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 0.732861,
+          "usable": true,
+          "score": 0.721497,
+          "notes": []
+        },
+        {
+          "item_id": "S2B_44QPD_20200301_0_L2A",
+          "acquired_utc": "2020-03-01T05:14:05.430000Z",
+          "cloud_cover_percent": 4.426051,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 0.707047,
+          "usable": true,
+          "score": 0.702621,
+          "notes": []
+        },
+        {
+          "item_id": "S2A_44QPD_20200205_0_L2A",
+          "acquired_utc": "2020-02-05T05:13:59.631000Z",
+          "cloud_cover_percent": 12.49611,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 0.680563,
+          "usable": true,
+          "score": 0.668067,
+          "notes": []
+        },
+        {
+          "item_id": "S2B_44QPD_20200410_0_L2A",
+          "acquired_utc": "2020-04-10T05:14:04.474000Z",
+          "cloud_cover_percent": 5.684992,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 0.639077,
+          "usable": true,
+          "score": 0.633392,
+          "notes": []
+        },
+        {
+          "item_id": "S2B_44QPD_20200301_1_L2A",
+          "acquired_utc": "2020-03-01T05:14:05.430000Z",
+          "cloud_cover_percent": 6.320909,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 0.590042,
+          "usable": false,
+          "score": 0.583722,
+          "notes": [
+            "in-AOI valid fraction 0.590 below 0.6"
+          ]
+        },
+        {
+          "item_id": "S2B_44QPD_20200121_1_L2A",
+          "acquired_utc": "2020-01-21T05:14:01.550000Z",
+          "cloud_cover_percent": 3.733372,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 0.49887,
+          "usable": false,
+          "score": 0.495137,
+          "notes": [
+            "in-AOI valid fraction 0.499 below 0.6"
+          ]
+        },
+        {
+          "item_id": "S2B_44QPD_20200410_1_L2A",
+          "acquired_utc": "2020-04-10T05:14:04.474000Z",
+          "cloud_cover_percent": 9.121384,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 0.432801,
+          "usable": false,
+          "score": 0.42368,
+          "notes": [
+            "in-AOI valid fraction 0.433 below 0.6"
+          ]
+        },
+        {
+          "item_id": "S2B_44QPD_20200121_0_L2A",
+          "acquired_utc": "2020-01-21T05:14:01.550000Z",
+          "cloud_cover_percent": 2.141122,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 0.399964,
+          "usable": false,
+          "score": 0.397823,
+          "notes": [
+            "in-AOI valid fraction 0.400 below 0.6"
+          ]
+        },
+        {
+          "item_id": "S2B_44QPD_20200311_0_L2A",
+          "acquired_utc": "2020-03-11T05:14:05.975000Z",
+          "cloud_cover_percent": 13.984558,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": null,
+          "usable": false,
+          "score": -0.013985,
+          "notes": [
+            "in-AOI validity not measured: outside the measurement budget"
+          ]
+        },
+        {
+          "item_id": "S2B_44QPD_20200220_1_L2A",
+          "acquired_utc": "2020-02-20T05:14:04.387000Z",
+          "cloud_cover_percent": 15.625799,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": null,
+          "usable": false,
+          "score": -0.015626,
+          "notes": [
+            "in-AOI validity not measured: outside the measurement budget"
+          ]
+        },
+        {
+          "item_id": "S2A_44QPD_20200205_1_L2A",
+          "acquired_utc": "2020-02-05T05:13:59.631000Z",
+          "cloud_cover_percent": 16.710757,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": null,
+          "usable": false,
+          "score": -0.016711,
+          "notes": [
+            "in-AOI validity not measured: outside the measurement budget"
+          ]
+        },
+        {
+          "item_id": "S2B_44QPD_20200311_1_L2A",
+          "acquired_utc": "2020-03-11T05:14:05.975000Z",
+          "cloud_cover_percent": 19.764893,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": null,
+          "usable": false,
+          "score": -0.019765,
+          "notes": [
+            "in-AOI validity not measured: outside the measurement budget"
+          ]
+        },
+        {
+          "item_id": "S2B_44QPD_20200321_0_L2A",
+          "acquired_utc": "2020-03-21T05:14:05.982000Z",
+          "cloud_cover_percent": 21.036769,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": null,
+          "usable": false,
+          "score": -0.021037,
+          "notes": [
+            "in-AOI validity not measured: outside the measurement budget"
+          ]
+        },
+        {
+          "item_id": "S2A_44QPD_20200505_0_L2A",
+          "acquired_utc": "2020-05-05T05:14:11.703000Z",
+          "cloud_cover_percent": 23.786541,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": null,
+          "usable": false,
+          "score": -0.023787,
+          "notes": [
+            "in-AOI validity not measured: outside the measurement budget"
+          ]
+        },
+        {
+          "item_id": "S2A_44QPD_20200116_0_L2A",
+          "acquired_utc": "2020-01-16T05:14:02.061000Z",
+          "cloud_cover_percent": 24.424804,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": null,
+          "usable": false,
+          "score": -0.024425,
+          "notes": [
+            "in-AOI validity not measured: outside the measurement budget"
+          ]
+        },
+        {
+          "item_id": "S2B_44QPD_20200321_1_L2A",
+          "acquired_utc": "2020-03-21T05:14:05.982000Z",
+          "cloud_cover_percent": 25.508019,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": null,
+          "usable": false,
+          "score": -0.025508,
+          "notes": [
+            "in-AOI validity not measured: outside the measurement budget"
+          ]
+        },
+        {
+          "item_id": "S2B_44QPD_20200131_0_L2A",
+          "acquired_utc": "2020-01-31T05:14:00.508000Z",
+          "cloud_cover_percent": 27.098159,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": null,
+          "usable": false,
+          "score": -0.027098,
+          "notes": [
+            "in-AOI validity not measured: outside the measurement budget"
+          ]
+        },
+        {
+          "item_id": "S2A_44QPD_20200116_1_L2A",
+          "acquired_utc": "2020-01-16T05:14:02.061000Z",
+          "cloud_cover_percent": 27.318066,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": null,
+          "usable": false,
+          "score": -0.027318,
+          "notes": [
+            "in-AOI validity not measured: outside the measurement budget"
+          ]
+        },
+        {
+          "item_id": "S2A_44QPD_20200505_1_L2A",
+          "acquired_utc": "2020-05-05T05:14:11.703000Z",
+          "cloud_cover_percent": 27.479658,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": null,
+          "usable": false,
+          "score": -0.02748,
+          "notes": [
+            "in-AOI validity not measured: outside the measurement budget"
+          ]
+        },
+        {
+          "item_id": "S2B_44QPD_20200131_1_L2A",
+          "acquired_utc": "2020-01-31T05:14:00.508000Z",
+          "cloud_cover_percent": 28.731236,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": null,
+          "usable": false,
+          "score": -0.028731,
+          "notes": [
+            "in-AOI validity not measured: outside the measurement budget"
+          ]
+        },
+        {
+          "item_id": "S2B_44QPD_20200430_0_L2A",
+          "acquired_utc": "2020-04-30T05:14:04.049000Z",
+          "cloud_cover_percent": 36.112753,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": null,
+          "usable": false,
+          "score": -0.036113,
+          "notes": [
+            "in-AOI validity not measured: outside the measurement budget"
+          ]
+        },
+        {
+          "item_id": "S2B_44QPD_20200510_0_L2A",
+          "acquired_utc": "2020-05-10T05:14:06.348000Z",
+          "cloud_cover_percent": 36.117654,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": null,
+          "usable": false,
+          "score": -0.036118,
+          "notes": [
+            "in-AOI validity not measured: outside the measurement budget"
+          ]
+        },
+        {
+          "item_id": "S2A_44QPD_20200225_1_L2A",
+          "acquired_utc": "2020-02-25T05:14:02.942000Z",
+          "cloud_cover_percent": 36.332715,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": null,
+          "usable": false,
+          "score": -0.036333,
+          "notes": [
+            "in-AOI validity not measured: outside the measurement budget"
+          ]
+        },
+        {
+          "item_id": "S2A_44QPD_20200106_0_L2A",
+          "acquired_utc": "2020-01-06T05:14:02.503000Z",
+          "cloud_cover_percent": 36.864398,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": null,
+          "usable": false,
+          "score": -0.036864,
+          "notes": [
+            "in-AOI validity not measured: outside the measurement budget"
+          ]
+        },
+        {
+          "item_id": "S2A_44QPD_20200425_0_L2A",
+          "acquired_utc": "2020-04-25T05:14:09.882000Z",
+          "cloud_cover_percent": 38.096937,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": null,
+          "usable": false,
+          "score": -0.038097,
+          "notes": [
+            "in-AOI validity not measured: outside the measurement budget"
+          ]
+        },
+        {
+          "item_id": "S2B_44QPD_20200111_0_L2A",
+          "acquired_utc": "2020-01-11T05:14:02.608000Z",
+          "cloud_cover_percent": 38.305181,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": null,
+          "usable": false,
+          "score": -0.038305,
+          "notes": [
+            "in-AOI validity not measured: outside the measurement budget"
+          ]
+        },
+        {
+          "item_id": "S2A_44QPD_20200225_0_L2A",
+          "acquired_utc": "2020-02-25T05:14:02.943000Z",
+          "cloud_cover_percent": 39.00972,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": null,
+          "usable": false,
+          "score": -0.03901,
+          "notes": [
+            "in-AOI validity not measured: outside the measurement budget"
+          ]
+        },
+        {
+          "item_id": "S2A_44QPD_20200106_1_L2A",
+          "acquired_utc": "2020-01-06T05:14:02.504000Z",
+          "cloud_cover_percent": 39.045912,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": null,
+          "usable": false,
+          "score": -0.039046,
+          "notes": [
+            "in-AOI validity not measured: outside the measurement budget"
+          ]
+        },
+        {
+          "item_id": "S2A_44QPD_20200425_1_L2A",
+          "acquired_utc": "2020-04-25T05:14:09.881000Z",
+          "cloud_cover_percent": 40.10354,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": null,
+          "usable": false,
+          "score": -0.040104,
+          "notes": [
+            "in-AOI validity not measured: outside the measurement budget"
+          ]
+        },
+        {
+          "item_id": "S2A_44QPD_20200306_0_L2A",
+          "acquired_utc": "2020-03-06T05:14:03.869000Z",
+          "cloud_cover_percent": 40.174501,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": null,
+          "usable": false,
+          "score": -0.040175,
+          "notes": [
+            "in-AOI validity not measured: outside the measurement budget"
+          ]
+        },
+        {
+          "item_id": "S2A_44QPD_20200306_1_L2A",
+          "acquired_utc": "2020-03-06T05:14:03.869000Z",
+          "cloud_cover_percent": 42.334789,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": null,
+          "usable": false,
+          "score": -0.042335,
+          "notes": [
+            "in-AOI validity not measured: outside the measurement budget"
+          ]
+        },
+        {
+          "item_id": "S2B_44QPD_20200111_1_L2A",
+          "acquired_utc": "2020-01-11T05:14:02.609000Z",
+          "cloud_cover_percent": 42.960933,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": null,
+          "usable": false,
+          "score": -0.042961,
+          "notes": [
+            "in-AOI validity not measured: outside the measurement budget"
+          ]
+        },
+        {
+          "item_id": "S2B_44QPD_20200510_1_L2A",
+          "acquired_utc": "2020-05-10T05:14:06.349000Z",
+          "cloud_cover_percent": 43.936941,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": null,
+          "usable": false,
+          "score": -0.043937,
+          "notes": [
+            "in-AOI validity not measured: outside the measurement budget"
+          ]
+        },
+        {
+          "item_id": "S2B_44QPD_20200210_0_L2A",
+          "acquired_utc": "2020-02-10T05:14:02.121000Z",
+          "cloud_cover_percent": 44.724762,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": null,
+          "usable": false,
+          "score": -0.044725,
+          "notes": [
+            "in-AOI validity not measured: outside the measurement budget"
+          ]
+        },
+        {
+          "item_id": "S2A_44QPD_20200515_0_L2A",
+          "acquired_utc": "2020-05-15T05:14:13.032000Z",
+          "cloud_cover_percent": 45.848889,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": null,
+          "usable": false,
+          "score": -0.045849,
+          "notes": [
+            "in-AOI validity not measured: outside the measurement budget"
+          ]
+        },
+        {
+          "item_id": "S2A_44QPD_20200525_0_L2A",
+          "acquired_utc": "2020-05-25T05:14:13.910000Z",
+          "cloud_cover_percent": 45.886315,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": null,
+          "usable": false,
+          "score": -0.045886,
+          "notes": [
+            "in-AOI validity not measured: outside the measurement budget"
+          ]
+        },
+        {
+          "item_id": "S2A_44QPD_20200515_1_L2A",
+          "acquired_utc": "2020-05-15T05:14:13.032000Z",
+          "cloud_cover_percent": 46.183962,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": null,
+          "usable": false,
+          "score": -0.046184,
+          "notes": [
+            "in-AOI validity not measured: outside the measurement budget"
+          ]
+        },
+        {
+          "item_id": "S2B_44QPD_20200430_1_L2A",
+          "acquired_utc": "2020-04-30T05:14:04.049000Z",
+          "cloud_cover_percent": 47.837761,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": null,
+          "usable": false,
+          "score": -0.047838,
+          "notes": [
+            "in-AOI validity not measured: outside the measurement budget"
+          ]
+        },
+        {
+          "item_id": "S2B_44QPD_20200210_3_L2A",
+          "acquired_utc": "2020-02-10T05:14:02.120000Z",
+          "cloud_cover_percent": 48.124564,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": null,
+          "usable": false,
+          "score": -0.048125,
+          "notes": [
+            "in-AOI validity not measured: outside the measurement budget"
+          ]
+        },
+        {
+          "item_id": "S2A_44QPD_20200525_1_L2A",
+          "acquired_utc": "2020-05-25T05:14:13.910000Z",
+          "cloud_cover_percent": 50.148982,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": null,
+          "usable": false,
+          "score": -0.050149,
+          "notes": [
+            "in-AOI validity not measured: outside the measurement budget"
+          ]
+        },
+        {
+          "item_id": "S2B_44QPD_20200101_0_L2A",
+          "acquired_utc": "2020-01-01T05:14:03.074000Z",
+          "cloud_cover_percent": 54.507942,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": null,
+          "usable": false,
+          "score": -0.054508,
+          "notes": [
+            "in-AOI validity not measured: outside the measurement budget"
+          ]
+        },
+        {
+          "item_id": "S2B_44QPD_20200101_1_L2A",
+          "acquired_utc": "2020-01-01T05:14:03.074000Z",
+          "cloud_cover_percent": 57.110304,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": null,
+          "usable": false,
+          "score": -0.05711,
+          "notes": [
+            "in-AOI validity not measured: outside the measurement budget"
+          ]
+        }
+      ]
+    },
+    "later": {
+      "request": {
+        "label": "later:2025-01-01..2025-05-31",
+        "collection": "sentinel-2-l2a",
+        "aoi_bounds_4326": [
+          82.245,
+          16.71,
+          82.285,
+          16.745
+        ],
+        "start_utc": "2025-01-01T00:00:00Z",
+        "end_utc": "2025-05-31T23:59:59Z",
+        "max_cloud_cover_percent": 60.0,
+        "limit": 100,
+        "max_items": 200,
+        "request_body": {
+          "collections": [
+            "sentinel-2-l2a"
+          ],
+          "intersects": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  82.285,
+                  16.71
+                ],
+                [
+                  82.285,
+                  16.745
+                ],
+                [
+                  82.245,
+                  16.745
+                ],
+                [
+                  82.245,
+                  16.71
+                ],
+                [
+                  82.285,
+                  16.71
+                ]
+              ]
+            ]
+          },
+          "datetime": "2025-01-01T00:00:00Z/2025-05-31T23:59:59Z",
+          "limit": 100,
+          "query": {
+            "eo:cloud_cover": {
+              "lte": 60.0
+            }
+          }
+        }
+      },
+      "returned_items": 26,
+      "accepted_items": 26,
+      "pages_fetched": 2,
+      "catalog_matched_count": 26,
+      "rejected": [],
+      "selection_policy": {
+        "measurement_budget": 24,
+        "measured_candidate_count": 24,
+        "decision_metric": "measured in-AOI SCL valid fraction",
+        "usable_threshold": 0.6,
+        "unmeasured_candidates_are_unusable": true
+      },
+      "scores": [
+        {
+          "item_id": "S2B_44QPD_20250213_0_L2A",
+          "acquired_utc": "2025-02-13T05:14:11.953000Z",
+          "cloud_cover_percent": 0.571262,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 1.0,
+          "usable": true,
+          "score": 0.999429,
+          "notes": []
+        },
+        {
+          "item_id": "S2A_44QPD_20250119_0_L2A",
+          "acquired_utc": "2025-01-19T05:14:06.775000Z",
+          "cloud_cover_percent": 0.883017,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 1.0,
+          "usable": true,
+          "score": 0.999117,
+          "notes": []
+        },
+        {
+          "item_id": "S2B_44QPD_20250203_0_L2A",
+          "acquired_utc": "2025-02-03T05:14:10.250000Z",
+          "cloud_cover_percent": 1.740055,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 1.0,
+          "usable": true,
+          "score": 0.99826,
+          "notes": []
+        },
+        {
+          "item_id": "S2C_44QPD_20250330_0_L2A",
+          "acquired_utc": "2025-03-30T05:14:30.232000Z",
+          "cloud_cover_percent": 2.591217,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 1.0,
+          "usable": true,
+          "score": 0.997409,
+          "notes": []
+        },
+        {
+          "item_id": "S2B_44QPD_20250223_0_L2A",
+          "acquired_utc": "2025-02-23T05:14:12.290000Z",
+          "cloud_cover_percent": 2.697138,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 0.995027,
+          "usable": true,
+          "score": 0.99233,
+          "notes": []
+        },
+        {
+          "item_id": "S2C_44QPD_20250228_0_L2A",
+          "acquired_utc": "2025-02-28T05:14:32.334000Z",
+          "cloud_cover_percent": 13.339494,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 1.0,
+          "usable": true,
+          "score": 0.986661,
+          "notes": []
+        },
+        {
+          "item_id": "S2B_44QPD_20250404_0_L2A",
+          "acquired_utc": "2025-04-04T05:14:07.353000Z",
+          "cloud_cover_percent": 21.409529,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 1.0,
+          "usable": true,
+          "score": 0.97859,
+          "notes": []
+        },
+        {
+          "item_id": "S2C_44QPD_20250218_0_L2A",
+          "acquired_utc": "2025-02-18T05:14:30.288000Z",
+          "cloud_cover_percent": 7.855725,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 0.972482,
+          "usable": true,
+          "score": 0.964626,
+          "notes": []
+        },
+        {
+          "item_id": "S2C_44QPD_20250208_0_L2A",
+          "acquired_utc": "2025-02-08T05:14:34.494000Z",
+          "cloud_cover_percent": 19.606417,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 0.974586,
+          "usable": true,
+          "score": 0.95498,
+          "notes": []
+        },
+        {
+          "item_id": "S2B_44QPD_20250325_0_L2A",
+          "acquired_utc": "2025-03-25T05:14:10.803000Z",
+          "cloud_cover_percent": 5.009511,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 0.95699,
+          "usable": true,
+          "score": 0.951981,
+          "notes": []
+        },
+        {
+          "item_id": "S2B_44QPD_20250315_0_L2A",
+          "acquired_utc": "2025-03-15T05:14:09.937000Z",
+          "cloud_cover_percent": 1.55794,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 0.95326,
+          "usable": true,
+          "score": 0.951702,
+          "notes": []
+        },
+        {
+          "item_id": "S2B_44QPD_20250114_0_L2A",
+          "acquired_utc": "2025-01-14T05:14:07.033000Z",
+          "cloud_cover_percent": 9.837547,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 0.956799,
+          "usable": true,
+          "score": 0.946961,
+          "notes": []
+        },
+        {
+          "item_id": "S2B_44QPD_20250305_0_L2A",
+          "acquired_utc": "2025-03-05T05:14:10.805000Z",
+          "cloud_cover_percent": 33.605289,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 0.966685,
+          "usable": true,
+          "score": 0.933079,
+          "notes": []
+        },
+        {
+          "item_id": "S2A_44QPD_20250401_1_L2A",
+          "acquired_utc": "2025-04-01T05:14:18.511000Z",
+          "cloud_cover_percent": 2.174839,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 0.920214,
+          "usable": true,
+          "score": 0.918039,
+          "notes": []
+        },
+        {
+          "item_id": "S2B_44QPD_20250104_0_L2A",
+          "acquired_utc": "2025-01-04T05:14:08.177000Z",
+          "cloud_cover_percent": 15.840626,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 0.844223,
+          "usable": true,
+          "score": 0.828383,
+          "notes": []
+        },
+        {
+          "item_id": "S2A_44QPD_20250421_1_L2A",
+          "acquired_utc": "2025-04-21T05:14:21.607000Z",
+          "cloud_cover_percent": 31.944314,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 0.789564,
+          "usable": true,
+          "score": 0.75762,
+          "notes": []
+        },
+        {
+          "item_id": "S2C_44QPD_20250429_0_L2A",
+          "acquired_utc": "2025-04-29T05:14:29.990000Z",
+          "cloud_cover_percent": 16.565777,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 0.665633,
+          "usable": true,
+          "score": 0.649067,
+          "notes": []
+        },
+        {
+          "item_id": "S2B_44QPD_20250424_0_L2A",
+          "acquired_utc": "2025-04-24T05:14:08.597000Z",
+          "cloud_cover_percent": 12.553206,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 0.632383,
+          "usable": true,
+          "score": 0.61983,
+          "notes": []
+        },
+        {
+          "item_id": "S2A_44QPD_20250511_1_L2A",
+          "acquired_utc": "2025-05-11T05:14:21.055000Z",
+          "cloud_cover_percent": 11.174658,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 0.54714,
+          "usable": false,
+          "score": 0.535965,
+          "notes": [
+            "in-AOI valid fraction 0.547 below 0.6"
+          ]
+        },
+        {
+          "item_id": "S2C_44QPD_20250310_0_L2A",
+          "acquired_utc": "2025-03-10T05:14:31.454000Z",
+          "cloud_cover_percent": 11.707056,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 0.497029,
+          "usable": false,
+          "score": 0.485322,
+          "notes": [
+            "in-AOI valid fraction 0.497 below 0.6"
+          ]
+        },
+        {
+          "item_id": "S2C_44QPD_20250320_0_L2A",
+          "acquired_utc": "2025-03-20T05:14:31.495000Z",
+          "cloud_cover_percent": 5.116558,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 0.483318,
+          "usable": false,
+          "score": 0.478202,
+          "notes": [
+            "in-AOI valid fraction 0.483 below 0.6"
+          ]
+        },
+        {
+          "item_id": "S2C_44QPD_20250409_0_L2A",
+          "acquired_utc": "2025-04-09T05:14:30.787000Z",
+          "cloud_cover_percent": 14.860195,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 0.434899,
+          "usable": false,
+          "score": 0.420039,
+          "notes": [
+            "in-AOI valid fraction 0.435 below 0.6"
+          ]
+        },
+        {
+          "item_id": "S2C_44QPD_20250419_0_L2A",
+          "acquired_utc": "2025-04-19T05:14:28.988000Z",
+          "cloud_cover_percent": 29.30966,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 0.307716,
+          "usable": false,
+          "score": 0.278407,
+          "notes": [
+            "in-AOI valid fraction 0.308 below 0.6"
+          ]
+        },
+        {
+          "item_id": "S2C_44QPD_20250509_0_L2A",
+          "acquired_utc": "2025-05-09T05:14:27.297000Z",
+          "cloud_cover_percent": 25.728244,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 0.292505,
+          "usable": false,
+          "score": 0.266777,
+          "notes": [
+            "in-AOI valid fraction 0.293 below 0.6"
+          ]
+        },
+        {
+          "item_id": "S2C_44QPD_20250129_0_L2A",
+          "acquired_utc": "2025-01-29T05:14:35.457000Z",
+          "cloud_cover_percent": 41.638631,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": null,
+          "usable": false,
+          "score": -0.041639,
+          "notes": [
+            "in-AOI validity not measured: outside the measurement budget"
+          ]
+        },
+        {
+          "item_id": "S2B_44QPD_20250124_0_L2A",
+          "acquired_utc": "2025-01-24T05:14:09.848000Z",
+          "cloud_cover_percent": 41.908938,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": null,
+          "usable": false,
+          "score": -0.041909,
+          "notes": [
+            "in-AOI validity not measured: outside the measurement budget"
+          ]
+        }
+      ]
+    }
+  },
+  "verification": [
+    {
+      "period_id": "earlier",
+      "sample_size": 400,
+      "max_abs_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "within_tolerance": true,
+      "georeferencing_matches_grid": true,
+      "masked_pixels_are_nan": true
+    },
+    {
+      "period_id": "later",
+      "sample_size": 400,
+      "max_abs_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "within_tolerance": true,
+      "georeferencing_matches_grid": true,
+      "masked_pixels_are_nan": true
+    }
+  ],
+  "outputs": {
+    "delta_tif": {
+      "kind": "raster",
+      "path": "data/processed/coringa_coastal/delta_ndvi.tif",
+      "bytes": 543314,
+      "sha256": "383fa9799c337ed0b28bcefb64c50f02ebeecfbadb99d8c7b4d64a4e2febf7a5"
+    },
+    "delta_png": {
+      "kind": "preview",
+      "path": "data/previews/coringa_coastal/delta_ndvi.png",
+      "bytes": 282609,
+      "sha256": "1e6901d02bd8f101a30dbe579e9d43840010ac6ac87f3f979157523320ede582"
+    },
+    "common_mask_png": {
+      "kind": "preview",
+      "path": "data/previews/coringa_coastal/common_valid_mask.png",
+      "bytes": 2075,
+      "sha256": "5ec30fe0b11022f1f4922ec8cd8dcd3ed9b6a0cacc41f31a4fcc0a3b43d6a5cf"
+    },
+    "ndvi_legend_png": {
+      "kind": "preview",
+      "path": "data/previews/coringa_coastal/ndvi_legend.png",
+      "bytes": 518,
+      "sha256": "5ff7a3e36a62c76de428c373cbcecba761837c7ba7e4041391a433394cb11a35"
+    }
+  },
+  "http_requests": 2,
+  "bytes_downloaded": 0,
+  "periods": [
+    {
+      "period_id": "earlier",
+      "acquisition_date": "2020-03-26",
+      "acquisition_utc": "2020-03-26T05:14:04.234000Z",
+      "scene": {
+        "item_id": "S2A_44QPD_20200326_1_L2A",
+        "collection": "sentinel-2-l2a",
+        "acquired_utc": "2020-03-26T05:14:04.234000Z",
+        "acquisition_date": "2020-03-26",
+        "platform": "sentinel-2a",
+        "constellation": "sentinel-2",
+        "instrument": "msi",
+        "cloud_cover_percent": 0.036885,
+        "epsg": 32644,
+        "catalog_url": "https://earth-search.aws.element84.com/v1",
+        "processing_baseline": "05.00",
+        "footprint": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                81.94035855635792,
+                17.182791762213984
+              ],
+              [
+                81.93552228411902,
+                16.191274966907432
+              ],
+              [
+                82.84273852608148,
+                16.185528534840664
+              ],
+              [
+                82.96761481605834,
+                16.704858407920227
+              ],
+              [
+                82.97251395918559,
+                17.175340777437757
+              ],
+              [
+                81.94035855635792,
+                17.182791762213984
+              ]
+            ]
+          ]
+        },
+        "assets": {
+          "blue": {
+            "key": "blue",
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/44/Q/PD/2020/3/S2A_44QPD_20200326_1_L2A/B02.tif",
+            "media_type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "scale": 0.0001,
+            "offset": -0.1,
+            "nodata": 0,
+            "gsd_metres": 10.0,
+            "shape": [
+              10980,
+              10980
+            ],
+            "anonymous_access_ok": null
+          },
+          "green": {
+            "key": "green",
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/44/Q/PD/2020/3/S2A_44QPD_20200326_1_L2A/B03.tif",
+            "media_type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "scale": 0.0001,
+            "offset": -0.1,
+            "nodata": 0,
+            "gsd_metres": 10.0,
+            "shape": [
+              10980,
+              10980
+            ],
+            "anonymous_access_ok": null
+          },
+          "red": {
+            "key": "red",
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/44/Q/PD/2020/3/S2A_44QPD_20200326_1_L2A/B04.tif",
+            "media_type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "scale": 0.0001,
+            "offset": -0.1,
+            "nodata": 0,
+            "gsd_metres": 10.0,
+            "shape": [
+              10980,
+              10980
+            ],
+            "anonymous_access_ok": null
+          },
+          "nir": {
+            "key": "nir",
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/44/Q/PD/2020/3/S2A_44QPD_20200326_1_L2A/B08.tif",
+            "media_type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "scale": 0.0001,
+            "offset": -0.1,
+            "nodata": 0,
+            "gsd_metres": 10.0,
+            "shape": [
+              10980,
+              10980
+            ],
+            "anonymous_access_ok": null
+          },
+          "scl": {
+            "key": "scl",
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/44/Q/PD/2020/3/S2A_44QPD_20200326_1_L2A/SCL.tif",
+            "media_type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "scale": 0.0001,
+            "offset": 0.0,
+            "nodata": 0,
+            "gsd_metres": null,
+            "shape": [
+              5490,
+              5490
+            ],
+            "anonymous_access_ok": null
+          }
+        }
+      },
+      "valid_fraction": 0.999976,
+      "mask_policy": {
+        "total_pixels": 165136,
+        "valid_pixels": 165132,
+        "valid_fraction": 0.999976,
+        "valid_percent": 99.998,
+        "accepted_scl_classes": {
+          "2": "dark_area_pixels",
+          "4": "vegetation",
+          "5": "not_vegetated",
+          "6": "water",
+          "7": "unclassified",
+          "11": "snow_ice"
+        },
+        "rejected_scl_classes": {
+          "0": "no_data",
+          "1": "saturated_or_defective",
+          "3": "cloud_shadow",
+          "8": "cloud_medium_probability",
+          "9": "cloud_high_probability",
+          "10": "thin_cirrus"
+        },
+        "class_histogram": {
+          "4": 98041,
+          "5": 32771,
+          "6": 17126,
+          "7": 19372
+        }
+      },
+      "radiometry": {
+        "blue": {
+          "asset_key": "blue",
+          "scale": 0.0001,
+          "offset": 0.0,
+          "nodata": 0,
+          "gsd_metres": 10.0,
+          "source": "stac:item.S2A_44QPD_20200326_1_L2A.assets.blue.raster:bands (baseline 05.00; earthsearch:boa_offset_applied=true so the declared -0.1 is already baked into the DNs and is not applied again)",
+          "transform": "reflectance = DN * scale + offset"
+        },
+        "green": {
+          "asset_key": "green",
+          "scale": 0.0001,
+          "offset": 0.0,
+          "nodata": 0,
+          "gsd_metres": 10.0,
+          "source": "stac:item.S2A_44QPD_20200326_1_L2A.assets.green.raster:bands (baseline 05.00; earthsearch:boa_offset_applied=true so the declared -0.1 is already baked into the DNs and is not applied again)",
+          "transform": "reflectance = DN * scale + offset"
+        },
+        "red": {
+          "asset_key": "red",
+          "scale": 0.0001,
+          "offset": 0.0,
+          "nodata": 0,
+          "gsd_metres": 10.0,
+          "source": "stac:item.S2A_44QPD_20200326_1_L2A.assets.red.raster:bands (baseline 05.00; earthsearch:boa_offset_applied=true so the declared -0.1 is already baked into the DNs and is not applied again)",
+          "transform": "reflectance = DN * scale + offset"
+        },
+        "nir": {
+          "asset_key": "nir",
+          "scale": 0.0001,
+          "offset": 0.0,
+          "nodata": 0,
+          "gsd_metres": 10.0,
+          "source": "stac:item.S2A_44QPD_20200326_1_L2A.assets.nir.raster:bands (baseline 05.00; earthsearch:boa_offset_applied=true so the declared -0.1 is already baked into the DNs and is not applied again)",
+          "transform": "reflectance = DN * scale + offset"
+        },
+        "scl": {
+          "asset_key": "scl",
+          "scale": 0.0001,
+          "offset": 0.0,
+          "nodata": 0,
+          "gsd_metres": null,
+          "source": "stac:item.S2A_44QPD_20200326_1_L2A.assets.scl.raster:bands (baseline 05.00; declared offset +0.0 (boa_offset_applied=True))",
+          "transform": "reflectance = DN * scale + offset"
+        }
+      },
+      "window_rendering": {
+        "true_colour_stretch": {
+          "low": [
+            0.005799999926239252,
+            0.018199998885393143,
+            9.999999747378752e-05
+          ],
+          "high": [
+            0.14659999310970306,
+            0.1225999966263771,
+            0.08758437633514404
+          ],
+          "gamma": 1.0,
+          "method": "per-band 2-98 percentile linear stretch on valid pixels"
+        }
+      },
+      "index_stats": {
+        "valid_count": 165132,
+        "total_count": 167310,
+        "valid_fraction": 0.986982,
+        "min": -0.995157,
+        "max": 0.999537,
+        "mean": 0.533215,
+        "std": 0.407616,
+        "quantiles": {
+          "p05": -0.231351,
+          "p25": 0.274386,
+          "p50": 0.648567,
+          "p75": 0.887497,
+          "p95": 0.955508
+        }
+      },
+      "outputs": {
+        "reflectance_tif": {
+          "kind": "raster",
+          "path": "data/processed/coringa_coastal/earlier_2020-03-26_reflectance.tif",
+          "bytes": 2088422,
+          "sha256": "481ab2b07891f0443fccb1f794dae1f05cf35020cda2165eb4311adbc663ca6c"
+        },
+        "ndvi_tif": {
+          "kind": "raster",
+          "path": "data/processed/coringa_coastal/earlier_2020-03-26_ndvi.tif",
+          "bytes": 527494,
+          "sha256": "4c2df75d670491e4c0501e98199160bd5e077373c15a7d76e8adbbb286d010bf"
+        },
+        "valid_mask_tif": {
+          "kind": "raster",
+          "path": "data/processed/coringa_coastal/earlier_2020-03-26_valid_mask.tif",
+          "bytes": 2359,
+          "sha256": "61dca3b98d3b9690885a23d0b31d94e4ff12146ab43de09d0b39e9a69e795f5a"
+        },
+        "true_colour_png": {
+          "kind": "preview",
+          "path": "data/previews/coringa_coastal/earlier_2020-03-26_true_colour.png",
+          "bytes": 368705,
+          "sha256": "e8b7f3db0be0c6a869d9730bd1407b8b3bd3a3ce535e88ff0adfb34c19d47f23"
+        },
+        "ndvi_png": {
+          "kind": "preview",
+          "path": "data/previews/coringa_coastal/earlier_2020-03-26_ndvi.png",
+          "bytes": 268435,
+          "sha256": "5c7760c81b2e2b0343d8428c0ab3721103f94fe25965941101a8fed48843ba49"
+        },
+        "valid_mask_png": {
+          "kind": "preview",
+          "path": "data/previews/coringa_coastal/earlier_2020-03-26_valid_mask.png",
+          "bytes": 1198,
+          "sha256": "6152c252e171a4b94d78fe24da322f19ae0078f1a5db3384ad1f1ed96954b9cf"
+        }
+      }
+    },
+    {
+      "period_id": "later",
+      "acquisition_date": "2025-03-25",
+      "acquisition_utc": "2025-03-25T05:14:10.803000Z",
+      "scene": {
+        "item_id": "S2B_44QPD_20250325_0_L2A",
+        "collection": "sentinel-2-l2a",
+        "acquired_utc": "2025-03-25T05:14:10.803000Z",
+        "acquisition_date": "2025-03-25",
+        "platform": "sentinel-2b",
+        "constellation": "sentinel-2",
+        "instrument": "msi",
+        "cloud_cover_percent": 5.009511,
+        "epsg": 32644,
+        "catalog_url": "https://earth-search.aws.element84.com/v1",
+        "processing_baseline": "05.11",
+        "footprint": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                81.94035855635792,
+                17.182791762213984
+              ],
+              [
+                81.93552228411914,
+                16.191274966938465
+              ],
+              [
+                82.82749765558225,
+                16.18565993521215
+              ],
+              [
+                82.96828649820475,
+                16.770261599183904
+              ],
+              [
+                82.97251395918556,
+                17.175340777437757
+              ],
+              [
+                81.94035855635792,
+                17.182791762213984
+              ]
+            ]
+          ]
+        },
+        "assets": {
+          "blue": {
+            "key": "blue",
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/44/Q/PD/2025/3/S2B_44QPD_20250325_0_L2A/B02.tif",
+            "media_type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "scale": 0.0001,
+            "offset": -0.1,
+            "nodata": 0,
+            "gsd_metres": 10.0,
+            "shape": [
+              10980,
+              10980
+            ],
+            "anonymous_access_ok": null
+          },
+          "green": {
+            "key": "green",
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/44/Q/PD/2025/3/S2B_44QPD_20250325_0_L2A/B03.tif",
+            "media_type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "scale": 0.0001,
+            "offset": -0.1,
+            "nodata": 0,
+            "gsd_metres": 10.0,
+            "shape": [
+              10980,
+              10980
+            ],
+            "anonymous_access_ok": null
+          },
+          "red": {
+            "key": "red",
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/44/Q/PD/2025/3/S2B_44QPD_20250325_0_L2A/B04.tif",
+            "media_type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "scale": 0.0001,
+            "offset": -0.1,
+            "nodata": 0,
+            "gsd_metres": 10.0,
+            "shape": [
+              10980,
+              10980
+            ],
+            "anonymous_access_ok": null
+          },
+          "nir": {
+            "key": "nir",
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/44/Q/PD/2025/3/S2B_44QPD_20250325_0_L2A/B08.tif",
+            "media_type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "scale": 0.0001,
+            "offset": -0.1,
+            "nodata": 0,
+            "gsd_metres": 10.0,
+            "shape": [
+              10980,
+              10980
+            ],
+            "anonymous_access_ok": null
+          },
+          "scl": {
+            "key": "scl",
+            "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/44/Q/PD/2025/3/S2B_44QPD_20250325_0_L2A/SCL.tif",
+            "media_type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "scale": 0.0001,
+            "offset": 0.0,
+            "nodata": 0,
+            "gsd_metres": 20.0,
+            "shape": [
+              5490,
+              5490
+            ],
+            "anonymous_access_ok": null
+          }
+        }
+      },
+      "valid_fraction": 0.957962,
+      "mask_policy": {
+        "total_pixels": 165136,
+        "valid_pixels": 158194,
+        "valid_fraction": 0.957962,
+        "valid_percent": 95.796,
+        "accepted_scl_classes": {
+          "2": "dark_area_pixels",
+          "4": "vegetation",
+          "5": "not_vegetated",
+          "6": "water",
+          "7": "unclassified",
+          "11": "snow_ice"
+        },
+        "rejected_scl_classes": {
+          "0": "no_data",
+          "1": "saturated_or_defective",
+          "3": "cloud_shadow",
+          "8": "cloud_medium_probability",
+          "9": "cloud_high_probability",
+          "10": "thin_cirrus"
+        },
+        "class_histogram": {
+          "3": 2786,
+          "4": 59272,
+          "5": 55616,
+          "6": 17068,
+          "7": 28158,
+          "8": 4282,
+          "9": 128
+        }
+      },
+      "radiometry": {
+        "blue": {
+          "asset_key": "blue",
+          "scale": 0.0001,
+          "offset": 0.0,
+          "nodata": 0,
+          "gsd_metres": 10.0,
+          "source": "stac:item.S2B_44QPD_20250325_0_L2A.assets.blue.raster:bands (baseline 05.11; earthsearch:boa_offset_applied=true so the declared -0.1 is already baked into the DNs and is not applied again)",
+          "transform": "reflectance = DN * scale + offset"
+        },
+        "green": {
+          "asset_key": "green",
+          "scale": 0.0001,
+          "offset": 0.0,
+          "nodata": 0,
+          "gsd_metres": 10.0,
+          "source": "stac:item.S2B_44QPD_20250325_0_L2A.assets.green.raster:bands (baseline 05.11; earthsearch:boa_offset_applied=true so the declared -0.1 is already baked into the DNs and is not applied again)",
+          "transform": "reflectance = DN * scale + offset"
+        },
+        "red": {
+          "asset_key": "red",
+          "scale": 0.0001,
+          "offset": 0.0,
+          "nodata": 0,
+          "gsd_metres": 10.0,
+          "source": "stac:item.S2B_44QPD_20250325_0_L2A.assets.red.raster:bands (baseline 05.11; earthsearch:boa_offset_applied=true so the declared -0.1 is already baked into the DNs and is not applied again)",
+          "transform": "reflectance = DN * scale + offset"
+        },
+        "nir": {
+          "asset_key": "nir",
+          "scale": 0.0001,
+          "offset": 0.0,
+          "nodata": 0,
+          "gsd_metres": 10.0,
+          "source": "stac:item.S2B_44QPD_20250325_0_L2A.assets.nir.raster:bands (baseline 05.11; earthsearch:boa_offset_applied=true so the declared -0.1 is already baked into the DNs and is not applied again)",
+          "transform": "reflectance = DN * scale + offset"
+        },
+        "scl": {
+          "asset_key": "scl",
+          "scale": 0.0001,
+          "offset": 0.0,
+          "nodata": 0,
+          "gsd_metres": 20.0,
+          "source": "stac:item.S2B_44QPD_20250325_0_L2A.assets.scl.raster:bands (baseline 05.11; declared offset +0.0 (boa_offset_applied=True))",
+          "transform": "reflectance = DN * scale + offset"
+        }
+      },
+      "window_rendering": {
+        "true_colour_stretch": {
+          "low": [
+            0.039400000125169754,
+            0.060999996960163116,
+            0.04809999838471413
+          ],
+          "high": [
+            0.18902811408042908,
+            0.20659999549388885,
+            0.19102811813354492
+          ],
+          "gamma": 1.0,
+          "method": "per-band 2-98 percentile linear stretch on valid pixels"
+        }
+      },
+      "index_stats": {
+        "valid_count": 158194,
+        "total_count": 167310,
+        "valid_fraction": 0.945514,
+        "min": -0.283133,
+        "max": 0.857544,
+        "mean": 0.443271,
+        "std": 0.268291,
+        "quantiles": {
+          "p05": -0.061571,
+          "p25": 0.26273,
+          "p50": 0.466312,
+          "p75": 0.68968,
+          "p95": 0.786614
+        }
+      },
+      "outputs": {
+        "reflectance_tif": {
+          "kind": "raster",
+          "path": "data/processed/coringa_coastal/later_2025-03-25_reflectance.tif",
+          "bytes": 1863594,
+          "sha256": "19e96d5d751c47b691606c5854f00527ed02eaac1a57483706ddaa70df89749f"
+        },
+        "ndvi_tif": {
+          "kind": "raster",
+          "path": "data/processed/coringa_coastal/later_2025-03-25_ndvi.tif",
+          "bytes": 511102,
+          "sha256": "734497c5a4ee4e7b6ec9a6c64cd4eb5b24558ae91d8b2c99e306cc53f476e393"
+        },
+        "valid_mask_tif": {
+          "kind": "raster",
+          "path": "data/processed/coringa_coastal/later_2025-03-25_valid_mask.tif",
+          "bytes": 3141,
+          "sha256": "219c24a5455ee90dc40cfb8dd4f2b7f588e74f73cb64ea8a22e222cb1d818e58"
+        },
+        "true_colour_png": {
+          "kind": "preview",
+          "path": "data/previews/coringa_coastal/later_2025-03-25_true_colour.png",
+          "bytes": 314848,
+          "sha256": "593d1f1d840bdf76eefb7a19e1df0ca7eac53fb0063ca05888026e0058ddab5c"
+        },
+        "ndvi_png": {
+          "kind": "preview",
+          "path": "data/previews/coringa_coastal/later_2025-03-25_ndvi.png",
+          "bytes": 244293,
+          "sha256": "50d659fa6694c49f79f0b63aa1604c9289393f8e642385ea3379809b11a05529"
+        },
+        "valid_mask_png": {
+          "kind": "preview",
+          "path": "data/previews/coringa_coastal/later_2025-03-25_valid_mask.png",
+          "bytes": 2106,
+          "sha256": "2ec5502074bf3dd2d459fd6df0f2bc373919f806947e355a909d6ef424dca925"
+        }
+      }
+    }
+  ]
+}

@@ -43,12 +43,79 @@ class Radiometry:
         }
 
 
+def _baseline_number(candidate: SceneCandidate) -> tuple[float, str]:
+    """Parse the item's processing baseline, or fail loudly."""
+    baseline = candidate.processing_baseline
+    if baseline is None:
+        raise RadiometryError(
+            f"item {candidate.item_id} declares no processing baseline, so the "
+            f"reflectance offset convention is indeterminate"
+        )
+    try:
+        major, _, minor = str(baseline).partition(".")
+        return float(f"{major}.{minor or '0'}"), str(baseline)
+    except ValueError as exc:
+        raise RadiometryError(
+            f"item {candidate.item_id} has unparseable baseline {baseline!r}"
+        ) from exc
+
+
+def resolve_offset(
+    candidate: SceneCandidate, declared: float, *, asset_key: str
+) -> tuple[float, str]:
+    """Return the offset that must actually be applied, plus its provenance.
+
+    Sentinel-2 L2A baseline 04.00 (25 Jan 2022) introduced
+    ``BOA_ADD_OFFSET = -1000``, i.e. ``reflectance = DN * 0.0001 - 0.1``;
+    older products carry no offset.  During COG conversion Earth Search baked
+    that offset into some items and flagged this with
+    ``earthsearch:boa_offset_applied = true``, while leaving the generic
+    ``raster:bands`` offset at -0.1.  Applying -0.1 again to those items would
+    double-correct every pixel, so the flag takes precedence there and the
+    effective offset becomes 0.0.  When the flag is absent or false, the
+    asset's declared offset is applied.  Values outside the two valid
+    Sentinel-2 conventions, or a BOA offset on a pre-04.00 product, are hard
+    errors rather than silent guesses.
+
+    See https://github.com/Element84/earth-search/blob/main/docs/collections/sentinel-2-l2a.md
+    ("Gain/Offset in Items after Jan 25, 2022").
+    """
+    numeric, raw = _baseline_number(candidate)
+    if not any(
+        abs(declared - valid) <= 1e-9
+        for valid in (config.NO_OFFSET, config.BOA_ADD_OFFSET)
+    ):
+        raise RadiometryError(
+            f"item {candidate.item_id} asset {asset_key}: declared offset "
+            f"{declared} is not a Sentinel-2 L2A convention "
+            f"(0.0 or {config.BOA_ADD_OFFSET})"
+        )
+    if numeric < config.BASELINE_OFFSET_THRESHOLD and abs(declared) > 1e-9:
+        raise RadiometryError(
+            f"item {candidate.item_id} asset {asset_key}: baseline {raw} "
+            f"predates 04.00 but declares offset {declared}"
+        )
+
+    applied = candidate.extra.get("boa_offset_applied")
+    if applied is True and abs(declared) > 1e-9:
+        return config.NO_OFFSET, (
+            f"baseline {raw}; earthsearch:boa_offset_applied=true so the "
+            f"declared {declared:+.1f} is already baked into the DNs and is "
+            f"not applied again"
+        )
+    return declared, (
+        f"baseline {raw}; declared offset {declared:+.1f} "
+        f"(boa_offset_applied={applied!r})"
+    )
+
+
 def verify_radiometry(candidate: SceneCandidate) -> dict[str, Radiometry]:
     """Validate every required asset and return its scaling record.
 
     Raises :class:`RadiometryError` when the catalog declares something other
-    than the expected Sentinel-2 L2A scaling or a differing native GSD, which
-    would mean the pipeline's assumptions no longer hold for this item.
+    than the Sentinel-2 L2A scaling required by this item's baseline, or a
+    differing native GSD, which would mean the pipeline's assumptions no longer
+    hold.
     """
     verified: dict[str, Radiometry] = {}
     for key in config.REQUIRED_ASSETS:
@@ -62,11 +129,7 @@ def verify_radiometry(candidate: SceneCandidate) -> dict[str, Radiometry]:
                 f"item {candidate.item_id} asset {key}: unexpected scale "
                 f"{asset.scale} (expected {config.EXPECTED_SCALE})"
             )
-        if abs(asset.offset - config.EXPECTED_OFFSET) > 1e-9:
-            raise RadiometryError(
-                f"item {candidate.item_id} asset {key}: unexpected offset "
-                f"{asset.offset} (expected {config.EXPECTED_OFFSET})"
-            )
+        offset, offset_reason = resolve_offset(candidate, asset.offset, asset_key=key)
         if asset.nodata is not None and asset.nodata != config.EXPECTED_NODATA:
             raise RadiometryError(
                 f"item {candidate.item_id} asset {key}: unexpected nodata "
@@ -82,10 +145,13 @@ def verify_radiometry(candidate: SceneCandidate) -> dict[str, Radiometry]:
         verified[key] = Radiometry(
             asset_key=key,
             scale=asset.scale,
-            offset=asset.offset,
+            offset=offset,
             nodata=asset.nodata,
             gsd=asset.gsd,
-            source=f"stac:item.{candidate.item_id}.assets.{key}.raster:bands",
+            source=(
+                f"stac:item.{candidate.item_id}.assets.{key}.raster:bands "
+                f"({offset_reason})"
+            ),
         )
     return verified
 

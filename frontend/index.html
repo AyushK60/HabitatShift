@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HabitatShift · M0 proof viewer</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip" href="#compare">Skip to comparison</a>
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-name">HabitatShift</span>
+        <span class="brand-tag">M0 · data proof</span>
+      </div>
+      <p class="topbar-note">
+        Two genuine Sentinel-2 L2A observations of one AOI. Every number below is
+        read from the pipeline manifest.
+      </p>
+    </header>
+
+    <main>
+      <section class="intro">
+        <p class="eyebrow">Study A · Coastal ecotone</p>
+        <h1>Coringa / Godavari delta</h1>
+        <p class="lede" id="lede">Loading measured study summary…</p>
+        <dl class="grid-facts" id="facts"></dl>
+      </section>
+
+      <p class="banner" id="banner" hidden></p>
+
+      <section class="controls" aria-label="Layer selection">
+        <div class="control-group">
+          <span class="control-label">Layer</span>
+          <div class="segmented" role="group" id="layer-switch">
+            <button type="button" data-layer="true_colour" class="is-active">
+              True colour
+            </button>
+            <button type="button" data-layer="ndvi">NDVI</button>
+            <button type="button" data-layer="mask">Valid mask</button>
+          </div>
+        </div>
+        <div class="control-group">
+          <span class="control-label">Compare</span>
+          <div class="segmented" role="group" id="mode-switch">
+            <button type="button" data-mode="side" class="is-active">
+              Side by side
+            </button>
+            <button type="button" data-mode="swipe">Swipe</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="compare" id="compare" data-mode="side"></section>
+
+      <section class="legend-row">
+        <img id="legend" alt="NDVI colour scale, -1 to 1" hidden />
+        <p class="legend-note" id="legend-note" hidden>
+          NDVI colour ramp is fixed for both dates, so equal values share a colour.
+          Charcoal pixels are masked (cloud, shadow, nodata or outside the AOI).
+        </p>
+      </section>
+
+      <section class="panels">
+        <article class="panel">
+          <h2>Measured metadata</h2>
+          <table class="meta" id="meta"></table>
+        </article>
+        <article class="panel">
+          <h2>Validity &amp; limitations</h2>
+          <ul class="notes" id="notes"></ul>
+        </article>
+        <article class="panel">
+          <h2>Provenance</h2>
+          <ul class="notes" id="provenance"></ul>
+        </article>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <p id="attribution">Loading attribution…</p>
+      <p>
+        Index formula: NDVI = (B08 − B04) / (B08 + B04), computed on surface
+        reflectance. Differences are <em>observed spectral change</em>, not a
+        land-cover verdict.
+      </p>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>

@@ -33,10 +33,10 @@ def _band_scale_offset(asset: dict[str, Any]) -> tuple[float, float, int | None]
     """Extract ``(scale, offset, nodata)`` from ``raster:bands`` metadata."""
     bands = asset.get("raster:bands") or []
     if not bands:
-        return config.EXPECTED_SCALE, config.EXPECTED_OFFSET, None
+        return config.EXPECTED_SCALE, config.NO_OFFSET, None
     band = bands[0]
     scale = band.get("scale", config.EXPECTED_SCALE)
-    offset = band.get("offset", config.EXPECTED_OFFSET)
+    offset = band.get("offset", config.NO_OFFSET)
     nodata = band.get("nodata")
     try:
         return float(scale), float(offset), None if nodata is None else int(nodata)
@@ -203,11 +203,17 @@ class SceneCandidate:
             epsg=int(proj_epsg) if proj_epsg is not None else None,
             catalog_url=catalog_url,
             processing_baseline=properties.get("processing:baseline")
+            or properties.get("s2:processing_baseline")
             or properties.get("earthsearch:processingBaseline"),
             assets=assets,
             extra={
                 "mgrs_tile": properties.get("grid:code"),
                 "view_off_nadir": properties.get("view:off_nadir"),
                 "sci_doi": properties.get("sci:doi"),
+                # Authoritative switch for whether the -0.1 BOA offset is
+                # already baked into the stored DNs of this product.
+                "boa_offset_applied": properties.get("earthsearch:boa_offset_applied")
+                if properties.get("earthsearch:boa_offset_applied") is not None
+                else properties.get("s2:boa_offset_applied"),
             },
         )
