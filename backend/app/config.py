@@ -29,6 +29,11 @@ OBSERVATION_CACHE_DIR = CACHE_DIR / "observations"
 PROCESSED_M1_DIR = PROCESSED_DIR / "m1"
 PREVIEW_M1_DIR = PREVIEW_DIR / "m1"
 
+#: Presentation-only derivatives for the M2-G0 comparison repair.  These are
+#: generated from the exported M1 valid-mask rasters and never replace or
+#: modify the frozen M1 summary, statistics or manifest.
+PREVIEW_G0_DIR = PREVIEW_DIR / "g0"
+
 STUDIES_DIR = PROJECT_ROOT / "studies"
 DOCS_DIR = PROJECT_ROOT / "docs"
 
@@ -42,6 +47,7 @@ for _p in (
     OBSERVATION_CACHE_DIR,
     PROCESSED_M1_DIR,
     PREVIEW_M1_DIR,
+    PREVIEW_G0_DIR,
 ):
     _p.mkdir(parents=True, exist_ok=True)
 

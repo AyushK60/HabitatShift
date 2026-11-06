@@ -31,6 +31,7 @@ MANIFEST_PATH = config.MANIFEST_DIR / "m0_primary_study.json"
 
 M1_ROOT = config.PROCESSED_M1_DIR
 M1_PREVIEW_ROOT = config.PREVIEW_M1_DIR
+G0_PREVIEW_ROOT = config.PREVIEW_G0_DIR
 
 _STUDY_ID = re.compile(r"^[A-Za-z0-9_-]+$")
 _SCOPES = ("processed", "previews")
@@ -282,6 +283,28 @@ def m1_manifest_alias(study_id: str) -> JSONResponse:
     return JSONResponse(_m1_manifest(study_id))
 
 
+@app.get("/api/m1/study/{study_id}/presentation")
+def m1_presentation(study_id: str) -> JSONResponse:
+    """Presentation-only M2-G0 validity assets derived from the M1 masks.
+
+    These assets do not modify the M1 summary, statistics or manifest.  The
+    endpoint is explicit so a reviewer can tell presentation derivatives from
+    scientific outputs.
+    """
+    directory = G0_PREVIEW_ROOT / _safe_study_id(study_id)
+    path = directory / "quality.json"
+    if not path.exists():
+        raise HTTPException(
+            status_code=404,
+            detail=(
+                f"no G0 presentation assets for {study_id!r}; run "
+                "`python scripts/build_g0_presentation.py --study "
+                f"{study_id}`"
+            ),
+        )
+    return JSONResponse(json.loads(path.read_text("utf-8")))
+
+
 # --------------------------------------------------------------------------- #
 # Static artefacts
 # --------------------------------------------------------------------------- #
@@ -313,6 +336,24 @@ def m1_asset(study_id: str, scope: str, name: str) -> FileResponse:
     root = _scope_root(scope) / study_id
     if not root.is_dir():
         raise HTTPException(status_code=404, detail=f"unknown M1 study {study_id!r}")
+    path = root / name
+    if not path.exists():
+        raise HTTPException(status_code=404, detail=f"{name} not found")
+    return FileResponse(
+        path,
+        media_type=_MEDIA_TYPES.get(path.suffix.lower(), "application/octet-stream"),
+    )
+
+
+@app.get("/files/g0/{study_id}/{name}")
+def g0_asset(study_id: str, name: str) -> FileResponse:
+    """Serve a presentation-only M2-G0 validity preview or overlay."""
+    study_id = _safe_study_id(study_id)
+    if "/" in name or "\\" in name or ".." in name:
+        raise HTTPException(status_code=400, detail="name must be a bare file name")
+    root = G0_PREVIEW_ROOT / study_id
+    if not root.is_dir():
+        raise HTTPException(status_code=404, detail=f"unknown G0 study {study_id!r}")
     path = root / name
     if not path.exists():
         raise HTTPException(status_code=404, detail=f"{name} not found")

@@ -1,0 +1,96 @@
+{
+  "artifact_sha256": {
+    "common_invalid.png": "f83916265ad048f7a0f04098115d021b3ed4cd819322248b59f0cac13ff74145",
+    "common_valid.png": "4a4d8b12f6b54a12ad1ff2459b2f9367c1fa543c3bff5722bfadbd15876dae16",
+    "earlier_invalid.png": "f83916265ad048f7a0f04098115d021b3ed4cd819322248b59f0cac13ff74145",
+    "earlier_valid.png": "4a4d8b12f6b54a12ad1ff2459b2f9367c1fa543c3bff5722bfadbd15876dae16",
+    "later_invalid.png": "f83916265ad048f7a0f04098115d021b3ed4cd819322248b59f0cac13ff74145",
+    "later_valid.png": "4a4d8b12f6b54a12ad1ff2459b2f9367c1fa543c3bff5722bfadbd15876dae16",
+    "masked_common.png": "07cc5e3918ee6a410834404f01e537405abcd7215b1b039b7c35db9d251f372b"
+  },
+  "coverage": {
+    "aoi_pixels": 165136,
+    "common_valid_fraction_of_aoi": 1.0,
+    "common_valid_pixels": 165136,
+    "earlier_valid_fraction_of_aoi": 1.0,
+    "earlier_valid_pixels": 165136,
+    "grid_pixels": 167310,
+    "later_valid_fraction_of_aoi": 1.0,
+    "later_valid_pixels": 165136,
+    "masked_pixels": 2174,
+    "uniform_common": true,
+    "uniform_note": "All AOI pixels are valid in both periods; a uniform common-valid footprint is mathematically expected, not a rendering defect."
+  },
+  "grid": {
+    "bounds": [
+      632700.0,
+      1847890.0,
+      636990.0,
+      1851790.0
+    ],
+    "crs": "EPSG:32644",
+    "height": 390,
+    "native_band_resolutions_m": {
+      "blue": 10.0,
+      "green": 10.0,
+      "nir": 10.0,
+      "red": 10.0,
+      "swir16": 20.0
+    },
+    "pixel_area_m2": 100.0,
+    "resolution_m": 10.0,
+    "signature": "ad1601d5620e5f23",
+    "transform": [
+      10.0,
+      0.0,
+      632700.0,
+      0.0,
+      -10.0,
+      1851790.0
+    ],
+    "utm_epsg": 32644,
+    "width": 429
+  },
+  "mask_previews": {
+    "common_valid.png": "data/previews/g0/coringa_coastal/common_valid.png",
+    "earlier_valid.png": "data/previews/g0/coringa_coastal/earlier_valid.png",
+    "later_valid.png": "data/previews/g0/coringa_coastal/later_valid.png",
+    "masked_common.png": "data/previews/g0/coringa_coastal/masked_common.png"
+  },
+  "observation_counts": {
+    "earlier": {
+      "0": 2174,
+      "1": 44,
+      "2": 33723,
+      "3": 131369
+    },
+    "later": {
+      "0": 2174,
+      "1": 166,
+      "2": 19754,
+      "3": 145216
+    }
+  },
+  "overlay_previews": {
+    "common_invalid.png": "data/previews/g0/coringa_coastal/common_invalid.png",
+    "earlier_invalid.png": "data/previews/g0/coringa_coastal/earlier_invalid.png",
+    "later_invalid.png": "data/previews/g0/coringa_coastal/later_invalid.png"
+  },
+  "presentation_version": "g0-1.0",
+  "source_sha256": {
+    "common_valid_mask": "6e6a9de229caf9a4ed1cc84eaca2621f64e809ae89ef3234b60496ce376a7c0b",
+    "earlier_observation_count": "5591b5f4054aeab7018f10e78fbe78cc337ad82f9fbecdda9d1629fdfef46c2b",
+    "earlier_valid_mask": "ae24e55b49146bf7043538e2d4f1dfb5374ae7f5902acc7cfbdda53772df1ace",
+    "later_observation_count": "c1f1fcb948edd4c2cfdaaa4ffb20c61173e4fca52c59ffe4db35ab11c8002845",
+    "later_valid_mask": "ae24e55b49146bf7043538e2d4f1dfb5374ae7f5902acc7cfbdda53772df1ace"
+  },
+  "source_summary_generated_utc": "2026-11-06T09:19:08.928506+00:00",
+  "sources": {
+    "common_valid_mask": "data/processed/m1/coringa_coastal/common_valid_ndvi.tif",
+    "earlier_observation_count": "data/processed/m1/coringa_coastal/earlier_2020-03-26_observation_count.tif",
+    "earlier_valid_mask": "data/processed/m1/coringa_coastal/earlier_2020-03-26_valid_mask.tif",
+    "later_observation_count": "data/processed/m1/coringa_coastal/later_2025-03-25_observation_count.tif",
+    "later_valid_mask": "data/processed/m1/coringa_coastal/later_2025-03-25_valid_mask.tif"
+  },
+  "study_id": "coringa_coastal"
+}

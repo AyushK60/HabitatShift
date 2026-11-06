@@ -1,0 +1,2279 @@
+{
+  "base_url": "http://127.0.0.1:8096/",
+  "started_utc": "2026-11-06T09:45:38.653Z",
+  "viewports": {
+    "1920x1080": {
+      "side": {
+        "stage": {
+          "width": 556,
+          "height": 505.453125,
+          "aspect": 1.1000030912856658
+        },
+        "identical_pattern_diff": {
+          "same_size": true,
+          "width": 556,
+          "height": 507,
+          "max": 11,
+          "mean": 0.007857619230059738,
+          "over4": 79,
+          "fraction_over4": 0.00028024917344231123
+        }
+      },
+      "swipe": {
+        "splits": {
+          "0": {
+            "aria": 0,
+            "diff": {
+              "same_size": true,
+              "width": 1130,
+              "height": 1028,
+              "max": 0,
+              "mean": 0,
+              "over4": 0,
+              "fraction_over4": 0
+            }
+          },
+          "10": {
+            "aria": 10,
+            "diff": {
+              "same_size": true,
+              "width": 1130,
+              "height": 1028,
+              "max": 0,
+              "mean": 0,
+              "over4": 0,
+              "fraction_over4": 0
+            }
+          },
+          "25": {
+            "aria": 25,
+            "diff": {
+              "same_size": true,
+              "width": 1130,
+              "height": 1028,
+              "max": 5,
+              "mean": 0.0006051788850246204,
+              "over4": 4,
+              "fraction_over4": 0.000003443407596157157
+            }
+          },
+          "50": {
+            "aria": 50,
+            "diff": {
+              "same_size": true,
+              "width": 1130,
+              "height": 1028,
+              "max": 0,
+              "mean": 0,
+              "over4": 0,
+              "fraction_over4": 0
+            }
+          },
+          "75": {
+            "aria": 75,
+            "diff": {
+              "same_size": true,
+              "width": 1130,
+              "height": 1028,
+              "max": 4,
+              "mean": 0.0009951447952894184,
+              "over4": 0,
+              "fraction_over4": 0
+            }
+          },
+          "90": {
+            "aria": 90,
+            "diff": {
+              "same_size": true,
+              "width": 1130,
+              "height": 1028,
+              "max": 0,
+              "mean": 0,
+              "over4": 0,
+              "fraction_over4": 0
+            }
+          },
+          "100": {
+            "aria": 100,
+            "diff": {
+              "same_size": true,
+              "width": 1130,
+              "height": 1028,
+              "max": 0,
+              "mean": 0,
+              "over4": 0,
+              "fraction_over4": 0
+            }
+          }
+        },
+        "stage": {
+          "width": 1130,
+          "height": 1027.265625,
+          "aspect": 1.1000076051410754
+        }
+      },
+      "change": {
+        "stage": {
+          "width": 692.859375,
+          "height": 629.859375,
+          "aspect": 1.1000223264121456
+        }
+      },
+      "quality": {
+        "stage": {
+          "width": 676.34375,
+          "height": 614.84375,
+          "aspect": 1.10002541296061
+        }
+      }
+    },
+    "1440x900": {
+      "side": {
+        "stage": {
+          "width": 556,
+          "height": 505.453125,
+          "aspect": 1.1000030912856658
+        },
+        "identical_pattern_diff": {
+          "same_size": true,
+          "width": 556,
+          "height": 507,
+          "max": 6,
+          "mean": 0.0040866714912094,
+          "over4": 19,
+          "fraction_over4": 0.0000674016999418217
+        }
+      },
+      "swipe": {
+        "splits": {
+          "0": {
+            "aria": 0,
+            "diff": {
+              "same_size": true,
+              "width": 1130,
+              "height": 1028,
+              "max": 0,
+              "mean": 0,
+              "over4": 0,
+              "fraction_over4": 0
+            }
+          },
+          "10": {
+            "aria": 10,
+            "diff": {
+              "same_size": true,
+              "width": 1130,
+              "height": 1028,
+              "max": 0,
+              "mean": 0,
+              "over4": 0,
+              "fraction_over4": 0
+            }
+          },
+          "25": {
+            "aria": 25,
+            "diff": {
+              "same_size": true,
+              "width": 1130,
+              "height": 1028,
+              "max": 0,
+              "mean": 0,
+              "over4": 0,
+              "fraction_over4": 0
+            }
+          },
+          "50": {
+            "aria": 50,
+            "diff": {
+              "same_size": true,
+              "width": 1130,
+              "height": 1028,
+              "max": 0,
+              "mean": 0,
+              "over4": 0,
+              "fraction_over4": 0
+            }
+          },
+          "75": {
+            "aria": 75,
+            "diff": {
+              "same_size": true,
+              "width": 1130,
+              "height": 1028,
+              "max": 0,
+              "mean": 0,
+              "over4": 0,
+              "fraction_over4": 0
+            }
+          },
+          "90": {
+            "aria": 90,
+            "diff": {
+              "same_size": true,
+              "width": 1130,
+              "height": 1028,
+              "max": 0,
+              "mean": 0,
+              "over4": 0,
+              "fraction_over4": 0
+            }
+          },
+          "100": {
+            "aria": 100,
+            "diff": {
+              "same_size": true,
+              "width": 1130,
+              "height": 1028,
+              "max": 0,
+              "mean": 0,
+              "over4": 0,
+              "fraction_over4": 0
+            }
+          }
+        },
+        "stage": {
+          "width": 1130,
+          "height": 1027.265625,
+          "aspect": 1.1000076051410754
+        }
+      },
+      "change": {
+        "stage": {
+          "width": 692.859375,
+          "height": 629.859375,
+          "aspect": 1.1000223264121456
+        }
+      },
+      "quality": {
+        "stage": {
+          "width": 676.34375,
+          "height": 614.84375,
+          "aspect": 1.10002541296061
+        }
+      }
+    },
+    "1280x800": {
+      "side": {
+        "stage": {
+          "width": 556,
+          "height": 505.453125,
+          "aspect": 1.1000030912856658
+        },
+        "identical_pattern_diff": {
+          "same_size": true,
+          "width": 556,
+          "height": 507,
+          "max": 11,
+          "mean": 0.006612461510081875,
+          "over4": 71,
+          "fraction_over4": 0.00025186951030891264
+        }
+      },
+      "swipe": {
+        "splits": {
+          "0": {
+            "aria": 0,
+            "diff": {
+              "same_size": true,
+              "width": 1130,
+              "height": 1028,
+              "max": 0,
+              "mean": 0,
+              "over4": 0,
+              "fraction_over4": 0
+            }
+          },
+          "10": {
+            "aria": 10,
+            "diff": {
+              "same_size": true,
+              "width": 1130,
+              "height": 1028,
+              "max": 0,
+              "mean": 0,
+              "over4": 0,
+              "fraction_over4": 0
+            }
+          },
+          "25": {
+            "aria": 25,
+            "diff": {
+              "same_size": true,
+              "width": 1130,
+              "height": 1028,
+              "max": 5,
+              "mean": 0.0006051788850246204,
+              "over4": 4,
+              "fraction_over4": 0.000003443407596157157
+            }
+          },
+          "50": {
+            "aria": 50,
+            "diff": {
+              "same_size": true,
+              "width": 1130,
+              "height": 1028,
+              "max": 0,
+              "mean": 0,
+              "over4": 0,
+              "fraction_over4": 0
+            }
+          },
+          "75": {
+            "aria": 75,
+            "diff": {
+              "same_size": true,
+              "width": 1130,
+              "height": 1028,
+              "max": 4,
+              "mean": 0.0009951447952894184,
+              "over4": 0,
+              "fraction_over4": 0
+            }
+          },
+          "90": {
+            "aria": 90,
+            "diff": {
+              "same_size": true,
+              "width": 1130,
+              "height": 1028,
+              "max": 0,
+              "mean": 0,
+              "over4": 0,
+              "fraction_over4": 0
+            }
+          },
+          "100": {
+            "aria": 100,
+            "diff": {
+              "same_size": true,
+              "width": 1130,
+              "height": 1028,
+              "max": 0,
+              "mean": 0,
+              "over4": 0,
+              "fraction_over4": 0
+            }
+          }
+        },
+        "stage": {
+          "width": 1130,
+          "height": 1027.265625,
+          "aspect": 1.1000076051410754
+        }
+      },
+      "change": {
+        "stage": {
+          "width": 692.859375,
+          "height": 629.859375,
+          "aspect": 1.1000223264121456
+        }
+      },
+      "quality": {
+        "stage": {
+          "width": 676.34375,
+          "height": 614.84375,
+          "aspect": 1.10002541296061
+        }
+      }
+    },
+    "768x900": {
+      "side": {
+        "stage": {
+          "width": 350,
+          "height": 318.171875,
+          "aspect": 1.1000343760742524
+        },
+        "identical_pattern_diff": {
+          "same_size": true,
+          "width": 350,
+          "height": 319,
+          "max": 9,
+          "mean": 0.005508284818629646,
+          "over4": 26,
+          "fraction_over4": 0.0002328705776981639
+        }
+      },
+      "swipe": {
+        "splits": {
+          "0": {
+            "aria": 0,
+            "diff": {
+              "same_size": true,
+              "width": 718,
+              "height": 654,
+              "max": 0,
+              "mean": 0,
+              "over4": 0,
+              "fraction_over4": 0
+            }
+          },
+          "10": {
+            "aria": 10,
+            "diff": {
+              "same_size": true,
+              "width": 718,
+              "height": 654,
+              "max": 0,
+              "mean": 0,
+              "over4": 0,
+              "fraction_over4": 0
+            }
+          },
+          "25": {
+            "aria": 25,
+            "diff": {
+              "same_size": true,
+              "width": 718,
+              "height": 654,
+              "max": 0,
+              "mean": 0,
+              "over4": 0,
+              "fraction_over4": 0
+            }
+          },
+          "50": {
+            "aria": 50,
+            "diff": {
+              "same_size": true,
+              "width": 718,
+              "height": 654,
+              "max": 0,
+              "mean": 0,
+              "over4": 0,
+              "fraction_over4": 0
+            }
+          },
+          "75": {
+            "aria": 75,
+            "diff": {
+              "same_size": true,
+              "width": 718,
+              "height": 654,
+              "max": 4,
+              "mean": 0.001552477575323912,
+              "over4": 0,
+              "fraction_over4": 0
+            }
+          },
+          "90": {
+            "aria": 90,
+            "diff": {
+              "same_size": true,
+              "width": 718,
+              "height": 654,
+              "max": 0,
+              "mean": 0,
+              "over4": 0,
+              "fraction_over4": 0
+            }
+          },
+          "100": {
+            "aria": 100,
+            "diff": {
+              "same_size": true,
+              "width": 718,
+              "height": 654,
+              "max": 8,
+              "mean": 0.0019358053717001865,
+              "over4": 47,
+              "fraction_over4": 0.00010009114683158281
+            }
+          }
+        },
+        "stage": {
+          "width": 718,
+          "height": 652.71875,
+          "aspect": 1.1000143630009096
+        }
+      },
+      "change": {
+        "stage": {
+          "width": 718,
+          "height": 652.71875,
+          "aspect": 1.1000143630009096
+        }
+      },
+      "quality": {
+        "stage": {
+          "width": 718,
+          "height": 652.71875,
+          "aspect": 1.1000143630009096
+        }
+      }
+    },
+    "390x844": {
+      "side": {
+        "stage": {
+          "width": 356,
+          "height": 323.625,
+          "aspect": 1.100038624951719
+        },
+        "identical_pattern_diff": {
+          "same_size": true,
+          "width": 356,
+          "height": 324,
+          "max": 8,
+          "mean": 0.03447947010681093,
+          "over4": 40,
+          "fraction_over4": 0.0003467887363018449
+        }
+      },
+      "swipe": {
+        "splits": {
+          "0": {
+            "aria": 0,
+            "diff": {
+              "same_size": true,
+              "width": 356,
+              "height": 324,
+              "max": 5,
+              "mean": 0.0031384380635316963,
+              "over4": 6,
+              "fraction_over4": 0.00005201831044527674
+            }
+          },
+          "10": {
+            "aria": 10,
+            "diff": {
+              "same_size": true,
+              "width": 356,
+              "height": 324,
+              "max": 5,
+              "mean": 0.0031384380635316963,
+              "over4": 6,
+              "fraction_over4": 0.00005201831044527674
+            }
+          },
+          "25": {
+            "aria": 25,
+            "diff": {
+              "same_size": true,
+              "width": 356,
+              "height": 324,
+              "max": 5,
+              "mean": 0.007481966985712304,
+              "over4": 13,
+              "fraction_over4": 0.0001127063392980996
+            }
+          },
+          "50": {
+            "aria": 50,
+            "diff": {
+              "same_size": true,
+              "width": 356,
+              "height": 324,
+              "max": 5,
+              "mean": 0.0031384380635316963,
+              "over4": 6,
+              "fraction_over4": 0.00005201831044527674
+            }
+          },
+          "75": {
+            "aria": 75,
+            "diff": {
+              "same_size": true,
+              "width": 356,
+              "height": 324,
+              "max": 5,
+              "mean": 0.007481966985712304,
+              "over4": 13,
+              "fraction_over4": 0.0001127063392980996
+            }
+          },
+          "90": {
+            "aria": 90,
+            "diff": {
+              "same_size": true,
+              "width": 356,
+              "height": 324,
+              "max": 5,
+              "mean": 0.006311555000693577,
+              "over4": 10,
+              "fraction_over4": 0.00008669718407546123
+            }
+          },
+          "100": {
+            "aria": 100,
+            "diff": {
+              "same_size": true,
+              "width": 356,
+              "height": 324,
+              "max": 5,
+              "mean": 0.007481966985712304,
+              "over4": 13,
+              "fraction_over4": 0.0001127063392980996
+            }
+          }
+        },
+        "stage": {
+          "width": 356,
+          "height": 323.625,
+          "aspect": 1.100038624951719
+        }
+      },
+      "change": {
+        "stage": {
+          "width": 356,
+          "height": 323.625,
+          "aspect": 1.100038624951719
+        }
+      },
+      "quality": {
+        "stage": {
+          "width": 356,
+          "height": 323.625,
+          "aspect": 1.100038624951719
+        }
+      }
+    }
+  },
+  "console_errors": [],
+  "page_errors": [],
+  "failed_requests": [],
+  "screenshots": [
+    "g0_swipe_split_000.png",
+    "g0_swipe_split_010.png",
+    "g0_swipe_split_025.png",
+    "g0_swipe_split_050.png",
+    "g0_swipe_split_075.png",
+    "g0_swipe_split_090.png",
+    "g0_swipe_split_100.png",
+    "g0_side_1440.png",
+    "g0_valid_mask_side_1440.png",
+    "g0_swipe_1440_50.png",
+    "g0_change_1440.png",
+    "g0_change_overlay_1440.png",
+    "g0_quality_1440.png",
+    "g0_quality_common_1440.png",
+    "g0_quality_masked_1440.png",
+    "g0_side_390.png",
+    "g0_valid_mask_side_390.png",
+    "g0_swipe_390_50.png",
+    "g0_change_390.png",
+    "g0_change_overlay_390.png",
+    "g0_quality_390.png",
+    "g0_quality_common_390.png",
+    "g0_quality_masked_390.png"
+  ],
+  "checks": [
+    {
+      "name": "M1 bundle loaded",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1920x1080 side has two stages",
+      "passed": true,
+      "detail": "2"
+    },
+    {
+      "name": "1920x1080 side stages share width",
+      "passed": true,
+      "detail": "556 vs 556"
+    },
+    {
+      "name": "1920x1080 side stages share height",
+      "passed": true,
+      "detail": "505.453125 vs 505.453125"
+    },
+    {
+      "name": "1920x1080 side image fills stage",
+      "passed": true,
+      "detail": "{\"role\":\"period\",\"src\":\"/files/m1/coringa_coastal/previews/earlier_2020-03-26_true_colour.png\",\"width\":556,\"height\":505.453125,\"left\":395,\"top\":842.5625,\"naturalWidth\":429,\"naturalHeight\":390,\"complete\":true}"
+    },
+    {
+      "name": "1920x1080 side raster aspect preserved",
+      "passed": true,
+      "detail": "1.1000030912856658"
+    },
+    {
+      "name": "1920x1080 side natural raster is 429x390",
+      "passed": true,
+      "detail": "429x390"
+    },
+    {
+      "name": "1920x1080 side image fills stage",
+      "passed": true,
+      "detail": "{\"role\":\"period\",\"src\":\"/files/m1/coringa_coastal/previews/later_2025-03-25_true_colour.png\",\"width\":556,\"height\":505.453125,\"left\":969,\"top\":842.5625,\"naturalWidth\":429,\"naturalHeight\":390,\"complete\":true}"
+    },
+    {
+      "name": "1920x1080 side raster aspect preserved",
+      "passed": true,
+      "detail": "1.1000030912856658"
+    },
+    {
+      "name": "1920x1080 side natural raster is 429x390",
+      "passed": true,
+      "detail": "429x390"
+    },
+    {
+      "name": "1920x1080 side identical pattern is pixel-aligned",
+      "passed": true,
+      "detail": "{\"same_size\":true,\"width\":556,\"height\":507,\"max\":11,\"mean\":0.007857619230059738,\"over4\":79,\"fraction_over4\":0.00028024917344231123}"
+    },
+    {
+      "name": "1920x1080 layer ndvi keeps stage bounds",
+      "passed": true,
+      "detail": "[[556,505.453125],[556,505.453125]]"
+    },
+    {
+      "name": "1920x1080 layer ndwi keeps stage bounds",
+      "passed": true,
+      "detail": "[[556,505.453125],[556,505.453125]]"
+    },
+    {
+      "name": "1920x1080 layer mndwi keeps stage bounds",
+      "passed": true,
+      "detail": "[[556,505.453125],[556,505.453125]]"
+    },
+    {
+      "name": "1920x1080 layer valid_mask keeps stage bounds",
+      "passed": true,
+      "detail": "[[556,505.453125],[556,505.453125]]"
+    },
+    {
+      "name": "1920x1080 layer observation_count keeps stage bounds",
+      "passed": true,
+      "detail": "[[556,505.453125],[556,505.453125]]"
+    },
+    {
+      "name": "1920x1080 layer true_colour keeps stage bounds",
+      "passed": true,
+      "detail": "[[556,505.453125],[556,505.453125]]"
+    },
+    {
+      "name": "1920x1080 swipe has one stage",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1920x1080 swipe raster aspect preserved",
+      "passed": true,
+      "detail": "1.1000076051410754"
+    },
+    {
+      "name": "1920x1080 swipe has earlier and later layers",
+      "passed": true,
+      "detail": "[\"earlier\",\"later\"]"
+    },
+    {
+      "name": "1920x1080 swipe earlier fills shared stage",
+      "passed": true,
+      "detail": "{\"role\":\"earlier\",\"src\":\"/files/m1/coringa_coastal/previews/earlier_2020-03-26_true_colour.png\",\"width\":1130,\"height\":1027.265625,\"left\":395,\"top\":574.5625,\"naturalWidth\":429,\"naturalHeight\":390,\"complete\":true}"
+    },
+    {
+      "name": "1920x1080 swipe later fills shared stage",
+      "passed": true,
+      "detail": "{\"role\":\"later\",\"src\":\"/files/m1/coringa_coastal/previews/later_2025-03-25_true_colour.png\",\"width\":1130,\"height\":1027.265625,\"left\":395,\"top\":574.5625,\"naturalWidth\":429,\"naturalHeight\":390,\"complete\":true}"
+    },
+    {
+      "name": "1920x1080 swipe click reaches 0%",
+      "passed": true,
+      "detail": "aria-valuenow=0"
+    },
+    {
+      "name": "1920x1080 swipe 0% remains pixel-aligned",
+      "passed": true,
+      "detail": "{\"same_size\":true,\"width\":1130,\"height\":1028,\"max\":0,\"mean\":0,\"over4\":0,\"fraction_over4\":0}"
+    },
+    {
+      "name": "1920x1080 swipe click reaches 10%",
+      "passed": true,
+      "detail": "aria-valuenow=10"
+    },
+    {
+      "name": "1920x1080 swipe 10% remains pixel-aligned",
+      "passed": true,
+      "detail": "{\"same_size\":true,\"width\":1130,\"height\":1028,\"max\":0,\"mean\":0,\"over4\":0,\"fraction_over4\":0}"
+    },
+    {
+      "name": "1920x1080 swipe click reaches 25%",
+      "passed": true,
+      "detail": "aria-valuenow=25"
+    },
+    {
+      "name": "1920x1080 swipe 25% remains pixel-aligned",
+      "passed": true,
+      "detail": "{\"same_size\":true,\"width\":1130,\"height\":1028,\"max\":5,\"mean\":0.0006051788850246204,\"over4\":4,\"fraction_over4\":0.000003443407596157157}"
+    },
+    {
+      "name": "1920x1080 swipe click reaches 50%",
+      "passed": true,
+      "detail": "aria-valuenow=50"
+    },
+    {
+      "name": "1920x1080 swipe 50% remains pixel-aligned",
+      "passed": true,
+      "detail": "{\"same_size\":true,\"width\":1130,\"height\":1028,\"max\":0,\"mean\":0,\"over4\":0,\"fraction_over4\":0}"
+    },
+    {
+      "name": "1920x1080 swipe click reaches 75%",
+      "passed": true,
+      "detail": "aria-valuenow=75"
+    },
+    {
+      "name": "1920x1080 swipe 75% remains pixel-aligned",
+      "passed": true,
+      "detail": "{\"same_size\":true,\"width\":1130,\"height\":1028,\"max\":4,\"mean\":0.0009951447952894184,\"over4\":0,\"fraction_over4\":0}"
+    },
+    {
+      "name": "1920x1080 swipe click reaches 90%",
+      "passed": true,
+      "detail": "aria-valuenow=90"
+    },
+    {
+      "name": "1920x1080 swipe 90% remains pixel-aligned",
+      "passed": true,
+      "detail": "{\"same_size\":true,\"width\":1130,\"height\":1028,\"max\":0,\"mean\":0,\"over4\":0,\"fraction_over4\":0}"
+    },
+    {
+      "name": "1920x1080 swipe click reaches 100%",
+      "passed": true,
+      "detail": "aria-valuenow=100"
+    },
+    {
+      "name": "1920x1080 swipe 100% remains pixel-aligned",
+      "passed": true,
+      "detail": "{\"same_size\":true,\"width\":1130,\"height\":1028,\"max\":0,\"mean\":0,\"over4\":0,\"fraction_over4\":0}"
+    },
+    {
+      "name": "1920x1080 divider sits on the clip boundary at 100%",
+      "passed": true,
+      "detail": "1524 vs 1525"
+    },
+    {
+      "name": "1920x1080 keyboard Home sets 0%",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1920x1080 keyboard End sets 100%",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1920x1080 keyboard ArrowLeft steps 1%",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1920x1080 keyboard Shift+ArrowLeft steps 10%",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1920x1080 click positions divider near 25%",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1920x1080 pointer drag releases at 75%",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1920x1080 reset restores 50%",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1920x1080 validity overlay toggles on",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1920x1080 change mode shows one derived map",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1920x1080 change stage preserves raster aspect",
+      "passed": true,
+      "detail": "1.1000223264121456"
+    },
+    {
+      "name": "1920x1080 change coverage reports 100%",
+      "passed": true,
+      "detail": "100.0%\nof the AOI is common-valid."
+    },
+    {
+      "name": "1920x1080 threshold table has measured rows",
+      "passed": true,
+      "detail": "3"
+    },
+    {
+      "name": "1920x1080 change legend visible",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1920x1080 change hides the temporal view switch",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1920x1080 change keeps the validity-overlay control",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1920x1080 change layer delta_ndwi keeps stage bounds",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1920x1080 change layer delta_mndwi keeps stage bounds",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1920x1080 change layer delta_ndvi keeps stage bounds",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1920x1080 quality mode shows one inspection stage",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1920x1080 quality coverage cards report 100%",
+      "passed": true,
+      "detail": "[\"100.0%\",\"100.0%\",\"100.0%\"]"
+    },
+    {
+      "name": "1920x1080 quality explanation states uniform coverage is expected",
+      "passed": true,
+      "detail": "VALID COVERAGE\nEARLIER\n100.0%\n165,136 px\nLATER\n100.0%\n165,136 px\nSHARED\n100.0%\n165,136 px\nHOW TO READ THIS\n\nAll AOI pixels are valid in both periods. A uniform shared footprint is mathematically expec"
+    },
+    {
+      "name": "1920x1080 quality hides the temporal view switch",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1920x1080 quality hides the overlay toggle",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1920x1080 quality layer qc_valid_earlier keeps stage bounds",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1920x1080 quality layer qc_valid_common keeps stage bounds",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1920x1080 quality layer qc_masked keeps stage bounds",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1920x1080 quality layer qc_count_later keeps stage bounds",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1440x900 side has two stages",
+      "passed": true,
+      "detail": "2"
+    },
+    {
+      "name": "1440x900 side stages share width",
+      "passed": true,
+      "detail": "556 vs 556"
+    },
+    {
+      "name": "1440x900 side stages share height",
+      "passed": true,
+      "detail": "505.453125 vs 505.453125"
+    },
+    {
+      "name": "1440x900 side image fills stage",
+      "passed": true,
+      "detail": "{\"role\":\"period\",\"src\":\"/files/m1/coringa_coastal/previews/earlier_2020-03-26_true_colour.png\",\"width\":556,\"height\":505.453125,\"left\":155,\"top\":772.5625,\"naturalWidth\":429,\"naturalHeight\":390,\"complete\":true}"
+    },
+    {
+      "name": "1440x900 side raster aspect preserved",
+      "passed": true,
+      "detail": "1.1000030912856658"
+    },
+    {
+      "name": "1440x900 side natural raster is 429x390",
+      "passed": true,
+      "detail": "429x390"
+    },
+    {
+      "name": "1440x900 side image fills stage",
+      "passed": true,
+      "detail": "{\"role\":\"period\",\"src\":\"/files/m1/coringa_coastal/previews/later_2025-03-25_true_colour.png\",\"width\":556,\"height\":505.453125,\"left\":729,\"top\":772.5625,\"naturalWidth\":429,\"naturalHeight\":390,\"complete\":true}"
+    },
+    {
+      "name": "1440x900 side raster aspect preserved",
+      "passed": true,
+      "detail": "1.1000030912856658"
+    },
+    {
+      "name": "1440x900 side natural raster is 429x390",
+      "passed": true,
+      "detail": "429x390"
+    },
+    {
+      "name": "1440x900 side identical pattern is pixel-aligned",
+      "passed": true,
+      "detail": "{\"same_size\":true,\"width\":556,\"height\":507,\"max\":6,\"mean\":0.0040866714912094,\"over4\":19,\"fraction_over4\":0.0000674016999418217}"
+    },
+    {
+      "name": "1440x900 layer ndvi keeps stage bounds",
+      "passed": true,
+      "detail": "[[556,505.453125],[556,505.453125]]"
+    },
+    {
+      "name": "1440x900 layer ndwi keeps stage bounds",
+      "passed": true,
+      "detail": "[[556,505.453125],[556,505.453125]]"
+    },
+    {
+      "name": "1440x900 layer mndwi keeps stage bounds",
+      "passed": true,
+      "detail": "[[556,505.453125],[556,505.453125]]"
+    },
+    {
+      "name": "1440x900 layer valid_mask keeps stage bounds",
+      "passed": true,
+      "detail": "[[556,505.453125],[556,505.453125]]"
+    },
+    {
+      "name": "1440x900 layer observation_count keeps stage bounds",
+      "passed": true,
+      "detail": "[[556,505.453125],[556,505.453125]]"
+    },
+    {
+      "name": "1440x900 layer true_colour keeps stage bounds",
+      "passed": true,
+      "detail": "[[556,505.453125],[556,505.453125]]"
+    },
+    {
+      "name": "1440x900 swipe has one stage",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1440x900 swipe raster aspect preserved",
+      "passed": true,
+      "detail": "1.1000076051410754"
+    },
+    {
+      "name": "1440x900 swipe has earlier and later layers",
+      "passed": true,
+      "detail": "[\"earlier\",\"later\"]"
+    },
+    {
+      "name": "1440x900 swipe earlier fills shared stage",
+      "passed": true,
+      "detail": "{\"role\":\"earlier\",\"src\":\"/files/m1/coringa_coastal/previews/earlier_2020-03-26_true_colour.png\",\"width\":1130,\"height\":1027.265625,\"left\":155,\"top\":394.5625,\"naturalWidth\":429,\"naturalHeight\":390,\"complete\":true}"
+    },
+    {
+      "name": "1440x900 swipe later fills shared stage",
+      "passed": true,
+      "detail": "{\"role\":\"later\",\"src\":\"/files/m1/coringa_coastal/previews/later_2025-03-25_true_colour.png\",\"width\":1130,\"height\":1027.265625,\"left\":155,\"top\":394.5625,\"naturalWidth\":429,\"naturalHeight\":390,\"complete\":true}"
+    },
+    {
+      "name": "1440x900 swipe click reaches 0%",
+      "passed": true,
+      "detail": "aria-valuenow=0"
+    },
+    {
+      "name": "1440x900 swipe 0% remains pixel-aligned",
+      "passed": true,
+      "detail": "{\"same_size\":true,\"width\":1130,\"height\":1028,\"max\":0,\"mean\":0,\"over4\":0,\"fraction_over4\":0}"
+    },
+    {
+      "name": "1440x900 swipe click reaches 10%",
+      "passed": true,
+      "detail": "aria-valuenow=10"
+    },
+    {
+      "name": "1440x900 swipe 10% remains pixel-aligned",
+      "passed": true,
+      "detail": "{\"same_size\":true,\"width\":1130,\"height\":1028,\"max\":0,\"mean\":0,\"over4\":0,\"fraction_over4\":0}"
+    },
+    {
+      "name": "1440x900 swipe click reaches 25%",
+      "passed": true,
+      "detail": "aria-valuenow=25"
+    },
+    {
+      "name": "1440x900 swipe 25% remains pixel-aligned",
+      "passed": true,
+      "detail": "{\"same_size\":true,\"width\":1130,\"height\":1028,\"max\":0,\"mean\":0,\"over4\":0,\"fraction_over4\":0}"
+    },
+    {
+      "name": "1440x900 swipe click reaches 50%",
+      "passed": true,
+      "detail": "aria-valuenow=50"
+    },
+    {
+      "name": "1440x900 swipe 50% remains pixel-aligned",
+      "passed": true,
+      "detail": "{\"same_size\":true,\"width\":1130,\"height\":1028,\"max\":0,\"mean\":0,\"over4\":0,\"fraction_over4\":0}"
+    },
+    {
+      "name": "1440x900 swipe click reaches 75%",
+      "passed": true,
+      "detail": "aria-valuenow=75"
+    },
+    {
+      "name": "1440x900 swipe 75% remains pixel-aligned",
+      "passed": true,
+      "detail": "{\"same_size\":true,\"width\":1130,\"height\":1028,\"max\":0,\"mean\":0,\"over4\":0,\"fraction_over4\":0}"
+    },
+    {
+      "name": "1440x900 swipe click reaches 90%",
+      "passed": true,
+      "detail": "aria-valuenow=90"
+    },
+    {
+      "name": "1440x900 swipe 90% remains pixel-aligned",
+      "passed": true,
+      "detail": "{\"same_size\":true,\"width\":1130,\"height\":1028,\"max\":0,\"mean\":0,\"over4\":0,\"fraction_over4\":0}"
+    },
+    {
+      "name": "1440x900 swipe click reaches 100%",
+      "passed": true,
+      "detail": "aria-valuenow=100"
+    },
+    {
+      "name": "1440x900 swipe 100% remains pixel-aligned",
+      "passed": true,
+      "detail": "{\"same_size\":true,\"width\":1130,\"height\":1028,\"max\":0,\"mean\":0,\"over4\":0,\"fraction_over4\":0}"
+    },
+    {
+      "name": "1440x900 divider sits on the clip boundary at 100%",
+      "passed": true,
+      "detail": "1284 vs 1285"
+    },
+    {
+      "name": "1440x900 keyboard Home sets 0%",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1440x900 keyboard End sets 100%",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1440x900 keyboard ArrowLeft steps 1%",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1440x900 keyboard Shift+ArrowLeft steps 10%",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1440x900 click positions divider near 25%",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1440x900 pointer drag releases at 75%",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1440x900 reset restores 50%",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1440x900 validity overlay toggles on",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1440x900 change mode shows one derived map",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1440x900 change stage preserves raster aspect",
+      "passed": true,
+      "detail": "1.1000223264121456"
+    },
+    {
+      "name": "1440x900 change coverage reports 100%",
+      "passed": true,
+      "detail": "100.0%\nof the AOI is common-valid."
+    },
+    {
+      "name": "1440x900 threshold table has measured rows",
+      "passed": true,
+      "detail": "3"
+    },
+    {
+      "name": "1440x900 change legend visible",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1440x900 change hides the temporal view switch",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1440x900 change keeps the validity-overlay control",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1440x900 change layer delta_ndwi keeps stage bounds",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1440x900 change layer delta_mndwi keeps stage bounds",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1440x900 change layer delta_ndvi keeps stage bounds",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1440x900 quality mode shows one inspection stage",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1440x900 quality coverage cards report 100%",
+      "passed": true,
+      "detail": "[\"100.0%\",\"100.0%\",\"100.0%\"]"
+    },
+    {
+      "name": "1440x900 quality explanation states uniform coverage is expected",
+      "passed": true,
+      "detail": "VALID COVERAGE\nEARLIER\n100.0%\n165,136 px\nLATER\n100.0%\n165,136 px\nSHARED\n100.0%\n165,136 px\nHOW TO READ THIS\n\nAll AOI pixels are valid in both periods. A uniform shared footprint is mathematically expec"
+    },
+    {
+      "name": "1440x900 quality hides the temporal view switch",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1440x900 quality hides the overlay toggle",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1440x900 quality layer qc_valid_earlier keeps stage bounds",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1440x900 quality layer qc_valid_common keeps stage bounds",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1440x900 quality layer qc_masked keeps stage bounds",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1440x900 quality layer qc_count_later keeps stage bounds",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1280x800 side has two stages",
+      "passed": true,
+      "detail": "2"
+    },
+    {
+      "name": "1280x800 side stages share width",
+      "passed": true,
+      "detail": "556 vs 556"
+    },
+    {
+      "name": "1280x800 side stages share height",
+      "passed": true,
+      "detail": "505.453125 vs 505.453125"
+    },
+    {
+      "name": "1280x800 side image fills stage",
+      "passed": true,
+      "detail": "{\"role\":\"period\",\"src\":\"/files/m1/coringa_coastal/previews/earlier_2020-03-26_true_colour.png\",\"width\":556,\"height\":505.453125,\"left\":75,\"top\":682.5625,\"naturalWidth\":429,\"naturalHeight\":390,\"complete\":true}"
+    },
+    {
+      "name": "1280x800 side raster aspect preserved",
+      "passed": true,
+      "detail": "1.1000030912856658"
+    },
+    {
+      "name": "1280x800 side natural raster is 429x390",
+      "passed": true,
+      "detail": "429x390"
+    },
+    {
+      "name": "1280x800 side image fills stage",
+      "passed": true,
+      "detail": "{\"role\":\"period\",\"src\":\"/files/m1/coringa_coastal/previews/later_2025-03-25_true_colour.png\",\"width\":556,\"height\":505.453125,\"left\":649,\"top\":682.5625,\"naturalWidth\":429,\"naturalHeight\":390,\"complete\":true}"
+    },
+    {
+      "name": "1280x800 side raster aspect preserved",
+      "passed": true,
+      "detail": "1.1000030912856658"
+    },
+    {
+      "name": "1280x800 side natural raster is 429x390",
+      "passed": true,
+      "detail": "429x390"
+    },
+    {
+      "name": "1280x800 side identical pattern is pixel-aligned",
+      "passed": true,
+      "detail": "{\"same_size\":true,\"width\":556,\"height\":507,\"max\":11,\"mean\":0.006612461510081875,\"over4\":71,\"fraction_over4\":0.00025186951030891264}"
+    },
+    {
+      "name": "1280x800 layer ndvi keeps stage bounds",
+      "passed": true,
+      "detail": "[[556,505.453125],[556,505.453125]]"
+    },
+    {
+      "name": "1280x800 layer ndwi keeps stage bounds",
+      "passed": true,
+      "detail": "[[556,505.453125],[556,505.453125]]"
+    },
+    {
+      "name": "1280x800 layer mndwi keeps stage bounds",
+      "passed": true,
+      "detail": "[[556,505.453125],[556,505.453125]]"
+    },
+    {
+      "name": "1280x800 layer valid_mask keeps stage bounds",
+      "passed": true,
+      "detail": "[[556,505.453125],[556,505.453125]]"
+    },
+    {
+      "name": "1280x800 layer observation_count keeps stage bounds",
+      "passed": true,
+      "detail": "[[556,505.453125],[556,505.453125]]"
+    },
+    {
+      "name": "1280x800 layer true_colour keeps stage bounds",
+      "passed": true,
+      "detail": "[[556,505.453125],[556,505.453125]]"
+    },
+    {
+      "name": "1280x800 swipe has one stage",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1280x800 swipe raster aspect preserved",
+      "passed": true,
+      "detail": "1.1000076051410754"
+    },
+    {
+      "name": "1280x800 swipe has earlier and later layers",
+      "passed": true,
+      "detail": "[\"earlier\",\"later\"]"
+    },
+    {
+      "name": "1280x800 swipe earlier fills shared stage",
+      "passed": true,
+      "detail": "{\"role\":\"earlier\",\"src\":\"/files/m1/coringa_coastal/previews/earlier_2020-03-26_true_colour.png\",\"width\":1130,\"height\":1027.265625,\"left\":75,\"top\":294.5625,\"naturalWidth\":429,\"naturalHeight\":390,\"complete\":true}"
+    },
+    {
+      "name": "1280x800 swipe later fills shared stage",
+      "passed": true,
+      "detail": "{\"role\":\"later\",\"src\":\"/files/m1/coringa_coastal/previews/later_2025-03-25_true_colour.png\",\"width\":1130,\"height\":1027.265625,\"left\":75,\"top\":294.5625,\"naturalWidth\":429,\"naturalHeight\":390,\"complete\":true}"
+    },
+    {
+      "name": "1280x800 swipe click reaches 0%",
+      "passed": true,
+      "detail": "aria-valuenow=0"
+    },
+    {
+      "name": "1280x800 swipe 0% remains pixel-aligned",
+      "passed": true,
+      "detail": "{\"same_size\":true,\"width\":1130,\"height\":1028,\"max\":0,\"mean\":0,\"over4\":0,\"fraction_over4\":0}"
+    },
+    {
+      "name": "1280x800 swipe click reaches 10%",
+      "passed": true,
+      "detail": "aria-valuenow=10"
+    },
+    {
+      "name": "1280x800 swipe 10% remains pixel-aligned",
+      "passed": true,
+      "detail": "{\"same_size\":true,\"width\":1130,\"height\":1028,\"max\":0,\"mean\":0,\"over4\":0,\"fraction_over4\":0}"
+    },
+    {
+      "name": "1280x800 swipe click reaches 25%",
+      "passed": true,
+      "detail": "aria-valuenow=25"
+    },
+    {
+      "name": "1280x800 swipe 25% remains pixel-aligned",
+      "passed": true,
+      "detail": "{\"same_size\":true,\"width\":1130,\"height\":1028,\"max\":5,\"mean\":0.0006051788850246204,\"over4\":4,\"fraction_over4\":0.000003443407596157157}"
+    },
+    {
+      "name": "1280x800 swipe click reaches 50%",
+      "passed": true,
+      "detail": "aria-valuenow=50"
+    },
+    {
+      "name": "1280x800 swipe 50% remains pixel-aligned",
+      "passed": true,
+      "detail": "{\"same_size\":true,\"width\":1130,\"height\":1028,\"max\":0,\"mean\":0,\"over4\":0,\"fraction_over4\":0}"
+    },
+    {
+      "name": "1280x800 swipe click reaches 75%",
+      "passed": true,
+      "detail": "aria-valuenow=75"
+    },
+    {
+      "name": "1280x800 swipe 75% remains pixel-aligned",
+      "passed": true,
+      "detail": "{\"same_size\":true,\"width\":1130,\"height\":1028,\"max\":4,\"mean\":0.0009951447952894184,\"over4\":0,\"fraction_over4\":0}"
+    },
+    {
+      "name": "1280x800 swipe click reaches 90%",
+      "passed": true,
+      "detail": "aria-valuenow=90"
+    },
+    {
+      "name": "1280x800 swipe 90% remains pixel-aligned",
+      "passed": true,
+      "detail": "{\"same_size\":true,\"width\":1130,\"height\":1028,\"max\":0,\"mean\":0,\"over4\":0,\"fraction_over4\":0}"
+    },
+    {
+      "name": "1280x800 swipe click reaches 100%",
+      "passed": true,
+      "detail": "aria-valuenow=100"
+    },
+    {
+      "name": "1280x800 swipe 100% remains pixel-aligned",
+      "passed": true,
+      "detail": "{\"same_size\":true,\"width\":1130,\"height\":1028,\"max\":0,\"mean\":0,\"over4\":0,\"fraction_over4\":0}"
+    },
+    {
+      "name": "1280x800 divider sits on the clip boundary at 100%",
+      "passed": true,
+      "detail": "1204 vs 1205"
+    },
+    {
+      "name": "1280x800 keyboard Home sets 0%",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1280x800 keyboard End sets 100%",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1280x800 keyboard ArrowLeft steps 1%",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1280x800 keyboard Shift+ArrowLeft steps 10%",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1280x800 click positions divider near 25%",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1280x800 pointer drag releases at 75%",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1280x800 reset restores 50%",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1280x800 validity overlay toggles on",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1280x800 change mode shows one derived map",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1280x800 change stage preserves raster aspect",
+      "passed": true,
+      "detail": "1.1000223264121456"
+    },
+    {
+      "name": "1280x800 change coverage reports 100%",
+      "passed": true,
+      "detail": "100.0%\nof the AOI is common-valid."
+    },
+    {
+      "name": "1280x800 threshold table has measured rows",
+      "passed": true,
+      "detail": "3"
+    },
+    {
+      "name": "1280x800 change legend visible",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1280x800 change hides the temporal view switch",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1280x800 change keeps the validity-overlay control",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1280x800 change layer delta_ndwi keeps stage bounds",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1280x800 change layer delta_mndwi keeps stage bounds",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1280x800 change layer delta_ndvi keeps stage bounds",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1280x800 quality mode shows one inspection stage",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1280x800 quality coverage cards report 100%",
+      "passed": true,
+      "detail": "[\"100.0%\",\"100.0%\",\"100.0%\"]"
+    },
+    {
+      "name": "1280x800 quality explanation states uniform coverage is expected",
+      "passed": true,
+      "detail": "VALID COVERAGE\nEARLIER\n100.0%\n165,136 px\nLATER\n100.0%\n165,136 px\nSHARED\n100.0%\n165,136 px\nHOW TO READ THIS\n\nAll AOI pixels are valid in both periods. A uniform shared footprint is mathematically expec"
+    },
+    {
+      "name": "1280x800 quality hides the temporal view switch",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1280x800 quality hides the overlay toggle",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1280x800 quality layer qc_valid_earlier keeps stage bounds",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1280x800 quality layer qc_valid_common keeps stage bounds",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1280x800 quality layer qc_masked keeps stage bounds",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1280x800 quality layer qc_count_later keeps stage bounds",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "768x900 side has two stages",
+      "passed": true,
+      "detail": "2"
+    },
+    {
+      "name": "768x900 side stages share width",
+      "passed": true,
+      "detail": "350 vs 350"
+    },
+    {
+      "name": "768x900 side stages share height",
+      "passed": true,
+      "detail": "318.171875 vs 318.171875"
+    },
+    {
+      "name": "768x900 side image fills stage",
+      "passed": true,
+      "detail": "{\"role\":\"period\",\"src\":\"/files/m1/coringa_coastal/previews/earlier_2020-03-26_true_colour.png\",\"width\":350,\"height\":318.171875,\"left\":25,\"top\":610.53125,\"naturalWidth\":429,\"naturalHeight\":390,\"complete\":true}"
+    },
+    {
+      "name": "768x900 side raster aspect preserved",
+      "passed": true,
+      "detail": "1.1000343760742524"
+    },
+    {
+      "name": "768x900 side natural raster is 429x390",
+      "passed": true,
+      "detail": "429x390"
+    },
+    {
+      "name": "768x900 side image fills stage",
+      "passed": true,
+      "detail": "{\"role\":\"period\",\"src\":\"/files/m1/coringa_coastal/previews/later_2025-03-25_true_colour.png\",\"width\":350,\"height\":318.171875,\"left\":393,\"top\":610.53125,\"naturalWidth\":429,\"naturalHeight\":390,\"complete\":true}"
+    },
+    {
+      "name": "768x900 side raster aspect preserved",
+      "passed": true,
+      "detail": "1.1000343760742524"
+    },
+    {
+      "name": "768x900 side natural raster is 429x390",
+      "passed": true,
+      "detail": "429x390"
+    },
+    {
+      "name": "768x900 side identical pattern is pixel-aligned",
+      "passed": true,
+      "detail": "{\"same_size\":true,\"width\":350,\"height\":319,\"max\":9,\"mean\":0.005508284818629646,\"over4\":26,\"fraction_over4\":0.0002328705776981639}"
+    },
+    {
+      "name": "768x900 layer ndvi keeps stage bounds",
+      "passed": true,
+      "detail": "[[350,318.171875],[350,318.171875]]"
+    },
+    {
+      "name": "768x900 layer ndwi keeps stage bounds",
+      "passed": true,
+      "detail": "[[350,318.171875],[350,318.171875]]"
+    },
+    {
+      "name": "768x900 layer mndwi keeps stage bounds",
+      "passed": true,
+      "detail": "[[350,318.171875],[350,318.171875]]"
+    },
+    {
+      "name": "768x900 layer valid_mask keeps stage bounds",
+      "passed": true,
+      "detail": "[[350,318.171875],[350,318.171875]]"
+    },
+    {
+      "name": "768x900 layer observation_count keeps stage bounds",
+      "passed": true,
+      "detail": "[[350,318.171875],[350,318.171875]]"
+    },
+    {
+      "name": "768x900 layer true_colour keeps stage bounds",
+      "passed": true,
+      "detail": "[[350,318.171875],[350,318.171875]]"
+    },
+    {
+      "name": "768x900 swipe has one stage",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "768x900 swipe raster aspect preserved",
+      "passed": true,
+      "detail": "1.1000143630009096"
+    },
+    {
+      "name": "768x900 swipe has earlier and later layers",
+      "passed": true,
+      "detail": "[\"earlier\",\"later\"]"
+    },
+    {
+      "name": "768x900 swipe earlier fills shared stage",
+      "passed": true,
+      "detail": "{\"role\":\"earlier\",\"src\":\"/files/m1/coringa_coastal/previews/earlier_2020-03-26_true_colour.png\",\"width\":718,\"height\":652.71875,\"left\":25,\"top\":581.53125,\"naturalWidth\":429,\"naturalHeight\":390,\"complete\":true}"
+    },
+    {
+      "name": "768x900 swipe later fills shared stage",
+      "passed": true,
+      "detail": "{\"role\":\"later\",\"src\":\"/files/m1/coringa_coastal/previews/later_2025-03-25_true_colour.png\",\"width\":718,\"height\":652.71875,\"left\":25,\"top\":581.53125,\"naturalWidth\":429,\"naturalHeight\":390,\"complete\":true}"
+    },
+    {
+      "name": "768x900 swipe click reaches 0%",
+      "passed": true,
+      "detail": "aria-valuenow=0"
+    },
+    {
+      "name": "768x900 swipe 0% remains pixel-aligned",
+      "passed": true,
+      "detail": "{\"same_size\":true,\"width\":718,\"height\":654,\"max\":0,\"mean\":0,\"over4\":0,\"fraction_over4\":0}"
+    },
+    {
+      "name": "768x900 swipe click reaches 10%",
+      "passed": true,
+      "detail": "aria-valuenow=10"
+    },
+    {
+      "name": "768x900 swipe 10% remains pixel-aligned",
+      "passed": true,
+      "detail": "{\"same_size\":true,\"width\":718,\"height\":654,\"max\":0,\"mean\":0,\"over4\":0,\"fraction_over4\":0}"
+    },
+    {
+      "name": "768x900 swipe click reaches 25%",
+      "passed": true,
+      "detail": "aria-valuenow=25"
+    },
+    {
+      "name": "768x900 swipe 25% remains pixel-aligned",
+      "passed": true,
+      "detail": "{\"same_size\":true,\"width\":718,\"height\":654,\"max\":0,\"mean\":0,\"over4\":0,\"fraction_over4\":0}"
+    },
+    {
+      "name": "768x900 swipe click reaches 50%",
+      "passed": true,
+      "detail": "aria-valuenow=50"
+    },
+    {
+      "name": "768x900 swipe 50% remains pixel-aligned",
+      "passed": true,
+      "detail": "{\"same_size\":true,\"width\":718,\"height\":654,\"max\":0,\"mean\":0,\"over4\":0,\"fraction_over4\":0}"
+    },
+    {
+      "name": "768x900 swipe click reaches 75%",
+      "passed": true,
+      "detail": "aria-valuenow=75"
+    },
+    {
+      "name": "768x900 swipe 75% remains pixel-aligned",
+      "passed": true,
+      "detail": "{\"same_size\":true,\"width\":718,\"height\":654,\"max\":4,\"mean\":0.001552477575323912,\"over4\":0,\"fraction_over4\":0}"
+    },
+    {
+      "name": "768x900 swipe click reaches 90%",
+      "passed": true,
+      "detail": "aria-valuenow=90"
+    },
+    {
+      "name": "768x900 swipe 90% remains pixel-aligned",
+      "passed": true,
+      "detail": "{\"same_size\":true,\"width\":718,\"height\":654,\"max\":0,\"mean\":0,\"over4\":0,\"fraction_over4\":0}"
+    },
+    {
+      "name": "768x900 swipe click reaches 100%",
+      "passed": true,
+      "detail": "aria-valuenow=100"
+    },
+    {
+      "name": "768x900 swipe 100% remains pixel-aligned",
+      "passed": true,
+      "detail": "{\"same_size\":true,\"width\":718,\"height\":654,\"max\":8,\"mean\":0.0019358053717001865,\"over4\":47,\"fraction_over4\":0.00010009114683158281}"
+    },
+    {
+      "name": "768x900 divider sits on the clip boundary at 100%",
+      "passed": true,
+      "detail": "742 vs 743"
+    },
+    {
+      "name": "768x900 keyboard Home sets 0%",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "768x900 keyboard End sets 100%",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "768x900 keyboard ArrowLeft steps 1%",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "768x900 keyboard Shift+ArrowLeft steps 10%",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "768x900 click positions divider near 25%",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "768x900 pointer drag releases at 75%",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "768x900 reset restores 50%",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "768x900 validity overlay toggles on",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "768x900 change mode shows one derived map",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "768x900 change stage preserves raster aspect",
+      "passed": true,
+      "detail": "1.1000143630009096"
+    },
+    {
+      "name": "768x900 change coverage reports 100%",
+      "passed": true,
+      "detail": "100.0%\nof the AOI is common-valid."
+    },
+    {
+      "name": "768x900 threshold table has measured rows",
+      "passed": true,
+      "detail": "3"
+    },
+    {
+      "name": "768x900 change legend visible",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "768x900 change hides the temporal view switch",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "768x900 change keeps the validity-overlay control",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "768x900 change layer delta_ndwi keeps stage bounds",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "768x900 change layer delta_mndwi keeps stage bounds",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "768x900 change layer delta_ndvi keeps stage bounds",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "768x900 quality mode shows one inspection stage",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "768x900 quality coverage cards report 100%",
+      "passed": true,
+      "detail": "[\"100.0%\",\"100.0%\",\"100.0%\"]"
+    },
+    {
+      "name": "768x900 quality explanation states uniform coverage is expected",
+      "passed": true,
+      "detail": "VALID COVERAGE\nEARLIER\n100.0%\n165,136 px\nLATER\n100.0%\n165,136 px\nSHARED\n100.0%\n165,136 px\nHOW TO READ THIS\n\nAll AOI pixels are valid in both periods. A uniform shared footprint is mathematically expec"
+    },
+    {
+      "name": "768x900 quality hides the temporal view switch",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "768x900 quality hides the overlay toggle",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "768x900 quality layer qc_valid_earlier keeps stage bounds",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "768x900 quality layer qc_valid_common keeps stage bounds",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "768x900 quality layer qc_masked keeps stage bounds",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "768x900 quality layer qc_count_later keeps stage bounds",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "390x844 side has two stages",
+      "passed": true,
+      "detail": "2"
+    },
+    {
+      "name": "390x844 side stages share width",
+      "passed": true,
+      "detail": "356 vs 356"
+    },
+    {
+      "name": "390x844 side stages share height",
+      "passed": true,
+      "detail": "323.625 vs 323.625"
+    },
+    {
+      "name": "390x844 side image fills stage",
+      "passed": true,
+      "detail": "{\"role\":\"period\",\"src\":\"/files/m1/coringa_coastal/previews/earlier_2020-03-26_true_colour.png\",\"width\":356,\"height\":323.625,\"left\":17,\"top\":729.234375,\"naturalWidth\":429,\"naturalHeight\":390,\"complete\":true}"
+    },
+    {
+      "name": "390x844 side raster aspect preserved",
+      "passed": true,
+      "detail": "1.100038624951719"
+    },
+    {
+      "name": "390x844 side natural raster is 429x390",
+      "passed": true,
+      "detail": "429x390"
+    },
+    {
+      "name": "390x844 side image fills stage",
+      "passed": true,
+      "detail": "{\"role\":\"period\",\"src\":\"/files/m1/coringa_coastal/previews/later_2025-03-25_true_colour.png\",\"width\":356,\"height\":323.625,\"left\":17,\"top\":1122.046875,\"naturalWidth\":429,\"naturalHeight\":390,\"complete\":true}"
+    },
+    {
+      "name": "390x844 side raster aspect preserved",
+      "passed": true,
+      "detail": "1.100038624951719"
+    },
+    {
+      "name": "390x844 side natural raster is 429x390",
+      "passed": true,
+      "detail": "429x390"
+    },
+    {
+      "name": "390x844 side identical pattern is pixel-aligned",
+      "passed": true,
+      "detail": "{\"same_size\":true,\"width\":356,\"height\":324,\"max\":8,\"mean\":0.03447947010681093,\"over4\":40,\"fraction_over4\":0.0003467887363018449}"
+    },
+    {
+      "name": "390x844 layer ndvi keeps stage bounds",
+      "passed": true,
+      "detail": "[[356,323.625],[356,323.625]]"
+    },
+    {
+      "name": "390x844 layer ndwi keeps stage bounds",
+      "passed": true,
+      "detail": "[[356,323.625],[356,323.625]]"
+    },
+    {
+      "name": "390x844 layer mndwi keeps stage bounds",
+      "passed": true,
+      "detail": "[[356,323.625],[356,323.625]]"
+    },
+    {
+      "name": "390x844 layer valid_mask keeps stage bounds",
+      "passed": true,
+      "detail": "[[356,323.625],[356,323.625]]"
+    },
+    {
+      "name": "390x844 layer observation_count keeps stage bounds",
+      "passed": true,
+      "detail": "[[356,323.625],[356,323.625]]"
+    },
+    {
+      "name": "390x844 layer true_colour keeps stage bounds",
+      "passed": true,
+      "detail": "[[356,323.625],[356,323.625]]"
+    },
+    {
+      "name": "390x844 swipe has one stage",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "390x844 swipe raster aspect preserved",
+      "passed": true,
+      "detail": "1.100038624951719"
+    },
+    {
+      "name": "390x844 swipe has earlier and later layers",
+      "passed": true,
+      "detail": "[\"earlier\",\"later\"]"
+    },
+    {
+      "name": "390x844 swipe earlier fills shared stage",
+      "passed": true,
+      "detail": "{\"role\":\"earlier\",\"src\":\"/files/m1/coringa_coastal/previews/earlier_2020-03-26_true_colour.png\",\"width\":356,\"height\":323.625,\"left\":17,\"top\":574.234375,\"naturalWidth\":429,\"naturalHeight\":390,\"complete\":true}"
+    },
+    {
+      "name": "390x844 swipe later fills shared stage",
+      "passed": true,
+      "detail": "{\"role\":\"later\",\"src\":\"/files/m1/coringa_coastal/previews/later_2025-03-25_true_colour.png\",\"width\":356,\"height\":323.625,\"left\":17,\"top\":574.234375,\"naturalWidth\":429,\"naturalHeight\":390,\"complete\":true}"
+    },
+    {
+      "name": "390x844 swipe click reaches 0%",
+      "passed": true,
+      "detail": "aria-valuenow=0"
+    },
+    {
+      "name": "390x844 swipe 0% remains pixel-aligned",
+      "passed": true,
+      "detail": "{\"same_size\":true,\"width\":356,\"height\":324,\"max\":5,\"mean\":0.0031384380635316963,\"over4\":6,\"fraction_over4\":0.00005201831044527674}"
+    },
+    {
+      "name": "390x844 swipe click reaches 10%",
+      "passed": true,
+      "detail": "aria-valuenow=10"
+    },
+    {
+      "name": "390x844 swipe 10% remains pixel-aligned",
+      "passed": true,
+      "detail": "{\"same_size\":true,\"width\":356,\"height\":324,\"max\":5,\"mean\":0.0031384380635316963,\"over4\":6,\"fraction_over4\":0.00005201831044527674}"
+    },
+    {
+      "name": "390x844 swipe click reaches 25%",
+      "passed": true,
+      "detail": "aria-valuenow=25"
+    },
+    {
+      "name": "390x844 swipe 25% remains pixel-aligned",
+      "passed": true,
+      "detail": "{\"same_size\":true,\"width\":356,\"height\":324,\"max\":5,\"mean\":0.007481966985712304,\"over4\":13,\"fraction_over4\":0.0001127063392980996}"
+    },
+    {
+      "name": "390x844 swipe click reaches 50%",
+      "passed": true,
+      "detail": "aria-valuenow=50"
+    },
+    {
+      "name": "390x844 swipe 50% remains pixel-aligned",
+      "passed": true,
+      "detail": "{\"same_size\":true,\"width\":356,\"height\":324,\"max\":5,\"mean\":0.0031384380635316963,\"over4\":6,\"fraction_over4\":0.00005201831044527674}"
+    },
+    {
+      "name": "390x844 swipe click reaches 75%",
+      "passed": true,
+      "detail": "aria-valuenow=75"
+    },
+    {
+      "name": "390x844 swipe 75% remains pixel-aligned",
+      "passed": true,
+      "detail": "{\"same_size\":true,\"width\":356,\"height\":324,\"max\":5,\"mean\":0.007481966985712304,\"over4\":13,\"fraction_over4\":0.0001127063392980996}"
+    },
+    {
+      "name": "390x844 swipe click reaches 90%",
+      "passed": true,
+      "detail": "aria-valuenow=90"
+    },
+    {
+      "name": "390x844 swipe 90% remains pixel-aligned",
+      "passed": true,
+      "detail": "{\"same_size\":true,\"width\":356,\"height\":324,\"max\":5,\"mean\":0.006311555000693577,\"over4\":10,\"fraction_over4\":0.00008669718407546123}"
+    },
+    {
+      "name": "390x844 swipe click reaches 100%",
+      "passed": true,
+      "detail": "aria-valuenow=100"
+    },
+    {
+      "name": "390x844 swipe 100% remains pixel-aligned",
+      "passed": true,
+      "detail": "{\"same_size\":true,\"width\":356,\"height\":324,\"max\":5,\"mean\":0.007481966985712304,\"over4\":13,\"fraction_over4\":0.0001127063392980996}"
+    },
+    {
+      "name": "390x844 divider sits on the clip boundary at 100%",
+      "passed": true,
+      "detail": "372 vs 373"
+    },
+    {
+      "name": "390x844 keyboard Home sets 0%",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "390x844 keyboard End sets 100%",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "390x844 keyboard ArrowLeft steps 1%",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "390x844 keyboard Shift+ArrowLeft steps 10%",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "390x844 click positions divider near 25%",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "390x844 pointer drag releases at 75%",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "390x844 reset restores 50%",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "390x844 validity overlay toggles on",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "390x844 change mode shows one derived map",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "390x844 change stage preserves raster aspect",
+      "passed": true,
+      "detail": "1.100038624951719"
+    },
+    {
+      "name": "390x844 change coverage reports 100%",
+      "passed": true,
+      "detail": "100.0%\nof the AOI is common-valid."
+    },
+    {
+      "name": "390x844 threshold table has measured rows",
+      "passed": true,
+      "detail": "3"
+    },
+    {
+      "name": "390x844 change legend visible",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "390x844 change hides the temporal view switch",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "390x844 change keeps the validity-overlay control",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "390x844 change layer delta_ndwi keeps stage bounds",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "390x844 change layer delta_mndwi keeps stage bounds",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "390x844 change layer delta_ndvi keeps stage bounds",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "390x844 quality mode shows one inspection stage",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "390x844 quality coverage cards report 100%",
+      "passed": true,
+      "detail": "[\"100.0%\",\"100.0%\",\"100.0%\"]"
+    },
+    {
+      "name": "390x844 quality explanation states uniform coverage is expected",
+      "passed": true,
+      "detail": "VALID COVERAGE\nEARLIER\n100.0%\n165,136 px\nLATER\n100.0%\n165,136 px\nSHARED\n100.0%\n165,136 px\nHOW TO READ THIS\n\nAll AOI pixels are valid in both periods. A uniform shared footprint is mathematically expec"
+    },
+    {
+      "name": "390x844 quality hides the temporal view switch",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "390x844 quality hides the overlay toggle",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "390x844 quality layer qc_valid_earlier keeps stage bounds",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "390x844 quality layer qc_valid_common keeps stage bounds",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "390x844 quality layer qc_masked keeps stage bounds",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "390x844 quality layer qc_count_later keeps stage bounds",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "resize preserves divider percentage",
+      "passed": true,
+      "detail": "37 -> 37"
+    },
+    {
+      "name": "resize preserves raster aspect",
+      "passed": true,
+      "detail": "1.1000143630009096"
+    },
+    {
+      "name": "resize keeps both swipe layers on identical bounds",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "reduced motion disables overlay transition",
+      "passed": true,
+      "detail": "0s"
+    },
+    {
+      "name": "no browser console errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "no uncaught page errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "no failed network requests",
+      "passed": true,
+      "detail": "[]"
+    }
+  ],
+  "finished_utc": "2026-11-06T09:46:42.024Z",
+  "checks_total": 323,
+  "checks_passed": 323
+}

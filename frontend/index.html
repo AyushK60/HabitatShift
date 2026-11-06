@@ -12,7 +12,7 @@
       <div class="brand">
         <span class="brand-mark" aria-hidden="true"></span>
         <span class="brand-name">HabitatShift</span>
-        <span class="brand-tag">M1 · temporal change</span>
+        <span class="brand-tag">M2 · comparison repair</span>
       </div>
       <p class="topbar-note">
         Sentinel-2 L2A observations of one AOI, processed by the reproducibility
@@ -30,36 +30,52 @@
 
       <p class="banner" id="banner" hidden></p>
 
-      <section class="controls" aria-label="Layer selection">
-        <div class="control-group">
-          <span class="control-label">Layer</span>
-          <div class="segmented" role="group" id="layer-switch">
-            <button type="button" data-layer="true_colour" class="is-active">
-              True colour
-            </button>
-            <button type="button" data-layer="ndvi">NDVI</button>
-            <button type="button" data-layer="mask">Valid mask</button>
+      <section class="workbench" aria-label="Comparison workbench">
+        <div class="workbench-bar">
+          <div class="control-group">
+            <span class="control-label" id="analysis-label">Analysis</span>
+            <div class="segmented" role="group" aria-labelledby="analysis-label" id="analysis-switch">
+              <button type="button" data-analysis="historical" class="is-active" aria-pressed="true">
+                Historical
+              </button>
+              <button type="button" data-analysis="change" aria-pressed="false">Change</button>
+              <button type="button" data-analysis="quality" aria-pressed="false">Quality</button>
+            </div>
           </div>
-        </div>
-        <div class="control-group">
-          <span class="control-label">Compare</span>
-          <div class="segmented" role="group" id="mode-switch">
-            <button type="button" data-mode="side" class="is-active">
-              Side by side
-            </button>
-            <button type="button" data-mode="swipe">Swipe</button>
+
+          <div class="control-group" id="view-group">
+            <span class="control-label" id="view-label">View</span>
+            <div class="segmented" role="group" aria-labelledby="view-label" id="mode-switch">
+              <button type="button" data-mode="side" class="is-active" aria-pressed="true">
+                Side by side
+              </button>
+              <button type="button" data-mode="swipe" aria-pressed="false">Swipe</button>
+            </div>
           </div>
+
+          <button type="button" class="ghost-toggle" id="overlay-toggle" aria-pressed="false">
+            Validity overlay
+          </button>
         </div>
-      </section>
 
-      <section class="compare" id="compare" data-mode="side"></section>
+        <div class="layer-groups" id="layer-groups" aria-label="Layer selection"></div>
 
-      <section class="legend-row">
-        <img id="legend" alt="NDVI colour scale, -1 to 1" hidden />
-        <p class="legend-note" id="legend-note" hidden>
-          NDVI colour ramp is fixed for both dates, so equal values share a colour.
-          Charcoal pixels are masked (cloud, shadow, nodata or outside the AOI).
-        </p>
+        <section
+          class="compare"
+          id="compare"
+          data-mode="side"
+          data-analysis="historical"
+          data-overlay="off"
+          style="--raster-aspect: 429 / 390"
+        ></section>
+
+        <section class="legend-row" id="legend-row" hidden>
+          <img id="legend" alt="" hidden />
+          <div class="legend-copy">
+            <p class="legend-note" id="legend-note"></p>
+            <div class="legend-swatches" id="legend-swatches" hidden></div>
+          </div>
+        </section>
       </section>
 
       <section class="panels">
