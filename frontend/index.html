@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>HabitatShift · M0 proof viewer</title>
+    <title>HabitatShift · proof viewer</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
@@ -12,11 +12,11 @@
       <div class="brand">
         <span class="brand-mark" aria-hidden="true"></span>
         <span class="brand-name">HabitatShift</span>
-        <span class="brand-tag">M0 · data proof</span>
+        <span class="brand-tag">M1 · temporal change</span>
       </div>
       <p class="topbar-note">
-        Two genuine Sentinel-2 L2A observations of one AOI. Every number below is
-        read from the pipeline manifest.
+        Sentinel-2 L2A observations of one AOI, processed by the reproducibility
+        engine. Every number below is read from a pipeline artefact.
       </p>
     </header>
 
@@ -81,9 +81,10 @@
     <footer class="foot">
       <p id="attribution">Loading attribution…</p>
       <p>
-        Index formula: NDVI = (B08 − B04) / (B08 + B04), computed on surface
-        reflectance. Differences are <em>observed spectral change</em>, not a
-        land-cover verdict.
+        Index formulas on surface reflectance: NDVI = (B08 − B04) / (B08 + B04);
+        NDWI = (B03 − B08) / (B03 + B08); MNDWI = (B03 − B11) / (B03 + B11).
+        B11 is native 20 m and is resampled to the 10 m grid. Differences are
+        <em>observed spectral change</em>, not a land-cover verdict.
       </p>
     </footer>
 

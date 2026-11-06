@@ -1,0 +1,17 @@
+{
+  "index": "mndwi",
+  "label": "MNDWI",
+  "formula": "(Green - SWIR1) / (Green + SWIR1)",
+  "breaks": [
+    -0.3,
+    -0.1,
+    0.0,
+    0.1,
+    0.3
+  ],
+  "range": [
+    -1.0,
+    1.0
+  ],
+  "left_low": true
+}

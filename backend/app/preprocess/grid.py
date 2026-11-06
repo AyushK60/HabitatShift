@@ -131,6 +131,7 @@ def write_geotiff(
     dtype: str = "float32",
     nodata: float = float("nan"),
     descriptions: tuple[str, ...] = ("band1",),
+    producer: str = "HabitatShift M0",
 ) -> Path:
     """Write a single- or multi-band GeoTIFF on the analysis grid."""
     data = array if array.ndim == 3 else array[np.newaxis, ...]
@@ -163,6 +164,6 @@ def write_geotiff(
             analysis_crs=window.crs,
             resolution_m=str(window.resolution),
             grid_signature=window.signature(),
-            producer="HabitatShift M0",
+            producer=producer,
         )
     return path

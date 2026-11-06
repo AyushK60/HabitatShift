@@ -25,6 +25,9 @@ PREVIEW_DIR = DATA_DIR / "previews"
 MANIFEST_DIR = DATA_DIR / "manifests"
 CACHE_DIR = DATA_DIR / "cache"
 SCL_MEASUREMENT_CACHE_DIR = CACHE_DIR / "scl_valid"
+OBSERVATION_CACHE_DIR = CACHE_DIR / "observations"
+PROCESSED_M1_DIR = PROCESSED_DIR / "m1"
+PREVIEW_M1_DIR = PREVIEW_DIR / "m1"
 
 STUDIES_DIR = PROJECT_ROOT / "studies"
 DOCS_DIR = PROJECT_ROOT / "docs"
@@ -36,6 +39,9 @@ for _p in (
     MANIFEST_DIR,
     CACHE_DIR,
     SCL_MEASUREMENT_CACHE_DIR,
+    OBSERVATION_CACHE_DIR,
+    PROCESSED_M1_DIR,
+    PREVIEW_M1_DIR,
 ):
     _p.mkdir(parents=True, exist_ok=True)
 
@@ -57,10 +63,23 @@ ASSET_BLUE = "blue"
 ASSET_GREEN = "green"
 ASSET_RED = "red"
 ASSET_NIR = "nir"
+ASSET_SWIR1 = "swir16"          # B11, native 20 m
+ASSET_SWIR2 = "swir22"          # B12, native 20 m
 ASSET_SCL = "scl"
 
 #: Required assets for the M0 pipeline (NDVI + true colour + quality mask).
 REQUIRED_ASSETS = (ASSET_BLUE, ASSET_GREEN, ASSET_RED, ASSET_NIR, ASSET_SCL)
+
+#: Every reflectance asset the M1 engine may read.  Only the bands an index
+#: actually needs are fetched; nothing reads all six for a single-index run.
+SPECTRAL_ASSETS = (
+    ASSET_BLUE,
+    ASSET_GREEN,
+    ASSET_RED,
+    ASSET_NIR,
+    ASSET_SWIR1,
+    ASSET_SWIR2,
+)
 
 #: Native ground sample distances in metres, taken from the collection
 #: ``raster:bands[].spatial_resolution`` metadata.  Used to validate that the
@@ -70,6 +89,8 @@ EXPECTED_GSD = {
     ASSET_GREEN: 10.0,
     ASSET_RED: 10.0,
     ASSET_NIR: 10.0,
+    ASSET_SWIR1: 20.0,
+    ASSET_SWIR2: 20.0,
     ASSET_SCL: 20.0,
 }
 
@@ -201,6 +222,30 @@ def env_flag(name: str, default: bool = False) -> bool:
 
 #: TTL for cached catalogue responses, in seconds (7 days).
 CACHE_TTL = 7 * 24 * 3600
+
+# --------------------------------------------------------------------------- #
+# M1 science engine
+# --------------------------------------------------------------------------- #
+#: Pipeline identity for the M1 engine.  M0 keeps its own version string so the
+#: two manifests never claim to be the same processing run.
+M1_PIPELINE_VERSION = "0.2.0-m1"
+M1_PROCESSING_PROFILE = "spectral_change_m1"
+
+#: Candidate change thresholds in index units, and the primary threshold used
+#: for the headline area table.  These are *candidate* thresholds, never
+#: ecological verdicts.
+M1_CHANGE_THRESHOLDS = (0.10, 0.15, 0.20)
+M1_PRIMARY_THRESHOLD = 0.15
+
+#: Difference-map previews saturate at +/- this many index units.
+M1_CHANGE_RAMP_SCALE = 0.30
+
+#: Default indices computed by an M1 run.
+M1_INDICES = ("ndvi", "ndwi", "mndwi")
+
+#: Default number of observations searched per period (not all need be used).
+M1_MAX_OBSERVATIONS = 3
+M1_MIN_OBSERVATIONS = 1
 
 # --------------------------------------------------------------------------- #
 # Analysis grid

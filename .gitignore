@@ -19,6 +19,13 @@ data/processed/**
 # Keep the small measured summary the proof viewer serves; rasters stay local.
 !data/processed/*/
 !data/processed/*/summary.json
+# M1 keeps its small machine-readable outputs; the GeoTIFF rasters and the
+# observation cache stay local.  Rendered previews are tracked below
+# data/previews/m1/ so the viewer works from a clean clone.
+!data/processed/m1/*/
+!data/processed/m1/*/summary.json
+!data/processed/m1/*/summary.csv
+!data/processed/m1/*/status.json
 data/cache/**
 !data/cache/.gitkeep
 

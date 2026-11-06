@@ -48,6 +48,7 @@ class HttpSession:
         min_interval: float = config.HTTP_MIN_INTERVAL,
         max_retries: int = config.HTTP_MAX_RETRIES,
         timeout: float = config.HTTP_TIMEOUT,
+        offline: bool = False,
     ) -> None:
         self._session = requests.Session()
         self._session.headers.update({"User-Agent": config.USER_AGENT})
@@ -60,6 +61,10 @@ class HttpSession:
         self.min_interval = min_interval
         self.max_retries = max_retries
         self.timeout = timeout
+        #: When true, no network request is ever attempted.  A cache miss is a
+        #: hard :class:`NetworkError`, and cached responses are accepted even
+        #: after ``CACHE_TTL`` so a study can be rebuilt from disk.
+        self.offline = offline
         self._last_call = 0.0
         self.request_count = 0
         self.bytes_downloaded = 0
@@ -74,11 +79,9 @@ class HttpSession:
         use_cache: bool = True,
     ) -> dict[str, Any]:
         """GET a JSON document, honouring the on-disk response cache."""
-        if use_cache and self.cache_dir is not None and cache_key:
-            entry = self._cache_lookup(cache_key)
-            if entry is not None and entry.fresh:
-                LOGGER.debug("cache hit %s", cache_key)
-                return json.loads(entry.path.read_text(encoding="utf-8"))
+        cached = self._read_cached(cache_key) if use_cache else None
+        if cached is not None:
+            return cached
 
         response = self._request("GET", url, params=params)
         try:
@@ -101,11 +104,9 @@ class HttpSession:
         use_cache: bool = True,
     ) -> dict[str, Any]:
         """POST a STAC search body, honouring the on-disk response cache."""
-        if use_cache and self.cache_dir is not None and cache_key:
-            entry = self._cache_lookup(cache_key)
-            if entry is not None and entry.fresh:
-                LOGGER.debug("cache hit %s", cache_key)
-                return json.loads(entry.path.read_text(encoding="utf-8"))
+        cached = self._read_cached(cache_key) if use_cache else None
+        if cached is not None:
+            return cached
 
         response = self._request("POST", url, json_body=payload)
         try:
@@ -129,6 +130,38 @@ class HttpSession:
             return 0, ""
 
     # -- internals --------------------------------------------------------- #
+    def _read_cached(self, cache_key: str | None) -> dict[str, Any] | None:
+        """Return a cached JSON document when policy allows it.
+
+        Offline mode accepts stale entries so a cached study can be rebuilt
+        without network access; online mode respects :data:`config.CACHE_TTL`.
+        A miss in offline mode is explicit rather than a silent empty result.
+        """
+        if self.cache_dir is None or not cache_key:
+            if self.offline:
+                raise NetworkError(
+                    "offline mode: no cache directory is configured; "
+                    "catalogue responses cannot be read"
+                )
+            return None
+        entry = self._cache_lookup(cache_key)
+        if entry is not None and (self.offline or entry.fresh):
+            LOGGER.debug("cache hit %s", cache_key)
+            try:
+                return json.loads(entry.path.read_text(encoding="utf-8"))
+            except ValueError as exc:
+                if self.offline:
+                    raise NetworkError(
+                        f"offline mode: cached response {cache_key} is unreadable: {exc}"
+                    ) from exc
+                LOGGER.warning("discarding unreadable cache %s", entry.path)
+        if self.offline:
+            raise NetworkError(
+                f"offline mode: no cached response for {cache_key}; "
+                "run the study online once before using --offline"
+            )
+        return None
+
     def _throttle(self) -> None:
         if self.min_interval <= 0:
             return
@@ -146,6 +179,11 @@ class HttpSession:
         json_body: dict[str, Any] | None = None,
         headers: dict[str, str] | None = None,
     ) -> requests.Response:
+        if self.offline:
+            raise NetworkError(
+                f"offline mode: refusing {method} {url}; only cached responses "
+                "are available"
+            )
         last_error: Exception | None = None
         for attempt in range(self.max_retries + 1):
             self._throttle()

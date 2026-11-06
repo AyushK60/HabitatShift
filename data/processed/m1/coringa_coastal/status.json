@@ -1,0 +1,39 @@
+{
+  "study_id": "coringa_coastal",
+  "experiment_id": "coringa_m1",
+  "status": "complete",
+  "started_utc": "2026-11-06T09:19:06.911620+00:00",
+  "stages": [
+    {
+      "stage": "search_select_read_composite",
+      "status": "ok",
+      "duration_seconds": 0.509
+    },
+    {
+      "stage": "change_analysis",
+      "status": "ok",
+      "duration_seconds": 0.021
+    },
+    {
+      "stage": "export_rasters_previews",
+      "status": "ok",
+      "duration_seconds": 1.107
+    },
+    {
+      "stage": "verify_written_artefacts",
+      "status": "ok",
+      "duration_seconds": 0.365
+    },
+    {
+      "stage": "write_summary_manifest",
+      "status": "ok",
+      "duration_seconds": 0.007
+    }
+  ],
+  "error": null,
+  "finished_utc": "2026-11-06T09:19:09.009372+00:00",
+  "duration_seconds": 2.098,
+  "summary_path": "data/processed/m1/coringa_coastal/summary.json",
+  "manifest_path": "data/manifests/m1_coringa_coastal.json",
+  "verification_all_passed": true
+}

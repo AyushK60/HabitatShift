@@ -1,0 +1,49 @@
+# M1 experiment: Coringa / Godavari delta, coastal ecotone.
+#
+# The AOI and study description are reused unchanged from studies/registry.yaml.
+# This file adds only the M1 processing plan: period anchors, bounded search
+# windows, compositing policy, indices and candidate change thresholds.
+#
+# Anchors are the two M0 acquisition dates, so the single-observation
+# reconstruction in the M1 manifest can be compared directly with the M0
+# two-scene baseline.  The headline M1 result uses up to three observations per
+# period, which is a different (and documented) estimator.
+experiment_id: coringa_m1
+study_id: coringa_coastal
+registry: studies/registry.yaml
+
+analysis:
+  resolution_m: 10.0
+  indices: [ndvi, ndwi, mndwi]
+  composite:
+    method: median
+    max_observations: 3
+    min_observations: 1
+    anchor_max_offset_days: 30
+  selection:
+    max_cloud_cover: 60.0
+    min_scene_valid_fraction: 0.60
+    min_comparable_valid_fraction: 0.50
+    measurement_budget: 24
+
+periods:
+  earlier:
+    anchor: "2020-03-26"
+    search_start: "2020-02-25"
+    search_end: "2020-04-25"
+    max_offset_days: 30
+  later:
+    anchor: "2025-03-25"
+    search_start: "2025-02-23"
+    search_end: "2025-04-24"
+    max_offset_days: 30
+
+change:
+  thresholds: [0.10, 0.15, 0.20]
+  primary_threshold: 0.15
+
+outputs:
+  processed_dir: data/processed/m1/coringa_coastal
+  preview_dir: data/previews/m1/coringa_coastal
+  manifest: data/manifests/m1_coringa_coastal.json
+  status: data/processed/m1/coringa_coastal/status.json

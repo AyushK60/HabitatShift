@@ -177,6 +177,7 @@ h1 {
 
 .segmented {
   display: inline-flex;
+  flex-wrap: wrap;
   border: 1px solid var(--rule);
   background: var(--paper);
 }

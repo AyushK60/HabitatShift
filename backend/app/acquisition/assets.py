@@ -109,51 +109,55 @@ def resolve_offset(
     )
 
 
-def verify_radiometry(candidate: SceneCandidate) -> dict[str, Radiometry]:
-    """Validate every required asset and return its scaling record.
+def verify_asset(candidate: SceneCandidate, key: str) -> Radiometry:
+    """Validate one asset's radiometry and return its scaling record.
 
     Raises :class:`RadiometryError` when the catalog declares something other
     than the Sentinel-2 L2A scaling required by this item's baseline, or a
     differing native GSD, which would mean the pipeline's assumptions no longer
     hold.
     """
-    verified: dict[str, Radiometry] = {}
-    for key in config.REQUIRED_ASSETS:
-        try:
-            asset = candidate.asset(key)
-        except Exception as exc:
-            raise RadiometryError(f"item {candidate.item_id}: {exc}") from exc
+    try:
+        asset = candidate.asset(key)
+    except Exception as exc:
+        raise RadiometryError(f"item {candidate.item_id}: {exc}") from exc
 
-        if abs(asset.scale - config.EXPECTED_SCALE) > 1e-9:
-            raise RadiometryError(
-                f"item {candidate.item_id} asset {key}: unexpected scale "
-                f"{asset.scale} (expected {config.EXPECTED_SCALE})"
-            )
-        offset, offset_reason = resolve_offset(candidate, asset.offset, asset_key=key)
-        if asset.nodata is not None and asset.nodata != config.EXPECTED_NODATA:
-            raise RadiometryError(
-                f"item {candidate.item_id} asset {key}: unexpected nodata "
-                f"{asset.nodata} (expected {config.EXPECTED_NODATA})"
-            )
-        expected_gsd = config.EXPECTED_GSD[key]
-        if asset.gsd is not None and abs(asset.gsd - expected_gsd) > 1e-6:
-            raise RadiometryError(
-                f"item {candidate.item_id} asset {key}: native GSD {asset.gsd} m "
-                f"does not match the analysis grid expectation {expected_gsd} m"
-            )
-
-        verified[key] = Radiometry(
-            asset_key=key,
-            scale=asset.scale,
-            offset=offset,
-            nodata=asset.nodata,
-            gsd=asset.gsd,
-            source=(
-                f"stac:item.{candidate.item_id}.assets.{key}.raster:bands "
-                f"({offset_reason})"
-            ),
+    if abs(asset.scale - config.EXPECTED_SCALE) > 1e-9:
+        raise RadiometryError(
+            f"item {candidate.item_id} asset {key}: unexpected scale "
+            f"{asset.scale} (expected {config.EXPECTED_SCALE})"
         )
-    return verified
+    offset, offset_reason = resolve_offset(candidate, asset.offset, asset_key=key)
+    if asset.nodata is not None and asset.nodata != config.EXPECTED_NODATA:
+        raise RadiometryError(
+            f"item {candidate.item_id} asset {key}: unexpected nodata "
+            f"{asset.nodata} (expected {config.EXPECTED_NODATA})"
+        )
+    expected_gsd = config.EXPECTED_GSD[key]
+    if asset.gsd is not None and abs(asset.gsd - expected_gsd) > 1e-6:
+        raise RadiometryError(
+            f"item {candidate.item_id} asset {key}: native GSD {asset.gsd} m "
+            f"does not match the analysis grid expectation {expected_gsd} m"
+        )
+
+    return Radiometry(
+        asset_key=key,
+        scale=asset.scale,
+        offset=offset,
+        nodata=asset.nodata,
+        gsd=asset.gsd,
+        source=(
+            f"stac:item.{candidate.item_id}.assets.{key}.raster:bands "
+            f"({offset_reason})"
+        ),
+    )
+
+
+def verify_radiometry(
+    candidate: SceneCandidate, keys: tuple[str, ...] = config.REQUIRED_ASSETS
+) -> dict[str, Radiometry]:
+    """Validate a set of assets and return their scaling records."""
+    return {key: verify_asset(candidate, key) for key in keys}
 
 
 def to_reflectance(dn: np.ndarray, radiometry: Radiometry) -> np.ndarray:

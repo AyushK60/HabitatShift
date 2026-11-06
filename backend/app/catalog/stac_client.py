@@ -59,12 +59,16 @@ class CatalogClient:
         catalog_url: str = config.CATALOG_URL,
         collection: str = config.COLLECTION,
         probe_assets: bool = True,
+        required_assets: tuple[str, ...] = config.REQUIRED_ASSETS,
     ) -> None:
         self.http = http
         self.catalog_url = catalog_url.rstrip("/")
         self.collection = collection
         self.collection_meta: dict[str, Any] | None = None
         self.probe_assets = probe_assets
+        #: Asset keys every accepted item must expose.  M0 uses the NDVI set;
+        #: M1 widens it to the full spectral set so SWIR is not silently absent.
+        self.required_assets = tuple(required_assets)
 
     # -- capability checks -------------------------------------------------- #
     def load_collection(self) -> dict[str, Any]:
@@ -80,13 +84,13 @@ class CatalogClient:
             raise CatalogUnavailable(
                 f"collection {self.collection} exposes no item_assets"
             )
-        missing = [k for k in config.REQUIRED_ASSETS if k not in item_assets]
+        missing = [k for k in self.required_assets if k not in item_assets]
         if missing:
             raise CatalogUnavailable(
                 f"collection {self.collection} lacks assets: {', '.join(missing)}"
             )
 
-        for key in config.REQUIRED_ASSETS:
+        for key in self.required_assets:
             declared = item_assets[key].get("raster:bands") or [{}]
             gsd = declared[0].get("spatial_resolution")
             expected = config.EXPECTED_GSD[key]
@@ -130,7 +134,9 @@ class CatalogClient:
                 item_id = str(raw.get("id", "<unknown>"))
                 try:
                     candidate = SceneCandidate.from_stac(
-                        raw, catalog_url=self.catalog_url
+                        raw,
+                        catalog_url=self.catalog_url,
+                        required_assets=self.required_assets,
                     )
                 except MetadataError as exc:
                     result.rejected.append({"item_id": item_id, "reason": str(exc)})

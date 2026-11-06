@@ -106,13 +106,16 @@ def measure_aoi_valid_fraction(
     *,
     resolution: float = config.GRID_RESOLUTION,
     cache_dir: Path | None = None,
+    offline: bool = False,
 ) -> tuple[float, dict[str, Any]]:
     """Read the real SCL over the AOI and return its valid fraction.
 
     When ``cache_dir`` is given the result is memoised for
     :data:`backend.app.config.CACHE_TTL` seconds, so re-running the pipeline
     does not re-download the same SCL window.  The memo stores the measured
-    fraction together with the mask report, never a fabricated value.
+    fraction together with the mask report, never a fabricated value.  In
+    ``offline`` mode a stale-but-present memo is accepted and a missing memo is
+    not read remotely.
     """
     cache_path: Path | None = None
     if cache_dir is not None:
@@ -121,13 +124,18 @@ def measure_aoi_valid_fraction(
         cache_path = _measurement_cache_path(cache_dir, candidate, aoi, resolution)
         if cache_path.exists():
             age = time.time() - cache_path.stat().st_mtime
-            if age <= config.CACHE_TTL:
+            if offline or age <= config.CACHE_TTL:
                 try:
                     memo = json.loads(cache_path.read_text(encoding="utf-8"))
                     LOGGER.debug("valid-fraction cache hit %s", candidate.item_id)
                     return float(memo["valid_fraction"]), memo["report"]
                 except (KeyError, ValueError, TypeError):     # pragma: no cover
                     LOGGER.warning("discarding unreadable cache %s", cache_path)
+
+    if offline:
+        raise RuntimeError(
+            f"offline mode: no cached SCL measurement for {candidate.item_id}"
+        )
 
     window = analysis_window(aoi, resolution)
     request = WindowRequest(
@@ -177,6 +185,7 @@ def score_candidates(
     measure: bool = True,
     max_measured: int | None = None,
     cache_dir: Path | None = None,
+    offline: bool = False,
 ) -> list[SceneScore]:
     """Score every candidate, ordered best first.
 
@@ -200,15 +209,26 @@ def score_candidates(
                 "in-AOI validity not measured: outside the measurement budget"
             )
         elif measure and intersection > 0.05:
-            try:
-                if cache_dir is None:
-                    valid, _ = measure_aoi_valid_fraction(candidate, aoi)
-                else:
-                    valid, _ = measure_aoi_valid_fraction(
-                        candidate, aoi, cache_dir=cache_dir
-                    )
-            except Exception as exc:                          # pragma: no cover - net
-                notes.append(f"valid-fraction read failed: {exc}")
+            memo_available = (
+                cache_dir is not None
+                and _measurement_cache_path(
+                    Path(cache_dir), candidate, aoi, config.GRID_RESOLUTION
+                ).exists()
+            )
+            if offline and not memo_available:
+                notes.append("offline: no cached in-AOI SCL measurement")
+            else:
+                try:
+                    if cache_dir is None:
+                        valid, _ = measure_aoi_valid_fraction(
+                            candidate, aoi, offline=offline
+                        )
+                    else:
+                        valid, _ = measure_aoi_valid_fraction(
+                            candidate, aoi, cache_dir=cache_dir, offline=offline
+                        )
+                except Exception as exc:                      # pragma: no cover - net
+                    notes.append(f"valid-fraction read failed: {exc}")
         usable = (
             intersection >= 0.999
             and valid is not None

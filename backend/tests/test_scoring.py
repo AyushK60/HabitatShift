@@ -69,7 +69,7 @@ def test_scores_are_ordered_by_valid_fraction(candidate, small_aoi, monkeypatch)
     fractions = {candidate.item_id: 0.95, "SECOND": 0.70}
     monkeypatch.setattr(
         scoring, "measure_aoi_valid_fraction",
-        lambda c, a, resolution=10.0: (fractions[c.item_id], {}),
+        lambda c, a, resolution=10.0, cache_dir=None, offline=False: (fractions[c.item_id], {}),
     )
     scores = scoring.score_candidates([second, candidate], small_aoi)
     assert [s.item_id for s in scores] == [candidate.item_id, "SECOND"]
@@ -78,7 +78,7 @@ def test_scores_are_ordered_by_valid_fraction(candidate, small_aoi, monkeypatch)
 
 def test_low_valid_fraction_is_not_usable(candidate, small_aoi, monkeypatch):
     monkeypatch.setattr(
-        scoring, "measure_aoi_valid_fraction", lambda c, a, resolution=10.0: (0.2, {})
+        scoring, "measure_aoi_valid_fraction", lambda c, a, resolution=10.0, cache_dir=None, offline=False: (0.2, {})
     )
     scores = scoring.score_candidates([candidate], small_aoi)
     assert scores[0].usable is False
@@ -86,7 +86,7 @@ def test_low_valid_fraction_is_not_usable(candidate, small_aoi, monkeypatch):
 
 
 def test_read_failure_is_noted_and_not_usable(candidate, small_aoi, monkeypatch):
-    def boom(c, a, resolution=10.0):
+    def boom(c, a, resolution=10.0, cache_dir=None, offline=False):
         raise RuntimeError("network down")
 
     monkeypatch.setattr(scoring, "measure_aoi_valid_fraction", boom)
@@ -157,7 +157,7 @@ def test_measurement_budget_leaves_extra_candidates_unmeasured(
 ):
     measured: list[str] = []
 
-    def fake_measure(c, a, resolution=10.0, cache_dir=None):
+    def fake_measure(c, a, resolution=10.0, cache_dir=None, offline=False):
         measured.append(c.item_id)
         return 0.9, {"valid_fraction": 0.9}
 

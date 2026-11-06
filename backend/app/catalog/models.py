@@ -123,8 +123,14 @@ class SceneCandidate:
     def cloud_fraction(self) -> float | None:
         return None if self.cloud_cover is None else self.cloud_cover / 100.0
 
-    def to_provenance(self) -> dict[str, Any]:
-        """Serialise the fields that belong in a manifest."""
+    def to_provenance(self, keys=None) -> dict[str, Any]:
+        """Serialise the fields that belong in a manifest.
+
+        ``keys`` selects which assets are recorded.  M0 passes nothing and
+        keeps its original asset set; M1 passes every band it actually read so
+        the SWIR source is not dropped from provenance.
+        """
+        selected = config.REQUIRED_ASSETS if keys is None else keys
         return {
             "item_id": self.item_id,
             "collection": self.collection,
@@ -151,7 +157,7 @@ class SceneCandidate:
                     "anonymous_access_ok": a.anonymous_access_ok,
                 }
                 for key, a in self.assets.items()
-                if key in config.REQUIRED_ASSETS
+                if key in selected
             },
         }
 

@@ -2,9 +2,13 @@
 
 Colours are fixed and documented: the visible-light stretch is a per-band 2-98
 percentile linear stretch (the standard "reasonable visual" mapping for
-Sentinel-2 true colour), NDVI uses a fixed diverging ramp so values are
-comparable between both dates, and masked pixels are drawn in the neutral
-invalid colour rather than being interpolated.
+Sentinel-2 true colour), each spectral index uses its own fixed diverging ramp
+declared in :mod:`backend.app.indices.spectral`, and masked pixels are drawn in
+the neutral invalid colour rather than being interpolated.
+
+Every preview in M1 is generated from the same array that is written to the
+GeoTIFF, and each fixed ramp ships a matching legend so a colour can always be
+mapped back to a number.  Masked pixels never take a ramp colour.
 """
 
 from __future__ import annotations
@@ -16,25 +20,41 @@ from pathlib import Path
 import numpy as np
 from PIL import Image, ImageDraw
 
+from ..indices.spectral import INDEX_SPECS, Colour, IndexSpec
+
 #: Neutral invalid-pixel colour (never green, so masks cannot be mistaken for
 #: vegetation).
 INVALID_RGB = (24, 39, 45)
 
 #: Fixed NDVI ramp, sampled at -1.0 .. 1.0 in 9 stops.  Semantically ordered
-#: (water/bare -> dry vegetation -> dense canopy), not brand-coloured.
-NDVI_RAMP: tuple[tuple[float, tuple[int, int, int]], ...] = (
-    (-1.00, (36, 66, 82)),
-    (-0.40, (86, 112, 106)),
-    (-0.15, (168, 158, 124)),
-    (-0.02, (196, 178, 132)),
-    (0.10, (176, 186, 138)),
-    (0.25, (140, 168, 122)),
-    (0.45, (86, 138, 96)),
-    (0.65, (44, 108, 78)),
-    (1.00, (18, 74, 56)),
+#: (water/bare -> dry vegetation -> dense canopy), not brand-coloured.  Kept as
+#: a module constant for backwards compatibility with the M0 API; the registry
+#: copy is authoritative.
+NDVI_RAMP: tuple[tuple[float, tuple[int, int, int]], ...] = INDEX_SPECS["ndvi"].ramp
+
+NDVI_BREAKS = INDEX_SPECS["ndvi"].breaks
+
+#: Symmetric difference-map ramp: loss of index -> teal/blue, gain -> copper.
+#: Saturated at +/- this many index units, declared in the legend.
+CHANGE_SCALE = 0.30
+CHANGE_RAMP: tuple[tuple[float, Colour], ...] = (
+    (-1.00, (25, 64, 82)),
+    (-0.60, (52, 112, 126)),
+    (-0.25, (127, 171, 167)),
+    (0.00, (232, 229, 216)),
+    (0.25, (214, 138, 93)),
+    (0.60, (178, 104, 76)),
+    (1.00, (120, 56, 48)),
 )
 
-NDVI_BREAKS = (-0.6, -0.35, -0.12, 0.02, 0.16, 0.30, 0.50)
+#: Discrete observation-count ramp (1 -> 4 observations).
+OBSERVATION_RAMP: tuple[tuple[float, Colour], ...] = (
+    (0.0, (24, 39, 45)),
+    (1.0, (214, 196, 168)),
+    (2.0, (196, 158, 112)),
+    (3.0, (176, 120, 82)),
+    (4.0, (120, 72, 56)),
+)
 
 
 @dataclass(frozen=True)
@@ -92,43 +112,110 @@ def rgb_to_png(
     return Image.fromarray(stack, mode="RGB")
 
 
-def _ramp_colour(value: float) -> tuple[int, int, int]:
-    if value <= NDVI_RAMP[0][0]:
-        return NDVI_RAMP[0][1]
-    if value >= NDVI_RAMP[-1][0]:
-        return NDVI_RAMP[-1][1]
-    for (left_v, left_c), (right_v, right_c) in zip(NDVI_RAMP, NDVI_RAMP[1:]):
+def false_colour_png(
+    nir: np.ndarray,
+    red: np.ndarray,
+    green: np.ndarray,
+    valid: np.ndarray,
+    stretch: Stretch,
+    *,
+    gamma: float = 1.0,
+) -> Image.Image:
+    """NIR/Red/Green composite; vegetation reads red, water dark."""
+    return rgb_to_png(nir, red, green, valid, stretch, gamma=gamma)
+
+
+def _ramp_colour(
+    value: float, ramp: tuple[tuple[float, Colour], ...] = NDVI_RAMP
+) -> tuple[int, int, int]:
+    if value <= ramp[0][0]:
+        return ramp[0][1]
+    if value >= ramp[-1][0]:
+        return ramp[-1][1]
+    for (left_v, left_c), (right_v, right_c) in zip(ramp, ramp[1:]):
         if left_v <= value <= right_v:
             span = right_v - left_v or 1e-9
             fraction = (value - left_v) / span
             return tuple(
-                int(round(l + (r - l) * fraction)) for l, r in zip(left_c, right_c)
+                int(round(left_channel + (right_channel - left_channel) * fraction))
+                for left_channel, right_channel in zip(left_c, right_c)
             )  # type: ignore[return-value]
-    return NDVI_RAMP[-1][1]
+    return ramp[-1][1]
+
+
+def _apply_ramp(
+    values: np.ndarray,
+    usable: np.ndarray,
+    ramp: tuple[tuple[float, Colour], ...],
+    *,
+    low: float,
+    high: float,
+) -> np.ndarray:
+    """Vectorised ramp renderer; invalid pixels take :data:`INVALID_RGB`."""
+    height, width = values.shape
+    rgb = np.empty((height, width, 3), dtype=np.uint8)
+    rgb[:, :] = np.array(INVALID_RGB, dtype=np.uint8)
+    if not usable.any():
+        return rgb
+    clipped = np.clip(values, low, high)
+    span = high - low or 1e-9
+    fraction = (clipped - low) / span
+    for (left_v, left_c), (right_v, right_c) in zip(ramp, ramp[1:]):
+        left_f = (left_v - low) / span
+        right_f = (right_v - low) / span
+        band = usable & (fraction >= left_f) & (fraction <= right_f)
+        if not band.any():
+            continue
+        local = (fraction[band] - left_f) / max(right_f - left_f, 1e-9)
+        for channel in range(3):
+            rgb[..., channel][band] = np.round(
+                left_c[channel] + (right_c[channel] - left_c[channel]) * local
+            ).astype(np.uint8)
+    return rgb
+
+
+def index_to_png(
+    values: np.ndarray, valid: np.ndarray, spec: IndexSpec | str = "ndvi"
+) -> Image.Image:
+    """Colourise one registered index with its fixed ramp."""
+    if isinstance(spec, str):
+        spec = INDEX_SPECS[spec]
+    usable = valid & np.isfinite(values)
+    rgb = _apply_ramp(
+        np.nan_to_num(values, nan=spec.value_range[0]),
+        usable,
+        spec.ramp,
+        low=spec.value_range[0],
+        high=spec.value_range[1],
+    )
+    return Image.fromarray(rgb, mode="RGB")
 
 
 def ndvi_to_png(ndvi: np.ndarray, valid: np.ndarray) -> Image.Image:
     """Colourise NDVI with the fixed ramp; masked pixels stay neutral."""
-    height, width = ndvi.shape
-    rgb = np.zeros((height, width, 3), dtype=np.uint8)
-    rgb[:, :] = np.array(INVALID_RGB, dtype=np.uint8)
-    usable = valid & np.isfinite(ndvi)
-    clipped = np.clip(ndvi, -1.0, 1.0)
-    for stop, colour in NDVI_RAMP:
-        touches = usable & (np.abs(clipped - stop) < 0.005)
-        rgb[touches] = np.array(colour, dtype=np.uint8)
-    # Fill the gradient between ramp stops in one vectorised pass.
-    ordered = np.sort(np.clip(clipped, -1.0, 1.0))
-    del ordered
-    for (left_v, left_c), (right_v, right_c) in zip(NDVI_RAMP, NDVI_RAMP[1:]):
-        band = usable & (clipped > left_v) & (clipped < right_v)
-        if not band.any():
-            continue
-        fraction = (clipped[band] - left_v) / (right_v - left_v)
-        for channel in range(3):
-            rgb[..., channel][band] = np.round(
-                left_c[channel] + (right_c[channel] - left_c[channel]) * fraction
-            ).astype(np.uint8)
+    return index_to_png(ndvi, valid, "ndvi")
+
+
+def change_to_png(
+    delta: np.ndarray, common: np.ndarray, *, scale: float = CHANGE_SCALE
+) -> Image.Image:
+    """Diverging difference map: later - earlier, saturated at +/- ``scale``."""
+    usable = common & np.isfinite(delta)
+    normalised = np.zeros_like(delta, dtype=np.float32)
+    normalised[usable] = np.clip(delta[usable] / scale, -1.0, 1.0)
+    rgb = _apply_ramp(normalised, usable, CHANGE_RAMP, low=-1.0, high=1.0)
+    return Image.fromarray(rgb, mode="RGB")
+
+
+def observation_count_to_png(
+    counts: np.ndarray, valid: np.ndarray, *, maximum: int | None = None
+) -> Image.Image:
+    """Discrete map of how many observations contributed to each pixel."""
+    high = float(max(1, int(maximum if maximum is not None else counts.max())))
+    ramp = OBSERVATION_RAMP
+    rgb = _apply_ramp(
+        counts.astype(np.float32), valid, ramp, low=0.0, high=max(high, 1.0)
+    )
     return Image.fromarray(rgb, mode="RGB")
 
 
@@ -156,26 +243,97 @@ def draw_aoi(image: Image.Image, window_mask: np.ndarray) -> Image.Image:
     return Image.fromarray(array, mode="RGB")
 
 
-def ndvi_legend(path: Path) -> Path:
-    """Write the NDVI colour legend as its own PNG plus JSON breaks."""
+def _legend(
+    path: Path,
+    *,
+    ramp: tuple[tuple[float, Colour], ...],
+    value_range: tuple[float, float],
+    breaks: tuple[float, ...],
+    payload: dict[str, object],
+) -> Path:
     width, height = 320, 44
     image = Image.new("RGB", (width, height), (242, 240, 235))
     draw = ImageDraw.Draw(image)
+    low, high = value_range
     for x in range(width):
-        value = 1.0 - 2.0 * x / (width - 1)
-        draw.line([(x, 4), (x, 24)], fill=_ramp_colour(value))
-    for break_value in NDVI_BREAKS:
-        x = int(round((1.0 - break_value) / 2.0 * (width - 1)))
+        value = high - (high - low) * x / (width - 1)
+        draw.line([(x, 4), (x, 24)], fill=_ramp_colour(value, ramp))
+    for break_value in breaks:
+        if not low <= break_value <= high:
+            continue
+        x = int(round((high - break_value) / (high - low) * (width - 1)))
         draw.line([(x, 24), (x, 28)], fill=(24, 39, 45))
+    path.parent.mkdir(parents=True, exist_ok=True)
     image.save(path)
     path.with_suffix(".json").write_text(
-        json.dumps(
-            {"breaks": list(NDVI_BREAKS), "range": [-1.0, 1.0], "left_low": True},
-            indent=2,
-        ),
-        encoding="utf-8",
+        json.dumps(payload, indent=2), encoding="utf-8"
     )
     return path
+
+
+def index_legend(path: Path, spec: IndexSpec | str) -> Path:
+    """Write one index's fixed colour legend as PNG plus JSON breaks."""
+    if isinstance(spec, str):
+        spec = INDEX_SPECS[spec]
+    return _legend(
+        path,
+        ramp=spec.ramp,
+        value_range=spec.value_range,
+        breaks=spec.breaks,
+        payload={
+            "index": spec.key,
+            "label": spec.label,
+            "formula": spec.formula,
+            "breaks": list(spec.breaks),
+            "range": list(spec.value_range),
+            "left_low": True,
+        },
+    )
+
+
+def ndvi_legend(path: Path) -> Path:
+    """Write the NDVI colour legend as its own PNG plus JSON breaks."""
+    return index_legend(path, "ndvi")
+
+
+def change_legend(path: Path, *, scale: float = CHANGE_SCALE) -> Path:
+    """Write the symmetric difference-map legend, stating its saturation."""
+    breaks = (-0.5 * scale, 0.0, 0.5 * scale)
+    return _legend(
+        path,
+        ramp=CHANGE_RAMP,
+        value_range=(-scale, scale),
+        breaks=breaks,
+        payload={
+            "kind": "difference_map",
+            "label": "later period minus earlier period (index units)",
+            "breaks": list(breaks),
+            "range": [-scale, scale],
+            "saturated_at": scale,
+            "left_low": True,
+            "note": (
+                "blue/teal = lower later index; ivory = unchanged; "
+                "copper = higher later index; charcoal = masked or not common-valid"
+            ),
+        },
+    )
+
+
+def observation_count_legend(path: Path) -> Path:
+    """Write a legend for the observation-count mask."""
+    return _legend(
+        path,
+        ramp=OBSERVATION_RAMP,
+        value_range=(0.0, 4.0),
+        breaks=(1.0, 2.0, 3.0),
+        payload={
+            "kind": "observation_count",
+            "label": "valid observations contributing per pixel",
+            "range": [0, 4],
+            "breaks": [1, 2, 3],
+            "note": "charcoal = 0 valid observations",
+        },
+    )
 
 
 def save(image: Image.Image, path: Path) -> Path:
