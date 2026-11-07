@@ -387,8 +387,8 @@ async function run() {
 
   /* 12 — experiments workspace ----------------------------------------------------- */
   await app(page, "/experiments");
-  const chartCount = await page.locator(".exp-figure img").count();
-  check("12. experiments page shows recorded charts", chartCount >= 3, `charts ${chartCount}`);
+  const chartCount = await page.locator(".ichart").count();
+  check("12. experiments page shows recorded charts", chartCount >= 3, `interactive charts ${chartCount}`);
   check(
     "12. uncertainty is not described as a population CI",
     await page.getByText("not a population", { exact: false }).first().isVisible()

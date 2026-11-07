@@ -238,3 +238,38 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* ------------------------------------------------- M4-R1 §11 additions --- */
+.exp-study-selector {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.availability-chip {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.14rem 0.5rem;
+  border: 1px solid var(--rule);
+}
+
+.availability-experiment {
+  background: var(--teal);
+  border-color: var(--teal);
+  color: var(--ivory);
+}
+
+.availability-descriptive {
+  background: var(--sea-glass);
+  color: var(--teal);
+}
+
+.availability-planned {
+  color: var(--copper-deep);
+  border-style: dashed;
+}
