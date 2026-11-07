@@ -1,7 +1,7 @@
 {
   "base_url": "http://127.0.0.1:8098/",
   "suite": "habitatshift-m4-browser/1",
-  "started_utc": "2026-11-07T16:26:35.520Z",
+  "started_utc": "2026-11-07T16:30:23.704Z",
   "checks": [
     {
       "name": "1. landing renders hero headline",
@@ -121,7 +121,7 @@
     {
       "name": "10. side-by-side maps stay synchronised",
       "passed": true,
-      "detail": "{\"earlier\":15.072354533887259,\"later\":15.072354533887259}"
+      "detail": "{\"earlier\":15.074068620450756,\"later\":15.074068620450756}"
     },
     {
       "name": "10. divider follows mouse hover with no click",
@@ -229,7 +229,7 @@
   "console_errors": [],
   "page_errors": [],
   "failed_requests": [],
-  "finished_utc": "2026-11-07T16:27:32.348Z",
+  "finished_utc": "2026-11-07T16:31:20.484Z",
   "passed": 40,
   "failed": 0
 }

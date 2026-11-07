@@ -61,6 +61,8 @@ interface MapCompareProps {
   onRoiComplete: (box: RoiBox) => void;
   /** Receives a setter so the parent can place the inspected-pixel marker. */
   onMarkerSetter: (setter: (lonLat: [number, number] | null) => void) => void;
+  /** Receives a setter for the "Fit Entire Study Area" action (M4-R1 §9). */
+  onFitSetter?: (fit: () => void) => void;
 }
 
 const MAP_BACKGROUND = "#dfe3de";
@@ -245,6 +247,7 @@ export function MapCompare({
   roiBox,
   onRoiComplete,
   onMarkerSetter,
+  onFitSetter,
 }: MapCompareProps) {
   const earlierMapDiv = useRef<HTMLDivElement>(null);
   const laterMapDiv = useRef<HTMLDivElement>(null);
@@ -495,6 +498,17 @@ export function MapCompare({
   useEffect(() => {
     onMarkerSetter(setPixelMarker);
   }, [setPixelMarker, onMarkerSetter]);
+
+  /* ------------------------------------------- fit-to-extent (M4-R1 §9) --- */
+  const fitToStudy = useCallback(() => {
+    const { earlier } = mapsRef.current;
+    // The earlier map leads the shared view; the later map follows on move.
+    earlier?.fitBounds(bounds, { padding: 8, duration: 350 });
+  }, [bounds]);
+
+  useEffect(() => {
+    onFitSetter?.(fitToStudy);
+  }, [fitToStudy, onFitSetter]);
 
   /* --------------------------------------------------- layer painting --- */
   useEffect(() => {

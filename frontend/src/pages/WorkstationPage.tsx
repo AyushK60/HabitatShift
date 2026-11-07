@@ -120,6 +120,7 @@ function WorkstationForStudy({ studyId }: { studyId: string }) {
   const [roiError, setRoiError] = useState<string | null>(null);
 
   const markerSetterRef = useRef<((lonLat: [number, number] | null) => void) | null>(null);
+  const fitRef = useRef<(() => void) | null>(null);
   const [inspectorTab, setInspectorTab] = useState<InspectorTab>("legend");
 
   /* ----------------------------------------------------------- loading --- */
@@ -248,6 +249,12 @@ function WorkstationForStudy({ studyId }: { studyId: string }) {
     },
     []
   );
+
+  /** M4-R1 §9: restore the complete study extent from any view. */
+  const handleFitSetter = useCallback((fit: () => void) => {
+    fitRef.current = fit;
+  }, []);
+  const fitStudy = useCallback(() => fitRef.current?.(), []);
 
   /* Early exit states -------------------------------------------------- */
   if (error) {
@@ -424,6 +431,14 @@ function WorkstationForStudy({ studyId }: { studyId: string }) {
                 </button>
               </>
             )}
+            <button
+              type="button"
+              className="toggle-btn"
+              onClick={fitStudy}
+              title="Fit the complete study AOI into the map viewport"
+            >
+              Fit Entire Study Area
+            </button>
           </span>
         </div>
 
@@ -470,6 +485,7 @@ function WorkstationForStudy({ studyId }: { studyId: string }) {
             roiBox={roiBox}
             onRoiComplete={handleRoiComplete}
             onMarkerSetter={handleMarkerSetter}
+            onFitSetter={handleFitSetter}
           />
           <Inspector
             summary={summary}
