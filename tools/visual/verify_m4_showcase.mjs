@@ -38,6 +38,28 @@ await page.waitForTimeout(300);
 const tip = await page.evaluate(() => document.querySelector(".ichart-tooltip")?.textContent ?? "");
 check("showcase: interactive chart tooltip with recorded values", tip.includes("index units") && tip.includes("% of shared-valid AOI"), tip.slice(0, 90));
 await page.screenshot({ path: "../../docs/evidence/m4/showcase_no_backend_chilika.png" });
+// M4-R1 §15: the What Changed? experience works without the backend.
+await page.goto(BASE_URL + "#/workstation/kathmandu_urban", { waitUntil: "domcontentloaded" });
+await page.waitForTimeout(3000);
+await page.getByRole("button", { name: "What changed?", exact: true }).click();
+await page.waitForTimeout(800);
+await page.getByRole("tab", { name: "Findings" }).click();
+await page.waitForTimeout(500);
+const wcState = await page.evaluate(async () => {
+  const src = window.__hsMaps?.earlier?.getSource("findings-overlay");
+  const data = src ? await src.getData() : null;
+  return {
+    entries: document.querySelectorAll(".finding-entry").length,
+    features: data?.features.length ?? 0,
+    overview: document.querySelector(".findings-panel .insp-meaning")?.textContent ?? "",
+  };
+});
+check(
+  "showcase: What Changed? regions render from bundle without backend (M4-R1 §15.9)",
+  wcState.entries > 0 && wcState.features === wcState.entries && wcState.overview.includes("candidate"),
+  JSON.stringify({ entries: wcState.entries, features: wcState.features }),
+);
+await page.screenshot({ path: "../../docs/evidence/m4-r1/g9_showcase_what_changed.png" });
 check("showcase: no unexpected console errors", results.console_errors.length === 0, results.console_errors.slice(0, 3).join(" | "));
 check("showcase: no page errors", results.page_errors.length === 0, results.page_errors.slice(0, 3).join(" | "));
 results.passed = results.checks.filter(c => c.passed).length;

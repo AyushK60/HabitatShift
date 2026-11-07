@@ -88,12 +88,15 @@ export function WorkstationPage() {
 
   /* M4-R1 §2: /workstation without a study id presents the study-selection
    * experience instead of forcing Coringa. Direct study URLs still render
-   * the workstation directly. */
+   * the workstation directly. The key forces a full remount on study
+   * switches: view/analysis/selection state must never leak between
+   * investigations (the suite caught cross-study asset 404s from the
+   * one-frame stale render without it). */
   if (!studyId) {
     return <StudyPicker />;
   }
 
-  return <WorkstationForStudy studyId={studyId} />;
+  return <WorkstationForStudy key={studyId} studyId={studyId} />;
 }
 
 function WorkstationForStudy({ studyId }: { studyId: string }) {

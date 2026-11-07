@@ -1,7 +1,7 @@
 {
   "base_url": "http://127.0.0.1:8098/",
   "suite": "habitatshift-m4-browser/1",
-  "started_utc": "2026-11-07T14:16:24.547Z",
+  "started_utc": "2026-11-07T17:25:22.563Z",
   "checks": [
     {
       "name": "1. landing renders hero headline",
@@ -9,7 +9,12 @@
       "detail": ""
     },
     {
-      "name": "1. hero CTA navigates to workstation",
+      "name": "1. hero CTA stays on the atlas and reveals the study gallery",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1. workstation nav opens the study selector, not a forced study",
       "passed": true,
       "detail": ""
     },
@@ -116,7 +121,7 @@
     {
       "name": "10. side-by-side maps stay synchronised",
       "passed": true,
-      "detail": "{\"earlier\":15.112547172754736,\"later\":15.112547172754736}"
+      "detail": "{\"earlier\":15.069840981040354,\"later\":15.069840981040354}"
     },
     {
       "name": "10. divider follows mouse hover with no click",
@@ -136,17 +141,62 @@
     {
       "name": "11. pixel probe returns measured reflectance + indices",
       "passed": true,
-      "detail": "82.26395°E, 16.72863°N · UTM 634741, 1849963 · pixel 204, 182 · 10 mEarlier · 2020-03-26Valid observation · 3 obs behind"
+      "detail": "82.26393°E, 16.72858°N · UTM 634738, 1849958 · pixel 203, 183 · 10 mEarlier · 2020-03-26Valid observation · 3 obs behind"
     },
     {
       "name": "12. experiments page shows recorded charts",
       "passed": true,
-      "detail": "charts 3"
+      "detail": "interactive charts 4"
     },
     {
       "name": "12. uncertainty is not described as a population CI",
       "passed": true,
       "detail": ""
+    },
+    {
+      "name": "12b. quality accounting separates outside-AOI from masked-inside-AOI (§4)",
+      "passed": true,
+      "detail": "[[\"AOI pixels (study window)\",\"237,774\"],[\"Grid pixels (rectangular raster footprint)\",\"239,855\"],[\"Outside AOI, inside grid footprint\",\"2,081 (not observations)\"],[\"Earlier valid inside AOI\",\"237,774 100.0% of AOI\"],[\"Later valid inside AOI\",\"237,774 100.0% of AOI\"],[\"Earlier-invalid inside AOI\",\"0 0.0% of AOI\"],[\"Later-invalid inside AOI\",\"0 0.0% of AOI\"],[\"Shared valid (both periods)\",\"237,774 100.0% of AOI\"],[\"Masked inside AOI (≥1 period unusable)\",\"0 0.0% of AOI\"]]"
+    },
+    {
+      "name": "12b. later map survives the analysis-tab sequence attached (§5/§6)",
+      "passed": true,
+      "detail": "{\"canvas\":true,\"detached\":false}"
+    },
+    {
+      "name": "12b. opacity endpoints reach the raster paint property (§7)",
+      "passed": true,
+      "detail": "at 100%: 1, at 0%: 0"
+    },
+    {
+      "name": "12b. What Changed? shows recorded regions on map and panel (§15.2/§15.3)",
+      "passed": true,
+      "detail": "{\"entries\":19,\"features\":19}"
+    },
+    {
+      "name": "12b. What Changed? overview frames regions as candidates (§15.6)",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "12b. selecting a finding zooms and shows measurement + limitations (§15.3)",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "12b. layer guide explains type, values and limits (§15.5)",
+      "passed": true,
+      "detail": "{\"resolution\":true,\"bands\":true,\"cannot\":true}"
+    },
+    {
+      "name": "12b. Fit Entire Study Area restores the overview zoom (§9)",
+      "passed": true,
+      "detail": "zoom 14.950283323797366 → 13.715334944179029"
+    },
+    {
+      "name": "12b. native-resolution tag renders beside the imagery (§8)",
+      "passed": true,
+      "detail": "10 m/px native"
     },
     {
       "name": "13. no horizontal overflow at 1920x1080",
@@ -200,31 +250,34 @@
     }
   ],
   "screenshots": [
-    "docs\\evidence\\m4\\m4_workstation_1440_default.png",
-    "docs\\evidence\\m4\\m4_landing_1440_gallery.png",
-    "docs\\evidence\\m4\\m4_chilika_workstation_1440.png",
-    "docs\\evidence\\m4\\m4_interactive_chart_hover.png",
-    "docs\\evidence\\m4\\m4_interactive_chart_keyboard.png",
-    "docs\\evidence\\m4\\m4_d1_event_view.png",
-    "docs\\evidence\\m4\\m4_d2_event_view.png",
-    "docs\\evidence\\m4\\m4_kathmandu_workstation.png",
-    "docs\\evidence\\m4\\m4_pixel_probe_live.png",
-    "docs\\evidence\\m4\\m4_landing_1920x1080.png",
-    "docs\\evidence\\m4\\m4_workstation_1920x1080.png",
-    "docs\\evidence\\m4\\m4_landing_1440x900.png",
-    "docs\\evidence\\m4\\m4_workstation_1440x900.png",
-    "docs\\evidence\\m4\\m4_landing_1280x800.png",
-    "docs\\evidence\\m4\\m4_workstation_1280x800.png",
-    "docs\\evidence\\m4\\m4_landing_768.png",
-    "docs\\evidence\\m4\\m4_workstation_768.png",
-    "docs\\evidence\\m4\\m4_landing_390.png",
-    "docs\\evidence\\m4\\m4_workstation_390.png",
-    "docs\\evidence\\m4\\m4_methods_1440.png"
+    "..\\..\\docs\\evidence\\m4\\m4_r1_workstation_study_selector_1440.png",
+    "..\\..\\docs\\evidence\\m4\\m4_landing_1440_gallery.png",
+    "..\\..\\docs\\evidence\\m4\\m4_chilika_workstation_1440.png",
+    "..\\..\\docs\\evidence\\m4\\m4_interactive_chart_hover.png",
+    "..\\..\\docs\\evidence\\m4\\m4_interactive_chart_keyboard.png",
+    "..\\..\\docs\\evidence\\m4\\m4_d1_event_view.png",
+    "..\\..\\docs\\evidence\\m4\\m4_d2_event_view.png",
+    "..\\..\\docs\\evidence\\m4\\m4_kathmandu_workstation.png",
+    "..\\..\\docs\\evidence\\m4\\m4_pixel_probe_live.png",
+    "..\\..\\docs\\evidence\\m4\\m4_r1_quality_accounting_1440.png",
+    "..\\..\\docs\\evidence\\m4\\m4_r1_opacity_mode_1440.png",
+    "..\\..\\docs\\evidence\\m4\\m4_r1_what_changed_1440.png",
+    "..\\..\\docs\\evidence\\m4\\m4_landing_1920x1080.png",
+    "..\\..\\docs\\evidence\\m4\\m4_workstation_1920x1080.png",
+    "..\\..\\docs\\evidence\\m4\\m4_landing_1440x900.png",
+    "..\\..\\docs\\evidence\\m4\\m4_workstation_1440x900.png",
+    "..\\..\\docs\\evidence\\m4\\m4_landing_1280x800.png",
+    "..\\..\\docs\\evidence\\m4\\m4_workstation_1280x800.png",
+    "..\\..\\docs\\evidence\\m4\\m4_landing_768.png",
+    "..\\..\\docs\\evidence\\m4\\m4_workstation_768.png",
+    "..\\..\\docs\\evidence\\m4\\m4_landing_390.png",
+    "..\\..\\docs\\evidence\\m4\\m4_workstation_390.png",
+    "..\\..\\docs\\evidence\\m4\\m4_methods_1440.png"
   ],
   "console_errors": [],
   "page_errors": [],
   "failed_requests": [],
-  "finished_utc": "2026-11-07T14:17:20.203Z",
-  "passed": 39,
+  "finished_utc": "2026-11-07T17:26:36.742Z",
+  "passed": 49,
   "failed": 0
 }

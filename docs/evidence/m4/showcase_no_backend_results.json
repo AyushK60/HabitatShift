@@ -43,6 +43,11 @@
       "detail": "ΔNDWI decrease0.15 index units → 4.20 % of shared-valid AOICandidate increase: 22.34 %Cand"
     },
     {
+      "name": "showcase: What Changed? regions render from bundle without backend (M4-R1 §15.9)",
+      "passed": true,
+      "detail": "{\"entries\":19,\"features\":19}"
+    },
+    {
       "name": "showcase: no unexpected console errors",
       "passed": true,
       "detail": ""
@@ -55,6 +60,6 @@
   ],
   "console_errors": [],
   "page_errors": [],
-  "passed": 10,
+  "passed": 11,
   "failed": 0
 }

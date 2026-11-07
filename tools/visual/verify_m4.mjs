@@ -23,7 +23,7 @@ import process from "node:process";
 import { chromium } from "playwright";
 
 const BASE_URL = process.env.HABITATSHIFT_URL || "http://127.0.0.1:8098/";
-const EVIDENCE = path.resolve("docs/evidence/m4");
+const EVIDENCE = path.resolve(import.meta.dirname, "../../docs/evidence/m4");
 const VIEWPORTS = [
   { name: "1920x1080", width: 1920, height: 1080 },
   { name: "1440x900", width: 1440, height: 900 },
@@ -290,14 +290,17 @@ async function run() {
 
   /* 8 — Kathmandu NDBI guardrail ------------------------------------------------ */
   await app(page, "/workstation/kathmandu_urban");
-  const kathmandu = await page.evaluate(() => ({
-    layers: [...document.querySelectorAll(".ws-layers button")].map((b) => b.textContent),
-    body: document.querySelector("main")?.textContent ?? "",
-  }));
+  const kathmanduLayers = await page.evaluate(() =>
+    [...document.querySelectorAll(".ws-layers button")].map((b) => b.textContent)
+  );
+  // The guardrail lives on the NDBI layer legend — select it as a user would.
+  await page.getByRole("button", { name: "NDBI", exact: true }).click();
+  await page.waitForTimeout(500);
+  const kathmanduBody = await page.evaluate(() => document.querySelector("main")?.textContent ?? "");
   check(
     "8. Kathmandu exposes NDBI with the not-a-building-detector guardrail",
-    kathmandu.layers.includes("NDBI") &&
-      kathmandu.body.includes("not a building detector"),
+    kathmanduLayers.includes("NDBI") &&
+      kathmanduBody.includes("NOT a building detector"),
     ""
   );
   await shot(page, "m4_kathmandu_workstation");
@@ -392,6 +395,156 @@ async function run() {
   check(
     "12. uncertainty is not described as a population CI",
     await page.getByText("not a population", { exact: false }).first().isVisible()
+  );
+
+  /* 12b — M4-R1 corrections + What Changed? (§15) ------------------------------------ */
+  // Quality accounting: outside-AOI vs masked-inside-AOI stay distinct (§4).
+  await app(page, "/workstation/western_ghats_forest");
+  await page.getByRole("button", { name: "Quality", exact: true }).click();
+  await page.waitForTimeout(600);
+  const coverage = await page.evaluate(() =>
+    [...document.querySelectorAll(".quality-coverage .insp-facts div")].map((d) => [
+      d.querySelector("dt")?.textContent,
+      d.querySelector("dd")?.textContent,
+    ])
+  );
+  const findRow = (label) => coverage.find(([dt]) => dt?.startsWith(label))?.[1] ?? null;
+  check(
+    "12b. quality accounting separates outside-AOI from masked-inside-AOI (§4)",
+    findRow("Outside AOI") === "2,081 (not observations)" &&
+      findRow("Masked inside AOI")?.startsWith("0"),
+    JSON.stringify(coverage),
+  );
+  await shot(page, "m4_r1_quality_accounting_1440");
+
+  // Later-map lifecycle: Historical → Change → Quality → Historical keeps the
+  // later map attached and painted (§5/§6).
+  await page.getByRole("button", { name: "Change", exact: true }).click();
+  await page.getByRole("button", { name: "Quality", exact: true }).click();
+  await page.getByRole("button", { name: "Historical", exact: true }).click();
+  await page.waitForTimeout(1200);
+  const lifecycle = await page.evaluate(() => {
+    const maps = window.__hsMaps ?? {};
+    const laterHost = document.querySelector(".map-later .map-host");
+    return {
+      canvas: Boolean(laterHost?.querySelector("canvas")),
+      detached: maps.later ? !maps.later.getContainer().isConnected : null,
+    };
+  });
+  check(
+    "12b. later map survives the analysis-tab sequence attached (§5/§6)",
+    lifecycle.canvas && lifecycle.detached === false,
+    JSON.stringify(lifecycle),
+  );
+
+  // Opacity endpoints drive the raster blend on the primary map (§7).
+  await page.getByRole("button", { name: "Opacity" }).click();
+  await page.waitForTimeout(600);
+  await page.locator('.opacity-control input[type="range"]').fill("100");
+  await page.waitForTimeout(500);
+  const opacityHigh = await page.evaluate(() =>
+    window.__hsMaps.earlier.getPaintProperty("layer-later", "raster-opacity")
+  );
+  await page.locator('.opacity-control input[type="range"]').fill("0");
+  await page.waitForTimeout(500);
+  const opacityLow = await page.evaluate(() =>
+    window.__hsMaps.earlier.getPaintProperty("layer-later", "raster-opacity")
+  );
+  check(
+    "12b. opacity endpoints reach the raster paint property (§7)",
+    opacityHigh === 1 && opacityLow === 0,
+    `at 100%: ${opacityHigh}, at 0%: ${opacityLow}`,
+  );
+  await shot(page, "m4_r1_opacity_mode_1440");
+
+  // What Changed? view: recorded regions + guided panel + layer guide (§15).
+  await app(page, "/workstation/kathmandu_urban");
+  await page.getByRole("button", { name: "What changed?", exact: true }).click();
+  await page.waitForTimeout(1000);
+  await page.getByRole("tab", { name: "Findings" }).click();
+  await page.waitForTimeout(500);
+  const whatChanged = await page.evaluate(async () => {
+    const maps = window.__hsMaps ?? {};
+    const src = maps.earlier?.getSource("findings-overlay");
+    const data = src ? await src.getData() : null;
+    return {
+      entries: document.querySelectorAll(".finding-entry").length,
+      overlayFeatures: data?.features.length ?? 0,
+      overview: document.querySelector(".findings-panel .insp-meaning")?.textContent ?? "",
+      guardrail: document.querySelector(".finding-detail")?.textContent ?? "",
+    };
+  });
+  check(
+    "12b. What Changed? shows recorded regions on map and panel (§15.2/§15.3)",
+    whatChanged.entries > 0 && whatChanged.overlayFeatures === whatChanged.entries,
+    JSON.stringify({ entries: whatChanged.entries, features: whatChanged.overlayFeatures }),
+  );
+  check(
+    "12b. What Changed? overview frames regions as candidates (§15.6)",
+    whatChanged.overview.includes("candidate") &&
+      whatChanged.overview.includes("not a confirmed environmental change"),
+  );
+  // Selecting a finding zooms the map and reveals the measurement + limits.
+  const zoomBeforeSelect = await page.evaluate(() => window.__hsMaps.earlier.getZoom());
+  await page.locator(".finding-entry").first().click();
+  await page.waitForTimeout(900);
+  const findingSelection = await page.evaluate(() => ({
+    zoom: window.__hsMaps.earlier.getZoom(),
+    detail: document.querySelector(".finding-detail")?.textContent ?? "",
+  }));
+  check(
+    "12b. selecting a finding zooms and shows measurement + limitations (§15.3)",
+    findingSelection.zoom > zoomBeforeSelect &&
+      findingSelection.detail.includes("Observed measurement") &&
+      findingSelection.detail.includes("cannot be concluded"),
+  );
+  await shot(page, "m4_r1_what_changed_1440");
+
+  // "What am I looking at?" explains the current layer (§15.5).
+  await page.getByRole("button", { name: "What am I looking at?" }).click();
+  await page.waitForTimeout(500);
+  const guide = await page.evaluate(() => {
+    const panel = document.querySelector(".layer-guide");
+    return panel
+      ? {
+          resolution: panel.textContent.includes("m per pixel"),
+          bands: panel.textContent.includes("ΔNDBI"),
+          cannot: panel.textContent.includes("cannot establish"),
+        }
+      : null;
+  });
+  check(
+    "12b. layer guide explains type, values and limits (§15.5)",
+    guide && guide.resolution && guide.bands && guide.cannot,
+    JSON.stringify(guide),
+  );
+
+  // Fit Entire Study Area restores the full extent (§9). Checked on a large
+  // study: Kathmandu's AOI is so small that its overview zoom is already ~15.
+  await app(page, "/workstation/western_ghats_forest");
+  const zoomInBtn = page.locator(".map-earlier .maplibregl-ctrl-zoom-in");
+  await zoomInBtn.click();
+  await zoomInBtn.click();
+  await page.waitForTimeout(600);
+  const zoomBeforeFit = await page.evaluate(() => window.__hsMaps.earlier.getZoom());
+  await page.getByRole("button", { name: "Fit Entire Study Area" }).click();
+  await page.waitForTimeout(1200);
+  const fitZoom = await page.evaluate(() => window.__hsMaps.earlier.getZoom());
+  check(
+    "12b. Fit Entire Study Area restores the overview zoom (§9)",
+    fitZoom < zoomBeforeFit - 1,
+    `zoom ${zoomBeforeFit} → ${fitZoom}`,
+  );
+
+  // Kathmandu carries the native-resolution tag beside the imagery (§8).
+  await app(page, "/workstation/kathmandu_urban");
+  const resolutionTag = await page.evaluate(() =>
+    document.querySelector(".map-resolution-tag")?.textContent ?? null
+  );
+  check(
+    "12b. native-resolution tag renders beside the imagery (§8)",
+    resolutionTag === "10 m/px native",
+    String(resolutionTag),
   );
 
   /* 13 — responsive layouts ---------------------------------------------------------- */
