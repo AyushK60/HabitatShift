@@ -235,3 +235,33 @@ G3 verification: verify_m4 **51/51**, showcase **11/11**, m2_experiments
 
 G4 verification: verify_m4 **51/51**, showcase **11/11**, m2_experiments
 **31/31**, build clean; deep-link and study-switch probes recorded.
+
+## G5 — study-specific interpretation and top-five disclosure verification
+
+- **PARTIAL visibility (§6, test #14):** the Explore overview now shows a
+  prominent PARTIAL-evidence note for the one restricted investigation
+  (Himalayan 2025 / Purepu), verified in the browser.
+- **New independent audit** `scripts/audit_m4r3_disclosure.py`
+  (schema `habitatshift-m4r3-disclosure-audit/1`, output
+  `docs/evidence/m4-r3/study_interpretation_checks.json`) verifies from the
+  recorded artifacts only, **106/106 checks passing**:
+  - disclosure math per experiment: container recorded count == audited
+    recorded count == policy artifact recorded count, and
+    recorded + unrecorded == audited components ≥ MMU (152 + 1368 = 1520);
+  - per-study interpretation themes (§6) present in container text:
+    Coringa tidal/turbidity/no-ecological-claim/composite limits; Chilika
+    water-level + seasonality + turbidity (both seasons, kept as separate
+    experiments); Western Ghats shadow + candidate-signal framing; Purepu
+    monsoon/shadow/volume-and-dam limits with PARTIAL status propagating
+    into every evidence record; Langtang snow/cloud/optical-only limits;
+    Kathmandu bare-soil/construction/building confusion guardrails;
+  - forbidden claims: no assertive sentence (negation-aware sentence
+    splitting, so the honest "not verified deforestation…" guardrails do
+    not false-positive) presents candidates as verified deforestation,
+    verified new construction/buildings, or a verified collapse footprint.
+- The interpretation content itself remains the deterministic,
+  generation-time templates recorded in the evidence records (M4-R2 G5);
+  no AI-generated text was added at the interface layer.
+
+G5 verification: disclosure audit **106/106**, verify_m4 **51/51**,
+showcase **11/11**, m2_experiments **31/31**, build clean.

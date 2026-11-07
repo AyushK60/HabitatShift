@@ -473,6 +473,13 @@ function ExploreFindingsPanel({
         </div>
       </dl>
 
+      {overview.evidence_status === "partial" && (
+        <p className="insp-note insp-guardrail partial-note">
+          <strong>PARTIAL evidence.</strong> This investigation has restricted
+          or incomplete observations — read the study limitations below and
+          the per-finding cards before interpreting anything here.
+        </p>
+      )}
       {/* Curated-selection disclosure (M4-R3 §5). Counts come from the
           generated policy artifact (audited); wording never implies the
           recorded list is a complete inventory. */}

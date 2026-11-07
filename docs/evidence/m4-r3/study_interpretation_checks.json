@@ -1,0 +1,544 @@
+{
+  "schema": "habitatshift-m4r3-disclosure-audit/1",
+  "generated_utc": "2026-11-07T20:50:58Z",
+  "sources": {
+    "findings": "data/findings/*.json",
+    "selection_policy": "frontend/public/studies/selection_policy.json",
+    "audit": "docs/evidence/m4-r2/findings_audit_results.json"
+  },
+  "checks_total": 106,
+  "checks_passed": 106,
+  "checks_failed": 0,
+  "checks": [
+    {
+      "name": "chilika_m4_dry: recorded count matches audit",
+      "passed": true,
+      "detail": "container 30 vs audit 30"
+    },
+    {
+      "name": "chilika_m4_dry: policy recorded count matches container",
+      "passed": true,
+      "detail": "container 30 vs policy 30"
+    },
+    {
+      "name": "chilika_m4_dry: recorded + unrecorded = components >= MMU",
+      "passed": true,
+      "detail": "30+264 != 294"
+    },
+    {
+      "name": "chilika_m4_dry: policy unrecorded matches audit",
+      "passed": true,
+      "detail": "policy 264 vs audit 264"
+    },
+    {
+      "name": "chilika_m4_dry: theme 'water level' present",
+      "passed": true,
+      "detail": "chilika_m4_dry"
+    },
+    {
+      "name": "chilika_m4_dry: theme 'seasonal|seasonality' present",
+      "passed": true,
+      "detail": "chilika_m4_dry"
+    },
+    {
+      "name": "chilika_m4_dry: theme 'turbidity' present",
+      "passed": true,
+      "detail": "chilika_m4_dry"
+    },
+    {
+      "name": "chilika_m4_dry: container evidence_status is processed",
+      "passed": true,
+      "detail": "processed"
+    },
+    {
+      "name": "chilika_m4_dry: no verified-deforestation claim",
+      "passed": true,
+      "detail": "chilika_m4_dry"
+    },
+    {
+      "name": "chilika_m4_dry: no confirmed-deforestation claim",
+      "passed": true,
+      "detail": "chilika_m4_dry"
+    },
+    {
+      "name": "chilika_m4_dry: no verified-construction claim",
+      "passed": true,
+      "detail": "chilika_m4_dry"
+    },
+    {
+      "name": "chilika_m4_dry: no confirmed-construction claim",
+      "passed": true,
+      "detail": "chilika_m4_dry"
+    },
+    {
+      "name": "chilika_m4_dry: no verified-collapse claim",
+      "passed": true,
+      "detail": "chilika_m4_dry"
+    },
+    {
+      "name": "chilika_m4_dry: no confirmed-collapse claim",
+      "passed": true,
+      "detail": "chilika_m4_dry"
+    },
+    {
+      "name": "chilika_m4_dry: no verified collapse footprint",
+      "passed": true,
+      "detail": "chilika_m4_dry"
+    },
+    {
+      "name": "chilika_m4_postmonsoon: recorded count matches audit",
+      "passed": true,
+      "detail": "container 30 vs audit 30"
+    },
+    {
+      "name": "chilika_m4_postmonsoon: policy recorded count matches container",
+      "passed": true,
+      "detail": "container 30 vs policy 30"
+    },
+    {
+      "name": "chilika_m4_postmonsoon: recorded + unrecorded = components >= MMU",
+      "passed": true,
+      "detail": "30+200 != 230"
+    },
+    {
+      "name": "chilika_m4_postmonsoon: policy unrecorded matches audit",
+      "passed": true,
+      "detail": "policy 200 vs audit 200"
+    },
+    {
+      "name": "chilika_m4_postmonsoon: theme 'water level' present",
+      "passed": true,
+      "detail": "chilika_m4_postmonsoon"
+    },
+    {
+      "name": "chilika_m4_postmonsoon: theme 'seasonal|seasonality' present",
+      "passed": true,
+      "detail": "chilika_m4_postmonsoon"
+    },
+    {
+      "name": "chilika_m4_postmonsoon: theme 'turbidity' present",
+      "passed": true,
+      "detail": "chilika_m4_postmonsoon"
+    },
+    {
+      "name": "chilika_m4_postmonsoon: container evidence_status is processed",
+      "passed": true,
+      "detail": "processed"
+    },
+    {
+      "name": "chilika_m4_postmonsoon: no verified-deforestation claim",
+      "passed": true,
+      "detail": "chilika_m4_postmonsoon"
+    },
+    {
+      "name": "chilika_m4_postmonsoon: no confirmed-deforestation claim",
+      "passed": true,
+      "detail": "chilika_m4_postmonsoon"
+    },
+    {
+      "name": "chilika_m4_postmonsoon: no verified-construction claim",
+      "passed": true,
+      "detail": "chilika_m4_postmonsoon"
+    },
+    {
+      "name": "chilika_m4_postmonsoon: no confirmed-construction claim",
+      "passed": true,
+      "detail": "chilika_m4_postmonsoon"
+    },
+    {
+      "name": "chilika_m4_postmonsoon: no verified-collapse claim",
+      "passed": true,
+      "detail": "chilika_m4_postmonsoon"
+    },
+    {
+      "name": "chilika_m4_postmonsoon: no confirmed-collapse claim",
+      "passed": true,
+      "detail": "chilika_m4_postmonsoon"
+    },
+    {
+      "name": "chilika_m4_postmonsoon: no verified collapse footprint",
+      "passed": true,
+      "detail": "chilika_m4_postmonsoon"
+    },
+    {
+      "name": "coringa_m1: recorded count matches audit",
+      "passed": true,
+      "detail": "container 30 vs audit 30"
+    },
+    {
+      "name": "coringa_m1: policy recorded count matches container",
+      "passed": true,
+      "detail": "container 30 vs policy 30"
+    },
+    {
+      "name": "coringa_m1: recorded + unrecorded = components >= MMU",
+      "passed": true,
+      "detail": "30+656 != 686"
+    },
+    {
+      "name": "coringa_m1: policy unrecorded matches audit",
+      "passed": true,
+      "detail": "policy 656 vs audit 656"
+    },
+    {
+      "name": "coringa_m1: theme 'tidal' present",
+      "passed": true,
+      "detail": "coringa_m1"
+    },
+    {
+      "name": "coringa_m1: theme 'turbidity' present",
+      "passed": true,
+      "detail": "coringa_m1"
+    },
+    {
+      "name": "coringa_m1: theme 'ecological-causation|species' present",
+      "passed": true,
+      "detail": "coringa_m1"
+    },
+    {
+      "name": "coringa_m1: theme 'composite' present",
+      "passed": true,
+      "detail": "coringa_m1"
+    },
+    {
+      "name": "coringa_m1: container evidence_status is processed",
+      "passed": true,
+      "detail": "processed"
+    },
+    {
+      "name": "coringa_m1: no verified-deforestation claim",
+      "passed": true,
+      "detail": "coringa_m1"
+    },
+    {
+      "name": "coringa_m1: no confirmed-deforestation claim",
+      "passed": true,
+      "detail": "coringa_m1"
+    },
+    {
+      "name": "coringa_m1: no verified-construction claim",
+      "passed": true,
+      "detail": "coringa_m1"
+    },
+    {
+      "name": "coringa_m1: no confirmed-construction claim",
+      "passed": true,
+      "detail": "coringa_m1"
+    },
+    {
+      "name": "coringa_m1: no verified-collapse claim",
+      "passed": true,
+      "detail": "coringa_m1"
+    },
+    {
+      "name": "coringa_m1: no confirmed-collapse claim",
+      "passed": true,
+      "detail": "coringa_m1"
+    },
+    {
+      "name": "coringa_m1: no verified collapse footprint",
+      "passed": true,
+      "detail": "coringa_m1"
+    },
+    {
+      "name": "himalaya_langtang_2026_m4: recorded count matches audit",
+      "passed": true,
+      "detail": "container 12 vs audit 12"
+    },
+    {
+      "name": "himalaya_langtang_2026_m4: policy recorded count matches container",
+      "passed": true,
+      "detail": "container 12 vs policy 12"
+    },
+    {
+      "name": "himalaya_langtang_2026_m4: recorded + unrecorded = components >= MMU",
+      "passed": true,
+      "detail": "12+51 != 63"
+    },
+    {
+      "name": "himalaya_langtang_2026_m4: policy unrecorded matches audit",
+      "passed": true,
+      "detail": "policy 51 vs audit 51"
+    },
+    {
+      "name": "himalaya_langtang_2026_m4: theme 'snow' present",
+      "passed": true,
+      "detail": "himalaya_langtang_2026_m4"
+    },
+    {
+      "name": "himalaya_langtang_2026_m4: theme 'cloud' present",
+      "passed": true,
+      "detail": "himalaya_langtang_2026_m4"
+    },
+    {
+      "name": "himalaya_langtang_2026_m4: theme 'optical only|optical' present",
+      "passed": true,
+      "detail": "himalaya_langtang_2026_m4"
+    },
+    {
+      "name": "himalaya_langtang_2026_m4: container evidence_status is processed",
+      "passed": true,
+      "detail": "processed"
+    },
+    {
+      "name": "himalaya_langtang_2026_m4: no verified-deforestation claim",
+      "passed": true,
+      "detail": "himalaya_langtang_2026_m4"
+    },
+    {
+      "name": "himalaya_langtang_2026_m4: no confirmed-deforestation claim",
+      "passed": true,
+      "detail": "himalaya_langtang_2026_m4"
+    },
+    {
+      "name": "himalaya_langtang_2026_m4: no verified-construction claim",
+      "passed": true,
+      "detail": "himalaya_langtang_2026_m4"
+    },
+    {
+      "name": "himalaya_langtang_2026_m4: no confirmed-construction claim",
+      "passed": true,
+      "detail": "himalaya_langtang_2026_m4"
+    },
+    {
+      "name": "himalaya_langtang_2026_m4: no verified-collapse claim",
+      "passed": true,
+      "detail": "himalaya_langtang_2026_m4"
+    },
+    {
+      "name": "himalaya_langtang_2026_m4: no confirmed-collapse claim",
+      "passed": true,
+      "detail": "himalaya_langtang_2026_m4"
+    },
+    {
+      "name": "himalaya_langtang_2026_m4: no verified collapse footprint",
+      "passed": true,
+      "detail": "himalaya_langtang_2026_m4"
+    },
+    {
+      "name": "himalaya_purepu_2025_m4: recorded count matches audit",
+      "passed": true,
+      "detail": "container 20 vs audit 20"
+    },
+    {
+      "name": "himalaya_purepu_2025_m4: policy recorded count matches container",
+      "passed": true,
+      "detail": "container 20 vs policy 20"
+    },
+    {
+      "name": "himalaya_purepu_2025_m4: recorded + unrecorded = components >= MMU",
+      "passed": true,
+      "detail": "20+119 != 139"
+    },
+    {
+      "name": "himalaya_purepu_2025_m4: policy unrecorded matches audit",
+      "passed": true,
+      "detail": "policy 119 vs audit 119"
+    },
+    {
+      "name": "himalaya_purepu_2025_m4: theme 'monsoon' present",
+      "passed": true,
+      "detail": "himalaya_purepu_2025_m4"
+    },
+    {
+      "name": "himalaya_purepu_2025_m4: theme 'shadow' present",
+      "passed": true,
+      "detail": "himalaya_purepu_2025_m4"
+    },
+    {
+      "name": "himalaya_purepu_2025_m4: theme 'volume|dam-failure' present",
+      "passed": true,
+      "detail": "himalaya_purepu_2025_m4"
+    },
+    {
+      "name": "himalaya_purepu_2025_m4: container evidence_status is partial",
+      "passed": true,
+      "detail": "partial"
+    },
+    {
+      "name": "himalaya_purepu_2025_m4: PARTIAL propagates into every evidence record",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "himalaya_purepu_2025_m4: no verified-deforestation claim",
+      "passed": true,
+      "detail": "himalaya_purepu_2025_m4"
+    },
+    {
+      "name": "himalaya_purepu_2025_m4: no confirmed-deforestation claim",
+      "passed": true,
+      "detail": "himalaya_purepu_2025_m4"
+    },
+    {
+      "name": "himalaya_purepu_2025_m4: no verified-construction claim",
+      "passed": true,
+      "detail": "himalaya_purepu_2025_m4"
+    },
+    {
+      "name": "himalaya_purepu_2025_m4: no confirmed-construction claim",
+      "passed": true,
+      "detail": "himalaya_purepu_2025_m4"
+    },
+    {
+      "name": "himalaya_purepu_2025_m4: no verified-collapse claim",
+      "passed": true,
+      "detail": "himalaya_purepu_2025_m4"
+    },
+    {
+      "name": "himalaya_purepu_2025_m4: no confirmed-collapse claim",
+      "passed": true,
+      "detail": "himalaya_purepu_2025_m4"
+    },
+    {
+      "name": "himalaya_purepu_2025_m4: no verified collapse footprint",
+      "passed": true,
+      "detail": "himalaya_purepu_2025_m4"
+    },
+    {
+      "name": "kathmandu_m4: recorded count matches audit",
+      "passed": true,
+      "detail": "container 19 vs audit 19"
+    },
+    {
+      "name": "kathmandu_m4: policy recorded count matches container",
+      "passed": true,
+      "detail": "container 19 vs policy 19"
+    },
+    {
+      "name": "kathmandu_m4: recorded + unrecorded = components >= MMU",
+      "passed": true,
+      "detail": "19+76 != 95"
+    },
+    {
+      "name": "kathmandu_m4: policy unrecorded matches audit",
+      "passed": true,
+      "detail": "policy 76 vs audit 76"
+    },
+    {
+      "name": "kathmandu_m4: theme 'bare soil' present",
+      "passed": true,
+      "detail": "kathmandu_m4"
+    },
+    {
+      "name": "kathmandu_m4: theme 'construction' present",
+      "passed": true,
+      "detail": "kathmandu_m4"
+    },
+    {
+      "name": "kathmandu_m4: theme 'building' present",
+      "passed": true,
+      "detail": "kathmandu_m4"
+    },
+    {
+      "name": "kathmandu_m4: container evidence_status is processed",
+      "passed": true,
+      "detail": "processed"
+    },
+    {
+      "name": "kathmandu_m4: no verified-deforestation claim",
+      "passed": true,
+      "detail": "kathmandu_m4"
+    },
+    {
+      "name": "kathmandu_m4: no confirmed-deforestation claim",
+      "passed": true,
+      "detail": "kathmandu_m4"
+    },
+    {
+      "name": "kathmandu_m4: no verified-construction claim",
+      "passed": true,
+      "detail": "kathmandu_m4"
+    },
+    {
+      "name": "kathmandu_m4: no confirmed-construction claim",
+      "passed": true,
+      "detail": "kathmandu_m4"
+    },
+    {
+      "name": "kathmandu_m4: no verified-collapse claim",
+      "passed": true,
+      "detail": "kathmandu_m4"
+    },
+    {
+      "name": "kathmandu_m4: no confirmed-collapse claim",
+      "passed": true,
+      "detail": "kathmandu_m4"
+    },
+    {
+      "name": "kathmandu_m4: no verified collapse footprint",
+      "passed": true,
+      "detail": "kathmandu_m4"
+    },
+    {
+      "name": "western_ghats_m4: recorded count matches audit",
+      "passed": true,
+      "detail": "container 11 vs audit 11"
+    },
+    {
+      "name": "western_ghats_m4: policy recorded count matches container",
+      "passed": true,
+      "detail": "container 11 vs policy 11"
+    },
+    {
+      "name": "western_ghats_m4: recorded + unrecorded = components >= MMU",
+      "passed": true,
+      "detail": "11+2 != 13"
+    },
+    {
+      "name": "western_ghats_m4: policy unrecorded matches audit",
+      "passed": true,
+      "detail": "policy 2 vs audit 2"
+    },
+    {
+      "name": "western_ghats_m4: theme 'shadow' present",
+      "passed": true,
+      "detail": "western_ghats_m4"
+    },
+    {
+      "name": "western_ghats_m4: theme 'candidate spectral signals|index differences' present",
+      "passed": true,
+      "detail": "western_ghats_m4"
+    },
+    {
+      "name": "western_ghats_m4: container evidence_status is processed",
+      "passed": true,
+      "detail": "processed"
+    },
+    {
+      "name": "western_ghats_m4: no verified-deforestation claim",
+      "passed": true,
+      "detail": "western_ghats_m4"
+    },
+    {
+      "name": "western_ghats_m4: no confirmed-deforestation claim",
+      "passed": true,
+      "detail": "western_ghats_m4"
+    },
+    {
+      "name": "western_ghats_m4: no verified-construction claim",
+      "passed": true,
+      "detail": "western_ghats_m4"
+    },
+    {
+      "name": "western_ghats_m4: no confirmed-construction claim",
+      "passed": true,
+      "detail": "western_ghats_m4"
+    },
+    {
+      "name": "western_ghats_m4: no verified-collapse claim",
+      "passed": true,
+      "detail": "western_ghats_m4"
+    },
+    {
+      "name": "western_ghats_m4: no confirmed-collapse claim",
+      "passed": true,
+      "detail": "western_ghats_m4"
+    },
+    {
+      "name": "western_ghats_m4: no verified collapse footprint",
+      "passed": true,
+      "detail": "western_ghats_m4"
+    }
+  ]
+}
