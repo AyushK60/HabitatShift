@@ -445,6 +445,7 @@ Avoid deeply nested scrolling and huge empty panels. Allow workspace maximizatio
 - Use a respectful documentary/cartographic presentation for the Nepal–Tibet case. No dramatic disaster animations, sensational casualty numbers, or fabricated footage. Avoid geographic/political assertions unsupported by data; label the border and referenced place names using authoritative sources.
 - Label **2025 lake drainage** and **2026 rock–ice collapse** separately in UI, legends, report headers and metadata.
 - Keep warm atlas-paper/forest/clay theme; use a distinct restrained **stone/ice/snow** semantic layer in Himalayan case and a **terracotta/urban grid** emphasis in Kathmandu. These are case-specific encodings, not arbitrary wholesale theme changes.
+  - *[M3 reconciliation, 7 Nov 2026: the "warm atlas-paper/forest/clay theme" wording above predates the final identity. The binding theme is §7.1 **Midnight Teal & Copper**, implemented in `docs/DESIGN_SPEC.md`; the stone/ice/snow and terracotta case-specific encodings remain in force on top of it. "The Field Atlas" mentions elsewhere in this roadmap refer to that superseded working name and are preserved as history.]*
 
 ## 7.6 Design QA acceptance
 
@@ -659,6 +660,8 @@ Move from a map demo to an academically credible small-scale experiment.
 ---
 
 ## M3 — Complete product UX and signature visual design
+
+*[M3 reconciliation, 7 Nov 2026: item 1 below says "The Field Atlas" identity. The executed identity is **Midnight Teal & Copper** (§7.1, `docs/DESIGN_SPEC.md`) — warm ivory background, Midnight Teal primary, Copper accent, Sea Glass secondary, editorial serif (Newsreader) + IBM Plex. Architecture decision for this milestone: `docs/architecture/M3_ARCHITECTURE_DECISION.md`.]*
 
 ### Objective
 Transform the verified scientific pipeline into a uniquely designed, professional geospatial research workstation.

@@ -26,8 +26,11 @@ app = FastAPI(
 )
 
 FRONTEND_DIR = config.PROJECT_ROOT / "frontend"
+FRONTEND_DIST_DIR = FRONTEND_DIR / "dist"
+FRONTEND_LEGACY_DIR = FRONTEND_DIR / "legacy"
 SUMMARY_PATH = config.PROCESSED_DIR / "coringa_coastal" / "summary.json"
 MANIFEST_PATH = config.MANIFEST_DIR / "m0_primary_study.json"
+REGISTRY_PATH = config.PROJECT_ROOT / "studies" / "registry.yaml"
 
 M1_ROOT = config.PROCESSED_M1_DIR
 M1_PREVIEW_ROOT = config.PREVIEW_M1_DIR
@@ -284,6 +287,373 @@ def m1_provenance(study_id: str) -> JSONResponse:
 def m1_manifest_alias(study_id: str) -> JSONResponse:
     """Alias of :func:`m1_provenance` with an explicit name."""
     return JSONResponse(_m1_manifest(study_id))
+
+
+@app.get("/api/m1/study/{study_id}/georef")
+def m1_georef(study_id: str) -> dict[str, object]:
+    """Georeference of the analysis grid for map placement.
+
+    Returns the grid transform/bounds verbatim from the M1 summary plus the
+    four raster corners (and centre) reprojected to EPSG:4326 with pyproj so
+    the browser can place preview imagery geographically without estimating
+    coordinates from CSS pixels.
+    """
+    summary = _m1_summary(study_id)
+    grid = summary.get("grid") or {}
+    bounds = grid.get("bounds")
+    transform = grid.get("transform")
+    utm_epsg = grid.get("utm_epsg")
+    if not bounds or not transform or not utm_epsg:
+        raise HTTPException(
+            status_code=404, detail=f"grid georeference missing for {study_id!r}"
+        )
+    try:
+        from pyproj import Transformer
+
+        west, south, east, north = (float(v) for v in bounds)
+        transformer = Transformer.from_crs(
+            f"EPSG:{int(utm_epsg)}", "EPSG:4326", always_xy=True
+        )
+        corners = [
+            [float(lon), float(lat)]
+            for lon, lat in (
+                (west, north),
+                (east, north),
+                (east, south),
+                (west, south),
+            )
+        ]
+        (centre_lon, centre_lat) = transformer.transform(
+            (west + east) / 2.0, (south + north) / 2.0
+        )
+        reprojected = [list(transformer.transform(lon, lat)) for lon, lat in corners]
+    except Exception as error:  # pragma: no cover - defensive
+        raise HTTPException(
+            status_code=500, detail=f"georeferencing failed: {error}"
+        ) from error
+    return {
+        "study_id": study_id,
+        "grid": grid,
+        "bounds_utm": bounds,
+        "transform": transform,
+        "corners_wgs84": reprojected,
+        "centre_wgs84": [float(centre_lon), float(centre_lat)],
+    }
+
+
+@app.get("/api/studies/registry")
+def studies_registry() -> FileResponse:
+    """The hand-maintained study registry (YAML) verbatim.
+
+    The frontend parses this single source of truth; the backend adds no
+    status that the registry does not state.
+    """
+    if not REGISTRY_PATH.exists():
+        raise HTTPException(status_code=404, detail="study registry not found")
+    return FileResponse(REGISTRY_PATH, media_type="text/yaml")
+
+
+@app.get("/api/m1/study/{study_id}/pixel")
+def m1_pixel(study_id: str, lon: float, lat: float) -> JSONResponse:
+    """Measured values at one pixel from the full-resolution M1 rasters.
+
+    The click arrives as EPSG:4326 lon/lat; the sample is computed
+    server-side from the exported GeoTIFFs listed in the M1 summary outputs
+    (never from browser pixels or CSS coordinates).  Every returned value is
+    a genuine full-resolution measurement or an explicit outside/invalid
+    status; nothing is interpolated.
+    """
+    import math
+
+    import numpy as np
+    import rasterio
+
+    summary = _m1_summary(study_id)
+    grid = summary.get("grid") or {}
+    outputs = summary.get("outputs") or {}
+    periods = summary.get("periods") or []
+    utm_epsg = grid.get("utm_epsg")
+    width, height = grid.get("width"), grid.get("height")
+    if not utm_epsg or not width or not height or not periods:
+        raise HTTPException(
+            status_code=404, detail=f"grid georeference missing for {study_id!r}"
+        )
+    try:
+        from pyproj import Transformer
+
+        x, y = Transformer.from_crs(
+            "EPSG:4326", f"EPSG:{int(utm_epsg)}", always_xy=True
+        ).transform(lon, lat)
+    except Exception as error:  # pragma: no cover - defensive
+        raise HTTPException(
+            status_code=500, detail=f"coordinate conversion failed: {error}"
+        ) from error
+
+    # North-up grid transform from the M1 summary: [a, b, c, d, e, f] with
+    # a = pixel width (positive), e = pixel height (negative).
+    a, _b, c, _d, e, f = (float(v) for v in grid["transform"])
+    col = math.floor((x - c) / a)
+    row = math.floor((y - f) / e)
+    inside = 0 <= col < int(width) and 0 <= row < int(height)
+
+    base: dict[str, object] = {
+        "study_id": study_id,
+        "query": {"lon": lon, "lat": lat},
+        "utm": {"x": x, "y": y, "epsg": int(utm_epsg)},
+        "pixel": {"col": col, "row": row},
+        "inside_grid": inside,
+        "resolution_m": grid.get("resolution_m"),
+    }
+    if not inside:
+        base["status"] = "outside_grid"
+        return JSONResponse(base)
+
+    window = rasterio.windows.Window(col, row, 1, 1)
+
+    def read_first_band(path: Path):
+        if not path.exists():
+            return None
+        with rasterio.open(path) as dataset:
+            array = dataset.read(window=window)
+        value = array[0][0][0].item()
+        if isinstance(value, float) and not math.isfinite(value):
+            return None
+        if np.ma.isMaskedArray(value):
+            return None
+        return value
+
+    def read_named_tif(record_name: str):
+        relative = (outputs.get(record_name) or {}).get("path")
+        if not relative:
+            return None
+        return read_first_band(config.PROJECT_ROOT / relative)
+
+    def read_reflectance(period_prefix: str):
+        relative = (outputs.get(f"{period_prefix}_reflectance_tif") or {}).get("path")
+        if not relative:
+            return None
+        path = config.PROJECT_ROOT / relative
+        if not path.exists():
+            return None
+        with rasterio.open(path) as dataset:
+            array = dataset.read(window=window)
+            descriptions = list(dataset.descriptions or [])
+        bands = {}
+        for index, name in enumerate(descriptions):
+            value = array[index][0][0].item()
+            bands[name] = (
+                round(float(value), 6)
+                if isinstance(value, float) and math.isfinite(value)
+                else None
+            )
+        return bands
+
+    def value_or_none(value):
+        return value if value is not None else None
+
+    period_results = []
+    all_valid = True
+    for period in periods:
+        prefix = period.get("period_id")
+        mask = read_named_tif(f"{prefix}_valid_mask_tif")
+        period_valid = mask == 1 if mask is not None else False
+        all_valid = all_valid and period_valid
+        indices = {}
+        for key in (period.get("indices") or {}):
+            indices[key] = value_or_none(read_named_tif(f"{prefix}_{key}_tif"))
+        period_results.append(
+            {
+                "period_id": prefix,
+                "anchor_date": period.get("anchor_date"),
+                "observation_count": read_named_tif(f"{prefix}_observation_count_tif"),
+                "valid_mask": mask,
+                "valid": period_valid,
+                "reflectance": read_reflectance(prefix),
+                "indices": indices,
+            }
+        )
+
+    common_valid = {}
+    for key in (summary.get("change") or {}):
+        common = read_named_tif(f"common_valid_{key}_tif")
+        common_valid[key] = common == 1 if common is not None else None
+        delta = read_named_tif(f"delta_{key}_tif")
+        common_valid[f"{key}_delta"] = (
+            round(float(delta), 6) if isinstance(delta, float) and math.isfinite(delta) else None
+        )
+
+    base.update(
+        {
+            "status": "ok",
+            "inside_aoi": all_valid,
+            "periods": period_results,
+            "common_valid": common_valid,
+            "source": "full-resolution server-side GeoTIFF sample",
+        }
+    )
+    return JSONResponse(base)
+
+
+@app.get("/api/m1/study/{study_id}/roi")
+def m1_roi(
+    study_id: str,
+    west: float,
+    south: float,
+    east: float,
+    north: float,
+) -> JSONResponse:
+    """On-demand statistics for a client-selected rectangular ROI.
+
+    The window is reprojected to the analysis grid and measured directly from
+    the full-resolution M1 GeoTIFFs.  The response is explicitly labelled
+    `"source": "full-resolution server-side GeoTIFF window"` so it can never
+    be mistaken for a downsampled client-side estimate.  Nothing is written
+    back to the stored M0/M1/M2 artefacts.
+    """
+    import math
+
+    import numpy as np
+    import rasterio
+    from rasterio.windows import Window, from_bounds
+
+    summary = _m1_summary(study_id)
+    grid = summary.get("grid") or {}
+    outputs = summary.get("outputs") or {}
+    periods = summary.get("periods") or []
+    utm_epsg = grid.get("utm_epsg")
+    if not utm_epsg or not periods:
+        raise HTTPException(
+            status_code=404, detail=f"grid georeference missing for {study_id!r}"
+        )
+    west_utm, south_utm, east_utm, north_utm = (
+        float(v) for v in (west, south, east, north)
+    )
+    if not (east_utm > west_utm and north_utm > south_utm):
+        raise HTTPException(status_code=400, detail="empty or inverted ROI window")
+    try:
+        from pyproj import Transformer
+
+        xs, ys = Transformer.from_crs(
+            "EPSG:4326", f"EPSG:{int(utm_epsg)}", always_xy=True
+        ).transform(
+            [float(west), float(east), float(west), float(east)],
+            [float(south), float(south), float(north), float(north)],
+        )
+    except Exception as error:  # pragma: no cover - defensive
+        raise HTTPException(
+            status_code=500, detail=f"coordinate conversion failed: {error}"
+        ) from error
+    left, right = min(xs), max(xs)
+    bottom, top = min(ys), max(ys)
+
+    a, _b, c, _d, e, f = (float(v) for v in grid["transform"])
+    transform_utm = rasterio.Affine(a, 0.0, c, 0.0, e, f)
+    window = from_bounds(left, bottom, right, top, transform=transform_utm)
+    window = window.round_offsets().round_lengths()
+    col_off, row_off, win_w, win_h = (
+        int(window.col_off),
+        int(window.row_off),
+        int(window.width),
+        int(window.height),
+    )
+    grid_w, grid_h = int(grid["width"]), int(grid["height"])
+    # Clamp to the grid and bound the request so a browser cannot ask the
+    # backend to stream an enormous window.
+    col_off = max(0, min(col_off, grid_w - 1))
+    row_off = max(0, min(row_off, grid_h - 1))
+    win_w = max(1, min(win_w, grid_w - col_off, 2048))
+    win_h = max(1, min(win_h, grid_h - row_off, 2048))
+    window = Window(col_off, row_off, win_w, win_h)
+
+    def read_window(record_name: str):
+        relative = (outputs.get(record_name) or {}).get("path")
+        if not relative:
+            return None
+        path = config.PROJECT_ROOT / relative
+        if not path.exists():
+            return None
+        with rasterio.open(path) as dataset:
+            return dataset.read(window=window)
+
+    def finite(values: np.ndarray):
+        data = values.astype("float64")
+        return data[np.isfinite(data)]
+
+    def stats(values: np.ndarray) -> dict:
+        data = finite(values)
+        if not data.size:
+            return {"count": 0}
+        return {
+            "count": int(data.size),
+            "mean": float(data.mean()),
+            "p05": float(np.percentile(data, 5)),
+            "p50": float(np.percentile(data, 50)),
+            "p95": float(np.percentile(data, 95)),
+        }
+
+    indices_summary = {}
+    for key, block in (summary.get("change") or {}).items():
+        delta = read_window(f"delta_{key}_tif")
+        common = read_window(f"common_valid_{key}_tif")
+        if delta is None or common is None:
+            continue
+        mask = common == 1
+        if not mask.any():
+            indices_summary[key] = {"common_valid_pixels": 0}
+            continue
+        delta_values = delta[mask]
+        threshold = float(block.get("primary_threshold") or 0)
+        decrease = int((delta_values <= -threshold).sum())
+        increase = int((delta_values >= threshold).sum())
+        pixel_area = float(grid.get("pixel_area_m2") or 0) / 10000.0
+        indices_summary[key] = {
+            "common_valid_pixels": int(mask.sum()),
+            "delta_stats": stats(delta_values),
+            "primary_threshold": threshold,
+            "decrease_pixels": decrease,
+            "increase_pixels": increase,
+            "decrease_area_ha": round(decrease * pixel_area, 4),
+            "increase_area_ha": round(increase * pixel_area, 4),
+        }
+
+    periods_out = []
+    for period in periods:
+        prefix = period.get("period_id")
+        mask = read_window(f"{prefix}_valid_mask_tif")
+        count = read_window(f"{prefix}_observation_count_tif")
+        period_block = {
+            "period_id": prefix,
+            "valid_pixels": int((mask == 1).sum()) if mask is not None else None,
+            "observation_count_stats": stats(count) if count is not None else None,
+        }
+        for key in (period.get("indices") or {}):
+            values = read_window(f"{prefix}_{key}_tif")
+            if values is not None:
+                period_block[f"{key}_stats"] = stats(values)
+        periods_out.append(period_block)
+
+    return JSONResponse(
+        {
+            "study_id": study_id,
+            "query": {
+                "west": west,
+                "south": south,
+                "east": east,
+                "north": north,
+            },
+            "window_px": {
+                "col_off": col_off,
+                "row_off": row_off,
+                "width": win_w,
+                "height": win_h,
+            },
+            "source": "full-resolution server-side GeoTIFF window",
+            "resolution_m": grid.get("resolution_m"),
+            "pixel_area_m2": grid.get("pixel_area_m2"),
+            "indices": indices_summary,
+            "periods": periods_out,
+        }
+    )
 
 
 @app.get("/api/m1/study/{study_id}/presentation")
@@ -554,5 +924,10 @@ def experiment_asset(experiment_id: str, run_id: str, subpath: str) -> FileRespo
     )
 
 
-if FRONTEND_DIR.exists():
+if FRONTEND_DIST_DIR.is_dir():
+    # M3 product build. The legacy M0–M2 proof viewer stays reachable so no
+    # previously verified functionality is removed.
+    app.mount("/legacy", StaticFiles(directory=FRONTEND_LEGACY_DIR, html=True), name="legacy")
+    app.mount("/", StaticFiles(directory=FRONTEND_DIST_DIR, html=True), name="frontend")
+elif FRONTEND_DIR.exists():
     app.mount("/", StaticFiles(directory=FRONTEND_DIR, html=True), name="frontend")

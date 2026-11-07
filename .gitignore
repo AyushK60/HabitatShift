@@ -45,3 +45,6 @@ desktop.ini
 *.log
 !docs/evidence/m0/*.log
 tmp/
+
+# ---- Frontend build output (rebuild with: cd frontend && npm run build) ----
+frontend/dist/

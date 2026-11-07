@@ -107,8 +107,10 @@ def test_g0_quality_json_documents_sources_and_hashes(tmp_path):
 
 def test_frontend_uses_shared_raster_aspect_and_overlay_stage():
     root = Path(__file__).resolve().parents[2]
-    css = (root / "frontend" / "styles.css").read_text("utf-8")
-    js = (root / "frontend" / "app.js").read_text("utf-8")
+    # M3 moved the legacy M0–M2 proof viewer to frontend/legacy; the
+    # shared-stage swipe contract still applies to those verified files.
+    css = (root / "frontend" / "legacy" / "styles.css").read_text("utf-8")
+    js = (root / "frontend" / "legacy" / "app.js").read_text("utf-8")
 
     assert "aspect-ratio: 1 / 1" not in css
     assert "aspect-ratio: var(--raster-aspect" in css
