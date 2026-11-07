@@ -1,5 +1,10 @@
 /* M3 real-browser verification with Playwright/Chromium.
  *
+ * M4 NOTE: superseded by tools/visual/verify_m4.mjs. The M4 gallery shows
+ * all six investigations as processed, so this suite's "honest statuses"
+ * check (expecting feasibility/provisional cards) no longer matches the
+ * product by design; the M4 suite carries the evolved contract.
+ *
  * Drives the actual M3 product served by uvicorn (frontend/dist) and covers
  * the 14 acceptance checks of the M3 brief §14: landing navigation, study
  * selection, before/after synchronisation, hover-follow swipe without

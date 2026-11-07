@@ -1,7 +1,7 @@
 {
   "base_url": "http://127.0.0.1:8098/",
   "suite": "habitatshift-m4-browser/1",
-  "started_utc": "2026-11-07T14:09:37.275Z",
+  "started_utc": "2026-11-07T14:16:24.547Z",
   "checks": [
     {
       "name": "1. landing renders hero headline",
@@ -116,7 +116,7 @@
     {
       "name": "10. side-by-side maps stay synchronised",
       "passed": true,
-      "detail": "{\"earlier\":15.073422231983512,\"later\":15.073422231983512}"
+      "detail": "{\"earlier\":15.112547172754736,\"later\":15.112547172754736}"
     },
     {
       "name": "10. divider follows mouse hover with no click",
@@ -136,7 +136,7 @@
     {
       "name": "11. pixel probe returns measured reflectance + indices",
       "passed": true,
-      "detail": "82.26393°E, 16.72866°N · UTM 634738, 1849966 · pixel 203, 182 · 10 mEarlier · 2020-03-26Valid observation · 3 obs behind"
+      "detail": "82.26395°E, 16.72863°N · UTM 634741, 1849963 · pixel 204, 182 · 10 mEarlier · 2020-03-26Valid observation · 3 obs behind"
     },
     {
       "name": "12. experiments page shows recorded charts",
@@ -224,7 +224,7 @@
   "console_errors": [],
   "page_errors": [],
   "failed_requests": [],
-  "finished_utc": "2026-11-07T14:10:33.006Z",
+  "finished_utc": "2026-11-07T14:17:20.203Z",
   "passed": 39,
   "failed": 0
 }
