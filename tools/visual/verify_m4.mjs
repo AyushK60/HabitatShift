@@ -519,6 +519,53 @@ async function run() {
     JSON.stringify(guide),
   );
 
+  // M4-R2 G7: Research-mode evidence record shares the Explore selection and
+  // shows the same sealed record (same evidence_id, no separate computation).
+  await page.getByRole("tab", { name: "Findings" }).click();
+  await page.waitForTimeout(400);
+  // The first entry is still selected from the earlier check — select the
+  // second one (the click toggles selection).
+  await page.locator(".finding-entry").nth(1).click();
+  await page.waitForTimeout(600);
+  const exploreCard = await page.evaluate(() => ({
+    evidenceId: document.querySelector(".finding-detail .mono-label")?.textContent ?? "",
+    hasSensitivity: (document.querySelector(".finding-detail")?.textContent ?? "").includes("Threshold behaviour"),
+  }));
+  await page.getByRole("tab", { name: "Evidence record" }).click();
+  await page.waitForTimeout(400);
+  const evidenceRecord = await page.evaluate(() => {
+    const panel = document.querySelector(".evidence-record");
+    const text = panel?.textContent ?? "";
+    return {
+      present: !!panel,
+      heading: text.includes("Evidence record"),
+      identification: text.includes("Identification") && text.includes("threshold-connected-region"),
+      provenance: text.includes("Method provenance") && text.includes("Git commit"),
+      measurements: text.includes("Spatial measurements") && text.includes("Valid denominator"),
+      checksum: text.includes("checksum"),
+      relationships: text.includes("Relationships"),
+      schema: text.includes("habitatshift-evidence-record/1"),
+    };
+  });
+  check(
+    "12b. M4-R2 evidence record tab renders the full research record",
+    evidenceRecord.present &&
+      evidenceRecord.heading &&
+      evidenceRecord.identification &&
+      evidenceRecord.provenance &&
+      evidenceRecord.measurements &&
+      evidenceRecord.checksum &&
+      evidenceRecord.relationships &&
+      evidenceRecord.schema,
+    JSON.stringify(evidenceRecord),
+  );
+  check(
+    "12b. M4-R2 Explore card shows sensitivity + record id (same record)",
+    exploreCard.hasSensitivity && exploreCard.evidenceId.includes("ev-kathmandu_m4-"),
+    JSON.stringify({ hasSensitivity: exploreCard.hasSensitivity, id: exploreCard.evidenceId.slice(0, 80) }),
+  );
+  await shot(page, "m4_r2_evidence_record_1440");
+
   // Fit Entire Study Area restores the full extent (§9). Checked on a large
   // study: Kathmandu's AOI is so small that its overview zoom is already ~15.
   await app(page, "/workstation/western_ghats_forest");

@@ -1,7 +1,7 @@
 {
   "base_url": "http://127.0.0.1:8098/",
   "suite": "habitatshift-m4-browser/1",
-  "started_utc": "2026-11-07T19:11:25.206Z",
+  "started_utc": "2026-11-07T19:17:16.531Z",
   "checks": [
     {
       "name": "1. landing renders hero headline",
@@ -121,7 +121,7 @@
     {
       "name": "10. side-by-side maps stay synchronised",
       "passed": true,
-      "detail": "{\"earlier\":15.072142435411067,\"later\":15.072142435411067}"
+      "detail": "{\"earlier\":15.070462906210379,\"later\":15.070462906210379}"
     },
     {
       "name": "10. divider follows mouse hover with no click",
@@ -189,9 +189,19 @@
       "detail": "{\"resolution\":true,\"bands\":true,\"cannot\":true}"
     },
     {
+      "name": "12b. M4-R2 evidence record tab renders the full research record",
+      "passed": true,
+      "detail": "{\"present\":true,\"heading\":true,\"identification\":true,\"provenance\":true,\"measurements\":true,\"checksum\":true,\"relationships\":true,\"schema\":true}"
+    },
+    {
+      "name": "12b. M4-R2 Explore card shows sensitivity + record id (same record)",
+      "passed": true,
+      "detail": "{\"hasSensitivity\":true,\"id\":\"Evidence record: ev-kathmandu_m4-ndbi-inc-333910-3065371 · Source: data/processe\"}"
+    },
+    {
       "name": "12b. Fit Entire Study Area restores the overview zoom (§9)",
       "passed": true,
-      "detail": "zoom 14.982869328562126 → 13.715334944178412"
+      "detail": "zoom 14.855885607348652 → 13.715334944180896"
     },
     {
       "name": "12b. native-resolution tag renders beside the imagery (§8)",
@@ -262,6 +272,7 @@
     "docs\\evidence\\m4\\m4_r1_quality_accounting_1440.png",
     "docs\\evidence\\m4\\m4_r1_opacity_mode_1440.png",
     "docs\\evidence\\m4\\m4_r1_what_changed_1440.png",
+    "docs\\evidence\\m4\\m4_r2_evidence_record_1440.png",
     "docs\\evidence\\m4\\m4_landing_1920x1080.png",
     "docs\\evidence\\m4\\m4_workstation_1920x1080.png",
     "docs\\evidence\\m4\\m4_landing_1440x900.png",
@@ -277,7 +288,7 @@
   "console_errors": [],
   "page_errors": [],
   "failed_requests": [],
-  "finished_utc": "2026-11-07T19:12:39.465Z",
-  "passed": 49,
+  "finished_utc": "2026-11-07T19:18:31.866Z",
+  "passed": 51,
   "failed": 0
 }

@@ -1068,3 +1068,24 @@
   border-top: 2px solid var(--teal);
   padding-top: 0.5rem;
 }
+
+/* M4-R2 G7: Research-mode evidence record */
+.evidence-record .insp-subheading {
+  margin-top: 0.8rem;
+}
+
+.insp-link {
+  margin-top: 0.6rem;
+  background: none;
+  border: 1px solid var(--teal);
+  color: var(--teal);
+  font: inherit;
+  font-size: 0.85rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.insp-link:hover {
+  background: color-mix(in srgb, var(--teal) 12%, transparent);
+}

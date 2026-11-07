@@ -176,6 +176,15 @@ export interface EvidenceRecord {
   input_measurements: Record<string, unknown>;
   spatial_measurements: Record<string, unknown>;
   evidence_quality: Record<string, unknown>;
+  relationships: {
+    overlap_rule?: string;
+    links: {
+      with_evidence_id: string;
+      relation: "same-direction-overlap" | "opposite-direction-overlap";
+      indices: string[];
+      overlap_percent_of_smaller: number;
+    }[];
+  };
   method_provenance: Record<string, unknown>;
 }
 

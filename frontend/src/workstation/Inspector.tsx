@@ -37,7 +37,14 @@ interface InspectorProps {
   onTabChange: (tab: InspectorTab) => void;
 }
 
-export type InspectorTab = "legend" | "guide" | "findings" | "context" | "pixel" | "roi";
+export type InspectorTab =
+  | "legend"
+  | "guide"
+  | "findings"
+  | "evidence"
+  | "context"
+  | "pixel"
+  | "roi";
 
 const REFLECTANCE_LABELS: Record<string, string> = {
   blue_B02: "B02 blue",
@@ -461,8 +468,61 @@ function FindingsPanel({
               <li key={item}>{item}</li>
             ))}
           </ul>
+          {(() => {
+            const sensitivity = selected.evidence.evidence_quality
+              .threshold_sensitivity as
+              | { label?: string; neighbours?: Record<string, unknown> }
+              | undefined;
+            if (!sensitivity?.label) return null;
+            const plain: Record<string, string> = {
+              "spatially persistent across tested thresholds":
+                "This region survives when the threshold is made stricter or looser by 0.05 index units — its footprint is robust to that choice.",
+              "threshold-sensitive":
+                "This region's footprint changes substantially when the threshold moves by 0.05 index units, so read its size as threshold-dependent.",
+              "moderately threshold-sensitive":
+                "This region changes moderately when the threshold moves by 0.05 index units.",
+            };
+            return (
+              <>
+                <h4 className="insp-subheading">Threshold behaviour</h4>
+                <p className="insp-note">
+                  {plain[sensitivity.label] ?? sensitivity.label}
+                </p>
+              </>
+            );
+          })()}
+          {(() => {
+            const links = (
+              selected.evidence.relationships as
+                | { links?: { with_evidence_id: string; relation: string; overlap_percent_of_smaller: number }[] }
+                | undefined
+            )?.links ?? [];
+            if (links.length === 0) return null;
+            const nameOf = (evidenceId: string) => {
+              const other = findings?.findings.find((f) => f.evidence_id === evidenceId);
+              return other ? `${other.display_id} (Δ${other.index.toUpperCase()} ${other.direction})` : evidenceId;
+            };
+            return (
+              <>
+                <h4 className="insp-subheading">Overlapping measurements</h4>
+                <p className="insp-note">
+                  Other indices flag parts of the same area. These are separate
+                  measurements of one geography — not independent events:
+                </p>
+                <ul className="insp-note">
+                  {links.map((link) => (
+                    <li key={link.with_evidence_id}>
+                      {nameOf(link.with_evidence_id)} — {link.relation === "same-direction-overlap" ? "same-direction candidate signal" : "opposite-direction candidate signal"} ·{" "}
+                      {link.overlap_percent_of_smaller.toFixed(0)}% overlap
+                    </li>
+                  ))}
+                </ul>
+              </>
+            );
+          })()}
           <p className="insp-note mono-label">
-            Source: {selected.interpretation.source.input_raster} ·{" "}
+            Evidence record: {selected.evidence_id} · Source:{" "}
+            {selected.interpretation.source.input_raster} ·{" "}
             {selected.interpretation.source.method}
           </p>
         </article>
@@ -478,6 +538,168 @@ function FindingsPanel({
           </ul>
         </>
       )}
+    </div>
+  );
+}
+
+/** Research Mode: the full versioned evidence record for the selected
+ *  finding (M4-R2 G7). Same record as the Findings view — both render from
+ *  the same payload entry and carry the same evidence_id. */
+function EvidenceRecordPanel({
+  findings,
+  selectedId,
+  onSelect,
+}: {
+  findings: BundleFindings | null;
+  selectedId: string | null;
+  onSelect: (id: string | null) => void;
+}) {
+  if (!findings) {
+    return (
+      <p className="insp-note">
+        No findings file is recorded for this experiment, so there is no
+        evidence record to display.
+      </p>
+    );
+  }
+  const selected = findings.findings.find((f) => f.id === selectedId) ?? null;
+  if (!selected) {
+    return (
+      <div className="evidence-record">
+        <h3 className="insp-heading">Evidence record</h3>
+        <p className="insp-note">
+          Select a finding in the Findings tab to open its full evidence
+          record. Every mapped region carries one sealed record: identification,
+          source observations, input measurements, spatial measurements,
+          evidence quality, relationships and method provenance.
+        </p>
+        <p className="insp-note mono-label">
+          Container schema: {findings.schema} · {findings.overview.findings_total} records
+        </p>
+      </div>
+    );
+  }
+  const ev = selected.evidence;
+  const im = ev.input_measurements as Record<string, any>;
+  const sp = ev.spatial_measurements as Record<string, any>;
+  const q = ev.evidence_quality as Record<string, any>;
+  const prov = ev.method_provenance as Record<string, any>;
+  const so = ev.source_observations as Record<string, any>;
+  const grid = im.analysis_grid as Record<string, any>;
+  const sensitivity = q.threshold_sensitivity as Record<string, any>;
+  const links =
+    (ev.relationships as { links?: { with_evidence_id: string; relation: string; indices: string[]; overlap_percent_of_smaller: number }[] })
+      ?.links ?? [];
+  const nameOf = (evidenceId: string) => {
+    const other = findings.findings.find((f) => f.evidence_id === evidenceId);
+    return other ? other.display_id : evidenceId;
+  };
+  return (
+    <div className="evidence-record">
+      <h3 className="insp-heading">Evidence record</h3>
+      <p className="insp-note mono-label">
+        {ev.schema} · {selected.evidence_id} · checksum-sealed
+      </p>
+      <h4 className="insp-subheading">Identification</h4>
+      <Facts
+        rows={[
+          ["Finding", `${ev.identification.display_id} (${ev.identification.finding_type})`],
+          ["Candidate direction", ev.identification.candidate_direction],
+          ["Evidence status", ev.identification.evidence_status],
+          ["Study / experiment", `${ev.identification.study_id} / ${ev.identification.experiment_id}`],
+        ]}
+      />
+      <h4 className="insp-subheading">Source observations</h4>
+      <Facts
+        rows={[
+          ["Earlier scenes", ((so.earlier as Record<string, any>).item_ids as string[])?.join(", ") ?? "unavailable"],
+          ["Earlier dates", ((so.earlier as Record<string, any>).observation_dates as string[])?.join(", ")],
+          ["Later scenes", ((so.later as Record<string, any>).item_ids as string[])?.join(", ") ?? "unavailable"],
+          ["Later dates", ((so.later as Record<string, any>).observation_dates as string[])?.join(", ")],
+          ["Dataset", (so.dataset as Record<string, any>).collection],
+        ]}
+      />
+      <h4 className="insp-subheading">Input measurements</h4>
+      <Facts
+        rows={[
+          ["Index", `${im.index_label} — ${im.formula}`],
+          [
+            "Bands",
+            [
+              (im.bands as string[])?.join(" + "),
+              im.band_resolution_note ?? "",
+            ]
+              .filter(Boolean)
+              .join(" · "),
+          ],
+          ["Delta definition", im.delta_definition],
+          ["Threshold", `|Δ| ≥ ${im.threshold} (inclusive)`],
+          ["Analysis grid", `${grid.crs} @ ${grid.resolution_m} m (${grid.pixel_area_m2} m²/px)`],
+          ["Delta raster", `${im.input_raster} · sha256 ${String(im.input_raster_sha256).slice(0, 16)}…`],
+          ["Valid mask", `${im.valid_mask} · sha256 ${String(im.valid_mask_sha256).slice(0, 16)}…`],
+        ]}
+      />
+      <h4 className="insp-subheading">Spatial measurements</h4>
+      <Facts
+        rows={[
+          ["Pixel count", `${Number(sp.pixel_count).toLocaleString("en-GB")} px`],
+          ["Area", `${sp.area_ha} ha (${sp.area_units})`],
+          ["Mean / median Δ", `${sp.mean_delta} / ${sp.median_delta}`],
+          ["Valid denominator", `${Number(sp.valid_pixel_denominator).toLocaleString("en-GB")} px shared-valid`],
+          ["Share of footprint", `${sp.share_of_common_valid_percent} %`],
+          ["Enclosed holes", `${sp.hole_pixel_count} masked px inside the outline`],
+        ]}
+      />
+      <h4 className="insp-subheading">Evidence quality</h4>
+      <Facts
+        rows={[
+          ["Shared-valid of AOI", `${((Number(q.shared_valid_fraction_of_aoi) || 0) * 100).toFixed(1)} %`],
+          [
+            "Observation support",
+            `${(q.observation_support as Record<string, any>).earlier_observations} earlier / ${(q.observation_support as Record<string, any>).later_observations} later observations`,
+          ],
+        ]}
+      />
+      <p className="insp-note mono-label">
+        Threshold sensitivity: {sensitivity.label} — {sensitivity.label_rules}
+      </p>
+      <h4 className="insp-subheading">Relationships</h4>
+      {links.length === 0 ? (
+        <p className="insp-note">
+          No overlapping measurement recorded for this region.
+        </p>
+      ) : (
+        <ul className="insp-note">
+          {links.map((link) => (
+            <li key={link.with_evidence_id}>
+              {nameOf(link.with_evidence_id)} ({link.relation},{" "}
+              {link.overlap_percent_of_smaller.toFixed(0)} % of the smaller region)
+            </li>
+          ))}
+        </ul>
+      )}
+      <h4 className="insp-subheading">Method provenance</h4>
+      <Facts
+        rows={[
+          ["Algorithm", String(prov.algorithm)],
+          ["Engine version", String(prov.algorithm_version)],
+          [
+            "Parameters",
+            `t = ${selected.threshold}, MMU ${(prov.parameters as Record<string, any>).minimum_mapping_unit_px} px, connectivity ${(prov.parameters as Record<string, any>).connectivity}, top-${(prov.parameters as Record<string, any>).max_regions_per_index_direction}`,
+          ],
+          ["Git commit", String(prov.git_commit).slice(0, 12)],
+          ["Software", Object.entries(prov.software as Record<string, string>).map(([k, v]) => `${k} ${v}`).join(", ")],
+          ["Output checksum", `${String(prov.output_checksum).slice(0, 16)}…`],
+        ]}
+      />
+      <h4 className="insp-subheading">Interpretation</h4>
+      <p className="insp-note">
+        The plain-language interpretation for this record is the Findings tab
+        card — same evidence_id, same numbers, no separate computation.
+      </p>
+      <button type="button" className="insp-link" onClick={() => onSelect(null)}>
+        Clear selection
+      </button>
     </div>
   );
 }
@@ -577,7 +799,10 @@ export function Inspector({
     { id: "legend", label: "Layer & legend" },
     { id: "guide", label: "What am I looking at?" },
     ...(analysis === "what_changed"
-      ? ([{ id: "findings", label: "Findings" }] as { id: InspectorTab; label: string }[])
+      ? ([
+          { id: "findings", label: "Findings" },
+          { id: "evidence", label: "Evidence record" },
+        ] as { id: InspectorTab; label: string }[])
       : []),
     { id: "context", label: "Acquisition" },
     { id: "pixel", label: "Pixel probe" },
@@ -663,6 +888,14 @@ export function Inspector({
 
         {tab === "findings" && (
           <FindingsPanel
+            findings={findings}
+            selectedId={selectedFindingId}
+            onSelect={onSelectFinding}
+          />
+        )}
+
+        {tab === "evidence" && (
+          <EvidenceRecordPanel
             findings={findings}
             selectedId={selectedFindingId}
             onSelect={onSelectFinding}
