@@ -33,11 +33,9 @@ export interface IndexStatsBlock {
     min?: number;
     max?: number;
     mean: number;
-    median?: number;
     std?: number;
-    p05?: number;
-    p95?: number;
     valid_count?: number;
+    quantiles?: { p05: number; p25: number; p50: number; p75: number; p95: number };
   };
 }
 
@@ -191,6 +189,29 @@ export interface RoiResult {
     }
   >;
   periods: Record<string, unknown>[];
+}
+
+/* ------------------------------------------------------- presentation --- */
+
+/** Presentation-only G0 quality payload (data/previews/g0/<study>/quality.json). */
+export interface G0Quality {
+  presentation_version: string;
+  study_id: string;
+  coverage: {
+    aoi_pixels: number;
+    grid_pixels: number;
+    earlier_valid_pixels: number;
+    later_valid_pixels: number;
+    common_valid_pixels: number;
+    masked_pixels: number;
+    earlier_valid_fraction_of_aoi: number;
+    later_valid_fraction_of_aoi: number;
+    common_valid_fraction_of_aoi: number;
+    uniform_common: boolean;
+    uniform_note?: string;
+  };
+  observation_counts?: Record<string, Record<string, number>>;
+  artifact_sha256?: Record<string, string>;
 }
 
 /* ------------------------------------------------------------- registry --- */

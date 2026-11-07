@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { Footer, TopNav } from "./components/shell";
 import { LandingPage } from "./pages/LandingPage";
 import { WorkstationPage } from "./pages/WorkstationPage";
@@ -6,8 +6,10 @@ import { ExperimentsPage } from "./pages/ExperimentsPage";
 import { MethodsPage } from "./pages/MethodsPage";
 
 export default function App() {
+  const { pathname } = useLocation();
+  const isWorkstation = pathname.startsWith("/workstation");
   return (
-    <>
+    <div className={isWorkstation ? "app-shell app-shell--fixed" : "app-shell"}>
       <a className="skip" href="#main">
         Skip to content
       </a>
@@ -27,7 +29,7 @@ export default function App() {
           }
         />
       </Routes>
-      <Footer />
-    </>
+      {!isWorkstation && <Footer />}
+    </div>
   );
 }

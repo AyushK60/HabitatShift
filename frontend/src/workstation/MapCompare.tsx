@@ -1,0 +1,677 @@
+/** MapLibre-based geographic comparison workspace.
+ *
+ * Renders the study's colourised PNG previews as *georeferenced raster image
+ * sources* pinned to the real grid corners from `/api/m1/study/{id}/georef`
+ * (EPSG:32644 → EPSG:4326, pyproj, server-side). The original GeoTIFFs are
+ * never loaded by the browser (ADR D2/D3).
+ *
+ * Modes:
+ * - `side`    two synchronized maps, locked shared view
+ * - `swipe`   one registered viewport; the later period is a clipped second
+ *             map whose divider follows the mouse with no click, keeping
+ *             touch drag, keyboard slider semantics and reset
+ * - `opacity` one map; the later raster's opacity is set by paint property
+ *
+ * Change and Quality analyses render on the primary map only: a derived
+ * difference raster or a validity mask is not a second temporal observation
+ * (M2-G0 lesson), so no fake temporal pairing is created.
+ */
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type MutableRefObject,
+} from "react";
+import maplibregl, { type Map as MapLibreMap, type MapMouseEvent } from "maplibre-gl";
+import type { Georef, M1Summary } from "../api/types";
+import type { LayerSpec, PeriodKey } from "./layers";
+import { layerImageUrl } from "./layers";
+
+export type CompareMode = "side" | "swipe" | "opacity";
+
+export interface RoiBox {
+  west: number;
+  south: number;
+  east: number;
+  north: number;
+}
+
+interface MapCompareProps {
+  georef: Georef;
+  summary: M1Summary;
+  studyId: string;
+  analysis: "historical" | "change" | "quality";
+  layer: LayerSpec;
+  mode: CompareMode;
+  opacity: number;
+  overlay: boolean;
+  split: number;
+  onSplitChange: (split: number) => void;
+  onMapClick: (lonLat: [number, number]) => void;
+  onCursorMove: (lonLat: [number, number] | null) => void;
+  roiMode: boolean;
+  roiBox: RoiBox | null;
+  onRoiComplete: (box: RoiBox) => void;
+  /** Receives a setter so the parent can place the inspected-pixel marker. */
+  onMarkerSetter: (setter: (lonLat: [number, number] | null) => void) => void;
+}
+
+const MAP_BACKGROUND = "#dfe3de";
+const EMPTY_FC: GeoJSON.FeatureCollection = { type: "FeatureCollection", features: [] };
+
+type Coord = [number, number];
+type CoordQuad = [Coord, Coord, Coord, Coord];
+
+function cornersToCoordinates(georef: Georef): CoordQuad {
+  // corners are ordered [tl, tr, br, bl]; MapLibre image sources want the same.
+  return georef.corners_wgs84.map(
+    ([lon, lat]) => [lon, lat] as Coord
+  ) as CoordQuad;
+}
+
+function boundsOf(georef: Georef): [[number, number], [number, number]] {
+  const lons = georef.corners_wgs84.map((c) => c[0]);
+  const lats = georef.corners_wgs84.map((c) => c[1]);
+  return [
+    [Math.min(...lons), Math.min(...lats)],
+    [Math.max(...lons), Math.max(...lats)],
+  ];
+}
+
+function aoiFeature(summary: M1Summary): GeoJSON.Feature | null {
+  const raw = summary.aoi?.geojson as unknown;
+  if (!raw || typeof raw !== "object") return null;
+  const obj = raw as { type?: string };
+  if (obj.type === "Feature") return raw as GeoJSON.Feature;
+  if (obj.type === "FeatureCollection") {
+    return (raw as GeoJSON.FeatureCollection).features?.[0] ?? null;
+  }
+  return null;
+}
+
+/** Ensure an image source + raster layer exist on a map and show `url`.
+ *  `coordinates` pins the raster to the real grid corners. */
+function applyImageLayer(
+  map: MapLibreMap,
+  id: string,
+  url: string,
+  coordinates: CoordQuad,
+  opacity = 1
+) {
+  const source = map.getSource(id) as maplibregl.ImageSource | undefined;
+  if (source && map.getLayer(id)) {
+    source.updateImage({ url, coordinates });
+    map.setLayoutProperty(id, "visibility", url ? "visible" : "none");
+    map.setPaintProperty(id, "raster-opacity", opacity);
+    return;
+  }
+  map.addSource(id, { type: "image", url, coordinates });
+  map.addLayer({
+    id,
+    type: "raster",
+    source: id,
+    paint: { "raster-opacity": opacity, "raster-resampling": "linear" },
+  });
+}
+
+function ensureLineRect(map: MapLibreMap, box: RoiBox | null) {
+  if (!map.getSource("roi-rect")) {
+    map.addSource("roi-rect", { type: "geojson", data: EMPTY_FC });
+    map.addLayer({
+      id: "roi-rect-fill",
+      type: "fill",
+      source: "roi-rect",
+      paint: { "fill-color": "#7faba7", "fill-opacity": 0.12 },
+    });
+    map.addLayer({
+      id: "roi-rect-line",
+      type: "line",
+      source: "roi-rect",
+      paint: { "line-color": "#193c43", "line-width": 2 },
+    });
+  }
+  const source = map.getSource("roi-rect") as maplibregl.GeoJSONSource;
+  source.setData(box ? roiFeature(box) : EMPTY_FC);
+}
+
+function roiFeature(box: RoiBox): GeoJSON.Feature {
+  const { west, south, east, north } = box;
+  return {
+    type: "Feature",
+    properties: {},
+    geometry: {
+      type: "Polygon",
+      coordinates: [
+        [
+          [west, south],
+          [east, south],
+          [east, north],
+          [west, north],
+          [west, south],
+        ],
+      ],
+    },
+  };
+}
+
+export function MapCompare({
+  georef,
+  summary,
+  studyId,
+  analysis,
+  layer,
+  mode,
+  opacity,
+  overlay,
+  split,
+  onSplitChange,
+  onMapClick,
+  onCursorMove,
+  roiMode,
+  roiBox,
+  onRoiComplete,
+  onMarkerSetter,
+}: MapCompareProps) {
+  const earlierMapDiv = useRef<HTMLDivElement>(null);
+  const laterMapDiv = useRef<HTMLDivElement>(null);
+  const stageRef = useRef<HTMLDivElement>(null);
+  const mapsRef = useRef<{ earlier?: MapLibreMap; later?: MapLibreMap }>({});
+  const [ready, setReady] = useState(false);
+  const [drawing, setDrawing] = useState(false);
+  const [liveRoi, setLiveRoi] = useState<RoiBox | null>(null);
+
+  const coordinates = useMemo(() => cornersToCoordinates(georef), [georef]);
+  const bounds = useMemo(() => boundsOf(georef), [georef]);
+  const layerUrlEarlier = layerImageUrl(layer, summary, studyId, "earlier");
+  const layerUrlLater = layerImageUrl(layer, summary, studyId, "later");
+  const singleMap = analysis !== "historical";
+
+  const overlayUrl = useCallback(
+    (period: PeriodKey) => {
+      if (!overlay || analysis === "quality") return "";
+      if (analysis === "change") {
+        return `/files/g0/${encodeURIComponent(studyId)}/common_invalid.png`;
+      }
+      return `/files/g0/${encodeURIComponent(studyId)}/${
+        period === "later" ? "later_invalid.png" : "earlier_invalid.png"
+      }`;
+    },
+    [overlay, analysis, studyId]
+  );
+
+  /* --------------------------------------------------------- map init --- */
+  useEffect(() => {
+    if (!earlierMapDiv.current || mapsRef.current.earlier) return;
+    const attribution =
+      "Contains modified Copernicus Sentinel data (ESA) · HabitatShift previews from processed L2A scenes";
+    // Each map needs its own style object; sharing one instance across two
+    // MapLibre maps lets the first map's normalization corrupt the second.
+    const makeStyle = () =>
+      ({
+        version: 8,
+        sources: {},
+        layers: [
+          { id: "bg", type: "background", paint: { "background-color": MAP_BACKGROUND } },
+        ],
+      }) as never;
+    const earlier = new maplibregl.Map({
+      container: earlierMapDiv.current,
+      style: makeStyle(),
+      center: georef.centre_wgs84 as [number, number],
+      zoom: 14,
+      attributionControl: false,
+      maxBounds: bounds,
+    });
+    const later = laterMapDiv.current
+      ? new maplibregl.Map({
+          container: laterMapDiv.current,
+          style: makeStyle(),
+          center: georef.centre_wgs84 as [number, number],
+          zoom: 14,
+          attributionControl: false,
+          maxBounds: bounds,
+        })
+      : undefined;
+
+    mapsRef.current = { earlier, later };
+    (window as unknown as { __hsMaps?: typeof mapsRef.current }).__hsMaps = mapsRef.current;
+
+    // The later map must never lead the shared view, but must still emit
+    // click events for the pixel probe.
+    if (later) {
+      later.dragPan.disable();
+      later.dragRotate.disable();
+      later.scrollZoom.disable();
+      later.boxZoom.disable();
+      later.keyboard.disable();
+      later.doubleClickZoom.disable();
+      later.touchZoomRotate.disable();
+      later.touchPitch.disable();
+    }
+
+    earlier.fitBounds(bounds, { padding: 6, duration: 0, animate: false });
+
+    const addControls = (map: MapLibreMap) => {
+      map.addControl(
+        new maplibregl.ScaleControl({ maxWidth: 96, unit: "metric" }),
+        "bottom-left"
+      );
+      map.addControl(
+        new maplibregl.AttributionControl({
+          compact: true,
+          customAttribution: attribution,
+        }),
+        "bottom-right"
+      );
+      map.addControl(
+        new maplibregl.NavigationControl({ showCompass: false }),
+        "top-right"
+      );
+    };
+    addControls(earlier);
+    if (later) addControls(later);
+
+    let readyCount = later ? 0 : 1;
+    const onReady = () => {
+      readyCount += 1;
+      if (readyCount >= (later ? 2 : 1)) setReady(true);
+    };
+    earlier.on("load", onReady);
+    later?.on("load", onReady);
+
+    /* Locked shared view: jump the later map only on real drift. */
+    const sync = () => {
+      const laterMap = mapsRef.current.later;
+      if (!laterMap) return;
+      const c = earlier.getCenter();
+      const z = earlier.getZoom();
+      const b = earlier.getBearing();
+      const p = earlier.getPitch();
+      const tc = laterMap.getCenter();
+      if (
+        tc.lng !== c.lng ||
+        tc.lat !== c.lat ||
+        laterMap.getZoom() !== z ||
+        laterMap.getBearing() !== b ||
+        laterMap.getPitch() !== p
+      ) {
+        laterMap.jumpTo({ center: c, zoom: z, bearing: b, pitch: p });
+      }
+    };
+    earlier.on("move", sync);
+    earlier.on("resize", sync);
+
+    earlier.on("mousemove", (event: MapMouseEvent) => {
+      onCursorMove([event.lngLat.lng, event.lngLat.lat]);
+    });
+    earlier.on("mouseout", () => onCursorMove(null));
+
+    const clickHandler = (event: MapMouseEvent) => {
+      if (roiModeRef.current) return;
+      onMapClick([event.lngLat.lng, event.lngLat.lat]);
+    };
+    earlier.on("click", clickHandler);
+    later?.on("click", clickHandler);
+
+    const resizeObserver = new ResizeObserver(() => {
+      earlier.resize();
+      later?.resize();
+    });
+    resizeObserver.observe(earlierMapDiv.current);
+    if (laterMapDiv.current) resizeObserver.observe(laterMapDiv.current);
+
+    return () => {
+      resizeObserver.disconnect();
+      earlier.remove();
+      later?.remove();
+      mapsRef.current = {};
+      setReady(false);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [georef]);
+
+  const roiModeRef = useRef(roiMode);
+  roiModeRef.current = roiMode;
+
+  /* -------------------------------------------------- shared overlays --- */
+  useEffect(() => {
+    if (!ready) return;
+    const { earlier, later } = mapsRef.current;
+    if (!earlier) return;
+    const aoi = aoiFeature(summary);
+    const setup = (map: MapLibreMap) => {
+      if (aoi && !map.getSource("aoi")) {
+        map.addSource("aoi", { type: "geojson", data: aoi });
+        map.addLayer({
+          id: "aoi-line",
+          type: "line",
+          source: "aoi",
+          paint: { "line-color": "#d68a5d", "line-width": 1.6, "line-dasharray": [3, 2] },
+        });
+      }
+      if (!map.getSource("pixel-marker")) {
+        map.addSource("pixel-marker", { type: "geojson", data: EMPTY_FC });
+        map.addLayer({
+          id: "pixel-marker-circle",
+          type: "circle",
+          source: "pixel-marker",
+          paint: {
+            "circle-radius": 5,
+            "circle-color": "#d68a5d",
+            "circle-stroke-color": "#18272d",
+            "circle-stroke-width": 1.5,
+          },
+        });
+      }
+      ensureLineRect(map, null);
+    };
+    setup(earlier);
+    if (later) setup(later);
+  }, [ready, summary]);
+
+  const setPixelMarker = useCallback((lonLat: [number, number] | null) => {
+    const data: GeoJSON.FeatureCollection = lonLat
+      ? {
+          type: "FeatureCollection",
+          features: [
+            {
+              type: "Feature",
+              properties: {},
+              geometry: { type: "Point", coordinates: lonLat },
+            },
+          ],
+        }
+      : EMPTY_FC;
+    const { earlier, later } = mapsRef.current;
+    for (const map of [earlier, later].filter(Boolean) as MapLibreMap[]) {
+      const source = map.getSource("pixel-marker") as maplibregl.GeoJSONSource | undefined;
+      if (source) source.setData(data);
+    }
+  }, []);
+
+  useEffect(() => {
+    onMarkerSetter(setPixelMarker);
+  }, [setPixelMarker, onMarkerSetter]);
+
+  /* --------------------------------------------------- layer painting --- */
+  useEffect(() => {
+    if (!ready) return;
+    const { earlier, later } = mapsRef.current;
+    if (!earlier) return;
+    const earlierOverlay = overlayUrl("earlier");
+    const laterOverlay = overlayUrl("later");
+
+    if (analysis === "historical") {
+      applyImageLayer(earlier, "layer-earlier", layerUrlEarlier, coordinates, 1);
+      applyImageLayer(earlier, "validity-overlay", earlierOverlay, coordinates);
+      if (later) {
+        applyImageLayer(later, "layer-later", layerUrlLater, coordinates, 1);
+        applyImageLayer(later, "validity-overlay", laterOverlay, coordinates);
+        // Opacity mode: stack the later raster over the earlier one on the
+        // primary map too is unnecessary — the later map itself fades.
+        applyImageLayer(later, "layer-later", layerUrlLater, coordinates, mode === "opacity" ? opacity : 1);
+      }
+    } else {
+      const url =
+        analysis === "change"
+          ? layerUrlEarlier
+          : layerImageUrl(layer, summary, studyId, "later");
+      applyImageLayer(earlier, "layer-earlier", url, coordinates, 1);
+      applyImageLayer(earlier, "validity-overlay", overlayUrl("earlier"), coordinates);
+      if (later) {
+        applyImageLayer(later, "layer-later", "", coordinates);
+        applyImageLayer(later, "validity-overlay", "", coordinates);
+      }
+    }
+  }, [
+    ready,
+    layer,
+    layerUrlEarlier,
+    layerUrlLater,
+    analysis,
+    mode,
+    opacity,
+    overlayUrl,
+    coordinates,
+    summary,
+    studyId,
+  ]);
+
+  /* -------------------------------------------------------- ROI draw --- */
+  useEffect(() => {
+    const { earlier } = mapsRef.current;
+    if (!earlier) return;
+    if (roiMode) {
+      earlier.dragPan.disable();
+      earlier.getCanvas().style.cursor = "crosshair";
+    } else {
+      earlier.dragPan.enable();
+      earlier.getCanvas().style.cursor = "";
+      setLiveRoi(null);
+    }
+  }, [roiMode, ready]);
+
+  useEffect(() => {
+    const { earlier } = mapsRef.current;
+    if (!earlier || !ready) return;
+    let start: { lng: number; lat: number } | null = null;
+    const onDown = (event: MapMouseEvent) => {
+      if (!roiModeRef.current) return;
+      event.preventDefault();
+      start = { lng: event.lngLat.lng, lat: event.lngLat.lat };
+      setDrawing(true);
+    };
+    const onMoveRoi = (event: MapMouseEvent) => {
+      if (!start) return;
+      setLiveRoi({
+        west: Math.min(start.lng, event.lngLat.lng),
+        east: Math.max(start.lng, event.lngLat.lng),
+        south: Math.min(start.lat, event.lngLat.lat),
+        north: Math.max(start.lat, event.lngLat.lat),
+      });
+    };
+    const onUp = (event: MapMouseEvent) => {
+      if (!start) return;
+      const from = start;
+      start = null;
+      setDrawing(false);
+      setLiveRoi(null);
+      const box: RoiBox = {
+        west: Math.min(from.lng, event.lngLat.lng),
+        east: Math.max(from.lng, event.lngLat.lng),
+        south: Math.min(from.lat, event.lngLat.lat),
+        north: Math.max(from.lat, event.lngLat.lat),
+      };
+      if ((box.east - box.west) * (box.north - box.south) > 1e-10) {
+        onRoiComplete(box);
+      }
+    };
+    earlier.on("mousedown", onDown);
+    earlier.on("mousemove", onMoveRoi);
+    earlier.on("mouseup", onUp);
+    return () => {
+      earlier.off("mousedown", onDown);
+      earlier.off("mousemove", onMoveRoi);
+      earlier.off("mouseup", onUp);
+    };
+  }, [ready, onRoiComplete]);
+
+  useEffect(() => {
+    if (!ready) return;
+    const { earlier, later } = mapsRef.current;
+    const box = liveRoi ?? roiBox;
+    for (const map of [earlier, later].filter(Boolean) as MapLibreMap[]) {
+      ensureLineRect(map, box);
+    }
+  }, [liveRoi, roiBox, ready]);
+
+  /* -------------------------------------------------- swipe handling --- */
+  const splitRef = useRef(split);
+  splitRef.current = split;
+  const rafRef = useRef<number | null>(null);
+  const draggingRef = useRef(false);
+
+  const applySplit = useCallback(
+    (value: number) => {
+      const next = Math.min(100, Math.max(0, value));
+      splitRef.current = next;
+      if (rafRef.current !== null) return;
+      rafRef.current = requestAnimationFrame(() => {
+        rafRef.current = null;
+        const stage = stageRef.current;
+        if (stage) {
+          stage.style.setProperty("--split", `${splitRef.current}%`);
+          const divider = stage.querySelector<HTMLDivElement>(".map-swipe-divider");
+          if (divider) {
+            const rounded = Math.round(splitRef.current);
+            divider.setAttribute("aria-valuenow", String(rounded));
+            divider.setAttribute(
+              "aria-valuetext",
+              `${rounded}% earlier, ${100 - rounded}% later`
+            );
+          }
+        }
+        onSplitChange(splitRef.current);
+      });
+    },
+    [onSplitChange]
+  );
+
+  useEffect(() => {
+    const stage = stageRef.current;
+    if (stage) stage.style.setProperty("--split", `${split}%`);
+  }, [split, mode]);
+
+  const splitFromEvent = (clientX: number): number | null => {
+    const stage = stageRef.current;
+    if (!stage) return null;
+    const box = stage.getBoundingClientRect();
+    if (!box.width) return null;
+    return ((clientX - box.left) / box.width) * 100;
+  };
+
+  const onStagePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (mode !== "swipe" || singleMap) return;
+    if (event.pointerType !== "mouse" && !(draggingRef.current && event.buttons !== 0)) return;
+    const value = splitFromEvent(event.clientX);
+    if (value !== null) applySplit(value);
+  };
+
+  const onStagePointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (mode !== "swipe" || singleMap) return;
+    // Mouse users already have hover-follow: a mouse *click* on the map must
+    // stay free for the pixel probe, so only touch/pen start a drag here.
+    if (event.pointerType === "mouse") return;
+    event.preventDefault();
+    draggingRef.current = true;
+    stageRef.current?.classList.add("is-dragging");
+    const stage = stageRef.current;
+    try {
+      stage?.setPointerCapture(event.pointerId);
+    } catch {
+      /* best-effort */
+    }
+    const value = splitFromEvent(event.clientX);
+    if (value !== null) applySplit(value);
+  };
+
+  const onStagePointerUp = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (!draggingRef.current) return;
+    draggingRef.current = false;
+    stageRef.current?.classList.remove("is-dragging");
+    if (event.pointerType !== "mouse") {
+      const stage = stageRef.current;
+      if (stage?.hasPointerCapture?.(event.pointerId)) {
+        stage.releasePointerCapture(event.pointerId);
+      }
+    }
+  };
+
+  const onDividerKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    let next = splitRef.current;
+    const step = event.shiftKey ? 10 : 1;
+    switch (event.key) {
+      case "ArrowLeft":
+      case "ArrowDown":
+        next -= step;
+        break;
+      case "ArrowRight":
+      case "ArrowUp":
+        next += step;
+        break;
+      case "PageDown":
+        next -= 10;
+        break;
+      case "PageUp":
+        next += 10;
+        break;
+      case "Home":
+        next = 0;
+        break;
+      case "End":
+        next = 100;
+        break;
+      default:
+        return;
+    }
+    event.preventDefault();
+    applySplit(next);
+  };
+
+  return (
+    <div
+      ref={stageRef}
+      className={`map-stage mode-${mode} ${singleMap ? "single-map" : ""} ${
+        roiMode ? "roi-mode" : ""
+      } ${drawing ? "is-drawing" : ""}`}
+      data-analysis={analysis}
+      onPointerMove={onStagePointerMove}
+      onPointerDown={onStagePointerDown}
+      onPointerUp={onStagePointerUp}
+      onPointerCancel={onStagePointerUp}
+      style={{ ["--split" as string]: `${split}%` }}
+    >
+      <div className="map-cell map-earlier" data-period="earlier">
+        <div className="map-host" ref={earlierMapDiv} />
+        <span className="map-cell-tag">
+          {analysis === "historical"
+            ? "Earlier"
+            : analysis === "change"
+              ? "Difference map"
+              : "Quality layer"}
+        </span>
+      </div>
+      {!singleMap && (
+        <div className="map-cell map-later" data-period="later">
+          <div className="map-host" ref={laterMapDiv} />
+          <span className="map-cell-tag">Later</span>
+        </div>
+      )}
+      {mode === "swipe" && !singleMap && (
+        <div
+          className="map-swipe-divider"
+          role="slider"
+          tabIndex={0}
+          aria-label="Map comparison divider"
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-valuenow={Math.round(split)}
+          onKeyDown={onDividerKeyDown}
+        >
+          <span className="map-swipe-line" aria-hidden="true" />
+          <span className="map-swipe-grip" aria-hidden="true" />
+        </div>
+      )}
+      {roiMode && (
+        <span className="map-roi-banner" role="status">
+          Draw a rectangle on the map to measure a region of interest · Esc cancels
+        </span>
+      )}
+    </div>
+  );
+}
+
+/** Ref handle type used by the parent to store the marker setter. */
+export type MarkerSetterRef = MutableRefObject<((lonLat: [number, number] | null) => void) | null>;

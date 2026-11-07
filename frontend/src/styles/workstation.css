@@ -1,0 +1,875 @@
+/* Research workstation layout — designed around ~1440×900.
+ *
+ * Structure: context bar / toolbar / layer groups / [map | inspector] / dock.
+ * On desktop the composition fits one viewport: .ws-row flexes to the
+ * remaining height, the inspector scrolls internally, and the dock expands
+ * as an overlay. Below 1020px it falls back to normal document flow.
+ */
+
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-shell > main {
+  flex: 1;
+}
+
+.app-shell--fixed {
+  height: 100vh;
+}
+
+.app-shell--fixed > main {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.workstation {
+  display: flex;
+  flex-direction: column;
+  max-width: none;
+  padding: 0;
+  overflow: hidden;
+}
+
+.workstation-loading,
+.workstation-error {
+  height: auto;
+  padding: 3rem 1.5rem;
+}
+
+/* ------------------------------------------------------- context bar --- */
+.ws-context {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem 2.5rem;
+  flex-wrap: wrap;
+  padding: 0.7rem 1.5rem 0.55rem;
+  border-bottom: 1px solid var(--rule);
+  background: var(--paper);
+}
+
+.ws-title .eyebrow {
+  margin-bottom: 0.1rem;
+}
+
+.ws-title h1 {
+  font-size: 1.35rem;
+  margin: 0;
+  color: var(--teal);
+}
+
+.ws-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.8rem;
+  margin: 0;
+}
+
+.ws-facts dt {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+}
+
+.ws-facts dd {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 0.76rem;
+  color: var(--teal);
+}
+
+.ws-facts a {
+  color: var(--teal-soft);
+}
+
+/* -------------------------------------------------------------- row --- */
+.ws-row {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 0.45rem 1.5rem 0;
+  gap: 0.4rem;
+}
+
+.ws-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1.4rem;
+  padding: 0.3rem 0;
+}
+
+.ws-split-tools {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.swipe-readout-inline {
+  color: var(--teal);
+}
+
+.control-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.control-label {
+  font-family: var(--mono);
+  font-size: 0.64rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.segmented {
+  display: inline-flex;
+  flex-wrap: wrap;
+  border: 1px solid var(--rule);
+  background: var(--paper);
+}
+
+.segmented button {
+  font: inherit;
+  font-size: 0.76rem;
+  padding: 0.28rem 0.66rem;
+  border: 0;
+  background: transparent;
+  color: #45585d;
+  cursor: pointer;
+}
+
+.segmented button + button {
+  border-left: 1px solid var(--rule);
+}
+
+.segmented button.is-active {
+  background: var(--teal);
+  color: var(--ivory);
+}
+
+.segmented button:focus-visible,
+.toggle-btn:focus-visible,
+.chip:focus-visible,
+.dock-toggle:focus-visible,
+.insp-tab:focus-visible,
+.swipe-reset:focus-visible {
+  outline: 2px solid var(--charcoal);
+  outline-offset: 2px;
+}
+
+.toggle-btn {
+  font: inherit;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.03em;
+  padding: 0.3rem 0.66rem;
+  border: 1px solid var(--rule);
+  background: var(--paper);
+  color: #45585d;
+  cursor: pointer;
+}
+
+.toggle-btn.is-active {
+  border-color: var(--teal);
+  background: var(--teal);
+  color: var(--ivory);
+}
+
+.opacity-control input[type="range"] {
+  width: 9rem;
+  accent-color: var(--teal);
+}
+
+/* ------------------------------------------------------- layer groups --- */
+.ws-layers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.4rem;
+}
+
+.layer-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* ------------------------------------------------------------- main --- */
+.ws-main {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(20rem, 3fr);
+  gap: 0.9rem;
+  padding-bottom: 0.6rem;
+}
+
+/* ---------------------------------------------------------- map stage --- */
+.map-stage {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  border: 1px solid var(--rule);
+  background: var(--paper);
+}
+
+.map-stage .map-cell {
+  min-width: 0;
+  min-height: 0;
+}
+
+.map-stage .map-host {
+  position: absolute;
+  inset: 0;
+}
+
+.map-cell .maplibregl-map {
+  position: absolute;
+  inset: 0;
+}
+
+.map-cell-tag {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 6;
+  font-family: var(--mono);
+  font-size: 0.64rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  background: rgba(251, 250, 246, 0.92);
+  border: 1px solid var(--rule);
+  color: var(--teal);
+  padding: 0.18rem 0.55rem;
+  pointer-events: none;
+}
+
+/* In swipe mode the later cell is only visible right of the divider, so its
+ * tag sits on the right edge, clear of the zoom control. */
+.map-stage.mode-swipe .map-later .map-cell-tag {
+  left: auto;
+  right: 0.5rem;
+  top: 3.4rem;
+}
+
+/* side-by-side: two equal cells */
+.map-stage.mode-side {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+}
+
+.map-stage.mode-side .map-cell {
+  position: relative;
+  overflow: hidden;
+}
+
+.map-stage.mode-side .map-cell + .map-cell {
+  border-left: 1px solid var(--rule);
+}
+
+/* swipe + opacity: stacked */
+.map-stage.mode-swipe,
+.map-stage.mode-opacity {
+  display: block;
+}
+
+.map-stage.mode-swipe .map-cell,
+.map-stage.mode-opacity .map-cell {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.map-stage.mode-swipe .map-cell.map-later {
+  clip-path: inset(0 0 0 var(--split, 50%));
+}
+
+.map-stage.single-map .map-cell.map-later {
+  display: none;
+}
+
+/* Change/Quality render on the primary map alone: one full-size cell. */
+.map-stage.single-map {
+  display: block;
+}
+
+.map-stage.single-map .map-cell.map-earlier {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.map-stage.single-map .map-cell.map-earlier {
+  inset: 0;
+}
+
+/* divider */
+.map-swipe-divider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--split, 50%);
+  width: 0;
+  z-index: 8;
+  cursor: ew-resize;
+  /* With hover-follow the divider always sits under the cursor; it must let
+   * clicks pass through to the map so the pixel probe keeps working. Focus
+   * and keyboard control are unaffected. */
+  pointer-events: none;
+}
+
+.map-swipe-divider:focus-visible {
+  outline: none;
+}
+
+.map-swipe-divider:focus-visible .map-swipe-grip {
+  outline: 3px solid var(--charcoal);
+  outline-offset: 3px;
+}
+
+.map-swipe-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 2px;
+  transform: translateX(-1px);
+  background: var(--copper);
+  box-shadow: 0 0 0 1px rgba(24, 39, 45, 0.25);
+}
+
+.map-swipe-grip {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 2.2rem;
+  height: 2.2rem;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 2px solid var(--copper);
+  background: var(--paper);
+  box-shadow: 0 2px 10px rgba(24, 39, 45, 0.3);
+  display: grid;
+  place-items: center;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--teal);
+}
+
+.map-swipe-grip::before {
+  content: "‹  ›";
+  letter-spacing: -0.08em;
+}
+
+.map-stage.roi-mode .map-host .maplibregl-canvas {
+  cursor: crosshair;
+}
+
+.map-roi-banner {
+  position: absolute;
+  top: 0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9;
+  background: rgba(251, 250, 246, 0.95);
+  border: 1px solid var(--teal);
+  color: var(--teal);
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  padding: 0.25rem 0.7rem;
+  pointer-events: none;
+}
+
+/* MapLibre control restyle (keep it Midnight-Teal, compact) */
+.map-stage .maplibregl-ctrl-group {
+  border: 1px solid var(--rule);
+  box-shadow: none;
+}
+
+.map-stage .maplibregl-ctrl-scale {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  color: var(--text-muted);
+  border-color: var(--rule-strong);
+  background: rgba(251, 250, 246, 0.85);
+}
+
+.map-stage .maplibregl-ctrl-attrib {
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  background: rgba(251, 250, 246, 0.85);
+}
+
+/* ------------------------------------------------------- inspector --- */
+.inspector {
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--rule);
+  background: var(--paper);
+}
+
+.insp-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--rule);
+}
+
+.insp-tab {
+  font: inherit;
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.5rem 0.7rem;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: #45585d;
+  cursor: pointer;
+}
+
+.insp-tab.is-active {
+  color: var(--teal);
+  border-bottom-color: var(--copper);
+}
+
+.insp-body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 0.8rem 0.95rem 1rem;
+}
+
+.insp-heading {
+  font-size: 1.05rem;
+  margin: 0 0 0.5rem;
+  color: var(--teal);
+}
+
+.insp-subheading {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--teal);
+  margin: 0.9rem 0 0.3rem;
+}
+
+.insp-legend-img {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--rule);
+  margin-bottom: 0.5rem;
+  background: #0e2226;
+}
+
+.insp-swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.insp-swatch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  color: #45585d;
+}
+
+.swatch-chip {
+  display: inline-block;
+  width: 0.9rem;
+  height: 0.9rem;
+  border: 1px solid var(--rule);
+}
+
+.insp-note {
+  font-size: 0.76rem;
+  line-height: 1.5;
+  color: var(--text-note);
+  margin: 0 0 0.5rem;
+}
+
+.insp-meaning {
+  border-left: 2px solid var(--sea-glass);
+  padding-left: 0.6rem;
+}
+
+.insp-guardrail {
+  border-left: 2px solid var(--copper);
+  padding-left: 0.6rem;
+  color: var(--copper-deep);
+}
+
+.insp-error {
+  color: var(--copper-deep);
+}
+
+.cursor-line {
+  margin-top: 0.6rem;
+}
+
+.insp-facts {
+  margin: 0;
+  display: grid;
+  gap: 0.3rem;
+}
+
+.insp-facts dt {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.insp-facts dd {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  color: var(--teal);
+  overflow-wrap: anywhere;
+}
+
+.insp-links {
+  margin: 0.3rem 0 0.6rem;
+  padding-left: 1.1rem;
+  font-size: 0.78rem;
+}
+
+/* pixel probe */
+.probe-coords {
+  margin-bottom: 0.5rem;
+}
+
+.probe-period {
+  margin-bottom: 0.7rem;
+}
+
+.probe-period h4 {
+  margin: 0 0 0.2rem;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--teal);
+}
+
+.probe-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+}
+
+.probe-table th {
+  text-align: left;
+  font-weight: 500;
+  color: var(--text-muted);
+  padding: 0.16rem 0.5rem 0.16rem 0;
+  vertical-align: top;
+}
+
+.probe-table td {
+  text-align: right;
+  color: var(--charcoal);
+  padding: 0.16rem 0;
+}
+
+.probe-table .probe-index th,
+.probe-table .probe-index td {
+  border-top: 1px solid var(--rule);
+  color: var(--teal);
+}
+
+.probe-source {
+  margin-top: 0.5rem;
+  color: var(--text-muted);
+}
+
+/* ROI */
+.roi-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.5rem;
+}
+
+.roi-source {
+  color: var(--teal);
+  border: 1px solid var(--rule);
+  background: var(--panel);
+  padding: 0.25rem 0.5rem;
+  display: inline-block;
+}
+
+.roi-block {
+  margin-top: 0.6rem;
+}
+
+.roi-block h4 {
+  margin: 0 0 0.25rem;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--teal);
+}
+
+/* --------------------------------------------------------------- dock --- */
+.dock {
+  position: relative;
+  border-top: 1px solid var(--rule);
+  background: var(--paper);
+  z-index: 12;
+}
+
+.dock-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem 1.2rem;
+  padding: 0.32rem 1.5rem;
+  flex-wrap: wrap;
+}
+
+.dock-toggle {
+  font: inherit;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: 1px solid var(--rule);
+  background: var(--ivory);
+  color: var(--teal);
+  padding: 0.24rem 0.7rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.dock-chevron {
+  color: var(--copper-deep);
+}
+
+.dock-summary {
+  color: var(--teal);
+}
+
+.dock-hint {
+  margin-left: auto;
+}
+
+.dock-panel {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  right: 0;
+  max-height: min(46vh, 26rem);
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: minmax(15rem, 1fr) minmax(17rem, 1.3fr) minmax(15rem, 1fr) minmax(16rem, 1.1fr);
+  gap: 1rem;
+  padding: 0.9rem 1.5rem 1rem;
+  border-top: 1px solid var(--rule);
+  background: var(--paper);
+  box-shadow: 0 -8px 22px rgba(24, 39, 45, 0.12);
+}
+
+.dock-section h3 {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--teal);
+  margin: 0 0 0.5rem;
+  border-top: 2px solid var(--teal);
+  padding-top: 0.4rem;
+}
+
+.dock-index-switch {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin-bottom: 0.45rem;
+}
+
+.chip {
+  font: inherit;
+  font-family: var(--mono);
+  font-size: 0.64rem;
+  padding: 0.16rem 0.5rem;
+  border: 1px solid var(--rule);
+  background: var(--ivory);
+  color: #45585d;
+  cursor: pointer;
+}
+
+.chip.is-active {
+  background: var(--teal);
+  border-color: var(--teal);
+  color: var(--ivory);
+}
+
+.dock-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--mono);
+  font-size: 0.66rem;
+}
+
+.dock-table th,
+.dock-table td {
+  padding: 0.18rem 0.35rem;
+  border-bottom: 1px solid var(--rule);
+  text-align: right;
+}
+
+.dock-table thead th {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.dock-table tbody th[scope="row"],
+.dock-table td:first-child {
+  text-align: left;
+  color: #45585d;
+  font-weight: 500;
+}
+
+.dock-chart {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--rule);
+  margin-top: 0.45rem;
+  background: #0e2226;
+}
+
+.dock-link {
+  font-size: 0.74rem;
+  color: var(--teal-soft);
+}
+
+/* timeline */
+.timeline-track {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  position: relative;
+}
+
+.timeline-node {
+  display: grid;
+  grid-template-columns: auto auto minmax(0, 1fr);
+  gap: 0.2rem 0.55rem;
+  align-items: baseline;
+}
+
+.timeline-node strong {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--teal);
+}
+
+.timeline-node .mono-label:first-of-type {
+  grid-column: 2 / -1;
+}
+
+.timeline-scenes {
+  grid-column: 2 / -1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.timeline-dot {
+  grid-row: 1 / span 2;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  background: var(--sea-glass);
+  border: 2px solid var(--teal);
+  align-self: start;
+  margin-top: 0.2rem;
+}
+
+.timeline-dot[data-period="later"] {
+  background: var(--copper);
+}
+
+/* ------------------------------------------------------- responsive --- */
+@media (max-width: 1180px) {
+  .ws-main {
+    grid-template-columns: minmax(0, 1fr) minmax(17rem, 20rem);
+  }
+
+  .dock-panel {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1020px) {
+  .workstation {
+    height: auto;
+    overflow: visible;
+  }
+
+  .ws-row {
+    flex: none;
+  }
+
+  .ws-main {
+    grid-template-columns: 1fr;
+  }
+
+  .map-stage {
+    min-height: 24rem;
+    height: 60vh;
+  }
+
+  .inspector {
+    max-height: none;
+  }
+
+  .insp-body {
+    overflow: visible;
+  }
+
+  .dock-panel {
+    position: static;
+    max-height: none;
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .ws-context,
+  .ws-row,
+  .dock-bar,
+  .dock-panel {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .map-stage.mode-side {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+
+  .map-stage.mode-side .map-cell + .map-cell {
+    border-left: 0;
+    border-top: 1px solid var(--rule);
+  }
+}

@@ -7,6 +7,7 @@
 import { load } from "js-yaml";
 import type {
   ExperimentSummary,
+  G0Quality,
   Georef,
   M1Summary,
   PixelSample,
@@ -58,6 +59,9 @@ export const api = {
       `/api/m1/study/${encodeURIComponent(studyId)}/roi` +
         `?west=${box.west}&south=${box.south}&east=${box.east}&north=${box.north}`
     ),
+
+  presentation: (studyId: string) =>
+    fetchJson<G0Quality>(`/api/m1/study/${encodeURIComponent(studyId)}/presentation`),
 
   experimentLatest: (experimentId: string) =>
     fetchJson<ExperimentSummary>(
