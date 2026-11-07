@@ -366,31 +366,31 @@
       "stretch": {
         "true_colour": {
           "low": [
-            0.03669999912381172,
-            0.055299997329711914,
-            0.05040000006556511
+            0.03830000013113022,
+            0.054499998688697815,
+            0.04800000041723251
           ],
           "high": [
-            0.1119999960064888,
-            0.12219999730587006,
-            0.10130000114440918
+            0.10979999601840973,
+            0.13519999384880066,
+            0.10599999874830246
           ],
           "gamma": 1.0,
-          "method": "per-band 2-98 percentile linear stretch on valid pixels"
+          "method": "joint per-band 2-98 percentile linear stretch over both periods' valid pixels (M4-R1 \u00a78: consistent stretch for direct visual comparison)"
         },
         "false_colour": {
           "low": [
-            0.018699999898672104,
-            0.03669999912381172,
-            0.055299997329711914
+            0.019199999049305916,
+            0.03830000013113022,
+            0.054499998688697815
           ],
           "high": [
-            0.2231999933719635,
-            0.1119999960064888,
-            0.12219999730587006
+            0.20600000023841858,
+            0.10979999601840973,
+            0.13519999384880066
           ],
           "gamma": 1.0,
-          "method": "per-band 2-98 percentile linear stretch on valid pixels"
+          "method": "joint per-band 2-98 percentile linear stretch over both periods' valid pixels (M4-R1 \u00a78: consistent stretch for direct visual comparison)"
         }
       },
       "previews": {
@@ -985,31 +985,31 @@
       "stretch": {
         "true_colour": {
           "low": [
-            0.042799998074769974,
-            0.05199999734759331,
-            0.04259999841451645
+            0.03830000013113022,
+            0.054499998688697815,
+            0.04800000041723251
           ],
           "high": [
-            0.10639999806880951,
-            0.13619999587535858,
-            0.10740000009536743
+            0.10979999601840973,
+            0.13519999384880066,
+            0.10599999874830246
           ],
           "gamma": 1.0,
-          "method": "per-band 2-98 percentile linear stretch on valid pixels"
+          "method": "joint per-band 2-98 percentile linear stretch over both periods' valid pixels (M4-R1 \u00a78: consistent stretch for direct visual comparison)"
         },
         "false_colour": {
           "low": [
-            0.022199999541044235,
-            0.042799998074769974,
-            0.05199999734759331
+            0.019199999049305916,
+            0.03830000013113022,
+            0.054499998688697815
           ],
           "high": [
-            0.18400000035762787,
-            0.10639999806880951,
-            0.13619999587535858
+            0.20600000023841858,
+            0.10979999601840973,
+            0.13519999384880066
           ],
           "gamma": 1.0,
-          "method": "per-band 2-98 percentile linear stretch on valid pixels"
+          "method": "joint per-band 2-98 percentile linear stretch over both periods' valid pixels (M4-R1 \u00a78: consistent stretch for direct visual comparison)"
         }
       },
       "previews": {

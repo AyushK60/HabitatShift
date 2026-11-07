@@ -402,6 +402,15 @@ export function Inspector({
               </div>
             )}
             <p className="insp-note">{legend.note}</p>
+            {/* M4-R1 §8: native spatial resolution beside the imagery. */}
+            <p className="insp-note mono-label">
+              Analysis grid: {summary.grid.resolution_m} m/px ·{" "}
+              {summary.grid.crs}. Sentinel-2 visible/NIR bands are natively
+              10 m, SWIR bands 20 m (resampled to this grid). A 10 m pixel does
+              not resolve individual buildings, trees or field boundaries. No
+              higher-resolution reference imagery is integrated — the detail
+              limit shown is the genuine limit of the open data.
+            </p>
             {layer.kind === "quality" && (
               <>
                 <p className="insp-note insp-meaning">

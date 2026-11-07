@@ -120,7 +120,7 @@
    "label": "Matched dry season (Feb 2020 vs Feb 2025)",
    "config_path": "studies/experiments/chilika_m4_dry.yaml",
    "config_sha256": "b0ebcfa401011a1e277a089aab8f8e9e986eaa5f449dd8c0a8db82f0664fa8ee",
-   "summary_sha256": "5756e46e6866946f1498c84b49fd799152ec29789942b94084414d57a51d4eba",
+   "summary_sha256": "20f6abc5c4f6be9a0971ef76e85f3b18f700f42a7f5ce928162a23591840c872",
    "summary": {
     "schema": "habitatshift-m1-summary/1",
     "experiment_id": "chilika_m4_dry",
@@ -472,31 +472,31 @@
       "stretch": {
        "true_colour": {
         "low": [
-         0.03669999912381172,
-         0.055299997329711914,
-         0.05040000006556511
+         0.03830000013113022,
+         0.054499998688697815,
+         0.04800000041723251
         ],
         "high": [
-         0.1119999960064888,
-         0.12219999730587006,
-         0.10130000114440918
+         0.10979999601840973,
+         0.13519999384880066,
+         0.10599999874830246
         ],
         "gamma": 1.0,
-        "method": "per-band 2-98 percentile linear stretch on valid pixels"
+        "method": "joint per-band 2-98 percentile linear stretch over both periods' valid pixels (M4-R1 \u00a78: consistent stretch for direct visual comparison)"
        },
        "false_colour": {
         "low": [
-         0.018699999898672104,
-         0.03669999912381172,
-         0.055299997329711914
+         0.019199999049305916,
+         0.03830000013113022,
+         0.054499998688697815
         ],
         "high": [
-         0.2231999933719635,
-         0.1119999960064888,
-         0.12219999730587006
+         0.20600000023841858,
+         0.10979999601840973,
+         0.13519999384880066
         ],
         "gamma": 1.0,
-        "method": "per-band 2-98 percentile linear stretch on valid pixels"
+        "method": "joint per-band 2-98 percentile linear stretch over both periods' valid pixels (M4-R1 \u00a78: consistent stretch for direct visual comparison)"
        }
       },
       "previews": {
@@ -758,31 +758,31 @@
       "stretch": {
        "true_colour": {
         "low": [
-         0.042799998074769974,
-         0.05199999734759331,
-         0.04259999841451645
+         0.03830000013113022,
+         0.054499998688697815,
+         0.04800000041723251
         ],
         "high": [
-         0.10639999806880951,
-         0.13619999587535858,
-         0.10740000009536743
+         0.10979999601840973,
+         0.13519999384880066,
+         0.10599999874830246
         ],
         "gamma": 1.0,
-        "method": "per-band 2-98 percentile linear stretch on valid pixels"
+        "method": "joint per-band 2-98 percentile linear stretch over both periods' valid pixels (M4-R1 \u00a78: consistent stretch for direct visual comparison)"
        },
        "false_colour": {
         "low": [
-         0.022199999541044235,
-         0.042799998074769974,
-         0.05199999734759331
+         0.019199999049305916,
+         0.03830000013113022,
+         0.054499998688697815
         ],
         "high": [
-         0.18400000035762787,
-         0.10639999806880951,
-         0.13619999587535858
+         0.20600000023841858,
+         0.10979999601840973,
+         0.13519999384880066
         ],
         "gamma": 1.0,
-        "method": "per-band 2-98 percentile linear stretch on valid pixels"
+        "method": "joint per-band 2-98 percentile linear stretch over both periods' valid pixels (M4-R1 \u00a78: consistent stretch for direct visual comparison)"
        }
       },
       "previews": {
@@ -1519,7 +1519,7 @@
    "label": "Matched post-monsoon (Nov 2020 vs Nov 2025)",
    "config_path": "studies/experiments/chilika_m4_postmonsoon.yaml",
    "config_sha256": "e2af1472f7ecf61c6fbd70b18eed0f3aa786d5fcee57d4149cc7a12e742ebe16",
-   "summary_sha256": "aea71cc608f2b0f20068f2d79042d4dbd742e3eaa30de44a22b949a726130a8b",
+   "summary_sha256": "0e6a3b8b3019d4a48d4c5f5452409bd75e24e4dcaec0b360a64f01a05e38ff31",
    "summary": {
     "schema": "habitatshift-m1-summary/1",
     "experiment_id": "chilika_m4_postmonsoon",
@@ -1871,31 +1871,31 @@
       "stretch": {
        "true_colour": {
         "low": [
-         0.027300000190734863,
-         0.03579999879002571,
-         0.01860000006854534
+         0.02709999866783619,
+         0.03229999914765358,
+         0.019600000232458115
         ],
         "high": [
-         0.10189999639987946,
-         0.11659999936819077,
-         0.0819999948143959
+         0.10040000081062317,
+         0.125,
+         0.08859999477863312
         ],
         "gamma": 1.0,
-        "method": "per-band 2-98 percentile linear stretch on valid pixels"
+        "method": "joint per-band 2-98 percentile linear stretch over both periods' valid pixels (M4-R1 \u00a78: consistent stretch for direct visual comparison)"
        },
        "false_colour": {
         "low": [
-         0.012199999764561653,
-         0.027300000190734863,
-         0.03579999879002571
+         0.01269999984651804,
+         0.02709999866783619,
+         0.03229999914765358
         ],
         "high": [
-         0.21159999072551727,
-         0.10189999639987946,
-         0.11659999936819077
+         0.18459999561309814,
+         0.10040000081062317,
+         0.125
         ],
         "gamma": 1.0,
-        "method": "per-band 2-98 percentile linear stretch on valid pixels"
+        "method": "joint per-band 2-98 percentile linear stretch over both periods' valid pixels (M4-R1 \u00a78: consistent stretch for direct visual comparison)"
        }
       },
       "previews": {
@@ -2153,31 +2153,31 @@
       "stretch": {
        "true_colour": {
         "low": [
-         0.026999998837709427,
-         0.031199999153614044,
-         0.020099999383091927
+         0.02709999866783619,
+         0.03229999914765358,
+         0.019600000232458115
         ],
         "high": [
-         0.09299999475479126,
-         0.12680000066757202,
-         0.09039999544620514
+         0.10040000081062317,
+         0.125,
+         0.08859999477863312
         ],
         "gamma": 1.0,
-        "method": "per-band 2-98 percentile linear stretch on valid pixels"
+        "method": "joint per-band 2-98 percentile linear stretch over both periods' valid pixels (M4-R1 \u00a78: consistent stretch for direct visual comparison)"
        },
        "false_colour": {
         "low": [
-         0.013100000098347664,
-         0.026999998837709427,
-         0.031199999153614044
+         0.01269999984651804,
+         0.02709999866783619,
+         0.03229999914765358
         ],
         "high": [
-         0.16859999299049377,
-         0.09299999475479126,
-         0.12680000066757202
+         0.18459999561309814,
+         0.10040000081062317,
+         0.125
         ],
         "gamma": 1.0,
-        "method": "per-band 2-98 percentile linear stretch on valid pixels"
+        "method": "joint per-band 2-98 percentile linear stretch over both periods' valid pixels (M4-R1 \u00a78: consistent stretch for direct visual comparison)"
        }
       },
       "previews": {
@@ -3175,7 +3175,7 @@
   },
   "chilika_m4_dry/earlier_2020-02-17_false_colour.png": {
    "path": "previews/chilika_m4_dry__earlier_2020-02-17_false_colour.png",
-   "sha256": "a93444c89622af8d0cdc4c93587356c0b8d606f5f751beeaca0deaed926cb9f6"
+   "sha256": "f58c9b74e0a98a2d8f74243ee64ed48a35e708dcd8a0e723e9f24c4e8beed0b8"
   },
   "chilika_m4_dry/earlier_2020-02-17_mndwi.png": {
    "path": "previews/chilika_m4_dry__earlier_2020-02-17_mndwi.png",
@@ -3195,7 +3195,7 @@
   },
   "chilika_m4_dry/earlier_2020-02-17_true_colour.png": {
    "path": "previews/chilika_m4_dry__earlier_2020-02-17_true_colour.png",
-   "sha256": "c6e653c963b22ac08cd71f3da39a2e7abecea2c5272e07d751f5f76c9a66f2fb"
+   "sha256": "9ea96be65fc5641f4c6c8b989012ec42be436d07785ddab0451bbbaeafe859cb"
   },
   "chilika_m4_dry/earlier_2020-02-17_valid_mask.png": {
    "path": "previews/chilika_m4_dry__earlier_2020-02-17_valid_mask.png",
@@ -3203,7 +3203,7 @@
   },
   "chilika_m4_dry/later_2025-02-15_false_colour.png": {
    "path": "previews/chilika_m4_dry__later_2025-02-15_false_colour.png",
-   "sha256": "9cee6776ae82736eaa1c4c434f09a6b5c57fe5010e5b61b203b638d149cb8c20"
+   "sha256": "d651d2c07111b07b1b1a4f771285fbd286b304ccd558f5cee0d799d58a9e58eb"
   },
   "chilika_m4_dry/later_2025-02-15_mndwi.png": {
    "path": "previews/chilika_m4_dry__later_2025-02-15_mndwi.png",
@@ -3223,7 +3223,7 @@
   },
   "chilika_m4_dry/later_2025-02-15_true_colour.png": {
    "path": "previews/chilika_m4_dry__later_2025-02-15_true_colour.png",
-   "sha256": "3201eb1fdc8af7ccaca101adf16090f051139fcc95a94d06475339149ad51470"
+   "sha256": "f75c89bf51004362684021642c6a5e62e7486a3b8b7fc8afb73457c1ec987f74"
   },
   "chilika_m4_dry/later_2025-02-15_valid_mask.png": {
    "path": "previews/chilika_m4_dry__later_2025-02-15_valid_mask.png",
@@ -3275,7 +3275,7 @@
   },
   "chilika_m4_postmonsoon/earlier_2020-11-08_false_colour.png": {
    "path": "previews/chilika_m4_postmonsoon__earlier_2020-11-08_false_colour.png",
-   "sha256": "37b5b2c5b29ba846b6512d9b01dafbc425164e59d5bfff780a248664334d13c2"
+   "sha256": "7f3a5dc8dc08b2f3298e0c8ea38012171d08cecb92261ad24e401b7d63599dba"
   },
   "chilika_m4_postmonsoon/earlier_2020-11-08_mndwi.png": {
    "path": "previews/chilika_m4_postmonsoon__earlier_2020-11-08_mndwi.png",
@@ -3295,7 +3295,7 @@
   },
   "chilika_m4_postmonsoon/earlier_2020-11-08_true_colour.png": {
    "path": "previews/chilika_m4_postmonsoon__earlier_2020-11-08_true_colour.png",
-   "sha256": "3e5f9e3e4c048efb1ab109337c1242fc8c8001b53241f5510f01f4daa335c938"
+   "sha256": "ffbef20d964b94cc4a3ec7340c267f078a62c98fb21e1a666c8d5dc2158671e5"
   },
   "chilika_m4_postmonsoon/earlier_2020-11-08_valid_mask.png": {
    "path": "previews/chilika_m4_postmonsoon__earlier_2020-11-08_valid_mask.png",
@@ -3303,7 +3303,7 @@
   },
   "chilika_m4_postmonsoon/later_2025-11-17_false_colour.png": {
    "path": "previews/chilika_m4_postmonsoon__later_2025-11-17_false_colour.png",
-   "sha256": "237b93105aebdec7214c7e924f315104f8bed27f7e5c2a26e8c88e8cf36b58f4"
+   "sha256": "a4ab8cba1fe38c283aec429da34328edc2a8e2219a01464d6bd6bf9fe549f83f"
   },
   "chilika_m4_postmonsoon/later_2025-11-17_mndwi.png": {
    "path": "previews/chilika_m4_postmonsoon__later_2025-11-17_mndwi.png",
@@ -3323,7 +3323,7 @@
   },
   "chilika_m4_postmonsoon/later_2025-11-17_true_colour.png": {
    "path": "previews/chilika_m4_postmonsoon__later_2025-11-17_true_colour.png",
-   "sha256": "e7d73b66b1d4131d09935b0b404e54fbae2a2695aa2b8cec9f57155e9bb26472"
+   "sha256": "386b42198fc5f7bc918964332fbd45ea5cc419c088277daaa9d3c29e4b6eb397"
   },
   "chilika_m4_postmonsoon/later_2025-11-17_valid_mask.png": {
    "path": "previews/chilika_m4_postmonsoon__later_2025-11-17_valid_mask.png",

@@ -118,7 +118,7 @@
    "label": null,
    "config_path": "studies/experiments/western_ghats_m4.yaml",
    "config_sha256": "de3dc0dcc6b6957f473cb126949161789cb2ed25914c4233452dc9d000456283",
-   "summary_sha256": "3703768f261d9b050480c9ff01abe87c14b6e5025bbe19e30b2d5686707b96e6",
+   "summary_sha256": "00dcb7f89b08ccbc30807dea837ac1d631e6a7d65f26bb9ed82833a99917e1bf",
    "summary": {
     "schema": "habitatshift-m1-summary/1",
     "experiment_id": "western_ghats_m4",
@@ -414,31 +414,31 @@
       "stretch": {
        "true_colour": {
         "low": [
-         0.016599999740719795,
-         0.02979999966919422,
-         0.01489999983459711
+         0.015399999916553497,
+         0.0284000001847744,
+         0.010599999688565731
         ],
         "high": [
-         0.09829999506473541,
-         0.06839999556541443,
-         0.04820000007748604
+         0.10119999945163727,
+         0.06920000165700912,
+         0.04699999839067459
         ],
         "gamma": 1.0,
-        "method": "per-band 2-98 percentile linear stretch on valid pixels"
+        "method": "joint per-band 2-98 percentile linear stretch over both periods' valid pixels (M4-R1 \u00a78: consistent stretch for direct visual comparison)"
        },
        "false_colour": {
         "low": [
-         0.17719998955726624,
-         0.016599999740719795,
-         0.02979999966919422
+         0.17659999430179596,
+         0.015399999916553497,
+         0.0284000001847744
         ],
         "high": [
-         0.3515999913215637,
-         0.09829999506473541,
-         0.06839999556541443
+         0.35920000076293945,
+         0.10119999945163727,
+         0.06920000165700912
         ],
         "gamma": 1.0,
-        "method": "per-band 2-98 percentile linear stretch on valid pixels"
+        "method": "joint per-band 2-98 percentile linear stretch over both periods' valid pixels (M4-R1 \u00a78: consistent stretch for direct visual comparison)"
        }
       },
       "previews": {
@@ -641,31 +641,31 @@
       "stretch": {
        "true_colour": {
         "low": [
-         0.014699999243021011,
-         0.027400000020861626,
-         0.009599999524652958
+         0.015399999916553497,
+         0.0284000001847744,
+         0.010599999688565731
         ],
         "high": [
-         0.10599999874830246,
-         0.07039999961853027,
-         0.04479999840259552
+         0.10119999945163727,
+         0.06920000165700912,
+         0.04699999839067459
         ],
         "gamma": 1.0,
-        "method": "per-band 2-98 percentile linear stretch on valid pixels"
+        "method": "joint per-band 2-98 percentile linear stretch over both periods' valid pixels (M4-R1 \u00a78: consistent stretch for direct visual comparison)"
        },
        "false_colour": {
         "low": [
-         0.17639999091625214,
-         0.014699999243021011,
-         0.027400000020861626
+         0.17659999430179596,
+         0.015399999916553497,
+         0.0284000001847744
         ],
         "high": [
-         0.3651999831199646,
-         0.10599999874830246,
-         0.07039999961853027
+         0.35920000076293945,
+         0.10119999945163727,
+         0.06920000165700912
         ],
         "gamma": 1.0,
-        "method": "per-band 2-98 percentile linear stretch on valid pixels"
+        "method": "joint per-band 2-98 percentile linear stretch over both periods' valid pixels (M4-R1 \u00a78: consistent stretch for direct visual comparison)"
        }
       },
       "previews": {
@@ -1388,7 +1388,7 @@
   },
   "western_ghats_m4/earlier_2020-02-19_false_colour.png": {
    "path": "previews/western_ghats_m4__earlier_2020-02-19_false_colour.png",
-   "sha256": "170cbbf07b864d7b1870e080886c3e3978f60bd171dc0fa103d5eec008ac1efc"
+   "sha256": "9456ecb52ee07f4b27de4c5091a20227fe47ae00c16cfbaec76e46ba218134c3"
   },
   "western_ghats_m4/earlier_2020-02-19_ndvi.png": {
    "path": "previews/western_ghats_m4__earlier_2020-02-19_ndvi.png",
@@ -1404,7 +1404,7 @@
   },
   "western_ghats_m4/earlier_2020-02-19_true_colour.png": {
    "path": "previews/western_ghats_m4__earlier_2020-02-19_true_colour.png",
-   "sha256": "6b8c5343d481768700af2468b4b6ca9ffc2a1d3b76435168d675fe7ed4f8733e"
+   "sha256": "b866e7188fc127820590d853147547775d50adcf964a74282648227f77afae52"
   },
   "western_ghats_m4/earlier_2020-02-19_valid_mask.png": {
    "path": "previews/western_ghats_m4__earlier_2020-02-19_valid_mask.png",
@@ -1412,7 +1412,7 @@
   },
   "western_ghats_m4/later_2025-02-22_false_colour.png": {
    "path": "previews/western_ghats_m4__later_2025-02-22_false_colour.png",
-   "sha256": "a18e6b61322fd9fc02d8710487fa1e980ab4ab562f8ca6805b8ff732b0b7b2d7"
+   "sha256": "8c55d040e595a481da14de7470cab3dcdaebf0e58719b81b0e95e7e9f661c05e"
   },
   "western_ghats_m4/later_2025-02-22_ndvi.png": {
    "path": "previews/western_ghats_m4__later_2025-02-22_ndvi.png",
@@ -1428,7 +1428,7 @@
   },
   "western_ghats_m4/later_2025-02-22_true_colour.png": {
    "path": "previews/western_ghats_m4__later_2025-02-22_true_colour.png",
-   "sha256": "5454312b48ff6eb2c262ebdc18547b594853a603ad2ce23ada31335cb832bffc"
+   "sha256": "e40a020e4fe57f7899e127e44aa98cbf1a3c157c60e7e887d87652b01d40272e"
   },
   "western_ghats_m4/later_2025-02-22_valid_mask.png": {
    "path": "previews/western_ghats_m4__later_2025-02-22_valid_mask.png",

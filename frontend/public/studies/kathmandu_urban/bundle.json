@@ -119,7 +119,7 @@
    "label": null,
    "config_path": "studies/experiments/kathmandu_m4.yaml",
    "config_sha256": "8c466502821664beddc8c04baa89df8c10b5734396cfc9059cde0018ac544a1d",
-   "summary_sha256": "32895fe9c24d7f72e2e0189e13a637f07c4720ce25cb2d8e14df33d6485469b0",
+   "summary_sha256": "594b9394f61f145164dec934b0d8658db6750b6c88c2f2b0a95489e5add0e5b4",
    "summary": {
     "schema": "habitatshift-m1-summary/1",
     "experiment_id": "kathmandu_m4",
@@ -474,31 +474,31 @@
       "stretch": {
        "true_colour": {
         "low": [
-         0.054099999368190765,
-         0.059699997305870056,
-         0.03709999844431877
+         0.0640999972820282,
+         0.06579999625682831,
+         0.043800000101327896
         ],
         "high": [
-         0.22039999067783356,
-         0.18639999628067017,
-         0.15760000050067902
+         0.20417999923229102,
+         0.1699800014495838,
+         0.1462000012397766
         ],
         "gamma": 1.0,
-        "method": "per-band 2-98 percentile linear stretch on valid pixels"
+        "method": "joint per-band 2-98 percentile linear stretch over both periods' valid pixels (M4-R1 \u00a78: consistent stretch for direct visual comparison)"
        },
        "false_colour": {
         "low": [
-         0.10419999808073044,
-         0.054099999368190765,
-         0.059699997305870056
+         0.10859999805688858,
+         0.0640999972820282,
+         0.06579999625682831
         ],
         "high": [
-         0.3165999948978424,
-         0.22039999067783356,
-         0.18639999628067017
+         0.2973799973726261,
+         0.20417999923229102,
+         0.1699800014495838
         ],
         "gamma": 1.0,
-        "method": "per-band 2-98 percentile linear stretch on valid pixels"
+        "method": "joint per-band 2-98 percentile linear stretch over both periods' valid pixels (M4-R1 \u00a78: consistent stretch for direct visual comparison)"
        }
       },
       "previews": {
@@ -767,31 +767,31 @@
       "stretch": {
        "true_colour": {
         "low": [
-         0.08079999685287476,
-         0.08169999718666077,
-         0.06909999996423721
+         0.0640999972820282,
+         0.06579999625682831,
+         0.043800000101327896
         ],
         "high": [
-         0.1873999983072281,
-         0.15559999644756317,
-         0.1363999992609024
+         0.20417999923229102,
+         0.1699800014495838,
+         0.1462000012397766
         ],
         "gamma": 1.0,
-        "method": "per-band 2-98 percentile linear stretch on valid pixels"
+        "method": "joint per-band 2-98 percentile linear stretch over both periods' valid pixels (M4-R1 \u00a78: consistent stretch for direct visual comparison)"
        },
        "false_colour": {
         "low": [
-         0.12299999594688416,
-         0.08079999685287476,
-         0.08169999718666077
+         0.10859999805688858,
+         0.0640999972820282,
+         0.06579999625682831
         ],
         "high": [
-         0.25699999928474426,
-         0.1873999983072281,
-         0.15559999644756317
+         0.2973799973726261,
+         0.20417999923229102,
+         0.1699800014495838
         ],
         "gamma": 1.0,
-        "method": "per-band 2-98 percentile linear stretch on valid pixels"
+        "method": "joint per-band 2-98 percentile linear stretch over both periods' valid pixels (M4-R1 \u00a78: consistent stretch for direct visual comparison)"
        }
       },
       "previews": {
@@ -1789,7 +1789,7 @@
   },
   "kathmandu_m4/earlier_2020-03-31_false_colour.png": {
    "path": "previews/kathmandu_m4__earlier_2020-03-31_false_colour.png",
-   "sha256": "d1274b1c861173b2814e1a164b0c3c136a056caa53e43c8a67dbb7b41b017c9b"
+   "sha256": "6799413d8e00287d3d818a7cdb7c957ea32cd579beda72548c9f77a36b9064bc"
   },
   "kathmandu_m4/earlier_2020-03-31_ndbi.png": {
    "path": "previews/kathmandu_m4__earlier_2020-03-31_ndbi.png",
@@ -1809,7 +1809,7 @@
   },
   "kathmandu_m4/earlier_2020-03-31_true_colour.png": {
    "path": "previews/kathmandu_m4__earlier_2020-03-31_true_colour.png",
-   "sha256": "1c199978fb4ca9503320a4e2d750b106189ddf47c37ba0045b00f1e6ff8d604e"
+   "sha256": "3e7466907512503e6319024987b59c855674fcc20896da14c8cd0d282a89c33d"
   },
   "kathmandu_m4/earlier_2020-03-31_valid_mask.png": {
    "path": "previews/kathmandu_m4__earlier_2020-03-31_valid_mask.png",
@@ -1817,7 +1817,7 @@
   },
   "kathmandu_m4/later_2025-03-29_false_colour.png": {
    "path": "previews/kathmandu_m4__later_2025-03-29_false_colour.png",
-   "sha256": "01bea46af379ef01b6c027e6c402b4a0a46c80d1a39ccb3ab569f5e6fef6617b"
+   "sha256": "222a70615486384b50c1daa68adb430cf35d8913cc958965dda6455d9a30a378"
   },
   "kathmandu_m4/later_2025-03-29_ndbi.png": {
    "path": "previews/kathmandu_m4__later_2025-03-29_ndbi.png",
@@ -1837,7 +1837,7 @@
   },
   "kathmandu_m4/later_2025-03-29_true_colour.png": {
    "path": "previews/kathmandu_m4__later_2025-03-29_true_colour.png",
-   "sha256": "1c27457abe0fd2de0e934dee37b6415e6055eb1af33f8898f5e9ad5d781b74c4"
+   "sha256": "0e54f3cd1da6a1bc2edd32231eb0d8c4bf379c4268960428a20b188f7d88274b"
   },
   "kathmandu_m4/later_2025-03-29_valid_mask.png": {
    "path": "previews/kathmandu_m4__later_2025-03-29_valid_mask.png",

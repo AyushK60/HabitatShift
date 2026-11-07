@@ -262,6 +262,22 @@
   top: 4.9rem; /* clear of the zoom control */
 }
 
+/* M4-R1 §8: native-resolution tag shown beside the imagery. */
+.map-resolution-tag {
+  position: absolute;
+  bottom: 2.6rem;
+  left: 0.5rem;
+  z-index: 6;
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.06em;
+  background: rgba(251, 250, 246, 0.85);
+  border: 1px solid var(--rule);
+  color: var(--text-muted);
+  padding: 0.14rem 0.45rem;
+  pointer-events: none;
+}
+
 /* side-by-side: two equal cells */
 .map-stage.mode-side {
   display: grid;

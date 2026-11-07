@@ -809,6 +809,10 @@ export function MapCompare({
               ? "Difference map"
               : "Quality layer"}
         </span>
+        {/* M4-R1 §8: the native analysis resolution travels with the imagery. */}
+        <span className="map-resolution-tag" title="Native analysis grid resolution">
+          {summary.grid.resolution_m} m/px native
+        </span>
       </div>
       {/* M4-R1 §5/§6: the later cell stays mounted for the map's lifetime.
           Unmounting it orphaned the MapLibre instance (the visible div became

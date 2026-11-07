@@ -121,7 +121,7 @@
    "label": null,
    "config_path": "studies/experiments/himalaya_langtang_2026_m4.yaml",
    "config_sha256": "03762bc2fe07d0dbe97598972cd05c12358d306b553d016c4056ea0d01674a33",
-   "summary_sha256": "754a2bb513b8eb9b23498556ef90409430dc47a292ed7ff4dc57765144181802",
+   "summary_sha256": "f02a30377b14c97071ac5d541aff3a7d12f4922b1c85d75bf9531c6bb690522b",
    "summary": {
     "schema": "habitatshift-m1-summary/1",
     "experiment_id": "himalaya_langtang_2026_m4",
@@ -453,31 +453,31 @@
       "stretch": {
        "true_colour": {
         "low": [
-         0.034299999475479126,
-         0.030299998819828033,
-         0.020999999716877937
+         0.04569999873638153,
+         0.043299999088048935,
+         0.029199998825788498
         ],
         "high": [
-         0.8104999661445618,
-         0.818399965763092,
-         0.82669997215271
+         1.2108999490737915,
+         1.2431999444961548,
+         1.2529000043869019
         ],
         "gamma": 1.0,
-        "method": "per-band 2-98 percentile linear stretch on valid pixels"
+        "method": "joint per-band 2-98 percentile linear stretch over both periods' valid pixels (M4-R1 \u00a78: consistent stretch for direct visual comparison)"
        },
        "false_colour": {
         "low": [
-         0.044199999421834946,
-         0.034299999475479126,
-         0.030299998819828033
+         0.06879999488592148,
+         0.04569999873638153,
+         0.043299999088048935
         ],
         "high": [
-         0.7304999828338623,
-         0.8104999661445618,
-         0.818399965763092
+         1.0800999402999878,
+         1.2108999490737915,
+         1.2431999444961548
         ],
         "gamma": 1.0,
-        "method": "per-band 2-98 percentile linear stretch on valid pixels"
+        "method": "joint per-band 2-98 percentile linear stretch over both periods' valid pixels (M4-R1 \u00a78: consistent stretch for direct visual comparison)"
        }
       },
       "previews": {
@@ -737,31 +737,31 @@
       "stretch": {
        "true_colour": {
         "low": [
-         0.21459999680519104,
-         0.20430000126361847,
-         0.18869999051094055
+         0.04569999873638153,
+         0.043299999088048935,
+         0.029199998825788498
         ],
         "high": [
-         1.2782999277114868,
-         1.3095999956130981,
-         1.3184000253677368
+         1.2108999490737915,
+         1.2431999444961548,
+         1.2529000043869019
         ],
         "gamma": 1.0,
-        "method": "per-band 2-98 percentile linear stretch on valid pixels"
+        "method": "joint per-band 2-98 percentile linear stretch over both periods' valid pixels (M4-R1 \u00a78: consistent stretch for direct visual comparison)"
        },
        "false_colour": {
         "low": [
-         0.21199999749660492,
-         0.21459999680519104,
-         0.20430000126361847
+         0.06879999488592148,
+         0.04569999873638153,
+         0.043299999088048935
         ],
         "high": [
-         1.1464999914169312,
-         1.2782999277114868,
-         1.3095999956130981
+         1.0800999402999878,
+         1.2108999490737915,
+         1.2431999444961548
         ],
         "gamma": 1.0,
-        "method": "per-band 2-98 percentile linear stretch on valid pixels"
+        "method": "joint per-band 2-98 percentile linear stretch over both periods' valid pixels (M4-R1 \u00a78: consistent stretch for direct visual comparison)"
        }
       },
       "previews": {
@@ -1759,7 +1759,7 @@
   },
   "himalaya_langtang_2026_m4/earlier_2026-08-12_false_colour.png": {
    "path": "previews/himalaya_langtang_2026_m4__earlier_2026-08-12_false_colour.png",
-   "sha256": "d43e9f1b6109358db4b416c2cdbec94d5a22e10080d948a00a21565cbb3d750c"
+   "sha256": "87b8249793e3f3e531c41d052cce5a61ba76b039cab0e80f7d570e9007dd31ca"
   },
   "himalaya_langtang_2026_m4/earlier_2026-08-12_ndsi.png": {
    "path": "previews/himalaya_langtang_2026_m4__earlier_2026-08-12_ndsi.png",
@@ -1779,7 +1779,7 @@
   },
   "himalaya_langtang_2026_m4/earlier_2026-08-12_true_colour.png": {
    "path": "previews/himalaya_langtang_2026_m4__earlier_2026-08-12_true_colour.png",
-   "sha256": "6ab962fe9b567ed2ab00300b2d2874d16d3431e76343acb1f9d9e5047b1c092b"
+   "sha256": "03496328079573faf4c53081a01b38483d6a7deb656d1d8230727a1ef22d009c"
   },
   "himalaya_langtang_2026_m4/earlier_2026-08-12_valid_mask.png": {
    "path": "previews/himalaya_langtang_2026_m4__earlier_2026-08-12_valid_mask.png",
@@ -1787,7 +1787,7 @@
   },
   "himalaya_langtang_2026_m4/later_2026-09-28_false_colour.png": {
    "path": "previews/himalaya_langtang_2026_m4__later_2026-09-28_false_colour.png",
-   "sha256": "256af8e7d2746720decefd347aceae9828ee46add1fee7c12fee25ded69e865f"
+   "sha256": "3188d41d34fda63e06a376f62b31221de8068eb437c8366642efb430ade622b6"
   },
   "himalaya_langtang_2026_m4/later_2026-09-28_ndsi.png": {
    "path": "previews/himalaya_langtang_2026_m4__later_2026-09-28_ndsi.png",
@@ -1807,7 +1807,7 @@
   },
   "himalaya_langtang_2026_m4/later_2026-09-28_true_colour.png": {
    "path": "previews/himalaya_langtang_2026_m4__later_2026-09-28_true_colour.png",
-   "sha256": "5d4d5fa9becff1ff93a616e751f0c2179ae7bf0f3a069cec6198343892dd28c5"
+   "sha256": "f35f4fae45ac0b3c4820329ab229cdf759196dec6a58bba12e4ea799c783d9e6"
   },
   "himalaya_langtang_2026_m4/later_2026-09-28_valid_mask.png": {
    "path": "previews/himalaya_langtang_2026_m4__later_2026-09-28_valid_mask.png",
