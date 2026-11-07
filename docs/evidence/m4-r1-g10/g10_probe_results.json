@@ -1,0 +1,133 @@
+{
+  "base_url": "http://127.0.0.1:8098/",
+  "suite": "habitatshift-m4-r1-g10-chart-qa/1",
+  "started_utc": "2026-11-07T18:32:39.371Z",
+  "checks": [
+    {
+      "name": "1. threshold legend labels are distinct per estimator configuration",
+      "passed": true,
+      "detail": "ΔMNDWI decrease · mean composite | ΔMNDWI decrease · median composite | ΔNDVI decrease · mean composite | ΔNDVI decrease · median composite | ΔNDWI decrease · mean composite | ΔNDWI decrease · median composite"
+    },
+    {
+      "name": "2. tooltip shows a single series by default",
+      "passed": true,
+      "detail": "rows=1"
+    },
+    {
+      "name": "3. tooltip carries exact value + units + denominator",
+      "passed": true,
+      "detail": "ΔNDVI decrease · mean composite0.15 index units→ 13.53 % of shared-valid AOIEsti"
+    },
+    {
+      "name": "4. tooltip inside plot and viewport (centre hover)",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "5. tooltip near LEFT edge stays inside plot+viewport",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "6. tooltip near RIGHT edge stays inside plot+viewport",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "7. all four chart types render",
+      "passed": true,
+      "detail": "count=4"
+    },
+    {
+      "name": "8. tooltip near TOP edge stays inside plot+viewport",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "9. tooltip near BOTTOM edge stays inside plot+viewport",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "10. expanded details show related series, context and limitations",
+      "passed": true,
+      "detail": "expanded=true hasDetails=true text=Candidate increase0.15 index units→ 13.71 % of shared-valid AOIBlock-bootstrap 95% range: 12.08–15.62 %Resampl"
+    },
+    {
+      "name": "11. expanded tooltip stays visible (viewport-clamped; vertically it may exceed a plot shorter than itself)",
+      "passed": true,
+      "detail": "{\"withinPlot\":false,\"withinPlotHorizontal\":true,\"withinViewport\":true,\"height\":367,\"plotHeight\":322,\"rows\":2,\"expanded\":true,\"text\":\"Candidate increase0.15 index units→ 13.71 % of shared-valid AOIBlock-bootstrap 95% range: 12.08–15.62 %Resampling variability for this AOI a\"}"
+    },
+    {
+      "name": "12. estimator ticks are short, unique and family-free",
+      "passed": true,
+      "detail": "anchor | mean | median | LOO 03-26 | LOO 03-21 | LOO 03-31 | LOO 04-01 | LOO 03-25 | LOO 03-30 | 03-26×04-01 | 03-26×03-25 | 03-26×03-30 | 03-21×04-01 | 03-21×03-25 | 03-21×03-30 | 03-31×04-01 | 03-31×03-25 | 03-31×03-30"
+    },
+    {
+      "name": "13. period-means axis shows each anchor date exactly once",
+      "passed": true,
+      "detail": "2020-03-26 | 2025-03-25"
+    },
+    {
+      "name": "14. estimator tooltip carries the full technical identifier",
+      "passed": true,
+      "detail": "ΔMNDWI mean per estimatorSingle scenes · 2020-03-26 × 2025-04-01→ 0.08Family: single_pairs"
+    },
+    {
+      "name": "15. chart proportions balanced (height 320, width capped ≤ 860)",
+      "passed": true,
+      "detail": "{\"w\":858,\"h\":320,\"ratio\":2.68}"
+    },
+    {
+      "name": "16. click-to-pin works",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "17. Escape dismisses the pinned tooltip",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "18. narrow desktop: tooltip stays inside plot+viewport",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "19. mobile 390: no horizontal overflow",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "20. mobile: tooltip stays inside plot+viewport",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "21. no page errors during probe",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "22. no console errors during probe",
+      "passed": true,
+      "detail": ""
+    }
+  ],
+  "screenshots": [
+    "g10_threshold_chart_coringa.png",
+    "g10_tooltip_normal.png",
+    "g10_tooltip_left_edge.png",
+    "g10_tooltip_right_edge.png",
+    "g10_tooltip_top_edge.png",
+    "g10_tooltip_bottom_edge.png",
+    "g10_tooltip_expanded.png",
+    "g10_period_means_chart.png",
+    "g10_estimator_chart.png",
+    "g10_narrow_1024.png",
+    "g10_mobile_390.png",
+    "g10_mobile_tooltip_right_edge.png"
+  ],
+  "console_errors": [],
+  "page_errors": []
+}

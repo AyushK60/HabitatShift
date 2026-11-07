@@ -1,7 +1,7 @@
 {
   "base_url": "http://127.0.0.1:8098/",
   "suite": "habitatshift-m4-browser/1",
-  "started_utc": "2026-11-07T17:25:22.563Z",
+  "started_utc": "2026-11-07T18:29:22.265Z",
   "checks": [
     {
       "name": "1. landing renders hero headline",
@@ -51,7 +51,7 @@
     {
       "name": "4. hover snaps to the nearest recorded point with an explanatory tooltip",
       "passed": true,
-      "detail": "ΔNDWI decrease0.15 index units → 4.20 % of shared-valid AOICandidate increase: 22.34 %Candidate decrease area: 146.09 haShared-valid pixels: 348,129observed index difference at the stated threshold; not a land-cover classification, deforestation/wetland-loss v"
+      "detail": "ΔNDVI decrease0.15 index units→ 32.89 % of shared-valid AOICandidate increase: 4.52 %Candidate decrease area: 1144.91 haShared-valid pixels: 348,129observed index difference at the stated threshold; not a land-cover classification, deforestation/wetland-loss v"
     },
     {
       "name": "4. tooltip values come from the recorded threshold sweep",
@@ -121,7 +121,7 @@
     {
       "name": "10. side-by-side maps stay synchronised",
       "passed": true,
-      "detail": "{\"earlier\":15.069840981040354,\"later\":15.069840981040354}"
+      "detail": "{\"earlier\":15.6867033133993,\"later\":15.6867033133993}"
     },
     {
       "name": "10. divider follows mouse hover with no click",
@@ -141,7 +141,7 @@
     {
       "name": "11. pixel probe returns measured reflectance + indices",
       "passed": true,
-      "detail": "82.26393°E, 16.72858°N · UTM 634738, 1849958 · pixel 203, 183 · 10 mEarlier · 2020-03-26Valid observation · 3 obs behind"
+      "detail": "82.26427°E, 16.72821°N · UTM 634775, 1849917 · pixel 207, 187 · 10 mEarlier · 2020-03-26Valid observation · 3 obs behind"
     },
     {
       "name": "12. experiments page shows recorded charts",
@@ -191,7 +191,7 @@
     {
       "name": "12b. Fit Entire Study Area restores the overview zoom (§9)",
       "passed": true,
-      "detail": "zoom 14.950283323797366 → 13.715334944179029"
+      "detail": "zoom 15.037558769853412 → 13.715334944179414"
     },
     {
       "name": "12b. native-resolution tag renders beside the imagery (§8)",
@@ -250,34 +250,34 @@
     }
   ],
   "screenshots": [
-    "..\\..\\docs\\evidence\\m4\\m4_r1_workstation_study_selector_1440.png",
-    "..\\..\\docs\\evidence\\m4\\m4_landing_1440_gallery.png",
-    "..\\..\\docs\\evidence\\m4\\m4_chilika_workstation_1440.png",
-    "..\\..\\docs\\evidence\\m4\\m4_interactive_chart_hover.png",
-    "..\\..\\docs\\evidence\\m4\\m4_interactive_chart_keyboard.png",
-    "..\\..\\docs\\evidence\\m4\\m4_d1_event_view.png",
-    "..\\..\\docs\\evidence\\m4\\m4_d2_event_view.png",
-    "..\\..\\docs\\evidence\\m4\\m4_kathmandu_workstation.png",
-    "..\\..\\docs\\evidence\\m4\\m4_pixel_probe_live.png",
-    "..\\..\\docs\\evidence\\m4\\m4_r1_quality_accounting_1440.png",
-    "..\\..\\docs\\evidence\\m4\\m4_r1_opacity_mode_1440.png",
-    "..\\..\\docs\\evidence\\m4\\m4_r1_what_changed_1440.png",
-    "..\\..\\docs\\evidence\\m4\\m4_landing_1920x1080.png",
-    "..\\..\\docs\\evidence\\m4\\m4_workstation_1920x1080.png",
-    "..\\..\\docs\\evidence\\m4\\m4_landing_1440x900.png",
-    "..\\..\\docs\\evidence\\m4\\m4_workstation_1440x900.png",
-    "..\\..\\docs\\evidence\\m4\\m4_landing_1280x800.png",
-    "..\\..\\docs\\evidence\\m4\\m4_workstation_1280x800.png",
-    "..\\..\\docs\\evidence\\m4\\m4_landing_768.png",
-    "..\\..\\docs\\evidence\\m4\\m4_workstation_768.png",
-    "..\\..\\docs\\evidence\\m4\\m4_landing_390.png",
-    "..\\..\\docs\\evidence\\m4\\m4_workstation_390.png",
-    "..\\..\\docs\\evidence\\m4\\m4_methods_1440.png"
+    "docs\\evidence\\m4\\m4_r1_workstation_study_selector_1440.png",
+    "docs\\evidence\\m4\\m4_landing_1440_gallery.png",
+    "docs\\evidence\\m4\\m4_chilika_workstation_1440.png",
+    "docs\\evidence\\m4\\m4_interactive_chart_hover.png",
+    "docs\\evidence\\m4\\m4_interactive_chart_keyboard.png",
+    "docs\\evidence\\m4\\m4_d1_event_view.png",
+    "docs\\evidence\\m4\\m4_d2_event_view.png",
+    "docs\\evidence\\m4\\m4_kathmandu_workstation.png",
+    "docs\\evidence\\m4\\m4_pixel_probe_live.png",
+    "docs\\evidence\\m4\\m4_r1_quality_accounting_1440.png",
+    "docs\\evidence\\m4\\m4_r1_opacity_mode_1440.png",
+    "docs\\evidence\\m4\\m4_r1_what_changed_1440.png",
+    "docs\\evidence\\m4\\m4_landing_1920x1080.png",
+    "docs\\evidence\\m4\\m4_workstation_1920x1080.png",
+    "docs\\evidence\\m4\\m4_landing_1440x900.png",
+    "docs\\evidence\\m4\\m4_workstation_1440x900.png",
+    "docs\\evidence\\m4\\m4_landing_1280x800.png",
+    "docs\\evidence\\m4\\m4_workstation_1280x800.png",
+    "docs\\evidence\\m4\\m4_landing_768.png",
+    "docs\\evidence\\m4\\m4_workstation_768.png",
+    "docs\\evidence\\m4\\m4_landing_390.png",
+    "docs\\evidence\\m4\\m4_workstation_390.png",
+    "docs\\evidence\\m4\\m4_methods_1440.png"
   ],
   "console_errors": [],
   "page_errors": [],
   "failed_requests": [],
-  "finished_utc": "2026-11-07T17:26:36.742Z",
+  "finished_utc": "2026-11-07T18:30:40.146Z",
   "passed": 49,
   "failed": 0
 }

@@ -16,6 +16,51 @@ import { InteractiveChart, type ChartSeries } from "./InteractiveChart";
 
 const PALETTE = ["#193c43", "#d68a5d", "#7faba7", "#8a4d2a", "#5f706c"];
 
+/** G10: threshold-series legends must be distinguishable.  When several
+ *  estimator configurations feed the same index, the display label carries a
+ *  short configuration name and the tooltip carries the full technical
+ *  identifier. */
+function thresholdSeriesLabel(item: BundleThresholdSeries, seen: Set<string>): string {
+  const base = `Δ${item.index.toUpperCase()} decrease`;
+  const configShort =
+    item.estimator_id === "composite_mean"
+      ? "mean composite"
+      : item.estimator_id === "composite_median"
+        ? "median composite"
+        : item.estimator_id
+          ? item.estimator_id.replace(/_/g, " ")
+          : null;
+  let label = configShort ? `${base} · ${configShort}` : base;
+  // Safety net: if two configurations still collide, disambiguate with the
+  // recorded primary threshold (a genuine configuration difference).
+  if (seen.has(label)) {
+    label = `${label}${item.primary_threshold != null ? ` · ±${item.primary_threshold}` : " (2)"}`;
+  }
+  seen.add(label);
+  return label;
+}
+
+/** G10: compact axis label for an estimator point; the full recorded label
+ *  stays on the point and is shown on hover/focus. */
+function estimatorShortLabel(estimatorId: string): string {
+  if (estimatorId === "anchor_single") return "anchor";
+  if (estimatorId === "composite_mean") return "mean";
+  if (estimatorId === "composite_median") return "median";
+  if (estimatorId === "m0_anchor_single_scene") return "M0";
+  const dates = estimatorId.match(/\d{8}/g) ?? [];
+  const mmdd = (date: string) => `${date.slice(4, 6)}-${date.slice(6, 8)}`;
+  if (estimatorId.startsWith("loo_")) {
+    const first = dates[0];
+    return first ? `LOO ${mmdd(first)}` : "LOO";
+  }
+  if (estimatorId.startsWith("single__")) {
+    const a = dates[0];
+    const b = dates[1];
+    return a && b ? `${mmdd(a)}×${mmdd(b)}` : "pair";
+  }
+  return estimatorId.length > 14 ? `${estimatorId.slice(0, 13)}…` : estimatorId;
+}
+
 /* ------------------------------------------------ threshold sensitivity --- */
 
 export function ThresholdChart({
@@ -27,17 +72,21 @@ export function ThresholdChart({
   context: string;
   guardrail?: string | null;
 }) {
+  const seenLabels = new Set<string>();
   const charts: ChartSeries[] = series
     .filter((item) => item.points.length > 0)
     .map((item, position) => ({
-      id: item.index,
-      label: `Δ${item.index.toUpperCase()} decrease`,
+      id: item.estimator_id ? `${item.index}:${item.estimator_id}` : item.index,
+      label: thresholdSeriesLabel(item, seenLabels),
       color: PALETTE[position % PALETTE.length],
       points: item.points.map((point) => ({
         x: point.threshold,
         y: point.decrease_percent_of_common,
         facts: (
           [
+            item.estimator_id
+              ? (["Estimator", item.estimator_id] as [string, string])
+              : null,
             ["Candidate increase", `${point.increase_percent_of_common?.toFixed(2) ?? "–"} %`],
             point.decrease_area_ha !== undefined
               ? (["Candidate decrease area", `${point.decrease_area_ha.toFixed(2)} ha`] as [string, string])
@@ -132,6 +181,7 @@ export function PrePostMeansChart({
       context={context}
       caption={`Per-period mean index values. ${context}`}
       formatX={fmtDate}
+      xCategorical
       canConclude={[
         "The recorded mean index level of each period's composite and how many valid observations back it.",
       ]}
@@ -171,10 +221,12 @@ export function EstimatorChart({
     points: rows.map((row, position) => ({
       x: position,
       label: row.label,
+      shortLabel: estimatorShortLabel(row.estimator_id),
       y: row.delta_mean as number,
       facts: (
         [
           ["Family", row.family],
+          ["Estimator", row.estimator_id],
           ["Shared-valid pixels", row.common_valid_pixels.toLocaleString("en-GB")],
           row.decrease_percent_of_common !== null
             ? (["Candidate decrease at primary threshold", `${row.decrease_percent_of_common.toFixed(2)} %`] as [string, string])
@@ -194,6 +246,7 @@ export function EstimatorChart({
       context={context}
       caption={`Estimator comparison for Δ${index.toUpperCase()}. ${context}`}
       formatX={fmtTick}
+      xCategorical
       canConclude={[
         "How much the recorded mean difference moves when the observation selection changes.",
       ]}
