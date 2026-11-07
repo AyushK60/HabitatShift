@@ -1,0 +1,2292 @@
+{
+  "schema": "habitatshift-findings/1",
+  "study_id": "western_ghats_forest",
+  "experiment_id": "western_ghats_m4",
+  "generated_utc": "2026-11-07T16:45:29Z",
+  "evidence_status": "processed",
+  "method": {
+    "source": "frozen M1 difference rasters + common-valid masks",
+    "threshold_rule": "recorded primary threshold of each index (|\u0394| \u2265 t)",
+    "connected_components": "scipy.ndimage.label, 4-connectivity",
+    "minimum_mapping_unit_px": 25,
+    "minimum_mapping_unit_ha": 0.25,
+    "max_regions_per_index_direction": 5,
+    "geometry": "rasterio.features.shapes on the native UTM grid, projected to WGS84 (pyproj); no hand-drawn geometry",
+    "area_convention": "pixel count \u00d7 pixel area on the projected analysis grid"
+  },
+  "periods": {
+    "earlier": {
+      "anchor_date": "2020-02-19",
+      "composite_method": "median"
+    },
+    "later": {
+      "anchor_date": "2025-02-22",
+      "composite_method": "median"
+    }
+  },
+  "common_valid_pixels": 237774,
+  "common_valid_fraction_of_aoi": 1.0,
+  "indices": {
+    "ndvi": {
+      "threshold": 0.15,
+      "common_valid_pixels": 237774,
+      "decrease_pixels_total": 345,
+      "increase_pixels_total": 899
+    },
+    "ndwi": {
+      "threshold": 0.15,
+      "common_valid_pixels": 237774,
+      "decrease_pixels_total": 338,
+      "increase_pixels_total": 85
+    }
+  },
+  "findings": [
+    {
+      "id": "region_01",
+      "display_id": "Region 01",
+      "index": "ndvi",
+      "direction": "decrease",
+      "threshold": 0.15,
+      "pixel_count": 47,
+      "area_ha": 0.47,
+      "share_of_common_valid_percent": 0.0198,
+      "mean_delta": -0.365976,
+      "median_delta": -0.381233,
+      "common_valid_pixels": 237774,
+      "centroid_utm": [
+        432989.6,
+        1673421.2
+      ],
+      "centroid_lonlat": [
+        74.376307,
+        15.135617
+      ],
+      "geometry_wgs84": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              74.375844,
+              15.136057
+            ],
+            [
+              74.375844,
+              15.135876
+            ],
+            [
+              74.375937,
+              15.135877
+            ],
+            [
+              74.375938,
+              15.135696
+            ],
+            [
+              74.376031,
+              15.135696
+            ],
+            [
+              74.376032,
+              15.135425
+            ],
+            [
+              74.376125,
+              15.135425
+            ],
+            [
+              74.376125,
+              15.135244
+            ],
+            [
+              74.376218,
+              15.135245
+            ],
+            [
+              74.376218,
+              15.135335
+            ],
+            [
+              74.376311,
+              15.135335
+            ],
+            [
+              74.376311,
+              15.135426
+            ],
+            [
+              74.37659,
+              15.135427
+            ],
+            [
+              74.37659,
+              15.135336
+            ],
+            [
+              74.37687,
+              15.135337
+            ],
+            [
+              74.376869,
+              15.135518
+            ],
+            [
+              74.376776,
+              15.135517
+            ],
+            [
+              74.376776,
+              15.135608
+            ],
+            [
+              74.376683,
+              15.135608
+            ],
+            [
+              74.376682,
+              15.135698
+            ],
+            [
+              74.37631,
+              15.135697
+            ],
+            [
+              74.376309,
+              15.135968
+            ],
+            [
+              74.376216,
+              15.135968
+            ],
+            [
+              74.376216,
+              15.136058
+            ],
+            [
+              74.375844,
+              15.136057
+            ]
+          ]
+        ]
+      },
+      "input_raster": "data/processed/m4/western_ghats_m4/delta_ndvi.tif",
+      "valid_mask": "data/processed/m4/western_ghats_m4/common_valid_ndvi.tif",
+      "interpretation": {
+        "title": "\u25bc Candidate NDVI decrease \u00b7 Region 01",
+        "location": "Region 01 \u00b7 centroid 74.3763\u00b0E, 15.1356\u00b0N \u00b7 0.47 ha",
+        "observation_period": "2020-02-19 \u2192 2025-02-22 (median composites)",
+        "observed_measurement": "Mean \u0394NDVI -0.366 index units (median -0.381 index units) at the recorded threshold |\u0394| \u2265 0.15; 47 px = 0.47 ha = 0.02 % of the 237,774-px shared-valid footprint.",
+        "meaning": "A NDVI decrease here marks where the later forest composite reads lower in NDVI. In this terrain the validity footprint is complete, but terrain shadow and illumination geometry can still colour the spectral comparison.",
+        "explanations": [
+          "Terrain shadow and illumination differences between acquisitions.",
+          "Canopy density or phenology differences between the windows.",
+          "Canopy disturbance \u2014 candidate only; independent evidence would be required to establish it."
+        ],
+        "evidence_strength": "Shared-valid coverage for this comparison is 100.00 % of the AOI (237,774 px). The region is a connected 47-px component at a stated threshold \u2014 adjacent pixels are not independent observations, so no significance is claimed. Candidate spectral signal with stated thresholds, not independently verified change.",
+        "cannot_conclude": [
+          "That deforestation occurred (no independent verification).",
+          "A distinction between shadow effects and real canopy change."
+        ],
+        "source": {
+          "experiment_id": "western_ghats_m4",
+          "input_raster": "data/processed/m4/western_ghats_m4/delta_ndvi.tif",
+          "valid_mask": "data/processed/m4/western_ghats_m4/common_valid_ndvi.tif",
+          "method": "frozen M1 difference rasters + common-valid masks"
+        }
+      }
+    },
+    {
+      "id": "region_02",
+      "display_id": "Region 02",
+      "index": "ndvi",
+      "direction": "decrease",
+      "threshold": 0.15,
+      "pixel_count": 44,
+      "area_ha": 0.44,
+      "share_of_common_valid_percent": 0.0185,
+      "mean_delta": -0.281807,
+      "median_delta": -0.273102,
+      "common_valid_pixels": 237774,
+      "centroid_utm": [
+        433338.0,
+        1674364.4
+      ],
+      "centroid_lonlat": [
+        74.379524,
+        15.144153
+      ],
+      "geometry_wgs84": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              74.379263,
+              15.144565
+            ],
+            [
+              74.379263,
+              15.144384
+            ],
+            [
+              74.37917,
+              15.144384
+            ],
+            [
+              74.379171,
+              15.144203
+            ],
+            [
+              74.379264,
+              15.144203
+            ],
+            [
+              74.379264,
+              15.144113
+            ],
+            [
+              74.379543,
+              15.144114
+            ],
+            [
+              74.379544,
+              15.143842
+            ],
+            [
+              74.379451,
+              15.143842
+            ],
+            [
+              74.379451,
+              15.143752
+            ],
+            [
+              74.379637,
+              15.143752
+            ],
+            [
+              74.379637,
+              15.143662
+            ],
+            [
+              74.379824,
+              15.143662
+            ],
+            [
+              74.379823,
+              15.143753
+            ],
+            [
+              74.38001,
+              15.143753
+            ],
+            [
+              74.380008,
+              15.144205
+            ],
+            [
+              74.379822,
+              15.144205
+            ],
+            [
+              74.379822,
+              15.144295
+            ],
+            [
+              74.379636,
+              15.144295
+            ],
+            [
+              74.379635,
+              15.144385
+            ],
+            [
+              74.379449,
+              15.144385
+            ],
+            [
+              74.379449,
+              15.144475
+            ],
+            [
+              74.379356,
+              15.144475
+            ],
+            [
+              74.379356,
+              15.144565
+            ],
+            [
+              74.379263,
+              15.144565
+            ]
+          ]
+        ]
+      },
+      "input_raster": "data/processed/m4/western_ghats_m4/delta_ndvi.tif",
+      "valid_mask": "data/processed/m4/western_ghats_m4/common_valid_ndvi.tif",
+      "interpretation": {
+        "title": "\u25bc Candidate NDVI decrease \u00b7 Region 02",
+        "location": "Region 02 \u00b7 centroid 74.3795\u00b0E, 15.1442\u00b0N \u00b7 0.44 ha",
+        "observation_period": "2020-02-19 \u2192 2025-02-22 (median composites)",
+        "observed_measurement": "Mean \u0394NDVI -0.282 index units (median -0.273 index units) at the recorded threshold |\u0394| \u2265 0.15; 44 px = 0.44 ha = 0.02 % of the 237,774-px shared-valid footprint.",
+        "meaning": "A NDVI decrease here marks where the later forest composite reads lower in NDVI. In this terrain the validity footprint is complete, but terrain shadow and illumination geometry can still colour the spectral comparison.",
+        "explanations": [
+          "Terrain shadow and illumination differences between acquisitions.",
+          "Canopy density or phenology differences between the windows.",
+          "Canopy disturbance \u2014 candidate only; independent evidence would be required to establish it."
+        ],
+        "evidence_strength": "Shared-valid coverage for this comparison is 100.00 % of the AOI (237,774 px). The region is a connected 44-px component at a stated threshold \u2014 adjacent pixels are not independent observations, so no significance is claimed. Candidate spectral signal with stated thresholds, not independently verified change.",
+        "cannot_conclude": [
+          "That deforestation occurred (no independent verification).",
+          "A distinction between shadow effects and real canopy change."
+        ],
+        "source": {
+          "experiment_id": "western_ghats_m4",
+          "input_raster": "data/processed/m4/western_ghats_m4/delta_ndvi.tif",
+          "valid_mask": "data/processed/m4/western_ghats_m4/common_valid_ndvi.tif",
+          "method": "frozen M1 difference rasters + common-valid masks"
+        }
+      }
+    },
+    {
+      "id": "region_03",
+      "display_id": "Region 03",
+      "index": "ndvi",
+      "direction": "decrease",
+      "threshold": 0.15,
+      "pixel_count": 31,
+      "area_ha": 0.31,
+      "share_of_common_valid_percent": 0.013,
+      "mean_delta": -0.280549,
+      "median_delta": -0.282942,
+      "common_valid_pixels": 237774,
+      "centroid_utm": [
+        433263.48,
+        1673510.43
+      ],
+      "centroid_lonlat": [
+        74.378853,
+        15.136431
+      ],
+      "geometry_wgs84": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              74.378634,
+              15.136698
+            ],
+            [
+              74.378634,
+              15.136607
+            ],
+            [
+              74.378541,
+              15.136607
+            ],
+            [
+              74.378542,
+              15.136426
+            ],
+            [
+              74.378635,
+              15.136427
+            ],
+            [
+              74.378635,
+              15.136246
+            ],
+            [
+              74.378728,
+              15.136246
+            ],
+            [
+              74.378729,
+              15.136156
+            ],
+            [
+              74.378822,
+              15.136156
+            ],
+            [
+              74.378822,
+              15.136065
+            ],
+            [
+              74.379008,
+              15.136066
+            ],
+            [
+              74.379008,
+              15.136247
+            ],
+            [
+              74.379101,
+              15.136247
+            ],
+            [
+              74.3791,
+              15.136337
+            ],
+            [
+              74.379193,
+              15.136338
+            ],
+            [
+              74.379193,
+              15.136519
+            ],
+            [
+              74.3791,
+              15.136518
+            ],
+            [
+              74.379099,
+              15.136699
+            ],
+            [
+              74.379006,
+              15.136699
+            ],
+            [
+              74.379007,
+              15.136608
+            ],
+            [
+              74.378727,
+              15.136608
+            ],
+            [
+              74.378727,
+              15.136698
+            ],
+            [
+              74.378634,
+              15.136698
+            ]
+          ]
+        ]
+      },
+      "input_raster": "data/processed/m4/western_ghats_m4/delta_ndvi.tif",
+      "valid_mask": "data/processed/m4/western_ghats_m4/common_valid_ndvi.tif",
+      "interpretation": {
+        "title": "\u25bc Candidate NDVI decrease \u00b7 Region 03",
+        "location": "Region 03 \u00b7 centroid 74.3789\u00b0E, 15.1364\u00b0N \u00b7 0.31 ha",
+        "observation_period": "2020-02-19 \u2192 2025-02-22 (median composites)",
+        "observed_measurement": "Mean \u0394NDVI -0.281 index units (median -0.283 index units) at the recorded threshold |\u0394| \u2265 0.15; 31 px = 0.31 ha = 0.01 % of the 237,774-px shared-valid footprint.",
+        "meaning": "A NDVI decrease here marks where the later forest composite reads lower in NDVI. In this terrain the validity footprint is complete, but terrain shadow and illumination geometry can still colour the spectral comparison.",
+        "explanations": [
+          "Terrain shadow and illumination differences between acquisitions.",
+          "Canopy density or phenology differences between the windows.",
+          "Canopy disturbance \u2014 candidate only; independent evidence would be required to establish it."
+        ],
+        "evidence_strength": "Shared-valid coverage for this comparison is 100.00 % of the AOI (237,774 px). The region is a connected 31-px component at a stated threshold \u2014 adjacent pixels are not independent observations, so no significance is claimed. Candidate spectral signal with stated thresholds, not independently verified change.",
+        "cannot_conclude": [
+          "That deforestation occurred (no independent verification).",
+          "A distinction between shadow effects and real canopy change."
+        ],
+        "source": {
+          "experiment_id": "western_ghats_m4",
+          "input_raster": "data/processed/m4/western_ghats_m4/delta_ndvi.tif",
+          "valid_mask": "data/processed/m4/western_ghats_m4/common_valid_ndvi.tif",
+          "method": "frozen M1 difference rasters + common-valid masks"
+        }
+      }
+    },
+    {
+      "id": "region_04",
+      "display_id": "Region 04",
+      "index": "ndvi",
+      "direction": "increase",
+      "threshold": 0.15,
+      "pixel_count": 191,
+      "area_ha": 1.91,
+      "share_of_common_valid_percent": 0.0803,
+      "mean_delta": 0.37698,
+      "median_delta": 0.398015,
+      "common_valid_pixels": 237774,
+      "centroid_utm": [
+        433172.98,
+        1673484.26
+      ],
+      "centroid_lonlat": [
+        74.378012,
+        15.136192
+      ],
+      "geometry_wgs84": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              74.377981,
+              15.137058
+            ],
+            [
+              74.377982,
+              15.136877
+            ],
+            [
+              74.377889,
+              15.136877
+            ],
+            [
+              74.377889,
+              15.136696
+            ],
+            [
+              74.377796,
+              15.136696
+            ],
+            [
+              74.377797,
+              15.136515
+            ],
+            [
+              74.377611,
+              15.136514
+            ],
+            [
+              74.377611,
+              15.136424
+            ],
+            [
+              74.377425,
+              15.136423
+            ],
+            [
+              74.377425,
+              15.136333
+            ],
+            [
+              74.377053,
+              15.136332
+            ],
+            [
+              74.377053,
+              15.136241
+            ],
+            [
+              74.37696,
+              15.136241
+            ],
+            [
+              74.376961,
+              15.13606
+            ],
+            [
+              74.377054,
+              15.136061
+            ],
+            [
+              74.377054,
+              15.13588
+            ],
+            [
+              74.377333,
+              15.135881
+            ],
+            [
+              74.377334,
+              15.13579
+            ],
+            [
+              74.377427,
+              15.13579
+            ],
+            [
+              74.377427,
+              15.1357
+            ],
+            [
+              74.377706,
+              15.135701
+            ],
+            [
+              74.377706,
+              15.13561
+            ],
+            [
+              74.378079,
+              15.135611
+            ],
+            [
+              74.378079,
+              15.135521
+            ],
+            [
+              74.378265,
+              15.135522
+            ],
+            [
+              74.378265,
+              15.135431
+            ],
+            [
+              74.378824,
+              15.135433
+            ],
+            [
+              74.378824,
+              15.135523
+            ],
+            [
+              74.378917,
+              15.135523
+            ],
+            [
+              74.378916,
+              15.135704
+            ],
+            [
+              74.378823,
+              15.135704
+            ],
+            [
+              74.378822,
+              15.135885
+            ],
+            [
+              74.378729,
+              15.135884
+            ],
+            [
+              74.378729,
+              15.136065
+            ],
+            [
+              74.378636,
+              15.136065
+            ],
+            [
+              74.378635,
+              15.136246
+            ],
+            [
+              74.378542,
+              15.136246
+            ],
+            [
+              74.378542,
+              15.136426
+            ],
+            [
+              74.378449,
+              15.136426
+            ],
+            [
+              74.378448,
+              15.136517
+            ],
+            [
+              74.378355,
+              15.136516
+            ],
+            [
+              74.378355,
+              15.136607
+            ],
+            [
+              74.378262,
+              15.136606
+            ],
+            [
+              74.378261,
+              15.136878
+            ],
+            [
+              74.378168,
+              15.136877
+            ],
+            [
+              74.378168,
+              15.137058
+            ],
+            [
+              74.377981,
+              15.137058
+            ]
+          ]
+        ]
+      },
+      "input_raster": "data/processed/m4/western_ghats_m4/delta_ndvi.tif",
+      "valid_mask": "data/processed/m4/western_ghats_m4/common_valid_ndvi.tif",
+      "interpretation": {
+        "title": "\u25b2 Candidate NDVI increase \u00b7 Region 04",
+        "location": "Region 04 \u00b7 centroid 74.3780\u00b0E, 15.1362\u00b0N \u00b7 1.91 ha",
+        "observation_period": "2020-02-19 \u2192 2025-02-22 (median composites)",
+        "observed_measurement": "Mean \u0394NDVI +0.377 index units (median +0.398 index units) at the recorded threshold |\u0394| \u2265 0.15; 191 px = 1.91 ha = 0.08 % of the 237,774-px shared-valid footprint.",
+        "meaning": "A NDVI increase here marks where the later forest composite reads higher in NDVI. In this terrain the validity footprint is complete, but terrain shadow and illumination geometry can still colour the spectral comparison.",
+        "explanations": [
+          "Terrain shadow and illumination differences between acquisitions.",
+          "Canopy density or phenology differences between the windows.",
+          "Canopy disturbance \u2014 candidate only; independent evidence would be required to establish it."
+        ],
+        "evidence_strength": "Shared-valid coverage for this comparison is 100.00 % of the AOI (237,774 px). The region is a connected 191-px component at a stated threshold \u2014 adjacent pixels are not independent observations, so no significance is claimed. Candidate spectral signal with stated thresholds, not independently verified change.",
+        "cannot_conclude": [
+          "That deforestation occurred (no independent verification).",
+          "A distinction between shadow effects and real canopy change."
+        ],
+        "source": {
+          "experiment_id": "western_ghats_m4",
+          "input_raster": "data/processed/m4/western_ghats_m4/delta_ndvi.tif",
+          "valid_mask": "data/processed/m4/western_ghats_m4/common_valid_ndvi.tif",
+          "method": "frozen M1 difference rasters + common-valid masks"
+        }
+      }
+    },
+    {
+      "id": "region_05",
+      "display_id": "Region 05",
+      "index": "ndvi",
+      "direction": "increase",
+      "threshold": 0.15,
+      "pixel_count": 88,
+      "area_ha": 0.88,
+      "share_of_common_valid_percent": 0.037,
+      "mean_delta": 0.25017,
+      "median_delta": 0.2435,
+      "common_valid_pixels": 237774,
+      "centroid_utm": [
+        429678.18,
+        1673256.91
+      ],
+      "centroid_lonlat": [
+        74.345492,
+        15.134045
+      ],
+      "geometry_wgs84": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              74.345506,
+              15.134887
+            ],
+            [
+              74.345506,
+              15.134796
+            ],
+            [
+              74.345413,
+              15.134796
+            ],
+            [
+              74.345414,
+              15.134705
+            ],
+            [
+              74.345228,
+              15.134705
+            ],
+            [
+              74.345228,
+              15.134615
+            ],
+            [
+              74.345135,
+              15.134614
+            ],
+            [
+              74.345135,
+              15.134433
+            ],
+            [
+              74.345042,
+              15.134433
+            ],
+            [
+              74.345043,
+              15.134343
+            ],
+            [
+              74.344949,
+              15.134342
+            ],
+            [
+              74.34495,
+              15.134252
+            ],
+            [
+              74.345043,
+              15.134252
+            ],
+            [
+              74.345044,
+              15.133981
+            ],
+            [
+              74.345137,
+              15.133981
+            ],
+            [
+              74.345137,
+              15.133891
+            ],
+            [
+              74.344951,
+              15.13389
+            ],
+            [
+              74.344951,
+              15.13371
+            ],
+            [
+              74.345138,
+              15.13371
+            ],
+            [
+              74.345138,
+              15.13362
+            ],
+            [
+              74.345417,
+              15.133621
+            ],
+            [
+              74.345417,
+              15.13353
+            ],
+            [
+              74.34551,
+              15.13353
+            ],
+            [
+              74.345511,
+              15.13344
+            ],
+            [
+              74.345604,
+              15.13344
+            ],
+            [
+              74.345604,
+              15.13335
+            ],
+            [
+              74.345697,
+              15.13335
+            ],
+            [
+              74.345698,
+              15.133169
+            ],
+            [
+              74.345791,
+              15.13317
+            ],
+            [
+              74.345791,
+              15.133079
+            ],
+            [
+              74.345884,
+              15.13308
+            ],
+            [
+              74.345883,
+              15.13326
+            ],
+            [
+              74.345977,
+              15.133261
+            ],
+            [
+              74.345976,
+              15.133441
+            ],
+            [
+              74.345883,
+              15.133441
+            ],
+            [
+              74.345882,
+              15.133622
+            ],
+            [
+              74.345696,
+              15.133621
+            ],
+            [
+              74.345696,
+              15.133712
+            ],
+            [
+              74.34551,
+              15.133711
+            ],
+            [
+              74.345509,
+              15.133892
+            ],
+            [
+              74.345416,
+              15.133892
+            ],
+            [
+              74.345415,
+              15.134163
+            ],
+            [
+              74.345322,
+              15.134163
+            ],
+            [
+              74.345321,
+              15.134434
+            ],
+            [
+              74.345508,
+              15.134435
+            ],
+            [
+              74.345507,
+              15.134525
+            ],
+            [
+              74.3456,
+              15.134525
+            ],
+            [
+              74.3456,
+              15.134616
+            ],
+            [
+              74.345693,
+              15.134616
+            ],
+            [
+              74.345693,
+              15.134706
+            ],
+            [
+              74.346065,
+              15.134707
+            ],
+            [
+              74.346065,
+              15.134617
+            ],
+            [
+              74.346159,
+              15.134617
+            ],
+            [
+              74.346158,
+              15.134888
+            ],
+            [
+              74.345506,
+              15.134887
+            ]
+          ]
+        ]
+      },
+      "input_raster": "data/processed/m4/western_ghats_m4/delta_ndvi.tif",
+      "valid_mask": "data/processed/m4/western_ghats_m4/common_valid_ndvi.tif",
+      "interpretation": {
+        "title": "\u25b2 Candidate NDVI increase \u00b7 Region 05",
+        "location": "Region 05 \u00b7 centroid 74.3455\u00b0E, 15.1340\u00b0N \u00b7 0.88 ha",
+        "observation_period": "2020-02-19 \u2192 2025-02-22 (median composites)",
+        "observed_measurement": "Mean \u0394NDVI +0.250 index units (median +0.243 index units) at the recorded threshold |\u0394| \u2265 0.15; 88 px = 0.88 ha = 0.04 % of the 237,774-px shared-valid footprint.",
+        "meaning": "A NDVI increase here marks where the later forest composite reads higher in NDVI. In this terrain the validity footprint is complete, but terrain shadow and illumination geometry can still colour the spectral comparison.",
+        "explanations": [
+          "Terrain shadow and illumination differences between acquisitions.",
+          "Canopy density or phenology differences between the windows.",
+          "Canopy disturbance \u2014 candidate only; independent evidence would be required to establish it."
+        ],
+        "evidence_strength": "Shared-valid coverage for this comparison is 100.00 % of the AOI (237,774 px). The region is a connected 88-px component at a stated threshold \u2014 adjacent pixels are not independent observations, so no significance is claimed. Candidate spectral signal with stated thresholds, not independently verified change.",
+        "cannot_conclude": [
+          "That deforestation occurred (no independent verification).",
+          "A distinction between shadow effects and real canopy change."
+        ],
+        "source": {
+          "experiment_id": "western_ghats_m4",
+          "input_raster": "data/processed/m4/western_ghats_m4/delta_ndvi.tif",
+          "valid_mask": "data/processed/m4/western_ghats_m4/common_valid_ndvi.tif",
+          "method": "frozen M1 difference rasters + common-valid masks"
+        }
+      }
+    },
+    {
+      "id": "region_06",
+      "display_id": "Region 06",
+      "index": "ndvi",
+      "direction": "increase",
+      "threshold": 0.15,
+      "pixel_count": 81,
+      "area_ha": 0.81,
+      "share_of_common_valid_percent": 0.0341,
+      "mean_delta": 0.190162,
+      "median_delta": 0.188629,
+      "common_valid_pixels": 237774,
+      "centroid_utm": [
+        432723.97,
+        1673025.71
+      ],
+      "centroid_lonlat": [
+        74.373845,
+        15.132035
+      ],
+      "geometry_wgs84": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              74.373712,
+              15.132887
+            ],
+            [
+              74.373713,
+              15.132797
+            ],
+            [
+              74.37362,
+              15.132796
+            ],
+            [
+              74.37362,
+              15.132706
+            ],
+            [
+              74.373434,
+              15.132706
+            ],
+            [
+              74.373434,
+              15.132615
+            ],
+            [
+              74.373527,
+              15.132615
+            ],
+            [
+              74.373528,
+              15.132163
+            ],
+            [
+              74.373342,
+              15.132163
+            ],
+            [
+              74.373342,
+              15.132072
+            ],
+            [
+              74.373249,
+              15.132072
+            ],
+            [
+              74.37325,
+              15.131711
+            ],
+            [
+              74.373344,
+              15.131711
+            ],
+            [
+              74.373344,
+              15.13153
+            ],
+            [
+              74.373716,
+              15.131531
+            ],
+            [
+              74.373716,
+              15.131712
+            ],
+            [
+              74.373623,
+              15.131712
+            ],
+            [
+              74.373622,
+              15.131802
+            ],
+            [
+              74.373436,
+              15.131802
+            ],
+            [
+              74.373436,
+              15.132073
+            ],
+            [
+              74.373622,
+              15.132073
+            ],
+            [
+              74.373621,
+              15.132164
+            ],
+            [
+              74.373715,
+              15.132164
+            ],
+            [
+              74.373715,
+              15.132074
+            ],
+            [
+              74.373808,
+              15.132074
+            ],
+            [
+              74.373808,
+              15.131983
+            ],
+            [
+              74.373715,
+              15.131983
+            ],
+            [
+              74.373715,
+              15.131893
+            ],
+            [
+              74.373901,
+              15.131893
+            ],
+            [
+              74.373902,
+              15.131803
+            ],
+            [
+              74.373995,
+              15.131803
+            ],
+            [
+              74.373995,
+              15.131713
+            ],
+            [
+              74.373809,
+              15.131712
+            ],
+            [
+              74.37381,
+              15.131441
+            ],
+            [
+              74.373996,
+              15.131441
+            ],
+            [
+              74.373995,
+              15.131622
+            ],
+            [
+              74.374088,
+              15.131623
+            ],
+            [
+              74.374089,
+              15.131532
+            ],
+            [
+              74.374182,
+              15.131532
+            ],
+            [
+              74.374181,
+              15.131623
+            ],
+            [
+              74.374275,
+              15.131623
+            ],
+            [
+              74.374275,
+              15.131533
+            ],
+            [
+              74.374461,
+              15.131533
+            ],
+            [
+              74.374461,
+              15.131624
+            ],
+            [
+              74.374368,
+              15.131623
+            ],
+            [
+              74.374367,
+              15.131804
+            ],
+            [
+              74.37446,
+              15.131804
+            ],
+            [
+              74.37446,
+              15.131895
+            ],
+            [
+              74.374367,
+              15.131894
+            ],
+            [
+              74.374367,
+              15.131985
+            ],
+            [
+              74.374273,
+              15.131985
+            ],
+            [
+              74.374273,
+              15.132075
+            ],
+            [
+              74.373994,
+              15.132074
+            ],
+            [
+              74.373994,
+              15.132165
+            ],
+            [
+              74.373901,
+              15.132164
+            ],
+            [
+              74.3739,
+              15.132436
+            ],
+            [
+              74.373807,
+              15.132435
+            ],
+            [
+              74.373807,
+              15.132526
+            ],
+            [
+              74.373713,
+              15.132526
+            ],
+            [
+              74.373713,
+              15.132706
+            ],
+            [
+              74.373806,
+              15.132707
+            ],
+            [
+              74.373805,
+              15.132887
+            ],
+            [
+              74.373712,
+              15.132887
+            ]
+          ]
+        ]
+      },
+      "input_raster": "data/processed/m4/western_ghats_m4/delta_ndvi.tif",
+      "valid_mask": "data/processed/m4/western_ghats_m4/common_valid_ndvi.tif",
+      "interpretation": {
+        "title": "\u25b2 Candidate NDVI increase \u00b7 Region 06",
+        "location": "Region 06 \u00b7 centroid 74.3738\u00b0E, 15.1320\u00b0N \u00b7 0.81 ha",
+        "observation_period": "2020-02-19 \u2192 2025-02-22 (median composites)",
+        "observed_measurement": "Mean \u0394NDVI +0.190 index units (median +0.189 index units) at the recorded threshold |\u0394| \u2265 0.15; 81 px = 0.81 ha = 0.03 % of the 237,774-px shared-valid footprint.",
+        "meaning": "A NDVI increase here marks where the later forest composite reads higher in NDVI. In this terrain the validity footprint is complete, but terrain shadow and illumination geometry can still colour the spectral comparison.",
+        "explanations": [
+          "Terrain shadow and illumination differences between acquisitions.",
+          "Canopy density or phenology differences between the windows.",
+          "Canopy disturbance \u2014 candidate only; independent evidence would be required to establish it."
+        ],
+        "evidence_strength": "Shared-valid coverage for this comparison is 100.00 % of the AOI (237,774 px). The region is a connected 81-px component at a stated threshold \u2014 adjacent pixels are not independent observations, so no significance is claimed. Candidate spectral signal with stated thresholds, not independently verified change.",
+        "cannot_conclude": [
+          "That deforestation occurred (no independent verification).",
+          "A distinction between shadow effects and real canopy change."
+        ],
+        "source": {
+          "experiment_id": "western_ghats_m4",
+          "input_raster": "data/processed/m4/western_ghats_m4/delta_ndvi.tif",
+          "valid_mask": "data/processed/m4/western_ghats_m4/common_valid_ndvi.tif",
+          "method": "frozen M1 difference rasters + common-valid masks"
+        }
+      }
+    },
+    {
+      "id": "region_07",
+      "display_id": "Region 07",
+      "index": "ndvi",
+      "direction": "increase",
+      "threshold": 0.15,
+      "pixel_count": 76,
+      "area_ha": 0.76,
+      "share_of_common_valid_percent": 0.032,
+      "mean_delta": 0.249681,
+      "median_delta": 0.237185,
+      "common_valid_pixels": 237774,
+      "centroid_utm": [
+        432878.29,
+        1673396.29
+      ],
+      "centroid_lonlat": [
+        74.375271,
+        15.135389
+      ],
+      "geometry_wgs84": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              74.374914,
+              15.135693
+            ],
+            [
+              74.374914,
+              15.135603
+            ],
+            [
+              74.374728,
+              15.135602
+            ],
+            [
+              74.374728,
+              15.135512
+            ],
+            [
+              74.374449,
+              15.135511
+            ],
+            [
+              74.37445,
+              15.13533
+            ],
+            [
+              74.374543,
+              15.13533
+            ],
+            [
+              74.374543,
+              15.13524
+            ],
+            [
+              74.374636,
+              15.13524
+            ],
+            [
+              74.374636,
+              15.135331
+            ],
+            [
+              74.374822,
+              15.135331
+            ],
+            [
+              74.374822,
+              15.135241
+            ],
+            [
+              74.375288,
+              15.135242
+            ],
+            [
+              74.375287,
+              15.135423
+            ],
+            [
+              74.37538,
+              15.135423
+            ],
+            [
+              74.37538,
+              15.135514
+            ],
+            [
+              74.375473,
+              15.135514
+            ],
+            [
+              74.375473,
+              15.135423
+            ],
+            [
+              74.375659,
+              15.135424
+            ],
+            [
+              74.37566,
+              15.135243
+            ],
+            [
+              74.375567,
+              15.135243
+            ],
+            [
+              74.375567,
+              15.135062
+            ],
+            [
+              74.37566,
+              15.135062
+            ],
+            [
+              74.375661,
+              15.134972
+            ],
+            [
+              74.376126,
+              15.134973
+            ],
+            [
+              74.376126,
+              15.135154
+            ],
+            [
+              74.376032,
+              15.135154
+            ],
+            [
+              74.376032,
+              15.135425
+            ],
+            [
+              74.375939,
+              15.135425
+            ],
+            [
+              74.375938,
+              15.135696
+            ],
+            [
+              74.375379,
+              15.135694
+            ],
+            [
+              74.37538,
+              15.135604
+            ],
+            [
+              74.375194,
+              15.135603
+            ],
+            [
+              74.375193,
+              15.135694
+            ],
+            [
+              74.374914,
+              15.135693
+            ]
+          ]
+        ]
+      },
+      "input_raster": "data/processed/m4/western_ghats_m4/delta_ndvi.tif",
+      "valid_mask": "data/processed/m4/western_ghats_m4/common_valid_ndvi.tif",
+      "interpretation": {
+        "title": "\u25b2 Candidate NDVI increase \u00b7 Region 07",
+        "location": "Region 07 \u00b7 centroid 74.3753\u00b0E, 15.1354\u00b0N \u00b7 0.76 ha",
+        "observation_period": "2020-02-19 \u2192 2025-02-22 (median composites)",
+        "observed_measurement": "Mean \u0394NDVI +0.250 index units (median +0.237 index units) at the recorded threshold |\u0394| \u2265 0.15; 76 px = 0.76 ha = 0.03 % of the 237,774-px shared-valid footprint.",
+        "meaning": "A NDVI increase here marks where the later forest composite reads higher in NDVI. In this terrain the validity footprint is complete, but terrain shadow and illumination geometry can still colour the spectral comparison.",
+        "explanations": [
+          "Terrain shadow and illumination differences between acquisitions.",
+          "Canopy density or phenology differences between the windows.",
+          "Canopy disturbance \u2014 candidate only; independent evidence would be required to establish it."
+        ],
+        "evidence_strength": "Shared-valid coverage for this comparison is 100.00 % of the AOI (237,774 px). The region is a connected 76-px component at a stated threshold \u2014 adjacent pixels are not independent observations, so no significance is claimed. Candidate spectral signal with stated thresholds, not independently verified change.",
+        "cannot_conclude": [
+          "That deforestation occurred (no independent verification).",
+          "A distinction between shadow effects and real canopy change."
+        ],
+        "source": {
+          "experiment_id": "western_ghats_m4",
+          "input_raster": "data/processed/m4/western_ghats_m4/delta_ndvi.tif",
+          "valid_mask": "data/processed/m4/western_ghats_m4/common_valid_ndvi.tif",
+          "method": "frozen M1 difference rasters + common-valid masks"
+        }
+      }
+    },
+    {
+      "id": "region_08",
+      "display_id": "Region 08",
+      "index": "ndvi",
+      "direction": "increase",
+      "threshold": 0.15,
+      "pixel_count": 62,
+      "area_ha": 0.62,
+      "share_of_common_valid_percent": 0.0261,
+      "mean_delta": 0.223235,
+      "median_delta": 0.216261,
+      "common_valid_pixels": 237774,
+      "centroid_utm": [
+        429679.39,
+        1672930.0
+      ],
+      "centroid_lonlat": [
+        74.345512,
+        15.13109
+      ],
+      "geometry_wgs84": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              74.345982,
+              15.131633
+            ],
+            [
+              74.345982,
+              15.131362
+            ],
+            [
+              74.345889,
+              15.131362
+            ],
+            [
+              74.34589,
+              15.131271
+            ],
+            [
+              74.345703,
+              15.131271
+            ],
+            [
+              74.345704,
+              15.13118
+            ],
+            [
+              74.345611,
+              15.13118
+            ],
+            [
+              74.345611,
+              15.13109
+            ],
+            [
+              74.345518,
+              15.13109
+            ],
+            [
+              74.345517,
+              15.13127
+            ],
+            [
+              74.345331,
+              15.13127
+            ],
+            [
+              74.345331,
+              15.131179
+            ],
+            [
+              74.345145,
+              15.131179
+            ],
+            [
+              74.345146,
+              15.130998
+            ],
+            [
+              74.345053,
+              15.130998
+            ],
+            [
+              74.345053,
+              15.130907
+            ],
+            [
+              74.344867,
+              15.130907
+            ],
+            [
+              74.344867,
+              15.130997
+            ],
+            [
+              74.344681,
+              15.130997
+            ],
+            [
+              74.34468,
+              15.131087
+            ],
+            [
+              74.344587,
+              15.131087
+            ],
+            [
+              74.344588,
+              15.130816
+            ],
+            [
+              74.344681,
+              15.130816
+            ],
+            [
+              74.344681,
+              15.130725
+            ],
+            [
+              74.344961,
+              15.130726
+            ],
+            [
+              74.344961,
+              15.130636
+            ],
+            [
+              74.345054,
+              15.130636
+            ],
+            [
+              74.345054,
+              15.130727
+            ],
+            [
+              74.345147,
+              15.130727
+            ],
+            [
+              74.345146,
+              15.130817
+            ],
+            [
+              74.345426,
+              15.130818
+            ],
+            [
+              74.345425,
+              15.130908
+            ],
+            [
+              74.345611,
+              15.130909
+            ],
+            [
+              74.345611,
+              15.130999
+            ],
+            [
+              74.345797,
+              15.131
+            ],
+            [
+              74.345797,
+              15.13109
+            ],
+            [
+              74.345983,
+              15.131091
+            ],
+            [
+              74.345983,
+              15.131
+            ],
+            [
+              74.34617,
+              15.131001
+            ],
+            [
+              74.346169,
+              15.131091
+            ],
+            [
+              74.346262,
+              15.131092
+            ],
+            [
+              74.346262,
+              15.131182
+            ],
+            [
+              74.346169,
+              15.131182
+            ],
+            [
+              74.346168,
+              15.131363
+            ],
+            [
+              74.346262,
+              15.131363
+            ],
+            [
+              74.346261,
+              15.131544
+            ],
+            [
+              74.346168,
+              15.131543
+            ],
+            [
+              74.346168,
+              15.131634
+            ],
+            [
+              74.345982,
+              15.131633
+            ]
+          ]
+        ]
+      },
+      "input_raster": "data/processed/m4/western_ghats_m4/delta_ndvi.tif",
+      "valid_mask": "data/processed/m4/western_ghats_m4/common_valid_ndvi.tif",
+      "interpretation": {
+        "title": "\u25b2 Candidate NDVI increase \u00b7 Region 08",
+        "location": "Region 08 \u00b7 centroid 74.3455\u00b0E, 15.1311\u00b0N \u00b7 0.62 ha",
+        "observation_period": "2020-02-19 \u2192 2025-02-22 (median composites)",
+        "observed_measurement": "Mean \u0394NDVI +0.223 index units (median +0.216 index units) at the recorded threshold |\u0394| \u2265 0.15; 62 px = 0.62 ha = 0.03 % of the 237,774-px shared-valid footprint.",
+        "meaning": "A NDVI increase here marks where the later forest composite reads higher in NDVI. In this terrain the validity footprint is complete, but terrain shadow and illumination geometry can still colour the spectral comparison.",
+        "explanations": [
+          "Terrain shadow and illumination differences between acquisitions.",
+          "Canopy density or phenology differences between the windows.",
+          "Canopy disturbance \u2014 candidate only; independent evidence would be required to establish it."
+        ],
+        "evidence_strength": "Shared-valid coverage for this comparison is 100.00 % of the AOI (237,774 px). The region is a connected 62-px component at a stated threshold \u2014 adjacent pixels are not independent observations, so no significance is claimed. Candidate spectral signal with stated thresholds, not independently verified change.",
+        "cannot_conclude": [
+          "That deforestation occurred (no independent verification).",
+          "A distinction between shadow effects and real canopy change."
+        ],
+        "source": {
+          "experiment_id": "western_ghats_m4",
+          "input_raster": "data/processed/m4/western_ghats_m4/delta_ndvi.tif",
+          "valid_mask": "data/processed/m4/western_ghats_m4/common_valid_ndvi.tif",
+          "method": "frozen M1 difference rasters + common-valid masks"
+        }
+      }
+    },
+    {
+      "id": "region_09",
+      "display_id": "Region 09",
+      "index": "ndwi",
+      "direction": "decrease",
+      "threshold": 0.15,
+      "pixel_count": 163,
+      "area_ha": 1.63,
+      "share_of_common_valid_percent": 0.0686,
+      "mean_delta": -0.226632,
+      "median_delta": -0.227479,
+      "common_valid_pixels": 237774,
+      "centroid_utm": [
+        433177.06,
+        1673477.45
+      ],
+      "centroid_lonlat": [
+        74.37805,
+        15.136131
+      ],
+      "geometry_wgs84": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              74.377982,
+              15.136967
+            ],
+            [
+              74.377982,
+              15.136786
+            ],
+            [
+              74.377889,
+              15.136786
+            ],
+            [
+              74.37789,
+              15.136605
+            ],
+            [
+              74.377797,
+              15.136605
+            ],
+            [
+              74.377797,
+              15.136515
+            ],
+            [
+              74.377704,
+              15.136514
+            ],
+            [
+              74.377704,
+              15.136424
+            ],
+            [
+              74.377611,
+              15.136424
+            ],
+            [
+              74.377611,
+              15.136333
+            ],
+            [
+              74.377425,
+              15.136333
+            ],
+            [
+              74.377425,
+              15.136242
+            ],
+            [
+              74.37696,
+              15.136241
+            ],
+            [
+              74.37696,
+              15.136151
+            ],
+            [
+              74.377053,
+              15.136151
+            ],
+            [
+              74.377054,
+              15.13597
+            ],
+            [
+              74.377147,
+              15.13597
+            ],
+            [
+              74.377147,
+              15.13588
+            ],
+            [
+              74.377426,
+              15.135881
+            ],
+            [
+              74.377427,
+              15.13579
+            ],
+            [
+              74.37752,
+              15.135791
+            ],
+            [
+              74.37752,
+              15.1357
+            ],
+            [
+              74.377985,
+              15.135702
+            ],
+            [
+              74.377986,
+              15.135611
+            ],
+            [
+              74.378172,
+              15.135612
+            ],
+            [
+              74.378172,
+              15.135521
+            ],
+            [
+              74.378265,
+              15.135522
+            ],
+            [
+              74.378265,
+              15.135431
+            ],
+            [
+              74.378824,
+              15.135433
+            ],
+            [
+              74.378824,
+              15.135523
+            ],
+            [
+              74.378917,
+              15.135523
+            ],
+            [
+              74.378916,
+              15.135614
+            ],
+            [
+              74.378637,
+              15.135613
+            ],
+            [
+              74.378637,
+              15.135703
+            ],
+            [
+              74.37873,
+              15.135704
+            ],
+            [
+              74.37873,
+              15.135794
+            ],
+            [
+              74.378823,
+              15.135794
+            ],
+            [
+              74.378822,
+              15.135885
+            ],
+            [
+              74.378636,
+              15.135884
+            ],
+            [
+              74.378635,
+              15.136246
+            ],
+            [
+              74.378542,
+              15.136246
+            ],
+            [
+              74.378542,
+              15.136336
+            ],
+            [
+              74.378449,
+              15.136336
+            ],
+            [
+              74.378449,
+              15.136426
+            ],
+            [
+              74.378356,
+              15.136426
+            ],
+            [
+              74.378355,
+              15.136516
+            ],
+            [
+              74.378262,
+              15.136516
+            ],
+            [
+              74.378261,
+              15.136878
+            ],
+            [
+              74.378168,
+              15.136877
+            ],
+            [
+              74.378168,
+              15.136968
+            ],
+            [
+              74.377982,
+              15.136967
+            ]
+          ]
+        ]
+      },
+      "input_raster": "data/processed/m4/western_ghats_m4/delta_ndwi.tif",
+      "valid_mask": "data/processed/m4/western_ghats_m4/common_valid_ndwi.tif",
+      "interpretation": {
+        "title": "\u25bc Candidate NDWI decrease \u00b7 Region 09",
+        "location": "Region 09 \u00b7 centroid 74.3781\u00b0E, 15.1361\u00b0N \u00b7 1.63 ha",
+        "observation_period": "2020-02-19 \u2192 2025-02-22 (median composites)",
+        "observed_measurement": "Mean \u0394NDWI -0.227 index units (median -0.227 index units) at the recorded threshold |\u0394| \u2265 0.15; 163 px = 1.63 ha = 0.07 % of the 237,774-px shared-valid footprint.",
+        "meaning": "A NDWI decrease here marks where the later forest composite reads lower in NDWI. In this terrain the validity footprint is complete, but terrain shadow and illumination geometry can still colour the spectral comparison.",
+        "explanations": [
+          "Terrain shadow and illumination differences between acquisitions.",
+          "Canopy density or phenology differences between the windows.",
+          "Canopy disturbance \u2014 candidate only; independent evidence would be required to establish it."
+        ],
+        "evidence_strength": "Shared-valid coverage for this comparison is 100.00 % of the AOI (237,774 px). The region is a connected 163-px component at a stated threshold \u2014 adjacent pixels are not independent observations, so no significance is claimed. Candidate spectral signal with stated thresholds, not independently verified change.",
+        "cannot_conclude": [
+          "That deforestation occurred (no independent verification).",
+          "A distinction between shadow effects and real canopy change."
+        ],
+        "source": {
+          "experiment_id": "western_ghats_m4",
+          "input_raster": "data/processed/m4/western_ghats_m4/delta_ndwi.tif",
+          "valid_mask": "data/processed/m4/western_ghats_m4/common_valid_ndwi.tif",
+          "method": "frozen M1 difference rasters + common-valid masks"
+        }
+      }
+    },
+    {
+      "id": "region_10",
+      "display_id": "Region 10",
+      "index": "ndwi",
+      "direction": "decrease",
+      "threshold": 0.15,
+      "pixel_count": 25,
+      "area_ha": 0.25,
+      "share_of_common_valid_percent": 0.0105,
+      "mean_delta": -0.193258,
+      "median_delta": -0.196036,
+      "common_valid_pixels": 237774,
+      "centroid_utm": [
+        432933.53,
+        1673404.12
+      ],
+      "centroid_lonlat": [
+        74.375785,
+        15.135462
+      ],
+      "geometry_wgs84": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              74.375752,
+              15.135695
+            ],
+            [
+              74.375752,
+              15.135515
+            ],
+            [
+              74.375659,
+              15.135514
+            ],
+            [
+              74.375659,
+              15.135605
+            ],
+            [
+              74.375473,
+              15.135604
+            ],
+            [
+              74.375473,
+              15.135423
+            ],
+            [
+              74.375659,
+              15.135424
+            ],
+            [
+              74.37566,
+              15.135062
+            ],
+            [
+              74.376033,
+              15.135063
+            ],
+            [
+              74.376032,
+              15.135335
+            ],
+            [
+              74.375939,
+              15.135334
+            ],
+            [
+              74.375939,
+              15.135425
+            ],
+            [
+              74.375846,
+              15.135424
+            ],
+            [
+              74.375845,
+              15.135515
+            ],
+            [
+              74.375938,
+              15.135515
+            ],
+            [
+              74.375938,
+              15.135696
+            ],
+            [
+              74.375752,
+              15.135695
+            ]
+          ]
+        ]
+      },
+      "input_raster": "data/processed/m4/western_ghats_m4/delta_ndwi.tif",
+      "valid_mask": "data/processed/m4/western_ghats_m4/common_valid_ndwi.tif",
+      "interpretation": {
+        "title": "\u25bc Candidate NDWI decrease \u00b7 Region 10",
+        "location": "Region 10 \u00b7 centroid 74.3758\u00b0E, 15.1355\u00b0N \u00b7 0.25 ha",
+        "observation_period": "2020-02-19 \u2192 2025-02-22 (median composites)",
+        "observed_measurement": "Mean \u0394NDWI -0.193 index units (median -0.196 index units) at the recorded threshold |\u0394| \u2265 0.15; 25 px = 0.25 ha = 0.01 % of the 237,774-px shared-valid footprint.",
+        "meaning": "A NDWI decrease here marks where the later forest composite reads lower in NDWI. In this terrain the validity footprint is complete, but terrain shadow and illumination geometry can still colour the spectral comparison.",
+        "explanations": [
+          "Terrain shadow and illumination differences between acquisitions.",
+          "Canopy density or phenology differences between the windows.",
+          "Canopy disturbance \u2014 candidate only; independent evidence would be required to establish it."
+        ],
+        "evidence_strength": "Shared-valid coverage for this comparison is 100.00 % of the AOI (237,774 px). The region is a connected 25-px component at a stated threshold \u2014 adjacent pixels are not independent observations, so no significance is claimed. Candidate spectral signal with stated thresholds, not independently verified change.",
+        "cannot_conclude": [
+          "That deforestation occurred (no independent verification).",
+          "A distinction between shadow effects and real canopy change."
+        ],
+        "source": {
+          "experiment_id": "western_ghats_m4",
+          "input_raster": "data/processed/m4/western_ghats_m4/delta_ndwi.tif",
+          "valid_mask": "data/processed/m4/western_ghats_m4/common_valid_ndwi.tif",
+          "method": "frozen M1 difference rasters + common-valid masks"
+        }
+      }
+    },
+    {
+      "id": "region_11",
+      "display_id": "Region 11",
+      "index": "ndwi",
+      "direction": "increase",
+      "threshold": 0.15,
+      "pixel_count": 31,
+      "area_ha": 0.31,
+      "share_of_common_valid_percent": 0.013,
+      "mean_delta": 0.226352,
+      "median_delta": 0.225338,
+      "common_valid_pixels": 237774,
+      "centroid_utm": [
+        432988.1,
+        1673426.19
+      ],
+      "centroid_lonlat": [
+        74.376292,
+        15.135662
+      ],
+      "geometry_wgs84": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              74.375937,
+              15.136058
+            ],
+            [
+              74.375938,
+              15.135696
+            ],
+            [
+              74.376031,
+              15.135696
+            ],
+            [
+              74.376031,
+              15.135606
+            ],
+            [
+              74.376124,
+              15.135606
+            ],
+            [
+              74.376125,
+              15.135335
+            ],
+            [
+              74.376218,
+              15.135335
+            ],
+            [
+              74.376218,
+              15.135425
+            ],
+            [
+              74.376683,
+              15.135427
+            ],
+            [
+              74.376683,
+              15.135336
+            ],
+            [
+              74.376777,
+              15.135337
+            ],
+            [
+              74.376776,
+              15.135517
+            ],
+            [
+              74.376683,
+              15.135517
+            ],
+            [
+              74.376683,
+              15.135608
+            ],
+            [
+              74.37631,
+              15.135607
+            ],
+            [
+              74.37631,
+              15.135878
+            ],
+            [
+              74.376217,
+              15.135878
+            ],
+            [
+              74.376216,
+              15.135968
+            ],
+            [
+              74.376123,
+              15.135968
+            ],
+            [
+              74.376123,
+              15.136058
+            ],
+            [
+              74.375937,
+              15.136058
+            ]
+          ]
+        ]
+      },
+      "input_raster": "data/processed/m4/western_ghats_m4/delta_ndwi.tif",
+      "valid_mask": "data/processed/m4/western_ghats_m4/common_valid_ndwi.tif",
+      "interpretation": {
+        "title": "\u25b2 Candidate NDWI increase \u00b7 Region 11",
+        "location": "Region 11 \u00b7 centroid 74.3763\u00b0E, 15.1357\u00b0N \u00b7 0.31 ha",
+        "observation_period": "2020-02-19 \u2192 2025-02-22 (median composites)",
+        "observed_measurement": "Mean \u0394NDWI +0.226 index units (median +0.225 index units) at the recorded threshold |\u0394| \u2265 0.15; 31 px = 0.31 ha = 0.01 % of the 237,774-px shared-valid footprint.",
+        "meaning": "A NDWI increase here marks where the later forest composite reads higher in NDWI. In this terrain the validity footprint is complete, but terrain shadow and illumination geometry can still colour the spectral comparison.",
+        "explanations": [
+          "Terrain shadow and illumination differences between acquisitions.",
+          "Canopy density or phenology differences between the windows.",
+          "Canopy disturbance \u2014 candidate only; independent evidence would be required to establish it."
+        ],
+        "evidence_strength": "Shared-valid coverage for this comparison is 100.00 % of the AOI (237,774 px). The region is a connected 31-px component at a stated threshold \u2014 adjacent pixels are not independent observations, so no significance is claimed. Candidate spectral signal with stated thresholds, not independently verified change.",
+        "cannot_conclude": [
+          "That deforestation occurred (no independent verification).",
+          "A distinction between shadow effects and real canopy change."
+        ],
+        "source": {
+          "experiment_id": "western_ghats_m4",
+          "input_raster": "data/processed/m4/western_ghats_m4/delta_ndwi.tif",
+          "valid_mask": "data/processed/m4/western_ghats_m4/common_valid_ndwi.tif",
+          "method": "frozen M1 difference rasters + common-valid masks"
+        }
+      }
+    }
+  ],
+  "overview": {
+    "findings_total": 11,
+    "by_direction": {
+      "decrease": 5,
+      "increase": 6
+    },
+    "signal_types": [
+      "NDVI",
+      "NDWI"
+    ],
+    "no_finding_statement": null
+  },
+  "limitations": [
+    "Topographic shadow and canopy structure complicate index interpretation.",
+    "Composites are robust within-period summaries of a few observations, not a dense time series; inter-annual change is represented by two period composites only.",
+    "Index differences are candidate spectral signals. They are not verified deforestation, wetland loss, construction, glacier damage or any other causal land-cover label.",
+    "Cloud, shadow and saturated-pixel exclusion relies on the provider SCL product; terrain shadow is not independently re-derived.",
+    "Surface reflectance is the provider L2A product; no independent atmospheric correction is performed.",
+    "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
+  ]
+}

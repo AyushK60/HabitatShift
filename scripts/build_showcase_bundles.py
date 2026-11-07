@@ -177,6 +177,14 @@ def load_m1_summary(experiment_id: str) -> dict[str, Any]:
     }
 
 
+def load_findings(experiment_id: str) -> dict[str, Any] | None:
+    """Load the generated What-Changed findings for one experiment (M4-R1)."""
+    path = config.PROJECT_ROOT / "data" / "findings" / f"{experiment_id}.json"
+    if not path.exists():
+        return None
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
 def raster_georef(raster_path: Path) -> dict[str, Any]:
     """Georeferenced placement of one exported raster, in WGS84 lon/lat."""
     import rasterio
@@ -612,6 +620,10 @@ def build_bundle(
                 "config_sha256": entry["config_sha256"],
                 "summary_sha256": entry["summary_sha256"],
                 "summary": entry["summary"],
+                # M4-R1 §15: the "What Changed?" findings, generated from the
+                # frozen difference rasters by scripts/generate_findings.py.
+                # Optional: experiments without a findings file simply omit it.
+                "findings": load_findings(entry["experiment_id"]),
             }
             for entry in experiments
         ],

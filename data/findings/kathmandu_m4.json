@@ -1,0 +1,4966 @@
+{
+  "schema": "habitatshift-findings/1",
+  "study_id": "kathmandu_urban",
+  "experiment_id": "kathmandu_m4",
+  "generated_utc": "2026-11-07T16:45:29Z",
+  "evidence_status": "processed",
+  "method": {
+    "source": "frozen M1 difference rasters + common-valid masks",
+    "threshold_rule": "recorded primary threshold of each index (|\u0394| \u2265 t)",
+    "connected_components": "scipy.ndimage.label, 4-connectivity",
+    "minimum_mapping_unit_px": 25,
+    "minimum_mapping_unit_ha": 0.25,
+    "max_regions_per_index_direction": 5,
+    "geometry": "rasterio.features.shapes on the native UTM grid, projected to WGS84 (pyproj); no hand-drawn geometry",
+    "area_convention": "pixel count \u00d7 pixel area on the projected analysis grid"
+  },
+  "periods": {
+    "earlier": {
+      "anchor_date": "2020-03-31",
+      "composite_method": "median"
+    },
+    "later": {
+      "anchor_date": "2025-03-29",
+      "composite_method": "median"
+    }
+  },
+  "common_valid_pixels": 43728,
+  "common_valid_fraction_of_aoi": 1.0,
+  "indices": {
+    "ndbi": {
+      "threshold": 0.15,
+      "common_valid_pixels": 43728,
+      "decrease_pixels_total": 395,
+      "increase_pixels_total": 2984
+    },
+    "ndvi": {
+      "threshold": 0.15,
+      "common_valid_pixels": 43728,
+      "decrease_pixels_total": 4924,
+      "increase_pixels_total": 249
+    },
+    "ndwi": {
+      "threshold": 0.15,
+      "common_valid_pixels": 43728,
+      "decrease_pixels_total": 350,
+      "increase_pixels_total": 3722
+    }
+  },
+  "findings": [
+    {
+      "id": "region_01",
+      "display_id": "Region 01",
+      "index": "ndbi",
+      "direction": "decrease",
+      "threshold": 0.15,
+      "pixel_count": 150,
+      "area_ha": 1.5,
+      "share_of_common_valid_percent": 0.343,
+      "mean_delta": -0.389068,
+      "median_delta": -0.413292,
+      "common_valid_pixels": 43728,
+      "centroid_utm": [
+        333901.48,
+        3066014.44
+      ],
+      "centroid_lonlat": [
+        85.315332,
+        27.7082
+      ],
+      "geometry_wgs84": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.314907,
+              27.708515
+            ],
+            [
+              85.314908,
+              27.708425
+            ],
+            [
+              85.31501,
+              27.708426
+            ],
+            [
+              85.315011,
+              27.708336
+            ],
+            [
+              85.315112,
+              27.708337
+            ],
+            [
+              85.315114,
+              27.708247
+            ],
+            [
+              85.31481,
+              27.708243
+            ],
+            [
+              85.314811,
+              27.708153
+            ],
+            [
+              85.314709,
+              27.708152
+            ],
+            [
+              85.314722,
+              27.70734
+            ],
+            [
+              85.31604,
+              27.707356
+            ],
+            [
+              85.316039,
+              27.707446
+            ],
+            [
+              85.31614,
+              27.707447
+            ],
+            [
+              85.316126,
+              27.70835
+            ],
+            [
+              85.315923,
+              27.708347
+            ],
+            [
+              85.315925,
+              27.708257
+            ],
+            [
+              85.315823,
+              27.708256
+            ],
+            [
+              85.315822,
+              27.708346
+            ],
+            [
+              85.315416,
+              27.708341
+            ],
+            [
+              85.315418,
+              27.708251
+            ],
+            [
+              85.315316,
+              27.70825
+            ],
+            [
+              85.315315,
+              27.70834
+            ],
+            [
+              85.315214,
+              27.708339
+            ],
+            [
+              85.315212,
+              27.708429
+            ],
+            [
+              85.315111,
+              27.708428
+            ],
+            [
+              85.31511,
+              27.708518
+            ],
+            [
+              85.314907,
+              27.708515
+            ]
+          ]
+        ]
+      },
+      "input_raster": "data/processed/m4/kathmandu_m4/delta_ndbi.tif",
+      "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndbi.tif",
+      "interpretation": {
+        "title": "\u25bc Candidate NDBI decrease \u00b7 Region 01",
+        "location": "Region 01 \u00b7 centroid 85.3153\u00b0E, 27.7082\u00b0N \u00b7 1.50 ha",
+        "observation_period": "2020-03-31 \u2192 2025-03-29 (median composites)",
+        "observed_measurement": "Mean \u0394NDBI -0.389 index units (median -0.413 index units) at the recorded threshold |\u0394| \u2265 0.15; 150 px = 1.50 ha = 0.34 % of the 43,728-px shared-valid footprint.",
+        "meaning": "A NDBI decrease here marks where the later composite reads lower in NDBI. For NDBI this is a candidate built-up/impervious-surface signal \u2014 NOT a building detector; bare soil and construction sites raise NDBI the same way.",
+        "explanations": [
+          "New or extended impervious surfaces (candidate built-up change).",
+          "Bare soil, construction sites or cleared ground between the windows.",
+          "Vegetation loss on the \u0394NDVI counter-evidence panel."
+        ],
+        "evidence_strength": "Shared-valid coverage for this comparison is 100.00 % of the AOI (43,728 px). The region is a connected 150-px component at a stated threshold \u2014 adjacent pixels are not independent observations, so no significance is claimed. Candidate spectral signal with stated thresholds, not independently verified change.",
+        "cannot_conclude": [
+          "That individual buildings were newly constructed (10 m pixels cannot resolve buildings).",
+          "Verified urban expansion without independent evidence."
+        ],
+        "source": {
+          "experiment_id": "kathmandu_m4",
+          "input_raster": "data/processed/m4/kathmandu_m4/delta_ndbi.tif",
+          "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndbi.tif",
+          "method": "frozen M1 difference rasters + common-valid masks"
+        }
+      }
+    },
+    {
+      "id": "region_02",
+      "display_id": "Region 02",
+      "index": "ndbi",
+      "direction": "increase",
+      "threshold": 0.15,
+      "pixel_count": 285,
+      "area_ha": 2.85,
+      "share_of_common_valid_percent": 0.6518,
+      "mean_delta": 0.195126,
+      "median_delta": 0.192564,
+      "common_valid_pixels": 43728,
+      "centroid_utm": [
+        333910.0,
+        3065371.26
+      ],
+      "centroid_lonlat": [
+        85.315508,
+        27.702397
+      ],
+      "geometry_wgs84": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.314269,
+              27.703814
+            ],
+            [
+              85.314272,
+              27.703634
+            ],
+            [
+              85.314171,
+              27.703633
+            ],
+            [
+              85.314172,
+              27.703542
+            ],
+            [
+              85.314273,
+              27.703544
+            ],
+            [
+              85.314275,
+              27.703453
+            ],
+            [
+              85.314376,
+              27.703455
+            ],
+            [
+              85.314377,
+              27.703364
+            ],
+            [
+              85.31458,
+              27.703367
+            ],
+            [
+              85.314579,
+              27.703457
+            ],
+            [
+              85.31468,
+              27.703458
+            ],
+            [
+              85.314682,
+              27.703368
+            ],
+            [
+              85.314884,
+              27.703371
+            ],
+            [
+              85.314889,
+              27.7031
+            ],
+            [
+              85.314787,
+              27.703099
+            ],
+            [
+              85.31479,
+              27.702918
+            ],
+            [
+              85.314891,
+              27.702919
+            ],
+            [
+              85.314893,
+              27.702829
+            ],
+            [
+              85.314994,
+              27.70283
+            ],
+            [
+              85.314993,
+              27.702921
+            ],
+            [
+              85.315094,
+              27.702922
+            ],
+            [
+              85.315093,
+              27.703012
+            ],
+            [
+              85.315194,
+              27.703013
+            ],
+            [
+              85.315201,
+              27.702562
+            ],
+            [
+              85.3151,
+              27.702561
+            ],
+            [
+              85.315101,
+              27.702471
+            ],
+            [
+              85.315,
+              27.702469
+            ],
+            [
+              85.315001,
+              27.702379
+            ],
+            [
+              85.315102,
+              27.70238
+            ],
+            [
+              85.315105,
+              27.7022
+            ],
+            [
+              85.315511,
+              27.702205
+            ],
+            [
+              85.315512,
+              27.702115
+            ],
+            [
+              85.315411,
+              27.702113
+            ],
+            [
+              85.315412,
+              27.702023
+            ],
+            [
+              85.315513,
+              27.702024
+            ],
+            [
+              85.315515,
+              27.701934
+            ],
+            [
+              85.315718,
+              27.701937
+            ],
+            [
+              85.315719,
+              27.701846
+            ],
+            [
+              85.315922,
+              27.701849
+            ],
+            [
+              85.315923,
+              27.701759
+            ],
+            [
+              85.315822,
+              27.701757
+            ],
+            [
+              85.315823,
+              27.701667
+            ],
+            [
+              85.315925,
+              27.701668
+            ],
+            [
+              85.315926,
+              27.701578
+            ],
+            [
+              85.316027,
+              27.701579
+            ],
+            [
+              85.316032,
+              27.701309
+            ],
+            [
+              85.316133,
+              27.70131
+            ],
+            [
+              85.316134,
+              27.70122
+            ],
+            [
+              85.316236,
+              27.701221
+            ],
+            [
+              85.31624,
+              27.70095
+            ],
+            [
+              85.316138,
+              27.700949
+            ],
+            [
+              85.316141,
+              27.700768
+            ],
+            [
+              85.315938,
+              27.700766
+            ],
+            [
+              85.31594,
+              27.700676
+            ],
+            [
+              85.316041,
+              27.700677
+            ],
+            [
+              85.316044,
+              27.700496
+            ],
+            [
+              85.316247,
+              27.700499
+            ],
+            [
+              85.316245,
+              27.700589
+            ],
+            [
+              85.316347,
+              27.70059
+            ],
+            [
+              85.316345,
+              27.700681
+            ],
+            [
+              85.316447,
+              27.700682
+            ],
+            [
+              85.316445,
+              27.700772
+            ],
+            [
+              85.316344,
+              27.700771
+            ],
+            [
+              85.31634,
+              27.701042
+            ],
+            [
+              85.316441,
+              27.701043
+            ],
+            [
+              85.31644,
+              27.701133
+            ],
+            [
+              85.316338,
+              27.701132
+            ],
+            [
+              85.316336,
+              27.701312
+            ],
+            [
+              85.316437,
+              27.701314
+            ],
+            [
+              85.316429,
+              27.701855
+            ],
+            [
+              85.316327,
+              27.701854
+            ],
+            [
+              85.316312,
+              27.702846
+            ],
+            [
+              85.316211,
+              27.702845
+            ],
+            [
+              85.316208,
+              27.703026
+            ],
+            [
+              85.316309,
+              27.703027
+            ],
+            [
+              85.316301,
+              27.703568
+            ],
+            [
+              85.3162,
+              27.703567
+            ],
+            [
+              85.316198,
+              27.703657
+            ],
+            [
+              85.315894,
+              27.703654
+            ],
+            [
+              85.315902,
+              27.703112
+            ],
+            [
+              85.315801,
+              27.703111
+            ],
+            [
+              85.3158,
+              27.703201
+            ],
+            [
+              85.315698,
+              27.7032
+            ],
+            [
+              85.315694,
+              27.703471
+            ],
+            [
+              85.315491,
+              27.703468
+            ],
+            [
+              85.31549,
+              27.703558
+            ],
+            [
+              85.314983,
+              27.703552
+            ],
+            [
+              85.314984,
+              27.703462
+            ],
+            [
+              85.314883,
+              27.703461
+            ],
+            [
+              85.314882,
+              27.703551
+            ],
+            [
+              85.31478,
+              27.70355
+            ],
+            [
+              85.314777,
+              27.70373
+            ],
+            [
+              85.314575,
+              27.703728
+            ],
+            [
+              85.314573,
+              27.703818
+            ],
+            [
+              85.314269,
+              27.703814
+            ]
+          ]
+        ]
+      },
+      "input_raster": "data/processed/m4/kathmandu_m4/delta_ndbi.tif",
+      "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndbi.tif",
+      "interpretation": {
+        "title": "\u25b2 Candidate NDBI increase \u00b7 Region 02",
+        "location": "Region 02 \u00b7 centroid 85.3155\u00b0E, 27.7024\u00b0N \u00b7 2.85 ha",
+        "observation_period": "2020-03-31 \u2192 2025-03-29 (median composites)",
+        "observed_measurement": "Mean \u0394NDBI +0.195 index units (median +0.193 index units) at the recorded threshold |\u0394| \u2265 0.15; 285 px = 2.85 ha = 0.65 % of the 43,728-px shared-valid footprint.",
+        "meaning": "A NDBI increase here marks where the later composite reads higher in NDBI. For NDBI this is a candidate built-up/impervious-surface signal \u2014 NOT a building detector; bare soil and construction sites raise NDBI the same way.",
+        "explanations": [
+          "New or extended impervious surfaces (candidate built-up change).",
+          "Bare soil, construction sites or cleared ground between the windows.",
+          "Vegetation loss on the \u0394NDVI counter-evidence panel."
+        ],
+        "evidence_strength": "Shared-valid coverage for this comparison is 100.00 % of the AOI (43,728 px). The region is a connected 285-px component at a stated threshold \u2014 adjacent pixels are not independent observations, so no significance is claimed. Candidate spectral signal with stated thresholds, not independently verified change.",
+        "cannot_conclude": [
+          "That individual buildings were newly constructed (10 m pixels cannot resolve buildings).",
+          "Verified urban expansion without independent evidence."
+        ],
+        "source": {
+          "experiment_id": "kathmandu_m4",
+          "input_raster": "data/processed/m4/kathmandu_m4/delta_ndbi.tif",
+          "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndbi.tif",
+          "method": "frozen M1 difference rasters + common-valid masks"
+        }
+      }
+    },
+    {
+      "id": "region_03",
+      "display_id": "Region 03",
+      "index": "ndbi",
+      "direction": "increase",
+      "threshold": 0.15,
+      "pixel_count": 108,
+      "area_ha": 1.08,
+      "share_of_common_valid_percent": 0.247,
+      "mean_delta": 0.222874,
+      "median_delta": 0.216622,
+      "common_valid_pixels": 43728,
+      "centroid_utm": [
+        333838.04,
+        3066494.31
+      ],
+      "centroid_lonlat": [
+        85.314622,
+        27.712522
+      ],
+      "geometry_wgs84": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.314629,
+              27.713386
+            ],
+            [
+              85.31463,
+              27.713295
+            ],
+            [
+              85.314529,
+              27.713294
+            ],
+            [
+              85.31453,
+              27.713204
+            ],
+            [
+              85.314328,
+              27.713201
+            ],
+            [
+              85.314329,
+              27.713111
+            ],
+            [
+              85.314228,
+              27.71311
+            ],
+            [
+              85.31423,
+              27.71293
+            ],
+            [
+              85.314332,
+              27.712931
+            ],
+            [
+              85.314337,
+              27.71257
+            ],
+            [
+              85.314439,
+              27.712571
+            ],
+            [
+              85.314443,
+              27.7123
+            ],
+            [
+              85.314544,
+              27.712302
+            ],
+            [
+              85.314546,
+              27.712211
+            ],
+            [
+              85.314343,
+              27.712209
+            ],
+            [
+              85.314344,
+              27.712119
+            ],
+            [
+              85.314243,
+              27.712117
+            ],
+            [
+              85.314244,
+              27.712027
+            ],
+            [
+              85.314041,
+              27.712025
+            ],
+            [
+              85.314046,
+              27.711754
+            ],
+            [
+              85.314147,
+              27.711755
+            ],
+            [
+              85.314148,
+              27.711665
+            ],
+            [
+              85.314655,
+              27.711671
+            ],
+            [
+              85.314657,
+              27.711581
+            ],
+            [
+              85.314758,
+              27.711582
+            ],
+            [
+              85.314757,
+              27.711672
+            ],
+            [
+              85.31496,
+              27.711675
+            ],
+            [
+              85.314958,
+              27.711765
+            ],
+            [
+              85.314857,
+              27.711764
+            ],
+            [
+              85.314854,
+              27.711944
+            ],
+            [
+              85.314955,
+              27.711946
+            ],
+            [
+              85.314948,
+              27.712397
+            ],
+            [
+              85.31505,
+              27.712398
+            ],
+            [
+              85.315047,
+              27.712578
+            ],
+            [
+              85.314946,
+              27.712577
+            ],
+            [
+              85.314947,
+              27.712487
+            ],
+            [
+              85.314643,
+              27.712483
+            ],
+            [
+              85.314642,
+              27.712574
+            ],
+            [
+              85.31454,
+              27.712572
+            ],
+            [
+              85.314537,
+              27.712753
+            ],
+            [
+              85.31474,
+              27.712755
+            ],
+            [
+              85.314742,
+              27.712665
+            ],
+            [
+              85.314944,
+              27.712667
+            ],
+            [
+              85.314937,
+              27.713119
+            ],
+            [
+              85.315039,
+              27.71312
+            ],
+            [
+              85.315037,
+              27.71321
+            ],
+            [
+              85.314936,
+              27.713209
+            ],
+            [
+              85.314935,
+              27.713299
+            ],
+            [
+              85.314732,
+              27.713297
+            ],
+            [
+              85.31473,
+              27.713387
+            ],
+            [
+              85.314629,
+              27.713386
+            ]
+          ]
+        ]
+      },
+      "input_raster": "data/processed/m4/kathmandu_m4/delta_ndbi.tif",
+      "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndbi.tif",
+      "interpretation": {
+        "title": "\u25b2 Candidate NDBI increase \u00b7 Region 03",
+        "location": "Region 03 \u00b7 centroid 85.3146\u00b0E, 27.7125\u00b0N \u00b7 1.08 ha",
+        "observation_period": "2020-03-31 \u2192 2025-03-29 (median composites)",
+        "observed_measurement": "Mean \u0394NDBI +0.223 index units (median +0.217 index units) at the recorded threshold |\u0394| \u2265 0.15; 108 px = 1.08 ha = 0.25 % of the 43,728-px shared-valid footprint.",
+        "meaning": "A NDBI increase here marks where the later composite reads higher in NDBI. For NDBI this is a candidate built-up/impervious-surface signal \u2014 NOT a building detector; bare soil and construction sites raise NDBI the same way.",
+        "explanations": [
+          "New or extended impervious surfaces (candidate built-up change).",
+          "Bare soil, construction sites or cleared ground between the windows.",
+          "Vegetation loss on the \u0394NDVI counter-evidence panel."
+        ],
+        "evidence_strength": "Shared-valid coverage for this comparison is 100.00 % of the AOI (43,728 px). The region is a connected 108-px component at a stated threshold \u2014 adjacent pixels are not independent observations, so no significance is claimed. Candidate spectral signal with stated thresholds, not independently verified change.",
+        "cannot_conclude": [
+          "That individual buildings were newly constructed (10 m pixels cannot resolve buildings).",
+          "Verified urban expansion without independent evidence."
+        ],
+        "source": {
+          "experiment_id": "kathmandu_m4",
+          "input_raster": "data/processed/m4/kathmandu_m4/delta_ndbi.tif",
+          "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndbi.tif",
+          "method": "frozen M1 difference rasters + common-valid masks"
+        }
+      }
+    },
+    {
+      "id": "region_04",
+      "display_id": "Region 04",
+      "index": "ndbi",
+      "direction": "increase",
+      "threshold": 0.15,
+      "pixel_count": 108,
+      "area_ha": 1.08,
+      "share_of_common_valid_percent": 0.247,
+      "mean_delta": 0.201713,
+      "median_delta": 0.189664,
+      "common_valid_pixels": 43728,
+      "centroid_utm": [
+        334684.64,
+        3064956.52
+      ],
+      "centroid_lonlat": [
+        85.323419,
+        27.698749
+      ],
+      "geometry_wgs84": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.323763,
+              27.699688
+            ],
+            [
+              85.323764,
+              27.699597
+            ],
+            [
+              85.323663,
+              27.699596
+            ],
+            [
+              85.323675,
+              27.698784
+            ],
+            [
+              85.323574,
+              27.698783
+            ],
+            [
+              85.323567,
+              27.699234
+            ],
+            [
+              85.323364,
+              27.699232
+            ],
+            [
+              85.323368,
+              27.698961
+            ],
+            [
+              85.323267,
+              27.69896
+            ],
+            [
+              85.323268,
+              27.698869
+            ],
+            [
+              85.322964,
+              27.698866
+            ],
+            [
+              85.322966,
+              27.698775
+            ],
+            [
+              85.322864,
+              27.698774
+            ],
+            [
+              85.322866,
+              27.698684
+            ],
+            [
+              85.322764,
+              27.698683
+            ],
+            [
+              85.322763,
+              27.698773
+            ],
+            [
+              85.32256,
+              27.69877
+            ],
+            [
+              85.322566,
+              27.69841
+            ],
+            [
+              85.322464,
+              27.698408
+            ],
+            [
+              85.322463,
+              27.698499
+            ],
+            [
+              85.322361,
+              27.698497
+            ],
+            [
+              85.322366,
+              27.698227
+            ],
+            [
+              85.322467,
+              27.698228
+            ],
+            [
+              85.322468,
+              27.698138
+            ],
+            [
+              85.322671,
+              27.69814
+            ],
+            [
+              85.322673,
+              27.69805
+            ],
+            [
+              85.322571,
+              27.698049
+            ],
+            [
+              85.322573,
+              27.697958
+            ],
+            [
+              85.322674,
+              27.69796
+            ],
+            [
+              85.322675,
+              27.697869
+            ],
+            [
+              85.323182,
+              27.697875
+            ],
+            [
+              85.323184,
+              27.697785
+            ],
+            [
+              85.323285,
+              27.697786
+            ],
+            [
+              85.323282,
+              27.697967
+            ],
+            [
+              85.322775,
+              27.697961
+            ],
+            [
+              85.32277,
+              27.698322
+            ],
+            [
+              85.322973,
+              27.698324
+            ],
+            [
+              85.322968,
+              27.698595
+            ],
+            [
+              85.323475,
+              27.698601
+            ],
+            [
+              85.323477,
+              27.698511
+            ],
+            [
+              85.323578,
+              27.698512
+            ],
+            [
+              85.323577,
+              27.698602
+            ],
+            [
+              85.323678,
+              27.698604
+            ],
+            [
+              85.323677,
+              27.698694
+            ],
+            [
+              85.323778,
+              27.698695
+            ],
+            [
+              85.323775,
+              27.698875
+            ],
+            [
+              85.323978,
+              27.698878
+            ],
+            [
+              85.323979,
+              27.698788
+            ],
+            [
+              85.324081,
+              27.698789
+            ],
+            [
+              85.324079,
+              27.698879
+            ],
+            [
+              85.324384,
+              27.698883
+            ],
+            [
+              85.324385,
+              27.698793
+            ],
+            [
+              85.324486,
+              27.698794
+            ],
+            [
+              85.324484,
+              27.698974
+            ],
+            [
+              85.324281,
+              27.698972
+            ],
+            [
+              85.324279,
+              27.699062
+            ],
+            [
+              85.323975,
+              27.699058
+            ],
+            [
+              85.323974,
+              27.699149
+            ],
+            [
+              85.324075,
+              27.69915
+            ],
+            [
+              85.324074,
+              27.69924
+            ],
+            [
+              85.324175,
+              27.699241
+            ],
+            [
+              85.324174,
+              27.699332
+            ],
+            [
+              85.324073,
+              27.69933
+            ],
+            [
+              85.32407,
+              27.699511
+            ],
+            [
+              85.323968,
+              27.69951
+            ],
+            [
+              85.32397,
+              27.699419
+            ],
+            [
+              85.323868,
+              27.699418
+            ],
+            [
+              85.323864,
+              27.699689
+            ],
+            [
+              85.323763,
+              27.699688
+            ]
+          ]
+        ]
+      },
+      "input_raster": "data/processed/m4/kathmandu_m4/delta_ndbi.tif",
+      "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndbi.tif",
+      "interpretation": {
+        "title": "\u25b2 Candidate NDBI increase \u00b7 Region 04",
+        "location": "Region 04 \u00b7 centroid 85.3234\u00b0E, 27.6987\u00b0N \u00b7 1.08 ha",
+        "observation_period": "2020-03-31 \u2192 2025-03-29 (median composites)",
+        "observed_measurement": "Mean \u0394NDBI +0.202 index units (median +0.190 index units) at the recorded threshold |\u0394| \u2265 0.15; 108 px = 1.08 ha = 0.25 % of the 43,728-px shared-valid footprint.",
+        "meaning": "A NDBI increase here marks where the later composite reads higher in NDBI. For NDBI this is a candidate built-up/impervious-surface signal \u2014 NOT a building detector; bare soil and construction sites raise NDBI the same way.",
+        "explanations": [
+          "New or extended impervious surfaces (candidate built-up change).",
+          "Bare soil, construction sites or cleared ground between the windows.",
+          "Vegetation loss on the \u0394NDVI counter-evidence panel."
+        ],
+        "evidence_strength": "Shared-valid coverage for this comparison is 100.00 % of the AOI (43,728 px). The region is a connected 108-px component at a stated threshold \u2014 adjacent pixels are not independent observations, so no significance is claimed. Candidate spectral signal with stated thresholds, not independently verified change.",
+        "cannot_conclude": [
+          "That individual buildings were newly constructed (10 m pixels cannot resolve buildings).",
+          "Verified urban expansion without independent evidence."
+        ],
+        "source": {
+          "experiment_id": "kathmandu_m4",
+          "input_raster": "data/processed/m4/kathmandu_m4/delta_ndbi.tif",
+          "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndbi.tif",
+          "method": "frozen M1 difference rasters + common-valid masks"
+        }
+      }
+    },
+    {
+      "id": "region_05",
+      "display_id": "Region 05",
+      "index": "ndbi",
+      "direction": "increase",
+      "threshold": 0.15,
+      "pixel_count": 104,
+      "area_ha": 1.04,
+      "share_of_common_valid_percent": 0.2378,
+      "mean_delta": 0.196338,
+      "median_delta": 0.188765,
+      "common_valid_pixels": 43728,
+      "centroid_utm": [
+        334270.16,
+        3065229.18
+      ],
+      "centroid_lonlat": [
+        85.319179,
+        27.701159
+      ],
+      "geometry_wgs84": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.318255,
+              27.701787
+            ],
+            [
+              85.318258,
+              27.701606
+            ],
+            [
+              85.318156,
+              27.701605
+            ],
+            [
+              85.318158,
+              27.701515
+            ],
+            [
+              85.318665,
+              27.701521
+            ],
+            [
+              85.318666,
+              27.701431
+            ],
+            [
+              85.318767,
+              27.701432
+            ],
+            [
+              85.318769,
+              27.701342
+            ],
+            [
+              85.31887,
+              27.701343
+            ],
+            [
+              85.318873,
+              27.701163
+            ],
+            [
+              85.31867,
+              27.70116
+            ],
+            [
+              85.318669,
+              27.70125
+            ],
+            [
+              85.318365,
+              27.701247
+            ],
+            [
+              85.318363,
+              27.701337
+            ],
+            [
+              85.318262,
+              27.701336
+            ],
+            [
+              85.318266,
+              27.701065
+            ],
+            [
+              85.318367,
+              27.701066
+            ],
+            [
+              85.318366,
+              27.701156
+            ],
+            [
+              85.318467,
+              27.701158
+            ],
+            [
+              85.318473,
+              27.700797
+            ],
+            [
+              85.318574,
+              27.700798
+            ],
+            [
+              85.318573,
+              27.700888
+            ],
+            [
+              85.318674,
+              27.700889
+            ],
+            [
+              85.318673,
+              27.70098
+            ],
+            [
+              85.319281,
+              27.700987
+            ],
+            [
+              85.31928,
+              27.701077
+            ],
+            [
+              85.319381,
+              27.701079
+            ],
+            [
+              85.319384,
+              27.700898
+            ],
+            [
+              85.319587,
+              27.700901
+            ],
+            [
+              85.31959,
+              27.70072
+            ],
+            [
+              85.319691,
+              27.700721
+            ],
+            [
+              85.319692,
+              27.700631
+            ],
+            [
+              85.319794,
+              27.700632
+            ],
+            [
+              85.319795,
+              27.700542
+            ],
+            [
+              85.319897,
+              27.700543
+            ],
+            [
+              85.319895,
+              27.700634
+            ],
+            [
+              85.319997,
+              27.700635
+            ],
+            [
+              85.319995,
+              27.700725
+            ],
+            [
+              85.319894,
+              27.700724
+            ],
+            [
+              85.319892,
+              27.700814
+            ],
+            [
+              85.319994,
+              27.700815
+            ],
+            [
+              85.319991,
+              27.700996
+            ],
+            [
+              85.31989,
+              27.700994
+            ],
+            [
+              85.319891,
+              27.700904
+            ],
+            [
+              85.31979,
+              27.700903
+            ],
+            [
+              85.319788,
+              27.700993
+            ],
+            [
+              85.319687,
+              27.700992
+            ],
+            [
+              85.319684,
+              27.701172
+            ],
+            [
+              85.31938,
+              27.701169
+            ],
+            [
+              85.319377,
+              27.701349
+            ],
+            [
+              85.31958,
+              27.701352
+            ],
+            [
+              85.319577,
+              27.701532
+            ],
+            [
+              85.319679,
+              27.701533
+            ],
+            [
+              85.319674,
+              27.701804
+            ],
+            [
+              85.319573,
+              27.701803
+            ],
+            [
+              85.319576,
+              27.701622
+            ],
+            [
+              85.319373,
+              27.70162
+            ],
+            [
+              85.319372,
+              27.70171
+            ],
+            [
+              85.31927,
+              27.701709
+            ],
+            [
+              85.319269,
+              27.701799
+            ],
+            [
+              85.318255,
+              27.701787
+            ]
+          ]
+        ]
+      },
+      "input_raster": "data/processed/m4/kathmandu_m4/delta_ndbi.tif",
+      "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndbi.tif",
+      "interpretation": {
+        "title": "\u25b2 Candidate NDBI increase \u00b7 Region 05",
+        "location": "Region 05 \u00b7 centroid 85.3192\u00b0E, 27.7012\u00b0N \u00b7 1.04 ha",
+        "observation_period": "2020-03-31 \u2192 2025-03-29 (median composites)",
+        "observed_measurement": "Mean \u0394NDBI +0.196 index units (median +0.189 index units) at the recorded threshold |\u0394| \u2265 0.15; 104 px = 1.04 ha = 0.24 % of the 43,728-px shared-valid footprint.",
+        "meaning": "A NDBI increase here marks where the later composite reads higher in NDBI. For NDBI this is a candidate built-up/impervious-surface signal \u2014 NOT a building detector; bare soil and construction sites raise NDBI the same way.",
+        "explanations": [
+          "New or extended impervious surfaces (candidate built-up change).",
+          "Bare soil, construction sites or cleared ground between the windows.",
+          "Vegetation loss on the \u0394NDVI counter-evidence panel."
+        ],
+        "evidence_strength": "Shared-valid coverage for this comparison is 100.00 % of the AOI (43,728 px). The region is a connected 104-px component at a stated threshold \u2014 adjacent pixels are not independent observations, so no significance is claimed. Candidate spectral signal with stated thresholds, not independently verified change.",
+        "cannot_conclude": [
+          "That individual buildings were newly constructed (10 m pixels cannot resolve buildings).",
+          "Verified urban expansion without independent evidence."
+        ],
+        "source": {
+          "experiment_id": "kathmandu_m4",
+          "input_raster": "data/processed/m4/kathmandu_m4/delta_ndbi.tif",
+          "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndbi.tif",
+          "method": "frozen M1 difference rasters + common-valid masks"
+        }
+      }
+    },
+    {
+      "id": "region_06",
+      "display_id": "Region 06",
+      "index": "ndbi",
+      "direction": "increase",
+      "threshold": 0.15,
+      "pixel_count": 70,
+      "area_ha": 0.7,
+      "share_of_common_valid_percent": 0.1601,
+      "mean_delta": 0.268395,
+      "median_delta": 0.242123,
+      "common_valid_pixels": 43728,
+      "centroid_utm": [
+        334472.22,
+        3065925.56
+      ],
+      "centroid_lonlat": [
+        85.321131,
+        27.707468
+      ],
+      "geometry_wgs84": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.320697,
+              27.707864
+            ],
+            [
+              85.3207,
+              27.707683
+            ],
+            [
+              85.320598,
+              27.707682
+            ],
+            [
+              85.320603,
+              27.707411
+            ],
+            [
+              85.320907,
+              27.707415
+            ],
+            [
+              85.320908,
+              27.707325
+            ],
+            [
+              85.320807,
+              27.707323
+            ],
+            [
+              85.320809,
+              27.707143
+            ],
+            [
+              85.321012,
+              27.707145
+            ],
+            [
+              85.321011,
+              27.707236
+            ],
+            [
+              85.321112,
+              27.707237
+            ],
+            [
+              85.321115,
+              27.707056
+            ],
+            [
+              85.321216,
+              27.707058
+            ],
+            [
+              85.321215,
+              27.707148
+            ],
+            [
+              85.321519,
+              27.707152
+            ],
+            [
+              85.321518,
+              27.707242
+            ],
+            [
+              85.321721,
+              27.707244
+            ],
+            [
+              85.321716,
+              27.707515
+            ],
+            [
+              85.321818,
+              27.707516
+            ],
+            [
+              85.321816,
+              27.707606
+            ],
+            [
+              85.321614,
+              27.707604
+            ],
+            [
+              85.32161,
+              27.707875
+            ],
+            [
+              85.321103,
+              27.707869
+            ],
+            [
+              85.321104,
+              27.707778
+            ],
+            [
+              85.3208,
+              27.707775
+            ],
+            [
+              85.320798,
+              27.707865
+            ],
+            [
+              85.320697,
+              27.707864
+            ]
+          ]
+        ]
+      },
+      "input_raster": "data/processed/m4/kathmandu_m4/delta_ndbi.tif",
+      "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndbi.tif",
+      "interpretation": {
+        "title": "\u25b2 Candidate NDBI increase \u00b7 Region 06",
+        "location": "Region 06 \u00b7 centroid 85.3211\u00b0E, 27.7075\u00b0N \u00b7 0.70 ha",
+        "observation_period": "2020-03-31 \u2192 2025-03-29 (median composites)",
+        "observed_measurement": "Mean \u0394NDBI +0.268 index units (median +0.242 index units) at the recorded threshold |\u0394| \u2265 0.15; 70 px = 0.70 ha = 0.16 % of the 43,728-px shared-valid footprint.",
+        "meaning": "A NDBI increase here marks where the later composite reads higher in NDBI. For NDBI this is a candidate built-up/impervious-surface signal \u2014 NOT a building detector; bare soil and construction sites raise NDBI the same way.",
+        "explanations": [
+          "New or extended impervious surfaces (candidate built-up change).",
+          "Bare soil, construction sites or cleared ground between the windows.",
+          "Vegetation loss on the \u0394NDVI counter-evidence panel."
+        ],
+        "evidence_strength": "Shared-valid coverage for this comparison is 100.00 % of the AOI (43,728 px). The region is a connected 70-px component at a stated threshold \u2014 adjacent pixels are not independent observations, so no significance is claimed. Candidate spectral signal with stated thresholds, not independently verified change.",
+        "cannot_conclude": [
+          "That individual buildings were newly constructed (10 m pixels cannot resolve buildings).",
+          "Verified urban expansion without independent evidence."
+        ],
+        "source": {
+          "experiment_id": "kathmandu_m4",
+          "input_raster": "data/processed/m4/kathmandu_m4/delta_ndbi.tif",
+          "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndbi.tif",
+          "method": "frozen M1 difference rasters + common-valid masks"
+        }
+      }
+    },
+    {
+      "id": "region_07",
+      "display_id": "Region 07",
+      "index": "ndvi",
+      "direction": "decrease",
+      "threshold": 0.15,
+      "pixel_count": 372,
+      "area_ha": 3.72,
+      "share_of_common_valid_percent": 0.8507,
+      "mean_delta": -0.250777,
+      "median_delta": -0.246063,
+      "common_valid_pixels": 43728,
+      "centroid_utm": [
+        333878.31,
+        3065410.72
+      ],
+      "centroid_lonlat": [
+        85.315181,
+        27.702749
+      ],
+      "geometry_wgs84": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.314371,
+              27.703816
+            ],
+            [
+              85.314372,
+              27.703725
+            ],
+            [
+              85.314271,
+              27.703724
+            ],
+            [
+              85.314275,
+              27.703453
+            ],
+            [
+              85.314376,
+              27.703455
+            ],
+            [
+              85.314377,
+              27.703364
+            ],
+            [
+              85.314175,
+              27.703362
+            ],
+            [
+              85.314179,
+              27.703091
+            ],
+            [
+              85.31428,
+              27.703092
+            ],
+            [
+              85.314282,
+              27.703002
+            ],
+            [
+              85.314586,
+              27.703006
+            ],
+            [
+              85.314584,
+              27.703096
+            ],
+            [
+              85.314483,
+              27.703095
+            ],
+            [
+              85.314482,
+              27.703185
+            ],
+            [
+              85.314786,
+              27.703189
+            ],
+            [
+              85.314791,
+              27.702828
+            ],
+            [
+              85.31469,
+              27.702827
+            ],
+            [
+              85.314691,
+              27.702736
+            ],
+            [
+              85.31459,
+              27.702735
+            ],
+            [
+              85.314589,
+              27.702825
+            ],
+            [
+              85.314284,
+              27.702822
+            ],
+            [
+              85.314283,
+              27.702912
+            ],
+            [
+              85.314182,
+              27.702911
+            ],
+            [
+              85.314187,
+              27.70255
+            ],
+            [
+              85.314289,
+              27.702551
+            ],
+            [
+              85.31429,
+              27.702461
+            ],
+            [
+              85.314391,
+              27.702462
+            ],
+            [
+              85.31439,
+              27.702552
+            ],
+            [
+              85.314491,
+              27.702553
+            ],
+            [
+              85.31449,
+              27.702644
+            ],
+            [
+              85.314693,
+              27.702646
+            ],
+            [
+              85.314694,
+              27.702556
+            ],
+            [
+              85.314593,
+              27.702555
+            ],
+            [
+              85.314595,
+              27.702374
+            ],
+            [
+              85.314697,
+              27.702375
+            ],
+            [
+              85.314698,
+              27.702285
+            ],
+            [
+              85.3148,
+              27.702286
+            ],
+            [
+              85.314802,
+              27.702106
+            ],
+            [
+              85.315005,
+              27.702108
+            ],
+            [
+              85.315007,
+              27.702018
+            ],
+            [
+              85.315818,
+              27.702028
+            ],
+            [
+              85.315819,
+              27.701938
+            ],
+            [
+              85.31592,
+              27.701939
+            ],
+            [
+              85.315926,
+              27.701578
+            ],
+            [
+              85.316027,
+              27.701579
+            ],
+            [
+              85.31603,
+              27.701399
+            ],
+            [
+              85.315929,
+              27.701398
+            ],
+            [
+              85.31593,
+              27.701307
+            ],
+            [
+              85.316133,
+              27.70131
+            ],
+            [
+              85.316125,
+              27.701851
+            ],
+            [
+              85.316023,
+              27.70185
+            ],
+            [
+              85.316022,
+              27.70194
+            ],
+            [
+              85.316123,
+              27.701942
+            ],
+            [
+              85.316122,
+              27.702032
+            ],
+            [
+              85.316223,
+              27.702033
+            ],
+            [
+              85.316234,
+              27.701311
+            ],
+            [
+              85.316437,
+              27.701314
+            ],
+            [
+              85.316426,
+              27.702035
+            ],
+            [
+              85.316325,
+              27.702034
+            ],
+            [
+              85.316316,
+              27.702576
+            ],
+            [
+              85.316418,
+              27.702577
+            ],
+            [
+              85.316416,
+              27.702667
+            ],
+            [
+              85.316315,
+              27.702666
+            ],
+            [
+              85.316312,
+              27.702846
+            ],
+            [
+              85.316413,
+              27.702848
+            ],
+            [
+              85.316411,
+              27.703028
+            ],
+            [
+              85.316309,
+              27.703027
+            ],
+            [
+              85.316298,
+              27.703749
+            ],
+            [
+              85.316095,
+              27.703746
+            ],
+            [
+              85.316097,
+              27.703656
+            ],
+            [
+              85.315995,
+              27.703655
+            ],
+            [
+              85.315994,
+              27.703745
+            ],
+            [
+              85.315183,
+              27.703735
+            ],
+            [
+              85.315184,
+              27.703645
+            ],
+            [
+              85.315083,
+              27.703644
+            ],
+            [
+              85.315082,
+              27.703734
+            ],
+            [
+              85.314777,
+              27.70373
+            ],
+            [
+              85.314776,
+              27.70382
+            ],
+            [
+              85.314675,
+              27.703819
+            ],
+            [
+              85.314676,
+              27.703729
+            ],
+            [
+              85.314575,
+              27.703728
+            ],
+            [
+              85.314573,
+              27.703818
+            ],
+            [
+              85.314371,
+              27.703816
+            ]
+          ]
+        ]
+      },
+      "input_raster": "data/processed/m4/kathmandu_m4/delta_ndvi.tif",
+      "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndvi.tif",
+      "interpretation": {
+        "title": "\u25bc Candidate NDVI decrease \u00b7 Region 07",
+        "location": "Region 07 \u00b7 centroid 85.3152\u00b0E, 27.7027\u00b0N \u00b7 3.72 ha",
+        "observation_period": "2020-03-31 \u2192 2025-03-29 (median composites)",
+        "observed_measurement": "Mean \u0394NDVI -0.251 index units (median -0.246 index units) at the recorded threshold |\u0394| \u2265 0.15; 372 px = 3.72 ha = 0.85 % of the 43,728-px shared-valid footprint.",
+        "meaning": "A NDVI decrease here marks where the later composite reads lower in NDVI. For NDBI this is a candidate built-up/impervious-surface signal \u2014 NOT a building detector; bare soil and construction sites raise NDBI the same way.",
+        "explanations": [
+          "New or extended impervious surfaces (candidate built-up change).",
+          "Bare soil, construction sites or cleared ground between the windows.",
+          "Vegetation loss on the \u0394NDVI counter-evidence panel."
+        ],
+        "evidence_strength": "Shared-valid coverage for this comparison is 100.00 % of the AOI (43,728 px). The region is a connected 372-px component at a stated threshold \u2014 adjacent pixels are not independent observations, so no significance is claimed. Candidate spectral signal with stated thresholds, not independently verified change.",
+        "cannot_conclude": [
+          "That individual buildings were newly constructed (10 m pixels cannot resolve buildings).",
+          "Verified urban expansion without independent evidence."
+        ],
+        "source": {
+          "experiment_id": "kathmandu_m4",
+          "input_raster": "data/processed/m4/kathmandu_m4/delta_ndvi.tif",
+          "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndvi.tif",
+          "method": "frozen M1 difference rasters + common-valid masks"
+        }
+      }
+    },
+    {
+      "id": "region_08",
+      "display_id": "Region 08",
+      "index": "ndvi",
+      "direction": "decrease",
+      "threshold": 0.15,
+      "pixel_count": 208,
+      "area_ha": 2.08,
+      "share_of_common_valid_percent": 0.4757,
+      "mean_delta": -0.277567,
+      "median_delta": -0.247106,
+      "common_valid_pixels": 43728,
+      "centroid_utm": [
+        334628.25,
+        3064956.35
+      ],
+      "centroid_lonlat": [
+        85.322847,
+        27.698741
+      ],
+      "geometry_wgs84": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.322139,
+              27.699758
+            ],
+            [
+              85.322141,
+              27.699668
+            ],
+            [
+              85.321938,
+              27.699665
+            ],
+            [
+              85.321945,
+              27.699214
+            ],
+            [
+              85.321844,
+              27.699213
+            ],
+            [
+              85.321845,
+              27.699123
+            ],
+            [
+              85.322149,
+              27.699127
+            ],
+            [
+              85.32215,
+              27.699036
+            ],
+            [
+              85.322353,
+              27.699039
+            ],
+            [
+              85.322356,
+              27.698858
+            ],
+            [
+              85.322153,
+              27.698856
+            ],
+            [
+              85.322156,
+              27.698675
+            ],
+            [
+              85.322055,
+              27.698674
+            ],
+            [
+              85.322057,
+              27.698494
+            ],
+            [
+              85.322159,
+              27.698495
+            ],
+            [
+              85.322157,
+              27.698585
+            ],
+            [
+              85.322259,
+              27.698586
+            ],
+            [
+              85.322257,
+              27.698677
+            ],
+            [
+              85.322359,
+              27.698678
+            ],
+            [
+              85.322357,
+              27.698768
+            ],
+            [
+              85.32256,
+              27.69877
+            ],
+            [
+              85.322563,
+              27.69859
+            ],
+            [
+              85.322461,
+              27.698589
+            ],
+            [
+              85.322464,
+              27.698408
+            ],
+            [
+              85.322363,
+              27.698407
+            ],
+            [
+              85.32237,
+              27.697956
+            ],
+            [
+              85.322674,
+              27.69796
+            ],
+            [
+              85.322675,
+              27.697869
+            ],
+            [
+              85.323081,
+              27.697874
+            ],
+            [
+              85.323082,
+              27.697784
+            ],
+            [
+              85.32369,
+              27.697791
+            ],
+            [
+              85.323689,
+              27.697882
+            ],
+            [
+              85.32379,
+              27.697883
+            ],
+            [
+              85.323786,
+              27.698154
+            ],
+            [
+              85.323888,
+              27.698155
+            ],
+            [
+              85.323884,
+              27.698425
+            ],
+            [
+              85.323985,
+              27.698427
+            ],
+            [
+              85.323984,
+              27.698517
+            ],
+            [
+              85.323781,
+              27.698515
+            ],
+            [
+              85.323782,
+              27.698424
+            ],
+            [
+              85.323377,
+              27.698419
+            ],
+            [
+              85.323375,
+              27.69851
+            ],
+            [
+              85.32297,
+              27.698505
+            ],
+            [
+              85.322968,
+              27.698595
+            ],
+            [
+              85.323678,
+              27.698604
+            ],
+            [
+              85.323677,
+              27.698694
+            ],
+            [
+              85.323778,
+              27.698695
+            ],
+            [
+              85.323777,
+              27.698785
+            ],
+            [
+              85.323574,
+              27.698783
+            ],
+            [
+              85.323568,
+              27.699144
+            ],
+            [
+              85.323264,
+              27.69914
+            ],
+            [
+              85.323268,
+              27.698869
+            ],
+            [
+              85.323167,
+              27.698868
+            ],
+            [
+              85.323164,
+              27.699049
+            ],
+            [
+              85.323063,
+              27.699047
+            ],
+            [
+              85.32306,
+              27.699228
+            ],
+            [
+              85.322857,
+              27.699225
+            ],
+            [
+              85.322859,
+              27.699135
+            ],
+            [
+              85.322656,
+              27.699133
+            ],
+            [
+              85.322649,
+              27.699584
+            ],
+            [
+              85.322548,
+              27.699583
+            ],
+            [
+              85.322545,
+              27.699763
+            ],
+            [
+              85.322139,
+              27.699758
+            ]
+          ]
+        ]
+      },
+      "input_raster": "data/processed/m4/kathmandu_m4/delta_ndvi.tif",
+      "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndvi.tif",
+      "interpretation": {
+        "title": "\u25bc Candidate NDVI decrease \u00b7 Region 08",
+        "location": "Region 08 \u00b7 centroid 85.3228\u00b0E, 27.6987\u00b0N \u00b7 2.08 ha",
+        "observation_period": "2020-03-31 \u2192 2025-03-29 (median composites)",
+        "observed_measurement": "Mean \u0394NDVI -0.278 index units (median -0.247 index units) at the recorded threshold |\u0394| \u2265 0.15; 208 px = 2.08 ha = 0.48 % of the 43,728-px shared-valid footprint.",
+        "meaning": "A NDVI decrease here marks where the later composite reads lower in NDVI. For NDBI this is a candidate built-up/impervious-surface signal \u2014 NOT a building detector; bare soil and construction sites raise NDBI the same way.",
+        "explanations": [
+          "New or extended impervious surfaces (candidate built-up change).",
+          "Bare soil, construction sites or cleared ground between the windows.",
+          "Vegetation loss on the \u0394NDVI counter-evidence panel."
+        ],
+        "evidence_strength": "Shared-valid coverage for this comparison is 100.00 % of the AOI (43,728 px). The region is a connected 208-px component at a stated threshold \u2014 adjacent pixels are not independent observations, so no significance is claimed. Candidate spectral signal with stated thresholds, not independently verified change.",
+        "cannot_conclude": [
+          "That individual buildings were newly constructed (10 m pixels cannot resolve buildings).",
+          "Verified urban expansion without independent evidence."
+        ],
+        "source": {
+          "experiment_id": "kathmandu_m4",
+          "input_raster": "data/processed/m4/kathmandu_m4/delta_ndvi.tif",
+          "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndvi.tif",
+          "method": "frozen M1 difference rasters + common-valid masks"
+        }
+      }
+    },
+    {
+      "id": "region_09",
+      "display_id": "Region 09",
+      "index": "ndvi",
+      "direction": "decrease",
+      "threshold": 0.15,
+      "pixel_count": 184,
+      "area_ha": 1.84,
+      "share_of_common_valid_percent": 0.4208,
+      "mean_delta": -0.239223,
+      "median_delta": -0.228608,
+      "common_valid_pixels": 43728,
+      "centroid_utm": [
+        334229.85,
+        3065283.58
+      ],
+      "centroid_lonlat": [
+        85.318763,
+        27.701645
+      ],
+      "geometry_wgs84": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.318852,
+              27.702516
+            ],
+            [
+              85.318858,
+              27.702155
+            ],
+            [
+              85.318655,
+              27.702153
+            ],
+            [
+              85.318656,
+              27.702063
+            ],
+            [
+              85.318555,
+              27.702061
+            ],
+            [
+              85.318551,
+              27.702332
+            ],
+            [
+              85.318449,
+              27.702331
+            ],
+            [
+              85.318448,
+              27.702421
+            ],
+            [
+              85.318245,
+              27.702419
+            ],
+            [
+              85.318248,
+              27.702238
+            ],
+            [
+              85.318349,
+              27.702239
+            ],
+            [
+              85.318352,
+              27.702059
+            ],
+            [
+              85.318251,
+              27.702058
+            ],
+            [
+              85.318252,
+              27.701967
+            ],
+            [
+              85.318151,
+              27.701966
+            ],
+            [
+              85.318152,
+              27.701876
+            ],
+            [
+              85.318254,
+              27.701877
+            ],
+            [
+              85.318255,
+              27.701787
+            ],
+            [
+              85.318154,
+              27.701786
+            ],
+            [
+              85.318155,
+              27.701695
+            ],
+            [
+              85.318256,
+              27.701697
+            ],
+            [
+              85.318258,
+              27.701606
+            ],
+            [
+              85.318156,
+              27.701605
+            ],
+            [
+              85.318159,
+              27.701425
+            ],
+            [
+              85.318261,
+              27.701426
+            ],
+            [
+              85.318262,
+              27.701336
+            ],
+            [
+              85.318161,
+              27.701334
+            ],
+            [
+              85.318163,
+              27.701154
+            ],
+            [
+              85.318062,
+              27.701153
+            ],
+            [
+              85.318063,
+              27.701063
+            ],
+            [
+              85.318165,
+              27.701064
+            ],
+            [
+              85.318167,
+              27.700883
+            ],
+            [
+              85.318269,
+              27.700885
+            ],
+            [
+              85.31827,
+              27.700794
+            ],
+            [
+              85.318473,
+              27.700797
+            ],
+            [
+              85.318474,
+              27.700707
+            ],
+            [
+              85.31888,
+              27.700711
+            ],
+            [
+              85.318879,
+              27.700802
+            ],
+            [
+              85.31898,
+              27.700803
+            ],
+            [
+              85.318979,
+              27.700893
+            ],
+            [
+              85.319181,
+              27.700896
+            ],
+            [
+              85.31918,
+              27.700986
+            ],
+            [
+              85.319281,
+              27.700987
+            ],
+            [
+              85.319279,
+              27.701168
+            ],
+            [
+              85.31938,
+              27.701169
+            ],
+            [
+              85.319377,
+              27.701349
+            ],
+            [
+              85.319479,
+              27.701351
+            ],
+            [
+              85.319476,
+              27.701531
+            ],
+            [
+              85.319679,
+              27.701533
+            ],
+            [
+              85.319677,
+              27.701624
+            ],
+            [
+              85.319779,
+              27.701625
+            ],
+            [
+              85.319776,
+              27.701805
+            ],
+            [
+              85.319674,
+              27.701804
+            ],
+            [
+              85.319676,
+              27.701714
+            ],
+            [
+              85.319574,
+              27.701713
+            ],
+            [
+              85.319573,
+              27.701803
+            ],
+            [
+              85.319269,
+              27.701799
+            ],
+            [
+              85.319267,
+              27.701889
+            ],
+            [
+              85.319166,
+              27.701888
+            ],
+            [
+              85.319165,
+              27.701978
+            ],
+            [
+              85.319063,
+              27.701977
+            ],
+            [
+              85.319062,
+              27.702067
+            ],
+            [
+              85.318961,
+              27.702066
+            ],
+            [
+              85.318959,
+              27.702156
+            ],
+            [
+              85.319061,
+              27.702158
+            ],
+            [
+              85.319055,
+              27.702519
+            ],
+            [
+              85.318852,
+              27.702516
+            ]
+          ]
+        ]
+      },
+      "input_raster": "data/processed/m4/kathmandu_m4/delta_ndvi.tif",
+      "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndvi.tif",
+      "interpretation": {
+        "title": "\u25bc Candidate NDVI decrease \u00b7 Region 09",
+        "location": "Region 09 \u00b7 centroid 85.3188\u00b0E, 27.7016\u00b0N \u00b7 1.84 ha",
+        "observation_period": "2020-03-31 \u2192 2025-03-29 (median composites)",
+        "observed_measurement": "Mean \u0394NDVI -0.239 index units (median -0.229 index units) at the recorded threshold |\u0394| \u2265 0.15; 184 px = 1.84 ha = 0.42 % of the 43,728-px shared-valid footprint.",
+        "meaning": "A NDVI decrease here marks where the later composite reads lower in NDVI. For NDBI this is a candidate built-up/impervious-surface signal \u2014 NOT a building detector; bare soil and construction sites raise NDBI the same way.",
+        "explanations": [
+          "New or extended impervious surfaces (candidate built-up change).",
+          "Bare soil, construction sites or cleared ground between the windows.",
+          "Vegetation loss on the \u0394NDVI counter-evidence panel."
+        ],
+        "evidence_strength": "Shared-valid coverage for this comparison is 100.00 % of the AOI (43,728 px). The region is a connected 184-px component at a stated threshold \u2014 adjacent pixels are not independent observations, so no significance is claimed. Candidate spectral signal with stated thresholds, not independently verified change.",
+        "cannot_conclude": [
+          "That individual buildings were newly constructed (10 m pixels cannot resolve buildings).",
+          "Verified urban expansion without independent evidence."
+        ],
+        "source": {
+          "experiment_id": "kathmandu_m4",
+          "input_raster": "data/processed/m4/kathmandu_m4/delta_ndvi.tif",
+          "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndvi.tif",
+          "method": "frozen M1 difference rasters + common-valid masks"
+        }
+      }
+    },
+    {
+      "id": "region_10",
+      "display_id": "Region 10",
+      "index": "ndvi",
+      "direction": "decrease",
+      "threshold": 0.15,
+      "pixel_count": 144,
+      "area_ha": 1.44,
+      "share_of_common_valid_percent": 0.3293,
+      "mean_delta": -0.301882,
+      "median_delta": -0.294347,
+      "common_valid_pixels": 43728,
+      "centroid_utm": [
+        333822.0,
+        3066504.22
+      ],
+      "centroid_lonlat": [
+        85.314458,
+        27.712609
+      ],
+      "geometry_wgs84": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.314528,
+              27.713384
+            ],
+            [
+              85.314529,
+              27.713294
+            ],
+            [
+              85.314326,
+              27.713292
+            ],
+            [
+              85.314328,
+              27.713201
+            ],
+            [
+              85.314226,
+              27.7132
+            ],
+            [
+              85.31423,
+              27.71293
+            ],
+            [
+              85.314129,
+              27.712928
+            ],
+            [
+              85.314128,
+              27.713019
+            ],
+            [
+              85.313925,
+              27.713016
+            ],
+            [
+              85.313926,
+              27.712926
+            ],
+            [
+              85.313825,
+              27.712925
+            ],
+            [
+              85.313828,
+              27.712744
+            ],
+            [
+              85.314132,
+              27.712748
+            ],
+            [
+              85.314133,
+              27.712658
+            ],
+            [
+              85.314336,
+              27.71266
+            ],
+            [
+              85.314337,
+              27.71257
+            ],
+            [
+              85.314439,
+              27.712571
+            ],
+            [
+              85.314443,
+              27.7123
+            ],
+            [
+              85.314342,
+              27.712299
+            ],
+            [
+              85.314344,
+              27.712119
+            ],
+            [
+              85.31404,
+              27.712115
+            ],
+            [
+              85.314044,
+              27.711844
+            ],
+            [
+              85.313943,
+              27.711843
+            ],
+            [
+              85.313944,
+              27.711753
+            ],
+            [
+              85.314147,
+              27.711755
+            ],
+            [
+              85.314148,
+              27.711665
+            ],
+            [
+              85.314554,
+              27.71167
+            ],
+            [
+              85.314555,
+              27.71158
+            ],
+            [
+              85.31486,
+              27.711583
+            ],
+            [
+              85.314858,
+              27.711674
+            ],
+            [
+              85.31496,
+              27.711675
+            ],
+            [
+              85.314951,
+              27.712216
+            ],
+            [
+              85.315053,
+              27.712217
+            ],
+            [
+              85.315046,
+              27.712669
+            ],
+            [
+              85.314843,
+              27.712666
+            ],
+            [
+              85.314839,
+              27.712937
+            ],
+            [
+              85.31494,
+              27.712938
+            ],
+            [
+              85.314939,
+              27.713028
+            ],
+            [
+              85.31504,
+              27.71303
+            ],
+            [
+              85.315037,
+              27.71321
+            ],
+            [
+              85.314835,
+              27.713208
+            ],
+            [
+              85.314833,
+              27.713298
+            ],
+            [
+              85.31463,
+              27.713295
+            ],
+            [
+              85.314629,
+              27.713386
+            ],
+            [
+              85.314528,
+              27.713384
+            ]
+          ]
+        ]
+      },
+      "input_raster": "data/processed/m4/kathmandu_m4/delta_ndvi.tif",
+      "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndvi.tif",
+      "interpretation": {
+        "title": "\u25bc Candidate NDVI decrease \u00b7 Region 10",
+        "location": "Region 10 \u00b7 centroid 85.3145\u00b0E, 27.7126\u00b0N \u00b7 1.44 ha",
+        "observation_period": "2020-03-31 \u2192 2025-03-29 (median composites)",
+        "observed_measurement": "Mean \u0394NDVI -0.302 index units (median -0.294 index units) at the recorded threshold |\u0394| \u2265 0.15; 144 px = 1.44 ha = 0.33 % of the 43,728-px shared-valid footprint.",
+        "meaning": "A NDVI decrease here marks where the later composite reads lower in NDVI. For NDBI this is a candidate built-up/impervious-surface signal \u2014 NOT a building detector; bare soil and construction sites raise NDBI the same way.",
+        "explanations": [
+          "New or extended impervious surfaces (candidate built-up change).",
+          "Bare soil, construction sites or cleared ground between the windows.",
+          "Vegetation loss on the \u0394NDVI counter-evidence panel."
+        ],
+        "evidence_strength": "Shared-valid coverage for this comparison is 100.00 % of the AOI (43,728 px). The region is a connected 144-px component at a stated threshold \u2014 adjacent pixels are not independent observations, so no significance is claimed. Candidate spectral signal with stated thresholds, not independently verified change.",
+        "cannot_conclude": [
+          "That individual buildings were newly constructed (10 m pixels cannot resolve buildings).",
+          "Verified urban expansion without independent evidence."
+        ],
+        "source": {
+          "experiment_id": "kathmandu_m4",
+          "input_raster": "data/processed/m4/kathmandu_m4/delta_ndvi.tif",
+          "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndvi.tif",
+          "method": "frozen M1 difference rasters + common-valid masks"
+        }
+      }
+    },
+    {
+      "id": "region_11",
+      "display_id": "Region 11",
+      "index": "ndvi",
+      "direction": "decrease",
+      "threshold": 0.15,
+      "pixel_count": 109,
+      "area_ha": 1.09,
+      "share_of_common_valid_percent": 0.2493,
+      "mean_delta": -0.303236,
+      "median_delta": -0.291021,
+      "common_valid_pixels": 43728,
+      "centroid_utm": [
+        334593.56,
+        3064631.78
+      ],
+      "centroid_lonlat": [
+        85.32254,
+        27.695808
+      ],
+      "geometry_wgs84": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.322699,
+              27.696335
+            ],
+            [
+              85.3227,
+              27.696245
+            ],
+            [
+              85.322802,
+              27.696246
+            ],
+            [
+              85.322807,
+              27.695885
+            ],
+            [
+              85.322706,
+              27.695884
+            ],
+            [
+              85.322704,
+              27.695974
+            ],
+            [
+              85.322603,
+              27.695973
+            ],
+            [
+              85.322604,
+              27.695883
+            ],
+            [
+              85.322503,
+              27.695882
+            ],
+            [
+              85.322504,
+              27.695791
+            ],
+            [
+              85.322302,
+              27.695789
+            ],
+            [
+              85.322303,
+              27.695699
+            ],
+            [
+              85.322202,
+              27.695697
+            ],
+            [
+              85.322203,
+              27.695607
+            ],
+            [
+              85.322102,
+              27.695606
+            ],
+            [
+              85.322096,
+              27.695967
+            ],
+            [
+              85.321995,
+              27.695966
+            ],
+            [
+              85.321993,
+              27.696056
+            ],
+            [
+              85.321892,
+              27.696055
+            ],
+            [
+              85.321895,
+              27.695874
+            ],
+            [
+              85.321793,
+              27.695873
+            ],
+            [
+              85.321796,
+              27.695693
+            ],
+            [
+              85.321695,
+              27.695691
+            ],
+            [
+              85.321706,
+              27.694969
+            ],
+            [
+              85.322517,
+              27.694979
+            ],
+            [
+              85.322514,
+              27.69516
+            ],
+            [
+              85.322615,
+              27.695161
+            ],
+            [
+              85.322614,
+              27.695251
+            ],
+            [
+              85.322715,
+              27.695252
+            ],
+            [
+              85.322714,
+              27.695343
+            ],
+            [
+              85.322613,
+              27.695341
+            ],
+            [
+              85.322608,
+              27.695612
+            ],
+            [
+              85.322913,
+              27.695616
+            ],
+            [
+              85.322911,
+              27.695706
+            ],
+            [
+              85.323114,
+              27.695709
+            ],
+            [
+              85.32311,
+              27.695979
+            ],
+            [
+              85.322907,
+              27.695977
+            ],
+            [
+              85.322906,
+              27.696067
+            ],
+            [
+              85.323007,
+              27.696068
+            ],
+            [
+              85.323006,
+              27.696158
+            ],
+            [
+              85.323107,
+              27.69616
+            ],
+            [
+              85.323106,
+              27.69625
+            ],
+            [
+              85.323004,
+              27.696249
+            ],
+            [
+              85.323003,
+              27.696339
+            ],
+            [
+              85.322699,
+              27.696335
+            ]
+          ]
+        ]
+      },
+      "input_raster": "data/processed/m4/kathmandu_m4/delta_ndvi.tif",
+      "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndvi.tif",
+      "interpretation": {
+        "title": "\u25bc Candidate NDVI decrease \u00b7 Region 11",
+        "location": "Region 11 \u00b7 centroid 85.3225\u00b0E, 27.6958\u00b0N \u00b7 1.09 ha",
+        "observation_period": "2020-03-31 \u2192 2025-03-29 (median composites)",
+        "observed_measurement": "Mean \u0394NDVI -0.303 index units (median -0.291 index units) at the recorded threshold |\u0394| \u2265 0.15; 109 px = 1.09 ha = 0.25 % of the 43,728-px shared-valid footprint.",
+        "meaning": "A NDVI decrease here marks where the later composite reads lower in NDVI. For NDBI this is a candidate built-up/impervious-surface signal \u2014 NOT a building detector; bare soil and construction sites raise NDBI the same way.",
+        "explanations": [
+          "New or extended impervious surfaces (candidate built-up change).",
+          "Bare soil, construction sites or cleared ground between the windows.",
+          "Vegetation loss on the \u0394NDVI counter-evidence panel."
+        ],
+        "evidence_strength": "Shared-valid coverage for this comparison is 100.00 % of the AOI (43,728 px). The region is a connected 109-px component at a stated threshold \u2014 adjacent pixels are not independent observations, so no significance is claimed. Candidate spectral signal with stated thresholds, not independently verified change.",
+        "cannot_conclude": [
+          "That individual buildings were newly constructed (10 m pixels cannot resolve buildings).",
+          "Verified urban expansion without independent evidence."
+        ],
+        "source": {
+          "experiment_id": "kathmandu_m4",
+          "input_raster": "data/processed/m4/kathmandu_m4/delta_ndvi.tif",
+          "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndvi.tif",
+          "method": "frozen M1 difference rasters + common-valid masks"
+        }
+      }
+    },
+    {
+      "id": "region_12",
+      "display_id": "Region 12",
+      "index": "ndvi",
+      "direction": "increase",
+      "threshold": 0.15,
+      "pixel_count": 74,
+      "area_ha": 0.74,
+      "share_of_common_valid_percent": 0.1692,
+      "mean_delta": 0.203368,
+      "median_delta": 0.20168,
+      "common_valid_pixels": 43728,
+      "centroid_utm": [
+        333883.95,
+        3065663.49
+      ],
+      "centroid_lonlat": [
+        85.315203,
+        27.70503
+      ],
+      "geometry_wgs84": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.314852,
+              27.705446
+            ],
+            [
+              85.314854,
+              27.705356
+            ],
+            [
+              85.314752,
+              27.705355
+            ],
+            [
+              85.314754,
+              27.705264
+            ],
+            [
+              85.314652,
+              27.705263
+            ],
+            [
+              85.314654,
+              27.705173
+            ],
+            [
+              85.314552,
+              27.705172
+            ],
+            [
+              85.314554,
+              27.705081
+            ],
+            [
+              85.314452,
+              27.70508
+            ],
+            [
+              85.314454,
+              27.70499
+            ],
+            [
+              85.314555,
+              27.704991
+            ],
+            [
+              85.314557,
+              27.704901
+            ],
+            [
+              85.314658,
+              27.704902
+            ],
+            [
+              85.314657,
+              27.704992
+            ],
+            [
+              85.315062,
+              27.704997
+            ],
+            [
+              85.315064,
+              27.704907
+            ],
+            [
+              85.314962,
+              27.704906
+            ],
+            [
+              85.314965,
+              27.704725
+            ],
+            [
+              85.315066,
+              27.704727
+            ],
+            [
+              85.315068,
+              27.704636
+            ],
+            [
+              85.315372,
+              27.70464
+            ],
+            [
+              85.315373,
+              27.70455
+            ],
+            [
+              85.315475,
+              27.704551
+            ],
+            [
+              85.315472,
+              27.704731
+            ],
+            [
+              85.315371,
+              27.70473
+            ],
+            [
+              85.315369,
+              27.70482
+            ],
+            [
+              85.315572,
+              27.704823
+            ],
+            [
+              85.315571,
+              27.704913
+            ],
+            [
+              85.315672,
+              27.704914
+            ],
+            [
+              85.315671,
+              27.705005
+            ],
+            [
+              85.315772,
+              27.705006
+            ],
+            [
+              85.315771,
+              27.705096
+            ],
+            [
+              85.315973,
+              27.705099
+            ],
+            [
+              85.315975,
+              27.705008
+            ],
+            [
+              85.316076,
+              27.70501
+            ],
+            [
+              85.316073,
+              27.70519
+            ],
+            [
+              85.315871,
+              27.705188
+            ],
+            [
+              85.315869,
+              27.705278
+            ],
+            [
+              85.315464,
+              27.705273
+            ],
+            [
+              85.315462,
+              27.705363
+            ],
+            [
+              85.315259,
+              27.705361
+            ],
+            [
+              85.315258,
+              27.705451
+            ],
+            [
+              85.314852,
+              27.705446
+            ]
+          ]
+        ]
+      },
+      "input_raster": "data/processed/m4/kathmandu_m4/delta_ndvi.tif",
+      "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndvi.tif",
+      "interpretation": {
+        "title": "\u25b2 Candidate NDVI increase \u00b7 Region 12",
+        "location": "Region 12 \u00b7 centroid 85.3152\u00b0E, 27.7050\u00b0N \u00b7 0.74 ha",
+        "observation_period": "2020-03-31 \u2192 2025-03-29 (median composites)",
+        "observed_measurement": "Mean \u0394NDVI +0.203 index units (median +0.202 index units) at the recorded threshold |\u0394| \u2265 0.15; 74 px = 0.74 ha = 0.17 % of the 43,728-px shared-valid footprint.",
+        "meaning": "A NDVI increase here marks where the later composite reads higher in NDVI. For NDBI this is a candidate built-up/impervious-surface signal \u2014 NOT a building detector; bare soil and construction sites raise NDBI the same way.",
+        "explanations": [
+          "New or extended impervious surfaces (candidate built-up change).",
+          "Bare soil, construction sites or cleared ground between the windows.",
+          "Vegetation loss on the \u0394NDVI counter-evidence panel."
+        ],
+        "evidence_strength": "Shared-valid coverage for this comparison is 100.00 % of the AOI (43,728 px). The region is a connected 74-px component at a stated threshold \u2014 adjacent pixels are not independent observations, so no significance is claimed. Candidate spectral signal with stated thresholds, not independently verified change.",
+        "cannot_conclude": [
+          "That individual buildings were newly constructed (10 m pixels cannot resolve buildings).",
+          "Verified urban expansion without independent evidence."
+        ],
+        "source": {
+          "experiment_id": "kathmandu_m4",
+          "input_raster": "data/processed/m4/kathmandu_m4/delta_ndvi.tif",
+          "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndvi.tif",
+          "method": "frozen M1 difference rasters + common-valid masks"
+        }
+      }
+    },
+    {
+      "id": "region_13",
+      "display_id": "Region 13",
+      "index": "ndwi",
+      "direction": "decrease",
+      "threshold": 0.15,
+      "pixel_count": 48,
+      "area_ha": 0.48,
+      "share_of_common_valid_percent": 0.1098,
+      "mean_delta": -0.196741,
+      "median_delta": -0.193452,
+      "common_valid_pixels": 43728,
+      "centroid_utm": [
+        333897.74,
+        3065672.58
+      ],
+      "centroid_lonlat": [
+        85.315342,
+        27.705114
+      ],
+      "geometry_wgs84": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.314852,
+              27.705446
+            ],
+            [
+              85.314857,
+              27.705175
+            ],
+            [
+              85.314654,
+              27.705173
+            ],
+            [
+              85.314655,
+              27.705083
+            ],
+            [
+              85.314757,
+              27.705084
+            ],
+            [
+              85.314758,
+              27.704994
+            ],
+            [
+              85.314961,
+              27.704996
+            ],
+            [
+              85.314959,
+              27.705086
+            ],
+            [
+              85.315061,
+              27.705087
+            ],
+            [
+              85.315062,
+              27.704997
+            ],
+            [
+              85.315164,
+              27.704998
+            ],
+            [
+              85.315165,
+              27.704908
+            ],
+            [
+              85.315368,
+              27.704911
+            ],
+            [
+              85.315366,
+              27.705001
+            ],
+            [
+              85.315468,
+              27.705002
+            ],
+            [
+              85.315469,
+              27.704912
+            ],
+            [
+              85.315672,
+              27.704914
+            ],
+            [
+              85.315671,
+              27.705005
+            ],
+            [
+              85.315772,
+              27.705006
+            ],
+            [
+              85.315771,
+              27.705096
+            ],
+            [
+              85.315973,
+              27.705099
+            ],
+            [
+              85.315975,
+              27.705008
+            ],
+            [
+              85.316076,
+              27.70501
+            ],
+            [
+              85.316073,
+              27.70519
+            ],
+            [
+              85.315871,
+              27.705188
+            ],
+            [
+              85.315869,
+              27.705278
+            ],
+            [
+              85.315464,
+              27.705273
+            ],
+            [
+              85.315462,
+              27.705363
+            ],
+            [
+              85.315259,
+              27.705361
+            ],
+            [
+              85.315258,
+              27.705451
+            ],
+            [
+              85.314852,
+              27.705446
+            ]
+          ]
+        ]
+      },
+      "input_raster": "data/processed/m4/kathmandu_m4/delta_ndwi.tif",
+      "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndwi.tif",
+      "interpretation": {
+        "title": "\u25bc Candidate NDWI decrease \u00b7 Region 13",
+        "location": "Region 13 \u00b7 centroid 85.3153\u00b0E, 27.7051\u00b0N \u00b7 0.48 ha",
+        "observation_period": "2020-03-31 \u2192 2025-03-29 (median composites)",
+        "observed_measurement": "Mean \u0394NDWI -0.197 index units (median -0.193 index units) at the recorded threshold |\u0394| \u2265 0.15; 48 px = 0.48 ha = 0.11 % of the 43,728-px shared-valid footprint.",
+        "meaning": "A NDWI decrease here marks where the later composite reads lower in NDWI. For NDBI this is a candidate built-up/impervious-surface signal \u2014 NOT a building detector; bare soil and construction sites raise NDBI the same way.",
+        "explanations": [
+          "New or extended impervious surfaces (candidate built-up change).",
+          "Bare soil, construction sites or cleared ground between the windows.",
+          "Vegetation loss on the \u0394NDVI counter-evidence panel."
+        ],
+        "evidence_strength": "Shared-valid coverage for this comparison is 100.00 % of the AOI (43,728 px). The region is a connected 48-px component at a stated threshold \u2014 adjacent pixels are not independent observations, so no significance is claimed. Candidate spectral signal with stated thresholds, not independently verified change.",
+        "cannot_conclude": [
+          "That individual buildings were newly constructed (10 m pixels cannot resolve buildings).",
+          "Verified urban expansion without independent evidence."
+        ],
+        "source": {
+          "experiment_id": "kathmandu_m4",
+          "input_raster": "data/processed/m4/kathmandu_m4/delta_ndwi.tif",
+          "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndwi.tif",
+          "method": "frozen M1 difference rasters + common-valid masks"
+        }
+      }
+    },
+    {
+      "id": "region_14",
+      "display_id": "Region 14",
+      "index": "ndwi",
+      "direction": "decrease",
+      "threshold": 0.15,
+      "pixel_count": 28,
+      "area_ha": 0.28,
+      "share_of_common_valid_percent": 0.064,
+      "mean_delta": -0.230217,
+      "median_delta": -0.230786,
+      "common_valid_pixels": 43728,
+      "centroid_utm": [
+        334020.0,
+        3066344.0
+      ],
+      "centroid_lonlat": [
+        85.316488,
+        27.711188
+      ],
+      "geometry_wgs84": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.316483,
+              27.711513
+            ],
+            [
+              85.316485,
+              27.711423
+            ],
+            [
+              85.316282,
+              27.71142
+            ],
+            [
+              85.316283,
+              27.71133
+            ],
+            [
+              85.316182,
+              27.711329
+            ],
+            [
+              85.316183,
+              27.711238
+            ],
+            [
+              85.316487,
+              27.711242
+            ],
+            [
+              85.316489,
+              27.711152
+            ],
+            [
+              85.316387,
+              27.711151
+            ],
+            [
+              85.316389,
+              27.71106
+            ],
+            [
+              85.316186,
+              27.711058
+            ],
+            [
+              85.316187,
+              27.710968
+            ],
+            [
+              85.316289,
+              27.710969
+            ],
+            [
+              85.31629,
+              27.710879
+            ],
+            [
+              85.316493,
+              27.710881
+            ],
+            [
+              85.316494,
+              27.710791
+            ],
+            [
+              85.316697,
+              27.710793
+            ],
+            [
+              85.316692,
+              27.711154
+            ],
+            [
+              85.316793,
+              27.711156
+            ],
+            [
+              85.316792,
+              27.711246
+            ],
+            [
+              85.316893,
+              27.711247
+            ],
+            [
+              85.316892,
+              27.711337
+            ],
+            [
+              85.316689,
+              27.711335
+            ],
+            [
+              85.316686,
+              27.711515
+            ],
+            [
+              85.316483,
+              27.711513
+            ]
+          ]
+        ]
+      },
+      "input_raster": "data/processed/m4/kathmandu_m4/delta_ndwi.tif",
+      "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndwi.tif",
+      "interpretation": {
+        "title": "\u25bc Candidate NDWI decrease \u00b7 Region 14",
+        "location": "Region 14 \u00b7 centroid 85.3165\u00b0E, 27.7112\u00b0N \u00b7 0.28 ha",
+        "observation_period": "2020-03-31 \u2192 2025-03-29 (median composites)",
+        "observed_measurement": "Mean \u0394NDWI -0.230 index units (median -0.231 index units) at the recorded threshold |\u0394| \u2265 0.15; 28 px = 0.28 ha = 0.06 % of the 43,728-px shared-valid footprint.",
+        "meaning": "A NDWI decrease here marks where the later composite reads lower in NDWI. For NDBI this is a candidate built-up/impervious-surface signal \u2014 NOT a building detector; bare soil and construction sites raise NDBI the same way.",
+        "explanations": [
+          "New or extended impervious surfaces (candidate built-up change).",
+          "Bare soil, construction sites or cleared ground between the windows.",
+          "Vegetation loss on the \u0394NDVI counter-evidence panel."
+        ],
+        "evidence_strength": "Shared-valid coverage for this comparison is 100.00 % of the AOI (43,728 px). The region is a connected 28-px component at a stated threshold \u2014 adjacent pixels are not independent observations, so no significance is claimed. Candidate spectral signal with stated thresholds, not independently verified change.",
+        "cannot_conclude": [
+          "That individual buildings were newly constructed (10 m pixels cannot resolve buildings).",
+          "Verified urban expansion without independent evidence."
+        ],
+        "source": {
+          "experiment_id": "kathmandu_m4",
+          "input_raster": "data/processed/m4/kathmandu_m4/delta_ndwi.tif",
+          "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndwi.tif",
+          "method": "frozen M1 difference rasters + common-valid masks"
+        }
+      }
+    },
+    {
+      "id": "region_15",
+      "display_id": "Region 15",
+      "index": "ndwi",
+      "direction": "increase",
+      "threshold": 0.15,
+      "pixel_count": 253,
+      "area_ha": 2.53,
+      "share_of_common_valid_percent": 0.5786,
+      "mean_delta": 0.192066,
+      "median_delta": 0.185356,
+      "common_valid_pixels": 43728,
+      "centroid_utm": [
+        333923.38,
+        3065408.92
+      ],
+      "centroid_lonlat": [
+        85.315638,
+        27.702738
+      ],
+      "geometry_wgs84": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.316197,
+              27.703747
+            ],
+            [
+              85.316198,
+              27.703657
+            ],
+            [
+              85.316097,
+              27.703656
+            ],
+            [
+              85.316098,
+              27.703566
+            ],
+            [
+              85.315895,
+              27.703563
+            ],
+            [
+              85.315897,
+              27.703473
+            ],
+            [
+              85.315998,
+              27.703474
+            ],
+            [
+              85.316002,
+              27.703204
+            ],
+            [
+              85.315901,
+              27.703202
+            ],
+            [
+              85.3159,
+              27.703293
+            ],
+            [
+              85.315798,
+              27.703291
+            ],
+            [
+              85.315797,
+              27.703382
+            ],
+            [
+              85.315695,
+              27.70338
+            ],
+            [
+              85.315693,
+              27.703561
+            ],
+            [
+              85.315591,
+              27.70356
+            ],
+            [
+              85.31559,
+              27.70365
+            ],
+            [
+              85.315489,
+              27.703649
+            ],
+            [
+              85.31549,
+              27.703558
+            ],
+            [
+              85.315084,
+              27.703553
+            ],
+            [
+              85.315086,
+              27.703463
+            ],
+            [
+              85.314883,
+              27.703461
+            ],
+            [
+              85.314882,
+              27.703551
+            ],
+            [
+              85.31478,
+              27.70355
+            ],
+            [
+              85.314782,
+              27.70346
+            ],
+            [
+              85.31468,
+              27.703458
+            ],
+            [
+              85.314682,
+              27.703368
+            ],
+            [
+              85.314986,
+              27.703372
+            ],
+            [
+              85.314987,
+              27.703282
+            ],
+            [
+              85.314886,
+              27.70328
+            ],
+            [
+              85.314889,
+              27.7031
+            ],
+            [
+              85.314787,
+              27.703099
+            ],
+            [
+              85.314794,
+              27.702647
+            ],
+            [
+              85.314693,
+              27.702646
+            ],
+            [
+              85.314698,
+              27.702285
+            ],
+            [
+              85.314901,
+              27.702288
+            ],
+            [
+              85.314902,
+              27.702197
+            ],
+            [
+              85.314801,
+              27.702196
+            ],
+            [
+              85.314802,
+              27.702106
+            ],
+            [
+              85.315309,
+              27.702112
+            ],
+            [
+              85.315308,
+              27.702202
+            ],
+            [
+              85.315409,
+              27.702204
+            ],
+            [
+              85.315412,
+              27.702023
+            ],
+            [
+              85.315919,
+              27.702029
+            ],
+            [
+              85.315926,
+              27.701578
+            ],
+            [
+              85.316027,
+              27.701579
+            ],
+            [
+              85.316032,
+              27.701309
+            ],
+            [
+              85.316133,
+              27.70131
+            ],
+            [
+              85.316126,
+              27.701761
+            ],
+            [
+              85.316025,
+              27.70176
+            ],
+            [
+              85.316022,
+              27.70194
+            ],
+            [
+              85.316123,
+              27.701942
+            ],
+            [
+              85.316122,
+              27.702032
+            ],
+            [
+              85.316223,
+              27.702033
+            ],
+            [
+              85.316233,
+              27.701401
+            ],
+            [
+              85.316334,
+              27.701403
+            ],
+            [
+              85.316337,
+              27.701222
+            ],
+            [
+              85.316438,
+              27.701223
+            ],
+            [
+              85.316429,
+              27.701855
+            ],
+            [
+              85.316327,
+              27.701854
+            ],
+            [
+              85.316316,
+              27.702576
+            ],
+            [
+              85.316418,
+              27.702577
+            ],
+            [
+              85.316416,
+              27.702667
+            ],
+            [
+              85.316315,
+              27.702666
+            ],
+            [
+              85.316298,
+              27.703749
+            ],
+            [
+              85.316197,
+              27.703747
+            ]
+          ]
+        ]
+      },
+      "input_raster": "data/processed/m4/kathmandu_m4/delta_ndwi.tif",
+      "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndwi.tif",
+      "interpretation": {
+        "title": "\u25b2 Candidate NDWI increase \u00b7 Region 15",
+        "location": "Region 15 \u00b7 centroid 85.3156\u00b0E, 27.7027\u00b0N \u00b7 2.53 ha",
+        "observation_period": "2020-03-31 \u2192 2025-03-29 (median composites)",
+        "observed_measurement": "Mean \u0394NDWI +0.192 index units (median +0.185 index units) at the recorded threshold |\u0394| \u2265 0.15; 253 px = 2.53 ha = 0.58 % of the 43,728-px shared-valid footprint.",
+        "meaning": "A NDWI increase here marks where the later composite reads higher in NDWI. For NDBI this is a candidate built-up/impervious-surface signal \u2014 NOT a building detector; bare soil and construction sites raise NDBI the same way.",
+        "explanations": [
+          "New or extended impervious surfaces (candidate built-up change).",
+          "Bare soil, construction sites or cleared ground between the windows.",
+          "Vegetation loss on the \u0394NDVI counter-evidence panel."
+        ],
+        "evidence_strength": "Shared-valid coverage for this comparison is 100.00 % of the AOI (43,728 px). The region is a connected 253-px component at a stated threshold \u2014 adjacent pixels are not independent observations, so no significance is claimed. Candidate spectral signal with stated thresholds, not independently verified change.",
+        "cannot_conclude": [
+          "That individual buildings were newly constructed (10 m pixels cannot resolve buildings).",
+          "Verified urban expansion without independent evidence."
+        ],
+        "source": {
+          "experiment_id": "kathmandu_m4",
+          "input_raster": "data/processed/m4/kathmandu_m4/delta_ndwi.tif",
+          "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndwi.tif",
+          "method": "frozen M1 difference rasters + common-valid masks"
+        }
+      }
+    },
+    {
+      "id": "region_16",
+      "display_id": "Region 16",
+      "index": "ndwi",
+      "direction": "increase",
+      "threshold": 0.15,
+      "pixel_count": 194,
+      "area_ha": 1.94,
+      "share_of_common_valid_percent": 0.4437,
+      "mean_delta": 0.382437,
+      "median_delta": 0.40109,
+      "common_valid_pixels": 43728,
+      "centroid_utm": [
+        333914.76,
+        3065984.76
+      ],
+      "centroid_lonlat": [
+        85.315471,
+        27.707933
+      ],
+      "geometry_wgs84": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.31501,
+              27.708426
+            ],
+            [
+              85.315011,
+              27.708336
+            ],
+            [
+              85.314605,
+              27.708331
+            ],
+            [
+              85.314618,
+              27.707519
+            ],
+            [
+              85.314516,
+              27.707518
+            ],
+            [
+              85.314519,
+              27.707337
+            ],
+            [
+              85.314621,
+              27.707338
+            ],
+            [
+              85.314622,
+              27.707248
+            ],
+            [
+              85.316143,
+              27.707267
+            ],
+            [
+              85.316141,
+              27.707357
+            ],
+            [
+              85.316243,
+              27.707358
+            ],
+            [
+              85.316232,
+              27.70808
+            ],
+            [
+              85.316333,
+              27.708081
+            ],
+            [
+              85.316332,
+              27.708172
+            ],
+            [
+              85.31623,
+              27.70817
+            ],
+            [
+              85.316229,
+              27.708261
+            ],
+            [
+              85.316128,
+              27.708259
+            ],
+            [
+              85.316126,
+              27.70835
+            ],
+            [
+              85.315112,
+              27.708337
+            ],
+            [
+              85.315111,
+              27.708428
+            ],
+            [
+              85.31501,
+              27.708426
+            ]
+          ]
+        ]
+      },
+      "input_raster": "data/processed/m4/kathmandu_m4/delta_ndwi.tif",
+      "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndwi.tif",
+      "interpretation": {
+        "title": "\u25b2 Candidate NDWI increase \u00b7 Region 16",
+        "location": "Region 16 \u00b7 centroid 85.3155\u00b0E, 27.7079\u00b0N \u00b7 1.94 ha",
+        "observation_period": "2020-03-31 \u2192 2025-03-29 (median composites)",
+        "observed_measurement": "Mean \u0394NDWI +0.382 index units (median +0.401 index units) at the recorded threshold |\u0394| \u2265 0.15; 194 px = 1.94 ha = 0.44 % of the 43,728-px shared-valid footprint.",
+        "meaning": "A NDWI increase here marks where the later composite reads higher in NDWI. For NDBI this is a candidate built-up/impervious-surface signal \u2014 NOT a building detector; bare soil and construction sites raise NDBI the same way.",
+        "explanations": [
+          "New or extended impervious surfaces (candidate built-up change).",
+          "Bare soil, construction sites or cleared ground between the windows.",
+          "Vegetation loss on the \u0394NDVI counter-evidence panel."
+        ],
+        "evidence_strength": "Shared-valid coverage for this comparison is 100.00 % of the AOI (43,728 px). The region is a connected 194-px component at a stated threshold \u2014 adjacent pixels are not independent observations, so no significance is claimed. Candidate spectral signal with stated thresholds, not independently verified change.",
+        "cannot_conclude": [
+          "That individual buildings were newly constructed (10 m pixels cannot resolve buildings).",
+          "Verified urban expansion without independent evidence."
+        ],
+        "source": {
+          "experiment_id": "kathmandu_m4",
+          "input_raster": "data/processed/m4/kathmandu_m4/delta_ndwi.tif",
+          "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndwi.tif",
+          "method": "frozen M1 difference rasters + common-valid masks"
+        }
+      }
+    },
+    {
+      "id": "region_17",
+      "display_id": "Region 17",
+      "index": "ndwi",
+      "direction": "increase",
+      "threshold": 0.15,
+      "pixel_count": 136,
+      "area_ha": 1.36,
+      "share_of_common_valid_percent": 0.311,
+      "mean_delta": 0.201836,
+      "median_delta": 0.190781,
+      "common_valid_pixels": 43728,
+      "centroid_utm": [
+        334226.92,
+        3065287.08
+      ],
+      "centroid_lonlat": [
+        85.318733,
+        27.701676
+      ],
+      "geometry_wgs84": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.318751,
+              27.702515
+            ],
+            [
+              85.318754,
+              27.702335
+            ],
+            [
+              85.318652,
+              27.702333
+            ],
+            [
+              85.318655,
+              27.702153
+            ],
+            [
+              85.318756,
+              27.702154
+            ],
+            [
+              85.318758,
+              27.702064
+            ],
+            [
+              85.318555,
+              27.702061
+            ],
+            [
+              85.318551,
+              27.702332
+            ],
+            [
+              85.318449,
+              27.702331
+            ],
+            [
+              85.318448,
+              27.702421
+            ],
+            [
+              85.318245,
+              27.702419
+            ],
+            [
+              85.318248,
+              27.702238
+            ],
+            [
+              85.318349,
+              27.702239
+            ],
+            [
+              85.318351,
+              27.702149
+            ],
+            [
+              85.318452,
+              27.70215
+            ],
+            [
+              85.318454,
+              27.70206
+            ],
+            [
+              85.318251,
+              27.702058
+            ],
+            [
+              85.318252,
+              27.701967
+            ],
+            [
+              85.318354,
+              27.701969
+            ],
+            [
+              85.318361,
+              27.701517
+            ],
+            [
+              85.318665,
+              27.701521
+            ],
+            [
+              85.318666,
+              27.701431
+            ],
+            [
+              85.318767,
+              27.701432
+            ],
+            [
+              85.318769,
+              27.701342
+            ],
+            [
+              85.318667,
+              27.701341
+            ],
+            [
+              85.318669,
+              27.70125
+            ],
+            [
+              85.318466,
+              27.701248
+            ],
+            [
+              85.318463,
+              27.701428
+            ],
+            [
+              85.318362,
+              27.701427
+            ],
+            [
+              85.318363,
+              27.701337
+            ],
+            [
+              85.318262,
+              27.701336
+            ],
+            [
+              85.318263,
+              27.701245
+            ],
+            [
+              85.318162,
+              27.701244
+            ],
+            [
+              85.318166,
+              27.700974
+            ],
+            [
+              85.318369,
+              27.700976
+            ],
+            [
+              85.31837,
+              27.700886
+            ],
+            [
+              85.318472,
+              27.700887
+            ],
+            [
+              85.318473,
+              27.700797
+            ],
+            [
+              85.318676,
+              27.700799
+            ],
+            [
+              85.318677,
+              27.700709
+            ],
+            [
+              85.31888,
+              27.700711
+            ],
+            [
+              85.318879,
+              27.700802
+            ],
+            [
+              85.31898,
+              27.700803
+            ],
+            [
+              85.318979,
+              27.700893
+            ],
+            [
+              85.319181,
+              27.700896
+            ],
+            [
+              85.319179,
+              27.701076
+            ],
+            [
+              85.319381,
+              27.701079
+            ],
+            [
+              85.319376,
+              27.70144
+            ],
+            [
+              85.319477,
+              27.701441
+            ],
+            [
+              85.319472,
+              27.701802
+            ],
+            [
+              85.31937,
+              27.7018
+            ],
+            [
+              85.319372,
+              27.70171
+            ],
+            [
+              85.31927,
+              27.701709
+            ],
+            [
+              85.319269,
+              27.701799
+            ],
+            [
+              85.319167,
+              27.701798
+            ],
+            [
+              85.319166,
+              27.701888
+            ],
+            [
+              85.319065,
+              27.701887
+            ],
+            [
+              85.319063,
+              27.701977
+            ],
+            [
+              85.318962,
+              27.701976
+            ],
+            [
+              85.318958,
+              27.702247
+            ],
+            [
+              85.319059,
+              27.702248
+            ],
+            [
+              85.319056,
+              27.702428
+            ],
+            [
+              85.318955,
+              27.702427
+            ],
+            [
+              85.318954,
+              27.702517
+            ],
+            [
+              85.318751,
+              27.702515
+            ]
+          ]
+        ]
+      },
+      "input_raster": "data/processed/m4/kathmandu_m4/delta_ndwi.tif",
+      "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndwi.tif",
+      "interpretation": {
+        "title": "\u25b2 Candidate NDWI increase \u00b7 Region 17",
+        "location": "Region 17 \u00b7 centroid 85.3187\u00b0E, 27.7017\u00b0N \u00b7 1.36 ha",
+        "observation_period": "2020-03-31 \u2192 2025-03-29 (median composites)",
+        "observed_measurement": "Mean \u0394NDWI +0.202 index units (median +0.191 index units) at the recorded threshold |\u0394| \u2265 0.15; 136 px = 1.36 ha = 0.31 % of the 43,728-px shared-valid footprint.",
+        "meaning": "A NDWI increase here marks where the later composite reads higher in NDWI. For NDBI this is a candidate built-up/impervious-surface signal \u2014 NOT a building detector; bare soil and construction sites raise NDBI the same way.",
+        "explanations": [
+          "New or extended impervious surfaces (candidate built-up change).",
+          "Bare soil, construction sites or cleared ground between the windows.",
+          "Vegetation loss on the \u0394NDVI counter-evidence panel."
+        ],
+        "evidence_strength": "Shared-valid coverage for this comparison is 100.00 % of the AOI (43,728 px). The region is a connected 136-px component at a stated threshold \u2014 adjacent pixels are not independent observations, so no significance is claimed. Candidate spectral signal with stated thresholds, not independently verified change.",
+        "cannot_conclude": [
+          "That individual buildings were newly constructed (10 m pixels cannot resolve buildings).",
+          "Verified urban expansion without independent evidence."
+        ],
+        "source": {
+          "experiment_id": "kathmandu_m4",
+          "input_raster": "data/processed/m4/kathmandu_m4/delta_ndwi.tif",
+          "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndwi.tif",
+          "method": "frozen M1 difference rasters + common-valid masks"
+        }
+      }
+    },
+    {
+      "id": "region_18",
+      "display_id": "Region 18",
+      "index": "ndwi",
+      "direction": "increase",
+      "threshold": 0.15,
+      "pixel_count": 132,
+      "area_ha": 1.32,
+      "share_of_common_valid_percent": 0.3019,
+      "mean_delta": 0.22302,
+      "median_delta": 0.206603,
+      "common_valid_pixels": 43728,
+      "centroid_utm": [
+        333825.12,
+        3066499.02
+      ],
+      "centroid_lonlat": [
+        85.314491,
+        27.712563
+      ],
+      "geometry_wgs84": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.314326,
+              27.713292
+            ],
+            [
+              85.314328,
+              27.713201
+            ],
+            [
+              85.314226,
+              27.7132
+            ],
+            [
+              85.314232,
+              27.712839
+            ],
+            [
+              85.31413,
+              27.712838
+            ],
+            [
+              85.314128,
+              27.713019
+            ],
+            [
+              85.313925,
+              27.713016
+            ],
+            [
+              85.313926,
+              27.712926
+            ],
+            [
+              85.313825,
+              27.712925
+            ],
+            [
+              85.313828,
+              27.712744
+            ],
+            [
+              85.31403,
+              27.712747
+            ],
+            [
+              85.314032,
+              27.712656
+            ],
+            [
+              85.314336,
+              27.71266
+            ],
+            [
+              85.314337,
+              27.71257
+            ],
+            [
+              85.314439,
+              27.712571
+            ],
+            [
+              85.314446,
+              27.71212
+            ],
+            [
+              85.314344,
+              27.712119
+            ],
+            [
+              85.314346,
+              27.712028
+            ],
+            [
+              85.314041,
+              27.712025
+            ],
+            [
+              85.314046,
+              27.711754
+            ],
+            [
+              85.314147,
+              27.711755
+            ],
+            [
+              85.314148,
+              27.711665
+            ],
+            [
+              85.314655,
+              27.711671
+            ],
+            [
+              85.314657,
+              27.711581
+            ],
+            [
+              85.31486,
+              27.711583
+            ],
+            [
+              85.314855,
+              27.711854
+            ],
+            [
+              85.314957,
+              27.711855
+            ],
+            [
+              85.31495,
+              27.712307
+            ],
+            [
+              85.315051,
+              27.712308
+            ],
+            [
+              85.315047,
+              27.712578
+            ],
+            [
+              85.314946,
+              27.712577
+            ],
+            [
+              85.314944,
+              27.712667
+            ],
+            [
+              85.314843,
+              27.712666
+            ],
+            [
+              85.31484,
+              27.712847
+            ],
+            [
+              85.314942,
+              27.712848
+            ],
+            [
+              85.314939,
+              27.713028
+            ],
+            [
+              85.31504,
+              27.71303
+            ],
+            [
+              85.315037,
+              27.71321
+            ],
+            [
+              85.314835,
+              27.713208
+            ],
+            [
+              85.314833,
+              27.713298
+            ],
+            [
+              85.314326,
+              27.713292
+            ]
+          ]
+        ]
+      },
+      "input_raster": "data/processed/m4/kathmandu_m4/delta_ndwi.tif",
+      "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndwi.tif",
+      "interpretation": {
+        "title": "\u25b2 Candidate NDWI increase \u00b7 Region 18",
+        "location": "Region 18 \u00b7 centroid 85.3145\u00b0E, 27.7126\u00b0N \u00b7 1.32 ha",
+        "observation_period": "2020-03-31 \u2192 2025-03-29 (median composites)",
+        "observed_measurement": "Mean \u0394NDWI +0.223 index units (median +0.207 index units) at the recorded threshold |\u0394| \u2265 0.15; 132 px = 1.32 ha = 0.30 % of the 43,728-px shared-valid footprint.",
+        "meaning": "A NDWI increase here marks where the later composite reads higher in NDWI. For NDBI this is a candidate built-up/impervious-surface signal \u2014 NOT a building detector; bare soil and construction sites raise NDBI the same way.",
+        "explanations": [
+          "New or extended impervious surfaces (candidate built-up change).",
+          "Bare soil, construction sites or cleared ground between the windows.",
+          "Vegetation loss on the \u0394NDVI counter-evidence panel."
+        ],
+        "evidence_strength": "Shared-valid coverage for this comparison is 100.00 % of the AOI (43,728 px). The region is a connected 132-px component at a stated threshold \u2014 adjacent pixels are not independent observations, so no significance is claimed. Candidate spectral signal with stated thresholds, not independently verified change.",
+        "cannot_conclude": [
+          "That individual buildings were newly constructed (10 m pixels cannot resolve buildings).",
+          "Verified urban expansion without independent evidence."
+        ],
+        "source": {
+          "experiment_id": "kathmandu_m4",
+          "input_raster": "data/processed/m4/kathmandu_m4/delta_ndwi.tif",
+          "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndwi.tif",
+          "method": "frozen M1 difference rasters + common-valid masks"
+        }
+      }
+    },
+    {
+      "id": "region_19",
+      "display_id": "Region 19",
+      "index": "ndwi",
+      "direction": "increase",
+      "threshold": 0.15,
+      "pixel_count": 91,
+      "area_ha": 0.91,
+      "share_of_common_valid_percent": 0.2081,
+      "mean_delta": 0.248227,
+      "median_delta": 0.232481,
+      "common_valid_pixels": 43728,
+      "centroid_utm": [
+        334593.83,
+        3064613.83
+      ],
+      "centroid_lonlat": [
+        85.322545,
+        27.695646
+      ],
+      "geometry_wgs84": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.322699,
+              27.696335
+            ],
+            [
+              85.3227,
+              27.696245
+            ],
+            [
+              85.322802,
+              27.696246
+            ],
+            [
+              85.322807,
+              27.695885
+            ],
+            [
+              85.322706,
+              27.695884
+            ],
+            [
+              85.322707,
+              27.695794
+            ],
+            [
+              85.322302,
+              27.695789
+            ],
+            [
+              85.322304,
+              27.695608
+            ],
+            [
+              85.322203,
+              27.695607
+            ],
+            [
+              85.322204,
+              27.695517
+            ],
+            [
+              85.322103,
+              27.695516
+            ],
+            [
+              85.3221,
+              27.695696
+            ],
+            [
+              85.321999,
+              27.695695
+            ],
+            [
+              85.321996,
+              27.695875
+            ],
+            [
+              85.321793,
+              27.695873
+            ],
+            [
+              85.321797,
+              27.695602
+            ],
+            [
+              85.321696,
+              27.695601
+            ],
+            [
+              85.321703,
+              27.69515
+            ],
+            [
+              85.321906,
+              27.695152
+            ],
+            [
+              85.321908,
+              27.694972
+            ],
+            [
+              85.322314,
+              27.694977
+            ],
+            [
+              85.322313,
+              27.695067
+            ],
+            [
+              85.322515,
+              27.695069
+            ],
+            [
+              85.322514,
+              27.69516
+            ],
+            [
+              85.322615,
+              27.695161
+            ],
+            [
+              85.322614,
+              27.695251
+            ],
+            [
+              85.322715,
+              27.695252
+            ],
+            [
+              85.322714,
+              27.695343
+            ],
+            [
+              85.322613,
+              27.695341
+            ],
+            [
+              85.32261,
+              27.695522
+            ],
+            [
+              85.322711,
+              27.695523
+            ],
+            [
+              85.32271,
+              27.695613
+            ],
+            [
+              85.322811,
+              27.695615
+            ],
+            [
+              85.322813,
+              27.695524
+            ],
+            [
+              85.322914,
+              27.695526
+            ],
+            [
+              85.322913,
+              27.695616
+            ],
+            [
+              85.323014,
+              27.695617
+            ],
+            [
+              85.323013,
+              27.695707
+            ],
+            [
+              85.323114,
+              27.695709
+            ],
+            [
+              85.323111,
+              27.695889
+            ],
+            [
+              85.32301,
+              27.695888
+            ],
+            [
+              85.323008,
+              27.695978
+            ],
+            [
+              85.322907,
+              27.695977
+            ],
+            [
+              85.322904,
+              27.696157
+            ],
+            [
+              85.323006,
+              27.696158
+            ],
+            [
+              85.323003,
+              27.696339
+            ],
+            [
+              85.322699,
+              27.696335
+            ]
+          ]
+        ]
+      },
+      "input_raster": "data/processed/m4/kathmandu_m4/delta_ndwi.tif",
+      "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndwi.tif",
+      "interpretation": {
+        "title": "\u25b2 Candidate NDWI increase \u00b7 Region 19",
+        "location": "Region 19 \u00b7 centroid 85.3225\u00b0E, 27.6956\u00b0N \u00b7 0.91 ha",
+        "observation_period": "2020-03-31 \u2192 2025-03-29 (median composites)",
+        "observed_measurement": "Mean \u0394NDWI +0.248 index units (median +0.232 index units) at the recorded threshold |\u0394| \u2265 0.15; 91 px = 0.91 ha = 0.21 % of the 43,728-px shared-valid footprint.",
+        "meaning": "A NDWI increase here marks where the later composite reads higher in NDWI. For NDBI this is a candidate built-up/impervious-surface signal \u2014 NOT a building detector; bare soil and construction sites raise NDBI the same way.",
+        "explanations": [
+          "New or extended impervious surfaces (candidate built-up change).",
+          "Bare soil, construction sites or cleared ground between the windows.",
+          "Vegetation loss on the \u0394NDVI counter-evidence panel."
+        ],
+        "evidence_strength": "Shared-valid coverage for this comparison is 100.00 % of the AOI (43,728 px). The region is a connected 91-px component at a stated threshold \u2014 adjacent pixels are not independent observations, so no significance is claimed. Candidate spectral signal with stated thresholds, not independently verified change.",
+        "cannot_conclude": [
+          "That individual buildings were newly constructed (10 m pixels cannot resolve buildings).",
+          "Verified urban expansion without independent evidence."
+        ],
+        "source": {
+          "experiment_id": "kathmandu_m4",
+          "input_raster": "data/processed/m4/kathmandu_m4/delta_ndwi.tif",
+          "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndwi.tif",
+          "method": "frozen M1 difference rasters + common-valid masks"
+        }
+      }
+    }
+  ],
+  "overview": {
+    "findings_total": 19,
+    "by_direction": {
+      "decrease": 8,
+      "increase": 11
+    },
+    "signal_types": [
+      "NDBI",
+      "NDVI",
+      "NDWI"
+    ],
+    "no_finding_statement": null
+  },
+  "limitations": [
+    "Bare soil, construction sites and dry riverbeds mimic built-up spectra.",
+    "NDBI is a feature, not a building label.",
+    "Agriculture/forest boundary ambiguity.",
+    "The following indices use 20 m SWIR bands resampled to the 10 m analysis grid and contain no genuine 10 m SWIR detail: ndbi.",
+    "Composites are robust within-period summaries of a few observations, not a dense time series; inter-annual change is represented by two period composites only.",
+    "Index differences are candidate spectral signals. They are not verified deforestation, wetland loss, construction, glacier damage or any other causal land-cover label.",
+    "Cloud, shadow and saturated-pixel exclusion relies on the provider SCL product; terrain shadow is not independently re-derived.",
+    "Surface reflectance is the provider L2A product; no independent atmospheric correction is performed.",
+    "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
+  ]
+}
