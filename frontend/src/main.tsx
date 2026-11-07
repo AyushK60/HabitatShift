@@ -13,6 +13,9 @@ import "./styles/base.css";
 import "./styles/shell.css";
 import "./styles/swipe.css";
 import "./styles/landing.css";
+import "./styles/experiments.css";
+import "./styles/methods.css";
+import "./styles/workstation.css";
 import App from "./App";
 
 createRoot(document.getElementById("root")!).render(

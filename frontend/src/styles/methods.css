@@ -1,0 +1,101 @@
+/* Methods & exports page. */
+
+.methods-page {
+  max-width: var(--shell-max);
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 3rem;
+}
+
+.methods-head h1 {
+  font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+  color: var(--teal);
+  margin: 0 0 0.8rem;
+  max-width: 32ch;
+}
+
+.methods-lede {
+  max-width: 76ch;
+  color: var(--text-soft);
+}
+
+.methods-grid {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.8rem 3rem;
+}
+
+.method-entry {
+  border-top: 2px solid var(--sea-glass);
+  padding-top: 0.7rem;
+}
+
+.method-entry h2 {
+  font-size: 1.15rem;
+  color: var(--teal);
+  margin: 0 0 0.5rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+}
+
+.method-number {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--copper-deep);
+}
+
+.method-entry p {
+  font-size: 0.86rem;
+  line-height: 1.6;
+  color: var(--text-note);
+  margin: 0 0 0.55rem;
+}
+
+.methods-sep {
+  margin-top: 3rem;
+  padding-top: 1.4rem;
+  border-top: 2px solid var(--teal);
+}
+
+.methods-sep h2 {
+  font-size: 1.4rem;
+  color: var(--teal);
+  margin: 0 0 0.7rem;
+}
+
+.methods-list {
+  margin: 0;
+  padding-left: 1.15rem;
+  font-size: 0.88rem;
+  color: var(--text-note);
+  display: grid;
+  gap: 0.45rem;
+  max-width: 90ch;
+}
+
+.methods-note {
+  font-size: 0.86rem;
+  color: var(--text-note);
+  max-width: 90ch;
+  margin: 0.6rem 0 0;
+}
+
+.methods-note code {
+  font-family: var(--mono);
+  font-size: 0.76rem;
+}
+
+.methods-exports {
+  margin: 0;
+  padding-left: 1.15rem;
+  font-size: 0.88rem;
+  display: grid;
+  gap: 0.4rem;
+}
+
+@media (max-width: 900px) {
+  .methods-grid {
+    grid-template-columns: 1fr;
+  }
+}
