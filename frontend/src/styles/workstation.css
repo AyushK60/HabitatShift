@@ -299,6 +299,12 @@
   display: none;
 }
 
+/* M4-R1 §7: opacity mode composites on the primary map, so the later cell
+ * (kept mounted for the map lifecycle) is hidden rather than stacked. */
+.map-stage.mode-opacity .map-cell.map-later {
+  display: none;
+}
+
 /* Change/Quality render on the primary map alone: one full-size cell. */
 .map-stage.single-map {
   display: block;

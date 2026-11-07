@@ -120,6 +120,13 @@ function aoiFeature(summary: M1Summary): GeoJSON.Feature | null {
   return null;
 }
 
+/** Per-map memo of the last image URL applied to each image source
+ *  (M4-R1 §7): content updates (`updateImage`) happen only when the URL
+ *  actually changes; paint-only changes (opacity) never re-fetch or
+ *  re-decode the image, which is what made the opacity slider flicker. */
+type LastImageMemo = WeakMap<MapLibreMap, Record<string, string>>;
+const lastImageMemo: LastImageMemo = new WeakMap();
+
 /** Ensure an image source + raster layer exist on a map and show `url`.
  *  `coordinates` pins the raster to the real grid corners. An empty `url`
  *  hides the layer but never creates a source with an empty image (MapLibre
@@ -145,7 +152,12 @@ function applyImageLayer(
       return;
     }
     if (source && map.getLayer(id)) {
-      source.updateImage({ url, coordinates });
+      const memo = lastImageMemo.get(map) ?? {};
+      if (memo[id] !== url) {
+        source.updateImage({ url, coordinates });
+        memo[id] = url;
+        lastImageMemo.set(map, memo);
+      }
       map.setLayoutProperty(id, "visibility", "visible");
       map.setPaintProperty(id, "raster-opacity", opacity);
       return;
@@ -160,9 +172,18 @@ function applyImageLayer(
       },
       map.getLayer("aoi-line") ? "aoi-line" : undefined
     );
+    const memo = lastImageMemo.get(map) ?? {};
+    memo[id] = url;
+    lastImageMemo.set(map, memo);
   };
   whenStyleReady(map, run);
 }
+
+/** Opacity mode (M4-R1 §7) composites on the PRIMARY map: the later raster
+ *  is a second image source whose `raster-opacity` the slider drives. That
+ *  keeps pan/zoom live (the later map's interaction is disabled by design),
+ *  makes 50% a genuine raster-over-raster blend, and never reloads the
+ *  image while dragging. */
 
 function ensureLineRect(map: MapLibreMap, box: RoiBox | null) {
   const run = () => {
@@ -487,11 +508,16 @@ export function MapCompare({
       applyImageLayer(earlier, "layer-earlier", layerUrlEarlier, coordinates, 1);
       applyImageLayer(earlier, "validity-overlay", earlierOverlay, coordinates);
       if (later) {
-        applyImageLayer(later, "layer-later", layerUrlLater, coordinates, 1);
-        applyImageLayer(later, "validity-overlay", laterOverlay, coordinates);
-        // Opacity mode: stack the later raster over the earlier one on the
-        // primary map too is unnecessary — the later map itself fades.
-        applyImageLayer(later, "layer-later", layerUrlLater, coordinates, mode === "opacity" ? opacity : 1);
+        if (mode === "opacity") {
+          // Single-map blend: the later raster lives on the primary map and
+          // only its paint opacity changes with the slider (M4-R1 §7).
+          applyImageLayer(earlier, "layer-later", layerUrlLater, coordinates, opacity);
+          applyImageLayer(later, "layer-later", "", coordinates);
+        } else {
+          applyImageLayer(earlier, "layer-later", "", coordinates);
+          applyImageLayer(later, "layer-later", layerUrlLater, coordinates, 1);
+          applyImageLayer(later, "validity-overlay", laterOverlay, coordinates);
+        }
       }
     } else {
       const url =
@@ -503,6 +529,7 @@ export function MapCompare({
       if (later) {
         applyImageLayer(later, "layer-later", "", coordinates);
         applyImageLayer(later, "validity-overlay", "", coordinates);
+        applyImageLayer(earlier, "layer-later", "", coordinates);
       }
     }
   }, [
@@ -783,12 +810,15 @@ export function MapCompare({
               : "Quality layer"}
         </span>
       </div>
-      {!singleMap && (
-        <div className="map-cell map-later" data-period="later">
-          <div className="map-host" ref={laterMapDiv} />
-          <span className="map-cell-tag">Later</span>
-        </div>
-      )}
+      {/* M4-R1 §5/§6: the later cell stays mounted for the map's lifetime.
+          Unmounting it orphaned the MapLibre instance (the visible div became
+          an empty host after Historical → Change → Quality → Historical),
+          which blanked the later image and broke swipe. Change/Quality hide
+          the cell with the `.single-map` CSS rule instead of removing it. */}
+      <div className="map-cell map-later" data-period="later">
+        <div className="map-host" ref={laterMapDiv} />
+        <span className="map-cell-tag">Later</span>
+      </div>
       {mode === "swipe" && !singleMap && (
         <div
           className="map-swipe-divider"
