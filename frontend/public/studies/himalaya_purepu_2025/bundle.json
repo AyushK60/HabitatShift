@@ -2,6 +2,7 @@
  "schema": "habitatshift-m4-bundle/1",
  "bundle_version": "1",
  "study_id": "himalaya_purepu_2025",
+ "evidence_status": "partial",
  "study": {
   "study_id": "himalaya_purepu_2025",
   "id": "D1",
@@ -89,7 +90,7 @@
    10.0,
    10.0
   ],
-  "nodata": NaN,
+  "nodata": null,
   "lonlat_bounds": [
    85.61456026346494,
    28.299603337305232,

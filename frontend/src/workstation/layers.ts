@@ -1,14 +1,24 @@
-/** Workstation layer registry.
+/** Workstation layer registry (M4: per-study, bundle-aware).
  *
- * Maps every selectable layer to the preview artefact it actually renders.
- * The mapping is explicit per layer so two selections can never silently
- * resolve to the same asset (M3 brief §8 frontend audit requirement).
+ * Layers are built from the study's recorded summary, so a layer only exists
+ * when the artefact it renders actually exists.  The mapping stays explicit
+ * per layer so two selections can never silently resolve to the same asset
+ * (M3 brief §8 frontend audit requirement).
+ *
+ * All asset URLs come from an {@link AssetResolver}: live mode resolves
+ * through the backend `/files` routes; showcase mode resolves bundled copies.
  */
 import type { M1Summary } from "../api/types";
-import { g0Url, m1PreviewUrl } from "../api/client";
 
 export type Analysis = "historical" | "change" | "quality";
 export type PeriodKey = "earlier" | "later";
+
+export interface AssetResolver {
+  /** URL for a recorded preview relative path ("data/previews/..."). */
+  previewUrl: (relative: string) => string;
+  /** URL for a G0 presentation asset name, or null when unavailable. */
+  g0Url: (name: string) => string | null;
+}
 
 interface LayerBase {
   id: string;
@@ -23,9 +33,8 @@ interface LayerBase {
 
 export interface PeriodLayer extends LayerBase {
   kind: "period";
-  /** Preview file name inside period.previews, or a G0 presentation asset. */
-  previewKey?: string;
-  g0?: (period: PeriodKey) => string;
+  /** Key into the period's recorded previews map. */
+  previewKey: string;
 }
 
 export interface ChangeLayer extends LayerBase {
@@ -37,8 +46,6 @@ export interface QualityLayer extends LayerBase {
   kind: "quality";
   quality: "valid" | "common" | "masked" | "count";
   period?: PeriodKey;
-  /** Observation-count layers render the period's count preview. */
-  previewKey?: string;
 }
 
 export type LayerSpec = PeriodLayer | ChangeLayer | QualityLayer;
@@ -49,207 +56,210 @@ export const NEUTRAL_VALID_SWATCHES = [
   { color: "#5f706c", label: "AOI boundary" },
 ];
 
-export const LAYERS: LayerSpec[] = [
+/** Honest reading notes per index key.  The map is explicit; an index
+ *  without a note fails loudly instead of borrowing another index's note. */
+const INDEX_LEGEND_NOTES: Record<string, { file: string; note: string }> = {
+  ndvi: {
+    file: "ndvi_legend.png",
+    note: "Fixed NDVI ramp for both periods, so equal values share a colour. Charcoal pixels are masked. NDVI is an observed spectral signal, not a land-cover verdict.",
+  },
+  ndwi: {
+    file: "ndwi_legend.png",
+    note: "Fixed NDWI ramp for both periods. Charcoal pixels are masked.",
+  },
+  mndwi: {
+    file: "mndwi_legend.png",
+    note: "Fixed MNDWI ramp. MNDWI uses 20 m SWIR (B11) resampled to the 10 m grid: it contains no genuine 10 m SWIR detail.",
+  },
+  ndsi: {
+    file: "ndsi_legend.png",
+    note: "Fixed NDSI ramp. NDSI (green, SWIR1) indicates snow and ice; on Sentinel-2 its formula is identical to MNDWI, so it reads snow-cover state, not liquid water. Seasonal snow evolution is a major confounder in Himalayan scenes.",
+  },
+  ndbi: {
+    file: "ndbi_legend.png",
+    note: "Fixed NDBI ramp. NDBI (SWIR1, NIR) is a candidate built-up spectral signal — NOT a building detector. Bare soil, construction sites and dry riverbeds can mimic the same signal; use the ΔNDVI and ΔNDWI layers as the counter-evidence panel.",
+  },
+};
+
+const CHANGE_NOTE =
+  "Diverging later − earlier map, saturated at ±0.30 index units. Ivory is no observed change, teal is lower later, copper is higher later, charcoal is outside the common-valid footprint.";
+
+export function buildLayers(summary: M1Summary, resolver: AssetResolver): LayerSpec[] {
+  const layers: LayerSpec[] = [];
+  const periods = summary.periods ?? [];
+  const earlier = periods[0];
+  if (!earlier) return layers;
+
+  const hasPreview = (key: string) => Boolean(earlier.previews?.[key]);
+
   // ------------------------------------------------------------ imagery ---
-  {
-    id: "true_colour",
-    label: "True colour",
-    group: "Imagery",
-    analysis: "historical",
-    kind: "period",
-    previewKey: "true_colour",
-  },
-  {
-    id: "false_colour",
-    label: "False colour",
-    group: "Imagery",
-    analysis: "historical",
-    kind: "period",
-    previewKey: "false_colour",
-  },
-  // ------------------------------------------------------------- indices ---
-  {
-    id: "ndvi",
-    label: "NDVI",
-    group: "Spectral indices",
-    analysis: "historical",
-    kind: "period",
-    previewKey: "ndvi",
-    legend: {
-      file: "ndvi_legend.png",
-      note: "Fixed NDVI ramp for both periods, so equal values share a colour. Charcoal pixels are masked. NDVI is an observed spectral signal, not a land-cover verdict.",
-    },
-  },
-  {
-    id: "ndwi",
-    label: "NDWI",
-    group: "Spectral indices",
-    analysis: "historical",
-    kind: "period",
-    previewKey: "ndwi",
-    legend: {
-      file: "ndwi_legend.png",
-      note: "Fixed NDWI ramp for both periods. Charcoal pixels are masked.",
-    },
-  },
-  {
-    id: "mndwi",
-    label: "MNDWI",
-    group: "Spectral indices",
-    analysis: "historical",
-    kind: "period",
-    previewKey: "mndwi",
-    legend: {
-      file: "mndwi_legend.png",
-      note: "Fixed MNDWI ramp. MNDWI uses 20 m SWIR (B11) resampled to the 10 m grid: it contains no genuine 10 m SWIR detail.",
-    },
-  },
-  // -------------------------------------------------------------- change ---
-  {
-    id: "delta_ndvi",
-    label: "Δ NDVI",
-    group: "Change analysis",
-    analysis: "change",
-    kind: "change",
-    index: "ndvi",
-    legend: {
-      file: "change_legend.png",
-      note: "Diverging later − earlier map, saturated at ±0.30 index units. Ivory is no observed change, teal is lower later, copper is higher later, charcoal is outside the common-valid footprint.",
-    },
-  },
-  {
-    id: "delta_ndwi",
-    label: "Δ NDWI",
-    group: "Change analysis",
-    analysis: "change",
-    kind: "change",
-    index: "ndwi",
-    legend: {
-      file: "change_legend.png",
-      note: "Diverging later − earlier map, saturated at ±0.30 index units. Ivory is no observed change, teal is lower later, copper is higher later.",
-    },
-  },
-  {
-    id: "delta_mndwi",
-    label: "Δ MNDWI",
-    group: "Change analysis",
-    analysis: "change",
-    kind: "change",
-    index: "mndwi",
-    legend: {
-      file: "change_legend.png",
-      note: "Diverging later − earlier map, saturated at ±0.30 index units. Ivory is no observed change, teal is lower later, copper is higher later.",
-    },
-  },
-  // ------------------------------------------------------------- quality ---
-  {
-    id: "qc_valid_earlier",
-    label: "Earlier valid",
-    group: "Validity",
-    analysis: "quality",
-    kind: "quality",
-    quality: "valid",
-    period: "earlier",
-    swatches: NEUTRAL_VALID_SWATCHES,
-  },
-  {
-    id: "qc_valid_later",
-    label: "Later valid",
-    group: "Validity",
-    analysis: "quality",
-    kind: "quality",
-    quality: "valid",
-    period: "later",
-    swatches: NEUTRAL_VALID_SWATCHES,
-  },
-  {
-    id: "qc_valid_common",
-    label: "Shared valid",
-    group: "Validity",
-    analysis: "quality",
-    kind: "quality",
-    quality: "common",
-    swatches: NEUTRAL_VALID_SWATCHES,
-  },
-  {
-    id: "qc_masked",
-    label: "Masked / unavailable",
-    group: "Validity",
-    analysis: "quality",
-    kind: "quality",
-    quality: "masked",
-    swatches: [
-      { color: "#f2f0eb", label: "Inside AOI, observed" },
-      { color: "#18272d", label: "Masked or outside AOI (hatched)" },
-    ],
-  },
-  {
-    id: "qc_count_earlier",
-    label: "Obs. count · earlier",
-    group: "Observation support",
-    analysis: "quality",
-    kind: "quality",
-    quality: "count",
-    period: "earlier",
-    previewKey: "observation_count",
-    legend: {
-      file: "observation_count_legend.png",
-      note: "Discrete count of valid observations behind each composite pixel. Charcoal = 0 valid observations; copper intensity encodes count, never index change.",
-    },
-  },
-  {
-    id: "qc_count_later",
-    label: "Obs. count · later",
-    group: "Observation support",
-    analysis: "quality",
-    kind: "quality",
-    quality: "count",
-    period: "later",
-    previewKey: "observation_count",
-    legend: {
-      file: "observation_count_legend.png",
-      note: "Discrete count of valid observations behind each composite pixel. Charcoal = 0 valid observations; copper intensity encodes count, never index change.",
-    },
-  },
+  if (hasPreview("true_colour")) {
+    layers.push({
+      id: "true_colour",
+      label: "True colour",
+      group: "Imagery",
+      analysis: "historical",
+      kind: "period",
+      previewKey: "true_colour",
+    });
+  }
+  if (hasPreview("false_colour")) {
+    layers.push({
+      id: "false_colour",
+      label: "False colour",
+      group: "Imagery",
+      analysis: "historical",
+      kind: "period",
+      previewKey: "false_colour",
+    });
+  }
+
+  // --------------------------------------------------------- spectral ---
+  for (const key of Object.keys(earlier.indices ?? {})) {
+    if (!hasPreview(key)) continue;
+    const legend = INDEX_LEGEND_NOTES[key];
+    layers.push({
+      id: key,
+      label: key.toUpperCase(),
+      group: "Spectral indices",
+      analysis: "historical",
+      kind: "period",
+      previewKey: key,
+      ...(legend ? { legend } : {}),
+    });
+  }
+
+  // ------------------------------------------------------------ change ---
+  for (const key of Object.keys(summary.change ?? {})) {
+    if (!summary.change[key]?.delta_preview) continue;
+    layers.push({
+      id: `delta_${key}`,
+      label: `Δ ${key.toUpperCase()}`,
+      group: "Change analysis",
+      analysis: "change",
+      kind: "change",
+      index: key,
+      legend: { file: "change_legend.png", note: CHANGE_NOTE },
+    });
+  }
+
+  // ----------------------------------------------------------- quality ---
+  if (hasPreview("valid_mask")) {
+    for (const period of ["earlier", "later"] as PeriodKey[]) {
+      layers.push({
+        id: `qc_valid_${period}`,
+        label: period === "earlier" ? "Earlier valid" : "Later valid",
+        group: "Validity",
+        analysis: "quality",
+        kind: "quality",
+        quality: "valid",
+        period,
+        swatches: NEUTRAL_VALID_SWATCHES,
+      });
+    }
+  }
+  const commonPreview = Object.values(summary.change ?? {})[0]?.common_valid_preview;
+  if (commonPreview) {
+    layers.push({
+      id: "qc_valid_common",
+      label: "Shared valid",
+      group: "Validity",
+      analysis: "quality",
+      kind: "quality",
+      quality: "common",
+      swatches: NEUTRAL_VALID_SWATCHES,
+    });
+  }
+  if (resolver.g0Url("masked_common.png")) {
+    layers.push({
+      id: "qc_masked",
+      label: "Masked / unavailable",
+      group: "Validity",
+      analysis: "quality",
+      kind: "quality",
+      quality: "masked",
+      swatches: [
+        { color: "#f2f0eb", label: "Inside AOI, observed" },
+        { color: "#18272d", label: "Masked or outside AOI (hatched)" },
+      ],
+    });
+  }
+  if (hasPreview("observation_count")) {
+    for (const period of ["earlier", "later"] as PeriodKey[]) {
+      layers.push({
+        id: `qc_count_${period}`,
+        label: `Obs. count · ${period}`,
+        group: "Observation support",
+        analysis: "quality",
+        kind: "quality",
+        quality: "count",
+        period,
+        legend: {
+          file: "observation_count_legend.png",
+          note: "Discrete count of valid observations behind each composite pixel. Charcoal = 0 valid observations; copper intensity encodes count, never index change.",
+        },
+      });
+    }
+  }
+  return layers;
+}
+
+export const GROUP_ORDER = [
+  "Imagery",
+  "Spectral indices",
+  "Change analysis",
+  "Validity",
+  "Observation support",
 ];
 
-export const GROUP_ORDER = ["Imagery", "Spectral indices", "Change analysis", "Validity", "Observation support"];
-
-export function layersFor(analysis: Analysis): LayerSpec[] {
-  return LAYERS.filter((layer) => layer.analysis === analysis);
+export function groupLayers(layers: LayerSpec[]): [string, LayerSpec[]][] {
+  const groups = new Map<string, LayerSpec[]>();
+  for (const layer of layers) {
+    const list = groups.get(layer.group) ?? [];
+    list.push(layer);
+    groups.set(layer.group, list);
+  }
+  return [...groups.entries()].sort(
+    (a, b) => GROUP_ORDER.indexOf(a[0]) - GROUP_ORDER.indexOf(b[0])
+  );
 }
 
 /** Resolve the image URL a layer renders. Every branch is explicit. */
 export function layerImageUrl(
   layer: LayerSpec,
   summary: M1Summary,
-  studyId: string,
+  resolver: AssetResolver,
   period: PeriodKey
 ): string {
   const periods = summary.periods ?? [];
   const periodIndex = period === "earlier" ? 0 : 1;
   const periodData = periods[periodIndex];
   if (layer.kind === "period") {
-    if (layer.g0) return layer.g0(period);
-    const relative = periodData?.previews?.[layer.previewKey ?? ""];
-    return relative ? m1PreviewUrl(studyId, relative) : "";
+    const relative = periodData?.previews?.[layer.previewKey];
+    return relative ? resolver.previewUrl(relative) : "";
   }
   if (layer.kind === "change") {
     const block = summary.change?.[layer.index];
-    return block?.delta_preview ? m1PreviewUrl(studyId, block.delta_preview) : "";
+    return block?.delta_preview ? resolver.previewUrl(block.delta_preview) : "";
   }
-  // Quality layers — each maps to its own verified asset.
+  // Quality layers — each maps to its own recorded asset.
   switch (layer.quality) {
     case "count": {
       const relative = periodData?.previews?.observation_count;
-      return relative ? m1PreviewUrl(studyId, relative) : "";
+      return relative ? resolver.previewUrl(relative) : "";
     }
-    case "valid":
-      return g0Url(studyId, layer.period === "later" ? "later_valid.png" : "earlier_valid.png");
-    case "common":
-      return g0Url(studyId, "common_valid.png");
-    case "masked":
-      return g0Url(studyId, "masked_common.png");
+    case "valid": {
+      const relative = periodData?.previews?.valid_mask;
+      return relative ? resolver.previewUrl(relative) : "";
+    }
+    case "common": {
+      const relative = Object.values(summary.change ?? {})[0]?.common_valid_preview;
+      return relative ? resolver.previewUrl(relative) : "";
+    }
+    case "masked": {
+      const url = resolver.g0Url("masked_common.png");
+      return url ?? "";
+    }
   }
 }
 

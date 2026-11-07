@@ -5,16 +5,20 @@
  * full-resolution server-side, explicitly labelled).
  */
 import type { G0Quality, M1Summary, PixelSample, RoiResult } from "../api/types";
-import { m1PreviewUrl } from "../api/client";
-import type { LayerSpec } from "./layers";
+import type { StudyBundle } from "../api/bundle";
+import type { AssetResolver, LayerSpec } from "./layers";
 import { layerLegend, qualityExplanation } from "./layers";
 import type { RoiBox } from "./MapCompare";
 
 interface InspectorProps {
   summary: M1Summary;
   studyId: string;
+  resolver: AssetResolver;
   layer: LayerSpec;
   quality: G0Quality | null;
+  bundle: StudyBundle;
+  /** True when the live backend serves this study's frozen M1 outputs. */
+  live: boolean;
   pixel: PixelSample | null;
   pixelError: string | null;
   pixelLoading: boolean;
@@ -292,8 +296,11 @@ function RoiPanel({
 export function Inspector({
   summary,
   studyId,
+  resolver,
   layer,
   quality,
+  bundle,
+  live,
   pixel,
   pixelError,
   pixelLoading,
@@ -347,7 +354,7 @@ export function Inspector({
             {legend.file && (
               <img
                 className="insp-legend-img"
-                src={m1PreviewUrl(studyId, legend.file)}
+                src={resolver.previewUrl(legend.file)}
                 alt={`Colour legend for ${layer.label}`}
               />
             )}
@@ -419,20 +426,100 @@ export function Inspector({
             />
             <h4 className="insp-subheading">Provenance</h4>
             <ul className="insp-links">
-              <li>
-                <a href={`/api/m1/study/${studyId}/manifest`} target="_blank" rel="noopener noreferrer">
-                  Run manifest (scenes, hashes, formulas)
-                </a>
-              </li>
-              <li>
-                <a href={`/api/m1/study/${studyId}`} target="_blank" rel="noopener noreferrer">
-                  Study summary JSON
-                </a>
-              </li>
+              {live ? (
+                <>
+                  <li>
+                    <a href={`/api/m1/study/${studyId}/manifest`} target="_blank" rel="noopener noreferrer">
+                      Run manifest (scenes, hashes, formulas)
+                    </a>
+                  </li>
+                  <li>
+                    <a href={`/api/m1/study/${studyId}`} target="_blank" rel="noopener noreferrer">
+                      Study summary JSON
+                    </a>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li>
+                    <a
+                      href={`/studies/${encodeURIComponent(studyId)}/bundle.json`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Showcase bundle JSON (checksummed artefact copies)
+                    </a>
+                  </li>
+                  <li className="mono-label">
+                    Experiment config: {bundle.experiments[0]?.config_path} · sha256{" "}
+                    {(bundle.experiments[0]?.config_sha256 ?? "").slice(0, 16)}…
+                  </li>
+                </>
+              )}
               <li>
                 <a href="/methods">Methods &amp; limitations</a>
               </li>
             </ul>
+            {bundle.dem_context?.available && (
+              <>
+                <h4 className="insp-subheading">Terrain context (DEM)</h4>
+                <Facts
+                  rows={[
+                    ["DEM", `${bundle.dem_context.collection} · ${bundle.dem_context.item_id}`],
+                    [
+                      "Elevation range",
+                      `${bundle.dem_context.elevation_min_m}–${bundle.dem_context.elevation_max_m} m (mean ${bundle.dem_context.elevation_mean_m} m)`,
+                    ],
+                  ]}
+                />
+                <p className="insp-note">{bundle.dem_context.role}</p>
+              </>
+            )}
+            {bundle.event && (
+              <>
+                <h4 className="insp-subheading">
+                  Event context · {bundle.event.event_date}
+                </h4>
+                <p className="insp-note">{bundle.event.event_mechanism}</p>
+                <Facts
+                  rows={bundle.event.observation_gaps.map((gap) => [
+                    "Observation gap",
+                    gap.statement,
+                  ])}
+                />
+                <ul className="insp-note">
+                  {bundle.event.known_unprocessed_observations.map((observation) => (
+                    <li key={observation.item_id ?? observation.date}>
+                      <span className="mono-label">
+                        {observation.date} · {observation.item_id} ·{" "}
+                        {observation.in_aoi_valid_fraction !== undefined
+                          ? `${(observation.in_aoi_valid_fraction * 100).toFixed(1)}% valid · `
+                          : ""}
+                      </span>
+                      {observation.status}
+                    </li>
+                  ))}
+                </ul>
+                <p className="insp-note insp-guardrail">{bundle.event.insar_note}</p>
+                <ul className="insp-note">
+                  {bundle.event.external_references.map((reference) => (
+                    <li key={reference.title}>
+                      {reference.title} — {reference.role}
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
+            {bundle.interpretation?.cannot_conclude?.length > 0 && (
+              <>
+                <h4 className="insp-subheading">What this evidence cannot establish</h4>
+                <ul className="insp-note insp-guardrail">
+                  {bundle.interpretation.cannot_conclude.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </>
+            )}
             <p className="insp-note">
               {typeof summary.attribution === "string"
                 ? summary.attribution

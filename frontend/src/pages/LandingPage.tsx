@@ -3,50 +3,81 @@
  * Scientific-integrity rules baked into this page:
  * - The hero imagery is the real processed Coringa comparison; its captions
  *   print the actual acquisition dates, scene IDs and composite method from
- *   the M1 summary.
- * - The five-study gallery is driven by `studies/registry.yaml` (served
- *   verbatim by the backend); non-processed studies show their true status
- *   and an AOI window schematic drawn from their registry bounds — never
- *   fabricated imagery, metrics or dates.
+ *   the bundle's recorded M1 summary.
+ * - The gallery is driven by the static registry copy and each study's own
+ *   bundle: processed studies show their real composite previews, the two
+ *   Himalayan events show their real processed source-zone context, and
+ *   nothing is fabricated. Study D1 carries its recorded PARTIAL status.
+ *
+ * M4: the page renders from the portable bundles, so it works with the
+ * Python backend stopped.
  */
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { api, m1PreviewUrl } from "../api/client";
-import type { M1Summary, Registry, RegistryStudy } from "../api/types";
+import {
+  bundlePreviewUrl,
+  bundleSummary,
+  loadRegistryJson,
+  loadStudyBundle,
+  type StudyBundle,
+} from "../api/bundle";
+import type { M1Summary, Registry } from "../api/types";
 import { SwipeStage } from "../components/SwipeStage";
 import { ErrorNote, MonoFact, StatusChip } from "../components/ui";
 import "../styles/landing.css";
 
 const CORINGA = "coringa_coastal";
 
-function useStudyData() {
+function useLandingData() {
   const [summary, setSummary] = useState<M1Summary | null>(null);
   const [registry, setRegistry] = useState<Registry | null>(null);
+  const [bundles, setBundles] = useState<Record<string, StudyBundle>>({});
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     let cancelled = false;
-    Promise.all([api.m1Summary(CORINGA), api.registry()])
-      .then(([m1, reg]) => {
-        if (!cancelled) {
-          setSummary(m1);
-          setRegistry(reg);
-        }
-      })
-      .catch((err: Error) => {
-        if (!cancelled) setError(err.message);
-      });
+    (async () => {
+      try {
+        const [reg, coringaBundle] = await Promise.all([
+          loadRegistryJson(),
+          loadStudyBundle(CORINGA),
+        ]);
+        if (cancelled) return;
+        setRegistry(reg);
+        setSummary(bundleSummary(CORINGA, coringaBundle));
+        setBundles({ [CORINGA]: coringaBundle });
+        // Load the remaining bundles opportunistically for real gallery media.
+        const others = reg.studies.filter((study) => study.study_id !== CORINGA);
+        const loaded = await Promise.all(
+          others.map((study) =>
+            loadStudyBundle(study.study_id)
+              .then((bundle) => [study.study_id, bundle] as const)
+              .catch(() => null)
+          )
+        );
+        if (cancelled) return;
+        setBundles((prev) => {
+          const next = { ...prev };
+          for (const entry of loaded) {
+            if (entry) next[entry[0]] = entry[1];
+          }
+          return next;
+        });
+      } catch (err) {
+        if (!cancelled) setError((err as Error).message);
+      }
+    })();
     return () => {
       cancelled = true;
     };
   }, []);
 
-  return { summary, registry, error };
+  return { summary, registry, bundles, error };
 }
 
 /** Schematic of a registry AOI window: real bounds, drawn as a map frame.
  *  It is explicitly a *window outline*, not imagery. */
-function AoiSchematic({ study }: { study: RegistryStudy }) {
+function AoiSchematic({ study }: { study: import("../api/types").RegistryStudy }) {
   const { west, south, east, north } = study.aoi.bounds;
   const midLat = (south + north) / 2;
   const kmPerDegLon = 111.32 * Math.cos((midLat * Math.PI) / 180);
@@ -90,7 +121,7 @@ function AoiSchematic({ study }: { study: RegistryStudy }) {
   );
 }
 
-function formatPeriodRange(study: RegistryStudy): string | null {
+function formatPeriodRange(study: import("../api/types").RegistryStudy): string | null {
   const periods = study.target_periods
     ? Object.values(study.target_periods)
     : [];
@@ -100,12 +131,37 @@ function formatPeriodRange(study: RegistryStudy): string | null {
   return `${starts[0]} → ${ends[ends.length - 1]}`;
 }
 
-function GalleryCard({ study }: { study: RegistryStudy }) {
+/** True processed acquisition dates from the study's bundle, for the card. */
+function bundlePeriodLabel(bundle: StudyBundle | undefined): string | null {
+  const periods = bundle?.experiments[0]?.summary?.periods ?? [];
+  if (!periods.length) return null;
+  return `${periods[0].anchor_date} → ${periods[periods.length - 1].anchor_date}`;
+}
+
+function GalleryCard({
+  study,
+  bundle,
+}: {
+  study: import("../api/types").RegistryStudy;
+  bundle?: StudyBundle;
+}) {
   const isCoringa = study.study_id === CORINGA;
-  const periodRange = formatPeriodRange(study);
+  const periodRange = bundlePeriodLabel(bundle) ?? formatPeriodRange(study);
+  const status = bundle ? bundle.evidence_status : study.status;
+  const processed = Boolean(bundle);
+  const earlierPreview = bundle
+    ? bundle.experiments[0]?.summary?.periods?.[0]?.previews?.true_colour
+    : undefined;
+  const laterPreview = bundle
+    ? bundle.experiments[0]?.summary?.periods?.[1]?.previews?.true_colour
+    : undefined;
+  const mediaNote = bundle
+    ? `Real processed composites · ${bundlePeriodLabel(bundle)} · Sentinel-2 L2A`
+    : undefined;
+
   return (
     <article
-      className={`study-card study-card--${study.status} ${isCoringa ? "study-card--lead" : ""}`}
+      className={`study-card study-card--${status} ${isCoringa ? "study-card--lead" : ""}`}
       data-study-id={study.study_id}
     >
       <header className="study-card-head">
@@ -119,24 +175,22 @@ function GalleryCard({ study }: { study: RegistryStudy }) {
           </p>
           <h3>{study.title}</h3>
         </div>
-        <StatusChip status={study.status} />
+        <StatusChip status={status} />
       </header>
 
-      {isCoringa ? (
+      {processed && earlierPreview && laterPreview ? (
         <div className="study-card-media">
           <img
-            src={m1PreviewUrl(CORINGA, "earlier_2020-03-26_true_colour.png")}
-            alt="True-colour Sentinel-2 composite of the Coringa AOI, March 2020"
+            src={bundlePreviewUrl(study.study_id, earlierPreview)}
+            alt={`True-colour Sentinel-2 composite of the ${study.title} earlier period`}
             loading="lazy"
           />
           <img
-            src={m1PreviewUrl(CORINGA, "later_2025-03-25_true_colour.png")}
-            alt="True-colour Sentinel-2 composite of the Coringa AOI, March 2025"
+            src={bundlePreviewUrl(study.study_id, laterPreview)}
+            alt={`True-colour Sentinel-2 composite of the ${study.title} later period`}
             loading="lazy"
           />
-          <span className="study-card-media-note">
-            Real processed composites · 2020-03-26 / 2025-03-25 · Sentinel-2 L2A
-          </span>
+          <span className="study-card-media-note">{mediaNote}</span>
         </div>
       ) : (
         <AoiSchematic study={study} />
@@ -144,7 +198,15 @@ function GalleryCard({ study }: { study: RegistryStudy }) {
 
       <p className="study-question">{study.question}</p>
       {periodRange && (
-        <p className="study-period mono-label">Target windows: {periodRange}</p>
+        <p className="study-period mono-label">
+          {processed ? "Processed acquisitions" : "Target windows"}: {periodRange}
+        </p>
+      )}
+      {bundle?.evidence_status === "partial" && (
+        <p className="study-period mono-label">
+          PARTIAL: no clean immediate post-event observation exists; the processed
+          pair is seasonal and explicitly caveated.
+        </p>
       )}
       <ul className="study-phenomena">
         {study.phenomena.map((item) => (
@@ -153,14 +215,21 @@ function GalleryCard({ study }: { study: RegistryStudy }) {
       </ul>
 
       <footer className="study-card-foot">
-        {isCoringa ? (
-          <Link className="button button--primary" to="/workstation">
-            Open the investigation
+        {processed ? (
+          <Link
+            className="button button--primary"
+            to={`/workstation/${encodeURIComponent(study.study_id)}`}
+          >
+            {isCoringa
+              ? "Open the reference investigation"
+              : study.event_date
+                ? "Open the event investigation"
+                : "Open the investigation"}
           </Link>
         ) : (
           <p className="study-status-note">
             {study.status === "feasibility"
-              ? "Data feasibility recorded in M0; no processed imagery is shown because none has been analysed yet."
+              ? "Data feasibility recorded; no processed imagery is shown because none has been analysed yet."
               : "Registered study; processing is scheduled for a later milestone."}
           </p>
         )}
@@ -170,28 +239,29 @@ function GalleryCard({ study }: { study: RegistryStudy }) {
 }
 
 export function LandingPage() {
-  const { summary, registry, error } = useStudyData();
+  const { summary, registry, bundles, error } = useLandingData();
   const earlierPeriod = summary?.periods?.[0];
   const laterPeriod = summary?.periods?.[1];
-  const attribution =
-    typeof summary?.attribution === "string"
+  const attribution = summary
+    ? typeof summary.attribution === "string"
       ? summary.attribution
-      : summary?.attribution?.text;
+      : (summary.attribution?.text ?? "")
+    : "";
 
   return (
     <main id="main">
       {/* ------------------------------------------------------------- hero */}
       <section className="hero">
         <div className="hero-copy">
-          <p className="eyebrow">Geospatial research workstation</p>
+          <p className="eyebrow">Geospatial research platform</p>
           <h1>
             Read the landscape.
             <br />
             Trace what changed.
           </h1>
           <p className="lede">
-            HabitatShift investigates environmental, cryospheric-disaster and
-            urban landscape change through reproducible open satellite data —
+            HabitatShift investigates coastal, wetland, forest, cryospheric-disaster
+            and urban landscape change through reproducible open satellite data —
             real Sentinel-2 acquisitions, explicit masking, documented methods,
             and measurements you can re-run.
           </p>
@@ -224,11 +294,11 @@ export function LandingPage() {
             <>
               <SwipeStage
                 earlier={{
-                  src: m1PreviewUrl(CORINGA, earlierPeriod.previews.true_colour),
+                  src: earlierPeriod.previews.true_colour,
                   alt: `True-colour composite, ${earlierPeriod.anchor_date}`,
                 }}
                 later={{
-                  src: m1PreviewUrl(CORINGA, laterPeriod.previews.true_colour),
+                  src: laterPeriod.previews.true_colour,
                   alt: `True-colour composite, ${laterPeriod.anchor_date}`,
                 }}
                 aspectRatio={`${summary.grid.width} / ${summary.grid.height}`}
@@ -255,7 +325,7 @@ export function LandingPage() {
           ) : (
             <div className="hero-media-empty" aria-live="polite">
               {error
-                ? "Processed imagery could not be loaded. Start the backend API to view the real comparison."
+                ? "Processed imagery could not be loaded. Build the showcase bundles with `python scripts/build_showcase_bundles.py` and reload."
                 : "Loading the processed Coringa comparison…"}
             </div>
           )}
@@ -266,11 +336,12 @@ export function LandingPage() {
       <section className="studies" id="studies" aria-labelledby="studies-title">
         <div className="section-head">
           <p className="eyebrow">Study areas</p>
-          <h2 id="studies-title">Five landscapes, one standard of evidence</h2>
+          <h2 id="studies-title">Five landscapes, six investigations, one standard of evidence</h2>
           <p className="section-lede">
-            Statuses below are the repository's own record. Only Study A has a
-            completed processed bundle today; the others state their real
-            feasibility position instead of showing placeholder results.
+            Statuses below are the repository's own record. Every card that links
+            to an investigation shows real processed composites from its bundle;
+            the 2025 Himalayan event carries its recorded PARTIAL status instead
+            of a cleaner story.
           </p>
         </div>
 
@@ -279,7 +350,11 @@ export function LandingPage() {
         {registry && (
           <div className="study-grid">
             {registry.studies.map((study) => (
-              <GalleryCard key={study.id} study={study} />
+              <GalleryCard
+                key={study.id}
+                study={study}
+                bundle={bundles[study.study_id]}
+              />
             ))}
           </div>
         )}
@@ -297,7 +372,9 @@ export function LandingPage() {
             <p>
               Scenes are discovered on the Sentinel-2 L2A STAC catalogue and
               read as windowed COG byte ranges — never whole-scene downloads.
-              Every scene ID and date is recorded in the run manifest.
+              Every scene ID and date is recorded in the run manifest, and the
+              radiometric DN convention of every scene is validated against the
+              pixels actually read.
             </p>
           </li>
           <li>
@@ -320,7 +397,8 @@ export function LandingPage() {
         <p className="method-note">
           The result is a workstation where a reviewer can trace any displayed
           number back to a scene, a mask and a formula — or reproduce the whole
-          run from the manifests.
+          run from the manifests. Completed studies are explorable as portable
+          bundles even when no processing backend is running.
         </p>
       </section>
 
@@ -338,6 +416,11 @@ export function LandingPage() {
           <li>
             <strong>Repeatable.</strong> Fixed thresholds, recorded seeds and
             grid signatures; runs are verified by an independent audit script.
+          </li>
+          <li>
+            <strong>Honest limits.</strong> Where evidence is partial — the 2025
+            Rasuwa event's monsoon gap, Kathmandu's missing reference labels —
+            the interface says so instead of papering over it.
           </li>
         </ul>
       </section>

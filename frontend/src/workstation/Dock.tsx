@@ -3,20 +3,25 @@
  * Collapsed it is one thin strip carrying the acquisition timeline summary.
  * Expanded it opens as an overlay above the strip so it never permanently
  * consumes map space. Only sections with genuine recorded data render.
+ *
+ * M4: the dock's charts are the interactive, explanatory chart system
+ * (M4-G5) driven by the recorded bundle data — the same numbers the maps
+ * and inspector show, explorable point by point.
  */
 import { useState } from "react";
-import type { ExperimentSummary, M1Summary } from "../api/types";
+import type { M1Summary } from "../api/types";
+import type { StudyBundle } from "../api/bundle";
+import { buildStudyCharts, type StudyChartSpec } from "../charts/studyCharts";
 
 interface DockProps {
   summary: M1Summary;
-  experiment: ExperimentSummary | null;
-  experimentError: string | null;
+  bundle: StudyBundle;
+  experimentIndex: number;
   open: boolean;
   onToggle: () => void;
-  studyId: string;
 }
 
-function Timeline({ summary }: { summary: M1Summary }) {
+function Timeline({ summary, bundle }: { summary: M1Summary; bundle: StudyBundle }) {
   return (
     <div className="dock-section dock-timeline">
       <h3>Timeline</h3>
@@ -38,14 +43,21 @@ function Timeline({ summary }: { summary: M1Summary }) {
         ))}
         <div className="timeline-gap" aria-hidden="true" />
       </div>
+      {bundle.evidence_status === "partial" && (
+        <p className="mono-label dock-note">
+          PARTIAL evidence: no clean immediate post-event observation exists; the
+          processed pair is seasonal and carries an explicit caveat.
+        </p>
+      )}
     </div>
   );
 }
 
-function IndexDistributions({ summary, experiment }: { summary: M1Summary; experiment: ExperimentSummary | null }) {
-  const [index, setIndex] = useState("ndvi");
+function IndexDistributions({ summary }: { summary: M1Summary }) {
+  const [index, setIndex] = useState<string>(
+    Object.keys(summary.periods?.[0]?.indices ?? {})[0] ?? ""
+  );
   const indices = Object.keys(summary.periods?.[0]?.indices ?? {});
-  const chart = experiment?.artifacts.charts[`delta_histogram_${index}`];
   return (
     <div className="dock-section">
       <h3>Index distributions</h3>
@@ -89,19 +101,12 @@ function IndexDistributions({ summary, experiment }: { summary: M1Summary; exper
           })}
         </tbody>
       </table>
-      {chart && (
-        <img
-          className="dock-chart"
-          src={chart}
-          alt={`Recorded ${index.toUpperCase()} difference histogram`}
-          loading="lazy"
-        />
-      )}
-      {!experiment && (
-        <p className="mono-label">
-          Recorded histogram appears when the experiment run is loaded.
-        </p>
-      )}
+      <p className="mono-label">
+        Recorded distribution summary over valid pixels of the composite.
+        {summary.periods[0]?.indices?.[index]?.upsampled
+          ? " This index uses 20 m SWIR resampled to the 10 m grid — it carries no genuine 10 m SWIR detail."
+          : ""}
+      </p>
     </div>
   );
 }
@@ -164,69 +169,27 @@ function ChangeAreas({ summary }: { summary: M1Summary }) {
   );
 }
 
-function Uncertainty({ experiment, experimentError }: { experiment: ExperimentSummary | null; experimentError: string | null }) {
-  if (!experiment) {
-    return (
-      <div className="dock-section">
-        <h3>Uncertainty</h3>
-        <p className="mono-label">{experimentError ?? "Loading recorded uncertainty…"}</p>
-      </div>
-    );
-  }
-  const index = experiment.config.indices[0];
-  const bootstrap = experiment.bootstrap?.[index];
-  const atPrimary = bootstrap?.thresholds?.find(
-    (row) => Math.abs(row.threshold - experiment.config.primary_threshold) < 1e-9
-  );
-  const pct = (value: number) => `${(value * 100).toFixed(2)}%`;
+function ChartSection({ spec }: { spec: StudyChartSpec }) {
   return (
-    <div className="dock-section">
-      <h3>Uncertainty · {index.toUpperCase()}</h3>
-      {atPrimary ? (
-        <table className="dock-table">
-          <tbody>
-            <tr>
-              <th scope="row">Candidate decrease</th>
-              <td>
-                {pct(atPrimary.decrease_fraction)} · block-bootstrap 95% range{" "}
-                {pct(atPrimary.decrease_fraction_ci95.p2_5)}–
-                {pct(atPrimary.decrease_fraction_ci95.p97_5)}
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">Candidate increase</th>
-              <td>
-                {pct(atPrimary.increase_fraction)} · 95% range{" "}
-                {pct(atPrimary.increase_fraction_ci95.p2_5)}–
-                {pct(atPrimary.increase_fraction_ci95.p97_5)}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      ) : (
-        <p className="mono-label">No recorded bootstrap row at the primary threshold.</p>
-      )}
-      <p className="mono-label">
-        Resampling variability of change-area fractions for this AOI and grid
-        ({bootstrap?.iterations_used} resamples, {bootstrap?.block_size_px} px
-        blocks) — not a population confidence interval.
-      </p>
-      <a href="/experiments" className="dock-link">
-        Open the full experiments workspace →
-      </a>
+    <div className="dock-section dock-chart-section">
+      <h3>{spec.title}</h3>
+      {spec.element}
     </div>
   );
 }
 
-export function Dock({ summary, experiment, experimentError, open, onToggle }: Omit<DockProps, "studyId">) {
+export function Dock({ summary, bundle, experimentIndex, open, onToggle }: DockProps) {
+  const charts = open ? buildStudyCharts(bundle, experimentIndex) : [];
   return (
     <section className={`dock ${open ? "is-open" : ""}`} aria-label="Analysis dock">
       {open && (
         <div className="dock-panel">
-          <Timeline summary={summary} />
-          <IndexDistributions summary={summary} experiment={experiment} />
+          <Timeline summary={summary} bundle={bundle} />
+          <IndexDistributions summary={summary} />
           <ChangeAreas summary={summary} />
-          <Uncertainty experiment={experiment} experimentError={experimentError} />
+          {charts.map((spec) => (
+            <ChartSection key={spec.id} spec={spec} />
+          ))}
         </div>
       )}
       <div className="dock-bar">
@@ -250,7 +213,7 @@ export function Dock({ summary, experiment, experimentError, open, onToggle }: O
             .join("  →  ")}
         </span>
         <span className="mono-label dock-hint">
-          {open ? "Expanded — the map stays usable; collapse for full height" : "Expand for distributions, change areas and uncertainty"}
+          {open ? "Expanded — the map stays usable; collapse for full height" : "Expand for distributions, change areas and interactive charts"}
         </span>
       </div>
     </section>

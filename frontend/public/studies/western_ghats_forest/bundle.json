@@ -2,6 +2,7 @@
  "schema": "habitatshift-m4-bundle/1",
  "bundle_version": "1",
  "study_id": "western_ghats_forest",
+ "evidence_status": "processed",
  "study": {
   "study_id": "western_ghats_forest",
   "id": "C",
@@ -85,7 +86,7 @@
    10.0,
    10.0
   ],
-  "nodata": NaN,
+  "nodata": null,
   "lonlat_bounds": [
    74.32985295650265,
    15.129778303385331,

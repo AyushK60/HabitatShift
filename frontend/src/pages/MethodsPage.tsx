@@ -178,6 +178,58 @@ export function MethodsPage() {
         </p>
       </section>
 
+      <section className="methods-sep" aria-labelledby="m4-title">
+        <h2 id="m4-title">M4 — five studies, radiometry honesty and the portable showcase</h2>
+        <p className="methods-note">
+          M4 extends the pipeline from the Coringa reference to six
+          investigations: Chilika Lake (matched dry-season and matched
+          post-monsoon experiments, read together as the documented
+          seasonal-sensitivity investigation), a Western Ghats forest block
+          (Supa taluk, Uttara Kannada, with Copernicus GLO-30 DEM terrain
+          context), two separate Himalayan event investigations (the 8 July
+          2025 Purepu lake drainage — PARTIAL, seasonal pair only — and the
+          26 August 2026 Langtang Lirung rock–ice collapse), and the Kathmandu
+          Valley built-up pilot (NDBI as a candidate signal with an explicit
+          no-labels guardrail). Scene selections and per-window validity
+          measurements are recorded in <code>docs/M4_FEASIBILITY.md</code>.
+        </p>
+        <p className="methods-note">
+          <strong>Radiometry.</strong> During M4 processing it was found that
+          the 2025 Earth Search reprocessing stores baseline-05.11 DNs
+          <em> without</em> the baked +1000 BOA offset while item metadata still
+          declares −0.1 (<code>earthsearch:boa_offset_applied: false</code>).
+          Applying the declared offset produced physically impossible negative
+          reflectance. The engine now validates every observation's applied
+          transform empirically: any window whose mean reflectance falls below
+          the physical floor retries the scale-only convention and records the
+          full evidence in the manifest; if neither convention is plausible the
+          observation is refused. All M4 results use the corrected convention;
+          the frozen Coringa M0–M2 artefacts were checked and were never
+          affected (their 2025 scenes carry the offset-applied flag and were
+          processed scale-only throughout).
+        </p>
+        <p className="methods-note">
+          <strong>Portable showcase.</strong> Each completed study has a
+          checksummed bundle (<code>frontend/public/studies/&lt;study_id&gt;/</code>)
+          containing its recorded summaries, georeferenced grid placement,
+          preview rasters, distilled chart series, quality information,
+          limitations and provenance. The workstation renders bundles as
+          static files, so maps, layers and the interactive charts work with
+          no backend. Live-only features (pixel probe, ROI measurement,
+          validity overlays) are labelled as such and activate only when the
+          backend is serving the study's frozen outputs.
+        </p>
+        <p className="methods-note">
+          <strong>Interactive charts.</strong> Charts snap to the nearest
+          recorded data point on hover — interpolated values are never shown —
+          with exact values, units, valid-pixel denominators, a plain-language
+          interpretation and an explicit can/cannot-conclude note. Point
+          pinning, touch tapping and full keyboard navigation (arrow keys,
+          Enter to pin, Escape to dismiss) are supported, and a visually hidden
+          table mirrors every recorded value for screen readers.
+        </p>
+      </section>
+
       <section className="methods-sep" aria-labelledby="exports-title">
         <h2 id="exports-title">Methodology &amp; provenance exports</h2>
         <ul className="methods-exports">
@@ -194,6 +246,16 @@ export function MethodsPage() {
           <li>
             <a href="/api/experiments/coringa_m2/latest" target="_blank" rel="noopener noreferrer">
               M2 experiment summary — thresholds, estimators, bootstrap
+            </a>
+          </li>
+          <li>
+            <a href="/studies/registry.json" target="_blank" rel="noopener noreferrer">
+              Static study registry (bundle copy, verbatim from YAML)
+            </a>
+          </li>
+          <li>
+            <a href="/studies/chilika_wetland/bundle.json" target="_blank" rel="noopener noreferrer">
+              Example M4 showcase bundle — Chilika (both experiments, checksums)
             </a>
           </li>
           <li>

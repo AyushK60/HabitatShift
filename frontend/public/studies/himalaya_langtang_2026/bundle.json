@@ -2,6 +2,7 @@
  "schema": "habitatshift-m4-bundle/1",
  "bundle_version": "1",
  "study_id": "himalaya_langtang_2026",
+ "evidence_status": "processed",
  "study": {
   "study_id": "himalaya_langtang_2026",
   "id": "D2",
@@ -88,7 +89,7 @@
    10.0,
    10.0
   ],
-  "nodata": NaN,
+  "nodata": null,
   "lonlat_bounds": [
    85.52947611376744,
    28.154670073104175,

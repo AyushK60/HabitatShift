@@ -30,7 +30,7 @@ import type { Map as MapLibreMap, MapMouseEvent, ImageSource, GeoJSONSource } fr
 // emit that worker as an asset and hand its URL to the library.
 import maplibreWorkerUrl from "maplibre-gl/dist/maplibre-gl-worker.mjs?url";
 import type { Georef, M1Summary } from "../api/types";
-import type { LayerSpec, PeriodKey } from "./layers";
+import type { AssetResolver, LayerSpec, PeriodKey } from "./layers";
 import { layerImageUrl } from "./layers";
 
 export type CompareMode = "side" | "swipe" | "opacity";
@@ -45,7 +45,8 @@ export interface RoiBox {
 interface MapCompareProps {
   georef: Georef;
   summary: M1Summary;
-  studyId: string;
+  /** Asset resolver: live backend routes or bundled showcase copies. */
+  resolver: AssetResolver;
   analysis: "historical" | "change" | "quality";
   layer: LayerSpec;
   mode: CompareMode;
@@ -177,7 +178,7 @@ function roiFeature(box: RoiBox): GeoJSON.Feature {
 export function MapCompare({
   georef,
   summary,
-  studyId,
+  resolver,
   analysis,
   layer,
   mode,
@@ -202,21 +203,21 @@ export function MapCompare({
 
   const coordinates = useMemo(() => cornersToCoordinates(georef), [georef]);
   const bounds = useMemo(() => boundsOf(georef), [georef]);
-  const layerUrlEarlier = layerImageUrl(layer, summary, studyId, "earlier");
-  const layerUrlLater = layerImageUrl(layer, summary, studyId, "later");
+  const layerUrlEarlier = layerImageUrl(layer, summary, resolver, "earlier");
+  const layerUrlLater = layerImageUrl(layer, summary, resolver, "later");
   const singleMap = analysis !== "historical";
 
   const overlayUrl = useCallback(
     (period: PeriodKey) => {
       if (!overlay || analysis === "quality") return "";
       if (analysis === "change") {
-        return `/files/g0/${encodeURIComponent(studyId)}/common_invalid.png`;
+        return resolver.g0Url("common_invalid.png") ?? "";
       }
-      return `/files/g0/${encodeURIComponent(studyId)}/${
-        period === "later" ? "later_invalid.png" : "earlier_invalid.png"
-      }`;
+      return (
+        resolver.g0Url(period === "later" ? "later_invalid.png" : "earlier_invalid.png") ?? ""
+      );
     },
-    [overlay, analysis, studyId]
+    [overlay, analysis, resolver]
   );
 
   /* --------------------------------------------------------- map init --- */
@@ -435,7 +436,7 @@ export function MapCompare({
       const url =
         analysis === "change"
           ? layerUrlEarlier
-          : layerImageUrl(layer, summary, studyId, "later");
+          : layerImageUrl(layer, summary, resolver, "later");
       applyImageLayer(earlier, "layer-earlier", url, coordinates, 1);
       applyImageLayer(earlier, "validity-overlay", overlayUrl("earlier"), coordinates);
       if (later) {
@@ -454,7 +455,7 @@ export function MapCompare({
     overlayUrl,
     coordinates,
     summary,
-    studyId,
+    resolver,
   ]);
 
   /* -------------------------------------------------------- ROI draw --- */

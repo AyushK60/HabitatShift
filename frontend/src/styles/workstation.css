@@ -873,3 +873,26 @@
     border-top: 1px solid var(--rule);
   }
 }
+
+/* ------------------------------------------------- M4 additions --- */
+.ws-experiment-switch {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.dock-note {
+  display: block;
+  margin-top: 8px;
+  color: var(--copper-deep);
+}
+
+.dock-chart-section {
+  min-width: 340px;
+  flex: 1 1 420px;
+}
+
+.dock-panel {
+  flex-wrap: wrap;
+}

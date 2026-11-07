@@ -120,6 +120,7 @@ export interface M1Summary {
   aoi: {
     geojson: GeoJSON.FeatureCollection | GeoJSON.Feature;
     area_km2: number;
+    aoi_pixels?: number;
   };
   grid: Grid;
   periods: Period[];

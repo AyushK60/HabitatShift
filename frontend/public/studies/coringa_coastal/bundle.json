@@ -2,6 +2,7 @@
  "schema": "habitatshift-m4-bundle/1",
  "bundle_version": "1",
  "study_id": "coringa_coastal",
+ "evidence_status": "processed",
  "study": {
   "study_id": "coringa_coastal",
   "id": "A",
@@ -87,7 +88,7 @@
    10.0,
    10.0
   ],
-  "nodata": NaN,
+  "nodata": null,
   "lonlat_bounds": [
    82.24469311780072,
    16.709765366706264,

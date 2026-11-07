@@ -575,6 +575,10 @@ def build_bundle(
         "schema": BUNDLE_SCHEMA,
         "bundle_version": BUNDLE_VERSION,
         "study_id": study_id,
+        # Evidence verdict for the interface: "partial" marks studies the
+        # feasibility review restricted (docs/M4_FEASIBILITY.md).  The
+        # registry's own status word is preserved in study.status.
+        "evidence_status": "partial" if study_id == "himalaya_purepu_2025" else "processed",
         "study": {
             "study_id": study_id,
             "id": study_entry.get("id"),
@@ -634,6 +638,21 @@ def build_bundle(
     return bundle
 
 
+def _sanitize(value: Any) -> Any:
+    """Replace non-finite floats with None so the bundle is strict JSON.
+
+    Raster nodata fields can be NaN; browsers' JSON.parse rejects NaN
+    literals, so the bundle must never contain them.
+    """
+    if isinstance(value, float):
+        return value if value == value and value not in (float("inf"), float("-inf")) else None
+    if isinstance(value, dict):
+        return {key: _sanitize(item) for key, item in value.items()}
+    if isinstance(value, (list, tuple)):
+        return [_sanitize(item) for item in value]
+    return value
+
+
 def build_study(study_id: str, studies_root: Path) -> Path:
     registry = load_registry()
     if study_id not in registry:
@@ -652,13 +671,14 @@ def build_study(study_id: str, studies_root: Path) -> Path:
         shutil.rmtree(out_dir)
     assets = collect_previews(experiments, previews_dir)
 
-    bundle = build_bundle(study_entry, experiments, m2, assets, out_dir)
+    bundle = _sanitize(build_bundle(study_entry, experiments, m2, assets, out_dir))
     bundle_path = out_dir / "bundle.json"
     bundle["bundle_sha256_inputs"] = {
         "previews": sorted(assets.keys()),
     }
     bundle_path.write_text(
-        json.dumps(bundle, indent=1, sort_keys=False), encoding="utf-8"
+        json.dumps(bundle, indent=1, sort_keys=False, allow_nan=False),
+        encoding="utf-8",
     )
     LOGGER.info(
         "%s: bundle written (%d assets, %d bytes)",
@@ -685,6 +705,17 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     studies_root = Path(args.out)
+    studies_root.mkdir(parents=True, exist_ok=True)
+    # Static registry copy: the landing page and gallery render without any
+    # backend.  Content is the parsed registry YAML, unchanged.
+    registry = yaml.safe_load(
+        (config.STUDIES_DIR / "registry.yaml").read_text(encoding="utf-8")
+    )
+    registry_path = studies_root / "registry.json"
+    registry_path.write_text(
+        json.dumps(_sanitize(registry), indent=1, allow_nan=False), encoding="utf-8"
+    )
+    LOGGER.info("registry.json written")
     targets = args.study or list(STUDY_EXPERIMENTS)
     for study_id in targets:
         build_study(study_id, studies_root)

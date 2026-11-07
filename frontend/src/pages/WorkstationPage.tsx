@@ -1,30 +1,40 @@
-/** The Coringa research workstation — the primary M3 product experience.
+/** The study research workstation — now the multi-study showcase (M4-G4).
+ *
+ * Every completed study renders from its portable bundle: the same recorded
+ * artefacts the backend serves, loaded as static files so the maps, layers,
+ * quality views and interactive charts work with no Python process running.
+ *
+ * Live enhancement: when the analysis backend is reachable AND the study has
+ * frozen M1 outputs (today: the Coringa reference), the pixel probe, ROI
+ * measurement and G0 validity overlays activate on top of the same bundle
+ * numbers. Without the backend those controls degrade to honest notes — the
+ * showcase itself never depends on them.
  *
  * Designed for ~1440×900: study context bar on top, geographic workspace
  * (65–75%) plus research inspector (25–35%) in the middle, collapsible
- * analysis dock at the bottom. The whole composition fits one viewport on
- * desktop; the inspector scrolls internally and the dock expands as an
- * overlay.
+ * analysis dock at the bottom.
  */
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { api } from "../api/client";
-import type {
-  ExperimentSummary,
-  G0Quality,
-  Georef,
-  M1Summary,
-  PixelSample,
-  RoiResult,
-} from "../api/types";
+import {
+  bundleGeoref,
+  bundleResolver,
+  bundleSummary,
+  liveResolver,
+  loadStudyBundle,
+  qualityFromSummary,
+  type StudyBundle,
+} from "../api/bundle";
+import type { Georef, M1Summary, PixelSample, RoiResult } from "../api/types";
 import { ErrorNote } from "../components/ui";
 import { MapCompare, type CompareMode, type RoiBox } from "../workstation/MapCompare";
 import { Inspector, type InspectorTab } from "../workstation/Inspector";
 import { Dock } from "../workstation/Dock";
-import { layersFor, type Analysis, type LayerSpec } from "../workstation/layers";
+import { buildLayers, type Analysis, type AssetResolver, type LayerSpec } from "../workstation/layers";
 import "../styles/workstation.css";
 
-const STUDY_ID = "coringa_coastal";
+const DEFAULT_STUDY = "coringa_coastal";
 
 type ModeState = Record<Analysis, CompareMode>;
 const DEFAULT_MODES: ModeState = {
@@ -33,17 +43,53 @@ const DEFAULT_MODES: ModeState = {
   quality: "side",
 };
 
+function defaultLayerId(layers: LayerSpec[], analysis: Analysis): string {
+  const forAnalysis = layers.filter((layer) => layer.analysis === analysis);
+  if (analysis === "historical") {
+    return (forAnalysis.find((l) => l.id === "true_colour") ?? forAnalysis[0])?.id ?? "";
+  }
+  return forAnalysis[0]?.id ?? "";
+}
+
+function useBackendReachable(): boolean {
+  const [reachable, setReachable] = useState(false);
+  useEffect(() => {
+    let cancelled = false;
+    const controller = new AbortController();
+    const timer = window.setTimeout(() => controller.abort(), 2500);
+    fetch("/api/studies/registry", { signal: controller.signal })
+      .then((response) => {
+        if (!cancelled) setReachable(response.ok);
+      })
+      .catch(() => {
+        if (!cancelled) setReachable(false);
+      })
+      .finally(() => window.clearTimeout(timer));
+    return () => {
+      cancelled = true;
+      controller.abort();
+    };
+  }, []);
+  return reachable;
+}
+
+const LIVE_STUDIES = new Set(["coringa_coastal"]);
+
 export function WorkstationPage() {
-  const [summary, setSummary] = useState<M1Summary | null>(null);
-  const [georef, setGeoref] = useState<Georef | null>(null);
-  const [quality, setQuality] = useState<G0Quality | null>(null);
+  const params = useParams();
+  const studyId = params.studyId ?? DEFAULT_STUDY;
+  const backendReachable = useBackendReachable();
+  const live = backendReachable && LIVE_STUDIES.has(studyId);
+
+  const [bundle, setBundle] = useState<StudyBundle | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [experimentIndex, setExperimentIndex] = useState(0);
 
   const [analysis, setAnalysis] = useState<Analysis>("historical");
   const [layerIds, setLayerIds] = useState<Record<Analysis, string>>({
     historical: "true_colour",
-    change: "delta_ndvi",
-    quality: "qc_count_earlier",
+    change: "",
+    quality: "",
   });
   const [modes, setModes] = useState<ModeState>(DEFAULT_MODES);
   const [split, setSplit] = useState(50);
@@ -62,26 +108,18 @@ export function WorkstationPage() {
   const [roiLoading, setRoiLoading] = useState(false);
   const [roiError, setRoiError] = useState<string | null>(null);
 
-  const [experiment, setExperiment] = useState<ExperimentSummary | null>(null);
-  const [experimentError, setExperimentError] = useState<string | null>(null);
-
   const markerSetterRef = useRef<((lonLat: [number, number] | null) => void) | null>(null);
   const [inspectorTab, setInspectorTab] = useState<InspectorTab>("legend");
 
   /* ----------------------------------------------------------- loading --- */
   useEffect(() => {
     let cancelled = false;
-    Promise.all([
-      api.m1Summary(STUDY_ID),
-      api.georef(STUDY_ID),
-      api.presentation(STUDY_ID).catch(() => null),
-    ])
-      .then(([m1, geo, g0]) => {
-        if (!cancelled) {
-          setSummary(m1);
-          setGeoref(geo);
-          setQuality(g0);
-        }
+    setBundle(null);
+    setError(null);
+    setExperimentIndex(0);
+    loadStudyBundle(studyId)
+      .then((payload) => {
+        if (!cancelled) setBundle(payload);
       })
       .catch((err: Error) => {
         if (!cancelled) setError(err.message);
@@ -89,54 +127,94 @@ export function WorkstationPage() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [studyId]);
+
+  const summary: M1Summary | null = useMemo(
+    () => (bundle ? bundleSummary(studyId, bundle, experimentIndex) : null),
+    [bundle, studyId, experimentIndex]
+  );
+  const georef: Georef | null = useMemo(
+    () => (bundle ? bundleGeoref(studyId, bundle) : null),
+    [bundle, studyId]
+  );
+  const resolver: AssetResolver = useMemo(
+    () => (bundle ? (live ? liveResolver(studyId) : bundleResolver(studyId, bundle)) : null)!,
+    [bundle, live, studyId]
+  );
+
+  const layers = useMemo(
+    () => (summary && resolver ? buildLayers(summary, resolver) : []),
+    [summary, resolver]
+  );
 
   useEffect(() => {
-    if (!dockOpen || experiment || experimentError) return;
-    let cancelled = false;
-    api
-      .experimentLatest("coringa_m2")
-      .then((payload) => {
-        if (!cancelled) setExperiment(payload);
-      })
-      .catch((err: Error) => {
-        if (!cancelled) setExperimentError(err.message);
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, [dockOpen, experiment, experimentError]);
+    if (!layers.length) return;
+    setLayerIds((prev) => {
+      const next = { ...prev };
+      for (const key of ["historical", "change", "quality"] as Analysis[]) {
+        if (!next[key] || !layers.some((l) => l.id === next[key] && l.analysis === key)) {
+          next[key] = defaultLayerId(layers, key);
+        }
+      }
+      return next;
+    });
+  }, [layers]);
+
+  const quality = useMemo(() => (summary ? qualityFromSummary(summary) : null), [summary]);
 
   /* -------------------------------------------------------- interactions --- */
-  const analysisLayers = useMemo(() => (summary ? layersFor(analysis) : []), [analysis, summary]);
+  const analysisLayers = useMemo(
+    () => layers.filter((layer) => layer.analysis === analysis),
+    [layers, analysis]
+  );
   const layer: LayerSpec | undefined =
     analysisLayers.find((item) => item.id === layerIds[analysis]) ?? analysisLayers[0];
 
-  const handleMapClick = useCallback((lonLat: [number, number]) => {
-    setPixelLoading(true);
-    setPixelError(null);
-    api
-      .pixel(STUDY_ID, lonLat[0], lonLat[1])
-      .then((sample) => {
-        setPixel(sample);
-        markerSetterRef.current?.(lonLat);
+  const handleMapClick = useCallback(
+    (lonLat: [number, number]) => {
+      if (!live) {
+        setPixelError(
+          "Live pixel sampling needs the analysis backend (run `python -m uvicorn backend.app.api.app:app --port 8098`). The showcase bundle itself does not include per-pixel sampling."
+        );
         setInspectorTab("pixel");
-      })
-      .catch((err: Error) => setPixelError(err.message))
-      .finally(() => setPixelLoading(false));
-  }, []);
+        return;
+      }
+      setPixelLoading(true);
+      setPixelError(null);
+      api
+        .pixel(studyId, lonLat[0], lonLat[1])
+        .then((sample) => {
+          setPixel(sample);
+          markerSetterRef.current?.(lonLat);
+          setInspectorTab("pixel");
+        })
+        .catch((err: Error) => setPixelError(err.message))
+        .finally(() => setPixelLoading(false));
+    },
+    [live, studyId]
+  );
 
-  const handleRoiComplete = useCallback((box: RoiBox) => {
-    setRoiBox(box);
-    setRoiLoading(true);
-    setRoiError(null);
-    setRoiMode(false);
-    api
-      .roi(STUDY_ID, box)
-      .then((result) => setRoiResult(result))
-      .catch((err: Error) => setRoiError(err.message))
-      .finally(() => setRoiLoading(false));
-  }, []);
+  const handleRoiComplete = useCallback(
+    (box: RoiBox) => {
+      if (!live) {
+        setRoiError(
+          "Live ROI measurement needs the analysis backend. The showcase bundle includes the full recorded change statistics in the analysis dock instead."
+        );
+        setInspectorTab("roi");
+        return;
+      }
+      setRoiBox(box);
+      setRoiLoading(true);
+      setRoiError(null);
+      setRoiMode(false);
+      api
+        .roi(studyId, box)
+        .then((result) => setRoiResult(result))
+        .catch((err: Error) => setRoiError(err.message))
+        .finally(() => setRoiLoading(false));
+    },
+    [live, studyId]
+  );
 
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
@@ -158,12 +236,12 @@ export function WorkstationPage() {
     return (
       <main id="main" className="workstation workstation-error">
         <ErrorNote
-          message={`The study bundle could not be loaded (${error}). Start the backend API and reload.`}
+          message={`The study bundle could not be loaded (${error}). Build the bundles with \`python scripts/build_showcase_bundles.py\` and reload.`}
         />
       </main>
     );
   }
-  if (!summary || !georef || !layer) {
+  if (!bundle || !summary || !georef || !resolver || !layer) {
     return (
       <main id="main" className="workstation workstation-loading">
         <p className="mono-label">Loading the measured study bundle…</p>
@@ -173,19 +251,40 @@ export function WorkstationPage() {
 
   const worstCommon = Math.min(
     ...Object.values(summary.change ?? {}).map((block) =>
-      Number(block.common_valid_fraction_of_aoi ?? 0)
+      Number(block.common_valid_fraction_of_aoi ?? 1)
     )
   );
   const earlier = summary.periods?.[0];
   const later = summary.periods?.[1];
+  const isHimalaya = Boolean(bundle.event);
 
   return (
     <main id="main" className="workstation">
       {/* ------------------------------------------------ study context bar */}
       <header className="ws-context">
         <div className="ws-title">
-          <p className="eyebrow">Study A · Coastal ecotone · Processed</p>
-          <h1>{summary.study.title}</h1>
+          <p className="eyebrow">
+            {bundle.study.id ? `Study ${bundle.study.id} · ` : ""}
+            {String(bundle.study.study_type ?? "").replace(/_/g, " ")}
+            {bundle.evidence_status === "partial" ? " · PARTIAL evidence" : " · Processed"}
+            {isHimalaya ? ` · event ${bundle.event?.event_date}` : ""}
+          </p>
+          <h1>{bundle.study.title}</h1>
+          {bundle.experiments.length > 1 && (
+            <div className="ws-experiment-switch" role="group" aria-label="Experiment">
+              {bundle.experiments.map((item, index) => (
+                <button
+                  key={item.experiment_id}
+                  type="button"
+                  className={index === experimentIndex ? "chip is-active" : "chip"}
+                  aria-pressed={index === experimentIndex}
+                  onClick={() => setExperimentIndex(index)}
+                >
+                  {item.label ?? item.experiment_id}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
         <dl className="ws-facts">
           <div>
@@ -200,7 +299,10 @@ export function WorkstationPage() {
           </div>
           <div>
             <dt>Valid coverage</dt>
-            <dd>{(worstCommon * 100).toFixed(1)}% of AOI common-valid</dd>
+            <dd>
+              {(worstCommon * 100).toFixed(1)}%
+              {worstCommon < 0.999 ? " of AOI shared-valid" : " of AOI common-valid"}
+            </dd>
           </div>
           <div>
             <dt>Method</dt>
@@ -209,12 +311,10 @@ export function WorkstationPage() {
             </dd>
           </div>
           <div>
-            <dt>Provenance</dt>
+            <dt>Evidence mode</dt>
             <dd>
-              <a href={`/api/m1/study/${STUDY_ID}/manifest`} target="_blank" rel="noopener noreferrer">
-                Run manifest
-              </a>{" "}
-              ·{" "}
+              {live ? "Showcase + live probe" : "Portable showcase (bundled)"}
+              {" · "}
               <Link to="/methods">Methods</Link>
             </dd>
           </div>
@@ -283,14 +383,16 @@ export function WorkstationPage() {
                   <span className="mono-label">{Math.round(opacity * 100)}%</span>
                 </label>
               )}
-              <button
-                type="button"
-                className={overlay ? "toggle-btn is-active" : "toggle-btn"}
-                aria-pressed={overlay}
-                onClick={() => setOverlay((prev) => !prev)}
-              >
-                Validity overlay
-              </button>
+              {live && (
+                <button
+                  type="button"
+                  className={overlay ? "toggle-btn is-active" : "toggle-btn"}
+                  aria-pressed={overlay}
+                  onClick={() => setOverlay((prev) => !prev)}
+                >
+                  Validity overlay
+                </button>
+              )}
             </>
           )}
           <span className="mono-label ws-split-tools">
@@ -336,7 +438,7 @@ export function WorkstationPage() {
           <MapCompare
             georef={georef}
             summary={summary}
-            studyId={STUDY_ID}
+            resolver={resolver}
             analysis={analysis}
             layer={layer}
             mode={modes[analysis]}
@@ -353,9 +455,11 @@ export function WorkstationPage() {
           />
           <Inspector
             summary={summary}
-            studyId={STUDY_ID}
+            studyId={studyId}
+            resolver={resolver}
             layer={layer}
             quality={quality}
+            bundle={bundle}
             pixel={pixel}
             pixelError={pixelError}
             pixelLoading={pixelLoading}
@@ -365,6 +469,7 @@ export function WorkstationPage() {
             roiResult={roiResult}
             roiError={roiError}
             roiLoading={roiLoading}
+            live={live}
             onToggleRoi={() => {
               setRoiMode((prev) => !prev);
               setInspectorTab("roi");
@@ -378,8 +483,8 @@ export function WorkstationPage() {
       {/* ------------------------------------------------------------- dock */}
       <Dock
         summary={summary}
-        experiment={experiment}
-        experimentError={experimentError}
+        bundle={bundle}
+        experimentIndex={experimentIndex}
         open={dockOpen}
         onToggle={() => setDockOpen((prev) => !prev)}
       />

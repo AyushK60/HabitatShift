@@ -1,0 +1,268 @@
+{
+ "registry_version": 2,
+ "generated_for": "M0 foundation (4 November 2026); M4 feasibility update (7 November 2026)",
+ "common": {
+  "target_sensor": "Sentinel-2 MSI Level-2A",
+  "stac_collection": "sentinel-2-l2a",
+  "catalog": "https://earth-search.aws.element84.com/v1",
+  "license": "Copernicus Sentinel data - free and open with attribution (ESA)",
+  "analysis_crs_rule": "auto-derived UTM zone from AOI centroid"
+ },
+ "studies": [
+  {
+   "id": "A",
+   "study_id": "coringa_coastal",
+   "slug": "coringa",
+   "title": "Coringa / Godavari delta, Andhra Pradesh",
+   "study_type": "coastal_ecotone",
+   "status": "processed",
+   "question": "Do surface-water and vegetation signals in the Coringa mangrove creeks differ between seasonally matched 2020 and 2025 observations, and how far can a masked NDVI difference be trusted at this tidal site?",
+   "phenomena": [
+    "mangrove / creek vegetation cover",
+    "surface water extent in tidal creeks"
+   ],
+   "target_periods": {
+    "earlier": {
+     "label": "Period A (near 2020)",
+     "start": "2020-01-01",
+     "end": "2020-05-31"
+    },
+    "later": {
+     "label": "Period B (near 2025)",
+     "start": "2025-01-01",
+     "end": "2025-05-31"
+    }
+   },
+   "aoi": {
+    "crs": "EPSG:4326",
+    "kind": "hand-chosen rectangular working window",
+    "boundary_source": "Manually placed over the mangrove/creek complex of Coringa Wildlife Sanctuary south of Kakinada; not the official sanctuary boundary.",
+    "bounds": {
+     "west": 82.245,
+     "south": 16.71,
+     "east": 82.285,
+     "north": 16.745
+    },
+    "approx_km": "4.4 x 3.9"
+   },
+   "limitations": [
+    "Tidal stage and turbidity are uncontrolled confounders.",
+    "Mixed mangrove/water pixels at 10 m.",
+    "No species or ecological-causation claim."
+   ]
+  },
+  {
+   "id": "B",
+   "study_id": "chilika_wetland",
+   "slug": "chilika",
+   "title": "Chilika Lake, Odisha",
+   "study_type": "dynamic_wetland",
+   "status": "feasibility",
+   "question": "How much of the apparent dry-season water-extent signal is seasonal or turbidity-driven versus a longer-term change between matched years?",
+   "phenomena": [
+    "lagoon water extent",
+    "mudflat and shore transitions"
+   ],
+   "target_periods": {
+    "earlier": {
+     "label": "Period A (near 2020)",
+     "start": "2020-01-01",
+     "end": "2020-03-31"
+    },
+    "later": {
+     "label": "Period B (near 2025)",
+     "start": "2025-01-01",
+     "end": "2025-03-31"
+    }
+   },
+   "aoi": {
+    "crs": "EPSG:4326",
+    "kind": "hand-chosen rectangular working window near Satapada",
+    "boundary_source": "Manually placed over lagoon/barrier area; not an official boundary.",
+    "bounds": {
+     "west": 85.3,
+     "south": 19.69,
+     "east": 85.36,
+     "north": 19.74
+    },
+    "approx_km": "6.6 x 5.6"
+   },
+   "limitations": [
+    "Water level and seasonality dominate; no hydrological cause claims.",
+    "Brackish turbidity shifts NDWI/MNDWI values."
+   ]
+  },
+  {
+   "id": "C",
+   "study_id": "western_ghats_forest",
+   "slug": "western_ghats",
+   "title": "Selected Western Ghats forest landscape",
+   "study_type": "forest_landscape",
+   "status": "feasibility",
+   "question": "Are vegetation signals spatially consistent across a matched-season pair in a rugged forest block, and how much is explained by terrain shadow?",
+   "phenomena": [
+    "canopy vegetation signal",
+    "terrain shadow artefacts"
+   ],
+   "target_periods": {
+    "earlier": {
+     "label": "Period A (near 2020)",
+     "start": "2020-01-01",
+     "end": "2020-04-30"
+    },
+    "later": {
+     "label": "Period B (near 2025)",
+     "start": "2025-01-01",
+     "end": "2025-04-30"
+    }
+   },
+   "aoi": {
+    "crs": "EPSG:4326",
+    "kind": "hand-chosen rectangular working window",
+    "boundary_source": "Manually placed over a forested block; site to be confirmed.",
+    "bounds": {
+     "west": 74.33,
+     "south": 15.13,
+     "east": 74.38,
+     "north": 15.17
+    },
+    "approx_km": "5.5 x 4.4"
+   },
+   "limitations": [
+    "Topographic shadow and canopy structure complicate index interpretation."
+   ]
+  },
+  {
+   "id": "D1",
+   "study_id": "himalaya_purepu_2025",
+   "slug": "himalayan_rasuwa",
+   "title": "Purepu supraglacial-lake drainage, Rasuwa (8 July 2025)",
+   "study_type": "hazard_cryosphere",
+   "status": "feasibility",
+   "event_date": "2025-07-08",
+   "event_mechanism": "rapid discharge of a supraglacial lake on the Purepu Glacier",
+   "question": "Are usable Sentinel-2 observations available before and after 8 July 2025 over the Purepu lake source area, and what does cloud cover permit?",
+   "phenomena": [
+    "lake surface extent",
+    "snow/ice context"
+   ],
+   "target_periods": {
+    "previous": {
+     "start": "2025-04-01",
+     "end": "2025-07-08"
+    },
+    "post": {
+     "start": "2025-07-08",
+     "end": "2025-07-31"
+    },
+    "later": {
+     "start": "2025-08-01",
+     "end": "2025-10-31"
+    }
+   },
+   "aoi": {
+    "crs": "EPSG:4326",
+    "kind": "approximate rectangular source-area window (uncertain +/-2 km)",
+    "boundary_source": "Placed from published NDRRMA situation-report context; centre is approximate and has not been snapped to a verified lake shoreline.",
+    "bounds": {
+     "west": 85.615,
+     "south": 28.3,
+     "east": 85.65,
+     "north": 28.33
+    },
+    "approx_km": "3.4 x 3.3"
+   },
+   "limitations": [
+    "Monsoon cloud; terrain shadow; approximate AOI centre.",
+    "No volume or dam-failure inference from area alone."
+   ]
+  },
+  {
+   "id": "D2",
+   "study_id": "himalaya_langtang_2026",
+   "slug": "himalayan_rasuwa",
+   "title": "Langtang Lirung rock-ice collapse, Rasuwa (26 August 2026)",
+   "study_type": "hazard_cryosphere",
+   "status": "feasibility",
+   "event_date": "2026-08-26",
+   "event_mechanism": "rock-and-ice collapse and cascading debris-laden flood, explicitly not a conventional glacial lake outburst",
+   "question": "Are usable Sentinel-2 observations available before and after 26 August 2026 around the high source zone, and where does optical visibility fail?",
+   "phenomena": [
+    "snow/ice and exposed-ground contrast",
+    "candidate debris signature"
+   ],
+   "target_periods": {
+    "previous": {
+     "start": "2026-06-01",
+     "end": "2026-08-26"
+    },
+    "post": {
+     "start": "2026-08-26",
+     "end": "2026-09-30"
+    },
+    "later": {
+     "start": "2026-10-01",
+     "end": "2026-12-15"
+    }
+   },
+   "aoi": {
+    "crs": "EPSG:4326",
+    "kind": "approximate rectangular source-zone window",
+    "boundary_source": "Centred on the Langtang Lirung massif from published ICIMOD/ESA context; exact detachment scar not verified at M0.",
+    "bounds": {
+     "west": 85.53,
+     "south": 28.155,
+     "east": 85.565,
+     "north": 28.19
+    },
+    "approx_km": "3.4 x 3.9"
+   },
+   "limitations": [
+    "Heavy monsoon cloud; snow/shadow confusion; optical only.",
+    "InSAR deformation is external literature, not reproduced here."
+   ]
+  },
+  {
+   "id": "E",
+   "study_id": "kathmandu_urban",
+   "slug": "kathmandu_urban",
+   "title": "Kathmandu Valley urban pilot, Nepal",
+   "study_type": "urban_landscape",
+   "status": "feasibility",
+   "question": "Are matched-season Sentinel-2 pairs available over a bounded inner-city pilot, and does bare soil / construction confusion threaten a built-up signal?",
+   "phenomena": [
+    "candidate built-up surface signal",
+    "exposed soil confounding"
+   ],
+   "target_periods": {
+    "earlier": {
+     "label": "Period A (near 2020)",
+     "start": "2020-01-01",
+     "end": "2020-05-31"
+    },
+    "later": {
+     "label": "Period B (near 2025)",
+     "start": "2025-01-01",
+     "end": "2025-05-31"
+    }
+   },
+   "aoi": {
+    "crs": "EPSG:4326",
+    "kind": "small bounded pilot window inside the urban core",
+    "boundary_source": "Manually placed; not a municipal boundary.",
+    "bounds": {
+     "west": 85.305,
+     "south": 27.695,
+     "east": 85.325,
+     "north": 27.715
+    },
+    "approx_km": "2.2 x 2.2"
+   },
+   "limitations": [
+    "Bare soil, construction sites and dry riverbeds mimic built-up spectra.",
+    "NDBI is a feature, not a building label.",
+    "Agriculture/forest boundary ambiguity."
+   ]
+  }
+ ]
+}

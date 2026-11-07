@@ -16,7 +16,7 @@ export default function App() {
       <TopNav />
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/workstation" element={<WorkstationPage />} />
+        <Route path="/workstation/:studyId?" element={<WorkstationPage />} />
         <Route path="/experiments" element={<ExperimentsPage />} />
         <Route path="/methods" element={<MethodsPage />} />
         <Route

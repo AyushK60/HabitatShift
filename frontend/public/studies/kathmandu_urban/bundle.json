@@ -2,6 +2,7 @@
  "schema": "habitatshift-m4-bundle/1",
  "bundle_version": "1",
  "study_id": "kathmandu_urban",
+ "evidence_status": "processed",
  "study": {
   "study_id": "kathmandu_urban",
   "id": "E",
@@ -86,7 +87,7 @@
    10.0,
    10.0
   ],
-  "nodata": NaN,
+  "nodata": null,
   "lonlat_bounds": [
    85.30466445462952,
    27.694765661509376,

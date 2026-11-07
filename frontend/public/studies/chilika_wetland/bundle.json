@@ -2,6 +2,7 @@
  "schema": "habitatshift-m4-bundle/1",
  "bundle_version": "1",
  "study_id": "chilika_wetland",
+ "evidence_status": "processed",
  "study": {
   "study_id": "chilika_wetland",
   "id": "B",
@@ -87,7 +88,7 @@
    10.0,
    10.0
   ],
-  "nodata": NaN,
+  "nodata": null,
   "lonlat_bounds": [
    85.2994206880976,
    19.68947391794435,
