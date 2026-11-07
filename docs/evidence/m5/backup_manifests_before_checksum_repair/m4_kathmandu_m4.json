@@ -1,0 +1,3481 @@
+{
+  "manifest_version": "m1-1.0",
+  "generated_utc": "2026-11-07T13:12:45.714603+00:00",
+  "experiment_id": "kathmandu_m4",
+  "study": {
+    "study_id": "kathmandu_urban",
+    "title": "Kathmandu Valley urban pilot, Nepal",
+    "study_type": "urban_landscape",
+    "question": "Are matched-season Sentinel-2 pairs available over a bounded inner-city pilot, and does bare soil / construction confusion threaten a built-up signal?",
+    "phenomena": [
+      "candidate built-up surface signal",
+      "exposed soil confounding"
+    ],
+    "limitations": [
+      "Bare soil, construction sites and dry riverbeds mimic built-up spectra.",
+      "NDBI is a feature, not a building label.",
+      "Agriculture/forest boundary ambiguity."
+    ],
+    "status": "feasibility"
+  },
+  "aoi": {
+    "geojson": {
+      "type": "Feature",
+      "properties": {
+        "study_id": "kathmandu_urban",
+        "description": "small bounded pilot window inside the urban core",
+        "source": "Manually placed; not a municipal boundary.",
+        "crs": "EPSG:4326",
+        "area_km2": 4.371274,
+        "utm_epsg": 32645
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.325,
+              27.695
+            ],
+            [
+              85.325,
+              27.715
+            ],
+            [
+              85.305,
+              27.715
+            ],
+            [
+              85.305,
+              27.695
+            ],
+            [
+              85.325,
+              27.695
+            ]
+          ]
+        ]
+      }
+    },
+    "bounds_4326": [
+      85.305,
+      27.695,
+      85.325,
+      27.715
+    ],
+    "crs": "EPSG:4326",
+    "analysis_crs": "EPSG:32645",
+    "area_km2": 4.371274,
+    "grid": {
+      "crs": "EPSG:32645",
+      "resolution_m": 10.0,
+      "width": 201,
+      "height": 225,
+      "transform": [
+        10.0,
+        0.0,
+        332860.0,
+        0.0,
+        -10.0,
+        3066790.0
+      ],
+      "bounds": [
+        332860.0,
+        3064540.0,
+        334870.0,
+        3066790.0
+      ],
+      "signature": "077db7532b5cf722",
+      "utm_epsg": 32645,
+      "pixel_area_m2": 100.0
+    }
+  },
+  "grid": {
+    "crs": "EPSG:32645",
+    "resolution_m": 10.0,
+    "width": 201,
+    "height": 225,
+    "transform": [
+      10.0,
+      0.0,
+      332860.0,
+      0.0,
+      -10.0,
+      3066790.0
+    ],
+    "bounds": [
+      332860.0,
+      3064540.0,
+      334870.0,
+      3066790.0
+    ],
+    "signature": "077db7532b5cf722",
+    "utm_epsg": 32645,
+    "pixel_area_m2": 100.0
+  },
+  "catalog": {
+    "endpoint": "https://earth-search.aws.element84.com/v1",
+    "collection": "sentinel-2-l2a",
+    "provider": "Element 84 Earth Search (AWS Open Data)",
+    "license": "Copernicus Sentinel data: free, open and unrestricted use with attribution (ESA Copernicus data policy). Catalogue: Element 84 Earth Search, AWS Open Data.",
+    "collection_license": "proprietary"
+  },
+  "periods": [
+    {
+      "period_id": "earlier",
+      "anchor_date": "2020-03-31",
+      "composite_method": "median",
+      "min_observations": 1,
+      "observation_count": 3,
+      "observation_dates": [
+        "2020-03-31",
+        "2020-04-02",
+        "2020-03-26"
+      ],
+      "item_ids": [
+        "S2B_45RUL_20200331_0_L2A",
+        "S2A_45RUL_20200402_1_L2A",
+        "S2A_45RUL_20200326_0_L2A"
+      ],
+      "valid_pixels": 43728,
+      "aoi_pixels": 43728,
+      "valid_fraction": 1.0,
+      "valid_fraction_of_grid": 0.966899,
+      "observation_count_stats": {
+        "min": 1,
+        "max": 3,
+        "mean": 2.998491,
+        "median": 3.0
+      },
+      "indices": {
+        "ndbi": {
+          "key": "ndbi",
+          "label": "NDBI",
+          "formula": "(SWIR1 - NIR) / (SWIR1 + NIR)",
+          "bands": [
+            "swir16",
+            "nir"
+          ],
+          "native_resolution_m": 20.0,
+          "value_range": [
+            -1.0,
+            1.0
+          ],
+          "description": "Normalised Difference Built-up Index feature (Zha et al. 2003); a candidate signal, never a building label",
+          "legend_breaks": [
+            -0.1,
+            0.0,
+            0.1,
+            0.3
+          ],
+          "analysis_resolution_m": 10.0,
+          "upsampled": true,
+          "resolution_note": "computed on a 10 m grid from 20 m native bands; upsampled data contain no genuine 10 m detail",
+          "stats": {
+            "valid_count": 43728,
+            "total_count": 45225,
+            "valid_fraction": 0.966899,
+            "min": -0.487272,
+            "max": 0.468381,
+            "mean": 0.091646,
+            "std": 0.097345,
+            "quantiles": {
+              "p05": -0.08932,
+              "p25": 0.039693,
+              "p50": 0.102205,
+              "p75": 0.155397,
+              "p95": 0.232249
+            }
+          }
+        },
+        "ndvi": {
+          "key": "ndvi",
+          "label": "NDVI",
+          "formula": "(NIR - Red) / (NIR + Red)",
+          "bands": [
+            "nir",
+            "red"
+          ],
+          "native_resolution_m": 10.0,
+          "value_range": [
+            -1.0,
+            1.0
+          ],
+          "description": "Normalised Difference Vegetation Index (Rouse et al. 1974)",
+          "legend_breaks": [
+            -0.6,
+            -0.35,
+            -0.12,
+            0.02,
+            0.16,
+            0.3,
+            0.5
+          ],
+          "analysis_resolution_m": 10.0,
+          "upsampled": false,
+          "resolution_note": "native 10 m band resolution",
+          "stats": {
+            "valid_count": 43728,
+            "total_count": 45225,
+            "valid_fraction": 0.966899,
+            "min": -0.087896,
+            "max": 0.873061,
+            "mean": 0.198894,
+            "std": 0.148996,
+            "quantiles": {
+              "p05": 0.051327,
+              "p25": 0.097218,
+              "p50": 0.145465,
+              "p75": 0.256747,
+              "p95": 0.527526
+            }
+          }
+        },
+        "ndwi": {
+          "key": "ndwi",
+          "label": "NDWI",
+          "formula": "(Green - NIR) / (Green + NIR)",
+          "bands": [
+            "green",
+            "nir"
+          ],
+          "native_resolution_m": 10.0,
+          "value_range": [
+            -1.0,
+            1.0
+          ],
+          "description": "McFeeters Normalised Difference Water Index (1996)",
+          "legend_breaks": [
+            -0.3,
+            -0.1,
+            0.0,
+            0.1,
+            0.3
+          ],
+          "analysis_resolution_m": 10.0,
+          "upsampled": false,
+          "resolution_note": "native 10 m band resolution",
+          "stats": {
+            "valid_count": 43728,
+            "total_count": 45225,
+            "valid_fraction": 0.966899,
+            "min": -0.783486,
+            "max": 0.245965,
+            "mean": -0.256622,
+            "std": 0.125948,
+            "quantiles": {
+              "p05": -0.517293,
+              "p25": -0.324868,
+              "p50": -0.222472,
+              "p75": -0.16431,
+              "p95": -0.108391
+            }
+          }
+        }
+      },
+      "anchor_single_observation": {
+        "item_id": "S2B_45RUL_20200331_0_L2A",
+        "date": "2020-03-31",
+        "indices": {
+          "ndbi": {
+            "valid_count": 43682,
+            "total_count": 45225,
+            "valid_fraction": 0.965882,
+            "min": -0.487272,
+            "max": 0.579861,
+            "mean": 0.096726,
+            "std": 0.10321,
+            "quantiles": {
+              "p05": -0.092404,
+              "p25": 0.040486,
+              "p50": 0.106232,
+              "p75": 0.163824,
+              "p95": 0.248222
+            }
+          },
+          "ndvi": {
+            "valid_count": 43682,
+            "total_count": 45225,
+            "valid_fraction": 0.965882,
+            "min": -0.077152,
+            "max": 0.878492,
+            "mean": 0.212435,
+            "std": 0.1523,
+            "quantiles": {
+              "p05": 0.056531,
+              "p25": 0.107592,
+              "p50": 0.160096,
+              "p75": 0.274141,
+              "p95": 0.548385
+            }
+          },
+          "ndwi": {
+            "valid_count": 43682,
+            "total_count": 45225,
+            "valid_fraction": 0.965882,
+            "min": -0.798728,
+            "max": 0.245965,
+            "mean": -0.275597,
+            "std": 0.126412,
+            "quantiles": {
+              "p05": -0.535544,
+              "p25": -0.343352,
+              "p50": -0.243633,
+              "p75": -0.185244,
+              "p95": -0.120189
+            }
+          }
+        },
+        "note": "single-observation reconstruction used only to compare the M1 composite against the M0 two-scene baseline; it is not the headline M1 result"
+      },
+      "selection": {
+        "anchor_date": "2020-03-31",
+        "max_offset_days": 30,
+        "usable_candidate_total": 24,
+        "distinct_usable_dates": [
+          "2020-03-03",
+          "2020-03-06",
+          "2020-03-08",
+          "2020-03-11",
+          "2020-03-18",
+          "2020-03-26",
+          "2020-03-31",
+          "2020-04-02",
+          "2020-04-05",
+          "2020-04-07",
+          "2020-04-10",
+          "2020-04-12",
+          "2020-04-20"
+        ],
+        "chosen_item_ids": [
+          "S2B_45RUL_20200331_0_L2A",
+          "S2A_45RUL_20200402_1_L2A",
+          "S2A_45RUL_20200326_0_L2A"
+        ],
+        "chosen_dates": [
+          "2020-03-31",
+          "2020-04-02",
+          "2020-03-26"
+        ],
+        "offset_days": {
+          "S2B_45RUL_20200331_0_L2A": 0,
+          "S2A_45RUL_20200402_1_L2A": 2,
+          "S2A_45RUL_20200326_0_L2A": 5
+        },
+        "within_anchor_window": true,
+        "fallback_used": false,
+        "single_observation_limitation": false
+      },
+      "stretch": {
+        "true_colour": {
+          "low": [
+            0.0640999972820282,
+            0.06579999625682831,
+            0.043800000101327896
+          ],
+          "high": [
+            0.20417999923229102,
+            0.1699800014495838,
+            0.1462000012397766
+          ],
+          "gamma": 1.0,
+          "method": "joint per-band 2-98 percentile linear stretch over both periods' valid pixels (M4-R1 \u00a78: consistent stretch for direct visual comparison)"
+        },
+        "false_colour": {
+          "low": [
+            0.10859999805688858,
+            0.0640999972820282,
+            0.06579999625682831
+          ],
+          "high": [
+            0.2973799973726261,
+            0.20417999923229102,
+            0.1699800014495838
+          ],
+          "gamma": 1.0,
+          "method": "joint per-band 2-98 percentile linear stretch over both periods' valid pixels (M4-R1 \u00a78: consistent stretch for direct visual comparison)"
+        }
+      },
+      "previews": {
+        "ndbi": "data/previews/m4/kathmandu_m4/earlier_2020-03-31_ndbi.png",
+        "ndvi": "data/previews/m4/kathmandu_m4/earlier_2020-03-31_ndvi.png",
+        "ndwi": "data/previews/m4/kathmandu_m4/earlier_2020-03-31_ndwi.png",
+        "true_colour": "data/previews/m4/kathmandu_m4/earlier_2020-03-31_true_colour.png",
+        "false_colour": "data/previews/m4/kathmandu_m4/earlier_2020-03-31_false_colour.png",
+        "valid_mask": "data/previews/m4/kathmandu_m4/earlier_2020-03-31_valid_mask.png",
+        "observation_count": "data/previews/m4/kathmandu_m4/earlier_2020-03-31_observation_count.png"
+      },
+      "observations": [
+        {
+          "item_id": "S2B_45RUL_20200331_0_L2A",
+          "acquisition_date": "2020-03-31",
+          "acquisition_utc": "2020-03-31T05:11:00.911000Z",
+          "scene_cloud_cover_percent": 0.06039,
+          "processing_baseline": "02.14",
+          "aoi_valid_fraction": 0.998948,
+          "grid_signature": "077db7532b5cf722",
+          "assets": {
+            "blue": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/45/R/UL/2020/3/S2B_45RUL_20200331_0_L2A/B02.tif",
+              "gsd_metres": 10.0
+            },
+            "green": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/45/R/UL/2020/3/S2B_45RUL_20200331_0_L2A/B03.tif",
+              "gsd_metres": 10.0
+            },
+            "red": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/45/R/UL/2020/3/S2B_45RUL_20200331_0_L2A/B04.tif",
+              "gsd_metres": 10.0
+            },
+            "nir": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/45/R/UL/2020/3/S2B_45RUL_20200331_0_L2A/B08.tif",
+              "gsd_metres": 10.0
+            },
+            "swir16": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/45/R/UL/2020/3/S2B_45RUL_20200331_0_L2A/B11.tif",
+              "gsd_metres": 20.0
+            }
+          },
+          "radiometry": {
+            "blue": {
+              "asset_key": "blue",
+              "scale": 0.0001,
+              "offset": 0.0,
+              "nodata": 0,
+              "gsd_metres": 10.0,
+              "source": "stac:item.S2B_45RUL_20200331_0_L2A.assets.blue.raster:bands (baseline 02.14; declared offset +0.0 (boa_offset_applied=False))",
+              "transform": "reflectance = DN * scale + offset"
+            },
+            "green": {
+              "asset_key": "green",
+              "scale": 0.0001,
+              "offset": 0.0,
+              "nodata": 0,
+              "gsd_metres": 10.0,
+              "source": "stac:item.S2B_45RUL_20200331_0_L2A.assets.green.raster:bands (baseline 02.14; declared offset +0.0 (boa_offset_applied=False))",
+              "transform": "reflectance = DN * scale + offset"
+            },
+            "nir": {
+              "asset_key": "nir",
+              "scale": 0.0001,
+              "offset": 0.0,
+              "nodata": 0,
+              "gsd_metres": 10.0,
+              "source": "stac:item.S2B_45RUL_20200331_0_L2A.assets.nir.raster:bands (baseline 02.14; declared offset +0.0 (boa_offset_applied=False))",
+              "transform": "reflectance = DN * scale + offset"
+            },
+            "red": {
+              "asset_key": "red",
+              "scale": 0.0001,
+              "offset": 0.0,
+              "nodata": 0,
+              "gsd_metres": 10.0,
+              "source": "stac:item.S2B_45RUL_20200331_0_L2A.assets.red.raster:bands (baseline 02.14; declared offset +0.0 (boa_offset_applied=False))",
+              "transform": "reflectance = DN * scale + offset"
+            },
+            "swir16": {
+              "asset_key": "swir16",
+              "scale": 0.0001,
+              "offset": 0.0,
+              "nodata": 0,
+              "gsd_metres": 20.0,
+              "source": "stac:item.S2B_45RUL_20200331_0_L2A.assets.swir16.raster:bands (baseline 02.14; declared offset +0.0 (boa_offset_applied=False))",
+              "transform": "reflectance = DN * scale + offset"
+            }
+          },
+          "radiometry_evidence": {}
+        },
+        {
+          "item_id": "S2A_45RUL_20200402_1_L2A",
+          "acquisition_date": "2020-04-02",
+          "acquisition_utc": "2020-04-02T05:01:03.824000Z",
+          "scene_cloud_cover_percent": 0.609898,
+          "processing_baseline": "05.00",
+          "aoi_valid_fraction": 1.0,
+          "grid_signature": "077db7532b5cf722",
+          "assets": {
+            "blue": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/45/R/UL/2020/4/S2A_45RUL_20200402_1_L2A/B02.tif",
+              "gsd_metres": 10.0
+            },
+            "green": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/45/R/UL/2020/4/S2A_45RUL_20200402_1_L2A/B03.tif",
+              "gsd_metres": 10.0
+            },
+            "red": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/45/R/UL/2020/4/S2A_45RUL_20200402_1_L2A/B04.tif",
+              "gsd_metres": 10.0
+            },
+            "nir": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/45/R/UL/2020/4/S2A_45RUL_20200402_1_L2A/B08.tif",
+              "gsd_metres": 10.0
+            },
+            "swir16": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/45/R/UL/2020/4/S2A_45RUL_20200402_1_L2A/B11.tif",
+              "gsd_metres": 20.0
+            }
+          },
+          "radiometry": {
+            "blue": {
+              "asset_key": "blue",
+              "scale": 0.0001,
+              "offset": 0.0,
+              "nodata": 0,
+              "gsd_metres": 10.0,
+              "source": "stac:item.S2A_45RUL_20200402_1_L2A.assets.blue.raster:bands (baseline 05.00; earthsearch:boa_offset_applied=true so the declared -0.1 is already baked into the DNs and is not applied again)",
+              "transform": "reflectance = DN * scale + offset"
+            },
+            "green": {
+              "asset_key": "green",
+              "scale": 0.0001,
+              "offset": 0.0,
+              "nodata": 0,
+              "gsd_metres": 10.0,
+              "source": "stac:item.S2A_45RUL_20200402_1_L2A.assets.green.raster:bands (baseline 05.00; earthsearch:boa_offset_applied=true so the declared -0.1 is already baked into the DNs and is not applied again)",
+              "transform": "reflectance = DN * scale + offset"
+            },
+            "nir": {
+              "asset_key": "nir",
+              "scale": 0.0001,
+              "offset": 0.0,
+              "nodata": 0,
+              "gsd_metres": 10.0,
+              "source": "stac:item.S2A_45RUL_20200402_1_L2A.assets.nir.raster:bands (baseline 05.00; earthsearch:boa_offset_applied=true so the declared -0.1 is already baked into the DNs and is not applied again)",
+              "transform": "reflectance = DN * scale + offset"
+            },
+            "red": {
+              "asset_key": "red",
+              "scale": 0.0001,
+              "offset": 0.0,
+              "nodata": 0,
+              "gsd_metres": 10.0,
+              "source": "stac:item.S2A_45RUL_20200402_1_L2A.assets.red.raster:bands (baseline 05.00; earthsearch:boa_offset_applied=true so the declared -0.1 is already baked into the DNs and is not applied again)",
+              "transform": "reflectance = DN * scale + offset"
+            },
+            "swir16": {
+              "asset_key": "swir16",
+              "scale": 0.0001,
+              "offset": 0.0,
+              "nodata": 0,
+              "gsd_metres": 20.0,
+              "source": "stac:item.S2A_45RUL_20200402_1_L2A.assets.swir16.raster:bands (baseline 05.00; earthsearch:boa_offset_applied=true so the declared -0.1 is already baked into the DNs and is not applied again)",
+              "transform": "reflectance = DN * scale + offset"
+            }
+          },
+          "radiometry_evidence": {}
+        },
+        {
+          "item_id": "S2A_45RUL_20200326_0_L2A",
+          "acquisition_date": "2020-03-26",
+          "acquisition_utc": "2020-03-26T05:10:59.669000Z",
+          "scene_cloud_cover_percent": 10.066844,
+          "processing_baseline": "02.14",
+          "aoi_valid_fraction": 0.999543,
+          "grid_signature": "077db7532b5cf722",
+          "assets": {
+            "blue": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/45/R/UL/2020/3/S2A_45RUL_20200326_0_L2A/B02.tif",
+              "gsd_metres": 10.0
+            },
+            "green": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/45/R/UL/2020/3/S2A_45RUL_20200326_0_L2A/B03.tif",
+              "gsd_metres": 10.0
+            },
+            "red": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/45/R/UL/2020/3/S2A_45RUL_20200326_0_L2A/B04.tif",
+              "gsd_metres": 10.0
+            },
+            "nir": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/45/R/UL/2020/3/S2A_45RUL_20200326_0_L2A/B08.tif",
+              "gsd_metres": 10.0
+            },
+            "swir16": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/45/R/UL/2020/3/S2A_45RUL_20200326_0_L2A/B11.tif",
+              "gsd_metres": 20.0
+            }
+          },
+          "radiometry": {
+            "blue": {
+              "asset_key": "blue",
+              "scale": 0.0001,
+              "offset": 0.0,
+              "nodata": 0,
+              "gsd_metres": 10.0,
+              "source": "stac:item.S2A_45RUL_20200326_0_L2A.assets.blue.raster:bands (baseline 02.14; declared offset +0.0 (boa_offset_applied=False))",
+              "transform": "reflectance = DN * scale + offset"
+            },
+            "green": {
+              "asset_key": "green",
+              "scale": 0.0001,
+              "offset": 0.0,
+              "nodata": 0,
+              "gsd_metres": 10.0,
+              "source": "stac:item.S2A_45RUL_20200326_0_L2A.assets.green.raster:bands (baseline 02.14; declared offset +0.0 (boa_offset_applied=False))",
+              "transform": "reflectance = DN * scale + offset"
+            },
+            "nir": {
+              "asset_key": "nir",
+              "scale": 0.0001,
+              "offset": 0.0,
+              "nodata": 0,
+              "gsd_metres": 10.0,
+              "source": "stac:item.S2A_45RUL_20200326_0_L2A.assets.nir.raster:bands (baseline 02.14; declared offset +0.0 (boa_offset_applied=False))",
+              "transform": "reflectance = DN * scale + offset"
+            },
+            "red": {
+              "asset_key": "red",
+              "scale": 0.0001,
+              "offset": 0.0,
+              "nodata": 0,
+              "gsd_metres": 10.0,
+              "source": "stac:item.S2A_45RUL_20200326_0_L2A.assets.red.raster:bands (baseline 02.14; declared offset +0.0 (boa_offset_applied=False))",
+              "transform": "reflectance = DN * scale + offset"
+            },
+            "swir16": {
+              "asset_key": "swir16",
+              "scale": 0.0001,
+              "offset": 0.0,
+              "nodata": 0,
+              "gsd_metres": 20.0,
+              "source": "stac:item.S2A_45RUL_20200326_0_L2A.assets.swir16.raster:bands (baseline 02.14; declared offset +0.0 (boa_offset_applied=False))",
+              "transform": "reflectance = DN * scale + offset"
+            }
+          },
+          "radiometry_evidence": {}
+        }
+      ],
+      "mask_policy": {
+        "S2B_45RUL_20200331_0_L2A": {
+          "total_pixels": 43728,
+          "valid_pixels": 43682,
+          "valid_fraction": 0.998948,
+          "valid_percent": 99.895,
+          "accepted_scl_classes": {
+            "2": "dark_area_pixels",
+            "4": "vegetation",
+            "5": "not_vegetated",
+            "6": "water",
+            "7": "unclassified",
+            "11": "snow_ice"
+          },
+          "rejected_scl_classes": {
+            "0": "no_data",
+            "1": "saturated_or_defective",
+            "3": "cloud_shadow",
+            "8": "cloud_medium_probability",
+            "9": "cloud_high_probability",
+            "10": "thin_cirrus"
+          },
+          "class_histogram": {
+            "2": 1840,
+            "4": 2554,
+            "5": 40751,
+            "7": 32,
+            "9": 48
+          }
+        },
+        "S2A_45RUL_20200402_1_L2A": {
+          "total_pixels": 43728,
+          "valid_pixels": 43728,
+          "valid_fraction": 1.0,
+          "valid_percent": 100.0,
+          "accepted_scl_classes": {
+            "2": "dark_area_pixels",
+            "4": "vegetation",
+            "5": "not_vegetated",
+            "6": "water",
+            "7": "unclassified",
+            "11": "snow_ice"
+          },
+          "rejected_scl_classes": {
+            "0": "no_data",
+            "1": "saturated_or_defective",
+            "3": "cloud_shadow",
+            "8": "cloud_medium_probability",
+            "9": "cloud_high_probability",
+            "10": "thin_cirrus"
+          },
+          "class_histogram": {
+            "4": 2994,
+            "5": 42231
+          }
+        },
+        "S2A_45RUL_20200326_0_L2A": {
+          "total_pixels": 43728,
+          "valid_pixels": 43708,
+          "valid_fraction": 0.999543,
+          "valid_percent": 99.954,
+          "accepted_scl_classes": {
+            "2": "dark_area_pixels",
+            "4": "vegetation",
+            "5": "not_vegetated",
+            "6": "water",
+            "7": "unclassified",
+            "11": "snow_ice"
+          },
+          "rejected_scl_classes": {
+            "0": "no_data",
+            "1": "saturated_or_defective",
+            "3": "cloud_shadow",
+            "8": "cloud_medium_probability",
+            "9": "cloud_high_probability",
+            "10": "thin_cirrus"
+          },
+          "class_histogram": {
+            "2": 806,
+            "4": 1078,
+            "5": 43273,
+            "7": 48,
+            "9": 20
+          }
+        }
+      },
+      "outputs": {
+        "reflectance": "data/processed/m4/kathmandu_m4/earlier_2020-03-31_reflectance_composite.tif",
+        "valid_mask": "data/processed/m4/kathmandu_m4/earlier_2020-03-31_valid_mask.tif",
+        "observation_count": "data/processed/m4/kathmandu_m4/earlier_2020-03-31_observation_count.tif",
+        "ndbi": "data/processed/m4/kathmandu_m4/earlier_2020-03-31_ndbi.tif",
+        "ndvi": "data/processed/m4/kathmandu_m4/earlier_2020-03-31_ndvi.tif",
+        "ndwi": "data/processed/m4/kathmandu_m4/earlier_2020-03-31_ndwi.tif"
+      }
+    },
+    {
+      "period_id": "later",
+      "anchor_date": "2025-03-29",
+      "composite_method": "median",
+      "min_observations": 1,
+      "observation_count": 3,
+      "observation_dates": [
+        "2025-03-29",
+        "2025-03-30",
+        "2025-03-27"
+      ],
+      "item_ids": [
+        "S2A_45RUL_20250329_0_L2A",
+        "S2C_45RUL_20250330_0_L2A",
+        "S2C_45RUL_20250327_0_L2A"
+      ],
+      "valid_pixels": 43728,
+      "aoi_pixels": 43728,
+      "valid_fraction": 1.0,
+      "valid_fraction_of_grid": 0.966899,
+      "observation_count_stats": {
+        "min": 3,
+        "max": 3,
+        "mean": 3.0,
+        "median": 3.0
+      },
+      "indices": {
+        "ndbi": {
+          "key": "ndbi",
+          "label": "NDBI",
+          "formula": "(SWIR1 - NIR) / (SWIR1 + NIR)",
+          "bands": [
+            "swir16",
+            "nir"
+          ],
+          "native_resolution_m": 20.0,
+          "value_range": [
+            -1.0,
+            1.0
+          ],
+          "description": "Normalised Difference Built-up Index feature (Zha et al. 2003); a candidate signal, never a building label",
+          "legend_breaks": [
+            -0.1,
+            0.0,
+            0.1,
+            0.3
+          ],
+          "analysis_resolution_m": 10.0,
+          "upsampled": true,
+          "resolution_note": "computed on a 10 m grid from 20 m native bands; upsampled data contain no genuine 10 m detail",
+          "stats": {
+            "valid_count": 43728,
+            "total_count": 45225,
+            "valid_fraction": 0.966899,
+            "min": -0.302009,
+            "max": 0.372737,
+            "mean": 0.130377,
+            "std": 0.065965,
+            "quantiles": {
+              "p05": 0.018391,
+              "p25": 0.096129,
+              "p50": 0.13525,
+              "p75": 0.170011,
+              "p95": 0.231986
+            }
+          }
+        },
+        "ndvi": {
+          "key": "ndvi",
+          "label": "NDVI",
+          "formula": "(NIR - Red) / (NIR + Red)",
+          "bands": [
+            "nir",
+            "red"
+          ],
+          "native_resolution_m": 10.0,
+          "value_range": [
+            -1.0,
+            1.0
+          ],
+          "description": "Normalised Difference Vegetation Index (Rouse et al. 1974)",
+          "legend_breaks": [
+            -0.6,
+            -0.35,
+            -0.12,
+            0.02,
+            0.16,
+            0.3,
+            0.5
+          ],
+          "analysis_resolution_m": 10.0,
+          "upsampled": false,
+          "resolution_note": "native 10 m band resolution",
+          "stats": {
+            "valid_count": 43728,
+            "total_count": 45225,
+            "valid_fraction": 0.966899,
+            "min": -0.042781,
+            "max": 0.6635,
+            "mean": 0.162622,
+            "std": 0.089996,
+            "quantiles": {
+              "p05": 0.069178,
+              "p25": 0.102011,
+              "p50": 0.135567,
+              "p75": 0.197,
+              "p95": 0.352536
+            }
+          }
+        },
+        "ndwi": {
+          "key": "ndwi",
+          "label": "NDWI",
+          "formula": "(Green - NIR) / (Green + NIR)",
+          "bands": [
+            "green",
+            "nir"
+          ],
+          "native_resolution_m": 10.0,
+          "value_range": [
+            -1.0,
+            1.0
+          ],
+          "description": "McFeeters Normalised Difference Water Index (1996)",
+          "legend_breaks": [
+            -0.3,
+            -0.1,
+            0.0,
+            0.1,
+            0.3
+          ],
+          "analysis_resolution_m": 10.0,
+          "upsampled": false,
+          "resolution_note": "native 10 m band resolution",
+          "stats": {
+            "valid_count": 43728,
+            "total_count": 45225,
+            "valid_fraction": 0.966899,
+            "min": -0.61395,
+            "max": 0.165457,
+            "mean": -0.231778,
+            "std": 0.07624,
+            "quantiles": {
+              "p05": -0.376892,
+              "p25": -0.270576,
+              "p50": -0.21848,
+              "p75": -0.181267,
+              "p95": -0.135551
+            }
+          }
+        }
+      },
+      "anchor_single_observation": {
+        "item_id": "S2A_45RUL_20250329_0_L2A",
+        "date": "2025-03-29",
+        "indices": {
+          "ndbi": {
+            "valid_count": 43728,
+            "total_count": 45225,
+            "valid_fraction": 0.966899,
+            "min": -0.333711,
+            "max": 0.560586,
+            "mean": 0.107788,
+            "std": 0.07854,
+            "quantiles": {
+              "p05": -0.029511,
+              "p25": 0.062818,
+              "p50": 0.113307,
+              "p75": 0.159371,
+              "p95": 0.225219
+            }
+          },
+          "ndvi": {
+            "valid_count": 43728,
+            "total_count": 45225,
+            "valid_fraction": 0.966899,
+            "min": -0.055495,
+            "max": 0.776707,
+            "mean": 0.190438,
+            "std": 0.117072,
+            "quantiles": {
+              "p05": 0.065725,
+              "p25": 0.113119,
+              "p50": 0.155313,
+              "p75": 0.234612,
+              "p95": 0.43675
+            }
+          },
+          "ndwi": {
+            "valid_count": 43728,
+            "total_count": 45225,
+            "valid_fraction": 0.966899,
+            "min": -0.704461,
+            "max": 0.236432,
+            "mean": -0.27516,
+            "std": 0.100522,
+            "quantiles": {
+              "p05": -0.470402,
+              "p25": -0.326583,
+              "p50": -0.255297,
+              "p75": -0.208849,
+              "p95": -0.14792
+            }
+          }
+        },
+        "note": "single-observation reconstruction used only to compare the M1 composite against the M0 two-scene baseline; it is not the headline M1 result"
+      },
+      "selection": {
+        "anchor_date": "2025-03-29",
+        "max_offset_days": 30,
+        "usable_candidate_total": 23,
+        "distinct_usable_dates": [
+          "2025-03-02",
+          "2025-03-05",
+          "2025-03-10",
+          "2025-03-15",
+          "2025-03-20",
+          "2025-03-22",
+          "2025-03-25",
+          "2025-03-27",
+          "2025-03-29",
+          "2025-03-30",
+          "2025-04-01",
+          "2025-04-04",
+          "2025-04-06",
+          "2025-04-09",
+          "2025-04-11",
+          "2025-04-14",
+          "2025-04-16",
+          "2025-04-18",
+          "2025-04-21",
+          "2025-04-24",
+          "2025-04-26"
+        ],
+        "chosen_item_ids": [
+          "S2A_45RUL_20250329_0_L2A",
+          "S2C_45RUL_20250330_0_L2A",
+          "S2C_45RUL_20250327_0_L2A"
+        ],
+        "chosen_dates": [
+          "2025-03-29",
+          "2025-03-30",
+          "2025-03-27"
+        ],
+        "offset_days": {
+          "S2A_45RUL_20250329_0_L2A": 0,
+          "S2C_45RUL_20250330_0_L2A": 1,
+          "S2C_45RUL_20250327_0_L2A": 2
+        },
+        "within_anchor_window": true,
+        "fallback_used": false,
+        "single_observation_limitation": false
+      },
+      "stretch": {
+        "true_colour": {
+          "low": [
+            0.0640999972820282,
+            0.06579999625682831,
+            0.043800000101327896
+          ],
+          "high": [
+            0.20417999923229102,
+            0.1699800014495838,
+            0.1462000012397766
+          ],
+          "gamma": 1.0,
+          "method": "joint per-band 2-98 percentile linear stretch over both periods' valid pixels (M4-R1 \u00a78: consistent stretch for direct visual comparison)"
+        },
+        "false_colour": {
+          "low": [
+            0.10859999805688858,
+            0.0640999972820282,
+            0.06579999625682831
+          ],
+          "high": [
+            0.2973799973726261,
+            0.20417999923229102,
+            0.1699800014495838
+          ],
+          "gamma": 1.0,
+          "method": "joint per-band 2-98 percentile linear stretch over both periods' valid pixels (M4-R1 \u00a78: consistent stretch for direct visual comparison)"
+        }
+      },
+      "previews": {
+        "ndbi": "data/previews/m4/kathmandu_m4/later_2025-03-29_ndbi.png",
+        "ndvi": "data/previews/m4/kathmandu_m4/later_2025-03-29_ndvi.png",
+        "ndwi": "data/previews/m4/kathmandu_m4/later_2025-03-29_ndwi.png",
+        "true_colour": "data/previews/m4/kathmandu_m4/later_2025-03-29_true_colour.png",
+        "false_colour": "data/previews/m4/kathmandu_m4/later_2025-03-29_false_colour.png",
+        "valid_mask": "data/previews/m4/kathmandu_m4/later_2025-03-29_valid_mask.png",
+        "observation_count": "data/previews/m4/kathmandu_m4/later_2025-03-29_observation_count.png"
+      },
+      "observations": [
+        {
+          "item_id": "S2A_45RUL_20250329_0_L2A",
+          "acquisition_date": "2025-03-29",
+          "acquisition_utc": "2025-03-29T05:01:16.705000Z",
+          "scene_cloud_cover_percent": 0.00308,
+          "processing_baseline": "05.11",
+          "aoi_valid_fraction": 1.0,
+          "grid_signature": "077db7532b5cf722",
+          "assets": {
+            "blue": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/45/R/UL/2025/3/S2A_45RUL_20250329_0_L2A/B02.tif",
+              "gsd_metres": 10.0
+            },
+            "green": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/45/R/UL/2025/3/S2A_45RUL_20250329_0_L2A/B03.tif",
+              "gsd_metres": 10.0
+            },
+            "red": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/45/R/UL/2025/3/S2A_45RUL_20250329_0_L2A/B04.tif",
+              "gsd_metres": 10.0
+            },
+            "nir": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/45/R/UL/2025/3/S2A_45RUL_20250329_0_L2A/B08.tif",
+              "gsd_metres": 10.0
+            },
+            "swir16": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/45/R/UL/2025/3/S2A_45RUL_20250329_0_L2A/B11.tif",
+              "gsd_metres": 20.0
+            }
+          },
+          "radiometry": {
+            "blue": {
+              "asset_key": "blue",
+              "scale": 0.0001,
+              "offset": 0.0,
+              "nodata": 0,
+              "gsd_metres": 10.0,
+              "source": "stac:item.S2A_45RUL_20250329_0_L2A.assets.blue.raster:bands (baseline 05.11; earthsearch:boa_offset_applied=true so the declared -0.1 is already baked into the DNs and is not applied again)",
+              "transform": "reflectance = DN * scale + offset"
+            },
+            "green": {
+              "asset_key": "green",
+              "scale": 0.0001,
+              "offset": 0.0,
+              "nodata": 0,
+              "gsd_metres": 10.0,
+              "source": "stac:item.S2A_45RUL_20250329_0_L2A.assets.green.raster:bands (baseline 05.11; earthsearch:boa_offset_applied=true so the declared -0.1 is already baked into the DNs and is not applied again)",
+              "transform": "reflectance = DN * scale + offset"
+            },
+            "nir": {
+              "asset_key": "nir",
+              "scale": 0.0001,
+              "offset": 0.0,
+              "nodata": 0,
+              "gsd_metres": 10.0,
+              "source": "stac:item.S2A_45RUL_20250329_0_L2A.assets.nir.raster:bands (baseline 05.11; earthsearch:boa_offset_applied=true so the declared -0.1 is already baked into the DNs and is not applied again)",
+              "transform": "reflectance = DN * scale + offset"
+            },
+            "red": {
+              "asset_key": "red",
+              "scale": 0.0001,
+              "offset": 0.0,
+              "nodata": 0,
+              "gsd_metres": 10.0,
+              "source": "stac:item.S2A_45RUL_20250329_0_L2A.assets.red.raster:bands (baseline 05.11; earthsearch:boa_offset_applied=true so the declared -0.1 is already baked into the DNs and is not applied again)",
+              "transform": "reflectance = DN * scale + offset"
+            },
+            "swir16": {
+              "asset_key": "swir16",
+              "scale": 0.0001,
+              "offset": 0.0,
+              "nodata": 0,
+              "gsd_metres": 20.0,
+              "source": "stac:item.S2A_45RUL_20250329_0_L2A.assets.swir16.raster:bands (baseline 05.11; earthsearch:boa_offset_applied=true so the declared -0.1 is already baked into the DNs and is not applied again)",
+              "transform": "reflectance = DN * scale + offset"
+            }
+          },
+          "radiometry_evidence": {}
+        },
+        {
+          "item_id": "S2C_45RUL_20250330_0_L2A",
+          "acquisition_date": "2025-03-30",
+          "acquisition_utc": "2025-03-30T05:11:25.698000Z",
+          "scene_cloud_cover_percent": 0.148829,
+          "processing_baseline": "05.11",
+          "aoi_valid_fraction": 1.0,
+          "grid_signature": "077db7532b5cf722",
+          "assets": {
+            "blue": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/45/R/UL/2025/3/S2C_45RUL_20250330_0_L2A/B02.tif",
+              "gsd_metres": 10.0
+            },
+            "green": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/45/R/UL/2025/3/S2C_45RUL_20250330_0_L2A/B03.tif",
+              "gsd_metres": 10.0
+            },
+            "red": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/45/R/UL/2025/3/S2C_45RUL_20250330_0_L2A/B04.tif",
+              "gsd_metres": 10.0
+            },
+            "nir": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/45/R/UL/2025/3/S2C_45RUL_20250330_0_L2A/B08.tif",
+              "gsd_metres": 10.0
+            },
+            "swir16": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/45/R/UL/2025/3/S2C_45RUL_20250330_0_L2A/B11.tif",
+              "gsd_metres": 20.0
+            }
+          },
+          "radiometry": {
+            "blue": {
+              "asset_key": "blue",
+              "scale": 0.0001,
+              "offset": 0.0,
+              "nodata": 0,
+              "gsd_metres": 10.0,
+              "source": "stac:item.S2C_45RUL_20250330_0_L2A.assets.blue.raster:bands (baseline 05.11; earthsearch:boa_offset_applied=true so the declared -0.1 is already baked into the DNs and is not applied again)",
+              "transform": "reflectance = DN * scale + offset"
+            },
+            "green": {
+              "asset_key": "green",
+              "scale": 0.0001,
+              "offset": 0.0,
+              "nodata": 0,
+              "gsd_metres": 10.0,
+              "source": "stac:item.S2C_45RUL_20250330_0_L2A.assets.green.raster:bands (baseline 05.11; earthsearch:boa_offset_applied=true so the declared -0.1 is already baked into the DNs and is not applied again)",
+              "transform": "reflectance = DN * scale + offset"
+            },
+            "nir": {
+              "asset_key": "nir",
+              "scale": 0.0001,
+              "offset": 0.0,
+              "nodata": 0,
+              "gsd_metres": 10.0,
+              "source": "stac:item.S2C_45RUL_20250330_0_L2A.assets.nir.raster:bands (baseline 05.11; earthsearch:boa_offset_applied=true so the declared -0.1 is already baked into the DNs and is not applied again)",
+              "transform": "reflectance = DN * scale + offset"
+            },
+            "red": {
+              "asset_key": "red",
+              "scale": 0.0001,
+              "offset": 0.0,
+              "nodata": 0,
+              "gsd_metres": 10.0,
+              "source": "stac:item.S2C_45RUL_20250330_0_L2A.assets.red.raster:bands (baseline 05.11; earthsearch:boa_offset_applied=true so the declared -0.1 is already baked into the DNs and is not applied again)",
+              "transform": "reflectance = DN * scale + offset"
+            },
+            "swir16": {
+              "asset_key": "swir16",
+              "scale": 0.0001,
+              "offset": 0.0,
+              "nodata": 0,
+              "gsd_metres": 20.0,
+              "source": "stac:item.S2C_45RUL_20250330_0_L2A.assets.swir16.raster:bands (baseline 05.11; earthsearch:boa_offset_applied=true so the declared -0.1 is already baked into the DNs and is not applied again)",
+              "transform": "reflectance = DN * scale + offset"
+            }
+          },
+          "radiometry_evidence": {}
+        },
+        {
+          "item_id": "S2C_45RUL_20250327_0_L2A",
+          "acquisition_date": "2025-03-27",
+          "acquisition_utc": "2025-03-27T05:01:29.212000Z",
+          "scene_cloud_cover_percent": 3.796208,
+          "processing_baseline": "05.11",
+          "aoi_valid_fraction": 1.0,
+          "grid_signature": "077db7532b5cf722",
+          "assets": {
+            "blue": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/45/R/UL/2025/3/S2C_45RUL_20250327_0_L2A/B02.tif",
+              "gsd_metres": 10.0
+            },
+            "green": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/45/R/UL/2025/3/S2C_45RUL_20250327_0_L2A/B03.tif",
+              "gsd_metres": 10.0
+            },
+            "red": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/45/R/UL/2025/3/S2C_45RUL_20250327_0_L2A/B04.tif",
+              "gsd_metres": 10.0
+            },
+            "nir": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/45/R/UL/2025/3/S2C_45RUL_20250327_0_L2A/B08.tif",
+              "gsd_metres": 10.0
+            },
+            "swir16": {
+              "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/45/R/UL/2025/3/S2C_45RUL_20250327_0_L2A/B11.tif",
+              "gsd_metres": 20.0
+            }
+          },
+          "radiometry": {
+            "blue": {
+              "asset_key": "blue",
+              "scale": 0.0001,
+              "offset": 0.0,
+              "nodata": 0,
+              "gsd_metres": 10.0,
+              "source": "stac:item.S2C_45RUL_20250327_0_L2A.assets.blue.raster:bands (baseline 05.11; earthsearch:boa_offset_applied=true so the declared -0.1 is already baked into the DNs and is not applied again)",
+              "transform": "reflectance = DN * scale + offset"
+            },
+            "green": {
+              "asset_key": "green",
+              "scale": 0.0001,
+              "offset": 0.0,
+              "nodata": 0,
+              "gsd_metres": 10.0,
+              "source": "stac:item.S2C_45RUL_20250327_0_L2A.assets.green.raster:bands (baseline 05.11; earthsearch:boa_offset_applied=true so the declared -0.1 is already baked into the DNs and is not applied again)",
+              "transform": "reflectance = DN * scale + offset"
+            },
+            "nir": {
+              "asset_key": "nir",
+              "scale": 0.0001,
+              "offset": 0.0,
+              "nodata": 0,
+              "gsd_metres": 10.0,
+              "source": "stac:item.S2C_45RUL_20250327_0_L2A.assets.nir.raster:bands (baseline 05.11; earthsearch:boa_offset_applied=true so the declared -0.1 is already baked into the DNs and is not applied again)",
+              "transform": "reflectance = DN * scale + offset"
+            },
+            "red": {
+              "asset_key": "red",
+              "scale": 0.0001,
+              "offset": 0.0,
+              "nodata": 0,
+              "gsd_metres": 10.0,
+              "source": "stac:item.S2C_45RUL_20250327_0_L2A.assets.red.raster:bands (baseline 05.11; earthsearch:boa_offset_applied=true so the declared -0.1 is already baked into the DNs and is not applied again)",
+              "transform": "reflectance = DN * scale + offset"
+            },
+            "swir16": {
+              "asset_key": "swir16",
+              "scale": 0.0001,
+              "offset": 0.0,
+              "nodata": 0,
+              "gsd_metres": 20.0,
+              "source": "stac:item.S2C_45RUL_20250327_0_L2A.assets.swir16.raster:bands (baseline 05.11; earthsearch:boa_offset_applied=true so the declared -0.1 is already baked into the DNs and is not applied again)",
+              "transform": "reflectance = DN * scale + offset"
+            }
+          },
+          "radiometry_evidence": {}
+        }
+      ],
+      "mask_policy": {
+        "S2A_45RUL_20250329_0_L2A": {
+          "total_pixels": 43728,
+          "valid_pixels": 43728,
+          "valid_fraction": 1.0,
+          "valid_percent": 100.0,
+          "accepted_scl_classes": {
+            "2": "dark_area_pixels",
+            "4": "vegetation",
+            "5": "not_vegetated",
+            "6": "water",
+            "7": "unclassified",
+            "11": "snow_ice"
+          },
+          "rejected_scl_classes": {
+            "0": "no_data",
+            "1": "saturated_or_defective",
+            "3": "cloud_shadow",
+            "8": "cloud_medium_probability",
+            "9": "cloud_high_probability",
+            "10": "thin_cirrus"
+          },
+          "class_histogram": {
+            "4": 494,
+            "5": 44731
+          }
+        },
+        "S2C_45RUL_20250330_0_L2A": {
+          "total_pixels": 43728,
+          "valid_pixels": 43728,
+          "valid_fraction": 1.0,
+          "valid_percent": 100.0,
+          "accepted_scl_classes": {
+            "2": "dark_area_pixels",
+            "4": "vegetation",
+            "5": "not_vegetated",
+            "6": "water",
+            "7": "unclassified",
+            "11": "snow_ice"
+          },
+          "rejected_scl_classes": {
+            "0": "no_data",
+            "1": "saturated_or_defective",
+            "3": "cloud_shadow",
+            "8": "cloud_medium_probability",
+            "9": "cloud_high_probability",
+            "10": "thin_cirrus"
+          },
+          "class_histogram": {
+            "4": 66,
+            "5": 45159
+          }
+        },
+        "S2C_45RUL_20250327_0_L2A": {
+          "total_pixels": 43728,
+          "valid_pixels": 43728,
+          "valid_fraction": 1.0,
+          "valid_percent": 100.0,
+          "accepted_scl_classes": {
+            "2": "dark_area_pixels",
+            "4": "vegetation",
+            "5": "not_vegetated",
+            "6": "water",
+            "7": "unclassified",
+            "11": "snow_ice"
+          },
+          "rejected_scl_classes": {
+            "0": "no_data",
+            "1": "saturated_or_defective",
+            "3": "cloud_shadow",
+            "8": "cloud_medium_probability",
+            "9": "cloud_high_probability",
+            "10": "thin_cirrus"
+          },
+          "class_histogram": {
+            "4": 74,
+            "5": 45025,
+            "6": 126
+          }
+        }
+      },
+      "outputs": {
+        "reflectance": "data/processed/m4/kathmandu_m4/later_2025-03-29_reflectance_composite.tif",
+        "valid_mask": "data/processed/m4/kathmandu_m4/later_2025-03-29_valid_mask.tif",
+        "observation_count": "data/processed/m4/kathmandu_m4/later_2025-03-29_observation_count.tif",
+        "ndbi": "data/processed/m4/kathmandu_m4/later_2025-03-29_ndbi.tif",
+        "ndvi": "data/processed/m4/kathmandu_m4/later_2025-03-29_ndvi.tif",
+        "ndwi": "data/processed/m4/kathmandu_m4/later_2025-03-29_ndwi.tif"
+      }
+    }
+  ],
+  "indices": {
+    "ndbi": {
+      "key": "ndbi",
+      "label": "NDBI",
+      "formula": "(SWIR1 - NIR) / (SWIR1 + NIR)",
+      "bands": [
+        "swir16",
+        "nir"
+      ],
+      "native_resolution_m": 20.0,
+      "value_range": [
+        -1.0,
+        1.0
+      ],
+      "description": "Normalised Difference Built-up Index feature (Zha et al. 2003); a candidate signal, never a building label",
+      "legend_breaks": [
+        -0.1,
+        0.0,
+        0.1,
+        0.3
+      ],
+      "analysis_resolution_m": 10.0,
+      "upsampled": true,
+      "resolution_note": "computed on a 10 m grid from 20 m native bands; upsampled data contain no genuine 10 m detail"
+    },
+    "ndvi": {
+      "key": "ndvi",
+      "label": "NDVI",
+      "formula": "(NIR - Red) / (NIR + Red)",
+      "bands": [
+        "nir",
+        "red"
+      ],
+      "native_resolution_m": 10.0,
+      "value_range": [
+        -1.0,
+        1.0
+      ],
+      "description": "Normalised Difference Vegetation Index (Rouse et al. 1974)",
+      "legend_breaks": [
+        -0.6,
+        -0.35,
+        -0.12,
+        0.02,
+        0.16,
+        0.3,
+        0.5
+      ],
+      "analysis_resolution_m": 10.0,
+      "upsampled": false,
+      "resolution_note": "native 10 m band resolution"
+    },
+    "ndwi": {
+      "key": "ndwi",
+      "label": "NDWI",
+      "formula": "(Green - NIR) / (Green + NIR)",
+      "bands": [
+        "green",
+        "nir"
+      ],
+      "native_resolution_m": 10.0,
+      "value_range": [
+        -1.0,
+        1.0
+      ],
+      "description": "McFeeters Normalised Difference Water Index (1996)",
+      "legend_breaks": [
+        -0.3,
+        -0.1,
+        0.0,
+        0.1,
+        0.3
+      ],
+      "analysis_resolution_m": 10.0,
+      "upsampled": false,
+      "resolution_note": "native 10 m band resolution"
+    }
+  },
+  "change": {
+    "ndbi": {
+      "index": "ndbi",
+      "label": "observed index difference (later - earlier); not a land-cover verdict",
+      "common_valid_pixels": 43728,
+      "aoi_pixels": 43728,
+      "common_valid_fraction_of_aoi": 1.0,
+      "common_valid_area_ha": 437.28,
+      "common_valid_area_km2": 4.3728,
+      "suitable_for_comparison": true,
+      "primary_threshold": 0.15,
+      "primary": {
+        "threshold": 0.15,
+        "valid_pixels": 43728,
+        "decrease_pixels": 395,
+        "increase_pixels": 2984,
+        "stable_pixels": 40349,
+        "valid_area_m2": 4372800.0,
+        "valid_area_ha": 437.28,
+        "valid_area_km2": 4.3728,
+        "decrease_area_ha": 3.95,
+        "increase_area_ha": 29.84,
+        "decrease_percent_of_common": 0.903311,
+        "increase_percent_of_common": 6.824003
+      },
+      "thresholds": [
+        {
+          "threshold": 0.1,
+          "valid_pixels": 43728,
+          "decrease_pixels": 1082,
+          "increase_pixels": 7766,
+          "stable_pixels": 34880,
+          "valid_area_m2": 4372800.0,
+          "valid_area_ha": 437.28,
+          "valid_area_km2": 4.3728,
+          "decrease_area_ha": 10.82,
+          "increase_area_ha": 77.66,
+          "decrease_percent_of_common": 2.474387,
+          "increase_percent_of_common": 17.759788
+        },
+        {
+          "threshold": 0.15,
+          "valid_pixels": 43728,
+          "decrease_pixels": 395,
+          "increase_pixels": 2984,
+          "stable_pixels": 40349,
+          "valid_area_m2": 4372800.0,
+          "valid_area_ha": 437.28,
+          "valid_area_km2": 4.3728,
+          "decrease_area_ha": 3.95,
+          "increase_area_ha": 29.84,
+          "decrease_percent_of_common": 0.903311,
+          "increase_percent_of_common": 6.824003
+        },
+        {
+          "threshold": 0.2,
+          "valid_pixels": 43728,
+          "decrease_pixels": 230,
+          "increase_pixels": 1164,
+          "stable_pixels": 42334,
+          "valid_area_m2": 4372800.0,
+          "valid_area_ha": 437.28,
+          "valid_area_km2": 4.3728,
+          "decrease_area_ha": 2.3,
+          "increase_area_ha": 11.64,
+          "decrease_percent_of_common": 0.525979,
+          "increase_percent_of_common": 2.66191
+        }
+      ],
+      "delta_stats": {
+        "valid_count": 43728,
+        "total_count": 45225,
+        "valid_fraction": 0.966899,
+        "min": -0.644114,
+        "max": 0.634345,
+        "mean": 0.038731,
+        "std": 0.07903,
+        "quantiles": {
+          "p05": -0.071655,
+          "p25": -0.006473,
+          "p50": 0.034687,
+          "p75": 0.080463,
+          "p95": 0.165663
+        }
+      },
+      "pixel_area_m2": 100.0,
+      "area_convention": "planimetric pixel area on the projected analysis grid; hectares and square kilometres converted from square metres",
+      "delta_preview": "data/previews/m4/kathmandu_m4/delta_ndbi.png",
+      "common_valid_preview": "data/previews/m4/kathmandu_m4/common_valid_ndbi.png",
+      "delta_tif": "data/processed/m4/kathmandu_m4/delta_ndbi.tif",
+      "change_classes_tif": "data/processed/m4/kathmandu_m4/change_classes_ndbi.tif",
+      "common_valid_tif": "data/processed/m4/kathmandu_m4/common_valid_ndbi.tif",
+      "class_counts": {
+        "decrease": 395,
+        "stable": 40349,
+        "increase": 2984,
+        "invalid": 1497
+      },
+      "interpretation_guardrail": "observed index difference at the stated threshold; not a land-cover classification, deforestation/wetland-loss verdict, building count or causal attribution"
+    },
+    "ndvi": {
+      "index": "ndvi",
+      "label": "observed index difference (later - earlier); not a land-cover verdict",
+      "common_valid_pixels": 43728,
+      "aoi_pixels": 43728,
+      "common_valid_fraction_of_aoi": 1.0,
+      "common_valid_area_ha": 437.28,
+      "common_valid_area_km2": 4.3728,
+      "suitable_for_comparison": true,
+      "primary_threshold": 0.15,
+      "primary": {
+        "threshold": 0.15,
+        "valid_pixels": 43728,
+        "decrease_pixels": 4924,
+        "increase_pixels": 249,
+        "stable_pixels": 38555,
+        "valid_area_m2": 4372800.0,
+        "valid_area_ha": 437.28,
+        "valid_area_km2": 4.3728,
+        "decrease_area_ha": 49.24,
+        "increase_area_ha": 2.49,
+        "decrease_percent_of_common": 11.26052,
+        "increase_percent_of_common": 0.569429
+      },
+      "thresholds": [
+        {
+          "threshold": 0.1,
+          "valid_pixels": 43728,
+          "decrease_pixels": 8138,
+          "increase_pixels": 914,
+          "stable_pixels": 34676,
+          "valid_area_m2": 4372800.0,
+          "valid_area_ha": 437.28,
+          "valid_area_km2": 4.3728,
+          "decrease_area_ha": 81.38,
+          "increase_area_ha": 9.14,
+          "decrease_percent_of_common": 18.610501,
+          "increase_percent_of_common": 2.090194
+        },
+        {
+          "threshold": 0.15,
+          "valid_pixels": 43728,
+          "decrease_pixels": 4924,
+          "increase_pixels": 249,
+          "stable_pixels": 38555,
+          "valid_area_m2": 4372800.0,
+          "valid_area_ha": 437.28,
+          "valid_area_km2": 4.3728,
+          "decrease_area_ha": 49.24,
+          "increase_area_ha": 2.49,
+          "decrease_percent_of_common": 11.26052,
+          "increase_percent_of_common": 0.569429
+        },
+        {
+          "threshold": 0.2,
+          "valid_pixels": 43728,
+          "decrease_pixels": 2866,
+          "increase_pixels": 87,
+          "stable_pixels": 40775,
+          "valid_area_m2": 4372800.0,
+          "valid_area_ha": 437.28,
+          "valid_area_km2": 4.3728,
+          "decrease_area_ha": 28.66,
+          "increase_area_ha": 0.87,
+          "decrease_percent_of_common": 6.554153,
+          "increase_percent_of_common": 0.198957
+        }
+      ],
+      "delta_stats": {
+        "valid_count": 43728,
+        "total_count": 45225,
+        "valid_fraction": 0.966899,
+        "min": -0.702084,
+        "max": 0.34534,
+        "mean": -0.036273,
+        "std": 0.094777,
+        "quantiles": {
+          "p05": -0.223958,
+          "p25": -0.071254,
+          "p50": -0.01463,
+          "p75": 0.021623,
+          "p95": 0.073661
+        }
+      },
+      "pixel_area_m2": 100.0,
+      "area_convention": "planimetric pixel area on the projected analysis grid; hectares and square kilometres converted from square metres",
+      "delta_preview": "data/previews/m4/kathmandu_m4/delta_ndvi.png",
+      "common_valid_preview": "data/previews/m4/kathmandu_m4/common_valid_ndvi.png",
+      "delta_tif": "data/processed/m4/kathmandu_m4/delta_ndvi.tif",
+      "change_classes_tif": "data/processed/m4/kathmandu_m4/change_classes_ndvi.tif",
+      "common_valid_tif": "data/processed/m4/kathmandu_m4/common_valid_ndvi.tif",
+      "class_counts": {
+        "decrease": 4924,
+        "stable": 38555,
+        "increase": 249,
+        "invalid": 1497
+      },
+      "interpretation_guardrail": "observed index difference at the stated threshold; not a land-cover classification, deforestation/wetland-loss verdict, building count or causal attribution"
+    },
+    "ndwi": {
+      "index": "ndwi",
+      "label": "observed index difference (later - earlier); not a land-cover verdict",
+      "common_valid_pixels": 43728,
+      "aoi_pixels": 43728,
+      "common_valid_fraction_of_aoi": 1.0,
+      "common_valid_area_ha": 437.28,
+      "common_valid_area_km2": 4.3728,
+      "suitable_for_comparison": true,
+      "primary_threshold": 0.15,
+      "primary": {
+        "threshold": 0.15,
+        "valid_pixels": 43728,
+        "decrease_pixels": 350,
+        "increase_pixels": 3722,
+        "stable_pixels": 39656,
+        "valid_area_m2": 4372800.0,
+        "valid_area_ha": 437.28,
+        "valid_area_km2": 4.3728,
+        "decrease_area_ha": 3.5,
+        "increase_area_ha": 37.22,
+        "decrease_percent_of_common": 0.800402,
+        "increase_percent_of_common": 8.511709
+      },
+      "thresholds": [
+        {
+          "threshold": 0.1,
+          "valid_pixels": 43728,
+          "decrease_pixels": 1780,
+          "increase_pixels": 7479,
+          "stable_pixels": 34469,
+          "valid_area_m2": 4372800.0,
+          "valid_area_ha": 437.28,
+          "valid_area_km2": 4.3728,
+          "decrease_area_ha": 17.8,
+          "increase_area_ha": 74.79,
+          "decrease_percent_of_common": 4.070618,
+          "increase_percent_of_common": 17.103458
+        },
+        {
+          "threshold": 0.15,
+          "valid_pixels": 43728,
+          "decrease_pixels": 350,
+          "increase_pixels": 3722,
+          "stable_pixels": 39656,
+          "valid_area_m2": 4372800.0,
+          "valid_area_ha": 437.28,
+          "valid_area_km2": 4.3728,
+          "decrease_area_ha": 3.5,
+          "increase_area_ha": 37.22,
+          "decrease_percent_of_common": 0.800402,
+          "increase_percent_of_common": 8.511709
+        },
+        {
+          "threshold": 0.2,
+          "valid_pixels": 43728,
+          "decrease_pixels": 111,
+          "increase_pixels": 1693,
+          "stable_pixels": 41924,
+          "valid_area_m2": 4372800.0,
+          "valid_area_ha": 437.28,
+          "valid_area_km2": 4.3728,
+          "decrease_area_ha": 1.11,
+          "increase_area_ha": 16.93,
+          "decrease_percent_of_common": 0.253842,
+          "increase_percent_of_common": 3.871661
+        }
+      ],
+      "delta_stats": {
+        "valid_count": 43728,
+        "total_count": 45225,
+        "valid_fraction": 0.966899,
+        "min": -0.439028,
+        "max": 0.54659,
+        "mean": 0.024844,
+        "std": 0.088483,
+        "quantiles": {
+          "p05": -0.093289,
+          "p25": -0.031957,
+          "p50": 0.010982,
+          "p75": 0.069632,
+          "p95": 0.183454
+        }
+      },
+      "pixel_area_m2": 100.0,
+      "area_convention": "planimetric pixel area on the projected analysis grid; hectares and square kilometres converted from square metres",
+      "delta_preview": "data/previews/m4/kathmandu_m4/delta_ndwi.png",
+      "common_valid_preview": "data/previews/m4/kathmandu_m4/common_valid_ndwi.png",
+      "delta_tif": "data/processed/m4/kathmandu_m4/delta_ndwi.tif",
+      "change_classes_tif": "data/processed/m4/kathmandu_m4/change_classes_ndwi.tif",
+      "common_valid_tif": "data/processed/m4/kathmandu_m4/common_valid_ndwi.tif",
+      "class_counts": {
+        "decrease": 350,
+        "stable": 39656,
+        "increase": 3722,
+        "invalid": 1497
+      },
+      "interpretation_guardrail": "observed index difference at the stated threshold; not a land-cover classification, deforestation/wetland-loss verdict, building count or causal attribution"
+    }
+  },
+  "processing": {
+    "pipeline_version": "0.2.0-m1",
+    "profile": "spectral_change_m1",
+    "operations": [
+      "STAC search per period with AOI polygon and bounded date range",
+      "in-AOI SCL valid-fraction scoring under a measurement budget",
+      "anchor-window observation selection, one scene per calendar date",
+      "bounded COG window reads via WarpedVRT (bilinear reflectance, nearest SCL)",
+      "per-item radiometry verification and DN->reflectance scaling",
+      "AOI + SCL + finite-reflectance masking, no interpolation",
+      "per-pixel temporal composite with valid-observation counts",
+      "spectral index computation on composite reflectance",
+      "shared-valid difference maps, candidate thresholds and projected areas",
+      "georeferenced raster, preview, JSON/CSV and manifest export",
+      "independent re-open and numerical verification of exports"
+    ],
+    "parameters": {
+      "resolution_m": 10.0,
+      "indices": [
+        "ndbi",
+        "ndvi",
+        "ndwi"
+      ],
+      "composite_method": "median",
+      "composite_median_even_rule": "NumPy nanmedian: mean of the two central values when the observation count is even",
+      "max_observations": 3,
+      "min_observations": 1,
+      "anchor_max_offset_days": 30,
+      "thresholds": [
+        0.1,
+        0.15,
+        0.2
+      ],
+      "primary_threshold": 0.15,
+      "resampling_continuous": "bilinear",
+      "resampling_categorical": "nearest",
+      "scale": 0.0001,
+      "offset_policy": {
+        "pre_04.00": 0.0,
+        "04.00_or_later_not_baked_in": -0.1,
+        "04.00_or_later_baked_in": 0.0,
+        "rule": "apply raster:bands offset unless earthsearch:boa_offset_applied=true"
+      },
+      "nodata": 0,
+      "scl_accepted": [
+        2,
+        4,
+        5,
+        6,
+        7,
+        11
+      ],
+      "scl_rejected": [
+        0,
+        1,
+        3,
+        8,
+        9,
+        10
+      ],
+      "mask_policy": "valid = inside AOI AND SCL class accepted AND every fetched reflectance band finite",
+      "area_convention": "projected pixel area on the analysis grid; ha = m2/10000, km2 = m2/1000000"
+    }
+  },
+  "search": {
+    "earlier": {
+      "request": {
+        "label": "earlier:2020-03-01..2020-04-30",
+        "collection": "sentinel-2-l2a",
+        "aoi_bounds_4326": [
+          85.305,
+          27.695,
+          85.325,
+          27.715
+        ],
+        "start_utc": "2020-03-01T00:00:00Z",
+        "end_utc": "2020-04-30T23:59:59Z",
+        "max_cloud_cover_percent": 60.0,
+        "limit": 100,
+        "max_items": 200,
+        "request_body": {
+          "collections": [
+            "sentinel-2-l2a"
+          ],
+          "intersects": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  85.325,
+                  27.695
+                ],
+                [
+                  85.325,
+                  27.715
+                ],
+                [
+                  85.305,
+                  27.715
+                ],
+                [
+                  85.305,
+                  27.695
+                ],
+                [
+                  85.325,
+                  27.695
+                ]
+              ]
+            ]
+          },
+          "datetime": "2020-03-01T00:00:00Z/2020-04-30T23:59:59Z",
+          "limit": 100,
+          "query": {
+            "eo:cloud_cover": {
+              "lte": 60.0
+            }
+          }
+        }
+      },
+      "returned_items": 43,
+      "accepted_items": 43,
+      "pages_fetched": 2,
+      "catalog_matched_count": 43,
+      "rejected": [],
+      "selection_policy": {
+        "measurement_budget": 24,
+        "decision_metric": "measured in-AOI SCL valid fraction",
+        "usable_threshold": 0.6,
+        "anchor": "2020-03-31",
+        "max_offset_days": 30,
+        "max_observations": 3,
+        "min_observations": 1,
+        "one_observation_per_calendar_date": true,
+        "unmeasured_candidates_are_unusable": true
+      },
+      "scores": [
+        {
+          "item_id": "S2B_45RUL_20200331_1_L2A",
+          "acquired_utc": "2020-03-31T05:11:00.911000Z",
+          "cloud_cover_percent": 0.072144,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 1.0,
+          "usable": true,
+          "score": 0.999928,
+          "notes": []
+        },
+        {
+          "item_id": "S2B_45RUL_20200410_1_L2A",
+          "acquired_utc": "2020-04-10T05:10:59.904000Z",
+          "cloud_cover_percent": 0.416378,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 1.0,
+          "usable": true,
+          "score": 0.999584,
+          "notes": []
+        },
+        {
+          "item_id": "S2B_45RUL_20200311_1_L2A",
+          "acquired_utc": "2020-03-11T05:11:01.415000Z",
+          "cloud_cover_percent": 0.506694,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 1.0,
+          "usable": true,
+          "score": 0.999493,
+          "notes": []
+        },
+        {
+          "item_id": "S2B_45RUL_20200311_0_L2A",
+          "acquired_utc": "2020-03-11T05:11:01.411000Z",
+          "cloud_cover_percent": 0.360517,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 0.999823,
+          "usable": true,
+          "score": 0.999463,
+          "notes": []
+        },
+        {
+          "item_id": "S2A_45RUL_20200402_1_L2A",
+          "acquired_utc": "2020-04-02T05:01:03.824000Z",
+          "cloud_cover_percent": 0.609898,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 1.0,
+          "usable": true,
+          "score": 0.99939,
+          "notes": []
+        },
+        {
+          "item_id": "S2B_45RUL_20200410_0_L2A",
+          "acquired_utc": "2020-04-10T05:10:59.901000Z",
+          "cloud_cover_percent": 0.316721,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 0.999469,
+          "usable": true,
+          "score": 0.999153,
+          "notes": []
+        },
+        {
+          "item_id": "S2B_45RUL_20200331_0_L2A",
+          "acquired_utc": "2020-03-31T05:11:00.911000Z",
+          "cloud_cover_percent": 0.06039,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 0.998939,
+          "usable": true,
+          "score": 0.998878,
+          "notes": []
+        },
+        {
+          "item_id": "S2A_45RUL_20200402_0_L2A",
+          "acquired_utc": "2020-04-02T05:01:03.824000Z",
+          "cloud_cover_percent": 0.972635,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 0.998408,
+          "usable": true,
+          "score": 0.997435,
+          "notes": []
+        },
+        {
+          "item_id": "S2B_45RUL_20200407_0_L2A",
+          "acquired_utc": "2020-04-07T05:01:04.797000Z",
+          "cloud_cover_percent": 2.438958,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 0.999646,
+          "usable": true,
+          "score": 0.997207,
+          "notes": []
+        },
+        {
+          "item_id": "S2B_45RUL_20200407_1_L2A",
+          "acquired_utc": "2020-04-07T05:01:04.798000Z",
+          "cloud_cover_percent": 3.005494,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 1.0,
+          "usable": true,
+          "score": 0.996995,
+          "notes": []
+        },
+        {
+          "item_id": "S2B_45RUL_20200308_0_L2A",
+          "acquired_utc": "2020-03-08T05:01:05.830000Z",
+          "cloud_cover_percent": 3.516345,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 1.0,
+          "usable": true,
+          "score": 0.996484,
+          "notes": []
+        },
+        {
+          "item_id": "S2A_45RUL_20200405_0_L2A",
+          "acquired_utc": "2020-04-05T05:11:00.075000Z",
+          "cloud_cover_percent": 3.171794,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 0.999292,
+          "usable": true,
+          "score": 0.996121,
+          "notes": []
+        },
+        {
+          "item_id": "S2A_45RUL_20200405_1_L2A",
+          "acquired_utc": "2020-04-05T05:11:00.072000Z",
+          "cloud_cover_percent": 4.078923,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 1.0,
+          "usable": true,
+          "score": 0.995921,
+          "notes": []
+        },
+        {
+          "item_id": "S2B_45RUL_20200308_1_L2A",
+          "acquired_utc": "2020-03-08T05:01:05.832000Z",
+          "cloud_cover_percent": 4.210568,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 1.0,
+          "usable": true,
+          "score": 0.995789,
+          "notes": []
+        },
+        {
+          "item_id": "S2B_45RUL_20200420_0_L2A",
+          "acquired_utc": "2020-04-20T05:10:58.323000Z",
+          "cloud_cover_percent": 6.049728,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 1.0,
+          "usable": true,
+          "score": 0.99395,
+          "notes": []
+        },
+        {
+          "item_id": "S2B_45RUL_20200318_0_L2A",
+          "acquired_utc": "2020-03-18T05:01:05.992000Z",
+          "cloud_cover_percent": 6.205153,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 0.999823,
+          "usable": true,
+          "score": 0.993618,
+          "notes": []
+        },
+        {
+          "item_id": "S2A_45RUL_20200303_0_L2A",
+          "acquired_utc": "2020-03-03T05:01:03.598000Z",
+          "cloud_cover_percent": 6.803999,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 0.999823,
+          "usable": true,
+          "score": 0.993019,
+          "notes": []
+        },
+        {
+          "item_id": "S2B_45RUL_20200318_1_L2A",
+          "acquired_utc": "2020-03-18T05:01:05.993000Z",
+          "cloud_cover_percent": 8.884735,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 1.0,
+          "usable": true,
+          "score": 0.991115,
+          "notes": []
+        },
+        {
+          "item_id": "S2A_45RUL_20200303_1_L2A",
+          "acquired_utc": "2020-03-03T05:01:03.598000Z",
+          "cloud_cover_percent": 9.496752,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 1.0,
+          "usable": true,
+          "score": 0.990503,
+          "notes": []
+        },
+        {
+          "item_id": "S2A_45RUL_20200412_0_L2A",
+          "acquired_utc": "2020-04-12T05:01:06.706000Z",
+          "cloud_cover_percent": 10.258987,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 0.999912,
+          "usable": true,
+          "score": 0.989653,
+          "notes": []
+        },
+        {
+          "item_id": "S2A_45RUL_20200326_0_L2A",
+          "acquired_utc": "2020-03-26T05:10:59.669000Z",
+          "cloud_cover_percent": 10.066844,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 0.999558,
+          "usable": true,
+          "score": 0.989491,
+          "notes": []
+        },
+        {
+          "item_id": "S2A_45RUL_20200412_1_L2A",
+          "acquired_utc": "2020-04-12T05:01:06.706000Z",
+          "cloud_cover_percent": 12.579197,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 1.0,
+          "usable": true,
+          "score": 0.987421,
+          "notes": []
+        },
+        {
+          "item_id": "S2A_45RUL_20200306_0_L2A",
+          "acquired_utc": "2020-03-06T05:10:59.290000Z",
+          "cloud_cover_percent": 12.312199,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 0.999292,
+          "usable": true,
+          "score": 0.98698,
+          "notes": []
+        },
+        {
+          "item_id": "S2A_45RUL_20200326_1_L2A",
+          "acquired_utc": "2020-03-26T05:10:59.671000Z",
+          "cloud_cover_percent": 13.547692,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 1.0,
+          "usable": true,
+          "score": 0.986452,
+          "notes": []
+        },
+        {
+          "item_id": "S2A_45RUL_20200306_1_L2A",
+          "acquired_utc": "2020-03-06T05:10:59.293000Z",
+          "cloud_cover_percent": 16.107729,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": null,
+          "usable": false,
+          "score": -0.016108,
+          "notes": [
+            "in-AOI validity not measured: outside the measurement budget"
+          ]
+        },
+        {
+          "item_id": "S2B_45RUL_20200420_1_L2A",
+          "acquired_utc": "2020-04-20T05:10:58.324000Z",
+          "cloud_cover_percent": 16.36799,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": null,
+          "usable": false,
+          "score": -0.016368,
+          "notes": [
+            "in-AOI validity not measured: outside the measurement budget"
+          ]
+        },
+        {
+          "item_id": "S2B_45RUL_20200321_0_L2A",
+          "acquired_utc": "2020-03-21T05:11:01.416000Z",
+          "cloud_cover_percent": 17.534181,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": null,
+          "usable": false,
+          "score": -0.017534,
+          "notes": [
+            "in-AOI validity not measured: outside the measurement budget"
+          ]
+        },
+        {
+          "item_id": "S2B_45RUL_20200301_0_L2A",
+          "acquired_utc": "2020-03-01T05:11:00.862000Z",
+          "cloud_cover_percent": 19.087335,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": null,
+          "usable": false,
+          "score": -0.019087,
+          "notes": [
+            "in-AOI validity not measured: outside the measurement budget"
+          ]
+        },
+        {
+          "item_id": "S2B_45RUL_20200321_1_L2A",
+          "acquired_utc": "2020-03-21T05:11:01.417000Z",
+          "cloud_cover_percent": 23.018768,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": null,
+          "usable": false,
+          "score": -0.023019,
+          "notes": [
+            "in-AOI validity not measured: outside the measurement budget"
+          ]
+        },
+        {
+          "item_id": "S2B_45RUL_20200301_1_L2A",
+          "acquired_utc": "2020-03-01T05:11:00.864000Z",
+          "cloud_cover_percent": 25.428107,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": null,
+          "usable": false,
+          "score": -0.025428,
+          "notes": [
+            "in-AOI validity not measured: outside the measurement budget"
+          ]
+        },
+        {
+          "item_id": "S2A_45RUL_20200316_0_L2A",
+          "acquired_utc": "2020-03-16T05:10:59.722000Z",
+          "cloud_cover_percent": 25.850344,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": null,
+          "usable": false,
+          "score": -0.02585,
+          "notes": [
+            "in-AOI validity not measured: outside the measurement budget"
+          ]
+        },
+        {
+          "item_id": "S2A_45RUL_20200316_1_L2A",
+          "acquired_utc": "2020-03-16T05:10:59.722000Z",
+          "cloud_cover_percent": 29.076293,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": null,
+          "usable": false,
+          "score": -0.029076,
+          "notes": [
+            "in-AOI validity not measured: outside the measurement budget"
+          ]
+        },
+        {
+          "item_id": "S2A_45RUL_20200323_0_L2A",
+          "acquired_utc": "2020-03-23T05:01:04.288000Z",
+          "cloud_cover_percent": 29.369664,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": null,
+          "usable": false,
+          "score": -0.02937,
+          "notes": [
+            "in-AOI validity not measured: outside the measurement budget"
+          ]
+        },
+        {
+          "item_id": "S2A_45RUL_20200323_1_L2A",
+          "acquired_utc": "2020-03-23T05:01:04.288000Z",
+          "cloud_cover_percent": 33.478242,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": null,
+          "usable": false,
+          "score": -0.033478,
+          "notes": [
+            "in-AOI validity not measured: outside the measurement budget"
+          ]
+        },
+        {
+          "item_id": "S2B_45RUL_20200328_1_L2A",
+          "acquired_utc": "2020-03-28T05:01:05.663000Z",
+          "cloud_cover_percent": 35.723329,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": null,
+          "usable": false,
+          "score": -0.035723,
+          "notes": [
+            "in-AOI validity not measured: outside the measurement budget"
+          ]
+        },
+        {
+          "item_id": "S2B_45RUL_20200328_0_L2A",
+          "acquired_utc": "2020-03-28T05:01:05.662000Z",
+          "cloud_cover_percent": 39.354524,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": null,
+          "usable": false,
+          "score": -0.039355,
+          "notes": [
+            "in-AOI validity not measured: outside the measurement budget"
+          ]
+        },
+        {
+          "item_id": "S2A_45RUL_20200422_0_L2A",
+          "acquired_utc": "2020-04-22T05:01:09.220000Z",
+          "cloud_cover_percent": 42.711213,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": null,
+          "usable": false,
+          "score": -0.042711,
+          "notes": [
+            "in-AOI validity not measured: outside the measurement budget"
+          ]
+        },
+        {
+          "item_id": "S2A_45RUL_20200422_1_L2A",
+          "acquired_utc": "2020-04-22T05:01:09.220000Z",
+          "cloud_cover_percent": 48.223534,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": null,
+          "usable": false,
+          "score": -0.048224,
+          "notes": [
+            "in-AOI validity not measured: outside the measurement budget"
+          ]
+        },
+        {
+          "item_id": "S2B_45RUL_20200417_0_L2A",
+          "acquired_utc": "2020-04-17T05:01:03.379000Z",
+          "cloud_cover_percent": 51.122096,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": null,
+          "usable": false,
+          "score": -0.051122,
+          "notes": [
+            "in-AOI validity not measured: outside the measurement budget"
+          ]
+        },
+        {
+          "item_id": "S2A_45RUL_20200415_0_L2A",
+          "acquired_utc": "2020-04-15T05:11:02.942000Z",
+          "cloud_cover_percent": 54.919495,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": null,
+          "usable": false,
+          "score": -0.054919,
+          "notes": [
+            "in-AOI validity not measured: outside the measurement budget"
+          ]
+        },
+        {
+          "item_id": "S2A_45RUL_20200415_1_L2A",
+          "acquired_utc": "2020-04-15T05:11:02.941000Z",
+          "cloud_cover_percent": 56.086141,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": null,
+          "usable": false,
+          "score": -0.056086,
+          "notes": [
+            "in-AOI validity not measured: outside the measurement budget"
+          ]
+        },
+        {
+          "item_id": "S2B_45RUL_20200430_0_L2A",
+          "acquired_utc": "2020-04-30T05:10:59.462000Z",
+          "cloud_cover_percent": 56.880324,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": null,
+          "usable": false,
+          "score": -0.05688,
+          "notes": [
+            "in-AOI validity not measured: outside the measurement budget"
+          ]
+        },
+        {
+          "item_id": "S2A_45RUL_20200425_0_L2A",
+          "acquired_utc": "2020-04-25T05:11:05.346000Z",
+          "cloud_cover_percent": 59.772946,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": null,
+          "usable": false,
+          "score": -0.059773,
+          "notes": [
+            "in-AOI validity not measured: outside the measurement budget"
+          ]
+        }
+      ],
+      "selection": {
+        "anchor_date": "2020-03-31",
+        "max_offset_days": 30,
+        "usable_candidate_total": 24,
+        "distinct_usable_dates": [
+          "2020-03-03",
+          "2020-03-06",
+          "2020-03-08",
+          "2020-03-11",
+          "2020-03-18",
+          "2020-03-26",
+          "2020-03-31",
+          "2020-04-02",
+          "2020-04-05",
+          "2020-04-07",
+          "2020-04-10",
+          "2020-04-12",
+          "2020-04-20"
+        ],
+        "chosen_item_ids": [
+          "S2B_45RUL_20200331_0_L2A",
+          "S2A_45RUL_20200402_1_L2A",
+          "S2A_45RUL_20200326_0_L2A"
+        ],
+        "chosen_dates": [
+          "2020-03-31",
+          "2020-04-02",
+          "2020-03-26"
+        ],
+        "offset_days": {
+          "S2B_45RUL_20200331_0_L2A": 0,
+          "S2A_45RUL_20200402_1_L2A": 2,
+          "S2A_45RUL_20200326_0_L2A": 5
+        },
+        "within_anchor_window": true,
+        "fallback_used": false,
+        "single_observation_limitation": false
+      },
+      "selected_observations": [
+        {
+          "item_id": "S2B_45RUL_20200331_0_L2A",
+          "date": "2020-03-31",
+          "scene_cloud_cover_percent": 0.06039,
+          "aoi_valid_fraction": 0.998948
+        },
+        {
+          "item_id": "S2A_45RUL_20200402_1_L2A",
+          "date": "2020-04-02",
+          "scene_cloud_cover_percent": 0.609898,
+          "aoi_valid_fraction": 1.0
+        },
+        {
+          "item_id": "S2A_45RUL_20200326_0_L2A",
+          "date": "2020-03-26",
+          "scene_cloud_cover_percent": 10.066844,
+          "aoi_valid_fraction": 0.999543
+        }
+      ]
+    },
+    "later": {
+      "request": {
+        "label": "later:2025-02-27..2025-04-28",
+        "collection": "sentinel-2-l2a",
+        "aoi_bounds_4326": [
+          85.305,
+          27.695,
+          85.325,
+          27.715
+        ],
+        "start_utc": "2025-02-27T00:00:00Z",
+        "end_utc": "2025-04-28T23:59:59Z",
+        "max_cloud_cover_percent": 60.0,
+        "limit": 100,
+        "max_items": 200,
+        "request_body": {
+          "collections": [
+            "sentinel-2-l2a"
+          ],
+          "intersects": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  85.325,
+                  27.695
+                ],
+                [
+                  85.325,
+                  27.715
+                ],
+                [
+                  85.305,
+                  27.715
+                ],
+                [
+                  85.305,
+                  27.695
+                ],
+                [
+                  85.325,
+                  27.695
+                ]
+              ]
+            ]
+          },
+          "datetime": "2025-02-27T00:00:00Z/2025-04-28T23:59:59Z",
+          "limit": 100,
+          "query": {
+            "eo:cloud_cover": {
+              "lte": 60.0
+            }
+          }
+        }
+      },
+      "returned_items": 25,
+      "accepted_items": 25,
+      "pages_fetched": 2,
+      "catalog_matched_count": 25,
+      "rejected": [],
+      "selection_policy": {
+        "measurement_budget": 24,
+        "decision_metric": "measured in-AOI SCL valid fraction",
+        "usable_threshold": 0.6,
+        "anchor": "2025-03-29",
+        "max_offset_days": 30,
+        "max_observations": 3,
+        "min_observations": 1,
+        "one_observation_per_calendar_date": true,
+        "unmeasured_candidates_are_unusable": true
+      },
+      "scores": [
+        {
+          "item_id": "S2A_45RUL_20250329_0_L2A",
+          "acquired_utc": "2025-03-29T05:01:16.705000Z",
+          "cloud_cover_percent": 0.00308,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 1.0,
+          "usable": true,
+          "score": 0.999997,
+          "notes": []
+        },
+        {
+          "item_id": "S2B_45RUL_20250424_0_L2A",
+          "acquired_utc": "2025-04-24T05:11:04.059000Z",
+          "cloud_cover_percent": 0.011321,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 1.0,
+          "usable": true,
+          "score": 0.999989,
+          "notes": []
+        },
+        {
+          "item_id": "S2B_45RUL_20250302_0_L2A",
+          "acquired_utc": "2025-03-02T05:01:11.100000Z",
+          "cloud_cover_percent": 0.01338,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 1.0,
+          "usable": true,
+          "score": 0.999987,
+          "notes": []
+        },
+        {
+          "item_id": "S2B_45RUL_20250325_0_L2A",
+          "acquired_utc": "2025-03-25T05:11:06.272000Z",
+          "cloud_cover_percent": 0.065418,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 1.0,
+          "usable": true,
+          "score": 0.999935,
+          "notes": []
+        },
+        {
+          "item_id": "S2C_45RUL_20250330_0_L2A",
+          "acquired_utc": "2025-03-30T05:11:25.698000Z",
+          "cloud_cover_percent": 0.148829,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 1.0,
+          "usable": true,
+          "score": 0.999851,
+          "notes": []
+        },
+        {
+          "item_id": "S2A_45RUL_20250401_1_L2A",
+          "acquired_utc": "2025-04-01T05:11:13.941000Z",
+          "cloud_cover_percent": 0.179673,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 1.0,
+          "usable": true,
+          "score": 0.99982,
+          "notes": []
+        },
+        {
+          "item_id": "S2B_45RUL_20250401_0_L2A",
+          "acquired_utc": "2025-04-01T05:01:07.870000Z",
+          "cloud_cover_percent": 0.396688,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 1.0,
+          "usable": true,
+          "score": 0.999603,
+          "notes": []
+        },
+        {
+          "item_id": "S2B_45RUL_20250305_0_L2A",
+          "acquired_utc": "2025-03-05T05:11:06.617000Z",
+          "cloud_cover_percent": 0.738918,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 1.0,
+          "usable": true,
+          "score": 0.999261,
+          "notes": []
+        },
+        {
+          "item_id": "S2C_45RUL_20250320_0_L2A",
+          "acquired_utc": "2025-03-20T05:11:26.972000Z",
+          "cloud_cover_percent": 0.861525,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 1.0,
+          "usable": true,
+          "score": 0.999138,
+          "notes": []
+        },
+        {
+          "item_id": "S2B_45RUL_20250315_0_L2A",
+          "acquired_utc": "2025-03-15T05:11:05.403000Z",
+          "cloud_cover_percent": 1.296308,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 1.0,
+          "usable": true,
+          "score": 0.998704,
+          "notes": []
+        },
+        {
+          "item_id": "S2C_45RUL_20250406_0_L2A",
+          "acquired_utc": "2025-04-06T05:01:31.156000Z",
+          "cloud_cover_percent": 1.316278,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 1.0,
+          "usable": true,
+          "score": 0.998684,
+          "notes": []
+        },
+        {
+          "item_id": "S2C_45RUL_20250426_0_L2A",
+          "acquired_utc": "2025-04-26T05:01:30.126000Z",
+          "cloud_cover_percent": 2.873657,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 1.0,
+          "usable": true,
+          "score": 0.997126,
+          "notes": []
+        },
+        {
+          "item_id": "S2C_45RUL_20250327_0_L2A",
+          "acquired_utc": "2025-03-27T05:01:29.212000Z",
+          "cloud_cover_percent": 3.796208,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 1.0,
+          "usable": true,
+          "score": 0.996204,
+          "notes": []
+        },
+        {
+          "item_id": "S2B_45RUL_20250322_0_L2A",
+          "acquired_utc": "2025-03-22T05:01:11.109000Z",
+          "cloud_cover_percent": 8.656276,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 1.0,
+          "usable": true,
+          "score": 0.991344,
+          "notes": []
+        },
+        {
+          "item_id": "S2B_45RUL_20250404_0_L2A",
+          "acquired_utc": "2025-04-04T05:11:02.787000Z",
+          "cloud_cover_percent": 10.881231,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 1.0,
+          "usable": true,
+          "score": 0.989119,
+          "notes": []
+        },
+        {
+          "item_id": "S2B_45RUL_20250414_0_L2A",
+          "acquired_utc": "2025-04-14T05:11:06.178000Z",
+          "cloud_cover_percent": 19.962578,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 1.0,
+          "usable": true,
+          "score": 0.980037,
+          "notes": []
+        },
+        {
+          "item_id": "S2A_45RUL_20250418_0_L2A",
+          "acquired_utc": "2025-04-18T05:01:20.696000Z",
+          "cloud_cover_percent": 23.468651,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 1.0,
+          "usable": true,
+          "score": 0.976531,
+          "notes": []
+        },
+        {
+          "item_id": "S2C_45RUL_20250310_0_L2A",
+          "acquired_utc": "2025-03-10T05:11:26.911000Z",
+          "cloud_cover_percent": 23.764654,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 1.0,
+          "usable": true,
+          "score": 0.976235,
+          "notes": []
+        },
+        {
+          "item_id": "S2B_45RUL_20250411_0_L2A",
+          "acquired_utc": "2025-04-11T05:01:10.488000Z",
+          "cloud_cover_percent": 29.334155,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 1.0,
+          "usable": true,
+          "score": 0.970666,
+          "notes": []
+        },
+        {
+          "item_id": "S2B_45RUL_20250421_0_L2A",
+          "acquired_utc": "2025-04-21T05:01:09.642000Z",
+          "cloud_cover_percent": 15.33265,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 0.969044,
+          "usable": true,
+          "score": 0.953711,
+          "notes": []
+        },
+        {
+          "item_id": "S2C_45RUL_20250409_0_L2A",
+          "acquired_utc": "2025-04-09T05:11:27.694000Z",
+          "cloud_cover_percent": 47.694534,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 1.0,
+          "usable": true,
+          "score": 0.952305,
+          "notes": []
+        },
+        {
+          "item_id": "S2A_45RUL_20250421_1_L2A",
+          "acquired_utc": "2025-04-21T05:11:17.082000Z",
+          "cloud_cover_percent": 14.69107,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 0.902841,
+          "usable": true,
+          "score": 0.88815,
+          "notes": []
+        },
+        {
+          "item_id": "S2C_45RUL_20250416_0_L2A",
+          "acquired_utc": "2025-04-16T05:01:28.391000Z",
+          "cloud_cover_percent": 28.812185,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 0.860475,
+          "usable": true,
+          "score": 0.831663,
+          "notes": []
+        },
+        {
+          "item_id": "S2C_45RUL_20250307_0_L2A",
+          "acquired_utc": "2025-03-07T05:01:32.078000Z",
+          "cloud_cover_percent": 46.939886,
+          "aoi_intersection_fraction": 1.0,
+          "aoi_valid_fraction": 0.106866,
+          "usable": false,
+          "score": 0.059926,
+          "notes": [
+            "in-AOI valid fraction 0.107 below 0.6"
+          ]
+        },
+        {
+          "item_id": "S2C_45RUL_20250409_1_L2A",
+          "acquired_utc": "2025-04-09T05:11:21.221000Z",
+          "cloud_cover_percent": 47.65875,
+          "aoi_intersection_fraction": 0.908078,
+          "aoi_valid_fraction": null,
+          "usable": false,
+          "score": -0.047659,
+          "notes": [
+            "AOI only 0.908 covered by scene footprint",
+            "in-AOI validity not measured: outside the measurement budget"
+          ]
+        }
+      ],
+      "selection": {
+        "anchor_date": "2025-03-29",
+        "max_offset_days": 30,
+        "usable_candidate_total": 23,
+        "distinct_usable_dates": [
+          "2025-03-02",
+          "2025-03-05",
+          "2025-03-10",
+          "2025-03-15",
+          "2025-03-20",
+          "2025-03-22",
+          "2025-03-25",
+          "2025-03-27",
+          "2025-03-29",
+          "2025-03-30",
+          "2025-04-01",
+          "2025-04-04",
+          "2025-04-06",
+          "2025-04-09",
+          "2025-04-11",
+          "2025-04-14",
+          "2025-04-16",
+          "2025-04-18",
+          "2025-04-21",
+          "2025-04-24",
+          "2025-04-26"
+        ],
+        "chosen_item_ids": [
+          "S2A_45RUL_20250329_0_L2A",
+          "S2C_45RUL_20250330_0_L2A",
+          "S2C_45RUL_20250327_0_L2A"
+        ],
+        "chosen_dates": [
+          "2025-03-29",
+          "2025-03-30",
+          "2025-03-27"
+        ],
+        "offset_days": {
+          "S2A_45RUL_20250329_0_L2A": 0,
+          "S2C_45RUL_20250330_0_L2A": 1,
+          "S2C_45RUL_20250327_0_L2A": 2
+        },
+        "within_anchor_window": true,
+        "fallback_used": false,
+        "single_observation_limitation": false
+      },
+      "selected_observations": [
+        {
+          "item_id": "S2A_45RUL_20250329_0_L2A",
+          "date": "2025-03-29",
+          "scene_cloud_cover_percent": 0.00308,
+          "aoi_valid_fraction": 1.0
+        },
+        {
+          "item_id": "S2C_45RUL_20250330_0_L2A",
+          "date": "2025-03-30",
+          "scene_cloud_cover_percent": 0.148829,
+          "aoi_valid_fraction": 1.0
+        },
+        {
+          "item_id": "S2C_45RUL_20250327_0_L2A",
+          "date": "2025-03-27",
+          "scene_cloud_cover_percent": 3.796208,
+          "aoi_valid_fraction": 1.0
+        }
+      ]
+    }
+  },
+  "config": {
+    "experiment_id": "kathmandu_m4",
+    "study_id": "kathmandu_urban",
+    "indices": [
+      "ndbi",
+      "ndvi",
+      "ndwi"
+    ],
+    "resolution_m": 10.0,
+    "composite_method": "median",
+    "max_observations": 3,
+    "min_observations": 1,
+    "max_cloud_cover_percent": 60.0,
+    "min_scene_valid_fraction": 0.6,
+    "min_comparable_valid_fraction": 0.5,
+    "measurement_budget": 24,
+    "anchor_max_offset_days": 30,
+    "thresholds": [
+      0.1,
+      0.15,
+      0.2
+    ],
+    "primary_threshold": 0.15,
+    "periods": {
+      "earlier": {
+        "period_id": "earlier",
+        "anchor_date": "2020-03-31",
+        "search_start": "2020-03-01",
+        "search_end": "2020-04-30",
+        "max_offset_days": 30
+      },
+      "later": {
+        "period_id": "later",
+        "anchor_date": "2025-03-29",
+        "search_start": "2025-02-27",
+        "search_end": "2025-04-28",
+        "max_offset_days": 30
+      }
+    },
+    "processed_dir": "data/processed/m4/kathmandu_m4",
+    "preview_dir": "data/previews/m4/kathmandu_m4",
+    "manifest_path": "data/manifests/m4_kathmandu_m4.json"
+  },
+  "area_cross_check": {
+    "method": "projected polygon area, independent geodesic area on the WGS84 ellipsoid, and rasterised pixel-count area on the analysis grid",
+    "analysis_crs": "EPSG:32645",
+    "pixel_area_m2": 100.0,
+    "aoi_polygon_projected_km2": 4.371274,
+    "aoi_polygon_geodesic_km2": 4.371793,
+    "aoi_raster_km2": 4.3728,
+    "grid_extent_km2": 4.5225,
+    "geodesic_vs_projected_relative_difference": 0.00011862,
+    "raster_vs_projected_relative_difference": 0.00034909,
+    "note": "the raster area differs from the polygon area by boundary rasterisation only; hectares and km2 are converted from projected square metres, not from degrees"
+  },
+  "verification": {
+    "checks": [
+      {
+        "check": "grid_georeferencing",
+        "passed": true,
+        "details": {
+          "path": "data/processed/m4/kathmandu_m4/earlier_2020-03-31_reflectance_composite.tif",
+          "shape_matches": true,
+          "crs_matches": true,
+          "transform_matches": true,
+          "grid_signature_tag_matches": true
+        }
+      },
+      {
+        "check": "grid_georeferencing",
+        "passed": true,
+        "details": {
+          "path": "data/processed/m4/kathmandu_m4/earlier_2020-03-31_valid_mask.tif",
+          "shape_matches": true,
+          "crs_matches": true,
+          "transform_matches": true,
+          "grid_signature_tag_matches": true
+        }
+      },
+      {
+        "check": "grid_georeferencing",
+        "passed": true,
+        "details": {
+          "path": "data/processed/m4/kathmandu_m4/earlier_2020-03-31_observation_count.tif",
+          "shape_matches": true,
+          "crs_matches": true,
+          "transform_matches": true,
+          "grid_signature_tag_matches": true
+        }
+      },
+      {
+        "check": "grid_georeferencing",
+        "passed": true,
+        "details": {
+          "path": "data/processed/m4/kathmandu_m4/earlier_2020-03-31_ndbi.tif",
+          "shape_matches": true,
+          "crs_matches": true,
+          "transform_matches": true,
+          "grid_signature_tag_matches": true
+        }
+      },
+      {
+        "check": "grid_georeferencing",
+        "passed": true,
+        "details": {
+          "path": "data/processed/m4/kathmandu_m4/earlier_2020-03-31_ndvi.tif",
+          "shape_matches": true,
+          "crs_matches": true,
+          "transform_matches": true,
+          "grid_signature_tag_matches": true
+        }
+      },
+      {
+        "check": "grid_georeferencing",
+        "passed": true,
+        "details": {
+          "path": "data/processed/m4/kathmandu_m4/earlier_2020-03-31_ndwi.tif",
+          "shape_matches": true,
+          "crs_matches": true,
+          "transform_matches": true,
+          "grid_signature_tag_matches": true
+        }
+      },
+      {
+        "check": "observation_count_earlier",
+        "passed": true,
+        "details": {
+          "valid_mask_matches_count_positive": true,
+          "counts_within_observation_bounds": true,
+          "max_count": 3
+        }
+      },
+      {
+        "check": "index_recompute_earlier_ndbi",
+        "passed": true,
+        "details": {
+          "sample_size": 400,
+          "max_abs_difference": 0.0,
+          "masked_pixels_are_nan": true,
+          "native_resolution_m": 20.0
+        }
+      },
+      {
+        "check": "index_recompute_earlier_ndvi",
+        "passed": true,
+        "details": {
+          "sample_size": 400,
+          "max_abs_difference": 0.0,
+          "masked_pixels_are_nan": true,
+          "native_resolution_m": 10.0
+        }
+      },
+      {
+        "check": "index_recompute_earlier_ndwi",
+        "passed": true,
+        "details": {
+          "sample_size": 400,
+          "max_abs_difference": 0.0,
+          "masked_pixels_are_nan": true,
+          "native_resolution_m": 10.0
+        }
+      },
+      {
+        "check": "grid_georeferencing",
+        "passed": true,
+        "details": {
+          "path": "data/processed/m4/kathmandu_m4/later_2025-03-29_reflectance_composite.tif",
+          "shape_matches": true,
+          "crs_matches": true,
+          "transform_matches": true,
+          "grid_signature_tag_matches": true
+        }
+      },
+      {
+        "check": "grid_georeferencing",
+        "passed": true,
+        "details": {
+          "path": "data/processed/m4/kathmandu_m4/later_2025-03-29_valid_mask.tif",
+          "shape_matches": true,
+          "crs_matches": true,
+          "transform_matches": true,
+          "grid_signature_tag_matches": true
+        }
+      },
+      {
+        "check": "grid_georeferencing",
+        "passed": true,
+        "details": {
+          "path": "data/processed/m4/kathmandu_m4/later_2025-03-29_observation_count.tif",
+          "shape_matches": true,
+          "crs_matches": true,
+          "transform_matches": true,
+          "grid_signature_tag_matches": true
+        }
+      },
+      {
+        "check": "grid_georeferencing",
+        "passed": true,
+        "details": {
+          "path": "data/processed/m4/kathmandu_m4/later_2025-03-29_ndbi.tif",
+          "shape_matches": true,
+          "crs_matches": true,
+          "transform_matches": true,
+          "grid_signature_tag_matches": true
+        }
+      },
+      {
+        "check": "grid_georeferencing",
+        "passed": true,
+        "details": {
+          "path": "data/processed/m4/kathmandu_m4/later_2025-03-29_ndvi.tif",
+          "shape_matches": true,
+          "crs_matches": true,
+          "transform_matches": true,
+          "grid_signature_tag_matches": true
+        }
+      },
+      {
+        "check": "grid_georeferencing",
+        "passed": true,
+        "details": {
+          "path": "data/processed/m4/kathmandu_m4/later_2025-03-29_ndwi.tif",
+          "shape_matches": true,
+          "crs_matches": true,
+          "transform_matches": true,
+          "grid_signature_tag_matches": true
+        }
+      },
+      {
+        "check": "observation_count_later",
+        "passed": true,
+        "details": {
+          "valid_mask_matches_count_positive": true,
+          "counts_within_observation_bounds": true,
+          "max_count": 3
+        }
+      },
+      {
+        "check": "index_recompute_later_ndbi",
+        "passed": true,
+        "details": {
+          "sample_size": 400,
+          "max_abs_difference": 0.0,
+          "masked_pixels_are_nan": true,
+          "native_resolution_m": 20.0
+        }
+      },
+      {
+        "check": "index_recompute_later_ndvi",
+        "passed": true,
+        "details": {
+          "sample_size": 400,
+          "max_abs_difference": 0.0,
+          "masked_pixels_are_nan": true,
+          "native_resolution_m": 10.0
+        }
+      },
+      {
+        "check": "index_recompute_later_ndwi",
+        "passed": true,
+        "details": {
+          "sample_size": 400,
+          "max_abs_difference": 0.0,
+          "masked_pixels_are_nan": true,
+          "native_resolution_m": 10.0
+        }
+      },
+      {
+        "check": "delta_recompute_ndbi",
+        "passed": true,
+        "details": {
+          "sample_size": 400,
+          "max_abs_difference": 0.0
+        }
+      },
+      {
+        "check": "threshold_counts_ndbi",
+        "passed": true,
+        "details": {
+          "threshold": 0.15,
+          "decrease_matches": true,
+          "increase_matches": true,
+          "valid_matches": true,
+          "areas_conserve": true
+        }
+      },
+      {
+        "check": "delta_recompute_ndvi",
+        "passed": true,
+        "details": {
+          "sample_size": 400,
+          "max_abs_difference": 0.0
+        }
+      },
+      {
+        "check": "threshold_counts_ndvi",
+        "passed": true,
+        "details": {
+          "threshold": 0.15,
+          "decrease_matches": true,
+          "increase_matches": true,
+          "valid_matches": true,
+          "areas_conserve": true
+        }
+      },
+      {
+        "check": "delta_recompute_ndwi",
+        "passed": true,
+        "details": {
+          "sample_size": 400,
+          "max_abs_difference": 0.0
+        }
+      },
+      {
+        "check": "threshold_counts_ndwi",
+        "passed": true,
+        "details": {
+          "threshold": 0.15,
+          "decrease_matches": true,
+          "increase_matches": true,
+          "valid_matches": true,
+          "areas_conserve": true
+        }
+      }
+    ],
+    "all_passed": true,
+    "check_count": 26,
+    "failed_checks": []
+  },
+  "software": {
+    "python": "3.11.9",
+    "platform": "Windows-10-10.0.26300-SP0",
+    "numpy": "2.2.6",
+    "rasterio": "1.4.3",
+    "pyproj": "3.7.1",
+    "shapely": "2.0.7",
+    "pystac_client": "0.9.0",
+    "gdal": "3.9.3"
+  },
+  "attribution": {
+    "text": "Contains modified Copernicus Sentinel data, processed by ESA; L2A products distributed by the Element 84 Earth Search STAC catalogue (AWS Open Data).",
+    "license": "Copernicus Sentinel data: free, open and unrestricted use with attribution (ESA Copernicus data policy). Catalogue: Element 84 Earth Search, AWS Open Data.",
+    "provider": "Element 84 Earth Search (AWS Open Data)",
+    "access_date_utc": "2026-11-07T13:12:45.782528+00:00"
+  },
+  "limitations": [
+    "Bare soil, construction sites and dry riverbeds mimic built-up spectra.",
+    "NDBI is a feature, not a building label.",
+    "Agriculture/forest boundary ambiguity.",
+    "The following indices use 20 m SWIR bands resampled to the 10 m analysis grid and contain no genuine 10 m SWIR detail: ndbi.",
+    "Composites are robust within-period summaries of a few observations, not a dense time series; inter-annual change is represented by two period composites only.",
+    "Index differences are candidate spectral signals. They are not verified deforestation, wetland loss, construction, glacier damage or any other causal land-cover label.",
+    "Cloud, shadow and saturated-pixel exclusion relies on the provider SCL product; terrain shadow is not independently re-derived.",
+    "Surface reflectance is the provider L2A product; no independent atmospheric correction is performed.",
+    "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
+  ],
+  "outputs": {
+    "earlier_reflectance_tif": {
+      "kind": "raster",
+      "path": "data/processed/m4/kathmandu_m4/earlier_2020-03-31_reflectance_composite.tif",
+      "bytes": 692642,
+      "sha256": "e9451cdf140401a2a44620d20c788cc93f2be59abcd05d8cb56b4fd254479248"
+    },
+    "earlier_valid_mask_tif": {
+      "kind": "mask",
+      "path": "data/processed/m4/kathmandu_m4/earlier_2020-03-31_valid_mask.tif",
+      "bytes": 1481,
+      "sha256": "b7a70eac04f32c198ca1ace25f1637e98b28a85bbb06bfb551d142edc8796f4b"
+    },
+    "earlier_observation_count_tif": {
+      "kind": "mask",
+      "path": "data/processed/m4/kathmandu_m4/earlier_2020-03-31_observation_count.tif",
+      "bytes": 1779,
+      "sha256": "b392f93836d25baff2f689f583cae3e95fd09b88cf64b244e5790f4c8aedb83e"
+    },
+    "earlier_ndbi_tif": {
+      "kind": "raster",
+      "path": "data/processed/m4/kathmandu_m4/earlier_2020-03-31_ndbi.tif",
+      "bytes": 157968,
+      "sha256": "6d1fca572b2237a463d1da95e6aa8fba61c879e6271c97de7e5c2b2aa8bffa22"
+    },
+    "earlier_ndbi_png": {
+      "kind": "preview",
+      "path": "data/previews/m4/kathmandu_m4/earlier_2020-03-31_ndbi.png",
+      "bytes": 86739,
+      "sha256": "f5ec1225cede799761b0065182ec4014752ae012bf05c7ad81722b77f9838e31"
+    },
+    "earlier_ndvi_tif": {
+      "kind": "raster",
+      "path": "data/processed/m4/kathmandu_m4/earlier_2020-03-31_ndvi.tif",
+      "bytes": 150278,
+      "sha256": "a9282489bd9f8d3cabe06af3336ff4ab020c58e368e62f8358b4d45be2d52dac"
+    },
+    "earlier_ndvi_png": {
+      "kind": "preview",
+      "path": "data/previews/m4/kathmandu_m4/earlier_2020-03-31_ndvi.png",
+      "bytes": 84571,
+      "sha256": "a4e597f2558526af4353d17a31d0f18dc07fccf6e3bb26c883e293d4774aa795"
+    },
+    "earlier_ndwi_tif": {
+      "kind": "raster",
+      "path": "data/processed/m4/kathmandu_m4/earlier_2020-03-31_ndwi.tif",
+      "bytes": 145482,
+      "sha256": "3316c26168010063ec2cda73a48f18c4ed0096fe72f64057d7424c32af514a38"
+    },
+    "earlier_ndwi_png": {
+      "kind": "preview",
+      "path": "data/previews/m4/kathmandu_m4/earlier_2020-03-31_ndwi.png",
+      "bytes": 83198,
+      "sha256": "fc736f038eb5c53bb21dcb02065416b9d0975e0d67f0b7c98eae2e8dfffa3a7f"
+    },
+    "earlier_true_colour_png": {
+      "kind": "preview",
+      "path": "data/previews/m4/kathmandu_m4/earlier_2020-03-31_true_colour.png",
+      "bytes": 113174,
+      "sha256": "1c199978fb4ca9503320a4e2d750b106189ddf47c37ba0045b00f1e6ff8d604e"
+    },
+    "earlier_false_colour_png": {
+      "kind": "preview",
+      "path": "data/previews/m4/kathmandu_m4/earlier_2020-03-31_false_colour.png",
+      "bytes": 112399,
+      "sha256": "d1274b1c861173b2814e1a164b0c3c136a056caa53e43c8a67dbb7b41b017c9b"
+    },
+    "earlier_valid_mask_png": {
+      "kind": "preview",
+      "path": "data/previews/m4/kathmandu_m4/earlier_2020-03-31_valid_mask.png",
+      "bytes": 597,
+      "sha256": "08e8aaed293916f32c95239c79e092f524ebaa684289340b99931363286bf948"
+    },
+    "earlier_observation_count_png": {
+      "kind": "preview",
+      "path": "data/previews/m4/kathmandu_m4/earlier_2020-03-31_observation_count.png",
+      "bytes": 701,
+      "sha256": "281934e9566827cdeec9d4aa86a887bf35dfe1c154e07ddd6d794bef8abff4f2"
+    },
+    "later_reflectance_tif": {
+      "kind": "raster",
+      "path": "data/processed/m4/kathmandu_m4/later_2025-03-29_reflectance_composite.tif",
+      "bytes": 675604,
+      "sha256": "1f36fa41bb7b4a3e8665fbbb041b8d2d04e488382a500f2f85eee4e139b8e630"
+    },
+    "later_valid_mask_tif": {
+      "kind": "mask",
+      "path": "data/processed/m4/kathmandu_m4/later_2025-03-29_valid_mask.tif",
+      "bytes": 1481,
+      "sha256": "b7a70eac04f32c198ca1ace25f1637e98b28a85bbb06bfb551d142edc8796f4b"
+    },
+    "later_observation_count_tif": {
+      "kind": "mask",
+      "path": "data/processed/m4/kathmandu_m4/later_2025-03-29_observation_count.tif",
+      "bytes": 1693,
+      "sha256": "df7e62927cdffd56f7085df2e739bee6fe8edb5709ad43e773a6b9fecd6ababc"
+    },
+    "later_ndbi_tif": {
+      "kind": "raster",
+      "path": "data/processed/m4/kathmandu_m4/later_2025-03-29_ndbi.tif",
+      "bytes": 151198,
+      "sha256": "29e50f67a6a5d5ff7f1b011a11511651935cc4dc990820a2f77e89323d58c7e5"
+    },
+    "later_ndbi_png": {
+      "kind": "preview",
+      "path": "data/previews/m4/kathmandu_m4/later_2025-03-29_ndbi.png",
+      "bytes": 72111,
+      "sha256": "3bdb8e1af6f66328cb0185fac13ff76e02dec07171c62733488a3a3497f7e3ec"
+    },
+    "later_ndvi_tif": {
+      "kind": "raster",
+      "path": "data/processed/m4/kathmandu_m4/later_2025-03-29_ndvi.tif",
+      "bytes": 147852,
+      "sha256": "bc236cc4440884535a754186a5e5b574a7da0bb0a29d62c4bde260ee065bf387"
+    },
+    "later_ndvi_png": {
+      "kind": "preview",
+      "path": "data/previews/m4/kathmandu_m4/later_2025-03-29_ndvi.png",
+      "bytes": 73369,
+      "sha256": "aceef55fddb29c8dacb965e1e27d8d48aac7f56093f63e5b3180ba036950a642"
+    },
+    "later_ndwi_tif": {
+      "kind": "raster",
+      "path": "data/processed/m4/kathmandu_m4/later_2025-03-29_ndwi.tif",
+      "bytes": 139430,
+      "sha256": "18266f5423bb634a78544af6d38ffa79b6c59056fd76421f076358a35c55f605"
+    },
+    "later_ndwi_png": {
+      "kind": "preview",
+      "path": "data/previews/m4/kathmandu_m4/later_2025-03-29_ndwi.png",
+      "bytes": 74115,
+      "sha256": "ababcb840d7c5215b6b18ce072d9a997611c004026544cda98f9799ee5b977c2"
+    },
+    "later_true_colour_png": {
+      "kind": "preview",
+      "path": "data/previews/m4/kathmandu_m4/later_2025-03-29_true_colour.png",
+      "bytes": 115009,
+      "sha256": "1c27457abe0fd2de0e934dee37b6415e6055eb1af33f8898f5e9ad5d781b74c4"
+    },
+    "later_false_colour_png": {
+      "kind": "preview",
+      "path": "data/previews/m4/kathmandu_m4/later_2025-03-29_false_colour.png",
+      "bytes": 113395,
+      "sha256": "01bea46af379ef01b6c027e6c402b4a0a46c80d1a39ccb3ab569f5e6fef6617b"
+    },
+    "later_valid_mask_png": {
+      "kind": "preview",
+      "path": "data/previews/m4/kathmandu_m4/later_2025-03-29_valid_mask.png",
+      "bytes": 597,
+      "sha256": "08e8aaed293916f32c95239c79e092f524ebaa684289340b99931363286bf948"
+    },
+    "later_observation_count_png": {
+      "kind": "preview",
+      "path": "data/previews/m4/kathmandu_m4/later_2025-03-29_observation_count.png",
+      "bytes": 592,
+      "sha256": "79ddfbad6cacd3de610695190a3b046c89b6d206176708d9d969d2b9acb1f13e"
+    },
+    "delta_ndbi_tif": {
+      "kind": "raster",
+      "path": "data/processed/m4/kathmandu_m4/delta_ndbi.tif",
+      "bytes": 162551,
+      "sha256": "c97f00a6adbe005b422c7f837635d373b1d79b6ef7c04080880525712e7d3866"
+    },
+    "change_classes_ndbi_tif": {
+      "kind": "mask",
+      "path": "data/processed/m4/kathmandu_m4/change_classes_ndbi.tif",
+      "bytes": 4749,
+      "sha256": "e3f0ccfe62c18d56859ebd3622496dc6b989e43655a3906b98fd52648398ca20"
+    },
+    "common_valid_ndbi_tif": {
+      "kind": "mask",
+      "path": "data/processed/m4/kathmandu_m4/common_valid_ndbi.tif",
+      "bytes": 1488,
+      "sha256": "80fffd3cf94c5f6f61a9caca8b0e416a918ad26bc2e8657104dfee36ef78386e"
+    },
+    "delta_ndbi_png": {
+      "kind": "preview",
+      "path": "data/previews/m4/kathmandu_m4/delta_ndbi.png",
+      "bytes": 115515,
+      "sha256": "9d6ec9f0b7dbd5e1028cc7a96dac77b12698e381a5a8e129980b7de4a0750457"
+    },
+    "common_valid_ndbi_png": {
+      "kind": "preview",
+      "path": "data/previews/m4/kathmandu_m4/common_valid_ndbi.png",
+      "bytes": 560,
+      "sha256": "3f2526945c54c048653d35df1f1b8db19b5cd426ecbbc6eca85543893f126785"
+    },
+    "delta_ndvi_tif": {
+      "kind": "raster",
+      "path": "data/processed/m4/kathmandu_m4/delta_ndvi.tif",
+      "bytes": 163685,
+      "sha256": "89d9e84e8482ba914c8f8ae98590ef7d649f96d2671a6c54519a6f2ac1b5525e"
+    },
+    "change_classes_ndvi_tif": {
+      "kind": "mask",
+      "path": "data/processed/m4/kathmandu_m4/change_classes_ndvi.tif",
+      "bytes": 5459,
+      "sha256": "257faa31a8084f67db63921037cb6aafb3803fffc800717ec4bc04e2a9dd5867"
+    },
+    "common_valid_ndvi_tif": {
+      "kind": "mask",
+      "path": "data/processed/m4/kathmandu_m4/common_valid_ndvi.tif",
+      "bytes": 1488,
+      "sha256": "80fffd3cf94c5f6f61a9caca8b0e416a918ad26bc2e8657104dfee36ef78386e"
+    },
+    "delta_ndvi_png": {
+      "kind": "preview",
+      "path": "data/previews/m4/kathmandu_m4/delta_ndvi.png",
+      "bytes": 117398,
+      "sha256": "aa39977bab6ce2e2deab2df113dd7e101de5fc092f2e3c8563b57ab6a199a8e8"
+    },
+    "common_valid_ndvi_png": {
+      "kind": "preview",
+      "path": "data/previews/m4/kathmandu_m4/common_valid_ndvi.png",
+      "bytes": 560,
+      "sha256": "3f2526945c54c048653d35df1f1b8db19b5cd426ecbbc6eca85543893f126785"
+    },
+    "delta_ndwi_tif": {
+      "kind": "raster",
+      "path": "data/processed/m4/kathmandu_m4/delta_ndwi.tif",
+      "bytes": 162311,
+      "sha256": "6f5a5559db81f5d49faa1984431aebc0fef1a90777e3e03efe67fdeca4f8c72a"
+    },
+    "change_classes_ndwi_tif": {
+      "kind": "mask",
+      "path": "data/processed/m4/kathmandu_m4/change_classes_ndwi.tif",
+      "bytes": 5185,
+      "sha256": "ab31cf108f6054447f169d4668e73d00b923077adb44e3ec82acd41579155744"
+    },
+    "common_valid_ndwi_tif": {
+      "kind": "mask",
+      "path": "data/processed/m4/kathmandu_m4/common_valid_ndwi.tif",
+      "bytes": 1488,
+      "sha256": "80fffd3cf94c5f6f61a9caca8b0e416a918ad26bc2e8657104dfee36ef78386e"
+    },
+    "delta_ndwi_png": {
+      "kind": "preview",
+      "path": "data/previews/m4/kathmandu_m4/delta_ndwi.png",
+      "bytes": 117167,
+      "sha256": "dd44043346f2b6128fd2e36eb54a030c0c5d5d1fb988bf31371bc4174345f14e"
+    },
+    "common_valid_ndwi_png": {
+      "kind": "preview",
+      "path": "data/previews/m4/kathmandu_m4/common_valid_ndwi.png",
+      "bytes": 560,
+      "sha256": "3f2526945c54c048653d35df1f1b8db19b5cd426ecbbc6eca85543893f126785"
+    },
+    "ndbi_legend_png": {
+      "kind": "legend",
+      "path": "data/previews/m4/kathmandu_m4/ndbi_legend.png",
+      "bytes": 496,
+      "sha256": "ffb417df6c3f4455601ca2ef961d0207c625a69a53014fc7bc7925c0e8a2f730"
+    },
+    "ndbi_legend_json": {
+      "kind": "legend",
+      "path": "data/previews/m4/kathmandu_m4/ndbi_legend.json",
+      "bytes": 212,
+      "sha256": "eaaf33c5fcb67403c34b0329c4e58035ed9c964ca00f7c7bcb5358ec1dcc501f"
+    },
+    "ndvi_legend_png": {
+      "kind": "legend",
+      "path": "data/previews/m4/kathmandu_m4/ndvi_legend.png",
+      "bytes": 518,
+      "sha256": "5ff7a3e36a62c76de428c373cbcecba761837c7ba7e4041391a433394cb11a35"
+    },
+    "ndvi_legend_json": {
+      "kind": "legend",
+      "path": "data/previews/m4/kathmandu_m4/ndvi_legend.json",
+      "bytes": 244,
+      "sha256": "a7b8d0eb9a68a5b6ec7d64e6c9fb35f7b2b30e834cf9d96c767a5c789c176dfd"
+    },
+    "ndwi_legend_png": {
+      "kind": "legend",
+      "path": "data/previews/m4/kathmandu_m4/ndwi_legend.png",
+      "bytes": 519,
+      "sha256": "03c75ee6159dc50e49ad046fedddc218b1eafcce5f942b7dfc20dd343ce5d3d1"
+    },
+    "ndwi_legend_json": {
+      "kind": "legend",
+      "path": "data/previews/m4/kathmandu_m4/ndwi_legend.json",
+      "bytes": 223,
+      "sha256": "6fb48372f8d8705eda7be6ffccdf7c13d56c3370f65b19734bfe8c8c771aca3c"
+    },
+    "change_legend_png": {
+      "kind": "legend",
+      "path": "data/previews/m4/kathmandu_m4/change_legend.png",
+      "bytes": 482,
+      "sha256": "fa81d27dfb1a4d6eac40959dd95a3be5158487c36008538cdbd498a432269e18"
+    },
+    "change_legend_json": {
+      "kind": "legend",
+      "path": "data/previews/m4/kathmandu_m4/change_legend.json",
+      "bytes": 364,
+      "sha256": "8b5f8fe845d10bba27cefd87eeac71266e07e23388801a3e3faec451d5d59793"
+    },
+    "observation_count_legend_png": {
+      "kind": "legend",
+      "path": "data/previews/m4/kathmandu_m4/observation_count_legend.png",
+      "bytes": 451,
+      "sha256": "1281d835bcda90a0ab8b0a4418a48073d57c4f3d373486f0f96212f27a9e8d44"
+    },
+    "observation_count_legend_json": {
+      "kind": "legend",
+      "path": "data/previews/m4/kathmandu_m4/observation_count_legend.json",
+      "bytes": 217,
+      "sha256": "f3ee3577533e91dd5dfd8a9cb117755b5fac1dc32efcffdee14a7643be3d5066"
+    },
+    "summary_json": {
+      "kind": "summary",
+      "path": "data/processed/m4/kathmandu_m4/summary.json",
+      "bytes": 47661,
+      "sha256": "32895fe9c24d7f72e2e0189e13a637f07c4720ce25cb2d8e14df33d6485469b0"
+    },
+    "summary_csv": {
+      "kind": "summary",
+      "path": "data/processed/m4/kathmandu_m4/summary.csv",
+      "bytes": 10050,
+      "sha256": "f818b0d9806e86f5fc1fb1d2f4bb5e8da97618cafee94601db366d4f7f87f4e7"
+    }
+  },
+  "http_requests": 6,
+  "bytes_downloaded": 1450985,
+  "started_utc": "2026-11-07T13:11:16.540521+00:00"
+}

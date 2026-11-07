@@ -2895,13 +2895,13 @@
       "kind": "preview",
       "path": "data/previews/m4/himalaya_purepu_2025_m4/earlier_2025-04-21_true_colour.png",
       "bytes": 234703,
-      "sha256": "ea2c4cccc64c9b81af28646a729b9e213a6b8269f53536b09aa9d0fc8b36d829"
+      "sha256": "2abd7e756d5bf8f0fb0a844b9895e443b76502aa08e27c229a3dcb12de08cbe8"
     },
     "earlier_false_colour_png": {
       "kind": "preview",
       "path": "data/previews/m4/himalaya_purepu_2025_m4/earlier_2025-04-21_false_colour.png",
       "bytes": 231269,
-      "sha256": "b03cf3cc049631a280879e1f97655d7620533fc18b4c50a4356529306a70d7e5"
+      "sha256": "9d84eba7ac79895b874d3f25cd2baa3a19bce16f7cb085e15a0751c3e428275b"
     },
     "earlier_valid_mask_png": {
       "kind": "preview",
@@ -2973,13 +2973,13 @@
       "kind": "preview",
       "path": "data/previews/m4/himalaya_purepu_2025_m4/later_2025-10-21_true_colour.png",
       "bytes": 251484,
-      "sha256": "1186eb2bee09595f945e0ef054fdef6c731a4b901dc16968804c90d453a5cf5b"
+      "sha256": "8a6f068e2e4b822870080307dd33eb4da6e1e2ca12af9dcf8c4003e3b45c9b16"
     },
     "later_false_colour_png": {
       "kind": "preview",
       "path": "data/previews/m4/himalaya_purepu_2025_m4/later_2025-10-21_false_colour.png",
       "bytes": 247781,
-      "sha256": "cd46c4fb2f99fb3090a1b7b47b7cf3cff052da76544521b294dd826c05e838d4"
+      "sha256": "5d5762106fed90d5689d2b05dc8f780132ea5415f0ad33e10b7ea1173977235a"
     },
     "later_valid_mask_png": {
       "kind": "preview",
@@ -3147,7 +3147,7 @@
       "kind": "summary",
       "path": "data/processed/m4/himalaya_purepu_2025_m4/summary.json",
       "bytes": 48571,
-      "sha256": "63d0aee8372f6b7d28cf0ed227c833b1c5dc9a642bde9b9e247f6d5685f453a9"
+      "sha256": "b0f35fe63ed6b7d6d150f53ab017471e0f78a4cdad278bc51bcf9fb4de49ff2b"
     },
     "summary_csv": {
       "kind": "summary",

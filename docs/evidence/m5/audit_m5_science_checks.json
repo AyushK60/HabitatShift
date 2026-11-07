@@ -1,0 +1,362 @@
+{
+ "audit": "m5_scientific",
+ "passed": 3184,
+ "failed": 0,
+ "failures": [],
+ "radiometry_class_counts": {
+  "no_offset_declared": 8,
+  "offset_applied_scale_only": 26,
+  "declared_offset_applied": 0,
+  "empirical_scale_only": 6,
+  "unclassified": 0
+ },
+ "cache_negative_pixel_total": 0,
+ "source_verification": [
+  {
+   "experiment": "coringa_m1",
+   "item_id": "S2A_44QPD_20200326_1_L2A",
+   "acquisition_date": "2020-03-26",
+   "processing_baseline": "05.00",
+   "decision": "offset_applied_scale_only",
+   "grid_signature": "ad1601d5620e5f23"
+  },
+  {
+   "experiment": "coringa_m1",
+   "item_id": "S2B_44QPD_20200321_0_L2A",
+   "acquisition_date": "2020-03-21",
+   "processing_baseline": "02.14",
+   "decision": "no_offset_declared",
+   "grid_signature": "ad1601d5620e5f23"
+  },
+  {
+   "experiment": "coringa_m1",
+   "item_id": "S2B_44QPD_20200331_0_L2A",
+   "acquisition_date": "2020-03-31",
+   "processing_baseline": "02.14",
+   "decision": "no_offset_declared",
+   "grid_signature": "ad1601d5620e5f23"
+  },
+  {
+   "experiment": "coringa_m1",
+   "item_id": "S2B_44QPD_20250325_0_L2A",
+   "acquisition_date": "2025-03-25",
+   "processing_baseline": "05.11",
+   "decision": "offset_applied_scale_only",
+   "grid_signature": "ad1601d5620e5f23"
+  },
+  {
+   "experiment": "coringa_m1",
+   "item_id": "S2C_44QPD_20250330_0_L2A",
+   "acquisition_date": "2025-03-30",
+   "processing_baseline": "05.11",
+   "decision": "offset_applied_scale_only",
+   "grid_signature": "ad1601d5620e5f23"
+  },
+  {
+   "experiment": "coringa_m1",
+   "item_id": "S2A_44QPD_20250401_1_L2A",
+   "acquisition_date": "2025-04-01",
+   "processing_baseline": "05.11",
+   "decision": "offset_applied_scale_only",
+   "grid_signature": "ad1601d5620e5f23"
+  },
+  {
+   "experiment": "chilika_m4_dry",
+   "item_id": "S2B_45QUB_20200217_0_L2A",
+   "acquisition_date": "2020-02-17",
+   "processing_baseline": "02.14",
+   "decision": "no_offset_declared",
+   "grid_signature": "51a9da34666e1755"
+  },
+  {
+   "experiment": "chilika_m4_dry",
+   "item_id": "S2A_45QUB_20200212_1_L2A",
+   "acquisition_date": "2020-02-12",
+   "processing_baseline": "05.00",
+   "decision": "offset_applied_scale_only",
+   "grid_signature": "51a9da34666e1755"
+  },
+  {
+   "experiment": "chilika_m4_dry",
+   "item_id": "S2A_45QUB_20200222_0_L2A",
+   "acquisition_date": "2020-02-22",
+   "processing_baseline": "02.14",
+   "decision": "no_offset_declared",
+   "grid_signature": "51a9da34666e1755"
+  },
+  {
+   "experiment": "chilika_m4_dry",
+   "item_id": "S2C_45QUB_20250215_0_L2A",
+   "acquisition_date": "2025-02-15",
+   "processing_baseline": "05.11",
+   "decision": "empirical_scale_only",
+   "grid_signature": "51a9da34666e1755"
+  },
+  {
+   "experiment": "chilika_m4_dry",
+   "item_id": "S2B_45QUB_20250210_0_L2A",
+   "acquisition_date": "2025-02-10",
+   "processing_baseline": "05.11",
+   "decision": "empirical_scale_only",
+   "grid_signature": "51a9da34666e1755"
+  },
+  {
+   "experiment": "chilika_m4_dry",
+   "item_id": "S2B_45QUB_20250220_0_L2A",
+   "acquisition_date": "2025-02-20",
+   "processing_baseline": "05.11",
+   "decision": "empirical_scale_only",
+   "grid_signature": "51a9da34666e1755"
+  },
+  {
+   "experiment": "chilika_m4_postmonsoon",
+   "item_id": "S2A_45QUB_20201108_1_L2A",
+   "acquisition_date": "2020-11-08",
+   "processing_baseline": "05.00",
+   "decision": "offset_applied_scale_only",
+   "grid_signature": "51a9da34666e1755"
+  },
+  {
+   "experiment": "chilika_m4_postmonsoon",
+   "item_id": "S2B_45QUB_20201103_0_L2A",
+   "acquisition_date": "2020-11-03",
+   "processing_baseline": "02.14",
+   "decision": "no_offset_declared",
+   "grid_signature": "51a9da34666e1755"
+  },
+  {
+   "experiment": "chilika_m4_postmonsoon",
+   "item_id": "S2B_45QUB_20201113_0_L2A",
+   "acquisition_date": "2020-11-13",
+   "processing_baseline": "02.14",
+   "decision": "no_offset_declared",
+   "grid_signature": "51a9da34666e1755"
+  },
+  {
+   "experiment": "chilika_m4_postmonsoon",
+   "item_id": "S2B_45QUB_20251117_1_L2A",
+   "acquisition_date": "2025-11-17",
+   "processing_baseline": "05.11",
+   "decision": "offset_applied_scale_only",
+   "grid_signature": "51a9da34666e1755"
+  },
+  {
+   "experiment": "chilika_m4_postmonsoon",
+   "item_id": "S2A_45QUB_20251114_1_L2A",
+   "acquisition_date": "2025-11-14",
+   "processing_baseline": "05.11",
+   "decision": "offset_applied_scale_only",
+   "grid_signature": "51a9da34666e1755"
+  },
+  {
+   "experiment": "chilika_m4_postmonsoon",
+   "item_id": "S2C_45QUB_20251112_0_L2A",
+   "acquisition_date": "2025-11-12",
+   "processing_baseline": "05.11",
+   "decision": "offset_applied_scale_only",
+   "grid_signature": "51a9da34666e1755"
+  },
+  {
+   "experiment": "himalaya_langtang_2026_m4",
+   "item_id": "S2C_45RUM_20260812_0_L2A",
+   "acquisition_date": "2026-08-12",
+   "processing_baseline": "05.12",
+   "decision": "offset_applied_scale_only",
+   "grid_signature": "fd33a58502fe0b20"
+  },
+  {
+   "experiment": "himalaya_langtang_2026_m4",
+   "item_id": "S2C_45RUM_20260928_0_L2A",
+   "acquisition_date": "2026-09-28",
+   "processing_baseline": "05.13",
+   "decision": "offset_applied_scale_only",
+   "grid_signature": "fd33a58502fe0b20"
+  },
+  {
+   "experiment": "himalaya_langtang_2026_m4",
+   "item_id": "S2C_45RUM_20261001_0_L2A",
+   "acquisition_date": "2026-10-01",
+   "processing_baseline": "05.13",
+   "decision": "offset_applied_scale_only",
+   "grid_signature": "fd33a58502fe0b20"
+  },
+  {
+   "experiment": "himalaya_langtang_2026_m4",
+   "item_id": "S2B_45RUM_20261003_0_L2A",
+   "acquisition_date": "2026-10-03",
+   "processing_baseline": "05.13",
+   "decision": "offset_applied_scale_only",
+   "grid_signature": "fd33a58502fe0b20"
+  },
+  {
+   "experiment": "himalaya_purepu_2025_m4",
+   "item_id": "S2B_45RUM_20250421_0_L2A",
+   "acquisition_date": "2025-04-21",
+   "processing_baseline": "05.11",
+   "decision": "offset_applied_scale_only",
+   "grid_signature": "b709af83c65a4a3a"
+  },
+  {
+   "experiment": "himalaya_purepu_2025_m4",
+   "item_id": "S2A_45RUM_20250418_0_L2A",
+   "acquisition_date": "2025-04-18",
+   "processing_baseline": "05.11",
+   "decision": "offset_applied_scale_only",
+   "grid_signature": "b709af83c65a4a3a"
+  },
+  {
+   "experiment": "himalaya_purepu_2025_m4",
+   "item_id": "S2B_45RUM_20250424_0_L2A",
+   "acquisition_date": "2025-04-24",
+   "processing_baseline": "05.11",
+   "decision": "offset_applied_scale_only",
+   "grid_signature": "b709af83c65a4a3a"
+  },
+  {
+   "experiment": "himalaya_purepu_2025_m4",
+   "item_id": "S2B_45RUM_20251021_0_L2A",
+   "acquisition_date": "2025-10-21",
+   "processing_baseline": "05.11",
+   "decision": "offset_applied_scale_only",
+   "grid_signature": "b709af83c65a4a3a"
+  },
+  {
+   "experiment": "himalaya_purepu_2025_m4",
+   "item_id": "S2B_45RUM_20251018_0_L2A",
+   "acquisition_date": "2025-10-18",
+   "processing_baseline": "05.11",
+   "decision": "offset_applied_scale_only",
+   "grid_signature": "b709af83c65a4a3a"
+  },
+  {
+   "experiment": "himalaya_purepu_2025_m4",
+   "item_id": "S2A_45RUM_20251025_0_L2A",
+   "acquisition_date": "2025-10-25",
+   "processing_baseline": "05.11",
+   "decision": "offset_applied_scale_only",
+   "grid_signature": "b709af83c65a4a3a"
+  },
+  {
+   "experiment": "kathmandu_m4",
+   "item_id": "S2B_45RUL_20200331_0_L2A",
+   "acquisition_date": "2020-03-31",
+   "processing_baseline": "02.14",
+   "decision": "no_offset_declared",
+   "grid_signature": "077db7532b5cf722"
+  },
+  {
+   "experiment": "kathmandu_m4",
+   "item_id": "S2A_45RUL_20200402_1_L2A",
+   "acquisition_date": "2020-04-02",
+   "processing_baseline": "05.00",
+   "decision": "offset_applied_scale_only",
+   "grid_signature": "077db7532b5cf722"
+  },
+  {
+   "experiment": "kathmandu_m4",
+   "item_id": "S2A_45RUL_20200326_0_L2A",
+   "acquisition_date": "2020-03-26",
+   "processing_baseline": "02.14",
+   "decision": "no_offset_declared",
+   "grid_signature": "077db7532b5cf722"
+  },
+  {
+   "experiment": "kathmandu_m4",
+   "item_id": "S2A_45RUL_20250329_0_L2A",
+   "acquisition_date": "2025-03-29",
+   "processing_baseline": "05.11",
+   "decision": "offset_applied_scale_only",
+   "grid_signature": "077db7532b5cf722"
+  },
+  {
+   "experiment": "kathmandu_m4",
+   "item_id": "S2C_45RUL_20250330_0_L2A",
+   "acquisition_date": "2025-03-30",
+   "processing_baseline": "05.11",
+   "decision": "offset_applied_scale_only",
+   "grid_signature": "077db7532b5cf722"
+  },
+  {
+   "experiment": "kathmandu_m4",
+   "item_id": "S2C_45RUL_20250327_0_L2A",
+   "acquisition_date": "2025-03-27",
+   "processing_baseline": "05.11",
+   "decision": "offset_applied_scale_only",
+   "grid_signature": "077db7532b5cf722"
+  },
+  {
+   "experiment": "western_ghats_m4",
+   "item_id": "S2B_43PDS_20200219_1_L2A",
+   "acquisition_date": "2020-02-19",
+   "processing_baseline": "05.00",
+   "decision": "offset_applied_scale_only",
+   "grid_signature": "bd1413bd200c96cf"
+  },
+  {
+   "experiment": "western_ghats_m4",
+   "item_id": "S2A_43PDS_20200214_1_L2A",
+   "acquisition_date": "2020-02-14",
+   "processing_baseline": "05.00",
+   "decision": "offset_applied_scale_only",
+   "grid_signature": "bd1413bd200c96cf"
+  },
+  {
+   "experiment": "western_ghats_m4",
+   "item_id": "S2A_43PDS_20200224_1_L2A",
+   "acquisition_date": "2020-02-24",
+   "processing_baseline": "05.00",
+   "decision": "offset_applied_scale_only",
+   "grid_signature": "bd1413bd200c96cf"
+  },
+  {
+   "experiment": "western_ghats_m4",
+   "item_id": "S2B_43PDS_20250222_0_L2A",
+   "acquisition_date": "2025-02-22",
+   "processing_baseline": "05.11",
+   "decision": "empirical_scale_only",
+   "grid_signature": "bd1413bd200c96cf"
+  },
+  {
+   "experiment": "western_ghats_m4",
+   "item_id": "S2C_43PDS_20250217_0_L2A",
+   "acquisition_date": "2025-02-17",
+   "processing_baseline": "05.11",
+   "decision": "empirical_scale_only",
+   "grid_signature": "bd1413bd200c96cf"
+  },
+  {
+   "experiment": "western_ghats_m4",
+   "item_id": "S2C_43PDS_20250227_0_L2A",
+   "acquisition_date": "2025-02-27",
+   "processing_baseline": "05.11",
+   "decision": "empirical_scale_only",
+   "grid_signature": "bd1413bd200c96cf"
+  }
+ ],
+ "live_radiometry_spot_checks": [
+  {
+   "item_id": "S2C_45QUB_20250215_0_L2A",
+   "decision": "empirical_scale_only",
+   "declared_mean": -0.029504,
+   "scale_only_mean": 0.070496,
+   "negative_pixels": 0,
+   "negative_min": null
+  },
+  {
+   "item_id": "S2B_44QPD_20200321_0_L2A",
+   "decision": "no_offset_declared",
+   "declared_mean": -0.000643,
+   "scale_only_mean": 0.099358,
+   "negative_pixels": 0,
+   "negative_min": null
+  },
+  {
+   "item_id": "S2A_44QPD_20200326_1_L2A",
+   "decision": "offset_applied_scale_only",
+   "declared_mean": -0.073859,
+   "scale_only_mean": 0.026141,
+   "negative_pixels": 0,
+   "negative_min": null
+  }
+ ]
+}

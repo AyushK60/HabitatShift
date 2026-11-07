@@ -31,6 +31,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import logging
 import sys
@@ -209,9 +210,39 @@ def regenerate_experiment(experiment_id: str) -> bool:
         ):
             if manifest_period.get("period_id") == summary_period["period_id"]:
                 manifest_period["stretch"] = summary_period["stretch"]
+        # Every artefact rewritten above must also have its recorded bytes and
+        # SHA-256 refreshed, so the manifest's outputs section keeps matching
+        # the files on disk (the M5 audit verifies this).
+        rewritten = {
+            "summary_json": summary_path,
+        }
+        for manifest_period, summary_period in zip(manifest.get("periods", []), periods):
+            tag = manifest_period.get("period_id")
+            if tag != summary_period["period_id"]:
+                continue
+            for key in ("true_colour", "false_colour"):
+                preview_path = preview_dir / f"{tag}_{key}.png"
+                if preview_path.exists():
+                    rewritten[f"{tag}_{key}_png"] = preview_path
+        refreshed = 0
+        for name, meta in manifest.get("outputs", {}).items():
+            source = rewritten.get(name)
+            if source is None:
+                continue
+            payload = source.read_bytes()
+            meta["bytes"] = len(payload)
+            meta["sha256"] = hashlib.sha256(payload).hexdigest()
+            refreshed += 1
         manifest_path.write_text(
             json.dumps(manifest, indent=2) + "\n", encoding="utf-8"
         )
+        if refreshed != len(rewritten):
+            LOGGER.warning(
+                "%s: refreshed %d/%d output checksums (manifest output names may differ)",
+                experiment_id,
+                refreshed,
+                len(rewritten),
+            )
 
     LOGGER.info(
         "%s: re-rendered %d composites with joint stretch "

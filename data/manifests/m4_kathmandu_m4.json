@@ -3214,13 +3214,13 @@
       "kind": "preview",
       "path": "data/previews/m4/kathmandu_m4/earlier_2020-03-31_true_colour.png",
       "bytes": 113174,
-      "sha256": "1c199978fb4ca9503320a4e2d750b106189ddf47c37ba0045b00f1e6ff8d604e"
+      "sha256": "3e7466907512503e6319024987b59c855674fcc20896da14c8cd0d282a89c33d"
     },
     "earlier_false_colour_png": {
       "kind": "preview",
       "path": "data/previews/m4/kathmandu_m4/earlier_2020-03-31_false_colour.png",
       "bytes": 112399,
-      "sha256": "d1274b1c861173b2814e1a164b0c3c136a056caa53e43c8a67dbb7b41b017c9b"
+      "sha256": "6799413d8e00287d3d818a7cdb7c957ea32cd579beda72548c9f77a36b9064bc"
     },
     "earlier_valid_mask_png": {
       "kind": "preview",
@@ -3292,13 +3292,13 @@
       "kind": "preview",
       "path": "data/previews/m4/kathmandu_m4/later_2025-03-29_true_colour.png",
       "bytes": 115009,
-      "sha256": "1c27457abe0fd2de0e934dee37b6415e6055eb1af33f8898f5e9ad5d781b74c4"
+      "sha256": "0e54f3cd1da6a1bc2edd32231eb0d8c4bf379c4268960428a20b188f7d88274b"
     },
     "later_false_colour_png": {
       "kind": "preview",
       "path": "data/previews/m4/kathmandu_m4/later_2025-03-29_false_colour.png",
       "bytes": 113395,
-      "sha256": "01bea46af379ef01b6c027e6c402b4a0a46c80d1a39ccb3ab569f5e6fef6617b"
+      "sha256": "222a70615486384b50c1daa68adb430cf35d8913cc958965dda6455d9a30a378"
     },
     "later_valid_mask_png": {
       "kind": "preview",
@@ -3466,7 +3466,7 @@
       "kind": "summary",
       "path": "data/processed/m4/kathmandu_m4/summary.json",
       "bytes": 47661,
-      "sha256": "32895fe9c24d7f72e2e0189e13a637f07c4720ce25cb2d8e14df33d6485469b0"
+      "sha256": "594b9394f61f145164dec934b0d8658db6750b6c88c2f2b0a95489e5add0e5b4"
     },
     "summary_csv": {
       "kind": "summary",

@@ -2550,13 +2550,13 @@
       "kind": "preview",
       "path": "data/previews/m4/western_ghats_m4/earlier_2020-02-19_true_colour.png",
       "bytes": 559033,
-      "sha256": "6b8c5343d481768700af2468b4b6ca9ffc2a1d3b76435168d675fe7ed4f8733e"
+      "sha256": "b866e7188fc127820590d853147547775d50adcf964a74282648227f77afae52"
     },
     "earlier_false_colour_png": {
       "kind": "preview",
       "path": "data/previews/m4/western_ghats_m4/earlier_2020-02-19_false_colour.png",
       "bytes": 576783,
-      "sha256": "170cbbf07b864d7b1870e080886c3e3978f60bd171dc0fa103d5eec008ac1efc"
+      "sha256": "9456ecb52ee07f4b27de4c5091a20227fe47ae00c16cfbaec76e46ba218134c3"
     },
     "earlier_valid_mask_png": {
       "kind": "preview",
@@ -2616,13 +2616,13 @@
       "kind": "preview",
       "path": "data/previews/m4/western_ghats_m4/later_2025-02-22_true_colour.png",
       "bytes": 559659,
-      "sha256": "5454312b48ff6eb2c262ebdc18547b594853a603ad2ce23ada31335cb832bffc"
+      "sha256": "e40a020e4fe57f7899e127e44aa98cbf1a3c157c60e7e887d87652b01d40272e"
     },
     "later_false_colour_png": {
       "kind": "preview",
       "path": "data/previews/m4/western_ghats_m4/later_2025-02-22_false_colour.png",
       "bytes": 575431,
-      "sha256": "a18e6b61322fd9fc02d8710487fa1e980ab4ab562f8ca6805b8ff732b0b7b2d7"
+      "sha256": "8c55d040e595a481da14de7470cab3dcdaebf0e58719b81b0e95e7e9f661c05e"
     },
     "later_valid_mask_png": {
       "kind": "preview",
@@ -2748,7 +2748,7 @@
       "kind": "summary",
       "path": "data/processed/m4/western_ghats_m4/summary.json",
       "bytes": 36842,
-      "sha256": "3703768f261d9b050480c9ff01abe87c14b6e5025bbe19e30b2d5686707b96e6"
+      "sha256": "00dcb7f89b08ccbc30807dea837ac1d631e6a7d65f26bb9ed82833a99917e1bf"
     },
     "summary_csv": {
       "kind": "summary",

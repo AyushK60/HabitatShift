@@ -2907,13 +2907,13 @@
       "kind": "preview",
       "path": "data/previews/m4/chilika_m4_dry/earlier_2020-02-17_true_colour.png",
       "bytes": 658831,
-      "sha256": "c6e653c963b22ac08cd71f3da39a2e7abecea2c5272e07d751f5f76c9a66f2fb"
+      "sha256": "9ea96be65fc5641f4c6c8b989012ec42be436d07785ddab0451bbbaeafe859cb"
     },
     "earlier_false_colour_png": {
       "kind": "preview",
       "path": "data/previews/m4/chilika_m4_dry/earlier_2020-02-17_false_colour.png",
       "bytes": 599403,
-      "sha256": "a93444c89622af8d0cdc4c93587356c0b8d606f5f751beeaca0deaed926cb9f6"
+      "sha256": "f58c9b74e0a98a2d8f74243ee64ed48a35e708dcd8a0e723e9f24c4e8beed0b8"
     },
     "earlier_valid_mask_png": {
       "kind": "preview",
@@ -2985,13 +2985,13 @@
       "kind": "preview",
       "path": "data/previews/m4/chilika_m4_dry/later_2025-02-15_true_colour.png",
       "bytes": 650248,
-      "sha256": "3201eb1fdc8af7ccaca101adf16090f051139fcc95a94d06475339149ad51470"
+      "sha256": "f75c89bf51004362684021642c6a5e62e7486a3b8b7fc8afb73457c1ec987f74"
     },
     "later_false_colour_png": {
       "kind": "preview",
       "path": "data/previews/m4/chilika_m4_dry/later_2025-02-15_false_colour.png",
       "bytes": 592102,
-      "sha256": "9cee6776ae82736eaa1c4c434f09a6b5c57fe5010e5b61b203b638d149cb8c20"
+      "sha256": "d651d2c07111b07b1b1a4f771285fbd286b304ccd558f5cee0d799d58a9e58eb"
     },
     "later_valid_mask_png": {
       "kind": "preview",
@@ -3159,7 +3159,7 @@
       "kind": "summary",
       "path": "data/processed/m4/chilika_m4_dry/summary.json",
       "bytes": 47612,
-      "sha256": "5756e46e6866946f1498c84b49fd799152ec29789942b94084414d57a51d4eba"
+      "sha256": "20f6abc5c4f6be9a0971ef76e85f3b18f700f42a7f5ce928162a23591840c872"
     },
     "summary_csv": {
       "kind": "summary",
