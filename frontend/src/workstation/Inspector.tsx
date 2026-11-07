@@ -1,13 +1,13 @@
 /** Research inspector — the right-hand analytical rail of the workstation.
  *
- * Sections: layer legend & meaning, acquisition context, pixel probe
- * (server-measured full-resolution values) and the ROI tool (also
- * full-resolution server-side, explicitly labelled).
+ * Sections: layer legend & meaning, the "What am I looking at?" layer guide
+ * (M4-R1 §15.5), guided findings (§15.3), acquisition context, pixel probe
+ * (server-measured full-resolution values) and the ROI tool.
  */
 import type { G0Quality, M1Summary, PixelSample, RoiResult } from "../api/types";
-import type { StudyBundle } from "../api/bundle";
-import type { AssetResolver, LayerSpec } from "./layers";
-import { layerLegend, qualityExplanation } from "./layers";
+import type { BundleFindings, StudyBundle } from "../api/bundle";
+import type { Analysis, AssetResolver, LayerSpec } from "./layers";
+import { layerGuide, layerLegend, qualityExplanation } from "./layers";
 import type { RoiBox } from "./MapCompare";
 
 interface InspectorProps {
@@ -19,6 +19,10 @@ interface InspectorProps {
   bundle: StudyBundle;
   /** True when the live backend serves this study's frozen M1 outputs. */
   live: boolean;
+  analysis: Analysis;
+  findings: BundleFindings | null;
+  selectedFindingId: string | null;
+  onSelectFinding: (id: string | null) => void;
   pixel: PixelSample | null;
   pixelError: string | null;
   pixelLoading: boolean;
@@ -33,7 +37,7 @@ interface InspectorProps {
   onTabChange: (tab: InspectorTab) => void;
 }
 
-export type InspectorTab = "legend" | "context" | "pixel" | "roi";
+export type InspectorTab = "legend" | "guide" | "findings" | "context" | "pixel" | "roi";
 
 const REFLECTANCE_LABELS: Record<string, string> = {
   blue_B02: "B02 blue",
@@ -322,6 +326,219 @@ function RoiPanel({
   );
 }
 
+/** Guided "What Changed?" findings panel (M4-R1 §15.3/§15.6). Everything
+ *  renders from the recorded findings payload — same numbers as the map. */
+function FindingsPanel({
+  findings,
+  selectedId,
+  onSelect,
+}: {
+  findings: BundleFindings | null;
+  selectedId: string | null;
+  onSelect: (id: string | null) => void;
+}) {
+  if (!findings) {
+    return (
+      <p className="insp-note">
+        No findings file is recorded for this experiment. A finding appears
+        only when a connected candidate region meets the documented minimum
+        mapping unit at the recorded thresholds — none is ever invented.
+      </p>
+    );
+  }
+  const { overview, method, periods } = findings;
+  const selected = findings.findings.find((f) => f.id === selectedId) ?? null;
+  const indicesOrder = [...new Set(findings.findings.map((f) => f.index))];
+  return (
+    <div className="findings-panel">
+      <h3 className="insp-heading">What changed here?</h3>
+      {overview.findings_total === 0 ? (
+        <p className="insp-note insp-meaning">
+          {overview.no_finding_statement ??
+            "No defensible candidate region was identified for this comparison."}
+        </p>
+      ) : (
+        <p className="insp-note insp-meaning">
+          {overview.findings_total} defensible mapped regions:{" "}
+          {overview.by_direction.decrease} candidate decrease,{" "}
+          {overview.by_direction.increase} candidate increase, across{" "}
+          {overview.signal_types.join(", ")}. Every region is a connected
+          component of the recorded difference map at its stated threshold —
+          not a confirmed environmental change.
+        </p>
+      )}
+      <dl className="insp-facts">
+        <div>
+          <dt>Observation period</dt>
+          <dd>
+            {periods.earlier.anchor_date} → {periods.later.anchor_date} (
+            {periods.earlier.composite_method} composites)
+          </dd>
+        </div>
+        <div>
+          <dt>Shared-valid footprint</dt>
+          <dd>
+            {findings.common_valid_pixels.toLocaleString("en-GB")} px ·{" "}
+            {(findings.common_valid_fraction_of_aoi * 100).toFixed(1)}% of AOI
+          </dd>
+        </div>
+        <div>
+          <dt>Minimum mapping unit</dt>
+          <dd>
+            {method.minimum_mapping_unit_px} px ({method.minimum_mapping_unit_ha}{" "}
+            ha) · smaller clusters are never reported
+          </dd>
+        </div>
+      </dl>
+      <p className="insp-note mono-label">
+        Categories: candidate increase / candidate decrease / little measurable
+        difference / insufficient evidence. All mapped regions here are
+        <strong> candidates</strong>; "insufficient evidence" is exactly what
+        an empty list means.
+      </p>
+
+      {indicesOrder.map((index) => {
+        const entries = findings.findings.filter((f) => f.index === index);
+        const stats = findings.indices[index];
+        return (
+          <div key={index} className="finding-group">
+            <h4 className="insp-subheading">
+              Δ{index.toUpperCase()} @ |Δ| ≥ {stats?.threshold ?? entries[0].threshold} ·{" "}
+              {entries.length} regions
+            </h4>
+            <ul className="finding-list">
+              {entries.map((finding) => (
+                <li key={finding.id}>
+                  <button
+                    type="button"
+                    className={
+                      finding.id === selectedId
+                        ? "finding-entry is-selected"
+                        : "finding-entry"
+                    }
+                    aria-pressed={finding.id === selectedId}
+                    onClick={() => onSelect(finding.id === selectedId ? null : finding.id)}
+                  >
+                    <span className="finding-arrow" data-direction={finding.direction}>
+                      {finding.direction === "decrease" ? "▼" : "▲"}
+                    </span>
+                    <span className="finding-name">
+                      {finding.display_id} · {finding.direction}
+                    </span>
+                    <span className="mono-label finding-area">
+                      {finding.area_ha.toFixed(2)} ha
+                    </span>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        );
+      })}
+
+      {selected && (
+        <article className="finding-detail" aria-live="polite">
+          <h4 className="insp-heading">{selected.interpretation.title}</h4>
+          <Facts
+            rows={[
+              ["Location", selected.interpretation.location],
+              ["Observation period", selected.interpretation.observation_period],
+              ["Observed measurement", selected.interpretation.observed_measurement],
+            ]}
+          />
+          <p className="insp-note insp-meaning">{selected.interpretation.meaning}</p>
+          <h4 className="insp-subheading">What could explain it?</h4>
+          <ul className="insp-note">
+            {selected.interpretation.explanations.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+          <h4 className="insp-subheading">How strong is the evidence?</h4>
+          <p className="insp-note">{selected.interpretation.evidence_strength}</p>
+          <h4 className="insp-subheading">What cannot be concluded?</h4>
+          <ul className="insp-note insp-guardrail">
+            {selected.interpretation.cannot_conclude.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+          <p className="insp-note mono-label">
+            Source: {selected.interpretation.source.input_raster} ·{" "}
+            {selected.interpretation.source.method}
+          </p>
+        </article>
+      )}
+
+      {findings.limitations.length > 0 && (
+        <>
+          <h4 className="insp-subheading">Study limitations</h4>
+          <ul className="insp-note insp-guardrail">
+            {findings.limitations.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </>
+      )}
+    </div>
+  );
+}
+
+/** "What am I looking at?" — plain-language guide to the selected layer. */
+function LayerGuidePanel({
+  layer,
+  summary,
+  resolver,
+}: {
+  layer: LayerSpec;
+  summary: M1Summary;
+  resolver: AssetResolver;
+}) {
+  const guide = layerGuide(layer, summary);
+  const legend = layerLegend(layer);
+  return (
+    <div className="layer-guide">
+      <h3 className="insp-heading">What am I looking at?</h3>
+      <Facts
+        rows={[
+          ["Layer", layer.label],
+          ["Type", guide.kind],
+          ["Band composition", guide.composition ?? "Not a band composite"],
+          [
+            "Native resolution",
+            `${summary.grid.resolution_m} m per pixel (${summary.grid.crs})`,
+          ],
+        ]}
+      />
+      {legend.file && (
+        <img
+          className="insp-legend-img"
+          src={resolver.previewUrl(legend.file)}
+          alt={`Colour legend for ${layer.label}`}
+        />
+      )}
+      {legend.swatches && (
+        <div className="insp-swatches">
+          {legend.swatches.map((swatch) => (
+            <span key={swatch.label} className="insp-swatch">
+              <span
+                className="swatch-chip"
+                style={{ background: swatch.color }}
+                aria-hidden="true"
+              />
+              {swatch.label}
+            </span>
+          ))}
+        </div>
+      )}
+      <h4 className="insp-subheading">What the values represent</h4>
+      <p className="insp-note">{guide.values}</p>
+      <h4 className="insp-subheading">How to read the colours</h4>
+      <p className="insp-note">{guide.reading}</p>
+      <h4 className="insp-subheading">What this layer cannot establish</h4>
+      <p className="insp-note insp-guardrail">{guide.cannotEstablish}</p>
+    </div>
+  );
+}
+
 export function Inspector({
   summary,
   studyId,
@@ -330,6 +547,10 @@ export function Inspector({
   quality,
   bundle,
   live,
+  analysis,
+  findings,
+  selectedFindingId,
+  onSelectFinding,
   pixel,
   pixelError,
   pixelLoading,
@@ -354,6 +575,10 @@ export function Inspector({
 
   const tabs: { id: InspectorTab; label: string }[] = [
     { id: "legend", label: "Layer & legend" },
+    { id: "guide", label: "What am I looking at?" },
+    ...(analysis === "what_changed"
+      ? ([{ id: "findings", label: "Findings" }] as { id: InspectorTab; label: string }[])
+      : []),
     { id: "context", label: "Acquisition" },
     { id: "pixel", label: "Pixel probe" },
     { id: "roi", label: "ROI" },
@@ -430,6 +655,18 @@ export function Inspector({
                 : "Cursor coordinates appear here as you move over the map."}
             </p>
           </>
+        )}
+
+        {tab === "guide" && (
+          <LayerGuidePanel layer={layer} summary={summary} resolver={resolver} />
+        )}
+
+        {tab === "findings" && (
+          <FindingsPanel
+            findings={findings}
+            selectedId={selectedFindingId}
+            onSelect={onSelectFinding}
+          />
         )}
 
         {tab === "context" && (

@@ -47,7 +47,7 @@ interface MapCompareProps {
   summary: M1Summary;
   /** Asset resolver: live backend routes or bundled showcase copies. */
   resolver: AssetResolver;
-  analysis: "historical" | "change" | "quality";
+  analysis: "historical" | "change" | "quality" | "what_changed";
   layer: LayerSpec;
   mode: CompareMode;
   opacity: number;
@@ -63,6 +63,13 @@ interface MapCompareProps {
   onMarkerSetter: (setter: (lonLat: [number, number] | null) => void) => void;
   /** Receives a setter for the "Fit Entire Study Area" action (M4-R1 §9). */
   onFitSetter?: (fit: () => void) => void;
+  /** "What Changed?" findings overlay (M4-R1 §15.2): recorded regions, */
+  findings?: GeoJSON.FeatureCollection | null;
+  selectedFindingId?: string | null;
+  findingsVisible?: boolean;
+  onFindingSelect?: (id: string | null) => void;
+  /** Receives a setter to focus (fit) a finding's geometry (§15.2.6). */
+  onFocusSetter?: (focus: (geometry: GeoJSON.Geometry) => void) => void;
 }
 
 const MAP_BACKGROUND = "#dfe3de";
@@ -248,6 +255,11 @@ export function MapCompare({
   onRoiComplete,
   onMarkerSetter,
   onFitSetter,
+  findings,
+  selectedFindingId,
+  findingsVisible,
+  onFindingSelect,
+  onFocusSetter,
 }: MapCompareProps) {
   const earlierMapDiv = useRef<HTMLDivElement>(null);
   const laterMapDiv = useRef<HTMLDivElement>(null);
@@ -510,6 +522,119 @@ export function MapCompare({
     onFitSetter?.(fitToStudy);
   }, [fitToStudy, onFitSetter]);
 
+  /** Focus a finding's geometry: fit the map to the region's true bbox. */
+  const focusGeometry = useCallback((geometry: GeoJSON.Geometry) => {
+    const { earlier } = mapsRef.current;
+    if (!earlier) return;
+    const lons: number[] = [];
+    const lats: number[] = [];
+    const collect = (position: GeoJSON.Position | GeoJSON.Position[]) => {
+      if (typeof position[0] === "number") {
+        lons.push(position[0] as number);
+        lats.push(position[1] as number);
+      } else {
+        (position as GeoJSON.Position[]).forEach(collect);
+      }
+    };
+    const rings =
+      geometry.type === "Polygon"
+        ? geometry.coordinates
+        : geometry.type === "MultiPolygon"
+          ? geometry.coordinates.flat()
+          : [];
+    rings.forEach((ring) => ring.forEach(collect));
+    if (!lons.length) return;
+    earlier.fitBounds(
+      [
+        [Math.min(...lons), Math.min(...lats)],
+        [Math.max(...lons), Math.max(...lats)],
+      ],
+      { padding: 60, duration: 500, maxZoom: 15 }
+    );
+  }, []);
+
+  useEffect(() => {
+    onFocusSetter?.(focusGeometry);
+  }, [focusGeometry, onFocusSetter]);
+
+  /* ------------------------------ findings overlay (M4-R1 §15.2) --- */
+  const onFindingSelectRef = useRef(onFindingSelect);
+  onFindingSelectRef.current = onFindingSelect;
+
+  useEffect(() => {
+    if (!ready) return;
+    const { earlier } = mapsRef.current;
+    if (!earlier) return;
+    const run = () => {
+      if (!earlier.getSource("findings-overlay")) {
+        earlier.addSource("findings-overlay", { type: "geojson", data: EMPTY_FC });
+        // Subdued, scientifically meaningful colours, distinct from the
+        // brand's active-state teal/copper: muted versions with low fill
+        // opacity so the underlying imagery stays readable (§15.7).
+        earlier.addLayer(
+          {
+            id: "findings-fill",
+            type: "fill",
+            source: "findings-overlay",
+            paint: {
+              "fill-color": [
+                "match",
+                ["get", "direction"],
+                "decrease", "#4e7d74",
+                "#b3744e",
+              ],
+              "fill-opacity": 0.22,
+            },
+          },
+          earlier.getLayer("aoi-line") ? "aoi-line" : undefined
+        );
+        earlier.addLayer({
+          id: "findings-line",
+          type: "line",
+          source: "findings-overlay",
+          paint: {
+            "line-color": [
+              "case",
+              ["==", ["get", "id"], ["literal", selectedFindingId ?? "__none__"]],
+              "#193c43",
+              ["match", ["get", "direction"], "decrease", "#3c655d", "#8a5a3a"],
+            ],
+            "line-width": ["case",
+              ["==", ["get", "id"], ["literal", selectedFindingId ?? "__none__"]], 3, 1.6],
+          },
+        });
+        earlier.on("click", "findings-fill", (event) => {
+          const id = event.features?.[0]?.properties?.id;
+          if (typeof id === "string") onFindingSelectRef.current?.(id);
+        });
+        // Pointer affordance over findings.
+        earlier.on("mouseenter", "findings-fill", () => {
+          earlier.getCanvas().style.cursor = "pointer";
+        });
+        earlier.on("mouseleave", "findings-fill", () => {
+          earlier.getCanvas().style.cursor = "";
+        });
+      }
+      const source = earlier.getSource("findings-overlay") as GeoJSONSource;
+      const data =
+        findingsVisible && findings && findings.features.length ? findings : EMPTY_FC;
+      source.setData(data);
+      if (earlier.getLayer("findings-line")) {
+        earlier.setPaintProperty("findings-line", "line-color", [
+          "case",
+          ["==", ["get", "id"], ["literal", selectedFindingId ?? "__none__"]],
+          "#193c43",
+          ["match", ["get", "direction"], "decrease", "#3c655d", "#8a5a3a"],
+        ]);
+        earlier.setPaintProperty("findings-line", "line-width", [
+          "case",
+          ["==", ["get", "id"], ["literal", selectedFindingId ?? "__none__"]], 3, 1.6,
+        ]);
+      }
+    };
+    whenStyleReady(earlier, run);
+  }, [ready, findings, findingsVisible, selectedFindingId]);
+
   /* --------------------------------------------------- layer painting --- */
   useEffect(() => {
     if (!ready) return;
@@ -535,7 +660,7 @@ export function MapCompare({
       }
     } else {
       const url =
-        analysis === "change"
+        analysis === "change" || analysis === "what_changed"
           ? layerUrlEarlier
           : layerImageUrl(layer, summary, resolver, "later");
       applyImageLayer(earlier, "layer-earlier", url, coordinates, 1);
@@ -821,7 +946,9 @@ export function MapCompare({
             ? "Earlier"
             : analysis === "change"
               ? "Difference map"
-              : "Quality layer"}
+              : analysis === "what_changed"
+                ? "What changed"
+                : "Quality layer"}
         </span>
         {/* M4-R1 §8: the native analysis resolution travels with the imagery. */}
         <span className="map-resolution-tag" title="Native analysis grid resolution">

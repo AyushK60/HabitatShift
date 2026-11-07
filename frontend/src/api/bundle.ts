@@ -21,6 +21,9 @@ export interface BundleExperiment {
   config_sha256: string;
   summary_sha256: string;
   summary: M1Summary;
+  /** "What Changed?" findings (schema habitatshift-findings/1) when this
+   *  experiment's difference rasters yielded defensible regions. */
+  findings?: BundleFindings | null;
 }
 
 export interface BundleThresholdPoint {
@@ -135,6 +138,109 @@ export interface BundleDemContext {
   role?: string;
   license?: string;
   reason?: string;
+}
+
+/* --------------------------------------------- What-Changed findings --- */
+
+export interface BundleFindingInterpretation {
+  title: string;
+  location: string;
+  observation_period: string;
+  observed_measurement: string;
+  meaning: string;
+  explanations: string[];
+  evidence_strength: string;
+  cannot_conclude: string[];
+  source: {
+    experiment_id: string;
+    input_raster: string;
+    valid_mask: string;
+    method: string;
+  };
+}
+
+export interface BundleFinding {
+  id: string;
+  display_id: string;
+  index: string;
+  direction: "decrease" | "increase";
+  threshold: number;
+  pixel_count: number;
+  area_ha: number;
+  share_of_common_valid_percent: number;
+  mean_delta: number;
+  median_delta: number;
+  common_valid_pixels: number;
+  centroid_lonlat: [number, number];
+  geometry_wgs84: GeoJSON.Polygon;
+  input_raster: string;
+  valid_mask: string;
+  interpretation: BundleFindingInterpretation;
+}
+
+export interface BundleFindings {
+  schema: string;
+  study_id: string;
+  experiment_id: string;
+  generated_utc: string;
+  evidence_status: string;
+  method: {
+    source: string;
+    threshold_rule: string;
+    connected_components: string;
+    minimum_mapping_unit_px: number;
+    minimum_mapping_unit_ha: number | null;
+    max_regions_per_index_direction: number;
+    geometry: string;
+    area_convention: string;
+  };
+  periods: {
+    earlier: { anchor_date: string; composite_method: string };
+    later: { anchor_date: string; composite_method: string };
+  };
+  common_valid_pixels: number;
+  common_valid_fraction_of_aoi: number;
+  indices: Record<
+    string,
+    {
+      threshold: number;
+      common_valid_pixels: number;
+      decrease_pixels_total: number;
+      increase_pixels_total: number;
+    }
+  >;
+  findings: BundleFinding[];
+  overview: {
+    findings_total: number;
+    by_direction: { decrease: number; increase: number };
+    signal_types: string[];
+    no_finding_statement: string | null;
+  };
+  limitations: string[];
+}
+
+/** Convert recorded findings to the GeoJSON the map overlay renders.
+ *  The geometry comes verbatim from the findings payload — the browser never
+ *  redraws or approximates a region. */
+export function findingsToFeatureCollection(
+  payload: BundleFindings
+): GeoJSON.FeatureCollection {
+  return {
+    type: "FeatureCollection",
+    features: payload.findings.map((finding) => ({
+      type: "Feature",
+      id: finding.id,
+      properties: {
+        id: finding.id,
+        display_id: finding.display_id,
+        index: finding.index,
+        direction: finding.direction,
+        area_ha: finding.area_ha,
+        mean_delta: finding.mean_delta,
+      },
+      geometry: finding.geometry_wgs84,
+    })),
+  };
 }
 
 export interface StudyBundle {

@@ -21,9 +21,11 @@ import {
   bundleGeoref,
   bundleResolver,
   bundleSummary,
+  findingsToFeatureCollection,
   liveResolver,
   loadStudyBundle,
   qualityFromSummary,
+  type BundleFindings,
   type StudyBundle,
 } from "../api/bundle";
 import type { Georef, M1Summary, PixelSample, RoiResult } from "../api/types";
@@ -40,14 +42,20 @@ const DEFAULT_MODES: ModeState = {
   historical: "swipe",
   change: "side",
   quality: "side",
+  what_changed: "side",
 };
 
 function defaultLayerId(layers: LayerSpec[], analysis: Analysis): string {
-  const forAnalysis = layers.filter((layer) => layer.analysis === analysis);
+  // The "What Changed?" view composites on the Δ-index layers (the change
+  // pool), so its default comes from there.
+  const pool =
+    analysis === "what_changed"
+      ? layers.filter((layer) => layer.analysis === "change")
+      : layers.filter((layer) => layer.analysis === analysis);
   if (analysis === "historical") {
-    return (forAnalysis.find((l) => l.id === "true_colour") ?? forAnalysis[0])?.id ?? "";
+    return (pool.find((l) => l.id === "true_colour") ?? pool[0])?.id ?? "";
   }
-  return forAnalysis[0]?.id ?? "";
+  return pool[0]?.id ?? "";
 }
 
 function useBackendReachable(): boolean {
@@ -101,6 +109,7 @@ function WorkstationForStudy({ studyId }: { studyId: string }) {
     historical: "true_colour",
     change: "",
     quality: "",
+    what_changed: "",
   });
   const [modes, setModes] = useState<ModeState>(DEFAULT_MODES);
   const [split, setSplit] = useState(50);
@@ -136,6 +145,8 @@ function WorkstationForStudy({ studyId }: { studyId: string }) {
     setRoiError(null);
     setRoiMode(false);
     setRoiBox(null);
+    setSelectedFindingId(null);
+    setFindingsOverlay(true);
     loadStudyBundle(studyId)
       .then((payload) => {
         if (!cancelled) setBundle(payload);
@@ -170,8 +181,12 @@ function WorkstationForStudy({ studyId }: { studyId: string }) {
     if (!layers.length) return;
     setLayerIds((prev) => {
       const next = { ...prev };
-      for (const key of ["historical", "change", "quality"] as Analysis[]) {
-        if (!next[key] || !layers.some((l) => l.id === next[key] && l.analysis === key)) {
+      for (const key of ["historical", "change", "quality", "what_changed"] as Analysis[]) {
+        const poolAnalysis = key === "what_changed" ? "change" : key;
+        if (
+          !next[key] ||
+          !layers.some((l) => l.id === next[key] && l.analysis === poolAnalysis)
+        ) {
           next[key] = defaultLayerId(layers, key);
         }
       }
@@ -182,12 +197,40 @@ function WorkstationForStudy({ studyId }: { studyId: string }) {
   const quality = useMemo(() => (summary ? qualityFromSummary(summary) : null), [summary]);
 
   /* -------------------------------------------------------- interactions --- */
+  // The "What Changed?" view composites on the Δ-index (change) layers.
+  const layerPoolAnalysis: Analysis | "change" =
+    analysis === "what_changed" ? "change" : analysis;
   const analysisLayers = useMemo(
-    () => layers.filter((layer) => layer.analysis === analysis),
-    [layers, analysis]
+    () => layers.filter((layer) => layer.analysis === layerPoolAnalysis),
+    [layers, layerPoolAnalysis]
   );
   const layer: LayerSpec | undefined =
     analysisLayers.find((item) => item.id === layerIds[analysis]) ?? analysisLayers[0];
+
+  /* ------------------------------------- What Changed? state (M4-R1 §15) --- */
+  const [findingsOverlay, setFindingsOverlay] = useState(true);
+  const [selectedFindingId, setSelectedFindingId] = useState<string | null>(null);
+  const findings: BundleFindings | null =
+    bundle?.experiments[experimentIndex]?.findings ?? null;
+  const findingsFC = useMemo(
+    () => (findings ? findingsToFeatureCollection(findings) : null),
+    [findings]
+  );
+  const focusRef = useRef<((geometry: GeoJSON.Geometry) => void) | null>(null);
+  const handleFocusSetter = useCallback((focus: (geometry: GeoJSON.Geometry) => void) => {
+    focusRef.current = focus;
+  }, []);
+  const handleFindingSelect = useCallback(
+    (id: string | null) => {
+      setSelectedFindingId(id);
+      if (id && findings) {
+        const finding = findings.findings.find((item) => item.id === id);
+        if (finding) focusRef.current?.(finding.geometry_wgs84);
+      }
+      setInspectorTab("findings");
+    },
+    [findings]
+  );
 
   const handleMapClick = useCallback(
     (lonLat: [number, number]) => {
@@ -355,17 +398,25 @@ function WorkstationForStudy({ studyId }: { studyId: string }) {
               Analysis
             </span>
             <div className="segmented" role="group" aria-labelledby="ws-analysis-label">
-              {(["historical", "change", "quality"] as Analysis[]).map((item) => (
-                <button
-                  key={item}
-                  type="button"
-                  className={analysis === item ? "is-active" : ""}
-                  aria-pressed={analysis === item}
-                  onClick={() => setAnalysis(item)}
-                >
-                  {item === "historical" ? "Historical" : item === "change" ? "Change" : "Quality"}
-                </button>
-              ))}
+              {(["historical", "change", "quality", "what_changed"] as Analysis[]).map(
+                (item) => (
+                  <button
+                    key={item}
+                    type="button"
+                    className={analysis === item ? "is-active" : ""}
+                    aria-pressed={analysis === item}
+                    onClick={() => setAnalysis(item)}
+                  >
+                    {item === "historical"
+                      ? "Historical"
+                      : item === "change"
+                        ? "Change"
+                        : item === "quality"
+                          ? "Quality"
+                          : "What changed?"}
+                  </button>
+                )
+              )}
             </div>
           </div>
 
@@ -420,6 +471,29 @@ function WorkstationForStudy({ studyId }: { studyId: string }) {
               )}
             </>
           )}
+          {analysis === "what_changed" && (
+            <>
+              <button
+                type="button"
+                className={findingsOverlay ? "toggle-btn is-active" : "toggle-btn"}
+                aria-pressed={findingsOverlay}
+                onClick={() => setFindingsOverlay((prev) => !prev)}
+              >
+                Finding regions
+              </button>
+              <button
+                type="button"
+                className="toggle-btn"
+                onClick={() => {
+                  setSelectedFindingId(null);
+                  fitStudy();
+                }}
+                title="Clear the selection and restore the complete study extent"
+              >
+                Reset View
+              </button>
+            </>
+          )}
           <span className="mono-label ws-split-tools">
             {analysis === "historical" && modes.historical === "swipe" && (
               <>
@@ -431,6 +505,14 @@ function WorkstationForStudy({ studyId }: { studyId: string }) {
                 </button>
               </>
             )}
+            <button
+              type="button"
+              className="toggle-btn"
+              onClick={() => setInspectorTab("guide")}
+              title="Plain-language explanation of the selected layer"
+            >
+              What am I looking at?
+            </button>
             <button
               type="button"
               className="toggle-btn"
@@ -486,6 +568,11 @@ function WorkstationForStudy({ studyId }: { studyId: string }) {
             onRoiComplete={handleRoiComplete}
             onMarkerSetter={handleMarkerSetter}
             onFitSetter={handleFitSetter}
+            findings={findingsFC}
+            selectedFindingId={selectedFindingId}
+            findingsVisible={analysis === "what_changed" && findingsOverlay}
+            onFindingSelect={handleFindingSelect}
+            onFocusSetter={handleFocusSetter}
           />
           <Inspector
             summary={summary}
@@ -494,6 +581,11 @@ function WorkstationForStudy({ studyId }: { studyId: string }) {
             layer={layer}
             quality={quality}
             bundle={bundle}
+            live={live}
+            analysis={analysis}
+            findings={findings}
+            selectedFindingId={selectedFindingId}
+            onSelectFinding={handleFindingSelect}
             pixel={pixel}
             pixelError={pixelError}
             pixelLoading={pixelLoading}
@@ -503,7 +595,6 @@ function WorkstationForStudy({ studyId }: { studyId: string }) {
             roiResult={roiResult}
             roiError={roiError}
             roiLoading={roiLoading}
-            live={live}
             onToggleRoi={() => {
               setRoiMode((prev) => !prev);
               setInspectorTab("roi");

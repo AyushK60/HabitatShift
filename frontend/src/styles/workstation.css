@@ -1004,3 +1004,67 @@
 .dock-panel {
   flex-wrap: wrap;
 }
+
+/* -------------------------------- What Changed? findings (M4-R1 §15.3) --- */
+.finding-group {
+  margin-top: 0.5rem;
+}
+
+.finding-list {
+  list-style: none;
+  margin: 0.25rem 0 0.5rem;
+  padding: 0;
+  display: grid;
+  gap: 0.25rem;
+}
+
+.finding-entry {
+  font: inherit;
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 0.5rem;
+  text-align: left;
+  border: 1px solid var(--rule);
+  background: var(--ivory);
+  padding: 0.3rem 0.55rem;
+  cursor: pointer;
+}
+
+.finding-entry:hover {
+  border-color: var(--teal);
+}
+
+.finding-entry.is-selected {
+  border-color: var(--teal);
+  background: var(--panel);
+  box-shadow: inset 3px 0 0 var(--teal);
+}
+
+.finding-arrow {
+  font-size: 0.7rem;
+}
+
+.finding-arrow[data-direction="decrease"] {
+  color: var(--teal);
+}
+
+.finding-arrow[data-direction="increase"] {
+  color: var(--copper-deep);
+}
+
+.finding-name {
+  font-size: 0.78rem;
+  color: var(--charcoal);
+}
+
+.finding-area {
+  color: var(--text-muted);
+}
+
+.finding-detail {
+  margin-top: 0.7rem;
+  border-top: 2px solid var(--teal);
+  padding-top: 0.5rem;
+}

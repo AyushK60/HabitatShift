@@ -10,7 +10,7 @@
  */
 import type { M1Summary } from "../api/types";
 
-export type Analysis = "historical" | "change" | "quality";
+export type Analysis = "historical" | "change" | "quality" | "what_changed";
 export type PeriodKey = "earlier" | "later";
 
 export interface AssetResolver {
@@ -302,4 +302,87 @@ export function qualityExplanation(layer: LayerSpec): string {
 
 export function periodLabel(period: PeriodKey): string {
   return period === "earlier" ? "Earlier" : "Later";
+}
+
+/* --------------------------------------------- layer guide (M4-R1 §15.5) --- */
+
+export interface LayerGuide {
+  /** What kind of product this is — the first thing a visitor needs. */
+  kind: string;
+  /** Band composition for composites, formula otherwise; null when n/a. */
+  composition: string | null;
+  /** What the displayed values represent. */
+  values: string;
+  /** How to read lighter vs darker (or the diverging colours). */
+  reading: string;
+  /** What this layer cannot establish. */
+  cannotEstablish: string;
+}
+
+const BAND_COMPOSITIONS: Record<string, string> = {
+  true_colour: "RGB = B04 (red), B03 (green), B02 (blue) — natural colours",
+  false_colour: "RGB = B08 (NIR), B04 (red), B03 (green) — false colour",
+};
+
+/** Plain-language guide for the currently selected layer (§15.5). Every
+ *  string is fixed per layer kind; nothing is inferred from pixel data. */
+export function layerGuide(layer: LayerSpec, summary: M1Summary): LayerGuide {
+  const stretch = "Per-band 2–98 percentile stretch on valid pixels.";
+  const maskedNote = "Charcoal pixels are masked (no valid observation); masked pixels are never filled.";
+
+  if (layer.kind === "period") {
+    if (layer.previewKey === "true_colour" || layer.previewKey === "false_colour") {
+      const isTrue = layer.previewKey === "true_colour";
+      return {
+        kind: isTrue ? "True-colour satellite image" : "False-colour satellite image",
+        composition: BAND_COMPOSITIONS[layer.previewKey],
+        values: `Surface reflectance of the period's median composite. ${stretch} Display only — analytical values live in the rasters behind it.`,
+        reading: isTrue
+          ? "Darker tones read dense vegetation or water; bright tones read bare ground, urban surfaces or clouds. Colour meaning is scene-specific — never a universal land-cover code."
+          : "Vegetation appears in red tones (healthy canopy reflects strongly in NIR); water reads dark; bare ground reads blue-grey. Do not assume red here means heat or damage — the colour assignment is a band choice, not a meaning.",
+        cannotEstablish:
+          "Land-cover type, causes of any difference, or features smaller than the 10 m pixel (individual buildings or trees are not resolvable).",
+      };
+    }
+    const stats = summary.periods?.[0]?.indices?.[layer.previewKey];
+    const note = INDEX_LEGEND_NOTES[layer.previewKey];
+    const indexDescriptions: Record<string, string> = {
+      ndvi: "NDVI = (NIR − red) / (NIR + red). High ≈ dense green vegetation; low/negative ≈ water, bare ground or built surfaces.",
+      ndwi: "NDWI = (green − NIR) / (green + NIR). High ≈ water or wet surfaces.",
+      mndwi: "MNDWI = (green − SWIR1) / (green + SWIR1). High ≈ open water; it reads water more strongly than NDWI.",
+      ndsi: "NDSI = (green − SWIR1) / (green + SWIR1). High ≈ snow and ice (identical formula to MNDWI — it reads snow-cover state, not liquid water).",
+      ndbi: "NDBI = (SWIR1 − NIR) / (SWIR1 + NIR). High ≈ candidate built-up/impervious surface; bare soil mimics it.",
+    };
+    return {
+      kind: "Spectral index map",
+      composition: indexDescriptions[layer.previewKey] ?? null,
+      values: `Index values between −1 and +1 for every valid pixel of the ${layer.previewKey.toUpperCase()} composite. ${stretch} ${stats ? `This period's mean is ${stats.stats.mean.toFixed(3)}.` : ""}`,
+      reading: note?.note ?? `The fixed colour ramp is shared between the two periods, so equal values share a colour. ${maskedNote}`,
+      cannotEstablish:
+        "A land-cover verdict from one index. Indices are spectral ratios with real confounders — use the other indices and the interpretation guardrails before concluding anything.",
+    };
+  }
+
+  if (layer.kind === "change") {
+    return {
+      kind: "Difference map (later − earlier)",
+      composition: `Δ${layer.index.toUpperCase()} = later ${layer.index.toUpperCase()} − earlier ${layer.index.toUpperCase()} on the shared-valid footprint.`,
+      values:
+        "Difference values around 0 where nothing measurably changed; the display saturates at ±0.30 index units.",
+      reading:
+        "Ivory ≈ no observed change. Teal = lower later (candidate decrease). Copper = higher later (candidate increase). Charcoal = outside the common-valid footprint (excluded from the comparison, not zero).",
+      cannotEstablish:
+        "Certainty of change: the map is a thresholded spectral difference, not verified change. Seasonal, tidal and atmospheric confounders are documented per study.",
+    };
+  }
+
+  return {
+    kind: "Validity / observation-support map",
+    composition: null,
+    values: "Binary observation validity from the scene classification layer (SCL), or a discrete count of valid observations per pixel.",
+    reading:
+      "Sea-glass = observed valid; charcoal = masked or unavailable (cloud, shadow, cirrus, saturation, nodata or outside the AOI). Copper intensity in the observation-count layers encodes count, never change.",
+    cannotEstablish:
+      "Image sharpness or a general quality score — this layer records observation validity only.",
+  };
 }
