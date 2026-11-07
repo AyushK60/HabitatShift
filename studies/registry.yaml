@@ -2,13 +2,15 @@
 # ---------------------------------------------------------------------------
 # Status vocabulary:
 #   processed   - real imagery acquired and analysed in M0
-#   feasibility - M0 data-availability investigation only, no processing yet
+#   feasibility - data-availability investigated, no processing yet
 #   provisional - metadata only, belongs to a later milestone
 #
 # Every AOI is a hand-chosen rectangular working window in EPSG:4326, not an
 # official protected-area boundary.  `boundary_source` records that honestly.
-registry_version: 1
-generated_for: "M0 foundation (4 November 2026)"
+# M4 data feasibility (scene candidates, verdicts) is recorded per study in
+# docs/M4_FEASIBILITY.md; D1/D2/E details remain in docs/M0_HIMALAYAN_DATA_FEASIBILITY.md.
+registry_version: 2
+generated_for: "M0 foundation (4 November 2026); M4 feasibility update (7 November 2026)"
 
 common:
   target_sensor: "Sentinel-2 MSI Level-2A"
@@ -52,7 +54,7 @@ studies:
     slug: chilika
     title: "Chilika Lake, Odisha"
     study_type: dynamic_wetland
-    status: provisional
+    status: feasibility
     question: >-
       How much of the apparent dry-season water-extent signal is seasonal or
       turbidity-driven versus a longer-term change between matched years?
@@ -75,7 +77,7 @@ studies:
     slug: western_ghats
     title: "Selected Western Ghats forest landscape"
     study_type: forest_landscape
-    status: provisional
+    status: feasibility
     question: >-
       Are vegetation signals spatially consistent across a matched-season pair in
       a rugged forest block, and how much is explained by terrain shadow?
@@ -173,5 +175,4 @@ studies:
     limitations:
       - "Bare soil, construction sites and dry riverbeds mimic built-up spectra."
       - "NDBI is a feature, not a building label."
-
       - "Agriculture/forest boundary ambiguity."
