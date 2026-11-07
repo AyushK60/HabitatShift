@@ -15,7 +15,7 @@
  * analysis dock at the bottom.
  */
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useSearchParams, useParams } from "react-router-dom";
 import { api } from "../api/client";
 import {
   bundleGeoref,
@@ -35,7 +35,11 @@ import { Inspector, type InspectorTab } from "../workstation/Inspector";
 import { Dock } from "../workstation/Dock";
 import { StudyPicker } from "../workstation/StudyPicker";
 import { buildLayers, type Analysis, type AssetResolver, type LayerSpec } from "../workstation/layers";
-import { loadSelectionPolicy, type SelectionPolicy } from "../evidence/adapter";
+import {
+  findingByEvidenceId,
+  loadSelectionPolicy,
+  type SelectionPolicy,
+} from "../evidence/adapter";
 import "../styles/workstation.css";
 
 type ModeState = Record<Analysis, CompareMode>;
@@ -103,6 +107,7 @@ export function WorkstationPage() {
 function WorkstationForStudy({ studyId }: { studyId: string }) {
   const backendReachable = useBackendReachable();
   const live = backendReachable && LIVE_STUDIES.has(studyId);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const [bundle, setBundle] = useState<StudyBundle | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -248,6 +253,54 @@ function WorkstationForStudy({ studyId }: { studyId: string }) {
     [findings]
   );
   const handleOpenResearch = useCallback(() => setInspectorTab("evidence"), []);
+
+  // Direct links to findings (M4-R3 §8): `?finding=<evidence_id>` selects and
+  // flies to that finding once the container is loaded; `&view=research`
+  // opens the Research Mode record instead. The URL is kept in sync with the
+  // current selection so a copied address always carries the evidence_id.
+  const appliedDeepLinkRef = useRef(false);
+  useEffect(() => {
+    if (!findings || appliedDeepLinkRef.current) return;
+    const requested = searchParams.get("finding");
+    if (!requested) {
+      appliedDeepLinkRef.current = true;
+      return;
+    }
+    if (findingByEvidenceId(findings, requested)) {
+      appliedDeepLinkRef.current = true;
+      setAnalysis("what_changed");
+      setSelectedEvidenceId(requested);
+      const finding = findingByEvidenceId(findings, requested);
+      if (finding) focusRef.current?.(finding.geometry_wgs84);
+      setInspectorTab(searchParams.get("view") === "research" ? "evidence" : "findings");
+    } else {
+      appliedDeepLinkRef.current = true;
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [findings]);
+  useEffect(() => {
+    // Wait until the deep link (if any) has been resolved before reflecting
+    // selection state into the URL — otherwise this effect would strip the
+    // ?finding=... parameter on mount, before the container has loaded.
+    if (!appliedDeepLinkRef.current) return;
+    const next = new URLSearchParams(searchParams);
+    const currentFinding = next.get("finding");
+    if (selectedEvidenceId) {
+      if (currentFinding !== selectedEvidenceId) next.set("finding", selectedEvidenceId);
+    } else if (currentFinding) {
+      next.delete("finding");
+    }
+    const currentView = next.get("view");
+    if (inspectorTab === "evidence") {
+      if (currentView !== "research") next.set("view", "research");
+    } else if (currentView) {
+      next.delete("view");
+    }
+    if (next.toString() !== searchParams.toString()) {
+      setSearchParams(next, { replace: true });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedEvidenceId, inspectorTab]);
 
   const handleMapClick = useCallback(
     (lonLat: [number, number]) => {

@@ -211,3 +211,27 @@ The M4-R2 G7 evidence-record tab is now a full Research Mode workspace
 
 G3 verification: verify_m4 **51/51**, showcase **11/11**, m2_experiments
 **31/31**, build clean, math-block/sensitivity screenshots recorded.
+
+## G4 — shared navigation and provenance integration
+
+- **Direct links to findings (§8):** the workstation URL carries the
+  selection as `#/workstation/<study>?finding=<evidence_id>`, with
+  `&view=research` for the Research Mode record. A pasted link switches the
+  analysis to What Changed?, selects the finding, flies the map to its real
+  geometry and opens the requested experience; unknown ids are ignored
+  without error. The URL is kept in sync on every selection/tab change
+  (`replace` navigation), so a copied address always carries the
+  evidence_id. The reflection effect deliberately waits until the deep link
+  is resolved, so it never strips the parameter before the container loads.
+- **Selection stability across navigation (§2):** one `selectedEvidenceId`
+  state drives the Explore card, the Research Mode record and the map
+  highlight; returning to Explore preserves it; study switching clears it
+  together with the findings payload (verified: no kathmandu content leaks
+  into a chilika session).
+- Existing Historical / Change / Quality / What Changed? functionality is
+  untouched; Explore and Research remain What-Changed inspector modes, and
+  the What am I looking at? guide, Pixel Probe, ROI and Acquisition tabs
+  keep working (suite-verified).
+
+G4 verification: verify_m4 **51/51**, showcase **11/11**, m2_experiments
+**31/31**, build clean; deep-link and study-switch probes recorded.
