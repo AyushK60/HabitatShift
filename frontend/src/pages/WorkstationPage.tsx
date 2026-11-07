@@ -117,6 +117,13 @@ export function WorkstationPage() {
     setBundle(null);
     setError(null);
     setExperimentIndex(0);
+    setDockOpen(false);
+    setPixel(null);
+    setPixelError(null);
+    setRoiResult(null);
+    setRoiError(null);
+    setRoiMode(false);
+    setRoiBox(null);
     loadStudyBundle(studyId)
       .then((payload) => {
         if (!cancelled) setBundle(payload);
@@ -130,8 +137,8 @@ export function WorkstationPage() {
   }, [studyId]);
 
   const summary: M1Summary | null = useMemo(
-    () => (bundle ? bundleSummary(studyId, bundle, experimentIndex) : null),
-    [bundle, studyId, experimentIndex]
+    () => (bundle ? bundleSummary(studyId, bundle, experimentIndex, !live) : null),
+    [bundle, studyId, experimentIndex, live]
   );
   const georef: Georef | null = useMemo(
     () => (bundle ? bundleGeoref(studyId, bundle) : null),

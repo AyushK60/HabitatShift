@@ -21,6 +21,7 @@ import {
   loadStudyBundle,
   type StudyBundle,
 } from "../api/bundle";
+import { useMemo } from "react";
 import type { M1Summary, Registry } from "../api/types";
 import { SwipeStage } from "../components/SwipeStage";
 import { ErrorNote, MonoFact, StatusChip } from "../components/ui";
@@ -138,6 +139,15 @@ function bundlePeriodLabel(bundle: StudyBundle | undefined): string | null {
   return `${periods[0].anchor_date} → ${periods[periods.length - 1].anchor_date}`;
 }
 
+/** The study's first-experiment summary with preview paths rebased to the
+ *  bundled copies ("previews/<flat>.png" asset paths). */
+function useCardSummary(studyId: string, bundle?: StudyBundle): M1Summary | null {
+  return useMemo(
+    () => (bundle ? bundleSummary(studyId, bundle) : null),
+    [studyId, bundle]
+  );
+}
+
 function GalleryCard({
   study,
   bundle,
@@ -149,12 +159,9 @@ function GalleryCard({
   const periodRange = bundlePeriodLabel(bundle) ?? formatPeriodRange(study);
   const status = bundle ? bundle.evidence_status : study.status;
   const processed = Boolean(bundle);
-  const earlierPreview = bundle
-    ? bundle.experiments[0]?.summary?.periods?.[0]?.previews?.true_colour
-    : undefined;
-  const laterPreview = bundle
-    ? bundle.experiments[0]?.summary?.periods?.[1]?.previews?.true_colour
-    : undefined;
+  const summary = useCardSummary(study.study_id, bundle);
+  const earlierPreview = summary?.periods?.[0]?.previews?.true_colour;
+  const laterPreview = summary?.periods?.[1]?.previews?.true_colour;
   const mediaNote = bundle
     ? `Real processed composites · ${bundlePeriodLabel(bundle)} · Sentinel-2 L2A`
     : undefined;
@@ -294,11 +301,11 @@ export function LandingPage() {
             <>
               <SwipeStage
                 earlier={{
-                  src: earlierPeriod.previews.true_colour,
+                  src: bundlePreviewUrl(CORINGA, earlierPeriod.previews.true_colour),
                   alt: `True-colour composite, ${earlierPeriod.anchor_date}`,
                 }}
                 later={{
-                  src: laterPeriod.previews.true_colour,
+                  src: bundlePreviewUrl(CORINGA, laterPeriod.previews.true_colour),
                   alt: `True-colour composite, ${laterPeriod.anchor_date}`,
                 }}
                 aspectRatio={`${summary.grid.width} / ${summary.grid.height}`}

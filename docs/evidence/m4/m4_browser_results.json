@@ -1,0 +1,230 @@
+{
+  "base_url": "http://127.0.0.1:8098/",
+  "suite": "habitatshift-m4-browser/1",
+  "started_utc": "2026-11-07T14:09:37.275Z",
+  "checks": [
+    {
+      "name": "1. landing renders hero headline",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1. hero CTA navigates to workstation",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "2. gallery shows six processed investigations with real media and routes",
+      "passed": true,
+      "detail": "[[\"coringa_coastal\",\"processed\"],[\"chilika_wetland\",\"processed\"],[\"western_ghats_forest\",\"processed\"],[\"himalaya_purepu_2025\",\"partial\"],[\"himalaya_langtang_2026\",\"processed\"],[\"kathmandu_urban\",\"processed\"]]"
+    },
+    {
+      "name": "2. gallery carries the recorded PARTIAL verdict for the 2025 event only",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "2. study card opens its own investigation",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "3. Chilika offers both matched experiments",
+      "passed": true,
+      "detail": "[\"Matched dry season (Feb 2020 vs Feb 2025)\",\"Matched post-monsoon (Nov 2020 vs Nov 2025)\"]"
+    },
+    {
+      "name": "3. switching experiments changes the recorded acquisitions",
+      "passed": true,
+      "detail": "2020-02-17 → 2025-02-15 → 2020-11-08 → 2025-11-17"
+    },
+    {
+      "name": "4. dock exposes interactive chart sections",
+      "passed": true,
+      "detail": "[\"Timeline\",\"Index distributions\",\"Change areas\",\"Threshold sensitivity\",\"Period index means\"]"
+    },
+    {
+      "name": "4. hover snaps to the nearest recorded point with an explanatory tooltip",
+      "passed": true,
+      "detail": "ΔNDWI decrease0.15 index units → 4.20 % of shared-valid AOICandidate increase: 22.34 %Candidate decrease area: 146.09 haShared-valid pixels: 348,129observed index difference at the stated threshold; not a land-cover classification, deforestation/wetland-loss v"
+    },
+    {
+      "name": "4. tooltip values come from the recorded threshold sweep",
+      "passed": true,
+      "detail": "threshold 0.15"
+    },
+    {
+      "name": "5. arrow keys walk the recorded points; Enter pins the tooltip",
+      "passed": true,
+      "detail": "{\"movedThreshold\":\"0.15\",\"pinned\":true}"
+    },
+    {
+      "name": "5. Escape dismisses the pinned tooltip",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "6. charts state what can and cannot be concluded",
+      "passed": true,
+      "detail": "Can be read: How the candidate-change area responds as the threshold tightens; equal thresholds compare indices on the s"
+    },
+    {
+      "name": "7. D1 renders as a PARTIAL event investigation",
+      "passed": true,
+      "detail": "Study D1 · hazard cryosphere · PARTIAL evidence · event 2025-07-08"
+    },
+    {
+      "name": "7. D1 records the same-day observation and why it is not a difference baseline",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "7. D1 states lake area is not discharged volume and InSAR stays external",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "7. D2 is a distinct rock-ice collapse investigation, not a GLOF page",
+      "passed": true,
+      "detail": "Study D2 · hazard cryosphere · Processed · event 2026-08-26"
+    },
+    {
+      "name": "8. Kathmandu exposes NDBI with the not-a-building-detector guardrail",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "9. bundle is served as a static artefact",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "9. bundle carries summaries, charts, checksums and provenance",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "9. workstation labels the evidence mode honestly",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "10. coringa activates the live probe when the backend is present",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "10. side-by-side maps stay synchronised",
+      "passed": true,
+      "detail": "{\"earlier\":15.073422231983512,\"later\":15.073422231983512}"
+    },
+    {
+      "name": "10. divider follows mouse hover with no click",
+      "passed": true,
+      "detail": "20.0 → 75.0"
+    },
+    {
+      "name": "10. touch tap places the divider",
+      "passed": true,
+      "detail": "30.0"
+    },
+    {
+      "name": "10. keyboard divider controls work",
+      "passed": true,
+      "detail": "100"
+    },
+    {
+      "name": "11. pixel probe returns measured reflectance + indices",
+      "passed": true,
+      "detail": "82.26393°E, 16.72866°N · UTM 634738, 1849966 · pixel 203, 182 · 10 mEarlier · 2020-03-26Valid observation · 3 obs behind"
+    },
+    {
+      "name": "12. experiments page shows recorded charts",
+      "passed": true,
+      "detail": "charts 3"
+    },
+    {
+      "name": "12. uncertainty is not described as a population CI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "13. no horizontal overflow at 1920x1080",
+      "passed": true,
+      "detail": "landing 0px, workstation 0px"
+    },
+    {
+      "name": "13. no horizontal overflow at 1440x900",
+      "passed": true,
+      "detail": "landing 0px, workstation 0px"
+    },
+    {
+      "name": "13. no horizontal overflow at 1280x800",
+      "passed": true,
+      "detail": "landing 0px, workstation 0px"
+    },
+    {
+      "name": "13. no horizontal overflow at 768",
+      "passed": true,
+      "detail": "landing 0px, workstation 0px"
+    },
+    {
+      "name": "13. no horizontal overflow at 390",
+      "passed": true,
+      "detail": "landing 0px, workstation 0px"
+    },
+    {
+      "name": "14. methods page documents the radiometry correction",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "14. methods page documents the portable showcase",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "14. static registry serves JSON",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "14. manifest endpoint serves JSON",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "15. no P0/P1 browser errors",
+      "passed": true,
+      "detail": "console 0, page 0, failed 0: "
+    }
+  ],
+  "screenshots": [
+    "docs\\evidence\\m4\\m4_workstation_1440_default.png",
+    "docs\\evidence\\m4\\m4_landing_1440_gallery.png",
+    "docs\\evidence\\m4\\m4_chilika_workstation_1440.png",
+    "docs\\evidence\\m4\\m4_interactive_chart_hover.png",
+    "docs\\evidence\\m4\\m4_interactive_chart_keyboard.png",
+    "docs\\evidence\\m4\\m4_d1_event_view.png",
+    "docs\\evidence\\m4\\m4_d2_event_view.png",
+    "docs\\evidence\\m4\\m4_kathmandu_workstation.png",
+    "docs\\evidence\\m4\\m4_pixel_probe_live.png",
+    "docs\\evidence\\m4\\m4_landing_1920x1080.png",
+    "docs\\evidence\\m4\\m4_workstation_1920x1080.png",
+    "docs\\evidence\\m4\\m4_landing_1440x900.png",
+    "docs\\evidence\\m4\\m4_workstation_1440x900.png",
+    "docs\\evidence\\m4\\m4_landing_1280x800.png",
+    "docs\\evidence\\m4\\m4_workstation_1280x800.png",
+    "docs\\evidence\\m4\\m4_landing_768.png",
+    "docs\\evidence\\m4\\m4_workstation_768.png",
+    "docs\\evidence\\m4\\m4_landing_390.png",
+    "docs\\evidence\\m4\\m4_workstation_390.png",
+    "docs\\evidence\\m4\\m4_methods_1440.png"
+  ],
+  "console_errors": [],
+  "page_errors": [],
+  "failed_requests": [],
+  "finished_utc": "2026-11-07T14:10:33.006Z",
+  "passed": 39,
+  "failed": 0
+}

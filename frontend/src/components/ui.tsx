@@ -4,11 +4,13 @@ export function StatusChip({ status }: { status: string }) {
   const label =
     status === "processed"
       ? "Processed"
-      : status === "feasibility"
-        ? "Feasibility"
-        : status === "provisional"
-          ? "Planned"
-          : status;
+      : status === "partial"
+        ? "PARTIAL"
+        : status === "feasibility"
+          ? "Feasibility"
+          : status === "provisional"
+            ? "Planned"
+            : status;
   return (
     <span className={`status-chip status-${status}`} data-status={status}>
       {label}

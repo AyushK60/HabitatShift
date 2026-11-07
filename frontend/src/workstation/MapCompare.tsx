@@ -68,6 +68,28 @@ const MAP_BACKGROUND = "#dfe3de";
 maplibregl.setWorkerUrl(maplibreWorkerUrl);
 const EMPTY_FC: GeoJSON.FeatureCollection = { type: "FeatureCollection", features: [] };
 
+/** Run a style mutation once the map's style is genuinely loaded.
+ *
+ * The map's `load` event can fire while `isStyleLoaded()` is still false,
+ * and `once("load")` registered after that event never re-fires — so a
+ * naive deferral deadlocks the layer pipeline.  `idle` fires after every
+ * completed render, which makes it a safe retry tick.
+ */
+function whenStyleReady(map: MapLibreMap, fn: () => void) {
+  if (map.isStyleLoaded()) {
+    fn();
+    return;
+  }
+  const attempt = () => {
+    if (map.isStyleLoaded()) {
+      fn();
+      return;
+    }
+    map.once("idle", attempt);
+  };
+  map.once("idle", attempt);
+}
+
 type Coord = [number, number];
 type CoordQuad = [Coord, Coord, Coord, Coord];
 
@@ -102,7 +124,11 @@ function aoiFeature(summary: M1Summary): GeoJSON.Feature | null {
  *  `coordinates` pins the raster to the real grid corners. An empty `url`
  *  hides the layer but never creates a source with an empty image (MapLibre
  *  would raise a decode error); the layer is created lazily on first real
- *  image, ordered below the AOI outline. */
+ *  image, ordered below the AOI outline.
+ *
+ *  If the style has not finished loading (a fast study switch can land the
+ *  paint effect before the new map's style resolves), the work is deferred
+ *  to the style load instead of racing it. */
 function applyImageLayer(
   map: MapLibreMap,
   id: string,
@@ -110,49 +136,55 @@ function applyImageLayer(
   coordinates: CoordQuad,
   opacity = 1
 ) {
-  const source = map.getSource(id) as ImageSource | undefined;
-  if (!url) {
-    if (source && map.getLayer(id)) {
-      map.setLayoutProperty(id, "visibility", "none");
+  const run = () => {
+    const source = map.getSource(id) as ImageSource | undefined;
+    if (!url) {
+      if (source && map.getLayer(id)) {
+        map.setLayoutProperty(id, "visibility", "none");
+      }
+      return;
     }
-    return;
-  }
-  if (source && map.getLayer(id)) {
-    source.updateImage({ url, coordinates });
-    map.setLayoutProperty(id, "visibility", "visible");
-    map.setPaintProperty(id, "raster-opacity", opacity);
-    return;
-  }
-  map.addSource(id, { type: "image", url, coordinates });
-  map.addLayer(
-    {
-      id,
-      type: "raster",
-      source: id,
-      paint: { "raster-opacity": opacity, "raster-resampling": "linear" },
-    },
-    map.getLayer("aoi-line") ? "aoi-line" : undefined
-  );
+    if (source && map.getLayer(id)) {
+      source.updateImage({ url, coordinates });
+      map.setLayoutProperty(id, "visibility", "visible");
+      map.setPaintProperty(id, "raster-opacity", opacity);
+      return;
+    }
+    map.addSource(id, { type: "image", url, coordinates });
+    map.addLayer(
+      {
+        id,
+        type: "raster",
+        source: id,
+        paint: { "raster-opacity": opacity, "raster-resampling": "linear" },
+      },
+      map.getLayer("aoi-line") ? "aoi-line" : undefined
+    );
+  };
+  whenStyleReady(map, run);
 }
 
 function ensureLineRect(map: MapLibreMap, box: RoiBox | null) {
-  if (!map.getSource("roi-rect")) {
-    map.addSource("roi-rect", { type: "geojson", data: EMPTY_FC });
-    map.addLayer({
-      id: "roi-rect-fill",
-      type: "fill",
-      source: "roi-rect",
-      paint: { "fill-color": "#7faba7", "fill-opacity": 0.12 },
-    });
-    map.addLayer({
-      id: "roi-rect-line",
-      type: "line",
-      source: "roi-rect",
-      paint: { "line-color": "#193c43", "line-width": 2 },
-    });
-  }
-  const source = map.getSource("roi-rect") as GeoJSONSource;
-  source.setData(box ? roiFeature(box) : EMPTY_FC);
+  const run = () => {
+    if (!map.getSource("roi-rect")) {
+      map.addSource("roi-rect", { type: "geojson", data: EMPTY_FC });
+      map.addLayer({
+        id: "roi-rect-fill",
+        type: "fill",
+        source: "roi-rect",
+        paint: { "fill-color": "#7faba7", "fill-opacity": 0.12 },
+      });
+      map.addLayer({
+        id: "roi-rect-line",
+        type: "line",
+        source: "roi-rect",
+        paint: { "line-color": "#193c43", "line-width": 2 },
+      });
+    }
+    const source = map.getSource("roi-rect") as GeoJSONSource;
+    source.setData(box ? roiFeature(box) : EMPTY_FC);
+  };
+  whenStyleReady(map, run);
 }
 
 function roiFeature(box: RoiBox): GeoJSON.Feature {
@@ -257,6 +289,22 @@ export function MapCompare({
     mapsRef.current = { earlier, later };
     (window as unknown as { __hsMaps?: typeof mapsRef.current }).__hsMaps = mapsRef.current;
 
+    // Benign MapLibre lifecycle errors (e.g. a style still loading while a
+    // study switch tears the map down) must not escape as page errors —
+    // React 19 unmounts the whole tree on an uncaught one.  Anything else
+    // is logged for the console-error hygiene check.
+    const swallow = (map: MapLibreMap) => {
+      map.on("error", (event) => {
+        const message = String(
+          (event as unknown as { error?: { message?: string } }).error?.message ?? ""
+        );
+        if (message.includes("Style is not done loading")) return;
+        console.debug("maplibre:", message);
+      });
+    };
+    swallow(earlier);
+    if (later) swallow(later);
+
     // The later map must never lead the shared view, but must still emit
     // click events for the pixel probe.
     if (later) {
@@ -343,8 +391,18 @@ export function MapCompare({
 
     return () => {
       resizeObserver.disconnect();
-      earlier.remove();
-      later?.remove();
+      // A teardown racing a pending style load can throw inside MapLibre;
+      // the maps are being discarded either way, so a clean stop is enough.
+      try {
+        earlier.remove();
+      } catch {
+        /* discarding anyway */
+      }
+      try {
+        later?.remove();
+      } catch {
+        /* discarding anyway */
+      }
       mapsRef.current = {};
       setReady(false);
     };
@@ -361,30 +419,33 @@ export function MapCompare({
     if (!earlier) return;
     const aoi = aoiFeature(summary);
     const setup = (map: MapLibreMap) => {
-      if (aoi && !map.getSource("aoi")) {
-        map.addSource("aoi", { type: "geojson", data: aoi });
-        map.addLayer({
-          id: "aoi-line",
-          type: "line",
-          source: "aoi",
-          paint: { "line-color": "#d68a5d", "line-width": 1.6, "line-dasharray": [3, 2] },
-        });
-      }
-      if (!map.getSource("pixel-marker")) {
-        map.addSource("pixel-marker", { type: "geojson", data: EMPTY_FC });
-        map.addLayer({
-          id: "pixel-marker-circle",
-          type: "circle",
-          source: "pixel-marker",
-          paint: {
-            "circle-radius": 5,
-            "circle-color": "#d68a5d",
-            "circle-stroke-color": "#18272d",
-            "circle-stroke-width": 1.5,
-          },
-        });
-      }
-      ensureLineRect(map, null);
+      const run = () => {
+        if (aoi && !map.getSource("aoi")) {
+          map.addSource("aoi", { type: "geojson", data: aoi });
+          map.addLayer({
+            id: "aoi-line",
+            type: "line",
+            source: "aoi",
+            paint: { "line-color": "#d68a5d", "line-width": 1.6, "line-dasharray": [3, 2] },
+          });
+        }
+        if (!map.getSource("pixel-marker")) {
+          map.addSource("pixel-marker", { type: "geojson", data: EMPTY_FC });
+          map.addLayer({
+            id: "pixel-marker-circle",
+            type: "circle",
+            source: "pixel-marker",
+            paint: {
+              "circle-radius": 5,
+              "circle-color": "#d68a5d",
+              "circle-stroke-color": "#18272d",
+              "circle-stroke-width": 1.5,
+            },
+          });
+        }
+        ensureLineRect(map, null);
+      };
+      whenStyleReady(map, run);
     };
     setup(earlier);
     if (later) setup(later);

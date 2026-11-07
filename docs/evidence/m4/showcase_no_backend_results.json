@@ -1,0 +1,60 @@
+{
+  "base_url": "http://127.0.0.1:8099/",
+  "mode": "static-file-server-only",
+  "checks": [
+    {
+      "name": "showcase: landing renders from bundles",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "showcase: six gallery cards with real media",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "showcase: chilika_wetland renders map layer from bundle",
+      "passed": true,
+      "detail": "/studies/chilika_wetland/previews/chilika_m4_dry__earlier_2020-02-17_true_colour.png"
+    },
+    {
+      "name": "showcase: western_ghats_forest renders map layer from bundle",
+      "passed": true,
+      "detail": "/studies/western_ghats_forest/previews/western_ghats_m4__earlier_2020-02-19_true_colour.png"
+    },
+    {
+      "name": "showcase: kathmandu_urban renders map layer from bundle",
+      "passed": true,
+      "detail": "/studies/kathmandu_urban/previews/kathmandu_m4__earlier_2020-03-31_true_colour.png"
+    },
+    {
+      "name": "showcase: himalaya_purepu_2025 renders map layer from bundle",
+      "passed": true,
+      "detail": "/studies/himalaya_purepu_2025/previews/himalaya_purepu_2025_m4__earlier_2025-04-21_true_colour.png"
+    },
+    {
+      "name": "showcase: himalaya_langtang_2026 renders map layer from bundle",
+      "passed": true,
+      "detail": "/studies/himalaya_langtang_2026/previews/himalaya_langtang_2026_m4__earlier_2026-08-12_true_colour.png"
+    },
+    {
+      "name": "showcase: interactive chart tooltip with recorded values",
+      "passed": true,
+      "detail": "ΔNDWI decrease0.15 index units → 4.20 % of shared-valid AOICandidate increase: 22.34 %Cand"
+    },
+    {
+      "name": "showcase: no unexpected console errors",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "showcase: no page errors",
+      "passed": true,
+      "detail": ""
+    }
+  ],
+  "console_errors": [],
+  "page_errors": [],
+  "passed": 10,
+  "failed": 0
+}

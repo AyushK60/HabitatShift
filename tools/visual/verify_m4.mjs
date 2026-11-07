@@ -1,0 +1,443 @@
+/* M4 real-browser verification with Playwright/Chromium.
+ *
+ * Evolves the M3 suite (verify_m3.mjs) to the M4 product: the gallery now
+ * links six processed investigations, the workstation renders portable
+ * bundles for every study (showcase mode) with live enhancement for Coringa,
+ * and every analytical chart is interactive and explanatory.
+ *
+ * Coverage: all M3 interaction contracts (synchronised maps, hover/touch/
+ * keyboard swipe, reset, layers, quality views, pixel probe, experiments
+ * workspace, responsive layouts, provenance) PLUS the M4 additions: gallery
+ * statuses incl. the recorded PARTIAL verdict, Chilika's experiment
+ * switcher, interactive chart hover/keyboard/pin behaviour with recorded
+ * values, both Himalayan event views as separate investigations, the
+ * Kathmandu NDBI guardrail, and showcase independence from the backend.
+ * Screenshots are written under docs/evidence/m4/.
+ *
+ * Usage:
+ *   HABITATSHIFT_URL=http://127.0.0.1:8098/ node tools/visual/verify_m4.mjs
+ */
+import fs from "node:fs";
+import path from "node:path";
+import process from "node:process";
+import { chromium } from "playwright";
+
+const BASE_URL = process.env.HABITATSHIFT_URL || "http://127.0.0.1:8098/";
+const EVIDENCE = path.resolve("docs/evidence/m4");
+const VIEWPORTS = [
+  { name: "1920x1080", width: 1920, height: 1080 },
+  { name: "1440x900", width: 1440, height: 900 },
+  { name: "1280x800", width: 1280, height: 800 },
+  { name: "768", width: 768, height: 900 },
+  { name: "390", width: 390, height: 844 },
+];
+
+const results = {
+  base_url: BASE_URL,
+  suite: "habitatshift-m4-browser/1",
+  started_utc: new Date().toISOString(),
+  checks: [],
+  screenshots: [],
+  console_errors: [],
+  page_errors: [],
+  failed_requests: [],
+};
+
+fs.mkdirSync(EVIDENCE, { recursive: true });
+
+function check(name, condition, detail = "") {
+  results.checks.push({ name, passed: Boolean(condition), detail });
+  if (!condition) {
+    console.error(`FAIL  ${name}${detail ? ` — ${detail}` : ""}`);
+  } else {
+    console.log(`ok    ${name}`);
+  }
+}
+
+async function shot(page, name) {
+  const file = path.join(EVIDENCE, `${name}.png`);
+  await page.screenshot({ path: file, fullPage: false });
+  results.screenshots.push(path.relative(process.cwd(), file));
+}
+
+async function app(page, hash) {
+  await page.goto(`${BASE_URL}#${hash}`, { waitUntil: "domcontentloaded" });
+  await page.waitForTimeout(1800);
+}
+
+async function run() {
+  const browser = await chromium.launch();
+  const context = await browser.newContext({
+    viewport: { width: 1440, height: 900 },
+    hasTouch: true,
+  });
+  const page = await context.newPage();
+  page.on("console", (message) => {
+    if (message.type() === "error") {
+      const location = message.location()?.url ?? "";
+      results.console_errors.push(
+        location && !location.startsWith("http")
+          ? message.text()
+          : `${message.text()} @ ${location}`
+      );
+    }
+  });
+  page.on("pageerror", (error) => results.page_errors.push(String(error)));
+  page.on("requestfailed", (request) =>
+    results.failed_requests.push(`${request.url()} ${request.failure()?.errorText ?? ""}`)
+  );
+
+  /* 1 — landing navigation ------------------------------------------------ */
+  await app(page, "/");
+  await page.locator(".hero-copy h1").waitFor({ state: "visible", timeout: 8000 });
+  check("1. landing renders hero headline", await page.getByText("Read the landscape.").first().isVisible());
+  await page.getByRole("link", { name: "Explore the Atlas" }).click();
+  await page.waitForTimeout(1200);
+  check("1. hero CTA navigates to workstation", page.url().includes("workstation"));
+  await shot(page, "m4_workstation_1440_default");
+
+  /* 2 — gallery: six processed investigations, honest PARTIAL --------------- */
+  await app(page, "/");
+  await page.locator(".study-card--lead").waitFor({ state: "visible", timeout: 8000 });
+  const cardStates = await page.evaluate(() =>
+    [...document.querySelectorAll(".study-card")].map((card) => ({
+      id: card.getAttribute("data-study-id"),
+      status: card.querySelector(".status-chip")?.getAttribute("data-status"),
+      hasMedia: Boolean(card.querySelector(".study-card-media img")),
+      link: card.querySelector("a.button")?.getAttribute("href") ?? null,
+    }))
+  );
+  check(
+    "2. gallery shows six processed investigations with real media and routes",
+    cardStates.length === 6 &&
+      cardStates.every((card) => card.status === "processed" || card.status === "partial") &&
+      cardStates.every((card) => card.hasMedia && card.link?.includes("/workstation/")),
+    JSON.stringify(cardStates.map((c) => [c.id, c.status]))
+  );
+  check(
+    "2. gallery carries the recorded PARTIAL verdict for the 2025 event only",
+    cardStates.filter((card) => card.status === "partial").map((card) => card.id).join(",") ===
+      "himalaya_purepu_2025"
+  );
+  await shot(page, "m4_landing_1440_gallery");
+  await page.locator('.study-card[data-study-id="chilika_wetland"]').getByRole("link").click();
+  await page.waitForTimeout(1500);
+  check("2. study card opens its own investigation", page.url().includes("workstation/chilika_wetland"));
+
+  /* 3 — Chilika showcase: experiment switcher ------------------------------- */
+  await app(page, "/workstation/chilika_wetland");
+  const switcher = await page.evaluate(() =>
+    [...document.querySelectorAll(".ws-experiment-switch .chip")].map((chip) => chip.textContent)
+  );
+  check(
+    "3. Chilika offers both matched experiments",
+    switcher.length === 2 && switcher[0].includes("dry season") && switcher[1].includes("post-monsoon"),
+    JSON.stringify(switcher)
+  );
+  const acquisitionsBefore = await page.evaluate(() =>
+    [...document.querySelectorAll(".ws-facts dd")][0]?.textContent
+  );
+  await page.locator(".ws-experiment-switch .chip").nth(1).click();
+  await page.waitForTimeout(1200);
+  const acquisitionsAfter = await page.evaluate(() =>
+    [...document.querySelectorAll(".ws-facts dd")][0]?.textContent
+  );
+  check(
+    "3. switching experiments changes the recorded acquisitions",
+    acquisitionsBefore?.includes("2020-02-17") &&
+      acquisitionsAfter?.includes("2020-11-08"),
+    `${acquisitionsBefore} → ${acquisitionsAfter}`
+  );
+  await shot(page, "m4_chilika_workstation_1440");
+
+  /* 4 — interactive chart hover --------------------------------------------- */
+  await page.getByRole("button", { name: /Analysis dock/ }).click();
+  await page.waitForTimeout(900);
+  const chartSections = await page.evaluate(() =>
+    [...document.querySelectorAll(".dock-section h3")].map((h) => h.textContent)
+  );
+  check(
+    "4. dock exposes interactive chart sections",
+    chartSections.includes("Threshold sensitivity") && chartSections.includes("Period index means"),
+    JSON.stringify(chartSections)
+  );
+  const plotBox = await page.locator(".dock-chart-section .ichart-plot").first().boundingBox();
+  await page.mouse.move(plotBox.x + plotBox.width * 0.7, plotBox.y + plotBox.height * 0.5, { steps: 4 });
+  await page.waitForTimeout(400);
+  const hoverState = await page.evaluate(() => {
+    const tooltip = document.querySelector(".ichart-tooltip");
+    return {
+      shown: Boolean(tooltip),
+      guide: Boolean(document.querySelector(".ichart-guide")),
+      activeDots: document.querySelectorAll(".ichart-dot.is-active").length,
+      text: tooltip?.textContent?.replace(/\s+/g, " ").slice(0, 260) ?? null,
+    };
+  });
+  check(
+    "4. hover snaps to the nearest recorded point with an explanatory tooltip",
+    hoverState.shown && hoverState.guide && hoverState.activeDots > 0 &&
+      hoverState.text?.includes("% of shared-valid AOI"),
+    hoverState.text ?? "no tooltip"
+  );
+  const hoverValue = hoverState.text?.match(/([\d.]+) index units/)?.[1];
+  check(
+    "4. tooltip values come from the recorded threshold sweep",
+    hoverValue !== null && ["0.05", "0.10", "0.15", "0.20"].includes(hoverValue),
+    `threshold ${hoverValue}`
+  );
+  await shot(page, "m4_interactive_chart_hover");
+
+  /* 5 — keyboard navigation and pinning -------------------------------------- */
+  await page.mouse.move(60, 300);
+  await page.waitForTimeout(300);
+  const keyboardState = await page.evaluate(async () => {
+    const plot = document.querySelector(".dock-chart-section .ichart-plot");
+    plot.focus();
+    const fire = (key) =>
+      plot.dispatchEvent(
+        new KeyboardEvent("keydown", { key, bubbles: true, cancelable: true })
+      );
+    fire("ArrowRight");
+    fire("ArrowRight");
+    await new Promise((resolve) => setTimeout(resolve, 150));
+    const movedText = document.querySelector(".ichart-tooltip")?.textContent ?? "";
+    fire("Enter");
+    await new Promise((resolve) => setTimeout(resolve, 150));
+    const pinned = document
+      .querySelector(".ichart-tooltip")
+      ?.textContent?.includes("Pinned");
+    return { movedThreshold: movedText.match(/([\d.]+) index units/)?.[1] ?? null, pinned };
+  });
+  check(
+    "5. arrow keys walk the recorded points; Enter pins the tooltip",
+    keyboardState.movedThreshold !== null && keyboardState.pinned,
+    JSON.stringify(keyboardState)
+  );
+  await page.keyboard.press("Escape");
+  await page.waitForTimeout(300);
+  const dismissed = await page.evaluate(() => !document.querySelector(".ichart-tooltip"));
+  check("5. Escape dismisses the pinned tooltip", dismissed);
+  await shot(page, "m4_interactive_chart_keyboard");
+
+  /* 6 — can/cannot-conclude guardrails ---------------------------------------- */
+  const guardrail = await page.evaluate(() =>
+    document.querySelector(".dock-chart-section .ichart-caption")?.textContent ?? ""
+  );
+  check(
+    "6. charts state what can and cannot be concluded",
+    guardrail.includes("Can be read") && guardrail.includes("Cannot be read"),
+    guardrail.slice(0, 120)
+  );
+
+  /* 7 — Himalayan event views are separate investigations ---------------------- */
+  await app(page, "/workstation/himalaya_purepu_2025");
+  const d1 = await page.evaluate(() => ({
+    eyebrow: document.querySelector(".ws-title .eyebrow")?.textContent ?? "",
+    h1: document.querySelector("main h1")?.textContent ?? "",
+  }));
+  check(
+    "7. D1 renders as a PARTIAL event investigation",
+    d1.eyebrow.includes("PARTIAL") && d1.eyebrow.includes("event 2025-07-08"),
+    d1.eyebrow
+  );
+  await page.getByRole("tab", { name: "Acquisition" }).click();
+  await page.waitForTimeout(500);
+  const d1Context = await page.evaluate(() => document.querySelector(".insp-body")?.textContent ?? "");
+  check(
+    "7. D1 records the same-day observation and why it is not a difference baseline",
+    d1Context.includes("S2C_45RUM_20250708_0_L2A") &&
+      d1Context.includes("not used as a difference baseline"),
+    ""
+  );
+  check(
+    "7. D1 states lake area is not discharged volume and InSAR stays external",
+    d1Context.includes("not discharged-water volume") &&
+      d1Context.includes("InSAR"),
+    ""
+  );
+  await shot(page, "m4_d1_event_view");
+  await app(page, "/workstation/himalaya_langtang_2026");
+  const d2 = await page.evaluate(() => ({
+    eyebrow: document.querySelector(".ws-title .eyebrow")?.textContent ?? "",
+    context: document.querySelector("main")?.textContent ?? "",
+  }));
+  check(
+    "7. D2 is a distinct rock-ice collapse investigation, not a GLOF page",
+    d2.eyebrow.includes("event 2026-08-26") &&
+      !d2.eyebrow.includes("PARTIAL") &&
+      d2.context.includes("rock-ice collapse"),
+    d2.eyebrow
+  );
+  await shot(page, "m4_d2_event_view");
+
+  /* 8 — Kathmandu NDBI guardrail ------------------------------------------------ */
+  await app(page, "/workstation/kathmandu_urban");
+  const kathmandu = await page.evaluate(() => ({
+    layers: [...document.querySelectorAll(".ws-layers button")].map((b) => b.textContent),
+    body: document.querySelector("main")?.textContent ?? "",
+  }));
+  check(
+    "8. Kathmandu exposes NDBI with the not-a-building-detector guardrail",
+    kathmandu.layers.includes("NDBI") &&
+      kathmandu.body.includes("not a building detector"),
+    ""
+  );
+  await shot(page, "m4_kathmandu_workstation");
+
+  /* 9 — showcase independence from the backend ---------------------------------- */
+  const bundleResponse = await page.request.get(`${BASE_URL}studies/chilika_wetland/bundle.json`);
+  check("9. bundle is served as a static artefact", bundleResponse.ok());
+  const bundleJson = await bundleResponse.json().catch(() => null);
+  check(
+    "9. bundle carries summaries, charts, checksums and provenance",
+    bundleJson?.experiments?.length === 2 &&
+      bundleJson?.charts?.threshold_series?.length > 0 &&
+      Object.keys(bundleJson?.assets ?? {}).length > 10 &&
+      Boolean(bundleJson?.attribution),
+    ""
+  );
+  const chilikaMode = await page.evaluate(() => document.body.textContent.includes("Portable showcase"));
+  check(
+    "9. workstation labels the evidence mode honestly",
+    chilikaMode,
+    ""
+  );
+
+  /* 10 — coringa live enhancement + M3 interaction contracts --------------------- */
+  await app(page, "/workstation");
+  const mode = await page.evaluate(() => document.body.textContent.includes("Showcase + live probe"));
+  check("10. coringa activates the live probe when the backend is present", mode);
+  await page.getByRole("button", { name: "Side by side" }).click();
+  await page.waitForTimeout(800);
+  const zoomIn = page.locator(".map-earlier .maplibregl-ctrl-zoom-in");
+  await zoomIn.click();
+  await zoomIn.click();
+  await page.waitForTimeout(700);
+  const zooms = await page.evaluate(() => ({
+    earlier: window.__hsMaps.earlier.getZoom(),
+    later: window.__hsMaps.later.getZoom(),
+  }));
+  check("10. side-by-side maps stay synchronised", Math.abs(zooms.earlier - zooms.later) < 1e-6, JSON.stringify(zooms));
+
+  await page.getByRole("button", { name: "Swipe" }).click();
+  await page.waitForTimeout(600);
+  const stage = await page.locator(".map-stage").boundingBox();
+  const cy = stage.y + stage.height / 2;
+  await page.mouse.move(stage.x + stage.width * 0.2, cy, { steps: 4 });
+  await page.waitForTimeout(300);
+  const splitA = await page.evaluate(() =>
+    parseFloat(document.querySelector(".map-stage").style.getPropertyValue("--split"))
+  );
+  await page.mouse.move(stage.x + stage.width * 0.75, cy, { steps: 4 });
+  await page.waitForTimeout(300);
+  const splitB = await page.evaluate(() =>
+    parseFloat(document.querySelector(".map-stage").style.getPropertyValue("--split"))
+  );
+  check("10. divider follows mouse hover with no click", splitA < 30 && splitB > 65, `${splitA.toFixed(1)} → ${splitB.toFixed(1)}`);
+
+  await page.touchscreen.tap(stage.x + stage.width * 0.3, cy);
+  await page.waitForTimeout(300);
+  const touchSplit = await page.evaluate(() =>
+    parseFloat(document.querySelector(".map-stage").style.getPropertyValue("--split"))
+  );
+  check("10. touch tap places the divider", Math.abs(touchSplit - 30) < 6, `${touchSplit.toFixed(1)}`);
+
+  await page.locator(".map-swipe-divider").focus();
+  await page.keyboard.press("ArrowRight");
+  await page.keyboard.press("Home");
+  await page.keyboard.press("End");
+  await page.waitForTimeout(200);
+  const kbEnd = await page.evaluate(() =>
+    parseFloat(document.querySelector(".map-stage").style.getPropertyValue("--split"))
+  );
+  check("10. keyboard divider controls work", Math.abs(kbEnd - 100) < 1.5, `${kbEnd}`);
+  await page.getByRole("button", { name: "Reset 50%" }).click();
+  await page.waitForTimeout(300);
+
+  /* 11 — pixel probe (live) ------------------------------------------------------ */
+  await page.waitForTimeout(600);
+  const stage2 = await page.locator(".map-stage").boundingBox();
+  await page.mouse.click(stage2.x + stage2.width * 0.45, stage2.y + stage2.height * 0.4);
+  await page.waitForTimeout(1400);
+  const probeText = await page.locator(".pixel-probe").textContent().catch(() => null);
+  check(
+    "11. pixel probe returns measured reflectance + indices",
+    probeText !== null && probeText.includes("B08 NIR") && probeText.includes("NDVI"),
+    probeText?.slice(0, 120)
+  );
+  await shot(page, "m4_pixel_probe_live");
+
+  /* 12 — experiments workspace ----------------------------------------------------- */
+  await app(page, "/experiments");
+  const chartCount = await page.locator(".exp-figure img").count();
+  check("12. experiments page shows recorded charts", chartCount >= 3, `charts ${chartCount}`);
+  check(
+    "12. uncertainty is not described as a population CI",
+    await page.getByText("not a population", { exact: false }).first().isVisible()
+  );
+
+  /* 13 — responsive layouts ---------------------------------------------------------- */
+  for (const viewport of VIEWPORTS) {
+    await page.setViewportSize({ width: viewport.width, height: viewport.height });
+    await app(page, "/");
+    const landingOverflow = await page.evaluate(
+      () => document.documentElement.scrollWidth - document.documentElement.clientWidth
+    );
+    await shot(page, `m4_landing_${viewport.name}`);
+    await app(page, "/workstation/chilika_wetland");
+    await page.waitForTimeout(1200);
+    const wsOverflow = await page.evaluate(
+      () => document.documentElement.scrollWidth - document.documentElement.clientWidth
+    );
+    await shot(page, `m4_workstation_${viewport.name}`);
+    check(
+      `13. no horizontal overflow at ${viewport.name}`,
+      landingOverflow <= 0 && wsOverflow <= 0,
+      `landing ${landingOverflow}px, workstation ${wsOverflow}px`
+    );
+  }
+
+  /* 14 — provenance / methods ---------------------------------------------------------- */
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await app(page, "/methods");
+  check(
+    "14. methods page documents the radiometry correction",
+    await page.getByText("Radiometry", { exact: false }).first().isVisible()
+  );
+  check(
+    "14. methods page documents the portable showcase",
+    await page.getByText("Portable showcase", { exact: false }).first().isVisible()
+  );
+  const registryResponse = await page.request.get(`${BASE_URL}studies/registry.json`);
+  check("14. static registry serves JSON", registryResponse.ok());
+  const manifestResponse = await page.request.get(`${BASE_URL}api/m1/study/coringa_coastal/manifest`);
+  check("14. manifest endpoint serves JSON", manifestResponse.ok());
+  await shot(page, "m4_methods_1440");
+
+  /* console / error hygiene ---------------------------------------------------------------- */
+  check(
+    "15. no P0/P1 browser errors",
+    results.console_errors.length === 0 &&
+      results.page_errors.length === 0 &&
+      results.failed_requests.length === 0,
+    `console ${results.console_errors.length}, page ${results.page_errors.length}, failed ${results.failed_requests.length}: ` +
+      [...results.console_errors, ...results.page_errors, ...results.failed_requests].slice(0, 6).join(" | ")
+  );
+
+  await browser.close();
+
+  results.finished_utc = new Date().toISOString();
+  results.passed = results.checks.filter((c) => c.passed).length;
+  results.failed = results.checks.filter((c) => !c.passed).length;
+  fs.writeFileSync(
+    path.join(EVIDENCE, "m4_browser_results.json"),
+    JSON.stringify(results, null, 2)
+  );
+  console.log(`\n${results.passed} passed, ${results.failed} failed`);
+  process.exit(results.failed ? 1 : 0);
+}
+
+run().catch((error) => {
+  console.error(error);
+  process.exit(1);
+});

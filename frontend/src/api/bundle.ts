@@ -253,14 +253,15 @@ export function bundlePreviewUrl(studyId: string, assetPath: string): string {
   return `/studies/${encodeURIComponent(studyId)}/${assetPath}`;
 }
 
-/** Rewrite recorded `data/previews/...` paths to their bundled copies. */
-function rebasedPreview(studyId: string, bundle: StudyBundle, relative: string): string {
+/** Rewrite recorded `data/previews/...` paths to bundle asset paths
+ *  ("previews/<flat>.png"), which the asset resolver turns into URLs. */
+function rebasedPreview(bundle: StudyBundle, relative: string): string {
   const name = String(relative || "").split(/[/\\]/).pop() ?? "";
   // Preview file names are unique within an experiment; find the asset that
   // carries the file name (the bundle may hold several experiments).
   for (const experiment of bundle.experiments) {
     const direct = bundle.assets[`${experiment.experiment_id}/${name}`];
-    if (direct) return bundlePreviewUrl(studyId, direct.path);
+    if (direct) return direct.path;
   }
   if (import.meta.env.DEV) {
     console.warn(`bundle asset not found: ${name}`);
@@ -268,16 +269,25 @@ function rebasedPreview(studyId: string, bundle: StudyBundle, relative: string):
   return "";
 }
 
-/** The bundle's M1 summary, with preview paths pointed at the bundled files. */
-export function bundleSummary(studyId: string, bundle: StudyBundle, experimentIndex = 0): M1Summary {
+/** The bundle's M1 summary.  With ``rebasePreviews`` (the default) preview
+ *  paths are rewritten to the bundled copies for the showcase resolver; pass
+ *  false when a live backend resolver will consume the recorded paths. */
+export function bundleSummary(
+  _studyId: string,
+  bundle: StudyBundle,
+  experimentIndex = 0,
+  rebasePreviews = true
+): M1Summary {
   const experiment = bundle.experiments[experimentIndex] ?? bundle.experiments[0];
   const summary = experiment.summary;
+  const rebase = (relative: string) =>
+    rebasePreviews ? rebasedPreview(bundle, relative) : relative;
   const periods = summary.periods.map((period) => ({
     ...period,
     previews: Object.fromEntries(
       Object.entries(period.previews ?? {}).map(([key, relative]) => [
         key,
-        rebasedPreview(studyId, bundle, relative),
+        rebase(relative),
       ])
     ),
   })) as Period[];
@@ -286,8 +296,8 @@ export function bundleSummary(studyId: string, bundle: StudyBundle, experimentIn
       key,
       {
         ...block,
-        delta_preview: rebasedPreview(studyId, bundle, block.delta_preview),
-        common_valid_preview: rebasedPreview(studyId, bundle, block.common_valid_preview),
+        delta_preview: rebase(block.delta_preview),
+        common_valid_preview: rebase(block.common_valid_preview),
       },
     ])
   );
