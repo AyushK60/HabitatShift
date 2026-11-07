@@ -1,7 +1,7 @@
 {
   "base_url": "http://127.0.0.1:8098/",
   "suite": "habitatshift-m4-r1-g10-chart-qa/1",
-  "started_utc": "2026-11-07T18:32:39.371Z",
+  "started_utc": "2026-11-07T19:25:30.002Z",
   "checks": [
     {
       "name": "1. threshold legend labels are distinct per estimator configuration",
