@@ -242,6 +242,34 @@ export function thresholdSensitivity(
   return raw ?? null;
 }
 
+/* ------------------------------------------------------ exports --- */
+
+/** Flatten an evidence record to section,field,value CSV rows (M4-R3 §4.6).
+ *  Deterministic traversal of the recorded structure; no values are
+ *  recomputed. Nested objects/arrays are JSON-encoded into the value cell. */
+export function evidenceRecordToCsv(record: EvidenceRecord): string {
+  const esc = (value: unknown) =>
+    `"${String(value ?? "").replace(/"/g, '""')}"`;
+  const rows: string[] = ["section,field,value"];
+  for (const [section, body] of Object.entries(record)) {
+    if (body === null || typeof body !== "object") {
+      rows.push([esc(section), esc(""), esc(body)].join(","));
+      continue;
+    }
+    const emit = (prefix: string, value: unknown) => {
+      if (value !== null && typeof value === "object") {
+        for (const [key, child] of Object.entries(value as object)) {
+          emit(prefix ? `${prefix}.${key}` : key, child);
+        }
+      } else {
+        rows.push([esc(section), esc(prefix), esc(value)].join(","));
+      }
+    };
+    emit("", body);
+  }
+  return rows.join("\n") + "\n";
+}
+
 /* ------------------------------------------------------ helpers --- */
 
 export function directionTerm(direction: "decrease" | "increase"): string {

@@ -1178,3 +1178,65 @@
   border-top-color: var(--teal-deep);
   border-bottom-color: var(--teal-deep);
 }
+
+/* ------------------------------------ M4-R3 Research Mode (evidence tab) --- */
+
+.methods-toggle {
+  margin-top: 0.2rem;
+}
+
+/* Mathematical method block (§4.2): readable definition list, brand serif
+   for the formulas, quiet prose for the variable explanations. */
+.math-block {
+  margin-top: 0.5rem;
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--teal);
+  background: var(--panel);
+  padding: 0.55rem 0.65rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.math-line {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--teal-deep);
+  overflow-wrap: anywhere;
+}
+
+.math-legend {
+  font-size: 0.8rem;
+  color: #45585d;
+  overflow-wrap: anywhere;
+}
+
+/* Recorded threshold-sensitivity neighbours (§4.4). */
+.sensitivity-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.78rem;
+  margin-top: 0.4rem;
+}
+
+.sensitivity-table th,
+.sensitivity-table td {
+  border: 1px solid var(--rule);
+  padding: 0.22rem 0.45rem;
+  text-align: left;
+}
+
+.sensitivity-table thead th {
+  font-family: var(--mono);
+  font-size: 0.64rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  background: var(--paper);
+}
+
+.evidence-exports {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}

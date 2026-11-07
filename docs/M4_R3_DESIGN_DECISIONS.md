@@ -167,3 +167,47 @@ this gate closed the remaining gaps:
 
 G2 verification: verify_m4 **51/51**, showcase **11/11**, m2_experiments
 **31/31**, build clean, tooltip + selection screenshots recorded.
+
+## G3 — Research Mode technical evidence panel
+
+The M4-R2 G7 evidence-record tab is now a full Research Mode workspace
+(§4), still reading the same sealed record through the same selection:
+
+- **Mathematical methods (§4.2):** a per-finding method block renders only
+  the operations actually recorded for that finding — index definition with
+  bands and the band-resolution note, `ΔI = I_later − I_earlier` with the
+  record's own delta definition, the candidate-selection rule as an
+  inequality (`ΔNDBI ≤ −0.15` for a decrease, `ΔNDVI ≥ +t` for an
+  increase, inclusive), what the threshold controls, the component pipeline
+  (algorithm, connectivity, MMU discard, top-5 curated selection with the
+  no-evidence-records caveat) and the shared-valid denominator. Formulas
+  are set in a dedicated mono/legend block; no unrelated formulas appear.
+- **Feature & data inspector (§4.3):** source observations (scene ids,
+  dates, dataset), input measurements (formula, bands, threshold, grid,
+  delta-raster and valid-mask sha256 prefixes), spatial measurements
+  (pixels, area, mean/median, denominator, share, holes) — with an explicit
+  levels note separating the region summary (this record), per-pixel values
+  (not part of the record; Pixel Probe where live) and study-wide summaries
+  (the findings container shown in Explore).
+- **Threshold sensitivity (§4.4):** the recorded label with its exact
+  `label_rules` text, primary threshold, and a neighbours table (t − 0.05 /
+  t + 0.05: component pixels, retained fraction, growth factor) using the
+  existing G6 classification verbatim; caption states it is a transparency
+  category, not a confidence score.
+- **Relationships (§4.5):** recorded overlap rule shown; links are
+  clickable and open the related record in place (selection is shared
+  state, so the study context and tab are preserved).
+- **Provenance & exports (§4.6):** full method provenance (algorithm,
+  version, parameters, git commit, software versions, generated time,
+  sealed output checksum) plus client-side **record JSON** and **record
+  CSV** downloads. The CSV is a deterministic `section,field,value`
+  flatten (`evidenceRecordToCsv` in the shared adapter); the JSON is the
+  record verbatim. Verified: downloads carry the correct filename
+  (`<evidence_id>.json` / `.csv`), schema `habitatshift-evidence-record/1`,
+  and 141 CSV rows for a Kathmandu record.
+- Masking/cloud limitations from the record render under Evidence quality.
+- Back-link "← Back to the Explore the Evidence card" keeps §8 navigation
+  symmetric.
+
+G3 verification: verify_m4 **51/51**, showcase **11/11**, m2_experiments
+**31/31**, build clean, math-block/sensitivity screenshots recorded.
