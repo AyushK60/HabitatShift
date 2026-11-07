@@ -1,0 +1,255 @@
+{
+  "results": [
+    {
+      "experiment_id": "coringa_m1",
+      "findings_recorded": 30,
+      "findings_recomputed": 30,
+      "per_index": {
+        "ndvi": {
+          "threshold": 0.15,
+          "common_valid_pixels": 165136,
+          "decrease_pixels_total": 19291,
+          "increase_pixels_total": 14398,
+          "recorded_findings": 10,
+          "recomputed_topk_regions": 10,
+          "components_at_or_above_mmu_total": 234,
+          "components_at_or_above_mmu_unrecorded_top5_cap": 224
+        },
+        "ndwi": {
+          "threshold": 0.15,
+          "common_valid_pixels": 165136,
+          "decrease_pixels_total": 12612,
+          "increase_pixels_total": 16245,
+          "recorded_findings": 10,
+          "recomputed_topk_regions": 10,
+          "components_at_or_above_mmu_total": 242,
+          "components_at_or_above_mmu_unrecorded_top5_cap": 232
+        },
+        "mndwi": {
+          "threshold": 0.15,
+          "common_valid_pixels": 165136,
+          "decrease_pixels_total": 21897,
+          "increase_pixels_total": 22640,
+          "recorded_findings": 10,
+          "recomputed_topk_regions": 10,
+          "components_at_or_above_mmu_total": 210,
+          "components_at_or_above_mmu_unrecorded_top5_cap": 200
+        }
+      }
+    },
+    {
+      "experiment_id": "chilika_m4_dry",
+      "findings_recorded": 30,
+      "findings_recomputed": 30,
+      "per_index": {
+        "ndwi": {
+          "threshold": 0.15,
+          "common_valid_pixels": 348129,
+          "decrease_pixels_total": 14609,
+          "increase_pixels_total": 77789,
+          "recorded_findings": 10,
+          "recomputed_topk_regions": 10,
+          "components_at_or_above_mmu_total": 107,
+          "components_at_or_above_mmu_unrecorded_top5_cap": 97
+        },
+        "mndwi": {
+          "threshold": 0.15,
+          "common_valid_pixels": 348129,
+          "decrease_pixels_total": 10528,
+          "increase_pixels_total": 18628,
+          "recorded_findings": 10,
+          "recomputed_topk_regions": 10,
+          "components_at_or_above_mmu_total": 77,
+          "components_at_or_above_mmu_unrecorded_top5_cap": 67
+        },
+        "ndvi": {
+          "threshold": 0.15,
+          "common_valid_pixels": 348129,
+          "decrease_pixels_total": 114491,
+          "increase_pixels_total": 15745,
+          "recorded_findings": 10,
+          "recomputed_topk_regions": 10,
+          "components_at_or_above_mmu_total": 110,
+          "components_at_or_above_mmu_unrecorded_top5_cap": 100
+        }
+      }
+    },
+    {
+      "experiment_id": "chilika_m4_postmonsoon",
+      "findings_recorded": 30,
+      "findings_recomputed": 30,
+      "per_index": {
+        "ndwi": {
+          "threshold": 0.15,
+          "common_valid_pixels": 348129,
+          "decrease_pixels_total": 38810,
+          "increase_pixels_total": 12170,
+          "recorded_findings": 10,
+          "recomputed_topk_regions": 10,
+          "components_at_or_above_mmu_total": 60,
+          "components_at_or_above_mmu_unrecorded_top5_cap": 50
+        },
+        "mndwi": {
+          "threshold": 0.15,
+          "common_valid_pixels": 348129,
+          "decrease_pixels_total": 29533,
+          "increase_pixels_total": 14001,
+          "recorded_findings": 10,
+          "recomputed_topk_regions": 10,
+          "components_at_or_above_mmu_total": 62,
+          "components_at_or_above_mmu_unrecorded_top5_cap": 52
+        },
+        "ndvi": {
+          "threshold": 0.15,
+          "common_valid_pixels": 348129,
+          "decrease_pixels_total": 15127,
+          "increase_pixels_total": 51297,
+          "recorded_findings": 10,
+          "recomputed_topk_regions": 10,
+          "components_at_or_above_mmu_total": 108,
+          "components_at_or_above_mmu_unrecorded_top5_cap": 98
+        }
+      }
+    },
+    {
+      "experiment_id": "western_ghats_m4",
+      "findings_recorded": 11,
+      "findings_recomputed": 11,
+      "per_index": {
+        "ndvi": {
+          "threshold": 0.15,
+          "common_valid_pixels": 237774,
+          "decrease_pixels_total": 345,
+          "increase_pixels_total": 899,
+          "recorded_findings": 8,
+          "recomputed_topk_regions": 8,
+          "components_at_or_above_mmu_total": 10,
+          "components_at_or_above_mmu_unrecorded_top5_cap": 2
+        },
+        "ndwi": {
+          "threshold": 0.15,
+          "common_valid_pixels": 237774,
+          "decrease_pixels_total": 338,
+          "increase_pixels_total": 85,
+          "recorded_findings": 3,
+          "recomputed_topk_regions": 3,
+          "components_at_or_above_mmu_total": 3,
+          "components_at_or_above_mmu_unrecorded_top5_cap": 0
+        }
+      }
+    },
+    {
+      "experiment_id": "himalaya_purepu_2025_m4",
+      "findings_recorded": 20,
+      "findings_recomputed": 20,
+      "per_index": {
+        "ndwi": {
+          "threshold": 0.15,
+          "common_valid_pixels": 114067,
+          "decrease_pixels_total": 129,
+          "increase_pixels_total": 23142,
+          "recorded_findings": 5,
+          "recomputed_topk_regions": 5,
+          "components_at_or_above_mmu_total": 58,
+          "components_at_or_above_mmu_unrecorded_top5_cap": 53
+        },
+        "ndsi": {
+          "threshold": 0.15,
+          "common_valid_pixels": 114067,
+          "decrease_pixels_total": 5504,
+          "increase_pixels_total": 67680,
+          "recorded_findings": 10,
+          "recomputed_topk_regions": 10,
+          "components_at_or_above_mmu_total": 63,
+          "components_at_or_above_mmu_unrecorded_top5_cap": 53
+        },
+        "ndvi": {
+          "threshold": 0.15,
+          "common_valid_pixels": 114067,
+          "decrease_pixels_total": 5228,
+          "increase_pixels_total": 32,
+          "recorded_findings": 5,
+          "recomputed_topk_regions": 5,
+          "components_at_or_above_mmu_total": 18,
+          "components_at_or_above_mmu_unrecorded_top5_cap": 13
+        }
+      }
+    },
+    {
+      "experiment_id": "himalaya_langtang_2026_m4",
+      "findings_recorded": 12,
+      "findings_recomputed": 12,
+      "per_index": {
+        "ndsi": {
+          "threshold": 0.15,
+          "common_valid_pixels": 93736,
+          "decrease_pixels_total": 47,
+          "increase_pixels_total": 84346,
+          "recorded_findings": 2,
+          "recomputed_topk_regions": 2,
+          "components_at_or_above_mmu_total": 2,
+          "components_at_or_above_mmu_unrecorded_top5_cap": 0
+        },
+        "ndwi": {
+          "threshold": 0.15,
+          "common_valid_pixels": 93736,
+          "decrease_pixels_total": 104,
+          "increase_pixels_total": 50048,
+          "recorded_findings": 5,
+          "recomputed_topk_regions": 5,
+          "components_at_or_above_mmu_total": 29,
+          "components_at_or_above_mmu_unrecorded_top5_cap": 24
+        },
+        "ndvi": {
+          "threshold": 0.15,
+          "common_valid_pixels": 93736,
+          "decrease_pixels_total": 38146,
+          "increase_pixels_total": 25,
+          "recorded_findings": 5,
+          "recomputed_topk_regions": 5,
+          "components_at_or_above_mmu_total": 32,
+          "components_at_or_above_mmu_unrecorded_top5_cap": 27
+        }
+      }
+    },
+    {
+      "experiment_id": "kathmandu_m4",
+      "findings_recorded": 19,
+      "findings_recomputed": 19,
+      "per_index": {
+        "ndbi": {
+          "threshold": 0.15,
+          "common_valid_pixels": 43728,
+          "decrease_pixels_total": 395,
+          "increase_pixels_total": 2984,
+          "recorded_findings": 6,
+          "recomputed_topk_regions": 6,
+          "components_at_or_above_mmu_total": 21,
+          "components_at_or_above_mmu_unrecorded_top5_cap": 15
+        },
+        "ndvi": {
+          "threshold": 0.15,
+          "common_valid_pixels": 43728,
+          "decrease_pixels_total": 4924,
+          "increase_pixels_total": 249,
+          "recorded_findings": 6,
+          "recomputed_topk_regions": 6,
+          "components_at_or_above_mmu_total": 46,
+          "components_at_or_above_mmu_unrecorded_top5_cap": 40
+        },
+        "ndwi": {
+          "threshold": 0.15,
+          "common_valid_pixels": 43728,
+          "decrease_pixels_total": 350,
+          "increase_pixels_total": 3722,
+          "recorded_findings": 7,
+          "recomputed_topk_regions": 7,
+          "components_at_or_above_mmu_total": 28,
+          "components_at_or_above_mmu_unrecorded_top5_cap": 21
+        }
+      }
+    }
+  ],
+  "passed": 1614,
+  "failed": 0
+}
