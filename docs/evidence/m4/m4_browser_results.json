@@ -1,7 +1,7 @@
 {
   "base_url": "http://127.0.0.1:8098/",
   "suite": "habitatshift-m4-browser/1",
-  "started_utc": "2026-11-07T20:27:27.650Z",
+  "started_utc": "2026-11-07T20:33:59.327Z",
   "checks": [
     {
       "name": "1. landing renders hero headline",
@@ -121,7 +121,7 @@
     {
       "name": "10. side-by-side maps stay synchronised",
       "passed": true,
-      "detail": "{\"earlier\":15.073422231727795,\"later\":15.073422231727795}"
+      "detail": "{\"earlier\":15.069634628495129,\"later\":15.069634628495129}"
     },
     {
       "name": "10. divider follows mouse hover with no click",
@@ -201,7 +201,7 @@
     {
       "name": "12b. Fit Entire Study Area restores the overview zoom (§9)",
       "passed": true,
-      "detail": "zoom 14.802284930696693 → 13.715334944181178"
+      "detail": "zoom 14.807074331590165 → 13.715334944180565"
     },
     {
       "name": "12b. native-resolution tag renders beside the imagery (§8)",
@@ -288,7 +288,7 @@
   "console_errors": [],
   "page_errors": [],
   "failed_requests": [],
-  "finished_utc": "2026-11-07T20:28:43.084Z",
+  "finished_utc": "2026-11-07T20:35:14.669Z",
   "passed": 51,
   "failed": 0
 }

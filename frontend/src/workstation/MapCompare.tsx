@@ -413,6 +413,12 @@ export function MapCompare({
 
     const clickHandler = (event: MapMouseEvent) => {
       if (roiModeRef.current) return;
+      // A click on a findings polygon selected that finding (M4-R3 §3.6);
+      // it must never also fire the pixel probe / ROI click path.
+      if (findingClickRef.current) {
+        findingClickRef.current = false;
+        return;
+      }
       onMapClick([event.lngLat.lng, event.lngLat.lat]);
     };
     earlier.on("click", clickHandler);
@@ -446,6 +452,9 @@ export function MapCompare({
   }, [georef]);
 
   const roiModeRef = useRef(roiMode);
+  // Set briefly when a findings polygon click selects a finding, so the
+  // generic map click handler can skip the pixel probe for that same click.
+  const findingClickRef = useRef(false);
   roiModeRef.current = roiMode;
 
   /* -------------------------------------------------- shared overlays --- */
@@ -604,15 +613,37 @@ export function MapCompare({
           },
         });
         earlier.on("click", "findings-fill", (event) => {
+          findingClickRef.current = true;
           const evidenceId = event.features?.[0]?.properties?.evidence_id;
           if (typeof evidenceId === "string") onFindingSelectRef.current?.(evidenceId);
         });
-        // Pointer affordance over findings.
-        earlier.on("mouseenter", "findings-fill", () => {
+        // Pointer affordance + stable region identifier tooltip (M4-R3 §3.3).
+        const hoverPopup = new maplibregl.Popup({
+          closeButton: false,
+          closeOnClick: false,
+          className: "findings-hover",
+        });
+        earlier.on("mousemove", "findings-fill", (event) => {
           earlier.getCanvas().style.cursor = "pointer";
+          const props = event.features?.[0]?.properties;
+          if (!props) return;
+          const direction = String(props.direction ?? "");
+          hoverPopup
+            .setLngLat(event.lngLat)
+            .setHTML(
+              `<strong>${String(props.display_id ?? "")}</strong> · Δ${String(
+                props.index ?? ""
+              ).toUpperCase()} ${direction}<br>${Number(props.area_ha ?? 0).toFixed(
+                2
+              )} ha · ${direction === "decrease" ? "candidate decrease" : "candidate increase"}<br><span class="mono-label">${String(
+                props.evidence_id ?? ""
+              )}</span>`
+            )
+            .addTo(earlier);
         });
         earlier.on("mouseleave", "findings-fill", () => {
           earlier.getCanvas().style.cursor = "";
+          hoverPopup.remove();
         });
       }
       const source = earlier.getSource("findings-overlay") as GeoJSONSource;

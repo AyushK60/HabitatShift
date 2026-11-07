@@ -142,3 +142,28 @@ Decisions:
 G1 verification: verify_m4 **51/51**, showcase **11/11**, m2_experiments
 **31/31**, production build clean; screenshots at 1440 and 390 confirm the
 Midnight Teal & Copper identity and no overflow.
+
+## G2 — spatial highlighting and finding navigation
+
+Most of §3.3 already existed (real polygons, muted direction colours,
+teal-selected outline, focus fly-to, Reset View, overlay toggle, AOI extent);
+this gate closed the remaining gaps:
+
+- **Finding clicks no longer trigger the pixel probe.** A click on a
+  findings polygon previously fired BOTH the selection handler and the
+  generic map click — in non-live (showcase) mode that raised the
+  "Live pixel sampling needs the backend" error and yanked the inspector to
+  the Pixel Probe tab on every region click. A one-shot ref now suppresses
+  the generic handler for that click; verified: selecting Region 07 on the
+  Kathmandu map keeps the Explore tab active, shows the matching
+  evidence_id card and raises no pixel error.
+- **Stable region identifier tooltip (§3.3):** hovering a region shows a
+  compact brand-styled popup — display id, ΔINDEX direction, area, candidate
+  direction, and the full `evidence_id` — so map-to-panel selection starts
+  from the stable identifier.
+- Verified panel→map (card/related-link click selects + flies), map→panel
+  (region click selects and highlights via the evidence_id paint expression),
+  zoom-to-region with maxZoom cap, and reset-to-study-area.
+
+G2 verification: verify_m4 **51/51**, showcase **11/11**, m2_experiments
+**31/31**, build clean, tooltip + selection screenshots recorded.

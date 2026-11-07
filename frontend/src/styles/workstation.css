@@ -1156,3 +1156,25 @@
 .finding-detail .insp-facts dd {
   overflow-wrap: anywhere;
 }
+
+/* Findings hover tooltip (M4-R3 §3.3): compact, brand-styled region card. */
+.maplibregl-popup.findings-hover .maplibregl-popup-content {
+  font-family: var(--sans);
+  font-size: 0.74rem;
+  line-height: 1.45;
+  padding: 0.45rem 0.6rem;
+  background: var(--teal-deep);
+  color: var(--ivory);
+  border-radius: 3px;
+  box-shadow: 0 2px 10px rgb(16 38 43 / 0.35);
+}
+
+.maplibregl-popup.findings-hover .maplibregl-popup-content .mono-label {
+  font-size: 0.62rem;
+  color: var(--sea-glass-soft);
+}
+
+.maplibregl-popup.findings-hover .maplibregl-popup-tip {
+  border-top-color: var(--teal-deep);
+  border-bottom-color: var(--teal-deep);
+}
