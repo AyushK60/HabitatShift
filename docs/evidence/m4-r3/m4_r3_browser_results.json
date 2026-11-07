@@ -1,0 +1,195 @@
+{
+  "base_url": "http://127.0.0.1:8098/",
+  "started_utc": "2026-11-07T21:08:03.637Z",
+  "console_errors": [],
+  "page_errors": [],
+  "failed_requests": [],
+  "screenshots": [
+    "m4_r3_explore_selected_1440.png",
+    "m4_r3_partial_study_1440.png",
+    "m4_r3_responsive_1920x1080.png",
+    "m4_r3_responsive_1280x800.png",
+    "m4_r3_responsive_768x900.png",
+    "m4_r3_responsive_390x844.png"
+  ],
+  "checks": [
+    {
+      "name": "1. Explore the Evidence opens with overview",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "4. finding list renders the recorded count",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "4. selecting a finding shows its card with the evidence_id",
+      "passed": true,
+      "detail": "ev-kathmandu_m4-ndvi-dec-333878-3065411"
+    },
+    {
+      "name": "5. map highlight matches the selected evidence geometry",
+      "passed": true,
+      "detail": "{\"found\":true,\"hitId\":\"ev-kathmandu_m4-ndvi-dec-333878-3065411\",\"zoom\":15}"
+    },
+    {
+      "name": "6. a clickable recorded region is visible in the study view",
+      "passed": true,
+      "detail": "{\"evidence_id\":\"ev-kathmandu_m4-ndvi-dec-333878-3065411\",\"x\":512.8443122237904,\"y\":553.0330822502237}"
+    },
+    {
+      "name": "6. clicking a region on the map selects that finding",
+      "passed": true,
+      "detail": "{\"expected\":\"ev-kathmandu_m4-ndvi-dec-333878-3065411\",\"tab\":\"Explore the Evidence\"}"
+    },
+    {
+      "name": "8. card area equals recorded area_ha",
+      "passed": true,
+      "detail": "ui 3.72 vs record 3.72"
+    },
+    {
+      "name": "8. card mean Δ equals recorded mean_delta (3 dp)",
+      "passed": true,
+      "detail": "ui -0.251 vs record -0.251"
+    },
+    {
+      "name": "8. card denominator equals recorded valid_pixel_denominator",
+      "passed": true,
+      "detail": "ui 43728 vs record 43728"
+    },
+    {
+      "name": "7. Research Mode shows the same evidence_id as the Explore card",
+      "passed": true,
+      "detail": "{\"sameRecord\":true,\"schema\":true,\"urlCarries\":true}"
+    },
+    {
+      "name": "10. sensitivity t_minus_0.05 pixels equal record",
+      "passed": true,
+      "detail": "ui 807 vs record 807"
+    },
+    {
+      "name": "10. sensitivity t_minus_0.05 retained % equals record",
+      "passed": true,
+      "detail": "ui 100.0 % vs record 100.0"
+    },
+    {
+      "name": "10. sensitivity t_plus_0.05 pixels equal record",
+      "passed": true,
+      "detail": "ui 261 vs record 261"
+    },
+    {
+      "name": "10. sensitivity t_plus_0.05 retained % equals record",
+      "passed": true,
+      "detail": "ui 74.5 % vs record 74.5"
+    },
+    {
+      "name": "10. recorded sensitivity label shown verbatim",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "9. a related-finding test case exists",
+      "passed": true,
+      "detail": "ev-kathmandu_m4-ndbi-dec-333901-3066014"
+    },
+    {
+      "name": "9. related record opens in place with the linked evidence_id",
+      "passed": true,
+      "detail": "{\"record\":true,\"url\":true}"
+    },
+    {
+      "name": "11. top-five selection disclosure visible with audited counts",
+      "passed": true,
+      "detail": "Curated selection. The recorded rule keeps the largest 5 components per index and direction. This experiment records 19 findings; 76 additional qualifying components met the minimum mapping unit but w"
+    },
+    {
+      "name": "14. PARTIAL evidence note visible for the restricted study",
+      "passed": true,
+      "detail": "PARTIAL evidence. This investigation has restricted or incom"
+    },
+    {
+      "name": "3. study id preserved in the URL",
+      "passed": true,
+      "detail": "http://127.0.0.1:8098/#/workstation/himalaya_purepu_2025"
+    },
+    {
+      "name": "15. switching studies leaks no stale findings or selection",
+      "passed": true,
+      "detail": "{\"kathmandu\":false,\"purepu\":false,\"detail\":false}"
+    },
+    {
+      "name": "12. What am I looking at? layer guide works",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "13. coringa_coastal: Explore renders candidate framing + recorded limitations",
+      "passed": true,
+      "detail": "{\"limitations\":9,\"overview\":true}"
+    },
+    {
+      "name": "13. chilika_wetland: Explore renders candidate framing + recorded limitations",
+      "passed": true,
+      "detail": "{\"limitations\":8,\"overview\":true}"
+    },
+    {
+      "name": "13. western_ghats_forest: Explore renders candidate framing + recorded limitations",
+      "passed": true,
+      "detail": "{\"limitations\":6,\"overview\":true}"
+    },
+    {
+      "name": "13. himalaya_purepu_2025: Explore renders candidate framing + recorded limitations",
+      "passed": true,
+      "detail": "{\"limitations\":8,\"overview\":true}"
+    },
+    {
+      "name": "13. himalaya_langtang_2026: Explore renders candidate framing + recorded limitations",
+      "passed": true,
+      "detail": "{\"limitations\":9,\"overview\":true}"
+    },
+    {
+      "name": "13. kathmandu_urban: Explore renders candidate framing + recorded limitations",
+      "passed": true,
+      "detail": "{\"limitations\":9,\"overview\":true}"
+    },
+    {
+      "name": "18. no horizontal overflow at 1920x1080 (Explore + selected card)",
+      "passed": true,
+      "detail": "overflow=0px"
+    },
+    {
+      "name": "18. no horizontal overflow at 1280x800 (Explore + selected card)",
+      "passed": true,
+      "detail": "overflow=0px"
+    },
+    {
+      "name": "18. no horizontal overflow at 768x900 (Explore + selected card)",
+      "passed": true,
+      "detail": "overflow=0px"
+    },
+    {
+      "name": "18. no horizontal overflow at 390x844 (Explore + selected card)",
+      "passed": true,
+      "detail": "overflow=0px"
+    },
+    {
+      "name": "19. no console errors",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "19. no page errors",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "19. no failed requests",
+      "passed": true,
+      "detail": ""
+    }
+  ],
+  "completed_utc": "2026-11-07T21:08:44.825Z",
+  "passed": 35,
+  "failed": 0
+}

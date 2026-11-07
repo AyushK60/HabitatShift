@@ -38,6 +38,8 @@ interface InspectorProps {
   /** Stable content-derived evidence_id of the selected finding (M4-R3). */
   selectedEvidenceId: string | null;
   onSelectFinding: (evidenceId: string | null) => void;
+  /** Select a record while staying in Research Mode (§4.5 related links). */
+  onSelectRecord: (evidenceId: string | null) => void;
   /** Open the Research Mode record for the same evidence_id. */
   onOpenResearch: () => void;
   /** Generated top-five selection disclosure; null when unavailable. */
@@ -1299,6 +1301,7 @@ export function Inspector({
   findings,
   selectedEvidenceId,
   onSelectFinding,
+  onSelectRecord,
   onOpenResearch,
   selectionPolicy,
   pixel,
@@ -1428,7 +1431,7 @@ export function Inspector({
           <EvidenceRecordPanel
             findings={findings}
             selectedId={selectedEvidenceId}
-            onSelect={onSelectFinding}
+            onSelect={onSelectRecord}
             onOpenExplore={() => onTabChange("findings")}
           />
         )}

@@ -291,3 +291,33 @@ mechanisms are untouched (only the small policy JSON was added next to
 pytest-verified (`test_m4_bundles.py`, run again at G7).
 
 G6 verification: showcase **17/17** (backend stopped), build clean.
+
+## G7 — full testing, visual QA, handoff
+
+- **New suite `verify_m4_r3.mjs` (35 checks, 0 failed)** covering the brief
+  §11 items not carried elsewhere, with the core architectural rule
+  verified numerically: the Explore card's area / mean Δ / shared-valid
+  denominator and the Research Mode sensitivity-neighbours table are
+  asserted **equal to the underlying evidence record** at the recorded
+  display precision; map highlight and click resolution are asserted
+  against the rendered features' `evidence_id`; related-record opening,
+  deep links, disclosure counts, PARTIAL note, per-study candidate framing
+  + recorded limitations, four-viewport overflow, and console/page/network
+  error guards. Findings fixed while writing the suite:
+  - related-record links previously jumped the inspector back to Explore
+    (the shared select handler switched tabs); Research Mode now uses a
+    tab-preserving selection path (§4.5), and
+  - the hover tooltip could sit under the pointer at click time; it is now
+    `pointer-events: none`.
+- **Full battery re-run on the final build:** pytest exit 0 (403),
+  findings audit 2837/0, M2 audit 149/149, disclosure audit 106/106,
+  verify_m4 51/51, showcase 17/17, m2_experiments 31/31,
+  verify_m4_r3 35/35, production build clean.
+- Visual QA: see `M4_R3_VISUAL_QA.md`; evidence screenshots committed under
+  `docs/evidence/m4-r3/` together with `m4_r3_browser_results.json` and
+  `study_interpretation_checks.json`.
+- Deliverable documents: `M4_R3_EXPLORE_MODE.md`, `M4_R3_RESEARCH_MODE.md`,
+  `M4_R3_VISUAL_QA.md`, `M4_R3_HANDOFF.md` (final report), this document.
+
+M4-R3 stops here per the brief: no supervised ML, no deployment; M5 is
+next.

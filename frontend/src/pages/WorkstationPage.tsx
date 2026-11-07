@@ -253,6 +253,18 @@ function WorkstationForStudy({ studyId }: { studyId: string }) {
     [findings]
   );
   const handleOpenResearch = useCallback(() => setInspectorTab("evidence"), []);
+  // Research Mode's related-record links (M4-R3 §4.5) open another record
+  // WITHOUT losing the current view: same selection state, tab unchanged.
+  const handleFindingSelectKeepTab = useCallback(
+    (evidenceId: string | null) => {
+      setSelectedEvidenceId(evidenceId);
+      if (evidenceId && findings) {
+        const finding = findings.findings.find((item) => item.evidence_id === evidenceId);
+        if (finding) focusRef.current?.(finding.geometry_wgs84);
+      }
+    },
+    [findings]
+  );
 
   // Direct links to findings (M4-R3 §8): `?finding=<evidence_id>` selects and
   // flies to that finding once the container is loaded; `&view=research`
@@ -656,6 +668,7 @@ function WorkstationForStudy({ studyId }: { studyId: string }) {
             findings={findings}
             selectedEvidenceId={selectedEvidenceId}
             onSelectFinding={handleFindingSelect}
+            onSelectRecord={handleFindingSelectKeepTab}
             onOpenResearch={handleOpenResearch}
             selectionPolicy={selectionPolicy}
             pixel={pixel}
