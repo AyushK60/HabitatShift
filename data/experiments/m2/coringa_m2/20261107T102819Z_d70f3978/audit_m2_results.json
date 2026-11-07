@@ -1,0 +1,753 @@
+{
+  "run_id": "20261107T102819Z_d70f3978",
+  "audit_utc_source": "wall clock, not used in results",
+  "checks": [
+    {
+      "name": "ndvi t=0.05: decrease pixels match",
+      "passed": true,
+      "detail": "62671 vs 62671"
+    },
+    {
+      "name": "ndvi t=0.05: increase pixels match",
+      "passed": true,
+      "detail": "39413 vs 39413"
+    },
+    {
+      "name": "ndvi t=0.05: stable pixels match",
+      "passed": true,
+      "detail": "63052 vs 63052"
+    },
+    {
+      "name": "ndvi t=0.05: decrease area from transform",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "ndvi t=0.05: pixel area is 100 m2",
+      "passed": true,
+      "detail": "100.0"
+    },
+    {
+      "name": "ndvi t=0.10: decrease pixels match",
+      "passed": true,
+      "detail": "34771 vs 34771"
+    },
+    {
+      "name": "ndvi t=0.10: increase pixels match",
+      "passed": true,
+      "detail": "23475 vs 23475"
+    },
+    {
+      "name": "ndvi t=0.10: stable pixels match",
+      "passed": true,
+      "detail": "106890 vs 106890"
+    },
+    {
+      "name": "ndvi t=0.10: decrease area from transform",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "ndvi t=0.10: pixel area is 100 m2",
+      "passed": true,
+      "detail": "100.0"
+    },
+    {
+      "name": "ndvi t=0.15: decrease pixels match",
+      "passed": true,
+      "detail": "19291 vs 19291"
+    },
+    {
+      "name": "ndvi t=0.15: increase pixels match",
+      "passed": true,
+      "detail": "14398 vs 14398"
+    },
+    {
+      "name": "ndvi t=0.15: stable pixels match",
+      "passed": true,
+      "detail": "131447 vs 131447"
+    },
+    {
+      "name": "ndvi t=0.15: decrease area from transform",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "ndvi t=0.15: pixel area is 100 m2",
+      "passed": true,
+      "detail": "100.0"
+    },
+    {
+      "name": "ndvi t=0.20: decrease pixels match",
+      "passed": true,
+      "detail": "11345 vs 11345"
+    },
+    {
+      "name": "ndvi t=0.20: increase pixels match",
+      "passed": true,
+      "detail": "9016 vs 9016"
+    },
+    {
+      "name": "ndvi t=0.20: stable pixels match",
+      "passed": true,
+      "detail": "144775 vs 144775"
+    },
+    {
+      "name": "ndvi t=0.20: decrease area from transform",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "ndvi t=0.20: pixel area is 100 m2",
+      "passed": true,
+      "detail": "100.0"
+    },
+    {
+      "name": "ndvi t=0.25: decrease pixels match",
+      "passed": true,
+      "detail": "7212 vs 7212"
+    },
+    {
+      "name": "ndvi t=0.25: increase pixels match",
+      "passed": true,
+      "detail": "5581 vs 5581"
+    },
+    {
+      "name": "ndvi t=0.25: stable pixels match",
+      "passed": true,
+      "detail": "152343 vs 152343"
+    },
+    {
+      "name": "ndvi t=0.25: decrease area from transform",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "ndvi t=0.25: pixel area is 100 m2",
+      "passed": true,
+      "detail": "100.0"
+    },
+    {
+      "name": "ndvi: classes partition the valid footprint",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "ndvi: composite mean delta matches recording",
+      "passed": true,
+      "detail": "-0.02047110780405028 vs -0.02047110780405028"
+    },
+    {
+      "name": "ndvi: M1 headline mean reproduced",
+      "passed": true,
+      "detail": "-0.02047110780405028 vs -0.020471"
+    },
+    {
+      "name": "ndwi t=0.05: decrease pixels match",
+      "passed": true,
+      "detail": "37338 vs 37338"
+    },
+    {
+      "name": "ndwi t=0.05: increase pixels match",
+      "passed": true,
+      "detail": "61477 vs 61477"
+    },
+    {
+      "name": "ndwi t=0.05: stable pixels match",
+      "passed": true,
+      "detail": "66321 vs 66321"
+    },
+    {
+      "name": "ndwi t=0.05: decrease area from transform",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "ndwi t=0.05: pixel area is 100 m2",
+      "passed": true,
+      "detail": "100.0"
+    },
+    {
+      "name": "ndwi t=0.10: decrease pixels match",
+      "passed": true,
+      "detail": "21287 vs 21287"
+    },
+    {
+      "name": "ndwi t=0.10: increase pixels match",
+      "passed": true,
+      "detail": "32069 vs 32069"
+    },
+    {
+      "name": "ndwi t=0.10: stable pixels match",
+      "passed": true,
+      "detail": "111780 vs 111780"
+    },
+    {
+      "name": "ndwi t=0.10: decrease area from transform",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "ndwi t=0.10: pixel area is 100 m2",
+      "passed": true,
+      "detail": "100.0"
+    },
+    {
+      "name": "ndwi t=0.15: decrease pixels match",
+      "passed": true,
+      "detail": "12612 vs 12612"
+    },
+    {
+      "name": "ndwi t=0.15: increase pixels match",
+      "passed": true,
+      "detail": "16245 vs 16245"
+    },
+    {
+      "name": "ndwi t=0.15: stable pixels match",
+      "passed": true,
+      "detail": "136279 vs 136279"
+    },
+    {
+      "name": "ndwi t=0.15: decrease area from transform",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "ndwi t=0.15: pixel area is 100 m2",
+      "passed": true,
+      "detail": "100.0"
+    },
+    {
+      "name": "ndwi t=0.20: decrease pixels match",
+      "passed": true,
+      "detail": "7731 vs 7731"
+    },
+    {
+      "name": "ndwi t=0.20: increase pixels match",
+      "passed": true,
+      "detail": "9059 vs 9059"
+    },
+    {
+      "name": "ndwi t=0.20: stable pixels match",
+      "passed": true,
+      "detail": "148346 vs 148346"
+    },
+    {
+      "name": "ndwi t=0.20: decrease area from transform",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "ndwi t=0.20: pixel area is 100 m2",
+      "passed": true,
+      "detail": "100.0"
+    },
+    {
+      "name": "ndwi t=0.25: decrease pixels match",
+      "passed": true,
+      "detail": "4819 vs 4819"
+    },
+    {
+      "name": "ndwi t=0.25: increase pixels match",
+      "passed": true,
+      "detail": "5485 vs 5485"
+    },
+    {
+      "name": "ndwi t=0.25: stable pixels match",
+      "passed": true,
+      "detail": "154832 vs 154832"
+    },
+    {
+      "name": "ndwi t=0.25: decrease area from transform",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "ndwi t=0.25: pixel area is 100 m2",
+      "passed": true,
+      "detail": "100.0"
+    },
+    {
+      "name": "ndwi: classes partition the valid footprint",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "ndwi: composite mean delta matches recording",
+      "passed": true,
+      "detail": "0.018959265219714857 vs 0.018959265219714857"
+    },
+    {
+      "name": "ndwi: M1 headline mean reproduced",
+      "passed": true,
+      "detail": "0.018959265219714857 vs 0.018959"
+    },
+    {
+      "name": "mndwi t=0.05: decrease pixels match",
+      "passed": true,
+      "detail": "67916 vs 67916"
+    },
+    {
+      "name": "mndwi t=0.05: increase pixels match",
+      "passed": true,
+      "detail": "48937 vs 48937"
+    },
+    {
+      "name": "mndwi t=0.05: stable pixels match",
+      "passed": true,
+      "detail": "48283 vs 48283"
+    },
+    {
+      "name": "mndwi t=0.05: decrease area from transform",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "mndwi t=0.05: pixel area is 100 m2",
+      "passed": true,
+      "detail": "100.0"
+    },
+    {
+      "name": "mndwi t=0.10: decrease pixels match",
+      "passed": true,
+      "detail": "41889 vs 41889"
+    },
+    {
+      "name": "mndwi t=0.10: increase pixels match",
+      "passed": true,
+      "detail": "33026 vs 33026"
+    },
+    {
+      "name": "mndwi t=0.10: stable pixels match",
+      "passed": true,
+      "detail": "90221 vs 90221"
+    },
+    {
+      "name": "mndwi t=0.10: decrease area from transform",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "mndwi t=0.10: pixel area is 100 m2",
+      "passed": true,
+      "detail": "100.0"
+    },
+    {
+      "name": "mndwi t=0.15: decrease pixels match",
+      "passed": true,
+      "detail": "21897 vs 21897"
+    },
+    {
+      "name": "mndwi t=0.15: increase pixels match",
+      "passed": true,
+      "detail": "22640 vs 22640"
+    },
+    {
+      "name": "mndwi t=0.15: stable pixels match",
+      "passed": true,
+      "detail": "120599 vs 120599"
+    },
+    {
+      "name": "mndwi t=0.15: decrease area from transform",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "mndwi t=0.15: pixel area is 100 m2",
+      "passed": true,
+      "detail": "100.0"
+    },
+    {
+      "name": "mndwi t=0.20: decrease pixels match",
+      "passed": true,
+      "detail": "10410 vs 10410"
+    },
+    {
+      "name": "mndwi t=0.20: increase pixels match",
+      "passed": true,
+      "detail": "15358 vs 15358"
+    },
+    {
+      "name": "mndwi t=0.20: stable pixels match",
+      "passed": true,
+      "detail": "139368 vs 139368"
+    },
+    {
+      "name": "mndwi t=0.20: decrease area from transform",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "mndwi t=0.20: pixel area is 100 m2",
+      "passed": true,
+      "detail": "100.0"
+    },
+    {
+      "name": "mndwi t=0.25: decrease pixels match",
+      "passed": true,
+      "detail": "5296 vs 5296"
+    },
+    {
+      "name": "mndwi t=0.25: increase pixels match",
+      "passed": true,
+      "detail": "10124 vs 10124"
+    },
+    {
+      "name": "mndwi t=0.25: stable pixels match",
+      "passed": true,
+      "detail": "149716 vs 149716"
+    },
+    {
+      "name": "mndwi t=0.25: decrease area from transform",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "mndwi t=0.25: pixel area is 100 m2",
+      "passed": true,
+      "detail": "100.0"
+    },
+    {
+      "name": "mndwi: classes partition the valid footprint",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "mndwi: composite mean delta matches recording",
+      "passed": true,
+      "detail": "-0.0061879365447017765 vs -0.0061879365447017765"
+    },
+    {
+      "name": "mndwi: M1 headline mean reproduced",
+      "passed": true,
+      "detail": "-0.0061879365447017765 vs -0.006188"
+    },
+    {
+      "name": "ndvi: decrease non-increasing with threshold",
+      "passed": true,
+      "detail": "[62671, 34771, 19291, 11345, 7212]"
+    },
+    {
+      "name": "ndvi: increase non-increasing with threshold",
+      "passed": true,
+      "detail": "[39413, 23475, 14398, 9016, 5581]"
+    },
+    {
+      "name": "ndwi: decrease non-increasing with threshold",
+      "passed": true,
+      "detail": "[37338, 21287, 12612, 7731, 4819]"
+    },
+    {
+      "name": "ndwi: increase non-increasing with threshold",
+      "passed": true,
+      "detail": "[61477, 32069, 16245, 9059, 5485]"
+    },
+    {
+      "name": "mndwi: decrease non-increasing with threshold",
+      "passed": true,
+      "detail": "[67916, 41889, 21897, 10410, 5296]"
+    },
+    {
+      "name": "mndwi: increase non-increasing with threshold",
+      "passed": true,
+      "detail": "[48937, 33026, 22640, 15358, 10124]"
+    },
+    {
+      "name": "ndvi: single pairs = n_earlier*n_later",
+      "passed": true,
+      "detail": "9 vs 9"
+    },
+    {
+      "name": "ndvi: leave-one-out = n_earlier+n_later",
+      "passed": true,
+      "detail": "6 vs 6"
+    },
+    {
+      "name": "ndvi: two composites (median+mean)",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "ndvi: all estimators conserve area",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "ndwi: single pairs = n_earlier*n_later",
+      "passed": true,
+      "detail": "9 vs 9"
+    },
+    {
+      "name": "ndwi: leave-one-out = n_earlier+n_later",
+      "passed": true,
+      "detail": "6 vs 6"
+    },
+    {
+      "name": "ndwi: two composites (median+mean)",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "ndwi: all estimators conserve area",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "mndwi: single pairs = n_earlier*n_later",
+      "passed": true,
+      "detail": "9 vs 9"
+    },
+    {
+      "name": "mndwi: leave-one-out = n_earlier+n_later",
+      "passed": true,
+      "detail": "6 vs 6"
+    },
+    {
+      "name": "mndwi: two composites (median+mean)",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "mndwi: all estimators conserve area",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "m0 estimator appears once (ndvi only)",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "ndvi t=0.05: decrease CI contains point",
+      "passed": true,
+      "detail": "{'p2_5': 0.3622566520966494, 'p50': 0.37996522286238166, 'p97_5': 0.40098842775113747} vs 0.37951143300067824"
+    },
+    {
+      "name": "ndvi t=0.05: increase CI contains point",
+      "passed": true,
+      "detail": "{'p2_5': 0.22089904326600204, 'p50': 0.23800133284319838, 'p97_5': 0.25520343369639625} vs 0.23866994477279332"
+    },
+    {
+      "name": "ndvi t=0.10: decrease CI contains point",
+      "passed": true,
+      "detail": "{'p2_5': 0.19720894526739752, 'p50': 0.21038556831939892, 'p97_5': 0.2244970997979458} vs 0.21055978102897005"
+    },
+    {
+      "name": "ndvi t=0.10: increase CI contains point",
+      "passed": true,
+      "detail": "{'p2_5': 0.12946020580104492, 'p50': 0.1425649030658433, 'p97_5': 0.15526870103902332} vs 0.1421555566321093"
+    },
+    {
+      "name": "ndvi t=0.15: decrease CI contains point",
+      "passed": true,
+      "detail": "{'p2_5': 0.10632149370134301, 'p50': 0.1172671909074593, 'p97_5': 0.12693290972911775} vs 0.11681886445111908"
+    },
+    {
+      "name": "ndvi t=0.15: increase CI contains point",
+      "passed": true,
+      "detail": "{'p2_5': 0.07817357585477862, 'p50': 0.08772849226977891, 'p97_5': 0.09750687212289416} vs 0.08718874140102703"
+    },
+    {
+      "name": "ndvi t=0.20: decrease CI contains point",
+      "passed": true,
+      "detail": "{'p2_5': 0.0605805402443309, 'p50': 0.06908844774550393, 'p97_5': 0.07667721507598962} vs 0.06870094952039531"
+    },
+    {
+      "name": "ndvi t=0.20: increase CI contains point",
+      "passed": true,
+      "detail": "{'p2_5': 0.04713840767773367, 'p50': 0.054979460521927245, 'p97_5': 0.06207890236218412} vs 0.05459742273035559"
+    },
+    {
+      "name": "ndvi t=0.25: decrease CI contains point",
+      "passed": true,
+      "detail": "{'p2_5': 0.037233697118195117, 'p50': 0.043951209994684645, 'p97_5': 0.05014774441042849} vs 0.04367309369247166"
+    },
+    {
+      "name": "ndvi t=0.25: increase CI contains point",
+      "passed": true,
+      "detail": "{'p2_5': 0.027750840921496146, 'p50': 0.034211213694098845, 'p97_5': 0.03961105211812753} vs 0.03379638600910764"
+    },
+    {
+      "name": "ndvi: bootstrap iterations used == requested",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "ndwi t=0.05: decrease CI contains point",
+      "passed": true,
+      "detail": "{'p2_5': 0.21004686754541085, 'p50': 0.22551769763875823, 'p97_5': 0.24201937546972388} vs 0.2261045441333204"
+    },
+    {
+      "name": "ndwi t=0.05: increase CI contains point",
+      "passed": true,
+      "detail": "{'p2_5': 0.3543005095711291, 'p50': 0.3731435854330276, 'p97_5': 0.39134536470791} vs 0.37228102897006105"
+    },
+    {
+      "name": "ndwi t=0.10: decrease CI contains point",
+      "passed": true,
+      "detail": "{'p2_5': 0.11770715372541002, 'p50': 0.12894293243947608, 'p97_5': 0.1413827024067857} vs 0.12890587152407712"
+    },
+    {
+      "name": "ndwi t=0.10: increase CI contains point",
+      "passed": true,
+      "detail": "{'p2_5': 0.1797066907053979, 'p50': 0.19490409752138557, 'p97_5': 0.2092964236646969} vs 0.1941975099312082"
+    },
+    {
+      "name": "ndwi t=0.15: decrease CI contains point",
+      "passed": true,
+      "detail": "{'p2_5': 0.06718097294502202, 'p50': 0.07656287371446957, 'p97_5': 0.08599318580070642} vs 0.07637341342893131"
+    },
+    {
+      "name": "ndwi t=0.15: increase CI contains point",
+      "passed": true,
+      "detail": "{'p2_5': 0.08770791605064772, 'p50': 0.09855136852618654, 'p97_5': 0.10943440604143795} vs 0.09837346187384943"
+    },
+    {
+      "name": "ndwi t=0.20: decrease CI contains point",
+      "passed": true,
+      "detail": "{'p2_5': 0.0399207385501105, 'p50': 0.04712603121336885, 'p97_5': 0.054245279296549605} vs 0.046815957756031396"
+    },
+    {
+      "name": "ndwi t=0.20: increase CI contains point",
+      "passed": true,
+      "detail": "{'p2_5': 0.047496552552590304, 'p50': 0.05491201396437051, 'p97_5': 0.0630540163792489} vs 0.05485781416529406"
+    },
+    {
+      "name": "ndwi t=0.25: decrease CI contains point",
+      "passed": true,
+      "detail": "{'p2_5': 0.023810890439259186, 'p50': 0.0291930486058184, 'p97_5': 0.03494549936237973} vs 0.029182007557407227"
+    },
+    {
+      "name": "ndwi t=0.25: increase CI contains point",
+      "passed": true,
+      "detail": "{'p2_5': 0.0274516762270508, 'p50': 0.03319067263158222, 'p97_5': 0.0394064771201798} vs 0.03321504699157059"
+    },
+    {
+      "name": "ndwi: bootstrap iterations used == requested",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "mndwi t=0.05: decrease CI contains point",
+      "passed": true,
+      "detail": "{'p2_5': 0.39067440405788395, 'p50': 0.41122285590188123, 'p97_5': 0.4306538373095557} vs 0.4112731324484062"
+    },
+    {
+      "name": "mndwi t=0.05: increase CI contains point",
+      "passed": true,
+      "detail": "{'p2_5': 0.27485756860912963, 'p50': 0.29664295674462626, 'p97_5': 0.3178622319895153} vs 0.29634361980428253"
+    },
+    {
+      "name": "mndwi t=0.10: decrease CI contains point",
+      "passed": true,
+      "detail": "{'p2_5': 0.23844101655230698, 'p50': 0.25335502241686647, 'p97_5': 0.2679861392489961} vs 0.2536636469334367"
+    },
+    {
+      "name": "mndwi t=0.10: increase CI contains point",
+      "passed": true,
+      "detail": "{'p2_5': 0.18161793816164454, 'p50': 0.20059375027064363, 'p97_5': 0.21988558083001136} vs 0.1999927332622808"
+    },
+    {
+      "name": "mndwi t=0.15: decrease CI contains point",
+      "passed": true,
+      "detail": "{'p2_5': 0.12055392308504155, 'p50': 0.13210481347559505, 'p97_5': 0.14387331388009128} vs 0.13259979653134385"
+    },
+    {
+      "name": "mndwi t=0.15: increase CI contains point",
+      "passed": true,
+      "detail": "{'p2_5': 0.12081844936369075, 'p50': 0.13735123327295168, 'p97_5': 0.15618485859859155} vs 0.13709911830249008"
+    },
+    {
+      "name": "mndwi t=0.20: decrease CI contains point",
+      "passed": true,
+      "detail": "{'p2_5': 0.0545510616267872, 'p50': 0.06249779852839075, 'p97_5': 0.07204903047464334} vs 0.06303894971417498"
+    },
+    {
+      "name": "mndwi t=0.20: increase CI contains point",
+      "passed": true,
+      "detail": "{'p2_5': 0.08015912782661694, 'p50': 0.09321910547039472, 'p97_5': 0.10912124745935574} vs 0.09300213157639764"
+    },
+    {
+      "name": "mndwi t=0.25: decrease CI contains point",
+      "passed": true,
+      "detail": "{'p2_5': 0.026175727822902443, 'p50': 0.031674400984507675, 'p97_5': 0.03881329887128593} vs 0.0320705358007945"
+    },
+    {
+      "name": "mndwi t=0.25: increase CI contains point",
+      "passed": true,
+      "detail": "{'p2_5': 0.05092819857078351, 'p50': 0.06118714583756066, 'p97_5': 0.07323257171496765} vs 0.06130704389109582"
+    },
+    {
+      "name": "mndwi: bootstrap iterations used == requested",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "csv row count == estimators x thresholds",
+      "passed": true,
+      "detail": "275 vs 275"
+    },
+    {
+      "name": "every csv row matches result.json",
+      "passed": true,
+      "detail": "0 mismatches"
+    },
+    {
+      "name": "all manifest artifact hashes verify",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "manifest records git commit",
+      "passed": true,
+      "detail": "593675e87141ad030de598878b711816818f0f03"
+    },
+    {
+      "name": "manifest records software versions",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "M1 summary hash matches the run's recorded input hash",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "M1 config hash recorded and present",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "observation cache inventory complete (3 earlier + 3 later)",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "result.json contains no supervised metric keys",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "run records the label-blocked status",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "api latest returns 200",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "api serves the same run",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "api decrease area equals result.json",
+      "passed": true,
+      "detail": ""
+    }
+  ],
+  "passed": 149,
+  "failed": 0
+}

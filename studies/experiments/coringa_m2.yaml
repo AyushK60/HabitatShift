@@ -1,0 +1,49 @@
+# M2 research experiment: Coringa / Godavari delta threshold sensitivity,
+# estimator comparison and measured uncertainty.
+#
+# This file states the hypotheses BEFORE any sweep is executed. The runner
+# records these strings verbatim in the result manifest, so the registered
+# questions cannot be silently edited after the numbers are known.
+#
+# It consumes only frozen M0/M1 artefacts: the M1 experiment configuration,
+# the M1 summary and rasters, the M0 summary and delta raster, and the
+# content-addressed observation cache. No imagery is downloaded.
+
+experiment_id: coringa_m2
+study_id: coringa_coastal
+m1_config: studies/experiments/coringa_m1.yaml
+
+# Hypotheses are questions, not conclusions. Each names the measurement that
+# will answer it, so the run either supports or fails the hypothesis.
+hypotheses:
+  - "H1 (threshold sensitivity): for every index, candidate-change area decreases monotonically as the absolute threshold tightens from 0.05 to 0.25, and the ranking of the three indices by candidate-change fraction at the primary threshold is preserved across the sweep. Measured by the threshold-response sweep with area-conservation checks."
+  - "H2 (composite versus single scene): the 3x3-observation median composite yields a smaller absolute mean delta and a narrower single-pair spread than the nine genuine single-scene pairs, because per-scene observation noise (sun angle, tide, atmosphere) partially averages out. Measured by comparing the composite_median estimator against the single_pairs family."
+  - "H3 (temporal robustness): removing any single observation from a composite (leave-one-out) shifts the candidate-change fraction less than the full spread across single-scene pairs. Measured by the leave_one_out family against the single_pairs family at each threshold."
+  - "H4 (cross-pipeline consistency): the frozen M0 single-scene NDVI delta and the M1 anchor single-scene NDVI delta agree closely on their shared valid footprint because they use the same two dates and the same formula; residual differences are attributable to mask policy, not processing. Measured by the cross-pipeline comparison on shared pixels."
+  - "H5 (validity role): the common-valid footprint is complete for this study, so estimator differences are caused by observation selection, not by validity masks. Measured by the coverage summary and the per-estimator common-valid fractions."
+
+analysis:
+  indices: [ndvi, ndwi, mndwi]
+  thresholds: [0.05, 0.10, 0.15, 0.20, 0.25]
+  primary_threshold: 0.15
+  estimator_families:
+    - composite
+    - anchor_single
+    - single_pairs
+    - leave_one_out
+    - m0_single_scene
+
+uncertainty:
+  block_size_px: 15
+  bootstrap_iterations: 200
+  bootstrap_seed: 20260326
+
+# Independent labels: none are available locally for this AOI (see
+# docs/M2_LABEL_FEASIBILITY.md). The supervised path stays blocked until a
+# validated, independent, spatially referenced label source is obtained.
+labels:
+  paths: []
+  status: "blocked - no independent reference labels for this AOI and period"
+
+outputs:
+  root: data/experiments/m2

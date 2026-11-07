@@ -1,0 +1,148 @@
+{
+  "schema": "habitatshift-m2-manifest/1",
+  "run_id": "20261107T102819Z_d70f3978",
+  "fingerprint": "d70f397838dea33efcd3f44ff96256e253749842931b18a5f0df1cbef9786746",
+  "experiment_id": "coringa_m2",
+  "study_id": "coringa_coastal",
+  "generated_utc": "2026-11-07T10:28:21Z",
+  "config_source": {
+    "path": "studies/experiments/coringa_m2.yaml",
+    "sha256": "1931610eec98112996c7f521b12b5bc506f6f9434f2477187782e10e330ddfeb"
+  },
+  "m1_config": {
+    "path": "studies/experiments/coringa_m1.yaml",
+    "sha256": "8a76b05ee143289dadd6123de563e08395a1c72850ee58ea830e4878c2c2271a"
+  },
+  "git_commit": "593675e87141ad030de598878b711816818f0f03",
+  "software": {
+    "python": "3.11.9",
+    "platform": "Windows-10-10.0.26300-SP0",
+    "numpy": "2.2.6",
+    "rasterio": "1.4.3"
+  },
+  "inputs": {
+    "experiment_id": "coringa_m2",
+    "study_id": "coringa_coastal",
+    "grid_signature": "ad1601d5620e5f23",
+    "m1_config": {
+      "path": "studies/experiments/coringa_m1.yaml",
+      "sha256": "8a76b05ee143289dadd6123de563e08395a1c72850ee58ea830e4878c2c2271a"
+    },
+    "m1_summary": {
+      "path": "data/processed/m1/coringa_coastal/summary.json",
+      "sha256": "ca8f527adbb21f9a3c9e9f1147f0b39b1b9f9e6b1f3baed67adcf941a085a490",
+      "generated_utc": "2026-11-06T09:19:08.928506+00:00"
+    },
+    "m0_summary": {
+      "path": "data/processed/coringa_coastal/summary.json",
+      "sha256": "1d1c0432dde1e889ab17377a09b5c4f637de2f5b4683b9f10471c4cdc3c19a37",
+      "generated_utc": "2026-11-04T17:11:25.336288+00:00"
+    },
+    "observations": [
+      {
+        "item_id": "S2A_44QPD_20200326_1_L2A",
+        "period_id": "earlier",
+        "date": "2020-03-26",
+        "valid_pixels": 165109,
+        "meta_sha256": "dec58dc7321b12be422a30e92f14cc5b7956018348c40b7b35b5bbe39d564d21",
+        "npz_sha256": "b5eb3ef22d3d2aad31ed74711f6c99bef83e7c8e3df73d100cfd66c65d12c749"
+      },
+      {
+        "item_id": "S2A_44QPD_20250401_1_L2A",
+        "period_id": "later",
+        "date": "2025-04-01",
+        "valid_pixels": 152012,
+        "meta_sha256": "eeec5c7ec26c286988c1505abe705572d516fa0914562c3f9ab122b5cb7b10f5",
+        "npz_sha256": "18b30b6595d108bd336aa31ab132b861da52df7c631c32bb542f5f3ff58e8524"
+      },
+      {
+        "item_id": "S2B_44QPD_20200321_0_L2A",
+        "period_id": "earlier",
+        "date": "2020-03-21",
+        "valid_pixels": 131388,
+        "meta_sha256": "482bf0ebca4920ce9ec6ee7d506ec894ff0a05b145838224bf03a3986a3bd4aa",
+        "npz_sha256": "f52f0875e84a8a4b2c03ba295551020140631ceede51819cb327d3b3cb0cabc8"
+      },
+      {
+        "item_id": "S2B_44QPD_20200331_0_L2A",
+        "period_id": "earlier",
+        "date": "2020-03-31",
+        "valid_pixels": 165100,
+        "meta_sha256": "7e21b16584ba9240024df4112576d14cca348d4ca32701ed2750779a63286d31",
+        "npz_sha256": "5457d95d516d74aed0f2cb896d42364d905dc16d40d98cca57b4cc243287ead7"
+      },
+      {
+        "item_id": "S2B_44QPD_20250325_0_L2A",
+        "period_id": "later",
+        "date": "2025-03-25",
+        "valid_pixels": 158194,
+        "meta_sha256": "201b932213df31a3835decf649dc208cfcb48a62da867fbad6f0f0dde39cb035",
+        "npz_sha256": "525390ce37259f71da1a2ade8875de501e1be845d742128a6cf54a5bcaf7e2fb"
+      },
+      {
+        "item_id": "S2C_44QPD_20250330_0_L2A",
+        "period_id": "later",
+        "date": "2025-03-30",
+        "valid_pixels": 165116,
+        "meta_sha256": "f90113c2d5b7ca6de7d63535e2dc966f7c5506cba83609052a111dc56be23299",
+        "npz_sha256": "8584b8c0802c6eca0bc87bc6cb15d076b57d5fdd7ab2f9c2029c47ccbff7a7f8"
+      }
+    ],
+    "m1_rasters": {
+      "summary": "ca8f527adbb21f9a3c9e9f1147f0b39b1b9f9e6b1f3baed67adcf941a085a490",
+      "earlier:valid_mask": "ae24e55b49146bf7043538e2d4f1dfb5374ae7f5902acc7cfbdda53772df1ace",
+      "earlier:ndvi": "a81e70cdbd517521aa9d18a57de2f4a025e03f4516643252c176bf76140cf3cb",
+      "earlier:ndwi": "de9c6483af3755f67b6b39347e7caef801c874c40d452794b3ec84eeeac8cd81",
+      "earlier:mndwi": "6f19c93dea6a014f797a87a58ae60639ede6a9dc75e4460bfb5b7303e65768e2",
+      "later:valid_mask": "ae24e55b49146bf7043538e2d4f1dfb5374ae7f5902acc7cfbdda53772df1ace",
+      "later:ndvi": "4bb0d663224fe0019d8cbdd95920552b58aebf1ecf7759c0a0b41dbb4539ce39",
+      "later:ndwi": "329be89ab6c6b5e499bc86778979a5e1378dcdc416bf0252603823f53ec32ca8",
+      "later:mndwi": "e962bbfc05f2a1ba5c64aaf5eb56dbfe7c7bdec1fad3a3207ce7882b92c124bc",
+      "delta:ndvi": "5a72f654ac267ada9cb922429a9ebe3fdfb555eccd55937eccb1fdf3e7e6a5aa",
+      "common:ndvi": "6e6a9de229caf9a4ed1cc84eaca2621f64e809ae89ef3234b60496ce376a7c0b",
+      "delta:ndwi": "5a7cfb380f9c956ef8cca1c5319c1ce86345183cdeb3d729e1f627fe363cd247",
+      "common:ndwi": "6e6a9de229caf9a4ed1cc84eaca2621f64e809ae89ef3234b60496ce376a7c0b",
+      "delta:mndwi": "29bb4b9d1fe1ef77e598ac278905696352c6a68313ad4f03585aee056caa9217",
+      "common:mndwi": "6e6a9de229caf9a4ed1cc84eaca2621f64e809ae89ef3234b60496ce376a7c0b"
+    },
+    "m0_rasters": {
+      "summary": "1d1c0432dde1e889ab17377a09b5c4f637de2f5b4683b9f10471c4cdc3c19a37",
+      "delta_ndvi": "383fa9799c337ed0b28bcefb64c50f02ebeecfbadb99d8c7b4d64a4e2febf7a5",
+      "earlier_ndvi": "4c2df75d670491e4c0501e98199160bd5e077373c15a7d76e8adbbb286d010bf",
+      "later_ndvi": "734497c5a4ee4e7b6ec9a6c64cd4eb5b24558ae91d8b2c99e306cc53f476e393",
+      "earlier_valid_mask": "61dca3b98d3b9690885a23d0b31d94e4ff12146ab43de09d0b39e9a69e795f5a",
+      "later_valid_mask": "219c24a5455ee90dc40cfb8dd4f2b7f588e74f73cb64ea8a22e222cb1d818e58"
+    }
+  },
+  "artifacts": {
+    "data/experiments/m2/coringa_m2/20261107T102819Z_d70f3978/charts/bootstrap_mndwi.svg": "218827d97e00f5929b7679046018dcd20695e39e802438d3e417f8c5e55dc2c9",
+    "data/experiments/m2/coringa_m2/20261107T102819Z_d70f3978/charts/bootstrap_ndvi.svg": "c54f09d9129309ac7d63eb1ad3c0c0dd44ddd063ba6832b20cebe0b8a53140ff",
+    "data/experiments/m2/coringa_m2/20261107T102819Z_d70f3978/charts/bootstrap_ndwi.svg": "a346fded68635b7f782f4cff9aa53dfab3af3029dd45916ce77aff115f4ec818",
+    "data/experiments/m2/coringa_m2/20261107T102819Z_d70f3978/charts/delta_histogram_mndwi.svg": "377dc25d9c656983242d617a6242bda5462bad81b478806df9050f5a2bad7776",
+    "data/experiments/m2/coringa_m2/20261107T102819Z_d70f3978/charts/delta_histogram_ndvi.svg": "fbfb10c45f522656285fd460b3bcf661d743e8c14e5224c24fc1661cefcfd0b1",
+    "data/experiments/m2/coringa_m2/20261107T102819Z_d70f3978/charts/delta_histogram_ndwi.svg": "811cccacd29cd3b738b2a88bae5ca5200dca0ad8bba0cc0b68f56b1a53812969",
+    "data/experiments/m2/coringa_m2/20261107T102819Z_d70f3978/charts/estimator_comparison_mndwi.svg": "ef991a3dabced2d1bb39442970533ced67ea3964be7a243e91356f0b6ec2f7ff",
+    "data/experiments/m2/coringa_m2/20261107T102819Z_d70f3978/charts/estimator_comparison_ndvi.svg": "eedb5bad01a30bbef588f43147a72d8f8a905160e95bea2cb91ce04a95cbbbb5",
+    "data/experiments/m2/coringa_m2/20261107T102819Z_d70f3978/charts/estimator_comparison_ndwi.svg": "fd81e5dcacf4ee77fe2646419e22129d1dedcbc1772c128981ddbd2fa2e0d273",
+    "data/experiments/m2/coringa_m2/20261107T102819Z_d70f3978/charts/threshold_response.svg": "961bb83abf4bcf066c8f0869a8a231df5d1c6de54b5099d9f6794b5e9fb4862b",
+    "data/experiments/m2/coringa_m2/20261107T102819Z_d70f3978/estimator_thresholds.csv": "f053c9776ad053d07d1ea1ce0ad3233c7408247712c5f51f7783374ddc3dcddd",
+    "data/experiments/m2/coringa_m2/20261107T102819Z_d70f3978/result.json": "a0ee949becdfc6fa89238f87eb18202ece6d2f116b5b0f4ce333d65c2bfe7c32",
+    "data/experiments/m2/coringa_m2/20261107T102819Z_d70f3978/threshold_sensitivity.csv": "6dde39d9b7d197f3e9fb62b30ebf7f5342a5f1fd4017f70b7bb03c4b05495d9a"
+  },
+  "row_counts": {
+    "estimator_threshold_rows": 275,
+    "threshold_sensitivity_rows": 15
+  },
+  "charts": [
+    "charts/threshold_response.svg",
+    "charts/delta_histogram_ndvi.svg",
+    "charts/estimator_comparison_ndvi.svg",
+    "charts/bootstrap_ndvi.svg",
+    "charts/delta_histogram_ndwi.svg",
+    "charts/estimator_comparison_ndwi.svg",
+    "charts/bootstrap_ndwi.svg",
+    "charts/delta_histogram_mndwi.svg",
+    "charts/estimator_comparison_mndwi.svg",
+    "charts/bootstrap_mndwi.svg"
+  ]
+}

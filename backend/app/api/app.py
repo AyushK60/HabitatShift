@@ -45,9 +45,12 @@ _MEDIA_TYPES = {
     ".png": "image/png",
     ".json": "application/json",
     ".csv": "text/csv",
+    ".svg": "image/svg+xml",
     ".tif": "image/tiff",
     ".tiff": "image/tiff",
 }
+
+EXPERIMENT_OUTPUT_ROOT = config.DATA_DIR / "experiments"
 
 
 def _require(path: Path, kind: str, hint: str = "scripts/build_primary_study.py") -> Path:
@@ -306,6 +309,177 @@ def m1_presentation(study_id: str) -> JSONResponse:
 
 
 # --------------------------------------------------------------------------- #
+# M2 research-experiment routes
+# --------------------------------------------------------------------------- #
+def _experiment_run_dirs(experiment_id: str) -> list[Path]:
+    """All run directories of one experiment, newest first."""
+    directory = EXPERIMENT_OUTPUT_ROOT / "m2" / _safe_experiment_id(experiment_id)
+    if not directory.is_dir():
+        return []
+    return sorted(
+        (run for run in directory.iterdir()
+         if run.is_dir() and (run / "result.json").exists()),
+        key=lambda run: run.name,
+        reverse=True,
+    )
+
+
+def _safe_experiment_id(experiment_id: str) -> str:
+    if not _STUDY_ID.fullmatch(experiment_id):
+        raise HTTPException(status_code=400, detail="invalid experiment_id")
+    return experiment_id
+
+
+def _experiment_run(experiment_id: str, run_id: str) -> Path:
+    directory = EXPERIMENT_OUTPUT_ROOT / "m2" / _safe_experiment_id(experiment_id)
+    if not _STUDY_ID.fullmatch(run_id) or "_" not in run_id:
+        # run ids look like 20261107T100530Z_d70f3978
+        raise HTTPException(status_code=400, detail="invalid run_id")
+    run_dir = directory / run_id
+    if not run_dir.is_dir() or not (run_dir / "result.json").exists():
+        raise HTTPException(status_code=404, detail=f"unknown run {run_id!r}")
+    return run_dir
+
+
+def _experiment_result(experiment_id: str, run_id: str) -> dict:
+    return json.loads(
+        (_experiment_run(experiment_id, run_id) / "result.json").read_text("utf-8")
+    )
+
+
+@app.get("/api/experiments")
+def experiments() -> dict[str, object]:
+    """List M2 experiments and their recorded runs."""
+    root = EXPERIMENT_OUTPUT_ROOT / "m2"
+    listing = []
+    if root.is_dir():
+        for directory in sorted(root.iterdir()):
+            if not directory.is_dir():
+                continue
+            runs = []
+            for run_dir in _experiment_run_dirs(directory.name):
+                try:
+                    result = json.loads(
+                        (run_dir / "result.json").read_text("utf-8")
+                    )
+                except ValueError:
+                    continue
+                runs.append(
+                    {
+                        "run_id": result.get("run_id"),
+                        "generated_utc": result.get("generated_utc"),
+                        "fingerprint": result.get("fingerprint"),
+                    }
+                )
+            if runs:
+                listing.append({"experiment_id": directory.name, "runs": runs})
+    return {"experiments": listing}
+
+
+@app.get("/api/experiments/{experiment_id}/latest")
+def experiment_latest(experiment_id: str) -> JSONResponse:
+    """Summary of the newest recorded run, shaped for the viewer."""
+    runs = _experiment_run_dirs(_safe_experiment_id(experiment_id))
+    if not runs:
+        raise HTTPException(
+            status_code=404,
+            detail=(
+                f"no recorded runs for {experiment_id!r}; run "
+                "`python scripts/run_experiment.py --config "
+                "studies/experiments/coringa_m2.yaml`"
+            ),
+        )
+    result = _experiment_result(experiment_id, runs[0].name)
+    run_id = result["run_id"]
+    file_base = f"/files/experiments/{experiment_id}/{run_id}"
+
+    composite = [
+        item for item in result["estimators"]
+        if item["estimator_id"] == "composite_median"
+    ]
+    primary = result["config"]["primary_threshold"]
+    estimators_at_primary = [
+        {
+            "estimator_id": item["estimator_id"],
+            "family": item["family"],
+            "label": item["label"],
+            "index": item["index"],
+            "common_valid_pixels": item["common_valid_pixels"],
+            "common_valid_fraction_of_aoi": item["common_valid_fraction_of_aoi"],
+            "delta_mean": item["delta_stats"]["mean"],
+            "delta_std": item["delta_stats"]["std"],
+            "decrease_area_ha": item["primary"]["decrease_area_ha"],
+            "increase_area_ha": item["primary"]["increase_area_ha"],
+            "decrease_percent_of_common": item["primary"]["decrease_percent_of_common"],
+            "increase_percent_of_common": item["primary"]["increase_percent_of_common"],
+            "earlier": item["sources"]["earlier"],
+            "later": item["sources"]["later"],
+        }
+        for item in result["estimators"]
+    ]
+    charts = {}
+    for chart in (
+        "threshold_response",
+        "delta_histogram_ndvi",
+        "delta_histogram_ndwi",
+        "delta_histogram_mndwi",
+        "estimator_comparison_ndvi",
+        "estimator_comparison_ndwi",
+        "estimator_comparison_mndwi",
+        "bootstrap_ndvi",
+        "bootstrap_ndwi",
+        "bootstrap_mndwi",
+    ):
+        if (runs[0] / "charts" / f"{chart}.svg").exists():
+            charts[chart] = f"{file_base}/charts/{chart}.svg"
+    return JSONResponse(
+        {
+            "schema": "habitatshift-m2-experiment-summary/1",
+            "experiment_id": experiment_id,
+            "study_id": result["study_id"],
+            "run_id": run_id,
+            "generated_utc": result["generated_utc"],
+            "fingerprint": result["fingerprint"],
+            "hypotheses": result["hypotheses"],
+            "hypothesis_verdicts": result["hypothesis_verdicts"],
+            "config": {
+                "indices": result["config"]["indices"],
+                "thresholds": result["config"]["thresholds"],
+                "primary_threshold": primary,
+                "estimator_families": result["config"]["estimator_families"],
+                "block_size_px": result["config"]["block_size_px"],
+                "bootstrap_iterations": result["config"]["bootstrap_iterations"],
+                "bootstrap_seed": result["config"]["bootstrap_seed"],
+                "m1_composite_method": result["config"]["m1_composite_method"],
+            },
+            "coverage": result["coverage"],
+            "verification": result["verification"],
+            "primary_threshold_rows": {
+                item["index"]: item["thresholds"] for item in composite
+            },
+            "estimators_at_primary": estimators_at_primary,
+            "temporal_robustness": result["temporal_robustness"],
+            "bootstrap": result["uncertainty"]["block_bootstrap"],
+            "cross_pipeline": result["cross_pipeline"],
+            "guardrails": result["interpretation_guardrails"],
+            "artifacts": {
+                "result": f"{file_base}/result.json",
+                "manifest": f"{file_base}/manifest.json",
+                "estimator_thresholds_csv": f"{file_base}/estimator_thresholds.csv",
+                "threshold_sensitivity_csv": f"{file_base}/threshold_sensitivity.csv",
+                "charts": charts,
+            },
+        }
+    )
+
+
+@app.get("/api/experiments/{experiment_id}/run/{run_id}/result")
+def experiment_result(experiment_id: str, run_id: str) -> JSONResponse:
+    """Full recorded result.json of one run (verbatim, no recomputation)."""
+    return JSONResponse(_experiment_result(experiment_id, run_id))
+
+
+# --------------------------------------------------------------------------- #
 # Static artefacts
 # --------------------------------------------------------------------------- #
 @app.get("/files/{kind}/{name}")
@@ -357,6 +531,23 @@ def g0_asset(study_id: str, name: str) -> FileResponse:
     path = root / name
     if not path.exists():
         raise HTTPException(status_code=404, detail=f"{name} not found")
+    return FileResponse(
+        path,
+        media_type=_MEDIA_TYPES.get(path.suffix.lower(), "application/octet-stream"),
+    )
+
+
+@app.get("/files/experiments/{experiment_id}/{run_id}/{subpath:path}")
+def experiment_asset(experiment_id: str, run_id: str, subpath: str) -> FileResponse:
+    """Serve one recorded run artifact (result/manifest JSON, CSV, chart SVG)."""
+    run_dir = _experiment_run(experiment_id, run_id)
+    if not subpath or ".." in subpath or subpath.startswith(("/", "\\")):
+        raise HTTPException(status_code=400, detail="invalid artifact path")
+    path = (run_dir / subpath).resolve()
+    if run_dir.resolve() not in path.parents:
+        raise HTTPException(status_code=400, detail="artifact escapes run directory")
+    if not path.exists():
+        raise HTTPException(status_code=404, detail="artifact not found")
     return FileResponse(
         path,
         media_type=_MEDIA_TYPES.get(path.suffix.lower(), "application/octet-stream"),

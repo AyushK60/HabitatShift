@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 460" width="900" height="460" font-family="Segoe UI, Arial, sans-serif">
+<rect x="70" y="56" width="806" height="340" fill="#0e2226" stroke="#3a5f63" stroke-width="1"/>
+<line x1="70" y1="396.0" x2="876" y2="396.0" stroke="#24444c" stroke-width="1" stroke-dasharray="3 4"/>
+<text x="60" y="400.0" text-anchor="end" font-size="12" fill="#9fc2c6">0.006</text>
+<line x1="70" y1="311.0" x2="876" y2="311.0" stroke="#24444c" stroke-width="1" stroke-dasharray="3 4"/>
+<text x="60" y="315.0" text-anchor="end" font-size="12" fill="#9fc2c6">0.117</text>
+<line x1="70" y1="226.0" x2="876" y2="226.0" stroke="#24444c" stroke-width="1" stroke-dasharray="3 4"/>
+<text x="60" y="230.0" text-anchor="end" font-size="12" fill="#9fc2c6">0.228</text>
+<line x1="70" y1="141.0" x2="876" y2="141.0" stroke="#24444c" stroke-width="1" stroke-dasharray="3 4"/>
+<text x="60" y="145.0" text-anchor="end" font-size="12" fill="#9fc2c6">0.34</text>
+<line x1="70" y1="56.0" x2="876" y2="56.0" stroke="#24444c" stroke-width="1" stroke-dasharray="3 4"/>
+<text x="60" y="60.0" text-anchor="end" font-size="12" fill="#9fc2c6">0.451</text>
+<text x="70.0" y="414" text-anchor="middle" font-size="11" fill="#9fc2c6">0.05</text>
+<text x="271.5" y="414" text-anchor="middle" font-size="11" fill="#9fc2c6">0.10</text>
+<text x="473.0" y="414" text-anchor="middle" font-size="11" fill="#9fc2c6">0.15</text>
+<text x="674.5" y="414" text-anchor="middle" font-size="11" fill="#9fc2c6">0.20</text>
+<text x="876.0" y="414" text-anchor="middle" font-size="11" fill="#9fc2c6">0.25</text>
+<text x="473" y="426" text-anchor="middle" font-size="12" fill="#9fc2c6">absolute delta threshold</text>
+<line x1="70.0" y1="102.0" x2="70.0" y2="71.5" stroke="#d98a5d" stroke-width="2"/>
+<line x1="66.0" y1="102.0" x2="74.0" y2="102.0" stroke="#d98a5d" stroke-width="2"/>
+<line x1="66.0" y1="71.5" x2="74.0" y2="71.5" stroke="#d98a5d" stroke-width="2"/>
+<circle cx="70.0" cy="86.3" r="3" fill="#d98a5d"/>
+<line x1="70.0" y1="190.5" x2="70.0" y2="157.6" stroke="#4fb3a9" stroke-width="2"/>
+<line x1="66.0" y1="190.5" x2="74.0" y2="190.5" stroke="#4fb3a9" stroke-width="2"/>
+<line x1="66.0" y1="157.6" x2="74.0" y2="157.6" stroke="#4fb3a9" stroke-width="2"/>
+<circle cx="70.0" cy="173.9" r="3" fill="#4fb3a9"/>
+<line x1="271.5" y1="218.3" x2="271.5" y2="195.8" stroke="#d98a5d" stroke-width="2"/>
+<line x1="267.5" y1="218.3" x2="275.5" y2="218.3" stroke="#d98a5d" stroke-width="2"/>
+<line x1="267.5" y1="195.8" x2="275.5" y2="195.8" stroke="#d98a5d" stroke-width="2"/>
+<circle cx="271.5" cy="206.9" r="3" fill="#d98a5d"/>
+<line x1="271.5" y1="261.8" x2="271.5" y2="232.5" stroke="#4fb3a9" stroke-width="2"/>
+<line x1="267.5" y1="261.8" x2="275.5" y2="261.8" stroke="#4fb3a9" stroke-width="2"/>
+<line x1="267.5" y1="232.5" x2="275.5" y2="232.5" stroke="#4fb3a9" stroke-width="2"/>
+<circle cx="271.5" cy="247.3" r="3" fill="#4fb3a9"/>
+<line x1="473.0" y1="308.4" x2="473.0" y2="290.6" stroke="#d98a5d" stroke-width="2"/>
+<line x1="469.0" y1="308.4" x2="477.0" y2="308.4" stroke="#d98a5d" stroke-width="2"/>
+<line x1="469.0" y1="290.6" x2="477.0" y2="290.6" stroke="#d98a5d" stroke-width="2"/>
+<circle cx="473.0" cy="299.6" r="3" fill="#d98a5d"/>
+<line x1="473.0" y1="308.2" x2="473.0" y2="281.2" stroke="#4fb3a9" stroke-width="2"/>
+<line x1="469.0" y1="308.2" x2="477.0" y2="308.2" stroke="#4fb3a9" stroke-width="2"/>
+<line x1="469.0" y1="281.2" x2="477.0" y2="281.2" stroke="#4fb3a9" stroke-width="2"/>
+<circle cx="473.0" cy="295.6" r="3" fill="#4fb3a9"/>
+<line x1="674.5" y1="358.9" x2="674.5" y2="345.5" stroke="#d98a5d" stroke-width="2"/>
+<line x1="670.5" y1="358.9" x2="678.5" y2="358.9" stroke="#d98a5d" stroke-width="2"/>
+<line x1="670.5" y1="345.5" x2="678.5" y2="345.5" stroke="#d98a5d" stroke-width="2"/>
+<circle cx="674.5" cy="352.8" r="3" fill="#d98a5d"/>
+<line x1="674.5" y1="339.3" x2="674.5" y2="317.2" stroke="#4fb3a9" stroke-width="2"/>
+<line x1="670.5" y1="339.3" x2="678.5" y2="339.3" stroke="#4fb3a9" stroke-width="2"/>
+<line x1="670.5" y1="317.2" x2="678.5" y2="317.2" stroke="#4fb3a9" stroke-width="2"/>
+<circle cx="674.5" cy="329.3" r="3" fill="#4fb3a9"/>
+<line x1="876.0" y1="380.5" x2="876.0" y2="370.9" stroke="#d98a5d" stroke-width="2"/>
+<line x1="872.0" y1="380.5" x2="880.0" y2="380.5" stroke="#d98a5d" stroke-width="2"/>
+<line x1="872.0" y1="370.9" x2="880.0" y2="370.9" stroke="#d98a5d" stroke-width="2"/>
+<circle cx="876.0" cy="376.3" r="3" fill="#d98a5d"/>
+<line x1="876.0" y1="361.6" x2="876.0" y2="344.6" stroke="#4fb3a9" stroke-width="2"/>
+<line x1="872.0" y1="361.6" x2="880.0" y2="361.6" stroke="#4fb3a9" stroke-width="2"/>
+<line x1="872.0" y1="344.6" x2="880.0" y2="344.6" stroke="#4fb3a9" stroke-width="2"/>
+<circle cx="876.0" cy="353.8" r="3" fill="#4fb3a9"/>
+<line x1="82" y1="76" x2="108" y2="76" stroke="#d98a5d" stroke-width="2"/>
+<text x="114" y="80" font-size="12" fill="#cfe3e4">decrease fraction</text>
+<line x1="82" y1="94" x2="108" y2="94" stroke="#4fb3a9" stroke-width="2"/>
+<text x="114" y="98" font-size="12" fill="#cfe3e4">increase fraction</text>
+<text x="70" y="448" font-size="11" fill="#6f949b">intervals describe resampling variability of an area fraction for this AOI and grid only; they are not population confidence intervals</text>
+<text x="450.0" y="24" text-anchor="middle" font-size="16" font-weight="600" fill="#e6f1f1">Spatial block bootstrap - MNDWI change fractions</text>
+<text x="450.0" y="42" text-anchor="middle" font-size="12" fill="#9fc2c6">block 15 px (150 m) | 200 resamples | seed 20260326 | whiskers = 95% percentile interval</text>
+</svg>

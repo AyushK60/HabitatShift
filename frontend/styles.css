@@ -964,3 +964,133 @@ h1 {
     transition: none;
   }
 }
+
+/* ------------------------------------------------------------------ *
+ * M2 research experiments section
+ * ------------------------------------------------------------------ */
+.experiments {
+  margin: 3rem 0 0;
+  border-top: 2px solid var(--teal);
+  padding-top: 1.4rem;
+}
+
+.exp-head h2 {
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  margin: 0.2rem 0 0.4rem;
+}
+
+.exp-lede {
+  font-size: 0.85rem;
+  color: #56686d;
+  margin: 0 0 1.2rem;
+}
+
+.exp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  gap: 1.4rem;
+  align-items: start; /* cards keep their own height instead of stretching */
+}
+
+.exp-card {
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 1rem 1.1rem 1.2rem;
+  min-width: 0;
+}
+
+.exp-card h3 {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--teal);
+  margin: 0 0 0.7rem;
+}
+
+.exp-note {
+  font-size: 0.8rem;
+  color: #56686d;
+  margin: 0 0 0.6rem;
+}
+
+.exp-figure {
+  margin: 0.8rem 0 0;
+}
+
+.exp-figure img {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  background: #0e2226;
+}
+
+.chart-holder[hidden] {
+  display: none !important;
+}
+
+.table-scroll {
+  overflow-x: auto;
+}
+
+/* Inside scrollable tables the row label must not monopolise the width:
+   nowrap th labels were squeezing value cells down to a few pixels and
+   wrapping every row into dozens of lines. */
+.table-scroll .meta th {
+  white-space: normal;
+  width: 44%;
+}
+
+.verdict-line {
+  font-size: 0.8rem;
+  margin: 0.35rem 0 0;
+  color: #3d4f54;
+}
+
+.verdict-line strong {
+  font-family: var(--mono);
+  color: var(--teal);
+}
+
+.verdict {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.05rem 0.45rem;
+  border-radius: 999px;
+  margin: 0 0.35rem;
+  vertical-align: 1px;
+}
+
+.verdict-supported {
+  background: rgba(127, 171, 167, 0.25);
+  color: #24545c;
+}
+
+.verdict-not_supported {
+  background: rgba(214, 138, 93, 0.25);
+  color: #8a4d2a;
+}
+
+.verdict-inconclusive {
+  background: rgba(24, 39, 45, 0.08);
+  color: #56686d;
+}
+
+.value-decrease {
+  color: #8a4d2a;
+}
+
+.value-increase {
+  color: #24545c;
+}
+
+.exp-card .exp-lede,
+.exp-card p {
+  overflow-wrap: anywhere;
+}

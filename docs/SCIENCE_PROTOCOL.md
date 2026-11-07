@@ -232,3 +232,45 @@ Before a number leaves the repository, confirm:
   `M1_NUMERICAL_AUDIT.md` or its successor.
 - A numerical change caused by a bug fix must be shown to be a fix, with the
   before/after values and the reason. Silent numerical drift is a defect.
+
+## 13. M2 experiment protocol
+
+M2 research experiments are consumers of frozen M0/M1 artefacts and obey
+these rules:
+
+1. **Hypotheses before results.** Every experiment YAML states at least two
+   hypotheses with the measurement that answers each. The runner copies them
+   verbatim into the result; verdicts are computed only from measured
+   numbers and are labelled `supported`, `not_supported` or `inconclusive`.
+2. **Frozen inputs.** Experiments read the M1 summary/rasters, the M0
+   summary/raster and the observation cache; recorded input hashes must
+   match at run time and are verified again by the audit. No imagery is
+   downloaded and no M0/M1 artefact is modified.
+3. **Fixed classification rule.** Decrease `Δ ≤ −t`, increase `Δ ≥ +t`,
+   stable otherwise, on the common-valid footprint; classes must partition
+   the footprint exactly (0-pixel residual) at every threshold and
+   estimator, and the sweep must be monotone.
+4. **Area discipline.** Areas derive from integer pixel counts on the
+   documented grid (100 m² per 10 m pixel) in hectares and km²; every table
+   row carries its own conservation check.
+5. **Estimator honesty.** A difference between estimators is an
+   observation-selection effect, never a processing regression. The M0
+   single-scene raster and the M1 anchor must agree on shared pixels; the
+   cross-pipeline comparison records that agreement.
+6. **Uncertainty vocabulary.** Threshold sweeps are sensitivity ranges.
+   Block-bootstrap intervals are resampling variability for this AOI and
+   grid, with stated exchangeability assumptions. Neither is a confidence
+   interval about the landscape, and neither validates a threshold.
+7. **Supervised claims.** No accuracy, F1, confusion matrix or
+   feature-importance number may appear unless it comes from genuine
+   held-out independent reference labels with documented provenance and
+   spatial separation. When labels are unavailable the run records the
+   blocked status and contains none of those keys (enforced by tests and by
+   the audit).
+8. **Reproducibility.** Runs are content-addressed (fingerprint over the
+   canonical config plus every input hash); reruns are served from the
+   recorded run; nothing is overwritten. Charts are generated
+   deterministically from measured arrays.
+9. **Viewer honesty.** The Experiments section displays recorded values
+   verbatim via the API; it never recomputes, and a missing run produces an
+   explicit empty state.

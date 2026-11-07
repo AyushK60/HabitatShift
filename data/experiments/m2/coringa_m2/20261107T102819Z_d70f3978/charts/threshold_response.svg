@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 460" width="900" height="460" font-family="Segoe UI, Arial, sans-serif">
+<rect x="70" y="56" width="806" height="340" fill="#0e2226" stroke="#3a5f63" stroke-width="1"/>
+<line x1="70" y1="396.0" x2="876" y2="396.0" stroke="#24444c" stroke-width="1" stroke-dasharray="3 4"/>
+<text x="60" y="400.0" text-anchor="end" font-size="12" fill="#9fc2c6">0</text>
+<line x1="70" y1="311.0" x2="876" y2="311.0" stroke="#24444c" stroke-width="1" stroke-dasharray="3 4"/>
+<text x="60" y="315.0" text-anchor="end" font-size="12" fill="#9fc2c6">12</text>
+<line x1="70" y1="226.0" x2="876" y2="226.0" stroke="#24444c" stroke-width="1" stroke-dasharray="3 4"/>
+<text x="60" y="230.0" text-anchor="end" font-size="12" fill="#9fc2c6">25</text>
+<line x1="70" y1="141.0" x2="876" y2="141.0" stroke="#24444c" stroke-width="1" stroke-dasharray="3 4"/>
+<text x="60" y="145.0" text-anchor="end" font-size="12" fill="#9fc2c6">38</text>
+<line x1="70" y1="56.0" x2="876" y2="56.0" stroke="#24444c" stroke-width="1" stroke-dasharray="3 4"/>
+<text x="60" y="60.0" text-anchor="end" font-size="12" fill="#9fc2c6">50</text>
+<text x="70.0" y="414" text-anchor="middle" font-size="11" fill="#9fc2c6">0.05</text>
+<text x="271.5" y="414" text-anchor="middle" font-size="11" fill="#9fc2c6">0.10</text>
+<text x="473.0" y="414" text-anchor="middle" font-size="11" fill="#9fc2c6">0.15</text>
+<text x="674.5" y="414" text-anchor="middle" font-size="11" fill="#9fc2c6">0.20</text>
+<text x="876.0" y="414" text-anchor="middle" font-size="11" fill="#9fc2c6">0.25</text>
+<text x="473" y="426" text-anchor="middle" font-size="12" fill="#9fc2c6">absolute delta threshold</text>
+<polyline points="70.0,116.3 271.5,223.5 473.0,305.8 674.5,353.1 876.0,374.2" fill="none" stroke="#4fb3a9" stroke-width="2.0" stroke-linejoin="round"/>
+<circle cx="70.0" cy="116.3" r="3" fill="#4fb3a9"/>
+<circle cx="271.5" cy="223.5" r="3" fill="#4fb3a9"/>
+<circle cx="473.0" cy="305.8" r="3" fill="#4fb3a9"/>
+<circle cx="674.5" cy="353.1" r="3" fill="#4fb3a9"/>
+<circle cx="876.0" cy="374.2" r="3" fill="#4fb3a9"/>
+<polyline points="70.0,194.5 271.5,260.0 473.0,302.8 674.5,332.8 876.0,354.3" fill="none" stroke="#4fb3a9" stroke-width="1.2" stroke-linejoin="round"/>
+<circle cx="70.0" cy="194.5" r="3" fill="#4fb3a9"/>
+<circle cx="271.5" cy="260.0" r="3" fill="#4fb3a9"/>
+<circle cx="473.0" cy="302.8" r="3" fill="#4fb3a9"/>
+<circle cx="674.5" cy="332.8" r="3" fill="#4fb3a9"/>
+<circle cx="876.0" cy="354.3" r="3" fill="#4fb3a9"/>
+<polyline points="70.0,137.9 271.5,252.8 473.0,316.6 674.5,349.3 876.0,366.3" fill="none" stroke="#d98a5d" stroke-width="2.0" stroke-linejoin="round"/>
+<circle cx="70.0" cy="137.9" r="3" fill="#d98a5d"/>
+<circle cx="271.5" cy="252.8" r="3" fill="#d98a5d"/>
+<circle cx="473.0" cy="316.6" r="3" fill="#d98a5d"/>
+<circle cx="674.5" cy="349.3" r="3" fill="#d98a5d"/>
+<circle cx="876.0" cy="366.3" r="3" fill="#d98a5d"/>
+<polyline points="70.0,233.7 271.5,299.3 473.0,336.7 674.5,358.9 876.0,373.0" fill="none" stroke="#d98a5d" stroke-width="1.2" stroke-linejoin="round"/>
+<circle cx="70.0" cy="233.7" r="3" fill="#d98a5d"/>
+<circle cx="271.5" cy="299.3" r="3" fill="#d98a5d"/>
+<circle cx="473.0" cy="336.7" r="3" fill="#d98a5d"/>
+<circle cx="674.5" cy="358.9" r="3" fill="#d98a5d"/>
+<circle cx="876.0" cy="373.0" r="3" fill="#d98a5d"/>
+<polyline points="70.0,242.2 271.5,308.3 473.0,344.1 674.5,364.2 876.0,376.2" fill="none" stroke="#8fb3c7" stroke-width="2.0" stroke-linejoin="round"/>
+<circle cx="70.0" cy="242.2" r="3" fill="#8fb3c7"/>
+<circle cx="271.5" cy="308.3" r="3" fill="#8fb3c7"/>
+<circle cx="473.0" cy="344.1" r="3" fill="#8fb3c7"/>
+<circle cx="674.5" cy="364.2" r="3" fill="#8fb3c7"/>
+<circle cx="876.0" cy="376.2" r="3" fill="#8fb3c7"/>
+<polyline points="70.0,142.8 271.5,263.9 473.0,329.1 674.5,358.7 876.0,373.4" fill="none" stroke="#8fb3c7" stroke-width="1.2" stroke-linejoin="round"/>
+<circle cx="70.0" cy="142.8" r="3" fill="#8fb3c7"/>
+<circle cx="271.5" cy="263.9" r="3" fill="#8fb3c7"/>
+<circle cx="473.0" cy="329.1" r="3" fill="#8fb3c7"/>
+<circle cx="674.5" cy="358.7" r="3" fill="#8fb3c7"/>
+<circle cx="876.0" cy="373.4" r="3" fill="#8fb3c7"/>
+<line x1="82" y1="76" x2="108" y2="76" stroke="#4fb3a9" stroke-width="2"/>
+<text x="114" y="80" font-size="12" fill="#cfe3e4">mndwi: decrease solid / increase thin</text>
+<line x1="82" y1="94" x2="108" y2="94" stroke="#d98a5d" stroke-width="2"/>
+<text x="114" y="98" font-size="12" fill="#cfe3e4">ndvi: decrease solid / increase thin</text>
+<line x1="82" y1="112" x2="108" y2="112" stroke="#8fb3c7" stroke-width="2"/>
+<text x="114" y="116" font-size="12" fill="#cfe3e4">ndwi: decrease solid / increase thin</text>
+<text x="70" y="448" font-size="11" fill="#6f949b">decrease = delta &lt;= -threshold; increase = delta &gt;= +threshold; fractions are of the estimator's own common-valid footprint</text>
+<text x="450.0" y="24" text-anchor="middle" font-size="16" font-weight="600" fill="#e6f1f1">Threshold response - candidate change fraction of common-valid area</text>
+<text x="450.0" y="42" text-anchor="middle" font-size="12" fill="#9fc2c6">estimator: composite_median</text>
+</svg>

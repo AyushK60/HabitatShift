@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 460" width="900" height="460" font-family="Segoe UI, Arial, sans-serif">
+<rect x="70" y="56" width="806" height="340" fill="#0e2226" stroke="#3a5f63" stroke-width="1"/>
+<line x1="70" y1="396.0" x2="876" y2="396.0" stroke="#24444c" stroke-width="1" stroke-dasharray="3 4"/>
+<text x="60" y="400.0" text-anchor="end" font-size="12" fill="#9fc2c6">0</text>
+<line x1="70" y1="311.0" x2="876" y2="311.0" stroke="#24444c" stroke-width="1" stroke-dasharray="3 4"/>
+<text x="60" y="315.0" text-anchor="end" font-size="12" fill="#9fc2c6">12</text>
+<line x1="70" y1="226.0" x2="876" y2="226.0" stroke="#24444c" stroke-width="1" stroke-dasharray="3 4"/>
+<text x="60" y="230.0" text-anchor="end" font-size="12" fill="#9fc2c6">25</text>
+<line x1="70" y1="141.0" x2="876" y2="141.0" stroke="#24444c" stroke-width="1" stroke-dasharray="3 4"/>
+<text x="60" y="145.0" text-anchor="end" font-size="12" fill="#9fc2c6">38</text>
+<line x1="70" y1="56.0" x2="876" y2="56.0" stroke="#24444c" stroke-width="1" stroke-dasharray="3 4"/>
+<text x="60" y="60.0" text-anchor="end" font-size="12" fill="#9fc2c6">50</text>
+<rect x="78.1" y="105.2" width="12.2" height="290.8" fill="#d98a5d"/>
+<rect x="92.2" y="324.6" width="12.2" height="71.4" fill="#5d4436"/>
+<text x="91.2" y="412" text-anchor="end" font-size="9" fill="#9fc2c6" transform="rotate(-52 91.2 412)">anchor_single</text>
+<rect x="120.5" y="304.0" width="12.2" height="92.0" fill="#4fb3a9"/>
+<rect x="134.6" y="323.7" width="12.2" height="72.3" fill="#7d4f38"/>
+<text x="133.6" y="412" text-anchor="end" font-size="9" fill="#9fc2c6" transform="rotate(-52 133.6 412)">composite_mean</text>
+<rect x="162.9" y="316.6" width="12.2" height="79.4" fill="#4fb3a9"/>
+<rect x="177.1" y="336.7" width="12.2" height="59.3" fill="#7d4f38"/>
+<text x="176.1" y="412" text-anchor="end" font-size="9" fill="#9fc2c6" transform="rotate(-52 176.1 412)">composite_median</text>
+<rect x="205.3" y="314.9" width="12.2" height="81.1" fill="#c9a15d"/>
+<rect x="219.5" y="304.5" width="12.2" height="91.5" fill="#7d4f38"/>
+<text x="218.5" y="412" text-anchor="end" font-size="9" fill="#9fc2c6" transform="rotate(-52 218.5 412)">loo_earlier_without_S2A_44QPD_20200326_1_L2A</text>
+<rect x="247.7" y="307.8" width="12.2" height="88.2" fill="#c9a15d"/>
+<rect x="261.9" y="336.5" width="12.2" height="59.5" fill="#7d4f38"/>
+<text x="260.9" y="412" text-anchor="end" font-size="9" fill="#9fc2c6" transform="rotate(-52 260.9 412)">loo_earlier_without_S2B_44QPD_20200321_0_L2A</text>
+<rect x="290.2" y="316.0" width="12.2" height="80.0" fill="#c9a15d"/>
+<rect x="304.3" y="300.9" width="12.2" height="95.1" fill="#7d4f38"/>
+<text x="303.3" y="412" text-anchor="end" font-size="9" fill="#9fc2c6" transform="rotate(-52 303.3 412)">loo_earlier_without_S2B_44QPD_20200331_0_L2A</text>
+<rect x="332.6" y="285.3" width="12.2" height="110.7" fill="#c9a15d"/>
+<rect x="346.7" y="333.8" width="12.2" height="62.2" fill="#7d4f38"/>
+<text x="345.7" y="412" text-anchor="end" font-size="9" fill="#9fc2c6" transform="rotate(-52 345.7 412)">loo_later_without_S2A_44QPD_20250401_1_L2A</text>
+<rect x="375.0" y="320.1" width="12.2" height="75.9" fill="#c9a15d"/>
+<rect x="389.2" y="326.3" width="12.2" height="69.7" fill="#7d4f38"/>
+<text x="388.2" y="412" text-anchor="end" font-size="9" fill="#9fc2c6" transform="rotate(-52 388.2 412)">loo_later_without_S2B_44QPD_20250325_0_L2A</text>
+<rect x="417.4" y="272.8" width="12.2" height="123.2" fill="#c9a15d"/>
+<rect x="431.6" y="343.4" width="12.2" height="52.6" fill="#7d4f38"/>
+<text x="430.6" y="412" text-anchor="end" font-size="9" fill="#9fc2c6" transform="rotate(-52 430.6 412)">loo_later_without_S2C_44QPD_20250330_0_L2A</text>
+<rect x="459.8" y="105.2" width="12.2" height="290.8" fill="#a9836d"/>
+<rect x="474.0" y="324.6" width="12.2" height="71.4" fill="#7d4f38"/>
+<text x="473.0" y="412" text-anchor="end" font-size="9" fill="#9fc2c6" transform="rotate(-52 473.0 412)">m0_anchor_single_scene</text>
+<rect x="502.3" y="278.3" width="12.2" height="117.7" fill="#8fb3c7"/>
+<rect x="516.4" y="339.8" width="12.2" height="56.2" fill="#7d4f38"/>
+<text x="515.4" y="412" text-anchor="end" font-size="9" fill="#9fc2c6" transform="rotate(-52 515.4 412)">single__S2A_44QPD_202003…</text>
+<rect x="544.7" y="105.2" width="12.2" height="290.8" fill="#8fb3c7"/>
+<rect x="558.8" y="324.6" width="12.2" height="71.4" fill="#7d4f38"/>
+<text x="557.8" y="412" text-anchor="end" font-size="9" fill="#9fc2c6" transform="rotate(-52 557.8 412)">single__S2A_44QPD_202003…</text>
+<rect x="587.1" y="304.7" width="12.2" height="91.3" fill="#8fb3c7"/>
+<rect x="601.3" y="294.5" width="12.2" height="101.5" fill="#7d4f38"/>
+<text x="600.3" y="412" text-anchor="end" font-size="9" fill="#9fc2c6" transform="rotate(-52 600.3 412)">single__S2A_44QPD_202003…</text>
+<rect x="629.5" y="304.7" width="12.2" height="91.3" fill="#8fb3c7"/>
+<rect x="643.7" y="282.3" width="12.2" height="113.7" fill="#7d4f38"/>
+<text x="642.7" y="412" text-anchor="end" font-size="9" fill="#9fc2c6" transform="rotate(-52 642.7 412)">single__S2B_44QPD_202003…</text>
+<rect x="672.0" y="268.7" width="12.2" height="127.3" fill="#8fb3c7"/>
+<rect x="686.1" y="316.0" width="12.2" height="80.0" fill="#7d4f38"/>
+<text x="685.1" y="412" text-anchor="end" font-size="9" fill="#9fc2c6" transform="rotate(-52 685.1 412)">single__S2B_44QPD_202003…</text>
+<rect x="714.4" y="333.6" width="12.2" height="62.4" fill="#8fb3c7"/>
+<rect x="728.5" y="240.4" width="12.2" height="155.6" fill="#7d4f38"/>
+<text x="727.5" y="412" text-anchor="end" font-size="9" fill="#9fc2c6" transform="rotate(-52 727.5 412)">single__S2B_44QPD_202003…</text>
+<rect x="756.8" y="276.5" width="12.2" height="119.5" fill="#8fb3c7"/>
+<rect x="770.9" y="339.8" width="12.2" height="56.2" fill="#7d4f38"/>
+<text x="769.9" y="412" text-anchor="end" font-size="9" fill="#9fc2c6" transform="rotate(-52 769.9 412)">single__S2B_44QPD_202003…</text>
+<rect x="799.2" y="222.2" width="12.2" height="173.8" fill="#8fb3c7"/>
+<rect x="813.4" y="346.3" width="12.2" height="49.7" fill="#7d4f38"/>
+<text x="812.4" y="412" text-anchor="end" font-size="9" fill="#9fc2c6" transform="rotate(-52 812.4 412)">single__S2B_44QPD_202003…</text>
+<rect x="841.6" y="315.9" width="12.2" height="80.1" fill="#8fb3c7"/>
+<rect x="855.8" y="309.6" width="12.2" height="86.4" fill="#7d4f38"/>
+<text x="854.8" y="412" text-anchor="end" font-size="9" fill="#9fc2c6" transform="rotate(-52 854.8 412)">single__S2B_44QPD_202003…</text>
+<text x="868" y="76" text-anchor="end" font-size="12" fill="#cfe3e4">left bar: decrease</text>
+<text x="868" y="92" text-anchor="end" font-size="12" fill="#cfe3e4">right bar: increase</text>
+<text x="70" y="448" font-size="11" fill="#6f949b">every bar is computed from the same index formula and threshold rule; differences are observation-selection effects</text>
+<text x="450.0" y="24" text-anchor="middle" font-size="16" font-weight="600" fill="#e6f1f1">Estimator comparison at threshold 0.15 - NDVI</text>
+<text x="450.0" y="42" text-anchor="middle" font-size="12" fill="#9fc2c6">bar height = candidate-change fraction (% of common-valid); colour = family</text>
+</svg>
