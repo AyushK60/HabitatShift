@@ -1,6 +1,6 @@
 {
   "base_url": "http://127.0.0.1:8096/",
-  "started_utc": "2026-11-06T09:45:38.653Z",
+  "started_utc": "2026-11-07T14:19:11.964Z",
   "viewports": {
     "1920x1080": {
       "side": {
@@ -388,8 +388,8 @@
           "same_size": true,
           "width": 350,
           "height": 319,
-          "max": 9,
-          "mean": 0.005508284818629646,
+          "max": 8,
+          "mean": 0.005588893864755934,
           "over4": 26,
           "fraction_over4": 0.0002328705776981639
         }
@@ -451,7 +451,7 @@
               "width": 718,
               "height": 654,
               "max": 4,
-              "mean": 0.001552477575323912,
+              "mean": 0.0015439591798488837,
               "over4": 0,
               "fraction_over4": 0
             }
@@ -475,9 +475,9 @@
               "width": 718,
               "height": 654,
               "max": 8,
-              "mean": 0.0019358053717001865,
-              "over4": 47,
-              "fraction_over4": 0.00010009114683158281
+              "mean": 0.0026343138006525092,
+              "over4": 50,
+              "fraction_over4": 0.00010647994343785405
             }
           }
         },
@@ -514,9 +514,9 @@
           "width": 356,
           "height": 324,
           "max": 8,
-          "mean": 0.03447947010681093,
-          "over4": 40,
-          "fraction_over4": 0.0003467887363018449
+          "mean": 0.014833888195311416,
+          "over4": 17,
+          "fraction_over4": 0.0001473852129282841
         }
       },
       "swipe": {
@@ -528,7 +528,7 @@
               "width": 356,
               "height": 324,
               "max": 5,
-              "mean": 0.0031384380635316963,
+              "mean": 0.0031471077819392426,
               "over4": 6,
               "fraction_over4": 0.00005201831044527674
             }
@@ -540,7 +540,7 @@
               "width": 356,
               "height": 324,
               "max": 5,
-              "mean": 0.0031384380635316963,
+              "mean": 0.0031471077819392426,
               "over4": 6,
               "fraction_over4": 0.00005201831044527674
             }
@@ -552,7 +552,7 @@
               "width": 356,
               "height": 324,
               "max": 5,
-              "mean": 0.007481966985712304,
+              "mean": 0.00749063670411985,
               "over4": 13,
               "fraction_over4": 0.0001127063392980996
             }
@@ -564,7 +564,7 @@
               "width": 356,
               "height": 324,
               "max": 5,
-              "mean": 0.0031384380635316963,
+              "mean": 0.0031471077819392426,
               "over4": 6,
               "fraction_over4": 0.00005201831044527674
             }
@@ -576,7 +576,7 @@
               "width": 356,
               "height": 324,
               "max": 5,
-              "mean": 0.007481966985712304,
+              "mean": 0.00749063670411985,
               "over4": 13,
               "fraction_over4": 0.0001127063392980996
             }
@@ -588,7 +588,7 @@
               "width": 356,
               "height": 324,
               "max": 5,
-              "mean": 0.006311555000693577,
+              "mean": 0.006086142322097378,
               "over4": 10,
               "fraction_over4": 0.00008669718407546123
             }
@@ -600,7 +600,7 @@
               "width": 356,
               "height": 324,
               "max": 5,
-              "mean": 0.007481966985712304,
+              "mean": 0.00749063670411985,
               "over4": 13,
               "fraction_over4": 0.0001127063392980996
             }
@@ -1625,7 +1625,7 @@
     {
       "name": "768x900 side image fills stage",
       "passed": true,
-      "detail": "{\"role\":\"period\",\"src\":\"/files/m1/coringa_coastal/previews/earlier_2020-03-26_true_colour.png\",\"width\":350,\"height\":318.171875,\"left\":25,\"top\":610.53125,\"naturalWidth\":429,\"naturalHeight\":390,\"complete\":true}"
+      "detail": "{\"role\":\"period\",\"src\":\"/files/m1/coringa_coastal/previews/earlier_2020-03-26_true_colour.png\",\"width\":350,\"height\":318.171875,\"left\":25,\"top\":655.328125,\"naturalWidth\":429,\"naturalHeight\":390,\"complete\":true}"
     },
     {
       "name": "768x900 side raster aspect preserved",
@@ -1640,7 +1640,7 @@
     {
       "name": "768x900 side image fills stage",
       "passed": true,
-      "detail": "{\"role\":\"period\",\"src\":\"/files/m1/coringa_coastal/previews/later_2025-03-25_true_colour.png\",\"width\":350,\"height\":318.171875,\"left\":393,\"top\":610.53125,\"naturalWidth\":429,\"naturalHeight\":390,\"complete\":true}"
+      "detail": "{\"role\":\"period\",\"src\":\"/files/m1/coringa_coastal/previews/later_2025-03-25_true_colour.png\",\"width\":350,\"height\":318.171875,\"left\":393,\"top\":655.328125,\"naturalWidth\":429,\"naturalHeight\":390,\"complete\":true}"
     },
     {
       "name": "768x900 side raster aspect preserved",
@@ -1655,7 +1655,7 @@
     {
       "name": "768x900 side identical pattern is pixel-aligned",
       "passed": true,
-      "detail": "{\"same_size\":true,\"width\":350,\"height\":319,\"max\":9,\"mean\":0.005508284818629646,\"over4\":26,\"fraction_over4\":0.0002328705776981639}"
+      "detail": "{\"same_size\":true,\"width\":350,\"height\":319,\"max\":8,\"mean\":0.005588893864755934,\"over4\":26,\"fraction_over4\":0.0002328705776981639}"
     },
     {
       "name": "768x900 layer ndvi keeps stage bounds",
@@ -1705,12 +1705,12 @@
     {
       "name": "768x900 swipe earlier fills shared stage",
       "passed": true,
-      "detail": "{\"role\":\"earlier\",\"src\":\"/files/m1/coringa_coastal/previews/earlier_2020-03-26_true_colour.png\",\"width\":718,\"height\":652.71875,\"left\":25,\"top\":581.53125,\"naturalWidth\":429,\"naturalHeight\":390,\"complete\":true}"
+      "detail": "{\"role\":\"earlier\",\"src\":\"/files/m1/coringa_coastal/previews/earlier_2020-03-26_true_colour.png\",\"width\":718,\"height\":652.71875,\"left\":25,\"top\":581.328125,\"naturalWidth\":429,\"naturalHeight\":390,\"complete\":true}"
     },
     {
       "name": "768x900 swipe later fills shared stage",
       "passed": true,
-      "detail": "{\"role\":\"later\",\"src\":\"/files/m1/coringa_coastal/previews/later_2025-03-25_true_colour.png\",\"width\":718,\"height\":652.71875,\"left\":25,\"top\":581.53125,\"naturalWidth\":429,\"naturalHeight\":390,\"complete\":true}"
+      "detail": "{\"role\":\"later\",\"src\":\"/files/m1/coringa_coastal/previews/later_2025-03-25_true_colour.png\",\"width\":718,\"height\":652.71875,\"left\":25,\"top\":581.328125,\"naturalWidth\":429,\"naturalHeight\":390,\"complete\":true}"
     },
     {
       "name": "768x900 swipe click reaches 0%",
@@ -1760,7 +1760,7 @@
     {
       "name": "768x900 swipe 75% remains pixel-aligned",
       "passed": true,
-      "detail": "{\"same_size\":true,\"width\":718,\"height\":654,\"max\":4,\"mean\":0.001552477575323912,\"over4\":0,\"fraction_over4\":0}"
+      "detail": "{\"same_size\":true,\"width\":718,\"height\":654,\"max\":4,\"mean\":0.0015439591798488837,\"over4\":0,\"fraction_over4\":0}"
     },
     {
       "name": "768x900 swipe click reaches 90%",
@@ -1780,7 +1780,7 @@
     {
       "name": "768x900 swipe 100% remains pixel-aligned",
       "passed": true,
-      "detail": "{\"same_size\":true,\"width\":718,\"height\":654,\"max\":8,\"mean\":0.0019358053717001865,\"over4\":47,\"fraction_over4\":0.00010009114683158281}"
+      "detail": "{\"same_size\":true,\"width\":718,\"height\":654,\"max\":8,\"mean\":0.0026343138006525092,\"over4\":50,\"fraction_over4\":0.00010647994343785405}"
     },
     {
       "name": "768x900 divider sits on the clip boundary at 100%",
@@ -1940,7 +1940,7 @@
     {
       "name": "390x844 side image fills stage",
       "passed": true,
-      "detail": "{\"role\":\"period\",\"src\":\"/files/m1/coringa_coastal/previews/earlier_2020-03-26_true_colour.png\",\"width\":356,\"height\":323.625,\"left\":17,\"top\":729.234375,\"naturalWidth\":429,\"naturalHeight\":390,\"complete\":true}"
+      "detail": "{\"role\":\"period\",\"src\":\"/files/m1/coringa_coastal/previews/earlier_2020-03-26_true_colour.png\",\"width\":356,\"height\":323.625,\"left\":17,\"top\":729.1875,\"naturalWidth\":429,\"naturalHeight\":390,\"complete\":true}"
     },
     {
       "name": "390x844 side raster aspect preserved",
@@ -1955,7 +1955,7 @@
     {
       "name": "390x844 side image fills stage",
       "passed": true,
-      "detail": "{\"role\":\"period\",\"src\":\"/files/m1/coringa_coastal/previews/later_2025-03-25_true_colour.png\",\"width\":356,\"height\":323.625,\"left\":17,\"top\":1122.046875,\"naturalWidth\":429,\"naturalHeight\":390,\"complete\":true}"
+      "detail": "{\"role\":\"period\",\"src\":\"/files/m1/coringa_coastal/previews/later_2025-03-25_true_colour.png\",\"width\":356,\"height\":323.625,\"left\":17,\"top\":1122,\"naturalWidth\":429,\"naturalHeight\":390,\"complete\":true}"
     },
     {
       "name": "390x844 side raster aspect preserved",
@@ -1970,7 +1970,7 @@
     {
       "name": "390x844 side identical pattern is pixel-aligned",
       "passed": true,
-      "detail": "{\"same_size\":true,\"width\":356,\"height\":324,\"max\":8,\"mean\":0.03447947010681093,\"over4\":40,\"fraction_over4\":0.0003467887363018449}"
+      "detail": "{\"same_size\":true,\"width\":356,\"height\":324,\"max\":8,\"mean\":0.014833888195311416,\"over4\":17,\"fraction_over4\":0.0001473852129282841}"
     },
     {
       "name": "390x844 layer ndvi keeps stage bounds",
@@ -2020,12 +2020,12 @@
     {
       "name": "390x844 swipe earlier fills shared stage",
       "passed": true,
-      "detail": "{\"role\":\"earlier\",\"src\":\"/files/m1/coringa_coastal/previews/earlier_2020-03-26_true_colour.png\",\"width\":356,\"height\":323.625,\"left\":17,\"top\":574.234375,\"naturalWidth\":429,\"naturalHeight\":390,\"complete\":true}"
+      "detail": "{\"role\":\"earlier\",\"src\":\"/files/m1/coringa_coastal/previews/earlier_2020-03-26_true_colour.png\",\"width\":356,\"height\":323.625,\"left\":17,\"top\":574.1875,\"naturalWidth\":429,\"naturalHeight\":390,\"complete\":true}"
     },
     {
       "name": "390x844 swipe later fills shared stage",
       "passed": true,
-      "detail": "{\"role\":\"later\",\"src\":\"/files/m1/coringa_coastal/previews/later_2025-03-25_true_colour.png\",\"width\":356,\"height\":323.625,\"left\":17,\"top\":574.234375,\"naturalWidth\":429,\"naturalHeight\":390,\"complete\":true}"
+      "detail": "{\"role\":\"later\",\"src\":\"/files/m1/coringa_coastal/previews/later_2025-03-25_true_colour.png\",\"width\":356,\"height\":323.625,\"left\":17,\"top\":574.1875,\"naturalWidth\":429,\"naturalHeight\":390,\"complete\":true}"
     },
     {
       "name": "390x844 swipe click reaches 0%",
@@ -2035,7 +2035,7 @@
     {
       "name": "390x844 swipe 0% remains pixel-aligned",
       "passed": true,
-      "detail": "{\"same_size\":true,\"width\":356,\"height\":324,\"max\":5,\"mean\":0.0031384380635316963,\"over4\":6,\"fraction_over4\":0.00005201831044527674}"
+      "detail": "{\"same_size\":true,\"width\":356,\"height\":324,\"max\":5,\"mean\":0.0031471077819392426,\"over4\":6,\"fraction_over4\":0.00005201831044527674}"
     },
     {
       "name": "390x844 swipe click reaches 10%",
@@ -2045,7 +2045,7 @@
     {
       "name": "390x844 swipe 10% remains pixel-aligned",
       "passed": true,
-      "detail": "{\"same_size\":true,\"width\":356,\"height\":324,\"max\":5,\"mean\":0.0031384380635316963,\"over4\":6,\"fraction_over4\":0.00005201831044527674}"
+      "detail": "{\"same_size\":true,\"width\":356,\"height\":324,\"max\":5,\"mean\":0.0031471077819392426,\"over4\":6,\"fraction_over4\":0.00005201831044527674}"
     },
     {
       "name": "390x844 swipe click reaches 25%",
@@ -2055,7 +2055,7 @@
     {
       "name": "390x844 swipe 25% remains pixel-aligned",
       "passed": true,
-      "detail": "{\"same_size\":true,\"width\":356,\"height\":324,\"max\":5,\"mean\":0.007481966985712304,\"over4\":13,\"fraction_over4\":0.0001127063392980996}"
+      "detail": "{\"same_size\":true,\"width\":356,\"height\":324,\"max\":5,\"mean\":0.00749063670411985,\"over4\":13,\"fraction_over4\":0.0001127063392980996}"
     },
     {
       "name": "390x844 swipe click reaches 50%",
@@ -2065,7 +2065,7 @@
     {
       "name": "390x844 swipe 50% remains pixel-aligned",
       "passed": true,
-      "detail": "{\"same_size\":true,\"width\":356,\"height\":324,\"max\":5,\"mean\":0.0031384380635316963,\"over4\":6,\"fraction_over4\":0.00005201831044527674}"
+      "detail": "{\"same_size\":true,\"width\":356,\"height\":324,\"max\":5,\"mean\":0.0031471077819392426,\"over4\":6,\"fraction_over4\":0.00005201831044527674}"
     },
     {
       "name": "390x844 swipe click reaches 75%",
@@ -2075,7 +2075,7 @@
     {
       "name": "390x844 swipe 75% remains pixel-aligned",
       "passed": true,
-      "detail": "{\"same_size\":true,\"width\":356,\"height\":324,\"max\":5,\"mean\":0.007481966985712304,\"over4\":13,\"fraction_over4\":0.0001127063392980996}"
+      "detail": "{\"same_size\":true,\"width\":356,\"height\":324,\"max\":5,\"mean\":0.00749063670411985,\"over4\":13,\"fraction_over4\":0.0001127063392980996}"
     },
     {
       "name": "390x844 swipe click reaches 90%",
@@ -2085,7 +2085,7 @@
     {
       "name": "390x844 swipe 90% remains pixel-aligned",
       "passed": true,
-      "detail": "{\"same_size\":true,\"width\":356,\"height\":324,\"max\":5,\"mean\":0.006311555000693577,\"over4\":10,\"fraction_over4\":0.00008669718407546123}"
+      "detail": "{\"same_size\":true,\"width\":356,\"height\":324,\"max\":5,\"mean\":0.006086142322097378,\"over4\":10,\"fraction_over4\":0.00008669718407546123}"
     },
     {
       "name": "390x844 swipe click reaches 100%",
@@ -2095,7 +2095,7 @@
     {
       "name": "390x844 swipe 100% remains pixel-aligned",
       "passed": true,
-      "detail": "{\"same_size\":true,\"width\":356,\"height\":324,\"max\":5,\"mean\":0.007481966985712304,\"over4\":13,\"fraction_over4\":0.0001127063392980996}"
+      "detail": "{\"same_size\":true,\"width\":356,\"height\":324,\"max\":5,\"mean\":0.00749063670411985,\"over4\":13,\"fraction_over4\":0.0001127063392980996}"
     },
     {
       "name": "390x844 divider sits on the clip boundary at 100%",
@@ -2273,7 +2273,7 @@
       "detail": "[]"
     }
   ],
-  "finished_utc": "2026-11-06T09:46:42.024Z",
+  "finished_utc": "2026-11-07T14:19:54.591Z",
   "checks_total": 323,
   "checks_passed": 323
 }
