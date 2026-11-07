@@ -18,7 +18,4 @@ export default defineConfig({
     sourcemap: false,
     chunkSizeWarningLimit: 1200,
   },
-  test: {
-    environment: "node",
-  },
 });

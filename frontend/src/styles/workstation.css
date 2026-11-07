@@ -259,7 +259,7 @@
 .map-stage.mode-swipe .map-later .map-cell-tag {
   left: auto;
   right: 0.5rem;
-  top: 3.4rem;
+  top: 4.9rem; /* clear of the zoom control */
 }
 
 /* side-by-side: two equal cells */

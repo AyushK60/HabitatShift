@@ -1,0 +1,199 @@
+{
+  "base_url": "http://127.0.0.1:8098/",
+  "started_utc": "2026-11-07T12:08:36.646Z",
+  "checks": [
+    {
+      "name": "1. landing renders hero headline",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1. hero CTA navigates to workstation",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "2. gallery shows honest statuses",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "2. study card opens the investigation",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "3. side-by-side maps stay synchronised",
+      "passed": true,
+      "detail": "{\"earlier\":15.977474558256663,\"later\":15.977474558256663,\"centerDelta\":0}"
+    },
+    {
+      "name": "4. divider follows mouse hover with no click",
+      "passed": true,
+      "detail": "splits 20.0 → 75.0"
+    },
+    {
+      "name": "4. divider position survives cursor exit",
+      "passed": true,
+      "detail": "exit split 75.0"
+    },
+    {
+      "name": "5. touch tap places the divider",
+      "passed": true,
+      "detail": "split 30.0"
+    },
+    {
+      "name": "5. touch drag moves the divider",
+      "passed": true,
+      "detail": "split 70.0"
+    },
+    {
+      "name": "6. keyboard arrows, Shift, Home and End control the divider",
+      "passed": true,
+      "detail": "72 82 0 100"
+    },
+    {
+      "name": "6. divider exposes slider semantics",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "7. reset returns the divider to 50%",
+      "passed": true,
+      "detail": "50"
+    },
+    {
+      "name": "8. layer switch updates both map sources",
+      "passed": true,
+      "detail": "{\"earlier\":\"/files/m1/coringa_coastal/previews/earlier_2020-03-26_mndwi.png\",\"later\":\"/files/m1/coringa_coastal/previews/later_2025-03-25_mndwi.png\"}"
+    },
+    {
+      "name": "9. shared-valid explains byte-identical masks",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "9. coverage accounting shows grid vs AOI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "9. observation-count layer shows its legend note",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "10. pixel probe returns measured reflectance + indices",
+      "passed": true,
+      "detail": "82.26439°E, 16.72813°N · UTM 634788, 1849908 · pixel 208, 188 · 10 mEarlier · 2020-03-26Valid observation · 3 obs behind"
+    },
+    {
+      "name": "11. experiments page shows recorded charts",
+      "passed": true,
+      "detail": "charts 3"
+    },
+    {
+      "name": "11. uncertainty is not described as a population CI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "12. threshold switch updates measured areas",
+      "passed": true,
+      "detail": "Measured areas at |ΔNDWI| ≥ 0.25Candidate decrease48.19 ha · 2.92% of footprintUnchanged (within thr"
+    },
+    {
+      "name": "13. no horizontal overflow at 1920x1080",
+      "passed": true,
+      "detail": "landing 0px, workstation 0px"
+    },
+    {
+      "name": "13. workstation comparison fits viewport height at 1920x1080",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "13. no horizontal overflow at 1440x900",
+      "passed": true,
+      "detail": "landing 0px, workstation 0px"
+    },
+    {
+      "name": "13. workstation comparison fits viewport height at 1440x900",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "13. no horizontal overflow at 1280x800",
+      "passed": true,
+      "detail": "landing 0px, workstation 0px"
+    },
+    {
+      "name": "13. workstation comparison fits viewport height at 1280x800",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "13. no horizontal overflow at 768",
+      "passed": true,
+      "detail": "landing 0px, workstation 0px"
+    },
+    {
+      "name": "13. no horizontal overflow at 390",
+      "passed": true,
+      "detail": "landing 0px, workstation 0px"
+    },
+    {
+      "name": "14. methods page exposes manifest export",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "14. manifest endpoint serves JSON",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "14. manifest carries scene IDs and grid",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "14. experiments endpoint serves recorded run",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "15. no P0/P1 browser errors",
+      "passed": true,
+      "detail": "console 0, page 0, failed 0: "
+    }
+  ],
+  "screenshots": [
+    "docs\\evidence\\m3\\m3_workstation_1440_default.png",
+    "docs\\evidence\\m3\\m3_landing_1440_gallery.png",
+    "docs\\evidence\\m3\\m3_workstation_1440_swipe_hover.png",
+    "docs\\evidence\\m3\\m3_workstation_1440_mndwi_swipe.png",
+    "docs\\evidence\\m3\\m3_workstation_1440_quality_shared_valid.png",
+    "docs\\evidence\\m3\\m3_workstation_1440_quality_obs_count.png",
+    "docs\\evidence\\m3\\m3_workstation_1440_pixel_probe.png",
+    "docs\\evidence\\m3\\m3_experiments_1440_top.png",
+    "docs\\evidence\\m3\\m3_experiments_1440_threshold.png",
+    "docs\\evidence\\m3\\m3_landing_1920x1080.png",
+    "docs\\evidence\\m3\\m3_workstation_1920x1080.png",
+    "docs\\evidence\\m3\\m3_landing_1440x900.png",
+    "docs\\evidence\\m3\\m3_workstation_1440x900.png",
+    "docs\\evidence\\m3\\m3_landing_1280x800.png",
+    "docs\\evidence\\m3\\m3_workstation_1280x800.png",
+    "docs\\evidence\\m3\\m3_landing_768.png",
+    "docs\\evidence\\m3\\m3_workstation_768.png",
+    "docs\\evidence\\m3\\m3_landing_390.png",
+    "docs\\evidence\\m3\\m3_workstation_390.png",
+    "docs\\evidence\\m3\\m3_methods_1440.png"
+  ],
+  "console_errors": [],
+  "page_errors": [],
+  "failed_requests": [],
+  "finished_utc": "2026-11-07T12:09:23.428Z",
+  "passed": 33,
+  "failed": 0
+}

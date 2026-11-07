@@ -24,7 +24,11 @@ import {
   useState,
   type MutableRefObject,
 } from "react";
-import maplibregl, { type Map as MapLibreMap, type MapMouseEvent } from "maplibre-gl";
+import * as maplibregl from "maplibre-gl";
+import type { Map as MapLibreMap, MapMouseEvent, ImageSource, GeoJSONSource } from "maplibre-gl";
+// MapLibre v6 runs its tile/raster pipeline in a dedicated worker; Vite must
+// emit that worker as an asset and hand its URL to the library.
+import maplibreWorkerUrl from "maplibre-gl/dist/maplibre-gl-worker.mjs?url";
 import type { Georef, M1Summary } from "../api/types";
 import type { LayerSpec, PeriodKey } from "./layers";
 import { layerImageUrl } from "./layers";
@@ -59,6 +63,8 @@ interface MapCompareProps {
 }
 
 const MAP_BACKGROUND = "#dfe3de";
+
+maplibregl.setWorkerUrl(maplibreWorkerUrl);
 const EMPTY_FC: GeoJSON.FeatureCollection = { type: "FeatureCollection", features: [] };
 
 type Coord = [number, number];
@@ -92,7 +98,10 @@ function aoiFeature(summary: M1Summary): GeoJSON.Feature | null {
 }
 
 /** Ensure an image source + raster layer exist on a map and show `url`.
- *  `coordinates` pins the raster to the real grid corners. */
+ *  `coordinates` pins the raster to the real grid corners. An empty `url`
+ *  hides the layer but never creates a source with an empty image (MapLibre
+ *  would raise a decode error); the layer is created lazily on first real
+ *  image, ordered below the AOI outline. */
 function applyImageLayer(
   map: MapLibreMap,
   id: string,
@@ -100,20 +109,29 @@ function applyImageLayer(
   coordinates: CoordQuad,
   opacity = 1
 ) {
-  const source = map.getSource(id) as maplibregl.ImageSource | undefined;
+  const source = map.getSource(id) as ImageSource | undefined;
+  if (!url) {
+    if (source && map.getLayer(id)) {
+      map.setLayoutProperty(id, "visibility", "none");
+    }
+    return;
+  }
   if (source && map.getLayer(id)) {
     source.updateImage({ url, coordinates });
-    map.setLayoutProperty(id, "visibility", url ? "visible" : "none");
+    map.setLayoutProperty(id, "visibility", "visible");
     map.setPaintProperty(id, "raster-opacity", opacity);
     return;
   }
   map.addSource(id, { type: "image", url, coordinates });
-  map.addLayer({
-    id,
-    type: "raster",
-    source: id,
-    paint: { "raster-opacity": opacity, "raster-resampling": "linear" },
-  });
+  map.addLayer(
+    {
+      id,
+      type: "raster",
+      source: id,
+      paint: { "raster-opacity": opacity, "raster-resampling": "linear" },
+    },
+    map.getLayer("aoi-line") ? "aoi-line" : undefined
+  );
 }
 
 function ensureLineRect(map: MapLibreMap, box: RoiBox | null) {
@@ -132,7 +150,7 @@ function ensureLineRect(map: MapLibreMap, box: RoiBox | null) {
       paint: { "line-color": "#193c43", "line-width": 2 },
     });
   }
-  const source = map.getSource("roi-rect") as maplibregl.GeoJSONSource;
+  const source = map.getSource("roi-rect") as GeoJSONSource;
   source.setData(box ? roiFeature(box) : EMPTY_FC);
 }
 
@@ -386,7 +404,7 @@ export function MapCompare({
       : EMPTY_FC;
     const { earlier, later } = mapsRef.current;
     for (const map of [earlier, later].filter(Boolean) as MapLibreMap[]) {
-      const source = map.getSource("pixel-marker") as maplibregl.GeoJSONSource | undefined;
+      const source = map.getSource("pixel-marker") as GeoJSONSource | undefined;
       if (source) source.setData(data);
     }
   }, []);
@@ -508,10 +526,18 @@ export function MapCompare({
   }, [liveRoi, roiBox, ready]);
 
   /* -------------------------------------------------- swipe handling --- */
+  // splitRef is the interaction source of truth. It must NOT be re-assigned
+  // in the render body: a render triggered between applySplit() and its rAF
+  // (e.g. the pixel-probe state update from the same tap) would clobber the
+  // pending value with the stale prop. External prop changes (reset button)
+  // sync it after commit.
   const splitRef = useRef(split);
-  splitRef.current = split;
   const rafRef = useRef<number | null>(null);
   const draggingRef = useRef(false);
+
+  useEffect(() => {
+    splitRef.current = split;
+  }, [split]);
 
   const applySplit = useCallback(
     (value: number) => {
@@ -588,6 +614,58 @@ export function MapCompare({
       }
     }
   };
+
+  /* Touch/pen drag in capture phase: the map canvas would otherwise win the
+   * pointer, so in swipe mode the stage claims touch pointers first and the
+   * divider follows the finger. Mouse hover-follow stays in React handlers. */
+  useEffect(() => {
+    if (mode !== "swipe" || singleMap) return;
+    const stage = stageRef.current;
+    if (!stage) return;
+    let active = false;
+    const down = (event: PointerEvent) => {
+      if (event.pointerType === "mouse") return;
+      active = true;
+      event.preventDefault();
+      event.stopPropagation();
+      try {
+        stage.setPointerCapture(event.pointerId);
+      } catch {
+        /* best-effort */
+      }
+      const box = stage.getBoundingClientRect();
+      if (box.width) {
+        applySplit(((event.clientX - box.left) / box.width) * 100);
+      }
+    };
+    const move = (event: PointerEvent) => {
+      if (!active || event.pointerType === "mouse") return;
+      event.preventDefault();
+      event.stopPropagation();
+      const box = stage.getBoundingClientRect();
+      if (box.width) {
+        applySplit(((event.clientX - box.left) / box.width) * 100);
+      }
+    };
+    const up = (event: PointerEvent) => {
+      if (!active || event.pointerType === "mouse") return;
+      active = false;
+      event.stopPropagation();
+      if (stage.hasPointerCapture?.(event.pointerId)) {
+        stage.releasePointerCapture(event.pointerId);
+      }
+    };
+    stage.addEventListener("pointerdown", down, true);
+    stage.addEventListener("pointermove", move, true);
+    stage.addEventListener("pointerup", up, true);
+    stage.addEventListener("pointercancel", up, true);
+    return () => {
+      stage.removeEventListener("pointerdown", down, true);
+      stage.removeEventListener("pointermove", move, true);
+      stage.removeEventListener("pointerup", up, true);
+      stage.removeEventListener("pointercancel", up, true);
+    };
+  }, [mode, singleMap, applySplit]);
 
   const onDividerKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     let next = splitRef.current;
