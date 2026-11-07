@@ -87,14 +87,32 @@ async function run() {
     results.failed_requests.push(`${request.url()} ${request.failure()?.errorText ?? ""}`)
   );
 
-  /* 1 — landing navigation ------------------------------------------------ */
+  /* 1 — landing navigation (M4-R1 §2: Atlas CTA presents the gallery) ------ */
   await app(page, "/");
   await page.locator(".hero-copy h1").waitFor({ state: "visible", timeout: 8000 });
   check("1. landing renders hero headline", await page.getByText("Read the landscape.").first().isVisible());
   await page.getByRole("link", { name: "Explore the Atlas" }).click();
   await page.waitForTimeout(1200);
-  check("1. hero CTA navigates to workstation", page.url().includes("workstation"));
-  await shot(page, "m4_workstation_1440_default");
+  check(
+    "1. hero CTA stays on the atlas and reveals the study gallery",
+    !page.url().includes("/workstation") &&
+      (await page.evaluate(() => {
+        const grid = document.querySelector(".study-grid");
+        const box = grid?.getBoundingClientRect();
+        return Boolean(box && box.top < window.innerHeight);
+      })),
+  );
+  check(
+    "1. workstation nav opens the study selector, not a forced study",
+    await (async () => {
+      await app(page, "/workstation");
+      return (
+        (await page.locator(".picker-card").count()) === 6 &&
+        !page.url().includes("/workstation/")
+      );
+    })(),
+  );
+  await shot(page, "m4_r1_workstation_study_selector_1440");
 
   /* 2 — gallery: six processed investigations, honest PARTIAL --------------- */
   await app(page, "/");
@@ -304,7 +322,7 @@ async function run() {
   );
 
   /* 10 — coringa live enhancement + M3 interaction contracts --------------------- */
-  await app(page, "/workstation");
+  await app(page, "/workstation/coringa_coastal");
   const mode = await page.evaluate(() => document.body.textContent.includes("Showcase + live probe"));
   check("10. coringa activates the live probe when the backend is present", mode);
   await page.getByRole("button", { name: "Side by side" }).click();

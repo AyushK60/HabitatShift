@@ -31,10 +31,9 @@ import { ErrorNote } from "../components/ui";
 import { MapCompare, type CompareMode, type RoiBox } from "../workstation/MapCompare";
 import { Inspector, type InspectorTab } from "../workstation/Inspector";
 import { Dock } from "../workstation/Dock";
+import { StudyPicker } from "../workstation/StudyPicker";
 import { buildLayers, type Analysis, type AssetResolver, type LayerSpec } from "../workstation/layers";
 import "../styles/workstation.css";
-
-const DEFAULT_STUDY = "coringa_coastal";
 
 type ModeState = Record<Analysis, CompareMode>;
 const DEFAULT_MODES: ModeState = {
@@ -77,7 +76,19 @@ const LIVE_STUDIES = new Set(["coringa_coastal"]);
 
 export function WorkstationPage() {
   const params = useParams();
-  const studyId = params.studyId ?? DEFAULT_STUDY;
+  const studyId = params.studyId;
+
+  /* M4-R1 §2: /workstation without a study id presents the study-selection
+   * experience instead of forcing Coringa. Direct study URLs still render
+   * the workstation directly. */
+  if (!studyId) {
+    return <StudyPicker />;
+  }
+
+  return <WorkstationForStudy studyId={studyId} />;
+}
+
+function WorkstationForStudy({ studyId }: { studyId: string }) {
   const backendReachable = useBackendReachable();
   const live = backendReachable && LIVE_STUDIES.has(studyId);
 

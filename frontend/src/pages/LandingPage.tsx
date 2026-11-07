@@ -273,9 +273,22 @@ export function LandingPage() {
             and measurements you can re-run.
           </p>
           <div className="hero-actions">
-            <Link to="/workstation" className="button button--primary">
+            {/* M4-R1 §2: the Atlas action presents the study gallery here on
+                the landing page instead of dropping the visitor into a
+                specific investigation. The hash router owns location.hash, so
+                the anchor is handled as a controlled smooth scroll. */}
+            <a
+              href="#studies"
+              className="button button--primary"
+              onClick={(event) => {
+                event.preventDefault();
+                document
+                  .getElementById("studies")
+                  ?.scrollIntoView({ behavior: "smooth", block: "start" });
+              }}
+            >
               Explore the Atlas
-            </Link>
+            </a>
             <Link to="/methods" className="button button--secondary">
               Read the Methods
             </Link>

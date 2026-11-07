@@ -875,6 +875,92 @@
 }
 
 /* ------------------------------------------------- M4 additions --- */
+
+/* ------------------------------------------- study picker (M4-R1 §2) --- */
+.picker-page {
+  max-width: var(--shell-max);
+  margin: 0 auto;
+  padding: 2.4rem 1.5rem 3rem;
+}
+
+.picker-head h1 {
+  color: var(--teal);
+  margin: 0.2rem 0 0.6rem;
+  font-size: clamp(1.7rem, 3vw, 2.3rem);
+}
+
+.picker-lede {
+  max-width: 74ch;
+  color: var(--text-soft);
+  margin: 0 0 1.6rem;
+}
+
+.picker-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.1rem;
+}
+
+.picker-card {
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--sea-glass);
+  background: var(--paper);
+  padding: 1rem 1.1rem 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  min-width: 0;
+}
+
+.picker-card--processed {
+  border-top-color: var(--teal);
+}
+
+.picker-card--partial {
+  border-top-color: var(--copper);
+}
+
+.picker-card-head {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 0.6rem;
+  align-items: start;
+}
+
+.picker-card h2 {
+  font-size: 1.08rem;
+  margin: 0;
+  color: var(--teal);
+  line-height: 1.25;
+}
+
+.picker-question {
+  font-size: 0.84rem;
+  color: var(--text-note);
+  margin: 0;
+  flex-grow: 1;
+}
+
+.picker-dates {
+  margin: 0;
+}
+
+.picker-foot {
+  margin-top: 0.4rem;
+}
+
+@media (max-width: 1020px) {
+  .picker-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .picker-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .ws-experiment-switch {
   display: flex;
   flex-wrap: wrap;

@@ -7,7 +7,10 @@ import { MethodsPage } from "./pages/MethodsPage";
 
 export default function App() {
   const { pathname } = useLocation();
-  const isWorkstation = pathname.startsWith("/workstation");
+  // M4-R1 §2: /workstation without a study id is the study-selection
+  // experience — a normal scrolling page, not the fixed-height workstation.
+  const isWorkstation =
+    pathname.startsWith("/workstation") && pathname !== "/workstation";
   return (
     <div className={isWorkstation ? "app-shell app-shell--fixed" : "app-shell"}>
       <a className="skip" href="#main">

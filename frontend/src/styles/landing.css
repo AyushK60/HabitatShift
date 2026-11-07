@@ -112,8 +112,9 @@ main {
   border-top-color: var(--teal);
 }
 
+/* M4-R1 §3: the lead study keeps its copper identity but shares the same
+ * 3-column rhythm as every other card, so the gallery is two balanced rows. */
 .study-card--lead {
-  grid-column: span 3;
   border-top-color: var(--copper);
 }
 
@@ -163,6 +164,9 @@ main {
   height: auto;
   display: block;
   border: 1px solid var(--rule);
+  /* Consistent preview aspect across cards: cover-cropped, never distorted. */
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
 }
 
 .study-card-media-note {
