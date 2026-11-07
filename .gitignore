@@ -48,3 +48,6 @@ tmp/
 
 # ---- Frontend build output (rebuild with: cd frontend && npm run build) ----
 frontend/dist/
+
+# ---- One-click startup runtime state (start.bat / stop.bat) ----
+.runtime/
