@@ -23,8 +23,10 @@ limitations. Interpretation strings are deterministic templates keyed to the
 study's science framework (brief §15.4); no AI text and no invented numbers.
 
 Output: ``data/findings/<experiment_id>/findings.json``
-(schema ``habitatshift-findings/1``). The bundle builder embeds this file per
-experiment so map overlays and descriptions use exactly these measurements.
+(schema ``habitatshift-findings/2``; per-finding Evidence Records schema
+``habitatshift-evidence-record/1`` — see ``docs/M4_R2_EVIDENCE_SCHEMA.md``).
+The bundle builder embeds this file per experiment so map overlays and
+descriptions use exactly these measurements.
 
 Usage:
     python scripts/generate_findings.py               # all experiments
@@ -34,10 +36,13 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import logging
+import subprocess
 import sys
 from datetime import datetime, timezone
+from importlib import metadata
 from pathlib import Path
 from typing import Any
 
@@ -262,6 +267,17 @@ def _polygon_wgs84(ring_utm: list[tuple[float, float]], transformer) -> list[lis
     ]
 
 
+def _ring_area_m2(ring: list[tuple[float, float]]) -> float:
+    """Shoelace area of a UTM ring (projected grid; orientation-agnostic)."""
+    acc = 0.0
+    n = len(ring)
+    for i in range(n):
+        x1, y1 = ring[i]
+        x2, y2 = ring[(i + 1) % n]
+        acc += x1 * y2 - x2 * y1
+    return abs(acc) / 2.0
+
+
 def _region_findings(
     *,
     experiment_id: str,
@@ -343,17 +359,36 @@ def _region_findings(
             if not polys:
                 continue
             geometry = polys[0]  # one connected component → one polygon
-            utm_ring = geometry["coordinates"][0]
+            # Ring 0 is the exterior; any further rings are interior holes
+            # (masked pixels fully enclosed by the candidate component). They
+            # are preserved in the geometry and counted explicitly.
+            rings_utm = geometry["coordinates"]
+            utm_ring = rings_utm[0]
+            hole_pixel_count = int(
+                round((_ring_area_m2(utm_ring) - pixel_count * pixel_area_m2) / pixel_area_m2)
+            )
+            hole_rings_wgs84 = [
+                _polygon_wgs84(ring, to_wgs84) for ring in rings_utm[1:]
+            ]
             xs = [point[0] for point in utm_ring]
             ys = [point[1] for point in utm_ring]
             centroid_x, centroid_y = float(np.mean(xs)), float(np.mean(ys))
             centroid_lon, centroid_lat = to_wgs84.transform(centroid_x, centroid_y)
             wgs_ring = _polygon_wgs84(utm_ring, to_wgs84)
             display_id = f"Region {next(counter):02d}"
+            # Content-derived stable ID, computed from the ROUNDED centroid
+            # that is recorded on the finding, so the ID is reproducible from
+            # the record itself.
+            centroid_utm = [round(centroid_x, 2), round(centroid_y, 2)]
+            evidence_id = (
+                f"ev-{experiment_id}-{index}-{direction[:3]}"
+                f"-{round(centroid_utm[0])}-{round(centroid_utm[1])}"
+            )
             findings.append(
                 {
                     "id": display_id.lower().replace(" ", "_"),
                     "display_id": display_id,
+                    "evidence_id": evidence_id,
                     "index": index,
                     "direction": direction,
                     "threshold": threshold,
@@ -365,11 +400,12 @@ def _region_findings(
                     "mean_delta": round(mean_delta, 6),
                     "median_delta": round(median_delta, 6),
                     "common_valid_pixels": common_valid_pixels,
-                    "centroid_utm": [round(centroid_x, 2), round(centroid_y, 2)],
+                    "hole_pixel_count": hole_pixel_count,
+                    "centroid_utm": centroid_utm,
                     "centroid_lonlat": [round(centroid_lon, 6), round(centroid_lat, 6)],
                     "geometry_wgs84": {
                         "type": "Polygon",
-                        "coordinates": [wgs_ring],
+                        "coordinates": [wgs_ring] + hole_rings_wgs84,
                     },
                     "input_raster": str(delta_path.relative_to(PROJECT_ROOT)).replace("\\", "/"),
                     "valid_mask": str(common_path.relative_to(PROJECT_ROOT)).replace("\\", "/"),
@@ -383,6 +419,200 @@ def _region_findings(
         "increase_pixels_total": totals.get("increase", 0),
     }
     return findings, index_stats
+
+
+def _git_commit() -> str | None:
+    """Commit of record at generation time; None when git is unavailable."""
+    try:
+        return subprocess.run(
+            ["git", "rev-parse", "HEAD"],
+            capture_output=True,
+            text=True,
+            check=True,
+            cwd=PROJECT_ROOT,
+        ).stdout.strip()
+    except Exception:  # pragma: no cover - provenance is best-effort
+        return None
+
+
+def _software_versions() -> dict[str, str]:
+    versions: dict[str, str] = {}
+    for dist in ("numpy", "rasterio", "scipy", "pyproj"):
+        try:
+            versions[dist] = metadata.version(dist)
+        except Exception:  # pragma: no cover
+            versions[dist] = "unavailable"
+    return versions
+
+
+def _finding_checksum(finding: dict[str, Any]) -> str:
+    payload = json.loads(json.dumps(finding))  # deep copy
+    payload["evidence"]["method_provenance"]["output_checksum"] = None
+    canonical = json.dumps(payload, sort_keys=True, separators=(",", ":"))
+    return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+
+
+def _evidence_record(
+    finding: dict[str, Any],
+    *,
+    summary: dict[str, Any],
+    method: dict[str, Any],
+    ctx: dict[str, Any],
+) -> dict[str, Any]:
+    """Assemble the versioned Evidence Record for one finding (G4).
+
+    Structured measurements only — the explanatory interpretation stays in
+    ``finding['interpretation']`` and is part of the record by reference.
+    Fields the pipeline cannot supply are recorded as null, never invented.
+    """
+    study = summary["study"]
+    earlier, later = summary["periods"][0], summary["periods"][1]
+    grid = summary["grid"]
+    aoi = summary["aoi"]
+    outputs = summary.get("outputs", {})
+    index = finding["index"]
+    block = summary["change"][index]
+    spec = summary.get("indices", {}).get(index, {})
+    catalog = summary.get("catalog", {})
+
+    def output_hash(*registry_keys: str) -> str | None:
+        for key in registry_keys:
+            entry = outputs.get(key)
+            if entry and entry.get("sha256"):
+                return entry["sha256"]
+        return None
+
+    delta_hash = output_hash(f"delta_{index}_tif", f"{later['period_id']}_{later['anchor_date']}_delta_{index}_tif")
+    common_hash = output_hash(f"common_valid_{index}_tif")
+
+    # Validity: the shared-valid footprint is the intersection of both
+    # periods' valid masks; the per-period fractions are recorded per period.
+    quality_limitations = list(summary.get("limitations", []))
+
+    return {
+        "schema": "habitatshift-evidence-record/1",
+        "identification": {
+            "evidence_id": finding["evidence_id"],
+            "finding_id": finding["id"],
+            "display_id": finding["display_id"],
+            "schema_version": 1,
+            "study_id": study["study_id"],
+            "experiment_id": summary["experiment_id"],
+            "finding_type": "threshold-connected-region",
+            "candidate_direction": finding["direction"],
+            "evidence_status": ctx["evidence_status"],
+        },
+        "source_observations": {
+            "earlier": {
+                "item_ids": earlier.get("item_ids"),
+                "observation_dates": earlier.get("observation_dates"),
+                "anchor_date": earlier["anchor_date"],
+                "composite_method": earlier["composite_method"],
+                "observation_count": earlier.get("observation_count"),
+                "valid_pixels": earlier.get("valid_pixels"),
+                "aoi_pixels": earlier.get("aoi_pixels"),
+                "valid_fraction": earlier.get("valid_fraction"),
+            },
+            "later": {
+                "item_ids": later.get("item_ids"),
+                "observation_dates": later.get("observation_dates"),
+                "anchor_date": later["anchor_date"],
+                "composite_method": later["composite_method"],
+                "observation_count": later.get("observation_count"),
+                "valid_pixels": later.get("valid_pixels"),
+                "aoi_pixels": later.get("aoi_pixels"),
+                "valid_fraction": later.get("valid_fraction"),
+            },
+            "dataset": {
+                "collection": catalog.get("collection"),
+                "provider": catalog.get("provider"),
+                "license": catalog.get("license"),
+                "processing_level": "Sentinel-2 L2A surface reflectance",
+                "attribution": summary.get("attribution"),
+            },
+            "study_aoi": {
+                "bounds_lonlat": aoi.get("bounds_4326"),
+                "area_km2": aoi.get("area_km2"),
+                "aoi_pixels": aoi.get("aoi_pixels"),
+            },
+        },
+        "input_measurements": {
+            "index": index,
+            "index_label": block.get("label") or index.upper(),
+            "formula": spec.get("formula"),
+            "bands": spec.get("bands"),
+            "native_band_resolution_m": spec.get("native_resolution_m"),
+            "band_resolution_note": spec.get("resolution_note"),
+            "delta_definition": "I_later(p) - I_earlier(p) on the shared analysis grid",
+            "threshold": finding["threshold"],
+            "threshold_rule": "|ΔI| ≥ t, inclusive; sign selects the candidate direction",
+            "input_raster": finding["input_raster"],
+            "input_raster_sha256": delta_hash,
+            "valid_mask": finding["valid_mask"],
+            "valid_mask_sha256": common_hash,
+            "analysis_grid": {
+                "crs": grid["crs"],
+                "resolution_m": grid["resolution_m"],
+                "width": grid["width"],
+                "height": grid["height"],
+                "transform": grid["transform"],
+                "pixel_area_m2": grid["pixel_area_m2"],
+            },
+        },
+        "spatial_measurements": {
+            "pixel_count": finding["pixel_count"],
+            "area_ha": finding["area_ha"],
+            "area_units": "ha (projected analysis grid, pixel count × pixel area)",
+            "mean_delta": finding["mean_delta"],
+            "median_delta": finding["median_delta"],
+            "valid_pixel_denominator": finding["common_valid_pixels"],
+            "share_of_common_valid_percent": finding["share_of_common_valid_percent"],
+            "hole_pixel_count": finding["hole_pixel_count"],
+            "centroid_utm": finding["centroid_utm"],
+            "centroid_lonlat": finding["centroid_lonlat"],
+            "geometry_wgs84_ref": "finding.geometry_wgs84",
+        },
+        "evidence_quality": {
+            "earlier_valid_fraction": earlier.get("valid_fraction"),
+            "later_valid_fraction": later.get("valid_fraction"),
+            "shared_valid_fraction_of_aoi": ctx["common_valid_fraction_of_aoi"],
+            "observation_support": {
+                "earlier_observations": earlier.get("observation_count"),
+                "later_observations": later.get("observation_count"),
+                "min_observations_required": earlier.get("min_observations"),
+            },
+            "masking_and_cloud_limitations": quality_limitations,
+            "threshold_sensitivity": {
+                "status": "evaluated in M4-R2 G6",
+                "result": None,
+            },
+            "confounding_factors": finding["interpretation"]["explanations"],
+        },
+        "method_provenance": {
+            "algorithm": "threshold candidate mask → 4-connected components (scipy.ndimage.label) → MMU filter → top-K selection",
+            "algorithm_version": summary.get("pipeline_version"),
+            "parameters": {
+                "threshold": finding["threshold"],
+                "minimum_mapping_unit_px": method["minimum_mapping_unit_px"],
+                "minimum_mapping_unit_ha": method["minimum_mapping_unit_ha"],
+                "max_regions_per_index_direction": method["max_regions_per_index_direction"],
+                "connectivity": 4,
+            },
+            "input_hashes": {
+                "delta_raster": delta_hash,
+                "common_valid_mask": common_hash,
+            },
+            "source_experiment_run": {
+                "experiment_id": summary["experiment_id"],
+                "run_generated_utc": summary.get("generated_utc"),
+                "pipeline_verification": summary.get("verification"),
+            },
+            "git_commit": _git_commit(),
+            "software": _software_versions(),
+            "generated_utc": ctx["generated_utc"],
+            "output_checksum": None,  # filled by _finding_checksum below
+        },
+    }
 
 
 def generate(experiment_id: str, processed_rel: str) -> int:
@@ -423,12 +653,17 @@ def generate(experiment_id: str, processed_rel: str) -> int:
     }
 
     first_block = next(iter(change.values()), None)
+    generated_utc = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     payload = {
-        "schema": "habitatshift-findings/1",
+        "schema": "habitatshift-findings/2",
         "study_id": study_id,
         "experiment_id": experiment_id,
-        "generated_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-        "evidence_status": summary.get("evidence_status", "processed"),
+        "generated_utc": generated_utc,
+        # Same evidence verdict as the bundle builder: "partial" marks the
+        # study the feasibility review restricted (docs/M4_FEASIBILITY.md).
+        "evidence_status": (
+            "partial" if study_id == "himalaya_purepu_2025" else summary.get("evidence_status", "processed")
+        ),
         "method": method,
         "periods": {
             "earlier": {
@@ -472,9 +707,18 @@ def generate(experiment_id: str, processed_rel: str) -> int:
         "common_valid_fraction_of_aoi": payload["common_valid_fraction_of_aoi"],
         "evidence_status": payload["evidence_status"],
         "method": method["source"],
+        "generated_utc": generated_utc,
     }
     for finding in payload["findings"]:
         finding["interpretation"] = _interpretation(study_id, finding, ctx)
+
+    # Attach the versioned Evidence Record (structured measurements; the
+    # explanatory interpretation stays at finding level and belongs to the
+    # record by reference). Then seal each record with a checksum.
+    for finding in payload["findings"]:
+        record = _evidence_record(finding, summary=summary, method=method, ctx=ctx)
+        finding["evidence"] = record
+        record["method_provenance"]["output_checksum"] = _finding_checksum(finding)
 
     out_dir = PROJECT_ROOT / "data" / "findings"
     out_dir.mkdir(parents=True, exist_ok=True)

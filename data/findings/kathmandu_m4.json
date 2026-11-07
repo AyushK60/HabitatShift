@@ -1,8 +1,8 @@
 {
-  "schema": "habitatshift-findings/1",
+  "schema": "habitatshift-findings/2",
   "study_id": "kathmandu_urban",
   "experiment_id": "kathmandu_m4",
-  "generated_utc": "2026-11-07T16:45:29Z",
+  "generated_utc": "2026-11-07T19:02:36Z",
   "evidence_status": "processed",
   "method": {
     "source": "frozen M1 difference rasters + common-valid masks",
@@ -50,6 +50,7 @@
     {
       "id": "region_01",
       "display_id": "Region 01",
+      "evidence_id": "ev-kathmandu_m4-ndbi-dec-333901-3066014",
       "index": "ndbi",
       "direction": "decrease",
       "threshold": 0.15,
@@ -59,6 +60,7 @@
       "mean_delta": -0.389068,
       "median_delta": -0.413292,
       "common_valid_pixels": 43728,
+      "hole_pixel_count": 0,
       "centroid_utm": [
         333901.48,
         3066014.44
@@ -206,11 +208,196 @@
           "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndbi.tif",
           "method": "frozen M1 difference rasters + common-valid masks"
         }
+      },
+      "evidence": {
+        "schema": "habitatshift-evidence-record/1",
+        "identification": {
+          "evidence_id": "ev-kathmandu_m4-ndbi-dec-333901-3066014",
+          "finding_id": "region_01",
+          "display_id": "Region 01",
+          "schema_version": 1,
+          "study_id": "kathmandu_urban",
+          "experiment_id": "kathmandu_m4",
+          "finding_type": "threshold-connected-region",
+          "candidate_direction": "decrease",
+          "evidence_status": "processed"
+        },
+        "source_observations": {
+          "earlier": {
+            "item_ids": [
+              "S2B_45RUL_20200331_0_L2A",
+              "S2A_45RUL_20200402_1_L2A",
+              "S2A_45RUL_20200326_0_L2A"
+            ],
+            "observation_dates": [
+              "2020-03-31",
+              "2020-04-02",
+              "2020-03-26"
+            ],
+            "anchor_date": "2020-03-31",
+            "composite_method": "median",
+            "observation_count": 3,
+            "valid_pixels": 43728,
+            "aoi_pixels": 43728,
+            "valid_fraction": 1.0
+          },
+          "later": {
+            "item_ids": [
+              "S2A_45RUL_20250329_0_L2A",
+              "S2C_45RUL_20250330_0_L2A",
+              "S2C_45RUL_20250327_0_L2A"
+            ],
+            "observation_dates": [
+              "2025-03-29",
+              "2025-03-30",
+              "2025-03-27"
+            ],
+            "anchor_date": "2025-03-29",
+            "composite_method": "median",
+            "observation_count": 3,
+            "valid_pixels": 43728,
+            "aoi_pixels": 43728,
+            "valid_fraction": 1.0
+          },
+          "dataset": {
+            "collection": "sentinel-2-l2a",
+            "provider": "Element 84 Earth Search (AWS Open Data)",
+            "license": "Copernicus Sentinel data: free, open and unrestricted use with attribution (ESA Copernicus data policy). Catalogue: Element 84 Earth Search, AWS Open Data.",
+            "processing_level": "Sentinel-2 L2A surface reflectance",
+            "attribution": "Contains modified Copernicus Sentinel data, processed by ESA; L2A products distributed by the Element 84 Earth Search STAC catalogue (AWS Open Data)."
+          },
+          "study_aoi": {
+            "bounds_lonlat": [
+              85.305,
+              27.695,
+              85.325,
+              27.715
+            ],
+            "area_km2": 4.371274,
+            "aoi_pixels": 43728
+          }
+        },
+        "input_measurements": {
+          "index": "ndbi",
+          "index_label": "observed index difference (later - earlier); not a land-cover verdict",
+          "formula": "(SWIR1 - NIR) / (SWIR1 + NIR)",
+          "bands": [
+            "swir16",
+            "nir"
+          ],
+          "native_band_resolution_m": 20.0,
+          "band_resolution_note": "computed on a 10 m grid from 20 m native bands; upsampled data contain no genuine 10 m detail",
+          "delta_definition": "I_later(p) - I_earlier(p) on the shared analysis grid",
+          "threshold": 0.15,
+          "threshold_rule": "|\u0394I| \u2265 t, inclusive; sign selects the candidate direction",
+          "input_raster": "data/processed/m4/kathmandu_m4/delta_ndbi.tif",
+          "input_raster_sha256": "c97f00a6adbe005b422c7f837635d373b1d79b6ef7c04080880525712e7d3866",
+          "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndbi.tif",
+          "valid_mask_sha256": "80fffd3cf94c5f6f61a9caca8b0e416a918ad26bc2e8657104dfee36ef78386e",
+          "analysis_grid": {
+            "crs": "EPSG:32645",
+            "resolution_m": 10.0,
+            "width": 201,
+            "height": 225,
+            "transform": [
+              10.0,
+              0.0,
+              332860.0,
+              0.0,
+              -10.0,
+              3066790.0
+            ],
+            "pixel_area_m2": 100.0
+          }
+        },
+        "spatial_measurements": {
+          "pixel_count": 150,
+          "area_ha": 1.5,
+          "area_units": "ha (projected analysis grid, pixel count \u00d7 pixel area)",
+          "mean_delta": -0.389068,
+          "median_delta": -0.413292,
+          "valid_pixel_denominator": 43728,
+          "share_of_common_valid_percent": 0.343,
+          "hole_pixel_count": 0,
+          "centroid_utm": [
+            333901.48,
+            3066014.44
+          ],
+          "centroid_lonlat": [
+            85.315332,
+            27.7082
+          ],
+          "geometry_wgs84_ref": "finding.geometry_wgs84"
+        },
+        "evidence_quality": {
+          "earlier_valid_fraction": 1.0,
+          "later_valid_fraction": 1.0,
+          "shared_valid_fraction_of_aoi": 1.0,
+          "observation_support": {
+            "earlier_observations": 3,
+            "later_observations": 3,
+            "min_observations_required": 1
+          },
+          "masking_and_cloud_limitations": [
+            "Bare soil, construction sites and dry riverbeds mimic built-up spectra.",
+            "NDBI is a feature, not a building label.",
+            "Agriculture/forest boundary ambiguity.",
+            "The following indices use 20 m SWIR bands resampled to the 10 m analysis grid and contain no genuine 10 m SWIR detail: ndbi.",
+            "Composites are robust within-period summaries of a few observations, not a dense time series; inter-annual change is represented by two period composites only.",
+            "Index differences are candidate spectral signals. They are not verified deforestation, wetland loss, construction, glacier damage or any other causal land-cover label.",
+            "Cloud, shadow and saturated-pixel exclusion relies on the provider SCL product; terrain shadow is not independently re-derived.",
+            "Surface reflectance is the provider L2A product; no independent atmospheric correction is performed.",
+            "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
+          ],
+          "threshold_sensitivity": {
+            "status": "evaluated in M4-R2 G6",
+            "result": null
+          },
+          "confounding_factors": [
+            "New or extended impervious surfaces (candidate built-up change).",
+            "Bare soil, construction sites or cleared ground between the windows.",
+            "Vegetation loss on the \u0394NDVI counter-evidence panel."
+          ]
+        },
+        "method_provenance": {
+          "algorithm": "threshold candidate mask \u2192 4-connected components (scipy.ndimage.label) \u2192 MMU filter \u2192 top-K selection",
+          "algorithm_version": "0.2.0-m1",
+          "parameters": {
+            "threshold": 0.15,
+            "minimum_mapping_unit_px": 25,
+            "minimum_mapping_unit_ha": 0.25,
+            "max_regions_per_index_direction": 5,
+            "connectivity": 4
+          },
+          "input_hashes": {
+            "delta_raster": "c97f00a6adbe005b422c7f837635d373b1d79b6ef7c04080880525712e7d3866",
+            "common_valid_mask": "80fffd3cf94c5f6f61a9caca8b0e416a918ad26bc2e8657104dfee36ef78386e"
+          },
+          "source_experiment_run": {
+            "experiment_id": "kathmandu_m4",
+            "run_generated_utc": "2026-11-07T13:12:45.714603+00:00",
+            "pipeline_verification": {
+              "all_passed": true,
+              "check_count": 26,
+              "failed_checks": []
+            }
+          },
+          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "software": {
+            "numpy": "2.2.6",
+            "rasterio": "1.4.3",
+            "scipy": "1.17.1",
+            "pyproj": "3.7.1"
+          },
+          "generated_utc": "2026-11-07T19:02:36Z",
+          "output_checksum": "1d514d4299142127de3a60a97f8f54d5fe5bac5ede53157b48271b71ab62079d"
+        }
       }
     },
     {
       "id": "region_02",
       "display_id": "Region 02",
+      "evidence_id": "ev-kathmandu_m4-ndbi-inc-333910-3065371",
       "index": "ndbi",
       "direction": "increase",
       "threshold": 0.15,
@@ -220,6 +407,7 @@
       "mean_delta": 0.195126,
       "median_delta": 0.192564,
       "common_valid_pixels": 43728,
+      "hole_pixel_count": 0,
       "centroid_utm": [
         333910.0,
         3065371.26
@@ -639,11 +827,196 @@
           "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndbi.tif",
           "method": "frozen M1 difference rasters + common-valid masks"
         }
+      },
+      "evidence": {
+        "schema": "habitatshift-evidence-record/1",
+        "identification": {
+          "evidence_id": "ev-kathmandu_m4-ndbi-inc-333910-3065371",
+          "finding_id": "region_02",
+          "display_id": "Region 02",
+          "schema_version": 1,
+          "study_id": "kathmandu_urban",
+          "experiment_id": "kathmandu_m4",
+          "finding_type": "threshold-connected-region",
+          "candidate_direction": "increase",
+          "evidence_status": "processed"
+        },
+        "source_observations": {
+          "earlier": {
+            "item_ids": [
+              "S2B_45RUL_20200331_0_L2A",
+              "S2A_45RUL_20200402_1_L2A",
+              "S2A_45RUL_20200326_0_L2A"
+            ],
+            "observation_dates": [
+              "2020-03-31",
+              "2020-04-02",
+              "2020-03-26"
+            ],
+            "anchor_date": "2020-03-31",
+            "composite_method": "median",
+            "observation_count": 3,
+            "valid_pixels": 43728,
+            "aoi_pixels": 43728,
+            "valid_fraction": 1.0
+          },
+          "later": {
+            "item_ids": [
+              "S2A_45RUL_20250329_0_L2A",
+              "S2C_45RUL_20250330_0_L2A",
+              "S2C_45RUL_20250327_0_L2A"
+            ],
+            "observation_dates": [
+              "2025-03-29",
+              "2025-03-30",
+              "2025-03-27"
+            ],
+            "anchor_date": "2025-03-29",
+            "composite_method": "median",
+            "observation_count": 3,
+            "valid_pixels": 43728,
+            "aoi_pixels": 43728,
+            "valid_fraction": 1.0
+          },
+          "dataset": {
+            "collection": "sentinel-2-l2a",
+            "provider": "Element 84 Earth Search (AWS Open Data)",
+            "license": "Copernicus Sentinel data: free, open and unrestricted use with attribution (ESA Copernicus data policy). Catalogue: Element 84 Earth Search, AWS Open Data.",
+            "processing_level": "Sentinel-2 L2A surface reflectance",
+            "attribution": "Contains modified Copernicus Sentinel data, processed by ESA; L2A products distributed by the Element 84 Earth Search STAC catalogue (AWS Open Data)."
+          },
+          "study_aoi": {
+            "bounds_lonlat": [
+              85.305,
+              27.695,
+              85.325,
+              27.715
+            ],
+            "area_km2": 4.371274,
+            "aoi_pixels": 43728
+          }
+        },
+        "input_measurements": {
+          "index": "ndbi",
+          "index_label": "observed index difference (later - earlier); not a land-cover verdict",
+          "formula": "(SWIR1 - NIR) / (SWIR1 + NIR)",
+          "bands": [
+            "swir16",
+            "nir"
+          ],
+          "native_band_resolution_m": 20.0,
+          "band_resolution_note": "computed on a 10 m grid from 20 m native bands; upsampled data contain no genuine 10 m detail",
+          "delta_definition": "I_later(p) - I_earlier(p) on the shared analysis grid",
+          "threshold": 0.15,
+          "threshold_rule": "|\u0394I| \u2265 t, inclusive; sign selects the candidate direction",
+          "input_raster": "data/processed/m4/kathmandu_m4/delta_ndbi.tif",
+          "input_raster_sha256": "c97f00a6adbe005b422c7f837635d373b1d79b6ef7c04080880525712e7d3866",
+          "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndbi.tif",
+          "valid_mask_sha256": "80fffd3cf94c5f6f61a9caca8b0e416a918ad26bc2e8657104dfee36ef78386e",
+          "analysis_grid": {
+            "crs": "EPSG:32645",
+            "resolution_m": 10.0,
+            "width": 201,
+            "height": 225,
+            "transform": [
+              10.0,
+              0.0,
+              332860.0,
+              0.0,
+              -10.0,
+              3066790.0
+            ],
+            "pixel_area_m2": 100.0
+          }
+        },
+        "spatial_measurements": {
+          "pixel_count": 285,
+          "area_ha": 2.85,
+          "area_units": "ha (projected analysis grid, pixel count \u00d7 pixel area)",
+          "mean_delta": 0.195126,
+          "median_delta": 0.192564,
+          "valid_pixel_denominator": 43728,
+          "share_of_common_valid_percent": 0.6518,
+          "hole_pixel_count": 0,
+          "centroid_utm": [
+            333910.0,
+            3065371.26
+          ],
+          "centroid_lonlat": [
+            85.315508,
+            27.702397
+          ],
+          "geometry_wgs84_ref": "finding.geometry_wgs84"
+        },
+        "evidence_quality": {
+          "earlier_valid_fraction": 1.0,
+          "later_valid_fraction": 1.0,
+          "shared_valid_fraction_of_aoi": 1.0,
+          "observation_support": {
+            "earlier_observations": 3,
+            "later_observations": 3,
+            "min_observations_required": 1
+          },
+          "masking_and_cloud_limitations": [
+            "Bare soil, construction sites and dry riverbeds mimic built-up spectra.",
+            "NDBI is a feature, not a building label.",
+            "Agriculture/forest boundary ambiguity.",
+            "The following indices use 20 m SWIR bands resampled to the 10 m analysis grid and contain no genuine 10 m SWIR detail: ndbi.",
+            "Composites are robust within-period summaries of a few observations, not a dense time series; inter-annual change is represented by two period composites only.",
+            "Index differences are candidate spectral signals. They are not verified deforestation, wetland loss, construction, glacier damage or any other causal land-cover label.",
+            "Cloud, shadow and saturated-pixel exclusion relies on the provider SCL product; terrain shadow is not independently re-derived.",
+            "Surface reflectance is the provider L2A product; no independent atmospheric correction is performed.",
+            "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
+          ],
+          "threshold_sensitivity": {
+            "status": "evaluated in M4-R2 G6",
+            "result": null
+          },
+          "confounding_factors": [
+            "New or extended impervious surfaces (candidate built-up change).",
+            "Bare soil, construction sites or cleared ground between the windows.",
+            "Vegetation loss on the \u0394NDVI counter-evidence panel."
+          ]
+        },
+        "method_provenance": {
+          "algorithm": "threshold candidate mask \u2192 4-connected components (scipy.ndimage.label) \u2192 MMU filter \u2192 top-K selection",
+          "algorithm_version": "0.2.0-m1",
+          "parameters": {
+            "threshold": 0.15,
+            "minimum_mapping_unit_px": 25,
+            "minimum_mapping_unit_ha": 0.25,
+            "max_regions_per_index_direction": 5,
+            "connectivity": 4
+          },
+          "input_hashes": {
+            "delta_raster": "c97f00a6adbe005b422c7f837635d373b1d79b6ef7c04080880525712e7d3866",
+            "common_valid_mask": "80fffd3cf94c5f6f61a9caca8b0e416a918ad26bc2e8657104dfee36ef78386e"
+          },
+          "source_experiment_run": {
+            "experiment_id": "kathmandu_m4",
+            "run_generated_utc": "2026-11-07T13:12:45.714603+00:00",
+            "pipeline_verification": {
+              "all_passed": true,
+              "check_count": 26,
+              "failed_checks": []
+            }
+          },
+          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "software": {
+            "numpy": "2.2.6",
+            "rasterio": "1.4.3",
+            "scipy": "1.17.1",
+            "pyproj": "3.7.1"
+          },
+          "generated_utc": "2026-11-07T19:02:36Z",
+          "output_checksum": "d00577910dc68d507728f8e1469463869c2857754c50baf780bb7002a9376cad"
+        }
       }
     },
     {
       "id": "region_03",
       "display_id": "Region 03",
+      "evidence_id": "ev-kathmandu_m4-ndbi-inc-333838-3066494",
       "index": "ndbi",
       "direction": "increase",
       "threshold": 0.15,
@@ -653,6 +1026,7 @@
       "mean_delta": 0.222874,
       "median_delta": 0.216622,
       "common_valid_pixels": 43728,
+      "hole_pixel_count": 1,
       "centroid_utm": [
         333838.04,
         3066494.31
@@ -869,6 +1243,28 @@
               85.314629,
               27.713386
             ]
+          ],
+          [
+            [
+              85.314633,
+              27.713115
+            ],
+            [
+              85.314735,
+              27.713116
+            ],
+            [
+              85.314736,
+              27.713026
+            ],
+            [
+              85.314635,
+              27.713025
+            ],
+            [
+              85.314633,
+              27.713115
+            ]
           ]
         ]
       },
@@ -896,11 +1292,196 @@
           "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndbi.tif",
           "method": "frozen M1 difference rasters + common-valid masks"
         }
+      },
+      "evidence": {
+        "schema": "habitatshift-evidence-record/1",
+        "identification": {
+          "evidence_id": "ev-kathmandu_m4-ndbi-inc-333838-3066494",
+          "finding_id": "region_03",
+          "display_id": "Region 03",
+          "schema_version": 1,
+          "study_id": "kathmandu_urban",
+          "experiment_id": "kathmandu_m4",
+          "finding_type": "threshold-connected-region",
+          "candidate_direction": "increase",
+          "evidence_status": "processed"
+        },
+        "source_observations": {
+          "earlier": {
+            "item_ids": [
+              "S2B_45RUL_20200331_0_L2A",
+              "S2A_45RUL_20200402_1_L2A",
+              "S2A_45RUL_20200326_0_L2A"
+            ],
+            "observation_dates": [
+              "2020-03-31",
+              "2020-04-02",
+              "2020-03-26"
+            ],
+            "anchor_date": "2020-03-31",
+            "composite_method": "median",
+            "observation_count": 3,
+            "valid_pixels": 43728,
+            "aoi_pixels": 43728,
+            "valid_fraction": 1.0
+          },
+          "later": {
+            "item_ids": [
+              "S2A_45RUL_20250329_0_L2A",
+              "S2C_45RUL_20250330_0_L2A",
+              "S2C_45RUL_20250327_0_L2A"
+            ],
+            "observation_dates": [
+              "2025-03-29",
+              "2025-03-30",
+              "2025-03-27"
+            ],
+            "anchor_date": "2025-03-29",
+            "composite_method": "median",
+            "observation_count": 3,
+            "valid_pixels": 43728,
+            "aoi_pixels": 43728,
+            "valid_fraction": 1.0
+          },
+          "dataset": {
+            "collection": "sentinel-2-l2a",
+            "provider": "Element 84 Earth Search (AWS Open Data)",
+            "license": "Copernicus Sentinel data: free, open and unrestricted use with attribution (ESA Copernicus data policy). Catalogue: Element 84 Earth Search, AWS Open Data.",
+            "processing_level": "Sentinel-2 L2A surface reflectance",
+            "attribution": "Contains modified Copernicus Sentinel data, processed by ESA; L2A products distributed by the Element 84 Earth Search STAC catalogue (AWS Open Data)."
+          },
+          "study_aoi": {
+            "bounds_lonlat": [
+              85.305,
+              27.695,
+              85.325,
+              27.715
+            ],
+            "area_km2": 4.371274,
+            "aoi_pixels": 43728
+          }
+        },
+        "input_measurements": {
+          "index": "ndbi",
+          "index_label": "observed index difference (later - earlier); not a land-cover verdict",
+          "formula": "(SWIR1 - NIR) / (SWIR1 + NIR)",
+          "bands": [
+            "swir16",
+            "nir"
+          ],
+          "native_band_resolution_m": 20.0,
+          "band_resolution_note": "computed on a 10 m grid from 20 m native bands; upsampled data contain no genuine 10 m detail",
+          "delta_definition": "I_later(p) - I_earlier(p) on the shared analysis grid",
+          "threshold": 0.15,
+          "threshold_rule": "|\u0394I| \u2265 t, inclusive; sign selects the candidate direction",
+          "input_raster": "data/processed/m4/kathmandu_m4/delta_ndbi.tif",
+          "input_raster_sha256": "c97f00a6adbe005b422c7f837635d373b1d79b6ef7c04080880525712e7d3866",
+          "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndbi.tif",
+          "valid_mask_sha256": "80fffd3cf94c5f6f61a9caca8b0e416a918ad26bc2e8657104dfee36ef78386e",
+          "analysis_grid": {
+            "crs": "EPSG:32645",
+            "resolution_m": 10.0,
+            "width": 201,
+            "height": 225,
+            "transform": [
+              10.0,
+              0.0,
+              332860.0,
+              0.0,
+              -10.0,
+              3066790.0
+            ],
+            "pixel_area_m2": 100.0
+          }
+        },
+        "spatial_measurements": {
+          "pixel_count": 108,
+          "area_ha": 1.08,
+          "area_units": "ha (projected analysis grid, pixel count \u00d7 pixel area)",
+          "mean_delta": 0.222874,
+          "median_delta": 0.216622,
+          "valid_pixel_denominator": 43728,
+          "share_of_common_valid_percent": 0.247,
+          "hole_pixel_count": 1,
+          "centroid_utm": [
+            333838.04,
+            3066494.31
+          ],
+          "centroid_lonlat": [
+            85.314622,
+            27.712522
+          ],
+          "geometry_wgs84_ref": "finding.geometry_wgs84"
+        },
+        "evidence_quality": {
+          "earlier_valid_fraction": 1.0,
+          "later_valid_fraction": 1.0,
+          "shared_valid_fraction_of_aoi": 1.0,
+          "observation_support": {
+            "earlier_observations": 3,
+            "later_observations": 3,
+            "min_observations_required": 1
+          },
+          "masking_and_cloud_limitations": [
+            "Bare soil, construction sites and dry riverbeds mimic built-up spectra.",
+            "NDBI is a feature, not a building label.",
+            "Agriculture/forest boundary ambiguity.",
+            "The following indices use 20 m SWIR bands resampled to the 10 m analysis grid and contain no genuine 10 m SWIR detail: ndbi.",
+            "Composites are robust within-period summaries of a few observations, not a dense time series; inter-annual change is represented by two period composites only.",
+            "Index differences are candidate spectral signals. They are not verified deforestation, wetland loss, construction, glacier damage or any other causal land-cover label.",
+            "Cloud, shadow and saturated-pixel exclusion relies on the provider SCL product; terrain shadow is not independently re-derived.",
+            "Surface reflectance is the provider L2A product; no independent atmospheric correction is performed.",
+            "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
+          ],
+          "threshold_sensitivity": {
+            "status": "evaluated in M4-R2 G6",
+            "result": null
+          },
+          "confounding_factors": [
+            "New or extended impervious surfaces (candidate built-up change).",
+            "Bare soil, construction sites or cleared ground between the windows.",
+            "Vegetation loss on the \u0394NDVI counter-evidence panel."
+          ]
+        },
+        "method_provenance": {
+          "algorithm": "threshold candidate mask \u2192 4-connected components (scipy.ndimage.label) \u2192 MMU filter \u2192 top-K selection",
+          "algorithm_version": "0.2.0-m1",
+          "parameters": {
+            "threshold": 0.15,
+            "minimum_mapping_unit_px": 25,
+            "minimum_mapping_unit_ha": 0.25,
+            "max_regions_per_index_direction": 5,
+            "connectivity": 4
+          },
+          "input_hashes": {
+            "delta_raster": "c97f00a6adbe005b422c7f837635d373b1d79b6ef7c04080880525712e7d3866",
+            "common_valid_mask": "80fffd3cf94c5f6f61a9caca8b0e416a918ad26bc2e8657104dfee36ef78386e"
+          },
+          "source_experiment_run": {
+            "experiment_id": "kathmandu_m4",
+            "run_generated_utc": "2026-11-07T13:12:45.714603+00:00",
+            "pipeline_verification": {
+              "all_passed": true,
+              "check_count": 26,
+              "failed_checks": []
+            }
+          },
+          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "software": {
+            "numpy": "2.2.6",
+            "rasterio": "1.4.3",
+            "scipy": "1.17.1",
+            "pyproj": "3.7.1"
+          },
+          "generated_utc": "2026-11-07T19:02:36Z",
+          "output_checksum": "b87f182f763e3d6b55a7704707a9c7ccad41e1f1f2a6f5b440137ae6d663d7df"
+        }
       }
     },
     {
       "id": "region_04",
       "display_id": "Region 04",
+      "evidence_id": "ev-kathmandu_m4-ndbi-inc-334685-3064957",
       "index": "ndbi",
       "direction": "increase",
       "threshold": 0.15,
@@ -910,6 +1491,7 @@
       "mean_delta": 0.201713,
       "median_delta": 0.189664,
       "common_valid_pixels": 43728,
+      "hole_pixel_count": 1,
       "centroid_utm": [
         334684.64,
         3064956.52
@@ -1198,6 +1780,28 @@
               85.323763,
               27.699688
             ]
+          ],
+          [
+            [
+              85.322664,
+              27.698591
+            ],
+            [
+              85.322766,
+              27.698592
+            ],
+            [
+              85.322767,
+              27.698502
+            ],
+            [
+              85.322666,
+              27.698501
+            ],
+            [
+              85.322664,
+              27.698591
+            ]
           ]
         ]
       },
@@ -1225,11 +1829,196 @@
           "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndbi.tif",
           "method": "frozen M1 difference rasters + common-valid masks"
         }
+      },
+      "evidence": {
+        "schema": "habitatshift-evidence-record/1",
+        "identification": {
+          "evidence_id": "ev-kathmandu_m4-ndbi-inc-334685-3064957",
+          "finding_id": "region_04",
+          "display_id": "Region 04",
+          "schema_version": 1,
+          "study_id": "kathmandu_urban",
+          "experiment_id": "kathmandu_m4",
+          "finding_type": "threshold-connected-region",
+          "candidate_direction": "increase",
+          "evidence_status": "processed"
+        },
+        "source_observations": {
+          "earlier": {
+            "item_ids": [
+              "S2B_45RUL_20200331_0_L2A",
+              "S2A_45RUL_20200402_1_L2A",
+              "S2A_45RUL_20200326_0_L2A"
+            ],
+            "observation_dates": [
+              "2020-03-31",
+              "2020-04-02",
+              "2020-03-26"
+            ],
+            "anchor_date": "2020-03-31",
+            "composite_method": "median",
+            "observation_count": 3,
+            "valid_pixels": 43728,
+            "aoi_pixels": 43728,
+            "valid_fraction": 1.0
+          },
+          "later": {
+            "item_ids": [
+              "S2A_45RUL_20250329_0_L2A",
+              "S2C_45RUL_20250330_0_L2A",
+              "S2C_45RUL_20250327_0_L2A"
+            ],
+            "observation_dates": [
+              "2025-03-29",
+              "2025-03-30",
+              "2025-03-27"
+            ],
+            "anchor_date": "2025-03-29",
+            "composite_method": "median",
+            "observation_count": 3,
+            "valid_pixels": 43728,
+            "aoi_pixels": 43728,
+            "valid_fraction": 1.0
+          },
+          "dataset": {
+            "collection": "sentinel-2-l2a",
+            "provider": "Element 84 Earth Search (AWS Open Data)",
+            "license": "Copernicus Sentinel data: free, open and unrestricted use with attribution (ESA Copernicus data policy). Catalogue: Element 84 Earth Search, AWS Open Data.",
+            "processing_level": "Sentinel-2 L2A surface reflectance",
+            "attribution": "Contains modified Copernicus Sentinel data, processed by ESA; L2A products distributed by the Element 84 Earth Search STAC catalogue (AWS Open Data)."
+          },
+          "study_aoi": {
+            "bounds_lonlat": [
+              85.305,
+              27.695,
+              85.325,
+              27.715
+            ],
+            "area_km2": 4.371274,
+            "aoi_pixels": 43728
+          }
+        },
+        "input_measurements": {
+          "index": "ndbi",
+          "index_label": "observed index difference (later - earlier); not a land-cover verdict",
+          "formula": "(SWIR1 - NIR) / (SWIR1 + NIR)",
+          "bands": [
+            "swir16",
+            "nir"
+          ],
+          "native_band_resolution_m": 20.0,
+          "band_resolution_note": "computed on a 10 m grid from 20 m native bands; upsampled data contain no genuine 10 m detail",
+          "delta_definition": "I_later(p) - I_earlier(p) on the shared analysis grid",
+          "threshold": 0.15,
+          "threshold_rule": "|\u0394I| \u2265 t, inclusive; sign selects the candidate direction",
+          "input_raster": "data/processed/m4/kathmandu_m4/delta_ndbi.tif",
+          "input_raster_sha256": "c97f00a6adbe005b422c7f837635d373b1d79b6ef7c04080880525712e7d3866",
+          "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndbi.tif",
+          "valid_mask_sha256": "80fffd3cf94c5f6f61a9caca8b0e416a918ad26bc2e8657104dfee36ef78386e",
+          "analysis_grid": {
+            "crs": "EPSG:32645",
+            "resolution_m": 10.0,
+            "width": 201,
+            "height": 225,
+            "transform": [
+              10.0,
+              0.0,
+              332860.0,
+              0.0,
+              -10.0,
+              3066790.0
+            ],
+            "pixel_area_m2": 100.0
+          }
+        },
+        "spatial_measurements": {
+          "pixel_count": 108,
+          "area_ha": 1.08,
+          "area_units": "ha (projected analysis grid, pixel count \u00d7 pixel area)",
+          "mean_delta": 0.201713,
+          "median_delta": 0.189664,
+          "valid_pixel_denominator": 43728,
+          "share_of_common_valid_percent": 0.247,
+          "hole_pixel_count": 1,
+          "centroid_utm": [
+            334684.64,
+            3064956.52
+          ],
+          "centroid_lonlat": [
+            85.323419,
+            27.698749
+          ],
+          "geometry_wgs84_ref": "finding.geometry_wgs84"
+        },
+        "evidence_quality": {
+          "earlier_valid_fraction": 1.0,
+          "later_valid_fraction": 1.0,
+          "shared_valid_fraction_of_aoi": 1.0,
+          "observation_support": {
+            "earlier_observations": 3,
+            "later_observations": 3,
+            "min_observations_required": 1
+          },
+          "masking_and_cloud_limitations": [
+            "Bare soil, construction sites and dry riverbeds mimic built-up spectra.",
+            "NDBI is a feature, not a building label.",
+            "Agriculture/forest boundary ambiguity.",
+            "The following indices use 20 m SWIR bands resampled to the 10 m analysis grid and contain no genuine 10 m SWIR detail: ndbi.",
+            "Composites are robust within-period summaries of a few observations, not a dense time series; inter-annual change is represented by two period composites only.",
+            "Index differences are candidate spectral signals. They are not verified deforestation, wetland loss, construction, glacier damage or any other causal land-cover label.",
+            "Cloud, shadow and saturated-pixel exclusion relies on the provider SCL product; terrain shadow is not independently re-derived.",
+            "Surface reflectance is the provider L2A product; no independent atmospheric correction is performed.",
+            "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
+          ],
+          "threshold_sensitivity": {
+            "status": "evaluated in M4-R2 G6",
+            "result": null
+          },
+          "confounding_factors": [
+            "New or extended impervious surfaces (candidate built-up change).",
+            "Bare soil, construction sites or cleared ground between the windows.",
+            "Vegetation loss on the \u0394NDVI counter-evidence panel."
+          ]
+        },
+        "method_provenance": {
+          "algorithm": "threshold candidate mask \u2192 4-connected components (scipy.ndimage.label) \u2192 MMU filter \u2192 top-K selection",
+          "algorithm_version": "0.2.0-m1",
+          "parameters": {
+            "threshold": 0.15,
+            "minimum_mapping_unit_px": 25,
+            "minimum_mapping_unit_ha": 0.25,
+            "max_regions_per_index_direction": 5,
+            "connectivity": 4
+          },
+          "input_hashes": {
+            "delta_raster": "c97f00a6adbe005b422c7f837635d373b1d79b6ef7c04080880525712e7d3866",
+            "common_valid_mask": "80fffd3cf94c5f6f61a9caca8b0e416a918ad26bc2e8657104dfee36ef78386e"
+          },
+          "source_experiment_run": {
+            "experiment_id": "kathmandu_m4",
+            "run_generated_utc": "2026-11-07T13:12:45.714603+00:00",
+            "pipeline_verification": {
+              "all_passed": true,
+              "check_count": 26,
+              "failed_checks": []
+            }
+          },
+          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "software": {
+            "numpy": "2.2.6",
+            "rasterio": "1.4.3",
+            "scipy": "1.17.1",
+            "pyproj": "3.7.1"
+          },
+          "generated_utc": "2026-11-07T19:02:36Z",
+          "output_checksum": "be4e9d5b0284b92be3da7694fe7b8feb43bb59b453ad8df628c2d10224e25d9b"
+        }
       }
     },
     {
       "id": "region_05",
       "display_id": "Region 05",
+      "evidence_id": "ev-kathmandu_m4-ndbi-inc-334270-3065229",
       "index": "ndbi",
       "direction": "increase",
       "threshold": 0.15,
@@ -1239,6 +2028,7 @@
       "mean_delta": 0.196338,
       "median_delta": 0.188765,
       "common_valid_pixels": 43728,
+      "hole_pixel_count": 9,
       "centroid_utm": [
         334270.16,
         3065229.18
@@ -1495,6 +2285,76 @@
               85.318255,
               27.701787
             ]
+          ],
+          [
+            [
+              85.319272,
+              27.701619
+            ],
+            [
+              85.319373,
+              27.70162
+            ],
+            [
+              85.319376,
+              27.70144
+            ],
+            [
+              85.319274,
+              27.701438
+            ],
+            [
+              85.319277,
+              27.701258
+            ],
+            [
+              85.319176,
+              27.701257
+            ],
+            [
+              85.319179,
+              27.701076
+            ],
+            [
+              85.319077,
+              27.701075
+            ],
+            [
+              85.319076,
+              27.701165
+            ],
+            [
+              85.318974,
+              27.701164
+            ],
+            [
+              85.318973,
+              27.701254
+            ],
+            [
+              85.319074,
+              27.701255
+            ],
+            [
+              85.319073,
+              27.701346
+            ],
+            [
+              85.319174,
+              27.701347
+            ],
+            [
+              85.319172,
+              27.701527
+            ],
+            [
+              85.319273,
+              27.701529
+            ],
+            [
+              85.319272,
+              27.701619
+            ]
           ]
         ]
       },
@@ -1522,11 +2382,196 @@
           "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndbi.tif",
           "method": "frozen M1 difference rasters + common-valid masks"
         }
+      },
+      "evidence": {
+        "schema": "habitatshift-evidence-record/1",
+        "identification": {
+          "evidence_id": "ev-kathmandu_m4-ndbi-inc-334270-3065229",
+          "finding_id": "region_05",
+          "display_id": "Region 05",
+          "schema_version": 1,
+          "study_id": "kathmandu_urban",
+          "experiment_id": "kathmandu_m4",
+          "finding_type": "threshold-connected-region",
+          "candidate_direction": "increase",
+          "evidence_status": "processed"
+        },
+        "source_observations": {
+          "earlier": {
+            "item_ids": [
+              "S2B_45RUL_20200331_0_L2A",
+              "S2A_45RUL_20200402_1_L2A",
+              "S2A_45RUL_20200326_0_L2A"
+            ],
+            "observation_dates": [
+              "2020-03-31",
+              "2020-04-02",
+              "2020-03-26"
+            ],
+            "anchor_date": "2020-03-31",
+            "composite_method": "median",
+            "observation_count": 3,
+            "valid_pixels": 43728,
+            "aoi_pixels": 43728,
+            "valid_fraction": 1.0
+          },
+          "later": {
+            "item_ids": [
+              "S2A_45RUL_20250329_0_L2A",
+              "S2C_45RUL_20250330_0_L2A",
+              "S2C_45RUL_20250327_0_L2A"
+            ],
+            "observation_dates": [
+              "2025-03-29",
+              "2025-03-30",
+              "2025-03-27"
+            ],
+            "anchor_date": "2025-03-29",
+            "composite_method": "median",
+            "observation_count": 3,
+            "valid_pixels": 43728,
+            "aoi_pixels": 43728,
+            "valid_fraction": 1.0
+          },
+          "dataset": {
+            "collection": "sentinel-2-l2a",
+            "provider": "Element 84 Earth Search (AWS Open Data)",
+            "license": "Copernicus Sentinel data: free, open and unrestricted use with attribution (ESA Copernicus data policy). Catalogue: Element 84 Earth Search, AWS Open Data.",
+            "processing_level": "Sentinel-2 L2A surface reflectance",
+            "attribution": "Contains modified Copernicus Sentinel data, processed by ESA; L2A products distributed by the Element 84 Earth Search STAC catalogue (AWS Open Data)."
+          },
+          "study_aoi": {
+            "bounds_lonlat": [
+              85.305,
+              27.695,
+              85.325,
+              27.715
+            ],
+            "area_km2": 4.371274,
+            "aoi_pixels": 43728
+          }
+        },
+        "input_measurements": {
+          "index": "ndbi",
+          "index_label": "observed index difference (later - earlier); not a land-cover verdict",
+          "formula": "(SWIR1 - NIR) / (SWIR1 + NIR)",
+          "bands": [
+            "swir16",
+            "nir"
+          ],
+          "native_band_resolution_m": 20.0,
+          "band_resolution_note": "computed on a 10 m grid from 20 m native bands; upsampled data contain no genuine 10 m detail",
+          "delta_definition": "I_later(p) - I_earlier(p) on the shared analysis grid",
+          "threshold": 0.15,
+          "threshold_rule": "|\u0394I| \u2265 t, inclusive; sign selects the candidate direction",
+          "input_raster": "data/processed/m4/kathmandu_m4/delta_ndbi.tif",
+          "input_raster_sha256": "c97f00a6adbe005b422c7f837635d373b1d79b6ef7c04080880525712e7d3866",
+          "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndbi.tif",
+          "valid_mask_sha256": "80fffd3cf94c5f6f61a9caca8b0e416a918ad26bc2e8657104dfee36ef78386e",
+          "analysis_grid": {
+            "crs": "EPSG:32645",
+            "resolution_m": 10.0,
+            "width": 201,
+            "height": 225,
+            "transform": [
+              10.0,
+              0.0,
+              332860.0,
+              0.0,
+              -10.0,
+              3066790.0
+            ],
+            "pixel_area_m2": 100.0
+          }
+        },
+        "spatial_measurements": {
+          "pixel_count": 104,
+          "area_ha": 1.04,
+          "area_units": "ha (projected analysis grid, pixel count \u00d7 pixel area)",
+          "mean_delta": 0.196338,
+          "median_delta": 0.188765,
+          "valid_pixel_denominator": 43728,
+          "share_of_common_valid_percent": 0.2378,
+          "hole_pixel_count": 9,
+          "centroid_utm": [
+            334270.16,
+            3065229.18
+          ],
+          "centroid_lonlat": [
+            85.319179,
+            27.701159
+          ],
+          "geometry_wgs84_ref": "finding.geometry_wgs84"
+        },
+        "evidence_quality": {
+          "earlier_valid_fraction": 1.0,
+          "later_valid_fraction": 1.0,
+          "shared_valid_fraction_of_aoi": 1.0,
+          "observation_support": {
+            "earlier_observations": 3,
+            "later_observations": 3,
+            "min_observations_required": 1
+          },
+          "masking_and_cloud_limitations": [
+            "Bare soil, construction sites and dry riverbeds mimic built-up spectra.",
+            "NDBI is a feature, not a building label.",
+            "Agriculture/forest boundary ambiguity.",
+            "The following indices use 20 m SWIR bands resampled to the 10 m analysis grid and contain no genuine 10 m SWIR detail: ndbi.",
+            "Composites are robust within-period summaries of a few observations, not a dense time series; inter-annual change is represented by two period composites only.",
+            "Index differences are candidate spectral signals. They are not verified deforestation, wetland loss, construction, glacier damage or any other causal land-cover label.",
+            "Cloud, shadow and saturated-pixel exclusion relies on the provider SCL product; terrain shadow is not independently re-derived.",
+            "Surface reflectance is the provider L2A product; no independent atmospheric correction is performed.",
+            "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
+          ],
+          "threshold_sensitivity": {
+            "status": "evaluated in M4-R2 G6",
+            "result": null
+          },
+          "confounding_factors": [
+            "New or extended impervious surfaces (candidate built-up change).",
+            "Bare soil, construction sites or cleared ground between the windows.",
+            "Vegetation loss on the \u0394NDVI counter-evidence panel."
+          ]
+        },
+        "method_provenance": {
+          "algorithm": "threshold candidate mask \u2192 4-connected components (scipy.ndimage.label) \u2192 MMU filter \u2192 top-K selection",
+          "algorithm_version": "0.2.0-m1",
+          "parameters": {
+            "threshold": 0.15,
+            "minimum_mapping_unit_px": 25,
+            "minimum_mapping_unit_ha": 0.25,
+            "max_regions_per_index_direction": 5,
+            "connectivity": 4
+          },
+          "input_hashes": {
+            "delta_raster": "c97f00a6adbe005b422c7f837635d373b1d79b6ef7c04080880525712e7d3866",
+            "common_valid_mask": "80fffd3cf94c5f6f61a9caca8b0e416a918ad26bc2e8657104dfee36ef78386e"
+          },
+          "source_experiment_run": {
+            "experiment_id": "kathmandu_m4",
+            "run_generated_utc": "2026-11-07T13:12:45.714603+00:00",
+            "pipeline_verification": {
+              "all_passed": true,
+              "check_count": 26,
+              "failed_checks": []
+            }
+          },
+          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "software": {
+            "numpy": "2.2.6",
+            "rasterio": "1.4.3",
+            "scipy": "1.17.1",
+            "pyproj": "3.7.1"
+          },
+          "generated_utc": "2026-11-07T19:02:36Z",
+          "output_checksum": "7e2c7b9fd53ad1a7f3a293f186c99109ca5230987c705cc09c57116f981bd671"
+        }
       }
     },
     {
       "id": "region_06",
       "display_id": "Region 06",
+      "evidence_id": "ev-kathmandu_m4-ndbi-inc-334472-3065926",
       "index": "ndbi",
       "direction": "increase",
       "threshold": 0.15,
@@ -1536,6 +2581,7 @@
       "mean_delta": 0.268395,
       "median_delta": 0.242123,
       "common_valid_pixels": 43728,
+      "hole_pixel_count": 2,
       "centroid_utm": [
         334472.22,
         3065925.56
@@ -1656,6 +2702,28 @@
               85.320697,
               27.707864
             ]
+          ],
+          [
+            [
+              85.321105,
+              27.707688
+            ],
+            [
+              85.321207,
+              27.707689
+            ],
+            [
+              85.32121,
+              27.707509
+            ],
+            [
+              85.321108,
+              27.707508
+            ],
+            [
+              85.321105,
+              27.707688
+            ]
           ]
         ]
       },
@@ -1683,11 +2751,196 @@
           "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndbi.tif",
           "method": "frozen M1 difference rasters + common-valid masks"
         }
+      },
+      "evidence": {
+        "schema": "habitatshift-evidence-record/1",
+        "identification": {
+          "evidence_id": "ev-kathmandu_m4-ndbi-inc-334472-3065926",
+          "finding_id": "region_06",
+          "display_id": "Region 06",
+          "schema_version": 1,
+          "study_id": "kathmandu_urban",
+          "experiment_id": "kathmandu_m4",
+          "finding_type": "threshold-connected-region",
+          "candidate_direction": "increase",
+          "evidence_status": "processed"
+        },
+        "source_observations": {
+          "earlier": {
+            "item_ids": [
+              "S2B_45RUL_20200331_0_L2A",
+              "S2A_45RUL_20200402_1_L2A",
+              "S2A_45RUL_20200326_0_L2A"
+            ],
+            "observation_dates": [
+              "2020-03-31",
+              "2020-04-02",
+              "2020-03-26"
+            ],
+            "anchor_date": "2020-03-31",
+            "composite_method": "median",
+            "observation_count": 3,
+            "valid_pixels": 43728,
+            "aoi_pixels": 43728,
+            "valid_fraction": 1.0
+          },
+          "later": {
+            "item_ids": [
+              "S2A_45RUL_20250329_0_L2A",
+              "S2C_45RUL_20250330_0_L2A",
+              "S2C_45RUL_20250327_0_L2A"
+            ],
+            "observation_dates": [
+              "2025-03-29",
+              "2025-03-30",
+              "2025-03-27"
+            ],
+            "anchor_date": "2025-03-29",
+            "composite_method": "median",
+            "observation_count": 3,
+            "valid_pixels": 43728,
+            "aoi_pixels": 43728,
+            "valid_fraction": 1.0
+          },
+          "dataset": {
+            "collection": "sentinel-2-l2a",
+            "provider": "Element 84 Earth Search (AWS Open Data)",
+            "license": "Copernicus Sentinel data: free, open and unrestricted use with attribution (ESA Copernicus data policy). Catalogue: Element 84 Earth Search, AWS Open Data.",
+            "processing_level": "Sentinel-2 L2A surface reflectance",
+            "attribution": "Contains modified Copernicus Sentinel data, processed by ESA; L2A products distributed by the Element 84 Earth Search STAC catalogue (AWS Open Data)."
+          },
+          "study_aoi": {
+            "bounds_lonlat": [
+              85.305,
+              27.695,
+              85.325,
+              27.715
+            ],
+            "area_km2": 4.371274,
+            "aoi_pixels": 43728
+          }
+        },
+        "input_measurements": {
+          "index": "ndbi",
+          "index_label": "observed index difference (later - earlier); not a land-cover verdict",
+          "formula": "(SWIR1 - NIR) / (SWIR1 + NIR)",
+          "bands": [
+            "swir16",
+            "nir"
+          ],
+          "native_band_resolution_m": 20.0,
+          "band_resolution_note": "computed on a 10 m grid from 20 m native bands; upsampled data contain no genuine 10 m detail",
+          "delta_definition": "I_later(p) - I_earlier(p) on the shared analysis grid",
+          "threshold": 0.15,
+          "threshold_rule": "|\u0394I| \u2265 t, inclusive; sign selects the candidate direction",
+          "input_raster": "data/processed/m4/kathmandu_m4/delta_ndbi.tif",
+          "input_raster_sha256": "c97f00a6adbe005b422c7f837635d373b1d79b6ef7c04080880525712e7d3866",
+          "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndbi.tif",
+          "valid_mask_sha256": "80fffd3cf94c5f6f61a9caca8b0e416a918ad26bc2e8657104dfee36ef78386e",
+          "analysis_grid": {
+            "crs": "EPSG:32645",
+            "resolution_m": 10.0,
+            "width": 201,
+            "height": 225,
+            "transform": [
+              10.0,
+              0.0,
+              332860.0,
+              0.0,
+              -10.0,
+              3066790.0
+            ],
+            "pixel_area_m2": 100.0
+          }
+        },
+        "spatial_measurements": {
+          "pixel_count": 70,
+          "area_ha": 0.7,
+          "area_units": "ha (projected analysis grid, pixel count \u00d7 pixel area)",
+          "mean_delta": 0.268395,
+          "median_delta": 0.242123,
+          "valid_pixel_denominator": 43728,
+          "share_of_common_valid_percent": 0.1601,
+          "hole_pixel_count": 2,
+          "centroid_utm": [
+            334472.22,
+            3065925.56
+          ],
+          "centroid_lonlat": [
+            85.321131,
+            27.707468
+          ],
+          "geometry_wgs84_ref": "finding.geometry_wgs84"
+        },
+        "evidence_quality": {
+          "earlier_valid_fraction": 1.0,
+          "later_valid_fraction": 1.0,
+          "shared_valid_fraction_of_aoi": 1.0,
+          "observation_support": {
+            "earlier_observations": 3,
+            "later_observations": 3,
+            "min_observations_required": 1
+          },
+          "masking_and_cloud_limitations": [
+            "Bare soil, construction sites and dry riverbeds mimic built-up spectra.",
+            "NDBI is a feature, not a building label.",
+            "Agriculture/forest boundary ambiguity.",
+            "The following indices use 20 m SWIR bands resampled to the 10 m analysis grid and contain no genuine 10 m SWIR detail: ndbi.",
+            "Composites are robust within-period summaries of a few observations, not a dense time series; inter-annual change is represented by two period composites only.",
+            "Index differences are candidate spectral signals. They are not verified deforestation, wetland loss, construction, glacier damage or any other causal land-cover label.",
+            "Cloud, shadow and saturated-pixel exclusion relies on the provider SCL product; terrain shadow is not independently re-derived.",
+            "Surface reflectance is the provider L2A product; no independent atmospheric correction is performed.",
+            "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
+          ],
+          "threshold_sensitivity": {
+            "status": "evaluated in M4-R2 G6",
+            "result": null
+          },
+          "confounding_factors": [
+            "New or extended impervious surfaces (candidate built-up change).",
+            "Bare soil, construction sites or cleared ground between the windows.",
+            "Vegetation loss on the \u0394NDVI counter-evidence panel."
+          ]
+        },
+        "method_provenance": {
+          "algorithm": "threshold candidate mask \u2192 4-connected components (scipy.ndimage.label) \u2192 MMU filter \u2192 top-K selection",
+          "algorithm_version": "0.2.0-m1",
+          "parameters": {
+            "threshold": 0.15,
+            "minimum_mapping_unit_px": 25,
+            "minimum_mapping_unit_ha": 0.25,
+            "max_regions_per_index_direction": 5,
+            "connectivity": 4
+          },
+          "input_hashes": {
+            "delta_raster": "c97f00a6adbe005b422c7f837635d373b1d79b6ef7c04080880525712e7d3866",
+            "common_valid_mask": "80fffd3cf94c5f6f61a9caca8b0e416a918ad26bc2e8657104dfee36ef78386e"
+          },
+          "source_experiment_run": {
+            "experiment_id": "kathmandu_m4",
+            "run_generated_utc": "2026-11-07T13:12:45.714603+00:00",
+            "pipeline_verification": {
+              "all_passed": true,
+              "check_count": 26,
+              "failed_checks": []
+            }
+          },
+          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "software": {
+            "numpy": "2.2.6",
+            "rasterio": "1.4.3",
+            "scipy": "1.17.1",
+            "pyproj": "3.7.1"
+          },
+          "generated_utc": "2026-11-07T19:02:36Z",
+          "output_checksum": "c2a780e2218041c99036199f15ad6468a3ef28386763a50aac37d3c930fe5d84"
+        }
       }
     },
     {
       "id": "region_07",
       "display_id": "Region 07",
+      "evidence_id": "ev-kathmandu_m4-ndvi-dec-333878-3065411",
       "index": "ndvi",
       "direction": "decrease",
       "threshold": 0.15,
@@ -1697,6 +2950,7 @@
       "mean_delta": -0.250777,
       "median_delta": -0.246063,
       "common_valid_pixels": 43728,
+      "hole_pixel_count": 4,
       "centroid_utm": [
         333878.31,
         3065410.72
@@ -2041,6 +3295,72 @@
               85.314371,
               27.703816
             ]
+          ],
+          [
+            [
+              85.314576,
+              27.703638
+            ],
+            [
+              85.314677,
+              27.703639
+            ],
+            [
+              85.31468,
+              27.703458
+            ],
+            [
+              85.314579,
+              27.703457
+            ],
+            [
+              85.314576,
+              27.703638
+            ]
+          ],
+          [
+            [
+              85.314477,
+              27.703456
+            ],
+            [
+              85.314579,
+              27.703457
+            ],
+            [
+              85.31458,
+              27.703367
+            ],
+            [
+              85.314479,
+              27.703366
+            ],
+            [
+              85.314477,
+              27.703456
+            ]
+          ],
+          [
+            [
+              85.314993,
+              27.702921
+            ],
+            [
+              85.315094,
+              27.702922
+            ],
+            [
+              85.315095,
+              27.702832
+            ],
+            [
+              85.314994,
+              27.70283
+            ],
+            [
+              85.314993,
+              27.702921
+            ]
           ]
         ]
       },
@@ -2068,11 +3388,196 @@
           "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndvi.tif",
           "method": "frozen M1 difference rasters + common-valid masks"
         }
+      },
+      "evidence": {
+        "schema": "habitatshift-evidence-record/1",
+        "identification": {
+          "evidence_id": "ev-kathmandu_m4-ndvi-dec-333878-3065411",
+          "finding_id": "region_07",
+          "display_id": "Region 07",
+          "schema_version": 1,
+          "study_id": "kathmandu_urban",
+          "experiment_id": "kathmandu_m4",
+          "finding_type": "threshold-connected-region",
+          "candidate_direction": "decrease",
+          "evidence_status": "processed"
+        },
+        "source_observations": {
+          "earlier": {
+            "item_ids": [
+              "S2B_45RUL_20200331_0_L2A",
+              "S2A_45RUL_20200402_1_L2A",
+              "S2A_45RUL_20200326_0_L2A"
+            ],
+            "observation_dates": [
+              "2020-03-31",
+              "2020-04-02",
+              "2020-03-26"
+            ],
+            "anchor_date": "2020-03-31",
+            "composite_method": "median",
+            "observation_count": 3,
+            "valid_pixels": 43728,
+            "aoi_pixels": 43728,
+            "valid_fraction": 1.0
+          },
+          "later": {
+            "item_ids": [
+              "S2A_45RUL_20250329_0_L2A",
+              "S2C_45RUL_20250330_0_L2A",
+              "S2C_45RUL_20250327_0_L2A"
+            ],
+            "observation_dates": [
+              "2025-03-29",
+              "2025-03-30",
+              "2025-03-27"
+            ],
+            "anchor_date": "2025-03-29",
+            "composite_method": "median",
+            "observation_count": 3,
+            "valid_pixels": 43728,
+            "aoi_pixels": 43728,
+            "valid_fraction": 1.0
+          },
+          "dataset": {
+            "collection": "sentinel-2-l2a",
+            "provider": "Element 84 Earth Search (AWS Open Data)",
+            "license": "Copernicus Sentinel data: free, open and unrestricted use with attribution (ESA Copernicus data policy). Catalogue: Element 84 Earth Search, AWS Open Data.",
+            "processing_level": "Sentinel-2 L2A surface reflectance",
+            "attribution": "Contains modified Copernicus Sentinel data, processed by ESA; L2A products distributed by the Element 84 Earth Search STAC catalogue (AWS Open Data)."
+          },
+          "study_aoi": {
+            "bounds_lonlat": [
+              85.305,
+              27.695,
+              85.325,
+              27.715
+            ],
+            "area_km2": 4.371274,
+            "aoi_pixels": 43728
+          }
+        },
+        "input_measurements": {
+          "index": "ndvi",
+          "index_label": "observed index difference (later - earlier); not a land-cover verdict",
+          "formula": "(NIR - Red) / (NIR + Red)",
+          "bands": [
+            "nir",
+            "red"
+          ],
+          "native_band_resolution_m": 10.0,
+          "band_resolution_note": "native 10 m band resolution",
+          "delta_definition": "I_later(p) - I_earlier(p) on the shared analysis grid",
+          "threshold": 0.15,
+          "threshold_rule": "|\u0394I| \u2265 t, inclusive; sign selects the candidate direction",
+          "input_raster": "data/processed/m4/kathmandu_m4/delta_ndvi.tif",
+          "input_raster_sha256": "89d9e84e8482ba914c8f8ae98590ef7d649f96d2671a6c54519a6f2ac1b5525e",
+          "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndvi.tif",
+          "valid_mask_sha256": "80fffd3cf94c5f6f61a9caca8b0e416a918ad26bc2e8657104dfee36ef78386e",
+          "analysis_grid": {
+            "crs": "EPSG:32645",
+            "resolution_m": 10.0,
+            "width": 201,
+            "height": 225,
+            "transform": [
+              10.0,
+              0.0,
+              332860.0,
+              0.0,
+              -10.0,
+              3066790.0
+            ],
+            "pixel_area_m2": 100.0
+          }
+        },
+        "spatial_measurements": {
+          "pixel_count": 372,
+          "area_ha": 3.72,
+          "area_units": "ha (projected analysis grid, pixel count \u00d7 pixel area)",
+          "mean_delta": -0.250777,
+          "median_delta": -0.246063,
+          "valid_pixel_denominator": 43728,
+          "share_of_common_valid_percent": 0.8507,
+          "hole_pixel_count": 4,
+          "centroid_utm": [
+            333878.31,
+            3065410.72
+          ],
+          "centroid_lonlat": [
+            85.315181,
+            27.702749
+          ],
+          "geometry_wgs84_ref": "finding.geometry_wgs84"
+        },
+        "evidence_quality": {
+          "earlier_valid_fraction": 1.0,
+          "later_valid_fraction": 1.0,
+          "shared_valid_fraction_of_aoi": 1.0,
+          "observation_support": {
+            "earlier_observations": 3,
+            "later_observations": 3,
+            "min_observations_required": 1
+          },
+          "masking_and_cloud_limitations": [
+            "Bare soil, construction sites and dry riverbeds mimic built-up spectra.",
+            "NDBI is a feature, not a building label.",
+            "Agriculture/forest boundary ambiguity.",
+            "The following indices use 20 m SWIR bands resampled to the 10 m analysis grid and contain no genuine 10 m SWIR detail: ndbi.",
+            "Composites are robust within-period summaries of a few observations, not a dense time series; inter-annual change is represented by two period composites only.",
+            "Index differences are candidate spectral signals. They are not verified deforestation, wetland loss, construction, glacier damage or any other causal land-cover label.",
+            "Cloud, shadow and saturated-pixel exclusion relies on the provider SCL product; terrain shadow is not independently re-derived.",
+            "Surface reflectance is the provider L2A product; no independent atmospheric correction is performed.",
+            "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
+          ],
+          "threshold_sensitivity": {
+            "status": "evaluated in M4-R2 G6",
+            "result": null
+          },
+          "confounding_factors": [
+            "New or extended impervious surfaces (candidate built-up change).",
+            "Bare soil, construction sites or cleared ground between the windows.",
+            "Vegetation loss on the \u0394NDVI counter-evidence panel."
+          ]
+        },
+        "method_provenance": {
+          "algorithm": "threshold candidate mask \u2192 4-connected components (scipy.ndimage.label) \u2192 MMU filter \u2192 top-K selection",
+          "algorithm_version": "0.2.0-m1",
+          "parameters": {
+            "threshold": 0.15,
+            "minimum_mapping_unit_px": 25,
+            "minimum_mapping_unit_ha": 0.25,
+            "max_regions_per_index_direction": 5,
+            "connectivity": 4
+          },
+          "input_hashes": {
+            "delta_raster": "89d9e84e8482ba914c8f8ae98590ef7d649f96d2671a6c54519a6f2ac1b5525e",
+            "common_valid_mask": "80fffd3cf94c5f6f61a9caca8b0e416a918ad26bc2e8657104dfee36ef78386e"
+          },
+          "source_experiment_run": {
+            "experiment_id": "kathmandu_m4",
+            "run_generated_utc": "2026-11-07T13:12:45.714603+00:00",
+            "pipeline_verification": {
+              "all_passed": true,
+              "check_count": 26,
+              "failed_checks": []
+            }
+          },
+          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "software": {
+            "numpy": "2.2.6",
+            "rasterio": "1.4.3",
+            "scipy": "1.17.1",
+            "pyproj": "3.7.1"
+          },
+          "generated_utc": "2026-11-07T19:02:36Z",
+          "output_checksum": "a3977c31d96b6e5b522a5978dcb3ae438f573d07fe883c85cc986d8c55187a94"
+        }
       }
     },
     {
       "id": "region_08",
       "display_id": "Region 08",
+      "evidence_id": "ev-kathmandu_m4-ndvi-dec-334628-3064956",
       "index": "ndvi",
       "direction": "decrease",
       "threshold": 0.15,
@@ -2082,6 +3587,7 @@
       "mean_delta": -0.277567,
       "median_delta": -0.247106,
       "common_valid_pixels": 43728,
+      "hole_pixel_count": 22,
       "centroid_utm": [
         334628.25,
         3064956.35
@@ -2346,6 +3852,150 @@
               85.322139,
               27.699758
             ]
+          ],
+          [
+            [
+              85.322555,
+              27.699131
+            ],
+            [
+              85.322656,
+              27.699133
+            ],
+            [
+              85.322657,
+              27.699042
+            ],
+            [
+              85.322759,
+              27.699044
+            ],
+            [
+              85.32276,
+              27.698953
+            ],
+            [
+              85.322557,
+              27.698951
+            ],
+            [
+              85.322555,
+              27.699131
+            ]
+          ],
+          [
+            [
+              85.322663,
+              27.698681
+            ],
+            [
+              85.322764,
+              27.698683
+            ],
+            [
+              85.322766,
+              27.698592
+            ],
+            [
+              85.322664,
+              27.698591
+            ],
+            [
+              85.322663,
+              27.698681
+            ]
+          ],
+          [
+            [
+              85.323073,
+              27.698416
+            ],
+            [
+              85.323174,
+              27.698417
+            ],
+            [
+              85.323177,
+              27.698236
+            ],
+            [
+              85.323582,
+              27.698241
+            ],
+            [
+              85.323584,
+              27.698151
+            ],
+            [
+              85.323685,
+              27.698152
+            ],
+            [
+              85.323688,
+              27.697972
+            ],
+            [
+              85.323485,
+              27.697969
+            ],
+            [
+              85.323484,
+              27.69806
+            ],
+            [
+              85.323281,
+              27.698057
+            ],
+            [
+              85.323279,
+              27.698147
+            ],
+            [
+              85.322874,
+              27.698143
+            ],
+            [
+              85.322873,
+              27.698233
+            ],
+            [
+              85.322974,
+              27.698234
+            ],
+            [
+              85.322973,
+              27.698324
+            ],
+            [
+              85.323074,
+              27.698325
+            ],
+            [
+              85.323073,
+              27.698416
+            ]
+          ],
+          [
+            [
+              85.323179,
+              27.698056
+            ],
+            [
+              85.323281,
+              27.698057
+            ],
+            [
+              85.323284,
+              27.697877
+            ],
+            [
+              85.323182,
+              27.697875
+            ],
+            [
+              85.323179,
+              27.698056
+            ]
           ]
         ]
       },
@@ -2373,11 +4023,196 @@
           "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndvi.tif",
           "method": "frozen M1 difference rasters + common-valid masks"
         }
+      },
+      "evidence": {
+        "schema": "habitatshift-evidence-record/1",
+        "identification": {
+          "evidence_id": "ev-kathmandu_m4-ndvi-dec-334628-3064956",
+          "finding_id": "region_08",
+          "display_id": "Region 08",
+          "schema_version": 1,
+          "study_id": "kathmandu_urban",
+          "experiment_id": "kathmandu_m4",
+          "finding_type": "threshold-connected-region",
+          "candidate_direction": "decrease",
+          "evidence_status": "processed"
+        },
+        "source_observations": {
+          "earlier": {
+            "item_ids": [
+              "S2B_45RUL_20200331_0_L2A",
+              "S2A_45RUL_20200402_1_L2A",
+              "S2A_45RUL_20200326_0_L2A"
+            ],
+            "observation_dates": [
+              "2020-03-31",
+              "2020-04-02",
+              "2020-03-26"
+            ],
+            "anchor_date": "2020-03-31",
+            "composite_method": "median",
+            "observation_count": 3,
+            "valid_pixels": 43728,
+            "aoi_pixels": 43728,
+            "valid_fraction": 1.0
+          },
+          "later": {
+            "item_ids": [
+              "S2A_45RUL_20250329_0_L2A",
+              "S2C_45RUL_20250330_0_L2A",
+              "S2C_45RUL_20250327_0_L2A"
+            ],
+            "observation_dates": [
+              "2025-03-29",
+              "2025-03-30",
+              "2025-03-27"
+            ],
+            "anchor_date": "2025-03-29",
+            "composite_method": "median",
+            "observation_count": 3,
+            "valid_pixels": 43728,
+            "aoi_pixels": 43728,
+            "valid_fraction": 1.0
+          },
+          "dataset": {
+            "collection": "sentinel-2-l2a",
+            "provider": "Element 84 Earth Search (AWS Open Data)",
+            "license": "Copernicus Sentinel data: free, open and unrestricted use with attribution (ESA Copernicus data policy). Catalogue: Element 84 Earth Search, AWS Open Data.",
+            "processing_level": "Sentinel-2 L2A surface reflectance",
+            "attribution": "Contains modified Copernicus Sentinel data, processed by ESA; L2A products distributed by the Element 84 Earth Search STAC catalogue (AWS Open Data)."
+          },
+          "study_aoi": {
+            "bounds_lonlat": [
+              85.305,
+              27.695,
+              85.325,
+              27.715
+            ],
+            "area_km2": 4.371274,
+            "aoi_pixels": 43728
+          }
+        },
+        "input_measurements": {
+          "index": "ndvi",
+          "index_label": "observed index difference (later - earlier); not a land-cover verdict",
+          "formula": "(NIR - Red) / (NIR + Red)",
+          "bands": [
+            "nir",
+            "red"
+          ],
+          "native_band_resolution_m": 10.0,
+          "band_resolution_note": "native 10 m band resolution",
+          "delta_definition": "I_later(p) - I_earlier(p) on the shared analysis grid",
+          "threshold": 0.15,
+          "threshold_rule": "|\u0394I| \u2265 t, inclusive; sign selects the candidate direction",
+          "input_raster": "data/processed/m4/kathmandu_m4/delta_ndvi.tif",
+          "input_raster_sha256": "89d9e84e8482ba914c8f8ae98590ef7d649f96d2671a6c54519a6f2ac1b5525e",
+          "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndvi.tif",
+          "valid_mask_sha256": "80fffd3cf94c5f6f61a9caca8b0e416a918ad26bc2e8657104dfee36ef78386e",
+          "analysis_grid": {
+            "crs": "EPSG:32645",
+            "resolution_m": 10.0,
+            "width": 201,
+            "height": 225,
+            "transform": [
+              10.0,
+              0.0,
+              332860.0,
+              0.0,
+              -10.0,
+              3066790.0
+            ],
+            "pixel_area_m2": 100.0
+          }
+        },
+        "spatial_measurements": {
+          "pixel_count": 208,
+          "area_ha": 2.08,
+          "area_units": "ha (projected analysis grid, pixel count \u00d7 pixel area)",
+          "mean_delta": -0.277567,
+          "median_delta": -0.247106,
+          "valid_pixel_denominator": 43728,
+          "share_of_common_valid_percent": 0.4757,
+          "hole_pixel_count": 22,
+          "centroid_utm": [
+            334628.25,
+            3064956.35
+          ],
+          "centroid_lonlat": [
+            85.322847,
+            27.698741
+          ],
+          "geometry_wgs84_ref": "finding.geometry_wgs84"
+        },
+        "evidence_quality": {
+          "earlier_valid_fraction": 1.0,
+          "later_valid_fraction": 1.0,
+          "shared_valid_fraction_of_aoi": 1.0,
+          "observation_support": {
+            "earlier_observations": 3,
+            "later_observations": 3,
+            "min_observations_required": 1
+          },
+          "masking_and_cloud_limitations": [
+            "Bare soil, construction sites and dry riverbeds mimic built-up spectra.",
+            "NDBI is a feature, not a building label.",
+            "Agriculture/forest boundary ambiguity.",
+            "The following indices use 20 m SWIR bands resampled to the 10 m analysis grid and contain no genuine 10 m SWIR detail: ndbi.",
+            "Composites are robust within-period summaries of a few observations, not a dense time series; inter-annual change is represented by two period composites only.",
+            "Index differences are candidate spectral signals. They are not verified deforestation, wetland loss, construction, glacier damage or any other causal land-cover label.",
+            "Cloud, shadow and saturated-pixel exclusion relies on the provider SCL product; terrain shadow is not independently re-derived.",
+            "Surface reflectance is the provider L2A product; no independent atmospheric correction is performed.",
+            "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
+          ],
+          "threshold_sensitivity": {
+            "status": "evaluated in M4-R2 G6",
+            "result": null
+          },
+          "confounding_factors": [
+            "New or extended impervious surfaces (candidate built-up change).",
+            "Bare soil, construction sites or cleared ground between the windows.",
+            "Vegetation loss on the \u0394NDVI counter-evidence panel."
+          ]
+        },
+        "method_provenance": {
+          "algorithm": "threshold candidate mask \u2192 4-connected components (scipy.ndimage.label) \u2192 MMU filter \u2192 top-K selection",
+          "algorithm_version": "0.2.0-m1",
+          "parameters": {
+            "threshold": 0.15,
+            "minimum_mapping_unit_px": 25,
+            "minimum_mapping_unit_ha": 0.25,
+            "max_regions_per_index_direction": 5,
+            "connectivity": 4
+          },
+          "input_hashes": {
+            "delta_raster": "89d9e84e8482ba914c8f8ae98590ef7d649f96d2671a6c54519a6f2ac1b5525e",
+            "common_valid_mask": "80fffd3cf94c5f6f61a9caca8b0e416a918ad26bc2e8657104dfee36ef78386e"
+          },
+          "source_experiment_run": {
+            "experiment_id": "kathmandu_m4",
+            "run_generated_utc": "2026-11-07T13:12:45.714603+00:00",
+            "pipeline_verification": {
+              "all_passed": true,
+              "check_count": 26,
+              "failed_checks": []
+            }
+          },
+          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "software": {
+            "numpy": "2.2.6",
+            "rasterio": "1.4.3",
+            "scipy": "1.17.1",
+            "pyproj": "3.7.1"
+          },
+          "generated_utc": "2026-11-07T19:02:36Z",
+          "output_checksum": "f7d9ca64cc3017b58add89d2fca11caf144a1edff72af7de14163b49b9d6612d"
+        }
       }
     },
     {
       "id": "region_09",
       "display_id": "Region 09",
+      "evidence_id": "ev-kathmandu_m4-ndvi-dec-334230-3065284",
       "index": "ndvi",
       "direction": "decrease",
       "threshold": 0.15,
@@ -2387,6 +4222,7 @@
       "mean_delta": -0.239223,
       "median_delta": -0.228608,
       "common_valid_pixels": 43728,
+      "hole_pixel_count": 2,
       "centroid_utm": [
         334229.85,
         3065283.58
@@ -2667,6 +4503,50 @@
               85.318852,
               27.702516
             ]
+          ],
+          [
+            [
+              85.319473,
+              27.701711
+            ],
+            [
+              85.319574,
+              27.701713
+            ],
+            [
+              85.319576,
+              27.701622
+            ],
+            [
+              85.319474,
+              27.701621
+            ],
+            [
+              85.319473,
+              27.701711
+            ]
+          ],
+          [
+            [
+              85.319172,
+              27.701527
+            ],
+            [
+              85.319273,
+              27.701529
+            ],
+            [
+              85.319274,
+              27.701438
+            ],
+            [
+              85.319173,
+              27.701437
+            ],
+            [
+              85.319172,
+              27.701527
+            ]
           ]
         ]
       },
@@ -2694,11 +4574,196 @@
           "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndvi.tif",
           "method": "frozen M1 difference rasters + common-valid masks"
         }
+      },
+      "evidence": {
+        "schema": "habitatshift-evidence-record/1",
+        "identification": {
+          "evidence_id": "ev-kathmandu_m4-ndvi-dec-334230-3065284",
+          "finding_id": "region_09",
+          "display_id": "Region 09",
+          "schema_version": 1,
+          "study_id": "kathmandu_urban",
+          "experiment_id": "kathmandu_m4",
+          "finding_type": "threshold-connected-region",
+          "candidate_direction": "decrease",
+          "evidence_status": "processed"
+        },
+        "source_observations": {
+          "earlier": {
+            "item_ids": [
+              "S2B_45RUL_20200331_0_L2A",
+              "S2A_45RUL_20200402_1_L2A",
+              "S2A_45RUL_20200326_0_L2A"
+            ],
+            "observation_dates": [
+              "2020-03-31",
+              "2020-04-02",
+              "2020-03-26"
+            ],
+            "anchor_date": "2020-03-31",
+            "composite_method": "median",
+            "observation_count": 3,
+            "valid_pixels": 43728,
+            "aoi_pixels": 43728,
+            "valid_fraction": 1.0
+          },
+          "later": {
+            "item_ids": [
+              "S2A_45RUL_20250329_0_L2A",
+              "S2C_45RUL_20250330_0_L2A",
+              "S2C_45RUL_20250327_0_L2A"
+            ],
+            "observation_dates": [
+              "2025-03-29",
+              "2025-03-30",
+              "2025-03-27"
+            ],
+            "anchor_date": "2025-03-29",
+            "composite_method": "median",
+            "observation_count": 3,
+            "valid_pixels": 43728,
+            "aoi_pixels": 43728,
+            "valid_fraction": 1.0
+          },
+          "dataset": {
+            "collection": "sentinel-2-l2a",
+            "provider": "Element 84 Earth Search (AWS Open Data)",
+            "license": "Copernicus Sentinel data: free, open and unrestricted use with attribution (ESA Copernicus data policy). Catalogue: Element 84 Earth Search, AWS Open Data.",
+            "processing_level": "Sentinel-2 L2A surface reflectance",
+            "attribution": "Contains modified Copernicus Sentinel data, processed by ESA; L2A products distributed by the Element 84 Earth Search STAC catalogue (AWS Open Data)."
+          },
+          "study_aoi": {
+            "bounds_lonlat": [
+              85.305,
+              27.695,
+              85.325,
+              27.715
+            ],
+            "area_km2": 4.371274,
+            "aoi_pixels": 43728
+          }
+        },
+        "input_measurements": {
+          "index": "ndvi",
+          "index_label": "observed index difference (later - earlier); not a land-cover verdict",
+          "formula": "(NIR - Red) / (NIR + Red)",
+          "bands": [
+            "nir",
+            "red"
+          ],
+          "native_band_resolution_m": 10.0,
+          "band_resolution_note": "native 10 m band resolution",
+          "delta_definition": "I_later(p) - I_earlier(p) on the shared analysis grid",
+          "threshold": 0.15,
+          "threshold_rule": "|\u0394I| \u2265 t, inclusive; sign selects the candidate direction",
+          "input_raster": "data/processed/m4/kathmandu_m4/delta_ndvi.tif",
+          "input_raster_sha256": "89d9e84e8482ba914c8f8ae98590ef7d649f96d2671a6c54519a6f2ac1b5525e",
+          "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndvi.tif",
+          "valid_mask_sha256": "80fffd3cf94c5f6f61a9caca8b0e416a918ad26bc2e8657104dfee36ef78386e",
+          "analysis_grid": {
+            "crs": "EPSG:32645",
+            "resolution_m": 10.0,
+            "width": 201,
+            "height": 225,
+            "transform": [
+              10.0,
+              0.0,
+              332860.0,
+              0.0,
+              -10.0,
+              3066790.0
+            ],
+            "pixel_area_m2": 100.0
+          }
+        },
+        "spatial_measurements": {
+          "pixel_count": 184,
+          "area_ha": 1.84,
+          "area_units": "ha (projected analysis grid, pixel count \u00d7 pixel area)",
+          "mean_delta": -0.239223,
+          "median_delta": -0.228608,
+          "valid_pixel_denominator": 43728,
+          "share_of_common_valid_percent": 0.4208,
+          "hole_pixel_count": 2,
+          "centroid_utm": [
+            334229.85,
+            3065283.58
+          ],
+          "centroid_lonlat": [
+            85.318763,
+            27.701645
+          ],
+          "geometry_wgs84_ref": "finding.geometry_wgs84"
+        },
+        "evidence_quality": {
+          "earlier_valid_fraction": 1.0,
+          "later_valid_fraction": 1.0,
+          "shared_valid_fraction_of_aoi": 1.0,
+          "observation_support": {
+            "earlier_observations": 3,
+            "later_observations": 3,
+            "min_observations_required": 1
+          },
+          "masking_and_cloud_limitations": [
+            "Bare soil, construction sites and dry riverbeds mimic built-up spectra.",
+            "NDBI is a feature, not a building label.",
+            "Agriculture/forest boundary ambiguity.",
+            "The following indices use 20 m SWIR bands resampled to the 10 m analysis grid and contain no genuine 10 m SWIR detail: ndbi.",
+            "Composites are robust within-period summaries of a few observations, not a dense time series; inter-annual change is represented by two period composites only.",
+            "Index differences are candidate spectral signals. They are not verified deforestation, wetland loss, construction, glacier damage or any other causal land-cover label.",
+            "Cloud, shadow and saturated-pixel exclusion relies on the provider SCL product; terrain shadow is not independently re-derived.",
+            "Surface reflectance is the provider L2A product; no independent atmospheric correction is performed.",
+            "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
+          ],
+          "threshold_sensitivity": {
+            "status": "evaluated in M4-R2 G6",
+            "result": null
+          },
+          "confounding_factors": [
+            "New or extended impervious surfaces (candidate built-up change).",
+            "Bare soil, construction sites or cleared ground between the windows.",
+            "Vegetation loss on the \u0394NDVI counter-evidence panel."
+          ]
+        },
+        "method_provenance": {
+          "algorithm": "threshold candidate mask \u2192 4-connected components (scipy.ndimage.label) \u2192 MMU filter \u2192 top-K selection",
+          "algorithm_version": "0.2.0-m1",
+          "parameters": {
+            "threshold": 0.15,
+            "minimum_mapping_unit_px": 25,
+            "minimum_mapping_unit_ha": 0.25,
+            "max_regions_per_index_direction": 5,
+            "connectivity": 4
+          },
+          "input_hashes": {
+            "delta_raster": "89d9e84e8482ba914c8f8ae98590ef7d649f96d2671a6c54519a6f2ac1b5525e",
+            "common_valid_mask": "80fffd3cf94c5f6f61a9caca8b0e416a918ad26bc2e8657104dfee36ef78386e"
+          },
+          "source_experiment_run": {
+            "experiment_id": "kathmandu_m4",
+            "run_generated_utc": "2026-11-07T13:12:45.714603+00:00",
+            "pipeline_verification": {
+              "all_passed": true,
+              "check_count": 26,
+              "failed_checks": []
+            }
+          },
+          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "software": {
+            "numpy": "2.2.6",
+            "rasterio": "1.4.3",
+            "scipy": "1.17.1",
+            "pyproj": "3.7.1"
+          },
+          "generated_utc": "2026-11-07T19:02:36Z",
+          "output_checksum": "fdc7975003f96454bbe03d8b3164d02fb0724685f0186ebb0d7656b9c0771561"
+        }
       }
     },
     {
       "id": "region_10",
       "display_id": "Region 10",
+      "evidence_id": "ev-kathmandu_m4-ndvi-dec-333822-3066504",
       "index": "ndvi",
       "direction": "decrease",
       "threshold": 0.15,
@@ -2708,6 +4773,7 @@
       "mean_delta": -0.301882,
       "median_delta": -0.294347,
       "common_valid_pixels": 43728,
+      "hole_pixel_count": 0,
       "centroid_utm": [
         333822.0,
         3066504.22
@@ -2927,11 +4993,196 @@
           "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndvi.tif",
           "method": "frozen M1 difference rasters + common-valid masks"
         }
+      },
+      "evidence": {
+        "schema": "habitatshift-evidence-record/1",
+        "identification": {
+          "evidence_id": "ev-kathmandu_m4-ndvi-dec-333822-3066504",
+          "finding_id": "region_10",
+          "display_id": "Region 10",
+          "schema_version": 1,
+          "study_id": "kathmandu_urban",
+          "experiment_id": "kathmandu_m4",
+          "finding_type": "threshold-connected-region",
+          "candidate_direction": "decrease",
+          "evidence_status": "processed"
+        },
+        "source_observations": {
+          "earlier": {
+            "item_ids": [
+              "S2B_45RUL_20200331_0_L2A",
+              "S2A_45RUL_20200402_1_L2A",
+              "S2A_45RUL_20200326_0_L2A"
+            ],
+            "observation_dates": [
+              "2020-03-31",
+              "2020-04-02",
+              "2020-03-26"
+            ],
+            "anchor_date": "2020-03-31",
+            "composite_method": "median",
+            "observation_count": 3,
+            "valid_pixels": 43728,
+            "aoi_pixels": 43728,
+            "valid_fraction": 1.0
+          },
+          "later": {
+            "item_ids": [
+              "S2A_45RUL_20250329_0_L2A",
+              "S2C_45RUL_20250330_0_L2A",
+              "S2C_45RUL_20250327_0_L2A"
+            ],
+            "observation_dates": [
+              "2025-03-29",
+              "2025-03-30",
+              "2025-03-27"
+            ],
+            "anchor_date": "2025-03-29",
+            "composite_method": "median",
+            "observation_count": 3,
+            "valid_pixels": 43728,
+            "aoi_pixels": 43728,
+            "valid_fraction": 1.0
+          },
+          "dataset": {
+            "collection": "sentinel-2-l2a",
+            "provider": "Element 84 Earth Search (AWS Open Data)",
+            "license": "Copernicus Sentinel data: free, open and unrestricted use with attribution (ESA Copernicus data policy). Catalogue: Element 84 Earth Search, AWS Open Data.",
+            "processing_level": "Sentinel-2 L2A surface reflectance",
+            "attribution": "Contains modified Copernicus Sentinel data, processed by ESA; L2A products distributed by the Element 84 Earth Search STAC catalogue (AWS Open Data)."
+          },
+          "study_aoi": {
+            "bounds_lonlat": [
+              85.305,
+              27.695,
+              85.325,
+              27.715
+            ],
+            "area_km2": 4.371274,
+            "aoi_pixels": 43728
+          }
+        },
+        "input_measurements": {
+          "index": "ndvi",
+          "index_label": "observed index difference (later - earlier); not a land-cover verdict",
+          "formula": "(NIR - Red) / (NIR + Red)",
+          "bands": [
+            "nir",
+            "red"
+          ],
+          "native_band_resolution_m": 10.0,
+          "band_resolution_note": "native 10 m band resolution",
+          "delta_definition": "I_later(p) - I_earlier(p) on the shared analysis grid",
+          "threshold": 0.15,
+          "threshold_rule": "|\u0394I| \u2265 t, inclusive; sign selects the candidate direction",
+          "input_raster": "data/processed/m4/kathmandu_m4/delta_ndvi.tif",
+          "input_raster_sha256": "89d9e84e8482ba914c8f8ae98590ef7d649f96d2671a6c54519a6f2ac1b5525e",
+          "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndvi.tif",
+          "valid_mask_sha256": "80fffd3cf94c5f6f61a9caca8b0e416a918ad26bc2e8657104dfee36ef78386e",
+          "analysis_grid": {
+            "crs": "EPSG:32645",
+            "resolution_m": 10.0,
+            "width": 201,
+            "height": 225,
+            "transform": [
+              10.0,
+              0.0,
+              332860.0,
+              0.0,
+              -10.0,
+              3066790.0
+            ],
+            "pixel_area_m2": 100.0
+          }
+        },
+        "spatial_measurements": {
+          "pixel_count": 144,
+          "area_ha": 1.44,
+          "area_units": "ha (projected analysis grid, pixel count \u00d7 pixel area)",
+          "mean_delta": -0.301882,
+          "median_delta": -0.294347,
+          "valid_pixel_denominator": 43728,
+          "share_of_common_valid_percent": 0.3293,
+          "hole_pixel_count": 0,
+          "centroid_utm": [
+            333822.0,
+            3066504.22
+          ],
+          "centroid_lonlat": [
+            85.314458,
+            27.712609
+          ],
+          "geometry_wgs84_ref": "finding.geometry_wgs84"
+        },
+        "evidence_quality": {
+          "earlier_valid_fraction": 1.0,
+          "later_valid_fraction": 1.0,
+          "shared_valid_fraction_of_aoi": 1.0,
+          "observation_support": {
+            "earlier_observations": 3,
+            "later_observations": 3,
+            "min_observations_required": 1
+          },
+          "masking_and_cloud_limitations": [
+            "Bare soil, construction sites and dry riverbeds mimic built-up spectra.",
+            "NDBI is a feature, not a building label.",
+            "Agriculture/forest boundary ambiguity.",
+            "The following indices use 20 m SWIR bands resampled to the 10 m analysis grid and contain no genuine 10 m SWIR detail: ndbi.",
+            "Composites are robust within-period summaries of a few observations, not a dense time series; inter-annual change is represented by two period composites only.",
+            "Index differences are candidate spectral signals. They are not verified deforestation, wetland loss, construction, glacier damage or any other causal land-cover label.",
+            "Cloud, shadow and saturated-pixel exclusion relies on the provider SCL product; terrain shadow is not independently re-derived.",
+            "Surface reflectance is the provider L2A product; no independent atmospheric correction is performed.",
+            "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
+          ],
+          "threshold_sensitivity": {
+            "status": "evaluated in M4-R2 G6",
+            "result": null
+          },
+          "confounding_factors": [
+            "New or extended impervious surfaces (candidate built-up change).",
+            "Bare soil, construction sites or cleared ground between the windows.",
+            "Vegetation loss on the \u0394NDVI counter-evidence panel."
+          ]
+        },
+        "method_provenance": {
+          "algorithm": "threshold candidate mask \u2192 4-connected components (scipy.ndimage.label) \u2192 MMU filter \u2192 top-K selection",
+          "algorithm_version": "0.2.0-m1",
+          "parameters": {
+            "threshold": 0.15,
+            "minimum_mapping_unit_px": 25,
+            "minimum_mapping_unit_ha": 0.25,
+            "max_regions_per_index_direction": 5,
+            "connectivity": 4
+          },
+          "input_hashes": {
+            "delta_raster": "89d9e84e8482ba914c8f8ae98590ef7d649f96d2671a6c54519a6f2ac1b5525e",
+            "common_valid_mask": "80fffd3cf94c5f6f61a9caca8b0e416a918ad26bc2e8657104dfee36ef78386e"
+          },
+          "source_experiment_run": {
+            "experiment_id": "kathmandu_m4",
+            "run_generated_utc": "2026-11-07T13:12:45.714603+00:00",
+            "pipeline_verification": {
+              "all_passed": true,
+              "check_count": 26,
+              "failed_checks": []
+            }
+          },
+          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "software": {
+            "numpy": "2.2.6",
+            "rasterio": "1.4.3",
+            "scipy": "1.17.1",
+            "pyproj": "3.7.1"
+          },
+          "generated_utc": "2026-11-07T19:02:36Z",
+          "output_checksum": "7d1bb6094cf1e9fbd1252029c6e2d1abfcf23bacc0e69db2c5fc9eac564cea78"
+        }
       }
     },
     {
       "id": "region_11",
       "display_id": "Region 11",
+      "evidence_id": "ev-kathmandu_m4-ndvi-dec-334594-3064632",
       "index": "ndvi",
       "direction": "decrease",
       "threshold": 0.15,
@@ -2941,6 +5192,7 @@
       "mean_delta": -0.303236,
       "median_delta": -0.291021,
       "common_valid_pixels": 43728,
+      "hole_pixel_count": 0,
       "centroid_utm": [
         334593.56,
         3064631.78
@@ -3160,11 +5412,196 @@
           "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndvi.tif",
           "method": "frozen M1 difference rasters + common-valid masks"
         }
+      },
+      "evidence": {
+        "schema": "habitatshift-evidence-record/1",
+        "identification": {
+          "evidence_id": "ev-kathmandu_m4-ndvi-dec-334594-3064632",
+          "finding_id": "region_11",
+          "display_id": "Region 11",
+          "schema_version": 1,
+          "study_id": "kathmandu_urban",
+          "experiment_id": "kathmandu_m4",
+          "finding_type": "threshold-connected-region",
+          "candidate_direction": "decrease",
+          "evidence_status": "processed"
+        },
+        "source_observations": {
+          "earlier": {
+            "item_ids": [
+              "S2B_45RUL_20200331_0_L2A",
+              "S2A_45RUL_20200402_1_L2A",
+              "S2A_45RUL_20200326_0_L2A"
+            ],
+            "observation_dates": [
+              "2020-03-31",
+              "2020-04-02",
+              "2020-03-26"
+            ],
+            "anchor_date": "2020-03-31",
+            "composite_method": "median",
+            "observation_count": 3,
+            "valid_pixels": 43728,
+            "aoi_pixels": 43728,
+            "valid_fraction": 1.0
+          },
+          "later": {
+            "item_ids": [
+              "S2A_45RUL_20250329_0_L2A",
+              "S2C_45RUL_20250330_0_L2A",
+              "S2C_45RUL_20250327_0_L2A"
+            ],
+            "observation_dates": [
+              "2025-03-29",
+              "2025-03-30",
+              "2025-03-27"
+            ],
+            "anchor_date": "2025-03-29",
+            "composite_method": "median",
+            "observation_count": 3,
+            "valid_pixels": 43728,
+            "aoi_pixels": 43728,
+            "valid_fraction": 1.0
+          },
+          "dataset": {
+            "collection": "sentinel-2-l2a",
+            "provider": "Element 84 Earth Search (AWS Open Data)",
+            "license": "Copernicus Sentinel data: free, open and unrestricted use with attribution (ESA Copernicus data policy). Catalogue: Element 84 Earth Search, AWS Open Data.",
+            "processing_level": "Sentinel-2 L2A surface reflectance",
+            "attribution": "Contains modified Copernicus Sentinel data, processed by ESA; L2A products distributed by the Element 84 Earth Search STAC catalogue (AWS Open Data)."
+          },
+          "study_aoi": {
+            "bounds_lonlat": [
+              85.305,
+              27.695,
+              85.325,
+              27.715
+            ],
+            "area_km2": 4.371274,
+            "aoi_pixels": 43728
+          }
+        },
+        "input_measurements": {
+          "index": "ndvi",
+          "index_label": "observed index difference (later - earlier); not a land-cover verdict",
+          "formula": "(NIR - Red) / (NIR + Red)",
+          "bands": [
+            "nir",
+            "red"
+          ],
+          "native_band_resolution_m": 10.0,
+          "band_resolution_note": "native 10 m band resolution",
+          "delta_definition": "I_later(p) - I_earlier(p) on the shared analysis grid",
+          "threshold": 0.15,
+          "threshold_rule": "|\u0394I| \u2265 t, inclusive; sign selects the candidate direction",
+          "input_raster": "data/processed/m4/kathmandu_m4/delta_ndvi.tif",
+          "input_raster_sha256": "89d9e84e8482ba914c8f8ae98590ef7d649f96d2671a6c54519a6f2ac1b5525e",
+          "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndvi.tif",
+          "valid_mask_sha256": "80fffd3cf94c5f6f61a9caca8b0e416a918ad26bc2e8657104dfee36ef78386e",
+          "analysis_grid": {
+            "crs": "EPSG:32645",
+            "resolution_m": 10.0,
+            "width": 201,
+            "height": 225,
+            "transform": [
+              10.0,
+              0.0,
+              332860.0,
+              0.0,
+              -10.0,
+              3066790.0
+            ],
+            "pixel_area_m2": 100.0
+          }
+        },
+        "spatial_measurements": {
+          "pixel_count": 109,
+          "area_ha": 1.09,
+          "area_units": "ha (projected analysis grid, pixel count \u00d7 pixel area)",
+          "mean_delta": -0.303236,
+          "median_delta": -0.291021,
+          "valid_pixel_denominator": 43728,
+          "share_of_common_valid_percent": 0.2493,
+          "hole_pixel_count": 0,
+          "centroid_utm": [
+            334593.56,
+            3064631.78
+          ],
+          "centroid_lonlat": [
+            85.32254,
+            27.695808
+          ],
+          "geometry_wgs84_ref": "finding.geometry_wgs84"
+        },
+        "evidence_quality": {
+          "earlier_valid_fraction": 1.0,
+          "later_valid_fraction": 1.0,
+          "shared_valid_fraction_of_aoi": 1.0,
+          "observation_support": {
+            "earlier_observations": 3,
+            "later_observations": 3,
+            "min_observations_required": 1
+          },
+          "masking_and_cloud_limitations": [
+            "Bare soil, construction sites and dry riverbeds mimic built-up spectra.",
+            "NDBI is a feature, not a building label.",
+            "Agriculture/forest boundary ambiguity.",
+            "The following indices use 20 m SWIR bands resampled to the 10 m analysis grid and contain no genuine 10 m SWIR detail: ndbi.",
+            "Composites are robust within-period summaries of a few observations, not a dense time series; inter-annual change is represented by two period composites only.",
+            "Index differences are candidate spectral signals. They are not verified deforestation, wetland loss, construction, glacier damage or any other causal land-cover label.",
+            "Cloud, shadow and saturated-pixel exclusion relies on the provider SCL product; terrain shadow is not independently re-derived.",
+            "Surface reflectance is the provider L2A product; no independent atmospheric correction is performed.",
+            "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
+          ],
+          "threshold_sensitivity": {
+            "status": "evaluated in M4-R2 G6",
+            "result": null
+          },
+          "confounding_factors": [
+            "New or extended impervious surfaces (candidate built-up change).",
+            "Bare soil, construction sites or cleared ground between the windows.",
+            "Vegetation loss on the \u0394NDVI counter-evidence panel."
+          ]
+        },
+        "method_provenance": {
+          "algorithm": "threshold candidate mask \u2192 4-connected components (scipy.ndimage.label) \u2192 MMU filter \u2192 top-K selection",
+          "algorithm_version": "0.2.0-m1",
+          "parameters": {
+            "threshold": 0.15,
+            "minimum_mapping_unit_px": 25,
+            "minimum_mapping_unit_ha": 0.25,
+            "max_regions_per_index_direction": 5,
+            "connectivity": 4
+          },
+          "input_hashes": {
+            "delta_raster": "89d9e84e8482ba914c8f8ae98590ef7d649f96d2671a6c54519a6f2ac1b5525e",
+            "common_valid_mask": "80fffd3cf94c5f6f61a9caca8b0e416a918ad26bc2e8657104dfee36ef78386e"
+          },
+          "source_experiment_run": {
+            "experiment_id": "kathmandu_m4",
+            "run_generated_utc": "2026-11-07T13:12:45.714603+00:00",
+            "pipeline_verification": {
+              "all_passed": true,
+              "check_count": 26,
+              "failed_checks": []
+            }
+          },
+          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "software": {
+            "numpy": "2.2.6",
+            "rasterio": "1.4.3",
+            "scipy": "1.17.1",
+            "pyproj": "3.7.1"
+          },
+          "generated_utc": "2026-11-07T19:02:36Z",
+          "output_checksum": "78f6876359af469311b4a6e7f5c29bdb3a618e7bab8726515dbc42c536ee2c31"
+        }
       }
     },
     {
       "id": "region_12",
       "display_id": "Region 12",
+      "evidence_id": "ev-kathmandu_m4-ndvi-inc-333884-3065663",
       "index": "ndvi",
       "direction": "increase",
       "threshold": 0.15,
@@ -3174,6 +5611,7 @@
       "mean_delta": 0.203368,
       "median_delta": 0.20168,
       "common_valid_pixels": 43728,
+      "hole_pixel_count": 0,
       "centroid_utm": [
         333883.95,
         3065663.49
@@ -3385,11 +5823,196 @@
           "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndvi.tif",
           "method": "frozen M1 difference rasters + common-valid masks"
         }
+      },
+      "evidence": {
+        "schema": "habitatshift-evidence-record/1",
+        "identification": {
+          "evidence_id": "ev-kathmandu_m4-ndvi-inc-333884-3065663",
+          "finding_id": "region_12",
+          "display_id": "Region 12",
+          "schema_version": 1,
+          "study_id": "kathmandu_urban",
+          "experiment_id": "kathmandu_m4",
+          "finding_type": "threshold-connected-region",
+          "candidate_direction": "increase",
+          "evidence_status": "processed"
+        },
+        "source_observations": {
+          "earlier": {
+            "item_ids": [
+              "S2B_45RUL_20200331_0_L2A",
+              "S2A_45RUL_20200402_1_L2A",
+              "S2A_45RUL_20200326_0_L2A"
+            ],
+            "observation_dates": [
+              "2020-03-31",
+              "2020-04-02",
+              "2020-03-26"
+            ],
+            "anchor_date": "2020-03-31",
+            "composite_method": "median",
+            "observation_count": 3,
+            "valid_pixels": 43728,
+            "aoi_pixels": 43728,
+            "valid_fraction": 1.0
+          },
+          "later": {
+            "item_ids": [
+              "S2A_45RUL_20250329_0_L2A",
+              "S2C_45RUL_20250330_0_L2A",
+              "S2C_45RUL_20250327_0_L2A"
+            ],
+            "observation_dates": [
+              "2025-03-29",
+              "2025-03-30",
+              "2025-03-27"
+            ],
+            "anchor_date": "2025-03-29",
+            "composite_method": "median",
+            "observation_count": 3,
+            "valid_pixels": 43728,
+            "aoi_pixels": 43728,
+            "valid_fraction": 1.0
+          },
+          "dataset": {
+            "collection": "sentinel-2-l2a",
+            "provider": "Element 84 Earth Search (AWS Open Data)",
+            "license": "Copernicus Sentinel data: free, open and unrestricted use with attribution (ESA Copernicus data policy). Catalogue: Element 84 Earth Search, AWS Open Data.",
+            "processing_level": "Sentinel-2 L2A surface reflectance",
+            "attribution": "Contains modified Copernicus Sentinel data, processed by ESA; L2A products distributed by the Element 84 Earth Search STAC catalogue (AWS Open Data)."
+          },
+          "study_aoi": {
+            "bounds_lonlat": [
+              85.305,
+              27.695,
+              85.325,
+              27.715
+            ],
+            "area_km2": 4.371274,
+            "aoi_pixels": 43728
+          }
+        },
+        "input_measurements": {
+          "index": "ndvi",
+          "index_label": "observed index difference (later - earlier); not a land-cover verdict",
+          "formula": "(NIR - Red) / (NIR + Red)",
+          "bands": [
+            "nir",
+            "red"
+          ],
+          "native_band_resolution_m": 10.0,
+          "band_resolution_note": "native 10 m band resolution",
+          "delta_definition": "I_later(p) - I_earlier(p) on the shared analysis grid",
+          "threshold": 0.15,
+          "threshold_rule": "|\u0394I| \u2265 t, inclusive; sign selects the candidate direction",
+          "input_raster": "data/processed/m4/kathmandu_m4/delta_ndvi.tif",
+          "input_raster_sha256": "89d9e84e8482ba914c8f8ae98590ef7d649f96d2671a6c54519a6f2ac1b5525e",
+          "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndvi.tif",
+          "valid_mask_sha256": "80fffd3cf94c5f6f61a9caca8b0e416a918ad26bc2e8657104dfee36ef78386e",
+          "analysis_grid": {
+            "crs": "EPSG:32645",
+            "resolution_m": 10.0,
+            "width": 201,
+            "height": 225,
+            "transform": [
+              10.0,
+              0.0,
+              332860.0,
+              0.0,
+              -10.0,
+              3066790.0
+            ],
+            "pixel_area_m2": 100.0
+          }
+        },
+        "spatial_measurements": {
+          "pixel_count": 74,
+          "area_ha": 0.74,
+          "area_units": "ha (projected analysis grid, pixel count \u00d7 pixel area)",
+          "mean_delta": 0.203368,
+          "median_delta": 0.20168,
+          "valid_pixel_denominator": 43728,
+          "share_of_common_valid_percent": 0.1692,
+          "hole_pixel_count": 0,
+          "centroid_utm": [
+            333883.95,
+            3065663.49
+          ],
+          "centroid_lonlat": [
+            85.315203,
+            27.70503
+          ],
+          "geometry_wgs84_ref": "finding.geometry_wgs84"
+        },
+        "evidence_quality": {
+          "earlier_valid_fraction": 1.0,
+          "later_valid_fraction": 1.0,
+          "shared_valid_fraction_of_aoi": 1.0,
+          "observation_support": {
+            "earlier_observations": 3,
+            "later_observations": 3,
+            "min_observations_required": 1
+          },
+          "masking_and_cloud_limitations": [
+            "Bare soil, construction sites and dry riverbeds mimic built-up spectra.",
+            "NDBI is a feature, not a building label.",
+            "Agriculture/forest boundary ambiguity.",
+            "The following indices use 20 m SWIR bands resampled to the 10 m analysis grid and contain no genuine 10 m SWIR detail: ndbi.",
+            "Composites are robust within-period summaries of a few observations, not a dense time series; inter-annual change is represented by two period composites only.",
+            "Index differences are candidate spectral signals. They are not verified deforestation, wetland loss, construction, glacier damage or any other causal land-cover label.",
+            "Cloud, shadow and saturated-pixel exclusion relies on the provider SCL product; terrain shadow is not independently re-derived.",
+            "Surface reflectance is the provider L2A product; no independent atmospheric correction is performed.",
+            "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
+          ],
+          "threshold_sensitivity": {
+            "status": "evaluated in M4-R2 G6",
+            "result": null
+          },
+          "confounding_factors": [
+            "New or extended impervious surfaces (candidate built-up change).",
+            "Bare soil, construction sites or cleared ground between the windows.",
+            "Vegetation loss on the \u0394NDVI counter-evidence panel."
+          ]
+        },
+        "method_provenance": {
+          "algorithm": "threshold candidate mask \u2192 4-connected components (scipy.ndimage.label) \u2192 MMU filter \u2192 top-K selection",
+          "algorithm_version": "0.2.0-m1",
+          "parameters": {
+            "threshold": 0.15,
+            "minimum_mapping_unit_px": 25,
+            "minimum_mapping_unit_ha": 0.25,
+            "max_regions_per_index_direction": 5,
+            "connectivity": 4
+          },
+          "input_hashes": {
+            "delta_raster": "89d9e84e8482ba914c8f8ae98590ef7d649f96d2671a6c54519a6f2ac1b5525e",
+            "common_valid_mask": "80fffd3cf94c5f6f61a9caca8b0e416a918ad26bc2e8657104dfee36ef78386e"
+          },
+          "source_experiment_run": {
+            "experiment_id": "kathmandu_m4",
+            "run_generated_utc": "2026-11-07T13:12:45.714603+00:00",
+            "pipeline_verification": {
+              "all_passed": true,
+              "check_count": 26,
+              "failed_checks": []
+            }
+          },
+          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "software": {
+            "numpy": "2.2.6",
+            "rasterio": "1.4.3",
+            "scipy": "1.17.1",
+            "pyproj": "3.7.1"
+          },
+          "generated_utc": "2026-11-07T19:02:36Z",
+          "output_checksum": "7389204c7f01f6a6a128375043137a8290b69e02f1472dbae82d9e5b91434c0d"
+        }
       }
     },
     {
       "id": "region_13",
       "display_id": "Region 13",
+      "evidence_id": "ev-kathmandu_m4-ndwi-dec-333898-3065673",
       "index": "ndwi",
       "direction": "decrease",
       "threshold": 0.15,
@@ -3399,6 +6022,7 @@
       "mean_delta": -0.196741,
       "median_delta": -0.193452,
       "common_valid_pixels": 43728,
+      "hole_pixel_count": 0,
       "centroid_utm": [
         333897.74,
         3065672.58
@@ -3562,11 +6186,196 @@
           "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndwi.tif",
           "method": "frozen M1 difference rasters + common-valid masks"
         }
+      },
+      "evidence": {
+        "schema": "habitatshift-evidence-record/1",
+        "identification": {
+          "evidence_id": "ev-kathmandu_m4-ndwi-dec-333898-3065673",
+          "finding_id": "region_13",
+          "display_id": "Region 13",
+          "schema_version": 1,
+          "study_id": "kathmandu_urban",
+          "experiment_id": "kathmandu_m4",
+          "finding_type": "threshold-connected-region",
+          "candidate_direction": "decrease",
+          "evidence_status": "processed"
+        },
+        "source_observations": {
+          "earlier": {
+            "item_ids": [
+              "S2B_45RUL_20200331_0_L2A",
+              "S2A_45RUL_20200402_1_L2A",
+              "S2A_45RUL_20200326_0_L2A"
+            ],
+            "observation_dates": [
+              "2020-03-31",
+              "2020-04-02",
+              "2020-03-26"
+            ],
+            "anchor_date": "2020-03-31",
+            "composite_method": "median",
+            "observation_count": 3,
+            "valid_pixels": 43728,
+            "aoi_pixels": 43728,
+            "valid_fraction": 1.0
+          },
+          "later": {
+            "item_ids": [
+              "S2A_45RUL_20250329_0_L2A",
+              "S2C_45RUL_20250330_0_L2A",
+              "S2C_45RUL_20250327_0_L2A"
+            ],
+            "observation_dates": [
+              "2025-03-29",
+              "2025-03-30",
+              "2025-03-27"
+            ],
+            "anchor_date": "2025-03-29",
+            "composite_method": "median",
+            "observation_count": 3,
+            "valid_pixels": 43728,
+            "aoi_pixels": 43728,
+            "valid_fraction": 1.0
+          },
+          "dataset": {
+            "collection": "sentinel-2-l2a",
+            "provider": "Element 84 Earth Search (AWS Open Data)",
+            "license": "Copernicus Sentinel data: free, open and unrestricted use with attribution (ESA Copernicus data policy). Catalogue: Element 84 Earth Search, AWS Open Data.",
+            "processing_level": "Sentinel-2 L2A surface reflectance",
+            "attribution": "Contains modified Copernicus Sentinel data, processed by ESA; L2A products distributed by the Element 84 Earth Search STAC catalogue (AWS Open Data)."
+          },
+          "study_aoi": {
+            "bounds_lonlat": [
+              85.305,
+              27.695,
+              85.325,
+              27.715
+            ],
+            "area_km2": 4.371274,
+            "aoi_pixels": 43728
+          }
+        },
+        "input_measurements": {
+          "index": "ndwi",
+          "index_label": "observed index difference (later - earlier); not a land-cover verdict",
+          "formula": "(Green - NIR) / (Green + NIR)",
+          "bands": [
+            "green",
+            "nir"
+          ],
+          "native_band_resolution_m": 10.0,
+          "band_resolution_note": "native 10 m band resolution",
+          "delta_definition": "I_later(p) - I_earlier(p) on the shared analysis grid",
+          "threshold": 0.15,
+          "threshold_rule": "|\u0394I| \u2265 t, inclusive; sign selects the candidate direction",
+          "input_raster": "data/processed/m4/kathmandu_m4/delta_ndwi.tif",
+          "input_raster_sha256": "6f5a5559db81f5d49faa1984431aebc0fef1a90777e3e03efe67fdeca4f8c72a",
+          "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndwi.tif",
+          "valid_mask_sha256": "80fffd3cf94c5f6f61a9caca8b0e416a918ad26bc2e8657104dfee36ef78386e",
+          "analysis_grid": {
+            "crs": "EPSG:32645",
+            "resolution_m": 10.0,
+            "width": 201,
+            "height": 225,
+            "transform": [
+              10.0,
+              0.0,
+              332860.0,
+              0.0,
+              -10.0,
+              3066790.0
+            ],
+            "pixel_area_m2": 100.0
+          }
+        },
+        "spatial_measurements": {
+          "pixel_count": 48,
+          "area_ha": 0.48,
+          "area_units": "ha (projected analysis grid, pixel count \u00d7 pixel area)",
+          "mean_delta": -0.196741,
+          "median_delta": -0.193452,
+          "valid_pixel_denominator": 43728,
+          "share_of_common_valid_percent": 0.1098,
+          "hole_pixel_count": 0,
+          "centroid_utm": [
+            333897.74,
+            3065672.58
+          ],
+          "centroid_lonlat": [
+            85.315342,
+            27.705114
+          ],
+          "geometry_wgs84_ref": "finding.geometry_wgs84"
+        },
+        "evidence_quality": {
+          "earlier_valid_fraction": 1.0,
+          "later_valid_fraction": 1.0,
+          "shared_valid_fraction_of_aoi": 1.0,
+          "observation_support": {
+            "earlier_observations": 3,
+            "later_observations": 3,
+            "min_observations_required": 1
+          },
+          "masking_and_cloud_limitations": [
+            "Bare soil, construction sites and dry riverbeds mimic built-up spectra.",
+            "NDBI is a feature, not a building label.",
+            "Agriculture/forest boundary ambiguity.",
+            "The following indices use 20 m SWIR bands resampled to the 10 m analysis grid and contain no genuine 10 m SWIR detail: ndbi.",
+            "Composites are robust within-period summaries of a few observations, not a dense time series; inter-annual change is represented by two period composites only.",
+            "Index differences are candidate spectral signals. They are not verified deforestation, wetland loss, construction, glacier damage or any other causal land-cover label.",
+            "Cloud, shadow and saturated-pixel exclusion relies on the provider SCL product; terrain shadow is not independently re-derived.",
+            "Surface reflectance is the provider L2A product; no independent atmospheric correction is performed.",
+            "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
+          ],
+          "threshold_sensitivity": {
+            "status": "evaluated in M4-R2 G6",
+            "result": null
+          },
+          "confounding_factors": [
+            "New or extended impervious surfaces (candidate built-up change).",
+            "Bare soil, construction sites or cleared ground between the windows.",
+            "Vegetation loss on the \u0394NDVI counter-evidence panel."
+          ]
+        },
+        "method_provenance": {
+          "algorithm": "threshold candidate mask \u2192 4-connected components (scipy.ndimage.label) \u2192 MMU filter \u2192 top-K selection",
+          "algorithm_version": "0.2.0-m1",
+          "parameters": {
+            "threshold": 0.15,
+            "minimum_mapping_unit_px": 25,
+            "minimum_mapping_unit_ha": 0.25,
+            "max_regions_per_index_direction": 5,
+            "connectivity": 4
+          },
+          "input_hashes": {
+            "delta_raster": "6f5a5559db81f5d49faa1984431aebc0fef1a90777e3e03efe67fdeca4f8c72a",
+            "common_valid_mask": "80fffd3cf94c5f6f61a9caca8b0e416a918ad26bc2e8657104dfee36ef78386e"
+          },
+          "source_experiment_run": {
+            "experiment_id": "kathmandu_m4",
+            "run_generated_utc": "2026-11-07T13:12:45.714603+00:00",
+            "pipeline_verification": {
+              "all_passed": true,
+              "check_count": 26,
+              "failed_checks": []
+            }
+          },
+          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "software": {
+            "numpy": "2.2.6",
+            "rasterio": "1.4.3",
+            "scipy": "1.17.1",
+            "pyproj": "3.7.1"
+          },
+          "generated_utc": "2026-11-07T19:02:36Z",
+          "output_checksum": "cdcd0babe90a795d0c79a4b9d03375380768e0efc5b24d9fe7a3990f98a0da2a"
+        }
       }
     },
     {
       "id": "region_14",
       "display_id": "Region 14",
+      "evidence_id": "ev-kathmandu_m4-ndwi-dec-334020-3066344",
       "index": "ndwi",
       "direction": "decrease",
       "threshold": 0.15,
@@ -3576,6 +6385,7 @@
       "mean_delta": -0.230217,
       "median_delta": -0.230786,
       "common_valid_pixels": 43728,
+      "hole_pixel_count": 2,
       "centroid_utm": [
         334020.0,
         3066344.0
@@ -3688,6 +6498,28 @@
               85.316483,
               27.711513
             ]
+          ],
+          [
+            [
+              85.316489,
+              27.711152
+            ],
+            [
+              85.31659,
+              27.711153
+            ],
+            [
+              85.316593,
+              27.710973
+            ],
+            [
+              85.316492,
+              27.710971
+            ],
+            [
+              85.316489,
+              27.711152
+            ]
           ]
         ]
       },
@@ -3715,11 +6547,196 @@
           "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndwi.tif",
           "method": "frozen M1 difference rasters + common-valid masks"
         }
+      },
+      "evidence": {
+        "schema": "habitatshift-evidence-record/1",
+        "identification": {
+          "evidence_id": "ev-kathmandu_m4-ndwi-dec-334020-3066344",
+          "finding_id": "region_14",
+          "display_id": "Region 14",
+          "schema_version": 1,
+          "study_id": "kathmandu_urban",
+          "experiment_id": "kathmandu_m4",
+          "finding_type": "threshold-connected-region",
+          "candidate_direction": "decrease",
+          "evidence_status": "processed"
+        },
+        "source_observations": {
+          "earlier": {
+            "item_ids": [
+              "S2B_45RUL_20200331_0_L2A",
+              "S2A_45RUL_20200402_1_L2A",
+              "S2A_45RUL_20200326_0_L2A"
+            ],
+            "observation_dates": [
+              "2020-03-31",
+              "2020-04-02",
+              "2020-03-26"
+            ],
+            "anchor_date": "2020-03-31",
+            "composite_method": "median",
+            "observation_count": 3,
+            "valid_pixels": 43728,
+            "aoi_pixels": 43728,
+            "valid_fraction": 1.0
+          },
+          "later": {
+            "item_ids": [
+              "S2A_45RUL_20250329_0_L2A",
+              "S2C_45RUL_20250330_0_L2A",
+              "S2C_45RUL_20250327_0_L2A"
+            ],
+            "observation_dates": [
+              "2025-03-29",
+              "2025-03-30",
+              "2025-03-27"
+            ],
+            "anchor_date": "2025-03-29",
+            "composite_method": "median",
+            "observation_count": 3,
+            "valid_pixels": 43728,
+            "aoi_pixels": 43728,
+            "valid_fraction": 1.0
+          },
+          "dataset": {
+            "collection": "sentinel-2-l2a",
+            "provider": "Element 84 Earth Search (AWS Open Data)",
+            "license": "Copernicus Sentinel data: free, open and unrestricted use with attribution (ESA Copernicus data policy). Catalogue: Element 84 Earth Search, AWS Open Data.",
+            "processing_level": "Sentinel-2 L2A surface reflectance",
+            "attribution": "Contains modified Copernicus Sentinel data, processed by ESA; L2A products distributed by the Element 84 Earth Search STAC catalogue (AWS Open Data)."
+          },
+          "study_aoi": {
+            "bounds_lonlat": [
+              85.305,
+              27.695,
+              85.325,
+              27.715
+            ],
+            "area_km2": 4.371274,
+            "aoi_pixels": 43728
+          }
+        },
+        "input_measurements": {
+          "index": "ndwi",
+          "index_label": "observed index difference (later - earlier); not a land-cover verdict",
+          "formula": "(Green - NIR) / (Green + NIR)",
+          "bands": [
+            "green",
+            "nir"
+          ],
+          "native_band_resolution_m": 10.0,
+          "band_resolution_note": "native 10 m band resolution",
+          "delta_definition": "I_later(p) - I_earlier(p) on the shared analysis grid",
+          "threshold": 0.15,
+          "threshold_rule": "|\u0394I| \u2265 t, inclusive; sign selects the candidate direction",
+          "input_raster": "data/processed/m4/kathmandu_m4/delta_ndwi.tif",
+          "input_raster_sha256": "6f5a5559db81f5d49faa1984431aebc0fef1a90777e3e03efe67fdeca4f8c72a",
+          "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndwi.tif",
+          "valid_mask_sha256": "80fffd3cf94c5f6f61a9caca8b0e416a918ad26bc2e8657104dfee36ef78386e",
+          "analysis_grid": {
+            "crs": "EPSG:32645",
+            "resolution_m": 10.0,
+            "width": 201,
+            "height": 225,
+            "transform": [
+              10.0,
+              0.0,
+              332860.0,
+              0.0,
+              -10.0,
+              3066790.0
+            ],
+            "pixel_area_m2": 100.0
+          }
+        },
+        "spatial_measurements": {
+          "pixel_count": 28,
+          "area_ha": 0.28,
+          "area_units": "ha (projected analysis grid, pixel count \u00d7 pixel area)",
+          "mean_delta": -0.230217,
+          "median_delta": -0.230786,
+          "valid_pixel_denominator": 43728,
+          "share_of_common_valid_percent": 0.064,
+          "hole_pixel_count": 2,
+          "centroid_utm": [
+            334020.0,
+            3066344.0
+          ],
+          "centroid_lonlat": [
+            85.316488,
+            27.711188
+          ],
+          "geometry_wgs84_ref": "finding.geometry_wgs84"
+        },
+        "evidence_quality": {
+          "earlier_valid_fraction": 1.0,
+          "later_valid_fraction": 1.0,
+          "shared_valid_fraction_of_aoi": 1.0,
+          "observation_support": {
+            "earlier_observations": 3,
+            "later_observations": 3,
+            "min_observations_required": 1
+          },
+          "masking_and_cloud_limitations": [
+            "Bare soil, construction sites and dry riverbeds mimic built-up spectra.",
+            "NDBI is a feature, not a building label.",
+            "Agriculture/forest boundary ambiguity.",
+            "The following indices use 20 m SWIR bands resampled to the 10 m analysis grid and contain no genuine 10 m SWIR detail: ndbi.",
+            "Composites are robust within-period summaries of a few observations, not a dense time series; inter-annual change is represented by two period composites only.",
+            "Index differences are candidate spectral signals. They are not verified deforestation, wetland loss, construction, glacier damage or any other causal land-cover label.",
+            "Cloud, shadow and saturated-pixel exclusion relies on the provider SCL product; terrain shadow is not independently re-derived.",
+            "Surface reflectance is the provider L2A product; no independent atmospheric correction is performed.",
+            "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
+          ],
+          "threshold_sensitivity": {
+            "status": "evaluated in M4-R2 G6",
+            "result": null
+          },
+          "confounding_factors": [
+            "New or extended impervious surfaces (candidate built-up change).",
+            "Bare soil, construction sites or cleared ground between the windows.",
+            "Vegetation loss on the \u0394NDVI counter-evidence panel."
+          ]
+        },
+        "method_provenance": {
+          "algorithm": "threshold candidate mask \u2192 4-connected components (scipy.ndimage.label) \u2192 MMU filter \u2192 top-K selection",
+          "algorithm_version": "0.2.0-m1",
+          "parameters": {
+            "threshold": 0.15,
+            "minimum_mapping_unit_px": 25,
+            "minimum_mapping_unit_ha": 0.25,
+            "max_regions_per_index_direction": 5,
+            "connectivity": 4
+          },
+          "input_hashes": {
+            "delta_raster": "6f5a5559db81f5d49faa1984431aebc0fef1a90777e3e03efe67fdeca4f8c72a",
+            "common_valid_mask": "80fffd3cf94c5f6f61a9caca8b0e416a918ad26bc2e8657104dfee36ef78386e"
+          },
+          "source_experiment_run": {
+            "experiment_id": "kathmandu_m4",
+            "run_generated_utc": "2026-11-07T13:12:45.714603+00:00",
+            "pipeline_verification": {
+              "all_passed": true,
+              "check_count": 26,
+              "failed_checks": []
+            }
+          },
+          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "software": {
+            "numpy": "2.2.6",
+            "rasterio": "1.4.3",
+            "scipy": "1.17.1",
+            "pyproj": "3.7.1"
+          },
+          "generated_utc": "2026-11-07T19:02:36Z",
+          "output_checksum": "b694d5e4e04db643f30b646c3b60ce90b16ad9ab2964cad96d72b65aadd5dbe7"
+        }
       }
     },
     {
       "id": "region_15",
       "display_id": "Region 15",
+      "evidence_id": "ev-kathmandu_m4-ndwi-inc-333923-3065409",
       "index": "ndwi",
       "direction": "increase",
       "threshold": 0.15,
@@ -3729,6 +6746,7 @@
       "mean_delta": 0.192066,
       "median_delta": 0.185356,
       "common_valid_pixels": 43728,
+      "hole_pixel_count": 15,
       "centroid_utm": [
         333923.38,
         3065408.92
@@ -4001,6 +7019,88 @@
               85.316197,
               27.703747
             ]
+          ],
+          [
+            [
+              85.315093,
+              27.703012
+            ],
+            [
+              85.315194,
+              27.703013
+            ],
+            [
+              85.315201,
+              27.702562
+            ],
+            [
+              85.314998,
+              27.70256
+            ],
+            [
+              85.314993,
+              27.702921
+            ],
+            [
+              85.315094,
+              27.702922
+            ],
+            [
+              85.315093,
+              27.703012
+            ]
+          ],
+          [
+            [
+              85.315907,
+              27.702841
+            ],
+            [
+              85.316109,
+              27.702844
+            ],
+            [
+              85.316115,
+              27.702483
+            ],
+            [
+              85.316013,
+              27.702482
+            ],
+            [
+              85.316009,
+              27.702752
+            ],
+            [
+              85.315908,
+              27.702751
+            ],
+            [
+              85.315907,
+              27.702841
+            ]
+          ],
+          [
+            [
+              85.316116,
+              27.702393
+            ],
+            [
+              85.316218,
+              27.702394
+            ],
+            [
+              85.316219,
+              27.702304
+            ],
+            [
+              85.316118,
+              27.702302
+            ],
+            [
+              85.316116,
+              27.702393
+            ]
           ]
         ]
       },
@@ -4028,11 +7128,196 @@
           "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndwi.tif",
           "method": "frozen M1 difference rasters + common-valid masks"
         }
+      },
+      "evidence": {
+        "schema": "habitatshift-evidence-record/1",
+        "identification": {
+          "evidence_id": "ev-kathmandu_m4-ndwi-inc-333923-3065409",
+          "finding_id": "region_15",
+          "display_id": "Region 15",
+          "schema_version": 1,
+          "study_id": "kathmandu_urban",
+          "experiment_id": "kathmandu_m4",
+          "finding_type": "threshold-connected-region",
+          "candidate_direction": "increase",
+          "evidence_status": "processed"
+        },
+        "source_observations": {
+          "earlier": {
+            "item_ids": [
+              "S2B_45RUL_20200331_0_L2A",
+              "S2A_45RUL_20200402_1_L2A",
+              "S2A_45RUL_20200326_0_L2A"
+            ],
+            "observation_dates": [
+              "2020-03-31",
+              "2020-04-02",
+              "2020-03-26"
+            ],
+            "anchor_date": "2020-03-31",
+            "composite_method": "median",
+            "observation_count": 3,
+            "valid_pixels": 43728,
+            "aoi_pixels": 43728,
+            "valid_fraction": 1.0
+          },
+          "later": {
+            "item_ids": [
+              "S2A_45RUL_20250329_0_L2A",
+              "S2C_45RUL_20250330_0_L2A",
+              "S2C_45RUL_20250327_0_L2A"
+            ],
+            "observation_dates": [
+              "2025-03-29",
+              "2025-03-30",
+              "2025-03-27"
+            ],
+            "anchor_date": "2025-03-29",
+            "composite_method": "median",
+            "observation_count": 3,
+            "valid_pixels": 43728,
+            "aoi_pixels": 43728,
+            "valid_fraction": 1.0
+          },
+          "dataset": {
+            "collection": "sentinel-2-l2a",
+            "provider": "Element 84 Earth Search (AWS Open Data)",
+            "license": "Copernicus Sentinel data: free, open and unrestricted use with attribution (ESA Copernicus data policy). Catalogue: Element 84 Earth Search, AWS Open Data.",
+            "processing_level": "Sentinel-2 L2A surface reflectance",
+            "attribution": "Contains modified Copernicus Sentinel data, processed by ESA; L2A products distributed by the Element 84 Earth Search STAC catalogue (AWS Open Data)."
+          },
+          "study_aoi": {
+            "bounds_lonlat": [
+              85.305,
+              27.695,
+              85.325,
+              27.715
+            ],
+            "area_km2": 4.371274,
+            "aoi_pixels": 43728
+          }
+        },
+        "input_measurements": {
+          "index": "ndwi",
+          "index_label": "observed index difference (later - earlier); not a land-cover verdict",
+          "formula": "(Green - NIR) / (Green + NIR)",
+          "bands": [
+            "green",
+            "nir"
+          ],
+          "native_band_resolution_m": 10.0,
+          "band_resolution_note": "native 10 m band resolution",
+          "delta_definition": "I_later(p) - I_earlier(p) on the shared analysis grid",
+          "threshold": 0.15,
+          "threshold_rule": "|\u0394I| \u2265 t, inclusive; sign selects the candidate direction",
+          "input_raster": "data/processed/m4/kathmandu_m4/delta_ndwi.tif",
+          "input_raster_sha256": "6f5a5559db81f5d49faa1984431aebc0fef1a90777e3e03efe67fdeca4f8c72a",
+          "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndwi.tif",
+          "valid_mask_sha256": "80fffd3cf94c5f6f61a9caca8b0e416a918ad26bc2e8657104dfee36ef78386e",
+          "analysis_grid": {
+            "crs": "EPSG:32645",
+            "resolution_m": 10.0,
+            "width": 201,
+            "height": 225,
+            "transform": [
+              10.0,
+              0.0,
+              332860.0,
+              0.0,
+              -10.0,
+              3066790.0
+            ],
+            "pixel_area_m2": 100.0
+          }
+        },
+        "spatial_measurements": {
+          "pixel_count": 253,
+          "area_ha": 2.53,
+          "area_units": "ha (projected analysis grid, pixel count \u00d7 pixel area)",
+          "mean_delta": 0.192066,
+          "median_delta": 0.185356,
+          "valid_pixel_denominator": 43728,
+          "share_of_common_valid_percent": 0.5786,
+          "hole_pixel_count": 15,
+          "centroid_utm": [
+            333923.38,
+            3065408.92
+          ],
+          "centroid_lonlat": [
+            85.315638,
+            27.702738
+          ],
+          "geometry_wgs84_ref": "finding.geometry_wgs84"
+        },
+        "evidence_quality": {
+          "earlier_valid_fraction": 1.0,
+          "later_valid_fraction": 1.0,
+          "shared_valid_fraction_of_aoi": 1.0,
+          "observation_support": {
+            "earlier_observations": 3,
+            "later_observations": 3,
+            "min_observations_required": 1
+          },
+          "masking_and_cloud_limitations": [
+            "Bare soil, construction sites and dry riverbeds mimic built-up spectra.",
+            "NDBI is a feature, not a building label.",
+            "Agriculture/forest boundary ambiguity.",
+            "The following indices use 20 m SWIR bands resampled to the 10 m analysis grid and contain no genuine 10 m SWIR detail: ndbi.",
+            "Composites are robust within-period summaries of a few observations, not a dense time series; inter-annual change is represented by two period composites only.",
+            "Index differences are candidate spectral signals. They are not verified deforestation, wetland loss, construction, glacier damage or any other causal land-cover label.",
+            "Cloud, shadow and saturated-pixel exclusion relies on the provider SCL product; terrain shadow is not independently re-derived.",
+            "Surface reflectance is the provider L2A product; no independent atmospheric correction is performed.",
+            "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
+          ],
+          "threshold_sensitivity": {
+            "status": "evaluated in M4-R2 G6",
+            "result": null
+          },
+          "confounding_factors": [
+            "New or extended impervious surfaces (candidate built-up change).",
+            "Bare soil, construction sites or cleared ground between the windows.",
+            "Vegetation loss on the \u0394NDVI counter-evidence panel."
+          ]
+        },
+        "method_provenance": {
+          "algorithm": "threshold candidate mask \u2192 4-connected components (scipy.ndimage.label) \u2192 MMU filter \u2192 top-K selection",
+          "algorithm_version": "0.2.0-m1",
+          "parameters": {
+            "threshold": 0.15,
+            "minimum_mapping_unit_px": 25,
+            "minimum_mapping_unit_ha": 0.25,
+            "max_regions_per_index_direction": 5,
+            "connectivity": 4
+          },
+          "input_hashes": {
+            "delta_raster": "6f5a5559db81f5d49faa1984431aebc0fef1a90777e3e03efe67fdeca4f8c72a",
+            "common_valid_mask": "80fffd3cf94c5f6f61a9caca8b0e416a918ad26bc2e8657104dfee36ef78386e"
+          },
+          "source_experiment_run": {
+            "experiment_id": "kathmandu_m4",
+            "run_generated_utc": "2026-11-07T13:12:45.714603+00:00",
+            "pipeline_verification": {
+              "all_passed": true,
+              "check_count": 26,
+              "failed_checks": []
+            }
+          },
+          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "software": {
+            "numpy": "2.2.6",
+            "rasterio": "1.4.3",
+            "scipy": "1.17.1",
+            "pyproj": "3.7.1"
+          },
+          "generated_utc": "2026-11-07T19:02:36Z",
+          "output_checksum": "91c5ba4ab7965893c7b686af735accdc81b77454bb72a7ca52e07d1bf2bec37b"
+        }
       }
     },
     {
       "id": "region_16",
       "display_id": "Region 16",
+      "evidence_id": "ev-kathmandu_m4-ndwi-inc-333915-3065985",
       "index": "ndwi",
       "direction": "increase",
       "threshold": 0.15,
@@ -4042,6 +7327,7 @@
       "mean_delta": 0.382437,
       "median_delta": 0.40109,
       "common_valid_pixels": 43728,
+      "hole_pixel_count": 0,
       "centroid_utm": [
         333914.76,
         3065984.76
@@ -4165,11 +7451,196 @@
           "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndwi.tif",
           "method": "frozen M1 difference rasters + common-valid masks"
         }
+      },
+      "evidence": {
+        "schema": "habitatshift-evidence-record/1",
+        "identification": {
+          "evidence_id": "ev-kathmandu_m4-ndwi-inc-333915-3065985",
+          "finding_id": "region_16",
+          "display_id": "Region 16",
+          "schema_version": 1,
+          "study_id": "kathmandu_urban",
+          "experiment_id": "kathmandu_m4",
+          "finding_type": "threshold-connected-region",
+          "candidate_direction": "increase",
+          "evidence_status": "processed"
+        },
+        "source_observations": {
+          "earlier": {
+            "item_ids": [
+              "S2B_45RUL_20200331_0_L2A",
+              "S2A_45RUL_20200402_1_L2A",
+              "S2A_45RUL_20200326_0_L2A"
+            ],
+            "observation_dates": [
+              "2020-03-31",
+              "2020-04-02",
+              "2020-03-26"
+            ],
+            "anchor_date": "2020-03-31",
+            "composite_method": "median",
+            "observation_count": 3,
+            "valid_pixels": 43728,
+            "aoi_pixels": 43728,
+            "valid_fraction": 1.0
+          },
+          "later": {
+            "item_ids": [
+              "S2A_45RUL_20250329_0_L2A",
+              "S2C_45RUL_20250330_0_L2A",
+              "S2C_45RUL_20250327_0_L2A"
+            ],
+            "observation_dates": [
+              "2025-03-29",
+              "2025-03-30",
+              "2025-03-27"
+            ],
+            "anchor_date": "2025-03-29",
+            "composite_method": "median",
+            "observation_count": 3,
+            "valid_pixels": 43728,
+            "aoi_pixels": 43728,
+            "valid_fraction": 1.0
+          },
+          "dataset": {
+            "collection": "sentinel-2-l2a",
+            "provider": "Element 84 Earth Search (AWS Open Data)",
+            "license": "Copernicus Sentinel data: free, open and unrestricted use with attribution (ESA Copernicus data policy). Catalogue: Element 84 Earth Search, AWS Open Data.",
+            "processing_level": "Sentinel-2 L2A surface reflectance",
+            "attribution": "Contains modified Copernicus Sentinel data, processed by ESA; L2A products distributed by the Element 84 Earth Search STAC catalogue (AWS Open Data)."
+          },
+          "study_aoi": {
+            "bounds_lonlat": [
+              85.305,
+              27.695,
+              85.325,
+              27.715
+            ],
+            "area_km2": 4.371274,
+            "aoi_pixels": 43728
+          }
+        },
+        "input_measurements": {
+          "index": "ndwi",
+          "index_label": "observed index difference (later - earlier); not a land-cover verdict",
+          "formula": "(Green - NIR) / (Green + NIR)",
+          "bands": [
+            "green",
+            "nir"
+          ],
+          "native_band_resolution_m": 10.0,
+          "band_resolution_note": "native 10 m band resolution",
+          "delta_definition": "I_later(p) - I_earlier(p) on the shared analysis grid",
+          "threshold": 0.15,
+          "threshold_rule": "|\u0394I| \u2265 t, inclusive; sign selects the candidate direction",
+          "input_raster": "data/processed/m4/kathmandu_m4/delta_ndwi.tif",
+          "input_raster_sha256": "6f5a5559db81f5d49faa1984431aebc0fef1a90777e3e03efe67fdeca4f8c72a",
+          "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndwi.tif",
+          "valid_mask_sha256": "80fffd3cf94c5f6f61a9caca8b0e416a918ad26bc2e8657104dfee36ef78386e",
+          "analysis_grid": {
+            "crs": "EPSG:32645",
+            "resolution_m": 10.0,
+            "width": 201,
+            "height": 225,
+            "transform": [
+              10.0,
+              0.0,
+              332860.0,
+              0.0,
+              -10.0,
+              3066790.0
+            ],
+            "pixel_area_m2": 100.0
+          }
+        },
+        "spatial_measurements": {
+          "pixel_count": 194,
+          "area_ha": 1.94,
+          "area_units": "ha (projected analysis grid, pixel count \u00d7 pixel area)",
+          "mean_delta": 0.382437,
+          "median_delta": 0.40109,
+          "valid_pixel_denominator": 43728,
+          "share_of_common_valid_percent": 0.4437,
+          "hole_pixel_count": 0,
+          "centroid_utm": [
+            333914.76,
+            3065984.76
+          ],
+          "centroid_lonlat": [
+            85.315471,
+            27.707933
+          ],
+          "geometry_wgs84_ref": "finding.geometry_wgs84"
+        },
+        "evidence_quality": {
+          "earlier_valid_fraction": 1.0,
+          "later_valid_fraction": 1.0,
+          "shared_valid_fraction_of_aoi": 1.0,
+          "observation_support": {
+            "earlier_observations": 3,
+            "later_observations": 3,
+            "min_observations_required": 1
+          },
+          "masking_and_cloud_limitations": [
+            "Bare soil, construction sites and dry riverbeds mimic built-up spectra.",
+            "NDBI is a feature, not a building label.",
+            "Agriculture/forest boundary ambiguity.",
+            "The following indices use 20 m SWIR bands resampled to the 10 m analysis grid and contain no genuine 10 m SWIR detail: ndbi.",
+            "Composites are robust within-period summaries of a few observations, not a dense time series; inter-annual change is represented by two period composites only.",
+            "Index differences are candidate spectral signals. They are not verified deforestation, wetland loss, construction, glacier damage or any other causal land-cover label.",
+            "Cloud, shadow and saturated-pixel exclusion relies on the provider SCL product; terrain shadow is not independently re-derived.",
+            "Surface reflectance is the provider L2A product; no independent atmospheric correction is performed.",
+            "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
+          ],
+          "threshold_sensitivity": {
+            "status": "evaluated in M4-R2 G6",
+            "result": null
+          },
+          "confounding_factors": [
+            "New or extended impervious surfaces (candidate built-up change).",
+            "Bare soil, construction sites or cleared ground between the windows.",
+            "Vegetation loss on the \u0394NDVI counter-evidence panel."
+          ]
+        },
+        "method_provenance": {
+          "algorithm": "threshold candidate mask \u2192 4-connected components (scipy.ndimage.label) \u2192 MMU filter \u2192 top-K selection",
+          "algorithm_version": "0.2.0-m1",
+          "parameters": {
+            "threshold": 0.15,
+            "minimum_mapping_unit_px": 25,
+            "minimum_mapping_unit_ha": 0.25,
+            "max_regions_per_index_direction": 5,
+            "connectivity": 4
+          },
+          "input_hashes": {
+            "delta_raster": "6f5a5559db81f5d49faa1984431aebc0fef1a90777e3e03efe67fdeca4f8c72a",
+            "common_valid_mask": "80fffd3cf94c5f6f61a9caca8b0e416a918ad26bc2e8657104dfee36ef78386e"
+          },
+          "source_experiment_run": {
+            "experiment_id": "kathmandu_m4",
+            "run_generated_utc": "2026-11-07T13:12:45.714603+00:00",
+            "pipeline_verification": {
+              "all_passed": true,
+              "check_count": 26,
+              "failed_checks": []
+            }
+          },
+          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "software": {
+            "numpy": "2.2.6",
+            "rasterio": "1.4.3",
+            "scipy": "1.17.1",
+            "pyproj": "3.7.1"
+          },
+          "generated_utc": "2026-11-07T19:02:36Z",
+          "output_checksum": "d4876f906bfea0900f38fd151e53bf1c54d29417b1ace598a351bf4a6546166d"
+        }
       }
     },
     {
       "id": "region_17",
       "display_id": "Region 17",
+      "evidence_id": "ev-kathmandu_m4-ndwi-inc-334227-3065287",
       "index": "ndwi",
       "direction": "increase",
       "threshold": 0.15,
@@ -4179,6 +7650,7 @@
       "mean_delta": 0.201836,
       "median_delta": 0.190781,
       "common_valid_pixels": 43728,
+      "hole_pixel_count": 13,
       "centroid_utm": [
         334226.92,
         3065287.08
@@ -4451,6 +7923,168 @@
               85.318751,
               27.702515
             ]
+          ],
+          [
+            [
+              85.318558,
+              27.701881
+            ],
+            [
+              85.318659,
+              27.701882
+            ],
+            [
+              85.318661,
+              27.701792
+            ],
+            [
+              85.318559,
+              27.701791
+            ],
+            [
+              85.318558,
+              27.701881
+            ]
+          ],
+          [
+            [
+              85.318965,
+              27.701796
+            ],
+            [
+              85.319167,
+              27.701798
+            ],
+            [
+              85.319169,
+              27.701708
+            ],
+            [
+              85.318966,
+              27.701705
+            ],
+            [
+              85.318965,
+              27.701796
+            ]
+          ],
+          [
+            [
+              85.318662,
+              27.701702
+            ],
+            [
+              85.318763,
+              27.701703
+            ],
+            [
+              85.318765,
+              27.701613
+            ],
+            [
+              85.318663,
+              27.701611
+            ],
+            [
+              85.318662,
+              27.701702
+            ]
+          ],
+          [
+            [
+              85.31917,
+              27.701618
+            ],
+            [
+              85.319373,
+              27.70162
+            ],
+            [
+              85.319376,
+              27.70144
+            ],
+            [
+              85.319274,
+              27.701438
+            ],
+            [
+              85.319276,
+              27.701348
+            ],
+            [
+              85.319174,
+              27.701347
+            ],
+            [
+              85.31917,
+              27.701618
+            ]
+          ],
+          [
+            [
+              85.319073,
+              27.701346
+            ],
+            [
+              85.319174,
+              27.701347
+            ],
+            [
+              85.319177,
+              27.701166
+            ],
+            [
+              85.319076,
+              27.701165
+            ],
+            [
+              85.319073,
+              27.701346
+            ]
+          ],
+          [
+            [
+              85.318669,
+              27.70125
+            ],
+            [
+              85.31877,
+              27.701252
+            ],
+            [
+              85.318772,
+              27.701161
+            ],
+            [
+              85.31867,
+              27.70116
+            ],
+            [
+              85.318669,
+              27.70125
+            ]
+          ],
+          [
+            [
+              85.318367,
+              27.701066
+            ],
+            [
+              85.318469,
+              27.701067
+            ],
+            [
+              85.31847,
+              27.700977
+            ],
+            [
+              85.318369,
+              27.700976
+            ],
+            [
+              85.318367,
+              27.701066
+            ]
           ]
         ]
       },
@@ -4478,11 +8112,196 @@
           "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndwi.tif",
           "method": "frozen M1 difference rasters + common-valid masks"
         }
+      },
+      "evidence": {
+        "schema": "habitatshift-evidence-record/1",
+        "identification": {
+          "evidence_id": "ev-kathmandu_m4-ndwi-inc-334227-3065287",
+          "finding_id": "region_17",
+          "display_id": "Region 17",
+          "schema_version": 1,
+          "study_id": "kathmandu_urban",
+          "experiment_id": "kathmandu_m4",
+          "finding_type": "threshold-connected-region",
+          "candidate_direction": "increase",
+          "evidence_status": "processed"
+        },
+        "source_observations": {
+          "earlier": {
+            "item_ids": [
+              "S2B_45RUL_20200331_0_L2A",
+              "S2A_45RUL_20200402_1_L2A",
+              "S2A_45RUL_20200326_0_L2A"
+            ],
+            "observation_dates": [
+              "2020-03-31",
+              "2020-04-02",
+              "2020-03-26"
+            ],
+            "anchor_date": "2020-03-31",
+            "composite_method": "median",
+            "observation_count": 3,
+            "valid_pixels": 43728,
+            "aoi_pixels": 43728,
+            "valid_fraction": 1.0
+          },
+          "later": {
+            "item_ids": [
+              "S2A_45RUL_20250329_0_L2A",
+              "S2C_45RUL_20250330_0_L2A",
+              "S2C_45RUL_20250327_0_L2A"
+            ],
+            "observation_dates": [
+              "2025-03-29",
+              "2025-03-30",
+              "2025-03-27"
+            ],
+            "anchor_date": "2025-03-29",
+            "composite_method": "median",
+            "observation_count": 3,
+            "valid_pixels": 43728,
+            "aoi_pixels": 43728,
+            "valid_fraction": 1.0
+          },
+          "dataset": {
+            "collection": "sentinel-2-l2a",
+            "provider": "Element 84 Earth Search (AWS Open Data)",
+            "license": "Copernicus Sentinel data: free, open and unrestricted use with attribution (ESA Copernicus data policy). Catalogue: Element 84 Earth Search, AWS Open Data.",
+            "processing_level": "Sentinel-2 L2A surface reflectance",
+            "attribution": "Contains modified Copernicus Sentinel data, processed by ESA; L2A products distributed by the Element 84 Earth Search STAC catalogue (AWS Open Data)."
+          },
+          "study_aoi": {
+            "bounds_lonlat": [
+              85.305,
+              27.695,
+              85.325,
+              27.715
+            ],
+            "area_km2": 4.371274,
+            "aoi_pixels": 43728
+          }
+        },
+        "input_measurements": {
+          "index": "ndwi",
+          "index_label": "observed index difference (later - earlier); not a land-cover verdict",
+          "formula": "(Green - NIR) / (Green + NIR)",
+          "bands": [
+            "green",
+            "nir"
+          ],
+          "native_band_resolution_m": 10.0,
+          "band_resolution_note": "native 10 m band resolution",
+          "delta_definition": "I_later(p) - I_earlier(p) on the shared analysis grid",
+          "threshold": 0.15,
+          "threshold_rule": "|\u0394I| \u2265 t, inclusive; sign selects the candidate direction",
+          "input_raster": "data/processed/m4/kathmandu_m4/delta_ndwi.tif",
+          "input_raster_sha256": "6f5a5559db81f5d49faa1984431aebc0fef1a90777e3e03efe67fdeca4f8c72a",
+          "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndwi.tif",
+          "valid_mask_sha256": "80fffd3cf94c5f6f61a9caca8b0e416a918ad26bc2e8657104dfee36ef78386e",
+          "analysis_grid": {
+            "crs": "EPSG:32645",
+            "resolution_m": 10.0,
+            "width": 201,
+            "height": 225,
+            "transform": [
+              10.0,
+              0.0,
+              332860.0,
+              0.0,
+              -10.0,
+              3066790.0
+            ],
+            "pixel_area_m2": 100.0
+          }
+        },
+        "spatial_measurements": {
+          "pixel_count": 136,
+          "area_ha": 1.36,
+          "area_units": "ha (projected analysis grid, pixel count \u00d7 pixel area)",
+          "mean_delta": 0.201836,
+          "median_delta": 0.190781,
+          "valid_pixel_denominator": 43728,
+          "share_of_common_valid_percent": 0.311,
+          "hole_pixel_count": 13,
+          "centroid_utm": [
+            334226.92,
+            3065287.08
+          ],
+          "centroid_lonlat": [
+            85.318733,
+            27.701676
+          ],
+          "geometry_wgs84_ref": "finding.geometry_wgs84"
+        },
+        "evidence_quality": {
+          "earlier_valid_fraction": 1.0,
+          "later_valid_fraction": 1.0,
+          "shared_valid_fraction_of_aoi": 1.0,
+          "observation_support": {
+            "earlier_observations": 3,
+            "later_observations": 3,
+            "min_observations_required": 1
+          },
+          "masking_and_cloud_limitations": [
+            "Bare soil, construction sites and dry riverbeds mimic built-up spectra.",
+            "NDBI is a feature, not a building label.",
+            "Agriculture/forest boundary ambiguity.",
+            "The following indices use 20 m SWIR bands resampled to the 10 m analysis grid and contain no genuine 10 m SWIR detail: ndbi.",
+            "Composites are robust within-period summaries of a few observations, not a dense time series; inter-annual change is represented by two period composites only.",
+            "Index differences are candidate spectral signals. They are not verified deforestation, wetland loss, construction, glacier damage or any other causal land-cover label.",
+            "Cloud, shadow and saturated-pixel exclusion relies on the provider SCL product; terrain shadow is not independently re-derived.",
+            "Surface reflectance is the provider L2A product; no independent atmospheric correction is performed.",
+            "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
+          ],
+          "threshold_sensitivity": {
+            "status": "evaluated in M4-R2 G6",
+            "result": null
+          },
+          "confounding_factors": [
+            "New or extended impervious surfaces (candidate built-up change).",
+            "Bare soil, construction sites or cleared ground between the windows.",
+            "Vegetation loss on the \u0394NDVI counter-evidence panel."
+          ]
+        },
+        "method_provenance": {
+          "algorithm": "threshold candidate mask \u2192 4-connected components (scipy.ndimage.label) \u2192 MMU filter \u2192 top-K selection",
+          "algorithm_version": "0.2.0-m1",
+          "parameters": {
+            "threshold": 0.15,
+            "minimum_mapping_unit_px": 25,
+            "minimum_mapping_unit_ha": 0.25,
+            "max_regions_per_index_direction": 5,
+            "connectivity": 4
+          },
+          "input_hashes": {
+            "delta_raster": "6f5a5559db81f5d49faa1984431aebc0fef1a90777e3e03efe67fdeca4f8c72a",
+            "common_valid_mask": "80fffd3cf94c5f6f61a9caca8b0e416a918ad26bc2e8657104dfee36ef78386e"
+          },
+          "source_experiment_run": {
+            "experiment_id": "kathmandu_m4",
+            "run_generated_utc": "2026-11-07T13:12:45.714603+00:00",
+            "pipeline_verification": {
+              "all_passed": true,
+              "check_count": 26,
+              "failed_checks": []
+            }
+          },
+          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "software": {
+            "numpy": "2.2.6",
+            "rasterio": "1.4.3",
+            "scipy": "1.17.1",
+            "pyproj": "3.7.1"
+          },
+          "generated_utc": "2026-11-07T19:02:36Z",
+          "output_checksum": "c53cf3d4b98ad7f175a7f64f7e9aa9d77b5c98457bb28c77e44e94d03dcde5c6"
+        }
       }
     },
     {
       "id": "region_18",
       "display_id": "Region 18",
+      "evidence_id": "ev-kathmandu_m4-ndwi-inc-333825-3066499",
       "index": "ndwi",
       "direction": "increase",
       "threshold": 0.15,
@@ -4492,6 +8311,7 @@
       "mean_delta": 0.22302,
       "median_delta": 0.206603,
       "common_valid_pixels": 43728,
+      "hole_pixel_count": 1,
       "centroid_utm": [
         333825.12,
         3066499.02
@@ -4668,6 +8488,28 @@
               85.314326,
               27.713292
             ]
+          ],
+          [
+            [
+              85.314742,
+              27.712665
+            ],
+            [
+              85.314843,
+              27.712666
+            ],
+            [
+              85.314844,
+              27.712576
+            ],
+            [
+              85.314743,
+              27.712575
+            ],
+            [
+              85.314742,
+              27.712665
+            ]
           ]
         ]
       },
@@ -4695,11 +8537,196 @@
           "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndwi.tif",
           "method": "frozen M1 difference rasters + common-valid masks"
         }
+      },
+      "evidence": {
+        "schema": "habitatshift-evidence-record/1",
+        "identification": {
+          "evidence_id": "ev-kathmandu_m4-ndwi-inc-333825-3066499",
+          "finding_id": "region_18",
+          "display_id": "Region 18",
+          "schema_version": 1,
+          "study_id": "kathmandu_urban",
+          "experiment_id": "kathmandu_m4",
+          "finding_type": "threshold-connected-region",
+          "candidate_direction": "increase",
+          "evidence_status": "processed"
+        },
+        "source_observations": {
+          "earlier": {
+            "item_ids": [
+              "S2B_45RUL_20200331_0_L2A",
+              "S2A_45RUL_20200402_1_L2A",
+              "S2A_45RUL_20200326_0_L2A"
+            ],
+            "observation_dates": [
+              "2020-03-31",
+              "2020-04-02",
+              "2020-03-26"
+            ],
+            "anchor_date": "2020-03-31",
+            "composite_method": "median",
+            "observation_count": 3,
+            "valid_pixels": 43728,
+            "aoi_pixels": 43728,
+            "valid_fraction": 1.0
+          },
+          "later": {
+            "item_ids": [
+              "S2A_45RUL_20250329_0_L2A",
+              "S2C_45RUL_20250330_0_L2A",
+              "S2C_45RUL_20250327_0_L2A"
+            ],
+            "observation_dates": [
+              "2025-03-29",
+              "2025-03-30",
+              "2025-03-27"
+            ],
+            "anchor_date": "2025-03-29",
+            "composite_method": "median",
+            "observation_count": 3,
+            "valid_pixels": 43728,
+            "aoi_pixels": 43728,
+            "valid_fraction": 1.0
+          },
+          "dataset": {
+            "collection": "sentinel-2-l2a",
+            "provider": "Element 84 Earth Search (AWS Open Data)",
+            "license": "Copernicus Sentinel data: free, open and unrestricted use with attribution (ESA Copernicus data policy). Catalogue: Element 84 Earth Search, AWS Open Data.",
+            "processing_level": "Sentinel-2 L2A surface reflectance",
+            "attribution": "Contains modified Copernicus Sentinel data, processed by ESA; L2A products distributed by the Element 84 Earth Search STAC catalogue (AWS Open Data)."
+          },
+          "study_aoi": {
+            "bounds_lonlat": [
+              85.305,
+              27.695,
+              85.325,
+              27.715
+            ],
+            "area_km2": 4.371274,
+            "aoi_pixels": 43728
+          }
+        },
+        "input_measurements": {
+          "index": "ndwi",
+          "index_label": "observed index difference (later - earlier); not a land-cover verdict",
+          "formula": "(Green - NIR) / (Green + NIR)",
+          "bands": [
+            "green",
+            "nir"
+          ],
+          "native_band_resolution_m": 10.0,
+          "band_resolution_note": "native 10 m band resolution",
+          "delta_definition": "I_later(p) - I_earlier(p) on the shared analysis grid",
+          "threshold": 0.15,
+          "threshold_rule": "|\u0394I| \u2265 t, inclusive; sign selects the candidate direction",
+          "input_raster": "data/processed/m4/kathmandu_m4/delta_ndwi.tif",
+          "input_raster_sha256": "6f5a5559db81f5d49faa1984431aebc0fef1a90777e3e03efe67fdeca4f8c72a",
+          "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndwi.tif",
+          "valid_mask_sha256": "80fffd3cf94c5f6f61a9caca8b0e416a918ad26bc2e8657104dfee36ef78386e",
+          "analysis_grid": {
+            "crs": "EPSG:32645",
+            "resolution_m": 10.0,
+            "width": 201,
+            "height": 225,
+            "transform": [
+              10.0,
+              0.0,
+              332860.0,
+              0.0,
+              -10.0,
+              3066790.0
+            ],
+            "pixel_area_m2": 100.0
+          }
+        },
+        "spatial_measurements": {
+          "pixel_count": 132,
+          "area_ha": 1.32,
+          "area_units": "ha (projected analysis grid, pixel count \u00d7 pixel area)",
+          "mean_delta": 0.22302,
+          "median_delta": 0.206603,
+          "valid_pixel_denominator": 43728,
+          "share_of_common_valid_percent": 0.3019,
+          "hole_pixel_count": 1,
+          "centroid_utm": [
+            333825.12,
+            3066499.02
+          ],
+          "centroid_lonlat": [
+            85.314491,
+            27.712563
+          ],
+          "geometry_wgs84_ref": "finding.geometry_wgs84"
+        },
+        "evidence_quality": {
+          "earlier_valid_fraction": 1.0,
+          "later_valid_fraction": 1.0,
+          "shared_valid_fraction_of_aoi": 1.0,
+          "observation_support": {
+            "earlier_observations": 3,
+            "later_observations": 3,
+            "min_observations_required": 1
+          },
+          "masking_and_cloud_limitations": [
+            "Bare soil, construction sites and dry riverbeds mimic built-up spectra.",
+            "NDBI is a feature, not a building label.",
+            "Agriculture/forest boundary ambiguity.",
+            "The following indices use 20 m SWIR bands resampled to the 10 m analysis grid and contain no genuine 10 m SWIR detail: ndbi.",
+            "Composites are robust within-period summaries of a few observations, not a dense time series; inter-annual change is represented by two period composites only.",
+            "Index differences are candidate spectral signals. They are not verified deforestation, wetland loss, construction, glacier damage or any other causal land-cover label.",
+            "Cloud, shadow and saturated-pixel exclusion relies on the provider SCL product; terrain shadow is not independently re-derived.",
+            "Surface reflectance is the provider L2A product; no independent atmospheric correction is performed.",
+            "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
+          ],
+          "threshold_sensitivity": {
+            "status": "evaluated in M4-R2 G6",
+            "result": null
+          },
+          "confounding_factors": [
+            "New or extended impervious surfaces (candidate built-up change).",
+            "Bare soil, construction sites or cleared ground between the windows.",
+            "Vegetation loss on the \u0394NDVI counter-evidence panel."
+          ]
+        },
+        "method_provenance": {
+          "algorithm": "threshold candidate mask \u2192 4-connected components (scipy.ndimage.label) \u2192 MMU filter \u2192 top-K selection",
+          "algorithm_version": "0.2.0-m1",
+          "parameters": {
+            "threshold": 0.15,
+            "minimum_mapping_unit_px": 25,
+            "minimum_mapping_unit_ha": 0.25,
+            "max_regions_per_index_direction": 5,
+            "connectivity": 4
+          },
+          "input_hashes": {
+            "delta_raster": "6f5a5559db81f5d49faa1984431aebc0fef1a90777e3e03efe67fdeca4f8c72a",
+            "common_valid_mask": "80fffd3cf94c5f6f61a9caca8b0e416a918ad26bc2e8657104dfee36ef78386e"
+          },
+          "source_experiment_run": {
+            "experiment_id": "kathmandu_m4",
+            "run_generated_utc": "2026-11-07T13:12:45.714603+00:00",
+            "pipeline_verification": {
+              "all_passed": true,
+              "check_count": 26,
+              "failed_checks": []
+            }
+          },
+          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "software": {
+            "numpy": "2.2.6",
+            "rasterio": "1.4.3",
+            "scipy": "1.17.1",
+            "pyproj": "3.7.1"
+          },
+          "generated_utc": "2026-11-07T19:02:36Z",
+          "output_checksum": "b1b3db2653542127b57835b0524ece21883b44c860aebc78e1121a8b59b02c94"
+        }
       }
     },
     {
       "id": "region_19",
       "display_id": "Region 19",
+      "evidence_id": "ev-kathmandu_m4-ndwi-inc-334594-3064614",
       "index": "ndwi",
       "direction": "increase",
       "threshold": 0.15,
@@ -4709,6 +8736,7 @@
       "mean_delta": 0.248227,
       "median_delta": 0.232481,
       "common_valid_pixels": 43728,
+      "hole_pixel_count": 1,
       "centroid_utm": [
         334593.83,
         3064613.83
@@ -4909,6 +8937,28 @@
               85.322699,
               27.696335
             ]
+          ],
+          [
+            [
+              85.321903,
+              27.695333
+            ],
+            [
+              85.322004,
+              27.695334
+            ],
+            [
+              85.322006,
+              27.695244
+            ],
+            [
+              85.321904,
+              27.695243
+            ],
+            [
+              85.321903,
+              27.695333
+            ]
           ]
         ]
       },
@@ -4935,6 +8985,190 @@
           "input_raster": "data/processed/m4/kathmandu_m4/delta_ndwi.tif",
           "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndwi.tif",
           "method": "frozen M1 difference rasters + common-valid masks"
+        }
+      },
+      "evidence": {
+        "schema": "habitatshift-evidence-record/1",
+        "identification": {
+          "evidence_id": "ev-kathmandu_m4-ndwi-inc-334594-3064614",
+          "finding_id": "region_19",
+          "display_id": "Region 19",
+          "schema_version": 1,
+          "study_id": "kathmandu_urban",
+          "experiment_id": "kathmandu_m4",
+          "finding_type": "threshold-connected-region",
+          "candidate_direction": "increase",
+          "evidence_status": "processed"
+        },
+        "source_observations": {
+          "earlier": {
+            "item_ids": [
+              "S2B_45RUL_20200331_0_L2A",
+              "S2A_45RUL_20200402_1_L2A",
+              "S2A_45RUL_20200326_0_L2A"
+            ],
+            "observation_dates": [
+              "2020-03-31",
+              "2020-04-02",
+              "2020-03-26"
+            ],
+            "anchor_date": "2020-03-31",
+            "composite_method": "median",
+            "observation_count": 3,
+            "valid_pixels": 43728,
+            "aoi_pixels": 43728,
+            "valid_fraction": 1.0
+          },
+          "later": {
+            "item_ids": [
+              "S2A_45RUL_20250329_0_L2A",
+              "S2C_45RUL_20250330_0_L2A",
+              "S2C_45RUL_20250327_0_L2A"
+            ],
+            "observation_dates": [
+              "2025-03-29",
+              "2025-03-30",
+              "2025-03-27"
+            ],
+            "anchor_date": "2025-03-29",
+            "composite_method": "median",
+            "observation_count": 3,
+            "valid_pixels": 43728,
+            "aoi_pixels": 43728,
+            "valid_fraction": 1.0
+          },
+          "dataset": {
+            "collection": "sentinel-2-l2a",
+            "provider": "Element 84 Earth Search (AWS Open Data)",
+            "license": "Copernicus Sentinel data: free, open and unrestricted use with attribution (ESA Copernicus data policy). Catalogue: Element 84 Earth Search, AWS Open Data.",
+            "processing_level": "Sentinel-2 L2A surface reflectance",
+            "attribution": "Contains modified Copernicus Sentinel data, processed by ESA; L2A products distributed by the Element 84 Earth Search STAC catalogue (AWS Open Data)."
+          },
+          "study_aoi": {
+            "bounds_lonlat": [
+              85.305,
+              27.695,
+              85.325,
+              27.715
+            ],
+            "area_km2": 4.371274,
+            "aoi_pixels": 43728
+          }
+        },
+        "input_measurements": {
+          "index": "ndwi",
+          "index_label": "observed index difference (later - earlier); not a land-cover verdict",
+          "formula": "(Green - NIR) / (Green + NIR)",
+          "bands": [
+            "green",
+            "nir"
+          ],
+          "native_band_resolution_m": 10.0,
+          "band_resolution_note": "native 10 m band resolution",
+          "delta_definition": "I_later(p) - I_earlier(p) on the shared analysis grid",
+          "threshold": 0.15,
+          "threshold_rule": "|\u0394I| \u2265 t, inclusive; sign selects the candidate direction",
+          "input_raster": "data/processed/m4/kathmandu_m4/delta_ndwi.tif",
+          "input_raster_sha256": "6f5a5559db81f5d49faa1984431aebc0fef1a90777e3e03efe67fdeca4f8c72a",
+          "valid_mask": "data/processed/m4/kathmandu_m4/common_valid_ndwi.tif",
+          "valid_mask_sha256": "80fffd3cf94c5f6f61a9caca8b0e416a918ad26bc2e8657104dfee36ef78386e",
+          "analysis_grid": {
+            "crs": "EPSG:32645",
+            "resolution_m": 10.0,
+            "width": 201,
+            "height": 225,
+            "transform": [
+              10.0,
+              0.0,
+              332860.0,
+              0.0,
+              -10.0,
+              3066790.0
+            ],
+            "pixel_area_m2": 100.0
+          }
+        },
+        "spatial_measurements": {
+          "pixel_count": 91,
+          "area_ha": 0.91,
+          "area_units": "ha (projected analysis grid, pixel count \u00d7 pixel area)",
+          "mean_delta": 0.248227,
+          "median_delta": 0.232481,
+          "valid_pixel_denominator": 43728,
+          "share_of_common_valid_percent": 0.2081,
+          "hole_pixel_count": 1,
+          "centroid_utm": [
+            334593.83,
+            3064613.83
+          ],
+          "centroid_lonlat": [
+            85.322545,
+            27.695646
+          ],
+          "geometry_wgs84_ref": "finding.geometry_wgs84"
+        },
+        "evidence_quality": {
+          "earlier_valid_fraction": 1.0,
+          "later_valid_fraction": 1.0,
+          "shared_valid_fraction_of_aoi": 1.0,
+          "observation_support": {
+            "earlier_observations": 3,
+            "later_observations": 3,
+            "min_observations_required": 1
+          },
+          "masking_and_cloud_limitations": [
+            "Bare soil, construction sites and dry riverbeds mimic built-up spectra.",
+            "NDBI is a feature, not a building label.",
+            "Agriculture/forest boundary ambiguity.",
+            "The following indices use 20 m SWIR bands resampled to the 10 m analysis grid and contain no genuine 10 m SWIR detail: ndbi.",
+            "Composites are robust within-period summaries of a few observations, not a dense time series; inter-annual change is represented by two period composites only.",
+            "Index differences are candidate spectral signals. They are not verified deforestation, wetland loss, construction, glacier damage or any other causal land-cover label.",
+            "Cloud, shadow and saturated-pixel exclusion relies on the provider SCL product; terrain shadow is not independently re-derived.",
+            "Surface reflectance is the provider L2A product; no independent atmospheric correction is performed.",
+            "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
+          ],
+          "threshold_sensitivity": {
+            "status": "evaluated in M4-R2 G6",
+            "result": null
+          },
+          "confounding_factors": [
+            "New or extended impervious surfaces (candidate built-up change).",
+            "Bare soil, construction sites or cleared ground between the windows.",
+            "Vegetation loss on the \u0394NDVI counter-evidence panel."
+          ]
+        },
+        "method_provenance": {
+          "algorithm": "threshold candidate mask \u2192 4-connected components (scipy.ndimage.label) \u2192 MMU filter \u2192 top-K selection",
+          "algorithm_version": "0.2.0-m1",
+          "parameters": {
+            "threshold": 0.15,
+            "minimum_mapping_unit_px": 25,
+            "minimum_mapping_unit_ha": 0.25,
+            "max_regions_per_index_direction": 5,
+            "connectivity": 4
+          },
+          "input_hashes": {
+            "delta_raster": "6f5a5559db81f5d49faa1984431aebc0fef1a90777e3e03efe67fdeca4f8c72a",
+            "common_valid_mask": "80fffd3cf94c5f6f61a9caca8b0e416a918ad26bc2e8657104dfee36ef78386e"
+          },
+          "source_experiment_run": {
+            "experiment_id": "kathmandu_m4",
+            "run_generated_utc": "2026-11-07T13:12:45.714603+00:00",
+            "pipeline_verification": {
+              "all_passed": true,
+              "check_count": 26,
+              "failed_checks": []
+            }
+          },
+          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "software": {
+            "numpy": "2.2.6",
+            "rasterio": "1.4.3",
+            "scipy": "1.17.1",
+            "pyproj": "3.7.1"
+          },
+          "generated_utc": "2026-11-07T19:02:36Z",
+          "output_checksum": "936f6c76fbb5ca72eec7ee4dc7f6cb0aa15a679348b6536d8a325441057de259"
         }
       }
     }

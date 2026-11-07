@@ -21,7 +21,7 @@ export interface BundleExperiment {
   config_sha256: string;
   summary_sha256: string;
   summary: M1Summary;
-  /** "What Changed?" findings (schema habitatshift-findings/1) when this
+  /** "What Changed?" findings (schema habitatshift-findings/2) when this
    *  experiment's difference rasters yielded defensible regions. */
   findings?: BundleFindings | null;
 }
@@ -159,9 +159,31 @@ export interface BundleFindingInterpretation {
   };
 }
 
+export interface EvidenceRecord {
+  schema: string;
+  identification: {
+    evidence_id: string;
+    finding_id: string;
+    display_id: string;
+    schema_version: number;
+    study_id: string;
+    experiment_id: string;
+    finding_type: string;
+    candidate_direction: "decrease" | "increase";
+    evidence_status: string;
+  };
+  source_observations: Record<string, unknown>;
+  input_measurements: Record<string, unknown>;
+  spatial_measurements: Record<string, unknown>;
+  evidence_quality: Record<string, unknown>;
+  method_provenance: Record<string, unknown>;
+}
+
 export interface BundleFinding {
   id: string;
   display_id: string;
+  /** Stable content-derived evidence record ID (M4-R2). */
+  evidence_id: string;
   index: string;
   direction: "decrease" | "increase";
   threshold: number;
@@ -171,10 +193,15 @@ export interface BundleFinding {
   mean_delta: number;
   median_delta: number;
   common_valid_pixels: number;
+  /** Masked pixels fully enclosed by the component (display holes). */
+  hole_pixel_count: number;
   centroid_lonlat: [number, number];
+  /** Ring 0 exterior; any further rings are enclosed masked pixels. */
   geometry_wgs84: GeoJSON.Polygon;
   input_raster: string;
   valid_mask: string;
+  /** Versioned evidence record (habitatshift-evidence-record/1, M4-R2). */
+  evidence: EvidenceRecord;
   interpretation: BundleFindingInterpretation;
 }
 

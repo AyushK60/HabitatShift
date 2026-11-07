@@ -37,7 +37,9 @@ def _load(name: str) -> dict:
 @pytest.mark.parametrize("experiment_id", sorted(EXPECTED_EXPERIMENTS))
 def test_findings_file_exists_with_schema(experiment_id: str) -> None:
     payload = _load(experiment_id)
-    assert payload["schema"] == "habitatshift-findings/1"
+    # M4-R2 G4: /2 is a strictly additive evolution of /1 — every /1 field
+    # keeps its meaning; see docs/M4_R2_EVIDENCE_SCHEMA.md.
+    assert payload["schema"] == "habitatshift-findings/2"
     assert payload["experiment_id"] == experiment_id
     assert payload["study_id"]
 

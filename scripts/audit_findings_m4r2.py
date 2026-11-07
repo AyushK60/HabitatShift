@@ -212,34 +212,56 @@ def audit_experiment(experiment_id: str, processed_rel: str, report: Report) -> 
 
             # Geometry checks on the recorded display polygon.
             geom = rec_f["geometry_wgs84"]
-            report.check(geom["type"] == "Polygon" and len(geom["coordinates"]) == 1, f"{fid}: single-ring Polygon")
+            report.check(geom["type"] == "Polygon" and len(geom["coordinates"]) >= 1, f"{fid}: Polygon structure")
             ring = geom["coordinates"][0]
-            shp = ShapelyPolygon(ring)
-            report.check(shp.is_valid, f"{fid}: shapely-valid geometry")
+            shp = ShapelyPolygon(ring, geom["coordinates"][1:])
+            report.check(shp.is_valid, f"{fid}: shapely-valid geometry (exterior + interior rings)")
             report.check(len(ring) >= 5 and ring[0] == ring[-1], f"{fid}: closed ring")
 
             utm_ring = [to_utm.transform(x, y) for x, y in ring]
             poly_area = shoelace(utm_ring)
             expected_area = rec_f["pixel_count"] * pixel_area_m2
-            # The display polygon is the EXTERIOR ring of the component: it may
-            # enclose holes (invalid pixels inside a 4-connected component), so
-            # its area is >= the analytical pixel-count area. The surplus must
-            # be a whole number of pixels (pixel-edge geometry with holes).
-            surplus_px = poly_area / pixel_area_m2 - rec_f["pixel_count"]
+            # The exterior ring encloses the component plus its holes; the
+            # recorded hole_pixel_count must account for the exact difference,
+            # and the interior rings must sum to the same hole area.
+            hole_px_recorded = rec_f.get("hole_pixel_count")
+            hole_px_measured = poly_area / pixel_area_m2 - rec_f["pixel_count"]
+            # The recorded count is exact integer arithmetic on the original
+            # UTM ring at generation time; this audit re-measures through the
+            # 6-dp WGS84 representation, whose per-vertex rounding accumulates
+            # across large rings (observed ~0.0005 px per vertex). Scale the
+            # tolerance with the ring complexity instead of pretending the
+            # roundtrip is lossless.
+            n_vertices = sum(len(r) for r in geom["coordinates"])
+            tol = 0.5 + 0.0005 * n_vertices
             report.check(
-                surplus_px >= -0.5 and abs(surplus_px - round(surplus_px)) < 0.5,
-                f"{fid}: exterior-ring area = pixel area + {surplus_px:.2f} hole pixels (integer, ≥ 0)",
+                hole_px_recorded is not None
+                and abs(hole_px_measured - hole_px_recorded) < tol
+                and hole_px_recorded == round(hole_px_recorded),
+                f"{fid}: exterior area = {rec_f['pixel_count']} px + {hole_px_measured:.2f} hole px == recorded {hole_px_recorded} (±{tol:.2f})",
             )
-            # Grid alignment: every vertex sits on the pixel grid. The recorded
-            # ring is rounded to 6 dp in WGS84 (~0.1 m ≈ 0.01 px), so allow 0.05 px.
+            hole_ring_area_px = sum(
+                shoelace([to_utm.transform(x, y) for x, y in h]) for h in geom["coordinates"][1:]
+            ) / pixel_area_m2
+            report.check(
+                abs(hole_ring_area_px - (hole_px_recorded or 0)) < tol,
+                f"{fid}: interior rings sum to {hole_ring_area_px:.2f} px == recorded {hole_px_recorded} hole px (±{tol:.2f})",
+            )
+            # Grid alignment: every vertex of every ring sits on the pixel grid.
+            # The recorded rings are rounded to 6 dp in WGS84 (~0.1 m ≈ 0.01 px),
+            # so allow 0.05 px.
             inv = ~transform
             ok_grid = True
-            for x, y in utm_ring:
-                fcol, frow = inv * (x, y)
-                if abs(fcol - round(fcol)) > 0.05 or abs(frow - round(frow)) > 0.05:
-                    ok_grid = False
+            for ring_i in geom["coordinates"]:
+                for px, py in ring_i:
+                    x, y = to_utm.transform(px, py)
+                    fcol, frow = inv * (x, y)
+                    if abs(fcol - round(fcol)) > 0.05 or abs(frow - round(frow)) > 0.05:
+                        ok_grid = False
+                        break
+                if not ok_grid:
                     break
-            report.check(ok_grid, f"{fid}: polygon vertices align with the raster grid (≤0.05 px after 6-dp rounding)")
+            report.check(ok_grid, f"{fid}: polygon vertices (all rings) align with the raster grid (≤0.05 px after 6-dp rounding)")
             # Centroid inside/near polygon centroid agreement.
             cx, cy = float(np.mean([p[0] for p in utm_ring])), float(np.mean([p[1] for p in utm_ring]))
             report.check(
@@ -262,10 +284,52 @@ def audit_experiment(experiment_id: str, processed_rel: str, report: Report) -> 
     # Duplicate / structure checks across the whole experiment.
     ids = [f["id"] for f in recorded_findings]
     report.check(len(ids) == len(set(ids)), f"{experiment_id}: finding IDs unique")
+    evidence_ids = [f["evidence_id"] for f in recorded_findings]
+    report.check(len(evidence_ids) == len(set(evidence_ids)), f"{experiment_id}: evidence IDs unique")
     report.check(
         findings_doc["overview"]["findings_total"] == len(recorded_findings),
         f"{experiment_id}: overview total matches findings array",
     )
+
+    # Evidence-record integrity (schema /2): required groups, checksums,
+    # provenance completeness, no invented values in mandatory slots.
+    REQUIRED_GROUPS = (
+        "identification", "source_observations", "input_measurements",
+        "spatial_measurements", "evidence_quality", "method_provenance",
+    )
+    for f in recorded_findings:
+        fid = f"{experiment_id}/{f.get('display_id', f['id'])}"
+        ev = f.get("evidence")
+        ok_groups = isinstance(ev, dict) and all(g in ev for g in REQUIRED_GROUPS)
+        report.check(ok_groups, f"{fid}: evidence record carries all six required groups")
+        if not ok_groups:
+            continue
+        report.check(
+            ev["schema"] == "habitatshift-evidence-record/1"
+            and ev["identification"]["evidence_id"] == f["evidence_id"],
+            f"{fid}: evidence schema + ID consistency",
+        )
+        # Verify the sealed checksum against the record content.
+        import hashlib
+        payload = json.loads(json.dumps(f))
+        claimed = payload["evidence"]["method_provenance"]["output_checksum"]
+        payload["evidence"]["method_provenance"]["output_checksum"] = None
+        recomputed = hashlib.sha256(
+            json.dumps(payload, sort_keys=True, separators=(",", ":")).encode("utf-8")
+        ).hexdigest()
+        report.check(claimed == recomputed, f"{fid}: output checksum verifies")
+        prov = ev["method_provenance"]
+        report.check(
+            bool(prov["git_commit"]) and bool(prov["algorithm_version"])
+            and prov["input_hashes"]["delta_raster"]
+            and prov["input_hashes"]["common_valid_mask"],
+            f"{fid}: provenance populated (commit, version, input hashes)",
+        )
+        report.check(
+            ev["input_measurements"]["formula"] and ev["input_measurements"]["bands"]
+            and ev["input_measurements"]["analysis_grid"]["crs"],
+            f"{fid}: input measurement definition populated",
+        )
 
     return {
         "experiment_id": experiment_id,

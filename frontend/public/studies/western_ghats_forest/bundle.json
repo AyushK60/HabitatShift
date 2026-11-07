@@ -1204,10 +1204,10 @@
     }
    },
    "findings": {
-    "schema": "habitatshift-findings/1",
+    "schema": "habitatshift-findings/2",
     "study_id": "western_ghats_forest",
     "experiment_id": "western_ghats_m4",
-    "generated_utc": "2026-11-07T16:45:29Z",
+    "generated_utc": "2026-11-07T19:02:34Z",
     "evidence_status": "processed",
     "method": {
      "source": "frozen M1 difference rasters + common-valid masks",
@@ -1249,6 +1249,7 @@
      {
       "id": "region_01",
       "display_id": "Region 01",
+      "evidence_id": "ev-western_ghats_m4-ndvi-dec-432990-1673421",
       "index": "ndvi",
       "direction": "decrease",
       "threshold": 0.15,
@@ -1258,6 +1259,7 @@
       "mean_delta": -0.365976,
       "median_delta": -0.381233,
       "common_valid_pixels": 237774,
+      "hole_pixel_count": 0,
       "centroid_utm": [
        432989.6,
        1673421.2
@@ -1397,11 +1399,193 @@
         "valid_mask": "data/processed/m4/western_ghats_m4/common_valid_ndvi.tif",
         "method": "frozen M1 difference rasters + common-valid masks"
        }
+      },
+      "evidence": {
+       "schema": "habitatshift-evidence-record/1",
+       "identification": {
+        "evidence_id": "ev-western_ghats_m4-ndvi-dec-432990-1673421",
+        "finding_id": "region_01",
+        "display_id": "Region 01",
+        "schema_version": 1,
+        "study_id": "western_ghats_forest",
+        "experiment_id": "western_ghats_m4",
+        "finding_type": "threshold-connected-region",
+        "candidate_direction": "decrease",
+        "evidence_status": "processed"
+       },
+       "source_observations": {
+        "earlier": {
+         "item_ids": [
+          "S2B_43PDS_20200219_1_L2A",
+          "S2A_43PDS_20200214_1_L2A",
+          "S2A_43PDS_20200224_1_L2A"
+         ],
+         "observation_dates": [
+          "2020-02-19",
+          "2020-02-14",
+          "2020-02-24"
+         ],
+         "anchor_date": "2020-02-19",
+         "composite_method": "median",
+         "observation_count": 3,
+         "valid_pixels": 237774,
+         "aoi_pixels": 237774,
+         "valid_fraction": 1.0
+        },
+        "later": {
+         "item_ids": [
+          "S2B_43PDS_20250222_0_L2A",
+          "S2C_43PDS_20250217_0_L2A",
+          "S2C_43PDS_20250227_0_L2A"
+         ],
+         "observation_dates": [
+          "2025-02-22",
+          "2025-02-17",
+          "2025-02-27"
+         ],
+         "anchor_date": "2025-02-22",
+         "composite_method": "median",
+         "observation_count": 3,
+         "valid_pixels": 237774,
+         "aoi_pixels": 237774,
+         "valid_fraction": 1.0
+        },
+        "dataset": {
+         "collection": "sentinel-2-l2a",
+         "provider": "Element 84 Earth Search (AWS Open Data)",
+         "license": "Copernicus Sentinel data: free, open and unrestricted use with attribution (ESA Copernicus data policy). Catalogue: Element 84 Earth Search, AWS Open Data.",
+         "processing_level": "Sentinel-2 L2A surface reflectance",
+         "attribution": "Contains modified Copernicus Sentinel data, processed by ESA; L2A products distributed by the Element 84 Earth Search STAC catalogue (AWS Open Data)."
+        },
+        "study_aoi": {
+         "bounds_lonlat": [
+          74.33,
+          15.13,
+          74.38,
+          15.17
+         ],
+         "area_km2": 23.768086,
+         "aoi_pixels": 237774
+        }
+       },
+       "input_measurements": {
+        "index": "ndvi",
+        "index_label": "observed index difference (later - earlier); not a land-cover verdict",
+        "formula": "(NIR - Red) / (NIR + Red)",
+        "bands": [
+         "nir",
+         "red"
+        ],
+        "native_band_resolution_m": 10.0,
+        "band_resolution_note": "native 10 m band resolution",
+        "delta_definition": "I_later(p) - I_earlier(p) on the shared analysis grid",
+        "threshold": 0.15,
+        "threshold_rule": "|\u0394I| \u2265 t, inclusive; sign selects the candidate direction",
+        "input_raster": "data/processed/m4/western_ghats_m4/delta_ndvi.tif",
+        "input_raster_sha256": "0b1555f043f40127144c1d3c4ba032b953aadca26047e5461bff40fe4928ada7",
+        "valid_mask": "data/processed/m4/western_ghats_m4/common_valid_ndvi.tif",
+        "valid_mask_sha256": "a4b61c260d98f178e84f6beadf0e53263e5ed98f2b721f2dd5bd37e6a622dc2e",
+        "analysis_grid": {
+         "crs": "EPSG:32643",
+         "resolution_m": 10.0,
+         "width": 539,
+         "height": 445,
+         "transform": [
+          10.0,
+          0.0,
+          428010.0,
+          0.0,
+          -10.0,
+          1677240.0
+         ],
+         "pixel_area_m2": 100.0
+        }
+       },
+       "spatial_measurements": {
+        "pixel_count": 47,
+        "area_ha": 0.47,
+        "area_units": "ha (projected analysis grid, pixel count \u00d7 pixel area)",
+        "mean_delta": -0.365976,
+        "median_delta": -0.381233,
+        "valid_pixel_denominator": 237774,
+        "share_of_common_valid_percent": 0.0198,
+        "hole_pixel_count": 0,
+        "centroid_utm": [
+         432989.6,
+         1673421.2
+        ],
+        "centroid_lonlat": [
+         74.376307,
+         15.135617
+        ],
+        "geometry_wgs84_ref": "finding.geometry_wgs84"
+       },
+       "evidence_quality": {
+        "earlier_valid_fraction": 1.0,
+        "later_valid_fraction": 1.0,
+        "shared_valid_fraction_of_aoi": 1.0,
+        "observation_support": {
+         "earlier_observations": 3,
+         "later_observations": 3,
+         "min_observations_required": 1
+        },
+        "masking_and_cloud_limitations": [
+         "Topographic shadow and canopy structure complicate index interpretation.",
+         "Composites are robust within-period summaries of a few observations, not a dense time series; inter-annual change is represented by two period composites only.",
+         "Index differences are candidate spectral signals. They are not verified deforestation, wetland loss, construction, glacier damage or any other causal land-cover label.",
+         "Cloud, shadow and saturated-pixel exclusion relies on the provider SCL product; terrain shadow is not independently re-derived.",
+         "Surface reflectance is the provider L2A product; no independent atmospheric correction is performed.",
+         "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
+        ],
+        "threshold_sensitivity": {
+         "status": "evaluated in M4-R2 G6",
+         "result": null
+        },
+        "confounding_factors": [
+         "Terrain shadow and illumination differences between acquisitions.",
+         "Canopy density or phenology differences between the windows.",
+         "Canopy disturbance \u2014 candidate only; independent evidence would be required to establish it."
+        ]
+       },
+       "method_provenance": {
+        "algorithm": "threshold candidate mask \u2192 4-connected components (scipy.ndimage.label) \u2192 MMU filter \u2192 top-K selection",
+        "algorithm_version": "0.2.0-m1",
+        "parameters": {
+         "threshold": 0.15,
+         "minimum_mapping_unit_px": 25,
+         "minimum_mapping_unit_ha": 0.25,
+         "max_regions_per_index_direction": 5,
+         "connectivity": 4
+        },
+        "input_hashes": {
+         "delta_raster": "0b1555f043f40127144c1d3c4ba032b953aadca26047e5461bff40fe4928ada7",
+         "common_valid_mask": "a4b61c260d98f178e84f6beadf0e53263e5ed98f2b721f2dd5bd37e6a622dc2e"
+        },
+        "source_experiment_run": {
+         "experiment_id": "western_ghats_m4",
+         "run_generated_utc": "2026-11-07T13:11:08.092457+00:00",
+         "pipeline_verification": {
+          "all_passed": true,
+          "check_count": 20,
+          "failed_checks": []
+         }
+        },
+        "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+        "software": {
+         "numpy": "2.2.6",
+         "rasterio": "1.4.3",
+         "scipy": "1.17.1",
+         "pyproj": "3.7.1"
+        },
+        "generated_utc": "2026-11-07T19:02:34Z",
+        "output_checksum": "e943f69f084ccf87a864af1310444788e49d71c8787062ce7d28374aca7c18af"
+       }
       }
      },
      {
       "id": "region_02",
       "display_id": "Region 02",
+      "evidence_id": "ev-western_ghats_m4-ndvi-dec-433338-1674364",
       "index": "ndvi",
       "direction": "decrease",
       "threshold": 0.15,
@@ -1411,6 +1595,7 @@
       "mean_delta": -0.281807,
       "median_delta": -0.273102,
       "common_valid_pixels": 237774,
+      "hole_pixel_count": 2,
       "centroid_utm": [
        433338.0,
        1674364.4
@@ -1523,6 +1708,28 @@
           74.379263,
           15.144565
          ]
+        ],
+        [
+         [
+          74.379729,
+          15.144024
+         ],
+         [
+          74.379823,
+          15.144024
+         ],
+         [
+          74.379823,
+          15.143843
+         ],
+         [
+          74.37973,
+          15.143843
+         ],
+         [
+          74.379729,
+          15.144024
+         ]
         ]
        ]
       },
@@ -1550,11 +1757,193 @@
         "valid_mask": "data/processed/m4/western_ghats_m4/common_valid_ndvi.tif",
         "method": "frozen M1 difference rasters + common-valid masks"
        }
+      },
+      "evidence": {
+       "schema": "habitatshift-evidence-record/1",
+       "identification": {
+        "evidence_id": "ev-western_ghats_m4-ndvi-dec-433338-1674364",
+        "finding_id": "region_02",
+        "display_id": "Region 02",
+        "schema_version": 1,
+        "study_id": "western_ghats_forest",
+        "experiment_id": "western_ghats_m4",
+        "finding_type": "threshold-connected-region",
+        "candidate_direction": "decrease",
+        "evidence_status": "processed"
+       },
+       "source_observations": {
+        "earlier": {
+         "item_ids": [
+          "S2B_43PDS_20200219_1_L2A",
+          "S2A_43PDS_20200214_1_L2A",
+          "S2A_43PDS_20200224_1_L2A"
+         ],
+         "observation_dates": [
+          "2020-02-19",
+          "2020-02-14",
+          "2020-02-24"
+         ],
+         "anchor_date": "2020-02-19",
+         "composite_method": "median",
+         "observation_count": 3,
+         "valid_pixels": 237774,
+         "aoi_pixels": 237774,
+         "valid_fraction": 1.0
+        },
+        "later": {
+         "item_ids": [
+          "S2B_43PDS_20250222_0_L2A",
+          "S2C_43PDS_20250217_0_L2A",
+          "S2C_43PDS_20250227_0_L2A"
+         ],
+         "observation_dates": [
+          "2025-02-22",
+          "2025-02-17",
+          "2025-02-27"
+         ],
+         "anchor_date": "2025-02-22",
+         "composite_method": "median",
+         "observation_count": 3,
+         "valid_pixels": 237774,
+         "aoi_pixels": 237774,
+         "valid_fraction": 1.0
+        },
+        "dataset": {
+         "collection": "sentinel-2-l2a",
+         "provider": "Element 84 Earth Search (AWS Open Data)",
+         "license": "Copernicus Sentinel data: free, open and unrestricted use with attribution (ESA Copernicus data policy). Catalogue: Element 84 Earth Search, AWS Open Data.",
+         "processing_level": "Sentinel-2 L2A surface reflectance",
+         "attribution": "Contains modified Copernicus Sentinel data, processed by ESA; L2A products distributed by the Element 84 Earth Search STAC catalogue (AWS Open Data)."
+        },
+        "study_aoi": {
+         "bounds_lonlat": [
+          74.33,
+          15.13,
+          74.38,
+          15.17
+         ],
+         "area_km2": 23.768086,
+         "aoi_pixels": 237774
+        }
+       },
+       "input_measurements": {
+        "index": "ndvi",
+        "index_label": "observed index difference (later - earlier); not a land-cover verdict",
+        "formula": "(NIR - Red) / (NIR + Red)",
+        "bands": [
+         "nir",
+         "red"
+        ],
+        "native_band_resolution_m": 10.0,
+        "band_resolution_note": "native 10 m band resolution",
+        "delta_definition": "I_later(p) - I_earlier(p) on the shared analysis grid",
+        "threshold": 0.15,
+        "threshold_rule": "|\u0394I| \u2265 t, inclusive; sign selects the candidate direction",
+        "input_raster": "data/processed/m4/western_ghats_m4/delta_ndvi.tif",
+        "input_raster_sha256": "0b1555f043f40127144c1d3c4ba032b953aadca26047e5461bff40fe4928ada7",
+        "valid_mask": "data/processed/m4/western_ghats_m4/common_valid_ndvi.tif",
+        "valid_mask_sha256": "a4b61c260d98f178e84f6beadf0e53263e5ed98f2b721f2dd5bd37e6a622dc2e",
+        "analysis_grid": {
+         "crs": "EPSG:32643",
+         "resolution_m": 10.0,
+         "width": 539,
+         "height": 445,
+         "transform": [
+          10.0,
+          0.0,
+          428010.0,
+          0.0,
+          -10.0,
+          1677240.0
+         ],
+         "pixel_area_m2": 100.0
+        }
+       },
+       "spatial_measurements": {
+        "pixel_count": 44,
+        "area_ha": 0.44,
+        "area_units": "ha (projected analysis grid, pixel count \u00d7 pixel area)",
+        "mean_delta": -0.281807,
+        "median_delta": -0.273102,
+        "valid_pixel_denominator": 237774,
+        "share_of_common_valid_percent": 0.0185,
+        "hole_pixel_count": 2,
+        "centroid_utm": [
+         433338.0,
+         1674364.4
+        ],
+        "centroid_lonlat": [
+         74.379524,
+         15.144153
+        ],
+        "geometry_wgs84_ref": "finding.geometry_wgs84"
+       },
+       "evidence_quality": {
+        "earlier_valid_fraction": 1.0,
+        "later_valid_fraction": 1.0,
+        "shared_valid_fraction_of_aoi": 1.0,
+        "observation_support": {
+         "earlier_observations": 3,
+         "later_observations": 3,
+         "min_observations_required": 1
+        },
+        "masking_and_cloud_limitations": [
+         "Topographic shadow and canopy structure complicate index interpretation.",
+         "Composites are robust within-period summaries of a few observations, not a dense time series; inter-annual change is represented by two period composites only.",
+         "Index differences are candidate spectral signals. They are not verified deforestation, wetland loss, construction, glacier damage or any other causal land-cover label.",
+         "Cloud, shadow and saturated-pixel exclusion relies on the provider SCL product; terrain shadow is not independently re-derived.",
+         "Surface reflectance is the provider L2A product; no independent atmospheric correction is performed.",
+         "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
+        ],
+        "threshold_sensitivity": {
+         "status": "evaluated in M4-R2 G6",
+         "result": null
+        },
+        "confounding_factors": [
+         "Terrain shadow and illumination differences between acquisitions.",
+         "Canopy density or phenology differences between the windows.",
+         "Canopy disturbance \u2014 candidate only; independent evidence would be required to establish it."
+        ]
+       },
+       "method_provenance": {
+        "algorithm": "threshold candidate mask \u2192 4-connected components (scipy.ndimage.label) \u2192 MMU filter \u2192 top-K selection",
+        "algorithm_version": "0.2.0-m1",
+        "parameters": {
+         "threshold": 0.15,
+         "minimum_mapping_unit_px": 25,
+         "minimum_mapping_unit_ha": 0.25,
+         "max_regions_per_index_direction": 5,
+         "connectivity": 4
+        },
+        "input_hashes": {
+         "delta_raster": "0b1555f043f40127144c1d3c4ba032b953aadca26047e5461bff40fe4928ada7",
+         "common_valid_mask": "a4b61c260d98f178e84f6beadf0e53263e5ed98f2b721f2dd5bd37e6a622dc2e"
+        },
+        "source_experiment_run": {
+         "experiment_id": "western_ghats_m4",
+         "run_generated_utc": "2026-11-07T13:11:08.092457+00:00",
+         "pipeline_verification": {
+          "all_passed": true,
+          "check_count": 20,
+          "failed_checks": []
+         }
+        },
+        "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+        "software": {
+         "numpy": "2.2.6",
+         "rasterio": "1.4.3",
+         "scipy": "1.17.1",
+         "pyproj": "3.7.1"
+        },
+        "generated_utc": "2026-11-07T19:02:34Z",
+        "output_checksum": "341df5ed63fabf6868e8e8449fd2404b97b527099256e510dc0b0ca407987b36"
+       }
       }
      },
      {
       "id": "region_03",
       "display_id": "Region 03",
+      "evidence_id": "ev-western_ghats_m4-ndvi-dec-433263-1673510",
       "index": "ndvi",
       "direction": "decrease",
       "threshold": 0.15,
@@ -1564,6 +1953,7 @@
       "mean_delta": -0.280549,
       "median_delta": -0.282942,
       "common_valid_pixels": 237774,
+      "hole_pixel_count": 0,
       "centroid_utm": [
        433263.48,
        1673510.43
@@ -1695,11 +2085,193 @@
         "valid_mask": "data/processed/m4/western_ghats_m4/common_valid_ndvi.tif",
         "method": "frozen M1 difference rasters + common-valid masks"
        }
+      },
+      "evidence": {
+       "schema": "habitatshift-evidence-record/1",
+       "identification": {
+        "evidence_id": "ev-western_ghats_m4-ndvi-dec-433263-1673510",
+        "finding_id": "region_03",
+        "display_id": "Region 03",
+        "schema_version": 1,
+        "study_id": "western_ghats_forest",
+        "experiment_id": "western_ghats_m4",
+        "finding_type": "threshold-connected-region",
+        "candidate_direction": "decrease",
+        "evidence_status": "processed"
+       },
+       "source_observations": {
+        "earlier": {
+         "item_ids": [
+          "S2B_43PDS_20200219_1_L2A",
+          "S2A_43PDS_20200214_1_L2A",
+          "S2A_43PDS_20200224_1_L2A"
+         ],
+         "observation_dates": [
+          "2020-02-19",
+          "2020-02-14",
+          "2020-02-24"
+         ],
+         "anchor_date": "2020-02-19",
+         "composite_method": "median",
+         "observation_count": 3,
+         "valid_pixels": 237774,
+         "aoi_pixels": 237774,
+         "valid_fraction": 1.0
+        },
+        "later": {
+         "item_ids": [
+          "S2B_43PDS_20250222_0_L2A",
+          "S2C_43PDS_20250217_0_L2A",
+          "S2C_43PDS_20250227_0_L2A"
+         ],
+         "observation_dates": [
+          "2025-02-22",
+          "2025-02-17",
+          "2025-02-27"
+         ],
+         "anchor_date": "2025-02-22",
+         "composite_method": "median",
+         "observation_count": 3,
+         "valid_pixels": 237774,
+         "aoi_pixels": 237774,
+         "valid_fraction": 1.0
+        },
+        "dataset": {
+         "collection": "sentinel-2-l2a",
+         "provider": "Element 84 Earth Search (AWS Open Data)",
+         "license": "Copernicus Sentinel data: free, open and unrestricted use with attribution (ESA Copernicus data policy). Catalogue: Element 84 Earth Search, AWS Open Data.",
+         "processing_level": "Sentinel-2 L2A surface reflectance",
+         "attribution": "Contains modified Copernicus Sentinel data, processed by ESA; L2A products distributed by the Element 84 Earth Search STAC catalogue (AWS Open Data)."
+        },
+        "study_aoi": {
+         "bounds_lonlat": [
+          74.33,
+          15.13,
+          74.38,
+          15.17
+         ],
+         "area_km2": 23.768086,
+         "aoi_pixels": 237774
+        }
+       },
+       "input_measurements": {
+        "index": "ndvi",
+        "index_label": "observed index difference (later - earlier); not a land-cover verdict",
+        "formula": "(NIR - Red) / (NIR + Red)",
+        "bands": [
+         "nir",
+         "red"
+        ],
+        "native_band_resolution_m": 10.0,
+        "band_resolution_note": "native 10 m band resolution",
+        "delta_definition": "I_later(p) - I_earlier(p) on the shared analysis grid",
+        "threshold": 0.15,
+        "threshold_rule": "|\u0394I| \u2265 t, inclusive; sign selects the candidate direction",
+        "input_raster": "data/processed/m4/western_ghats_m4/delta_ndvi.tif",
+        "input_raster_sha256": "0b1555f043f40127144c1d3c4ba032b953aadca26047e5461bff40fe4928ada7",
+        "valid_mask": "data/processed/m4/western_ghats_m4/common_valid_ndvi.tif",
+        "valid_mask_sha256": "a4b61c260d98f178e84f6beadf0e53263e5ed98f2b721f2dd5bd37e6a622dc2e",
+        "analysis_grid": {
+         "crs": "EPSG:32643",
+         "resolution_m": 10.0,
+         "width": 539,
+         "height": 445,
+         "transform": [
+          10.0,
+          0.0,
+          428010.0,
+          0.0,
+          -10.0,
+          1677240.0
+         ],
+         "pixel_area_m2": 100.0
+        }
+       },
+       "spatial_measurements": {
+        "pixel_count": 31,
+        "area_ha": 0.31,
+        "area_units": "ha (projected analysis grid, pixel count \u00d7 pixel area)",
+        "mean_delta": -0.280549,
+        "median_delta": -0.282942,
+        "valid_pixel_denominator": 237774,
+        "share_of_common_valid_percent": 0.013,
+        "hole_pixel_count": 0,
+        "centroid_utm": [
+         433263.48,
+         1673510.43
+        ],
+        "centroid_lonlat": [
+         74.378853,
+         15.136431
+        ],
+        "geometry_wgs84_ref": "finding.geometry_wgs84"
+       },
+       "evidence_quality": {
+        "earlier_valid_fraction": 1.0,
+        "later_valid_fraction": 1.0,
+        "shared_valid_fraction_of_aoi": 1.0,
+        "observation_support": {
+         "earlier_observations": 3,
+         "later_observations": 3,
+         "min_observations_required": 1
+        },
+        "masking_and_cloud_limitations": [
+         "Topographic shadow and canopy structure complicate index interpretation.",
+         "Composites are robust within-period summaries of a few observations, not a dense time series; inter-annual change is represented by two period composites only.",
+         "Index differences are candidate spectral signals. They are not verified deforestation, wetland loss, construction, glacier damage or any other causal land-cover label.",
+         "Cloud, shadow and saturated-pixel exclusion relies on the provider SCL product; terrain shadow is not independently re-derived.",
+         "Surface reflectance is the provider L2A product; no independent atmospheric correction is performed.",
+         "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
+        ],
+        "threshold_sensitivity": {
+         "status": "evaluated in M4-R2 G6",
+         "result": null
+        },
+        "confounding_factors": [
+         "Terrain shadow and illumination differences between acquisitions.",
+         "Canopy density or phenology differences between the windows.",
+         "Canopy disturbance \u2014 candidate only; independent evidence would be required to establish it."
+        ]
+       },
+       "method_provenance": {
+        "algorithm": "threshold candidate mask \u2192 4-connected components (scipy.ndimage.label) \u2192 MMU filter \u2192 top-K selection",
+        "algorithm_version": "0.2.0-m1",
+        "parameters": {
+         "threshold": 0.15,
+         "minimum_mapping_unit_px": 25,
+         "minimum_mapping_unit_ha": 0.25,
+         "max_regions_per_index_direction": 5,
+         "connectivity": 4
+        },
+        "input_hashes": {
+         "delta_raster": "0b1555f043f40127144c1d3c4ba032b953aadca26047e5461bff40fe4928ada7",
+         "common_valid_mask": "a4b61c260d98f178e84f6beadf0e53263e5ed98f2b721f2dd5bd37e6a622dc2e"
+        },
+        "source_experiment_run": {
+         "experiment_id": "western_ghats_m4",
+         "run_generated_utc": "2026-11-07T13:11:08.092457+00:00",
+         "pipeline_verification": {
+          "all_passed": true,
+          "check_count": 20,
+          "failed_checks": []
+         }
+        },
+        "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+        "software": {
+         "numpy": "2.2.6",
+         "rasterio": "1.4.3",
+         "scipy": "1.17.1",
+         "pyproj": "3.7.1"
+        },
+        "generated_utc": "2026-11-07T19:02:34Z",
+        "output_checksum": "b406e28a745e8d75e6011691760ffacf529baea32d88945c5da172b31a88d974"
+       }
       }
      },
      {
       "id": "region_04",
       "display_id": "Region 04",
+      "evidence_id": "ev-western_ghats_m4-ndvi-inc-433173-1673484",
       "index": "ndvi",
       "direction": "increase",
       "threshold": 0.15,
@@ -1709,6 +2281,7 @@
       "mean_delta": 0.37698,
       "median_delta": 0.398015,
       "common_valid_pixels": 237774,
+      "hole_pixel_count": 0,
       "centroid_utm": [
        433172.98,
        1673484.26
@@ -1936,11 +2509,193 @@
         "valid_mask": "data/processed/m4/western_ghats_m4/common_valid_ndvi.tif",
         "method": "frozen M1 difference rasters + common-valid masks"
        }
+      },
+      "evidence": {
+       "schema": "habitatshift-evidence-record/1",
+       "identification": {
+        "evidence_id": "ev-western_ghats_m4-ndvi-inc-433173-1673484",
+        "finding_id": "region_04",
+        "display_id": "Region 04",
+        "schema_version": 1,
+        "study_id": "western_ghats_forest",
+        "experiment_id": "western_ghats_m4",
+        "finding_type": "threshold-connected-region",
+        "candidate_direction": "increase",
+        "evidence_status": "processed"
+       },
+       "source_observations": {
+        "earlier": {
+         "item_ids": [
+          "S2B_43PDS_20200219_1_L2A",
+          "S2A_43PDS_20200214_1_L2A",
+          "S2A_43PDS_20200224_1_L2A"
+         ],
+         "observation_dates": [
+          "2020-02-19",
+          "2020-02-14",
+          "2020-02-24"
+         ],
+         "anchor_date": "2020-02-19",
+         "composite_method": "median",
+         "observation_count": 3,
+         "valid_pixels": 237774,
+         "aoi_pixels": 237774,
+         "valid_fraction": 1.0
+        },
+        "later": {
+         "item_ids": [
+          "S2B_43PDS_20250222_0_L2A",
+          "S2C_43PDS_20250217_0_L2A",
+          "S2C_43PDS_20250227_0_L2A"
+         ],
+         "observation_dates": [
+          "2025-02-22",
+          "2025-02-17",
+          "2025-02-27"
+         ],
+         "anchor_date": "2025-02-22",
+         "composite_method": "median",
+         "observation_count": 3,
+         "valid_pixels": 237774,
+         "aoi_pixels": 237774,
+         "valid_fraction": 1.0
+        },
+        "dataset": {
+         "collection": "sentinel-2-l2a",
+         "provider": "Element 84 Earth Search (AWS Open Data)",
+         "license": "Copernicus Sentinel data: free, open and unrestricted use with attribution (ESA Copernicus data policy). Catalogue: Element 84 Earth Search, AWS Open Data.",
+         "processing_level": "Sentinel-2 L2A surface reflectance",
+         "attribution": "Contains modified Copernicus Sentinel data, processed by ESA; L2A products distributed by the Element 84 Earth Search STAC catalogue (AWS Open Data)."
+        },
+        "study_aoi": {
+         "bounds_lonlat": [
+          74.33,
+          15.13,
+          74.38,
+          15.17
+         ],
+         "area_km2": 23.768086,
+         "aoi_pixels": 237774
+        }
+       },
+       "input_measurements": {
+        "index": "ndvi",
+        "index_label": "observed index difference (later - earlier); not a land-cover verdict",
+        "formula": "(NIR - Red) / (NIR + Red)",
+        "bands": [
+         "nir",
+         "red"
+        ],
+        "native_band_resolution_m": 10.0,
+        "band_resolution_note": "native 10 m band resolution",
+        "delta_definition": "I_later(p) - I_earlier(p) on the shared analysis grid",
+        "threshold": 0.15,
+        "threshold_rule": "|\u0394I| \u2265 t, inclusive; sign selects the candidate direction",
+        "input_raster": "data/processed/m4/western_ghats_m4/delta_ndvi.tif",
+        "input_raster_sha256": "0b1555f043f40127144c1d3c4ba032b953aadca26047e5461bff40fe4928ada7",
+        "valid_mask": "data/processed/m4/western_ghats_m4/common_valid_ndvi.tif",
+        "valid_mask_sha256": "a4b61c260d98f178e84f6beadf0e53263e5ed98f2b721f2dd5bd37e6a622dc2e",
+        "analysis_grid": {
+         "crs": "EPSG:32643",
+         "resolution_m": 10.0,
+         "width": 539,
+         "height": 445,
+         "transform": [
+          10.0,
+          0.0,
+          428010.0,
+          0.0,
+          -10.0,
+          1677240.0
+         ],
+         "pixel_area_m2": 100.0
+        }
+       },
+       "spatial_measurements": {
+        "pixel_count": 191,
+        "area_ha": 1.91,
+        "area_units": "ha (projected analysis grid, pixel count \u00d7 pixel area)",
+        "mean_delta": 0.37698,
+        "median_delta": 0.398015,
+        "valid_pixel_denominator": 237774,
+        "share_of_common_valid_percent": 0.0803,
+        "hole_pixel_count": 0,
+        "centroid_utm": [
+         433172.98,
+         1673484.26
+        ],
+        "centroid_lonlat": [
+         74.378012,
+         15.136192
+        ],
+        "geometry_wgs84_ref": "finding.geometry_wgs84"
+       },
+       "evidence_quality": {
+        "earlier_valid_fraction": 1.0,
+        "later_valid_fraction": 1.0,
+        "shared_valid_fraction_of_aoi": 1.0,
+        "observation_support": {
+         "earlier_observations": 3,
+         "later_observations": 3,
+         "min_observations_required": 1
+        },
+        "masking_and_cloud_limitations": [
+         "Topographic shadow and canopy structure complicate index interpretation.",
+         "Composites are robust within-period summaries of a few observations, not a dense time series; inter-annual change is represented by two period composites only.",
+         "Index differences are candidate spectral signals. They are not verified deforestation, wetland loss, construction, glacier damage or any other causal land-cover label.",
+         "Cloud, shadow and saturated-pixel exclusion relies on the provider SCL product; terrain shadow is not independently re-derived.",
+         "Surface reflectance is the provider L2A product; no independent atmospheric correction is performed.",
+         "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
+        ],
+        "threshold_sensitivity": {
+         "status": "evaluated in M4-R2 G6",
+         "result": null
+        },
+        "confounding_factors": [
+         "Terrain shadow and illumination differences between acquisitions.",
+         "Canopy density or phenology differences between the windows.",
+         "Canopy disturbance \u2014 candidate only; independent evidence would be required to establish it."
+        ]
+       },
+       "method_provenance": {
+        "algorithm": "threshold candidate mask \u2192 4-connected components (scipy.ndimage.label) \u2192 MMU filter \u2192 top-K selection",
+        "algorithm_version": "0.2.0-m1",
+        "parameters": {
+         "threshold": 0.15,
+         "minimum_mapping_unit_px": 25,
+         "minimum_mapping_unit_ha": 0.25,
+         "max_regions_per_index_direction": 5,
+         "connectivity": 4
+        },
+        "input_hashes": {
+         "delta_raster": "0b1555f043f40127144c1d3c4ba032b953aadca26047e5461bff40fe4928ada7",
+         "common_valid_mask": "a4b61c260d98f178e84f6beadf0e53263e5ed98f2b721f2dd5bd37e6a622dc2e"
+        },
+        "source_experiment_run": {
+         "experiment_id": "western_ghats_m4",
+         "run_generated_utc": "2026-11-07T13:11:08.092457+00:00",
+         "pipeline_verification": {
+          "all_passed": true,
+          "check_count": 20,
+          "failed_checks": []
+         }
+        },
+        "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+        "software": {
+         "numpy": "2.2.6",
+         "rasterio": "1.4.3",
+         "scipy": "1.17.1",
+         "pyproj": "3.7.1"
+        },
+        "generated_utc": "2026-11-07T19:02:34Z",
+        "output_checksum": "69fa9735431b9f01de1c1f41fdfc99cdc9de6f1054895d6bef4f93660c6cfdd8"
+       }
       }
      },
      {
       "id": "region_05",
       "display_id": "Region 05",
+      "evidence_id": "ev-western_ghats_m4-ndvi-inc-429678-1673257",
       "index": "ndvi",
       "direction": "increase",
       "threshold": 0.15,
@@ -1950,6 +2705,7 @@
       "mean_delta": 0.25017,
       "median_delta": 0.2435,
       "common_valid_pixels": 237774,
+      "hole_pixel_count": 0,
       "centroid_utm": [
        429678.18,
        1673256.91
@@ -2209,11 +2965,193 @@
         "valid_mask": "data/processed/m4/western_ghats_m4/common_valid_ndvi.tif",
         "method": "frozen M1 difference rasters + common-valid masks"
        }
+      },
+      "evidence": {
+       "schema": "habitatshift-evidence-record/1",
+       "identification": {
+        "evidence_id": "ev-western_ghats_m4-ndvi-inc-429678-1673257",
+        "finding_id": "region_05",
+        "display_id": "Region 05",
+        "schema_version": 1,
+        "study_id": "western_ghats_forest",
+        "experiment_id": "western_ghats_m4",
+        "finding_type": "threshold-connected-region",
+        "candidate_direction": "increase",
+        "evidence_status": "processed"
+       },
+       "source_observations": {
+        "earlier": {
+         "item_ids": [
+          "S2B_43PDS_20200219_1_L2A",
+          "S2A_43PDS_20200214_1_L2A",
+          "S2A_43PDS_20200224_1_L2A"
+         ],
+         "observation_dates": [
+          "2020-02-19",
+          "2020-02-14",
+          "2020-02-24"
+         ],
+         "anchor_date": "2020-02-19",
+         "composite_method": "median",
+         "observation_count": 3,
+         "valid_pixels": 237774,
+         "aoi_pixels": 237774,
+         "valid_fraction": 1.0
+        },
+        "later": {
+         "item_ids": [
+          "S2B_43PDS_20250222_0_L2A",
+          "S2C_43PDS_20250217_0_L2A",
+          "S2C_43PDS_20250227_0_L2A"
+         ],
+         "observation_dates": [
+          "2025-02-22",
+          "2025-02-17",
+          "2025-02-27"
+         ],
+         "anchor_date": "2025-02-22",
+         "composite_method": "median",
+         "observation_count": 3,
+         "valid_pixels": 237774,
+         "aoi_pixels": 237774,
+         "valid_fraction": 1.0
+        },
+        "dataset": {
+         "collection": "sentinel-2-l2a",
+         "provider": "Element 84 Earth Search (AWS Open Data)",
+         "license": "Copernicus Sentinel data: free, open and unrestricted use with attribution (ESA Copernicus data policy). Catalogue: Element 84 Earth Search, AWS Open Data.",
+         "processing_level": "Sentinel-2 L2A surface reflectance",
+         "attribution": "Contains modified Copernicus Sentinel data, processed by ESA; L2A products distributed by the Element 84 Earth Search STAC catalogue (AWS Open Data)."
+        },
+        "study_aoi": {
+         "bounds_lonlat": [
+          74.33,
+          15.13,
+          74.38,
+          15.17
+         ],
+         "area_km2": 23.768086,
+         "aoi_pixels": 237774
+        }
+       },
+       "input_measurements": {
+        "index": "ndvi",
+        "index_label": "observed index difference (later - earlier); not a land-cover verdict",
+        "formula": "(NIR - Red) / (NIR + Red)",
+        "bands": [
+         "nir",
+         "red"
+        ],
+        "native_band_resolution_m": 10.0,
+        "band_resolution_note": "native 10 m band resolution",
+        "delta_definition": "I_later(p) - I_earlier(p) on the shared analysis grid",
+        "threshold": 0.15,
+        "threshold_rule": "|\u0394I| \u2265 t, inclusive; sign selects the candidate direction",
+        "input_raster": "data/processed/m4/western_ghats_m4/delta_ndvi.tif",
+        "input_raster_sha256": "0b1555f043f40127144c1d3c4ba032b953aadca26047e5461bff40fe4928ada7",
+        "valid_mask": "data/processed/m4/western_ghats_m4/common_valid_ndvi.tif",
+        "valid_mask_sha256": "a4b61c260d98f178e84f6beadf0e53263e5ed98f2b721f2dd5bd37e6a622dc2e",
+        "analysis_grid": {
+         "crs": "EPSG:32643",
+         "resolution_m": 10.0,
+         "width": 539,
+         "height": 445,
+         "transform": [
+          10.0,
+          0.0,
+          428010.0,
+          0.0,
+          -10.0,
+          1677240.0
+         ],
+         "pixel_area_m2": 100.0
+        }
+       },
+       "spatial_measurements": {
+        "pixel_count": 88,
+        "area_ha": 0.88,
+        "area_units": "ha (projected analysis grid, pixel count \u00d7 pixel area)",
+        "mean_delta": 0.25017,
+        "median_delta": 0.2435,
+        "valid_pixel_denominator": 237774,
+        "share_of_common_valid_percent": 0.037,
+        "hole_pixel_count": 0,
+        "centroid_utm": [
+         429678.18,
+         1673256.91
+        ],
+        "centroid_lonlat": [
+         74.345492,
+         15.134045
+        ],
+        "geometry_wgs84_ref": "finding.geometry_wgs84"
+       },
+       "evidence_quality": {
+        "earlier_valid_fraction": 1.0,
+        "later_valid_fraction": 1.0,
+        "shared_valid_fraction_of_aoi": 1.0,
+        "observation_support": {
+         "earlier_observations": 3,
+         "later_observations": 3,
+         "min_observations_required": 1
+        },
+        "masking_and_cloud_limitations": [
+         "Topographic shadow and canopy structure complicate index interpretation.",
+         "Composites are robust within-period summaries of a few observations, not a dense time series; inter-annual change is represented by two period composites only.",
+         "Index differences are candidate spectral signals. They are not verified deforestation, wetland loss, construction, glacier damage or any other causal land-cover label.",
+         "Cloud, shadow and saturated-pixel exclusion relies on the provider SCL product; terrain shadow is not independently re-derived.",
+         "Surface reflectance is the provider L2A product; no independent atmospheric correction is performed.",
+         "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
+        ],
+        "threshold_sensitivity": {
+         "status": "evaluated in M4-R2 G6",
+         "result": null
+        },
+        "confounding_factors": [
+         "Terrain shadow and illumination differences between acquisitions.",
+         "Canopy density or phenology differences between the windows.",
+         "Canopy disturbance \u2014 candidate only; independent evidence would be required to establish it."
+        ]
+       },
+       "method_provenance": {
+        "algorithm": "threshold candidate mask \u2192 4-connected components (scipy.ndimage.label) \u2192 MMU filter \u2192 top-K selection",
+        "algorithm_version": "0.2.0-m1",
+        "parameters": {
+         "threshold": 0.15,
+         "minimum_mapping_unit_px": 25,
+         "minimum_mapping_unit_ha": 0.25,
+         "max_regions_per_index_direction": 5,
+         "connectivity": 4
+        },
+        "input_hashes": {
+         "delta_raster": "0b1555f043f40127144c1d3c4ba032b953aadca26047e5461bff40fe4928ada7",
+         "common_valid_mask": "a4b61c260d98f178e84f6beadf0e53263e5ed98f2b721f2dd5bd37e6a622dc2e"
+        },
+        "source_experiment_run": {
+         "experiment_id": "western_ghats_m4",
+         "run_generated_utc": "2026-11-07T13:11:08.092457+00:00",
+         "pipeline_verification": {
+          "all_passed": true,
+          "check_count": 20,
+          "failed_checks": []
+         }
+        },
+        "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+        "software": {
+         "numpy": "2.2.6",
+         "rasterio": "1.4.3",
+         "scipy": "1.17.1",
+         "pyproj": "3.7.1"
+        },
+        "generated_utc": "2026-11-07T19:02:34Z",
+        "output_checksum": "aa10655f3d42c5af3397226f269d02daef826f8d8d49db143f11d402be74ab5f"
+       }
       }
      },
      {
       "id": "region_06",
       "display_id": "Region 06",
+      "evidence_id": "ev-western_ghats_m4-ndvi-inc-432724-1673026",
       "index": "ndvi",
       "direction": "increase",
       "threshold": 0.15,
@@ -2223,6 +3161,7 @@
       "mean_delta": 0.190162,
       "median_delta": 0.188629,
       "common_valid_pixels": 237774,
+      "hole_pixel_count": 1,
       "centroid_utm": [
        432723.97,
        1673025.71
@@ -2487,6 +3426,28 @@
           74.373712,
           15.132887
          ]
+        ],
+        [
+         [
+          74.373621,
+          15.132435
+         ],
+         [
+          74.373714,
+          15.132435
+         ],
+         [
+          74.373714,
+          15.132345
+         ],
+         [
+          74.373621,
+          15.132344
+         ],
+         [
+          74.373621,
+          15.132435
+         ]
         ]
        ]
       },
@@ -2514,11 +3475,193 @@
         "valid_mask": "data/processed/m4/western_ghats_m4/common_valid_ndvi.tif",
         "method": "frozen M1 difference rasters + common-valid masks"
        }
+      },
+      "evidence": {
+       "schema": "habitatshift-evidence-record/1",
+       "identification": {
+        "evidence_id": "ev-western_ghats_m4-ndvi-inc-432724-1673026",
+        "finding_id": "region_06",
+        "display_id": "Region 06",
+        "schema_version": 1,
+        "study_id": "western_ghats_forest",
+        "experiment_id": "western_ghats_m4",
+        "finding_type": "threshold-connected-region",
+        "candidate_direction": "increase",
+        "evidence_status": "processed"
+       },
+       "source_observations": {
+        "earlier": {
+         "item_ids": [
+          "S2B_43PDS_20200219_1_L2A",
+          "S2A_43PDS_20200214_1_L2A",
+          "S2A_43PDS_20200224_1_L2A"
+         ],
+         "observation_dates": [
+          "2020-02-19",
+          "2020-02-14",
+          "2020-02-24"
+         ],
+         "anchor_date": "2020-02-19",
+         "composite_method": "median",
+         "observation_count": 3,
+         "valid_pixels": 237774,
+         "aoi_pixels": 237774,
+         "valid_fraction": 1.0
+        },
+        "later": {
+         "item_ids": [
+          "S2B_43PDS_20250222_0_L2A",
+          "S2C_43PDS_20250217_0_L2A",
+          "S2C_43PDS_20250227_0_L2A"
+         ],
+         "observation_dates": [
+          "2025-02-22",
+          "2025-02-17",
+          "2025-02-27"
+         ],
+         "anchor_date": "2025-02-22",
+         "composite_method": "median",
+         "observation_count": 3,
+         "valid_pixels": 237774,
+         "aoi_pixels": 237774,
+         "valid_fraction": 1.0
+        },
+        "dataset": {
+         "collection": "sentinel-2-l2a",
+         "provider": "Element 84 Earth Search (AWS Open Data)",
+         "license": "Copernicus Sentinel data: free, open and unrestricted use with attribution (ESA Copernicus data policy). Catalogue: Element 84 Earth Search, AWS Open Data.",
+         "processing_level": "Sentinel-2 L2A surface reflectance",
+         "attribution": "Contains modified Copernicus Sentinel data, processed by ESA; L2A products distributed by the Element 84 Earth Search STAC catalogue (AWS Open Data)."
+        },
+        "study_aoi": {
+         "bounds_lonlat": [
+          74.33,
+          15.13,
+          74.38,
+          15.17
+         ],
+         "area_km2": 23.768086,
+         "aoi_pixels": 237774
+        }
+       },
+       "input_measurements": {
+        "index": "ndvi",
+        "index_label": "observed index difference (later - earlier); not a land-cover verdict",
+        "formula": "(NIR - Red) / (NIR + Red)",
+        "bands": [
+         "nir",
+         "red"
+        ],
+        "native_band_resolution_m": 10.0,
+        "band_resolution_note": "native 10 m band resolution",
+        "delta_definition": "I_later(p) - I_earlier(p) on the shared analysis grid",
+        "threshold": 0.15,
+        "threshold_rule": "|\u0394I| \u2265 t, inclusive; sign selects the candidate direction",
+        "input_raster": "data/processed/m4/western_ghats_m4/delta_ndvi.tif",
+        "input_raster_sha256": "0b1555f043f40127144c1d3c4ba032b953aadca26047e5461bff40fe4928ada7",
+        "valid_mask": "data/processed/m4/western_ghats_m4/common_valid_ndvi.tif",
+        "valid_mask_sha256": "a4b61c260d98f178e84f6beadf0e53263e5ed98f2b721f2dd5bd37e6a622dc2e",
+        "analysis_grid": {
+         "crs": "EPSG:32643",
+         "resolution_m": 10.0,
+         "width": 539,
+         "height": 445,
+         "transform": [
+          10.0,
+          0.0,
+          428010.0,
+          0.0,
+          -10.0,
+          1677240.0
+         ],
+         "pixel_area_m2": 100.0
+        }
+       },
+       "spatial_measurements": {
+        "pixel_count": 81,
+        "area_ha": 0.81,
+        "area_units": "ha (projected analysis grid, pixel count \u00d7 pixel area)",
+        "mean_delta": 0.190162,
+        "median_delta": 0.188629,
+        "valid_pixel_denominator": 237774,
+        "share_of_common_valid_percent": 0.0341,
+        "hole_pixel_count": 1,
+        "centroid_utm": [
+         432723.97,
+         1673025.71
+        ],
+        "centroid_lonlat": [
+         74.373845,
+         15.132035
+        ],
+        "geometry_wgs84_ref": "finding.geometry_wgs84"
+       },
+       "evidence_quality": {
+        "earlier_valid_fraction": 1.0,
+        "later_valid_fraction": 1.0,
+        "shared_valid_fraction_of_aoi": 1.0,
+        "observation_support": {
+         "earlier_observations": 3,
+         "later_observations": 3,
+         "min_observations_required": 1
+        },
+        "masking_and_cloud_limitations": [
+         "Topographic shadow and canopy structure complicate index interpretation.",
+         "Composites are robust within-period summaries of a few observations, not a dense time series; inter-annual change is represented by two period composites only.",
+         "Index differences are candidate spectral signals. They are not verified deforestation, wetland loss, construction, glacier damage or any other causal land-cover label.",
+         "Cloud, shadow and saturated-pixel exclusion relies on the provider SCL product; terrain shadow is not independently re-derived.",
+         "Surface reflectance is the provider L2A product; no independent atmospheric correction is performed.",
+         "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
+        ],
+        "threshold_sensitivity": {
+         "status": "evaluated in M4-R2 G6",
+         "result": null
+        },
+        "confounding_factors": [
+         "Terrain shadow and illumination differences between acquisitions.",
+         "Canopy density or phenology differences between the windows.",
+         "Canopy disturbance \u2014 candidate only; independent evidence would be required to establish it."
+        ]
+       },
+       "method_provenance": {
+        "algorithm": "threshold candidate mask \u2192 4-connected components (scipy.ndimage.label) \u2192 MMU filter \u2192 top-K selection",
+        "algorithm_version": "0.2.0-m1",
+        "parameters": {
+         "threshold": 0.15,
+         "minimum_mapping_unit_px": 25,
+         "minimum_mapping_unit_ha": 0.25,
+         "max_regions_per_index_direction": 5,
+         "connectivity": 4
+        },
+        "input_hashes": {
+         "delta_raster": "0b1555f043f40127144c1d3c4ba032b953aadca26047e5461bff40fe4928ada7",
+         "common_valid_mask": "a4b61c260d98f178e84f6beadf0e53263e5ed98f2b721f2dd5bd37e6a622dc2e"
+        },
+        "source_experiment_run": {
+         "experiment_id": "western_ghats_m4",
+         "run_generated_utc": "2026-11-07T13:11:08.092457+00:00",
+         "pipeline_verification": {
+          "all_passed": true,
+          "check_count": 20,
+          "failed_checks": []
+         }
+        },
+        "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+        "software": {
+         "numpy": "2.2.6",
+         "rasterio": "1.4.3",
+         "scipy": "1.17.1",
+         "pyproj": "3.7.1"
+        },
+        "generated_utc": "2026-11-07T19:02:34Z",
+        "output_checksum": "e8032fa253383a93c18079a331e22b04f65406e17926420a2a79c7c97849468d"
+       }
       }
      },
      {
       "id": "region_07",
       "display_id": "Region 07",
+      "evidence_id": "ev-western_ghats_m4-ndvi-inc-432878-1673396",
       "index": "ndvi",
       "direction": "increase",
       "threshold": 0.15,
@@ -2528,6 +3671,7 @@
       "mean_delta": 0.249681,
       "median_delta": 0.237185,
       "common_valid_pixels": 237774,
+      "hole_pixel_count": 0,
       "centroid_utm": [
        432878.29,
        1673396.29
@@ -2707,11 +3851,193 @@
         "valid_mask": "data/processed/m4/western_ghats_m4/common_valid_ndvi.tif",
         "method": "frozen M1 difference rasters + common-valid masks"
        }
+      },
+      "evidence": {
+       "schema": "habitatshift-evidence-record/1",
+       "identification": {
+        "evidence_id": "ev-western_ghats_m4-ndvi-inc-432878-1673396",
+        "finding_id": "region_07",
+        "display_id": "Region 07",
+        "schema_version": 1,
+        "study_id": "western_ghats_forest",
+        "experiment_id": "western_ghats_m4",
+        "finding_type": "threshold-connected-region",
+        "candidate_direction": "increase",
+        "evidence_status": "processed"
+       },
+       "source_observations": {
+        "earlier": {
+         "item_ids": [
+          "S2B_43PDS_20200219_1_L2A",
+          "S2A_43PDS_20200214_1_L2A",
+          "S2A_43PDS_20200224_1_L2A"
+         ],
+         "observation_dates": [
+          "2020-02-19",
+          "2020-02-14",
+          "2020-02-24"
+         ],
+         "anchor_date": "2020-02-19",
+         "composite_method": "median",
+         "observation_count": 3,
+         "valid_pixels": 237774,
+         "aoi_pixels": 237774,
+         "valid_fraction": 1.0
+        },
+        "later": {
+         "item_ids": [
+          "S2B_43PDS_20250222_0_L2A",
+          "S2C_43PDS_20250217_0_L2A",
+          "S2C_43PDS_20250227_0_L2A"
+         ],
+         "observation_dates": [
+          "2025-02-22",
+          "2025-02-17",
+          "2025-02-27"
+         ],
+         "anchor_date": "2025-02-22",
+         "composite_method": "median",
+         "observation_count": 3,
+         "valid_pixels": 237774,
+         "aoi_pixels": 237774,
+         "valid_fraction": 1.0
+        },
+        "dataset": {
+         "collection": "sentinel-2-l2a",
+         "provider": "Element 84 Earth Search (AWS Open Data)",
+         "license": "Copernicus Sentinel data: free, open and unrestricted use with attribution (ESA Copernicus data policy). Catalogue: Element 84 Earth Search, AWS Open Data.",
+         "processing_level": "Sentinel-2 L2A surface reflectance",
+         "attribution": "Contains modified Copernicus Sentinel data, processed by ESA; L2A products distributed by the Element 84 Earth Search STAC catalogue (AWS Open Data)."
+        },
+        "study_aoi": {
+         "bounds_lonlat": [
+          74.33,
+          15.13,
+          74.38,
+          15.17
+         ],
+         "area_km2": 23.768086,
+         "aoi_pixels": 237774
+        }
+       },
+       "input_measurements": {
+        "index": "ndvi",
+        "index_label": "observed index difference (later - earlier); not a land-cover verdict",
+        "formula": "(NIR - Red) / (NIR + Red)",
+        "bands": [
+         "nir",
+         "red"
+        ],
+        "native_band_resolution_m": 10.0,
+        "band_resolution_note": "native 10 m band resolution",
+        "delta_definition": "I_later(p) - I_earlier(p) on the shared analysis grid",
+        "threshold": 0.15,
+        "threshold_rule": "|\u0394I| \u2265 t, inclusive; sign selects the candidate direction",
+        "input_raster": "data/processed/m4/western_ghats_m4/delta_ndvi.tif",
+        "input_raster_sha256": "0b1555f043f40127144c1d3c4ba032b953aadca26047e5461bff40fe4928ada7",
+        "valid_mask": "data/processed/m4/western_ghats_m4/common_valid_ndvi.tif",
+        "valid_mask_sha256": "a4b61c260d98f178e84f6beadf0e53263e5ed98f2b721f2dd5bd37e6a622dc2e",
+        "analysis_grid": {
+         "crs": "EPSG:32643",
+         "resolution_m": 10.0,
+         "width": 539,
+         "height": 445,
+         "transform": [
+          10.0,
+          0.0,
+          428010.0,
+          0.0,
+          -10.0,
+          1677240.0
+         ],
+         "pixel_area_m2": 100.0
+        }
+       },
+       "spatial_measurements": {
+        "pixel_count": 76,
+        "area_ha": 0.76,
+        "area_units": "ha (projected analysis grid, pixel count \u00d7 pixel area)",
+        "mean_delta": 0.249681,
+        "median_delta": 0.237185,
+        "valid_pixel_denominator": 237774,
+        "share_of_common_valid_percent": 0.032,
+        "hole_pixel_count": 0,
+        "centroid_utm": [
+         432878.29,
+         1673396.29
+        ],
+        "centroid_lonlat": [
+         74.375271,
+         15.135389
+        ],
+        "geometry_wgs84_ref": "finding.geometry_wgs84"
+       },
+       "evidence_quality": {
+        "earlier_valid_fraction": 1.0,
+        "later_valid_fraction": 1.0,
+        "shared_valid_fraction_of_aoi": 1.0,
+        "observation_support": {
+         "earlier_observations": 3,
+         "later_observations": 3,
+         "min_observations_required": 1
+        },
+        "masking_and_cloud_limitations": [
+         "Topographic shadow and canopy structure complicate index interpretation.",
+         "Composites are robust within-period summaries of a few observations, not a dense time series; inter-annual change is represented by two period composites only.",
+         "Index differences are candidate spectral signals. They are not verified deforestation, wetland loss, construction, glacier damage or any other causal land-cover label.",
+         "Cloud, shadow and saturated-pixel exclusion relies on the provider SCL product; terrain shadow is not independently re-derived.",
+         "Surface reflectance is the provider L2A product; no independent atmospheric correction is performed.",
+         "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
+        ],
+        "threshold_sensitivity": {
+         "status": "evaluated in M4-R2 G6",
+         "result": null
+        },
+        "confounding_factors": [
+         "Terrain shadow and illumination differences between acquisitions.",
+         "Canopy density or phenology differences between the windows.",
+         "Canopy disturbance \u2014 candidate only; independent evidence would be required to establish it."
+        ]
+       },
+       "method_provenance": {
+        "algorithm": "threshold candidate mask \u2192 4-connected components (scipy.ndimage.label) \u2192 MMU filter \u2192 top-K selection",
+        "algorithm_version": "0.2.0-m1",
+        "parameters": {
+         "threshold": 0.15,
+         "minimum_mapping_unit_px": 25,
+         "minimum_mapping_unit_ha": 0.25,
+         "max_regions_per_index_direction": 5,
+         "connectivity": 4
+        },
+        "input_hashes": {
+         "delta_raster": "0b1555f043f40127144c1d3c4ba032b953aadca26047e5461bff40fe4928ada7",
+         "common_valid_mask": "a4b61c260d98f178e84f6beadf0e53263e5ed98f2b721f2dd5bd37e6a622dc2e"
+        },
+        "source_experiment_run": {
+         "experiment_id": "western_ghats_m4",
+         "run_generated_utc": "2026-11-07T13:11:08.092457+00:00",
+         "pipeline_verification": {
+          "all_passed": true,
+          "check_count": 20,
+          "failed_checks": []
+         }
+        },
+        "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+        "software": {
+         "numpy": "2.2.6",
+         "rasterio": "1.4.3",
+         "scipy": "1.17.1",
+         "pyproj": "3.7.1"
+        },
+        "generated_utc": "2026-11-07T19:02:34Z",
+        "output_checksum": "c5a731acf096c3bb3b53fe679d8a75ff943cca0f32bc7d5d660fbf04953ae7dc"
+       }
       }
      },
      {
       "id": "region_08",
       "display_id": "Region 08",
+      "evidence_id": "ev-western_ghats_m4-ndvi-inc-429679-1672930",
       "index": "ndvi",
       "direction": "increase",
       "threshold": 0.15,
@@ -2721,6 +4047,7 @@
       "mean_delta": 0.223235,
       "median_delta": 0.216261,
       "common_valid_pixels": 237774,
+      "hole_pixel_count": 1,
       "centroid_utm": [
        429679.39,
        1672930.0
@@ -2929,6 +4256,28 @@
           74.345982,
           15.131633
          ]
+        ],
+        [
+         [
+          74.345332,
+          15.131089
+         ],
+         [
+          74.345425,
+          15.131089
+         ],
+         [
+          74.345425,
+          15.130999
+         ],
+         [
+          74.345332,
+          15.130999
+         ],
+         [
+          74.345332,
+          15.131089
+         ]
         ]
        ]
       },
@@ -2956,11 +4305,193 @@
         "valid_mask": "data/processed/m4/western_ghats_m4/common_valid_ndvi.tif",
         "method": "frozen M1 difference rasters + common-valid masks"
        }
+      },
+      "evidence": {
+       "schema": "habitatshift-evidence-record/1",
+       "identification": {
+        "evidence_id": "ev-western_ghats_m4-ndvi-inc-429679-1672930",
+        "finding_id": "region_08",
+        "display_id": "Region 08",
+        "schema_version": 1,
+        "study_id": "western_ghats_forest",
+        "experiment_id": "western_ghats_m4",
+        "finding_type": "threshold-connected-region",
+        "candidate_direction": "increase",
+        "evidence_status": "processed"
+       },
+       "source_observations": {
+        "earlier": {
+         "item_ids": [
+          "S2B_43PDS_20200219_1_L2A",
+          "S2A_43PDS_20200214_1_L2A",
+          "S2A_43PDS_20200224_1_L2A"
+         ],
+         "observation_dates": [
+          "2020-02-19",
+          "2020-02-14",
+          "2020-02-24"
+         ],
+         "anchor_date": "2020-02-19",
+         "composite_method": "median",
+         "observation_count": 3,
+         "valid_pixels": 237774,
+         "aoi_pixels": 237774,
+         "valid_fraction": 1.0
+        },
+        "later": {
+         "item_ids": [
+          "S2B_43PDS_20250222_0_L2A",
+          "S2C_43PDS_20250217_0_L2A",
+          "S2C_43PDS_20250227_0_L2A"
+         ],
+         "observation_dates": [
+          "2025-02-22",
+          "2025-02-17",
+          "2025-02-27"
+         ],
+         "anchor_date": "2025-02-22",
+         "composite_method": "median",
+         "observation_count": 3,
+         "valid_pixels": 237774,
+         "aoi_pixels": 237774,
+         "valid_fraction": 1.0
+        },
+        "dataset": {
+         "collection": "sentinel-2-l2a",
+         "provider": "Element 84 Earth Search (AWS Open Data)",
+         "license": "Copernicus Sentinel data: free, open and unrestricted use with attribution (ESA Copernicus data policy). Catalogue: Element 84 Earth Search, AWS Open Data.",
+         "processing_level": "Sentinel-2 L2A surface reflectance",
+         "attribution": "Contains modified Copernicus Sentinel data, processed by ESA; L2A products distributed by the Element 84 Earth Search STAC catalogue (AWS Open Data)."
+        },
+        "study_aoi": {
+         "bounds_lonlat": [
+          74.33,
+          15.13,
+          74.38,
+          15.17
+         ],
+         "area_km2": 23.768086,
+         "aoi_pixels": 237774
+        }
+       },
+       "input_measurements": {
+        "index": "ndvi",
+        "index_label": "observed index difference (later - earlier); not a land-cover verdict",
+        "formula": "(NIR - Red) / (NIR + Red)",
+        "bands": [
+         "nir",
+         "red"
+        ],
+        "native_band_resolution_m": 10.0,
+        "band_resolution_note": "native 10 m band resolution",
+        "delta_definition": "I_later(p) - I_earlier(p) on the shared analysis grid",
+        "threshold": 0.15,
+        "threshold_rule": "|\u0394I| \u2265 t, inclusive; sign selects the candidate direction",
+        "input_raster": "data/processed/m4/western_ghats_m4/delta_ndvi.tif",
+        "input_raster_sha256": "0b1555f043f40127144c1d3c4ba032b953aadca26047e5461bff40fe4928ada7",
+        "valid_mask": "data/processed/m4/western_ghats_m4/common_valid_ndvi.tif",
+        "valid_mask_sha256": "a4b61c260d98f178e84f6beadf0e53263e5ed98f2b721f2dd5bd37e6a622dc2e",
+        "analysis_grid": {
+         "crs": "EPSG:32643",
+         "resolution_m": 10.0,
+         "width": 539,
+         "height": 445,
+         "transform": [
+          10.0,
+          0.0,
+          428010.0,
+          0.0,
+          -10.0,
+          1677240.0
+         ],
+         "pixel_area_m2": 100.0
+        }
+       },
+       "spatial_measurements": {
+        "pixel_count": 62,
+        "area_ha": 0.62,
+        "area_units": "ha (projected analysis grid, pixel count \u00d7 pixel area)",
+        "mean_delta": 0.223235,
+        "median_delta": 0.216261,
+        "valid_pixel_denominator": 237774,
+        "share_of_common_valid_percent": 0.0261,
+        "hole_pixel_count": 1,
+        "centroid_utm": [
+         429679.39,
+         1672930.0
+        ],
+        "centroid_lonlat": [
+         74.345512,
+         15.13109
+        ],
+        "geometry_wgs84_ref": "finding.geometry_wgs84"
+       },
+       "evidence_quality": {
+        "earlier_valid_fraction": 1.0,
+        "later_valid_fraction": 1.0,
+        "shared_valid_fraction_of_aoi": 1.0,
+        "observation_support": {
+         "earlier_observations": 3,
+         "later_observations": 3,
+         "min_observations_required": 1
+        },
+        "masking_and_cloud_limitations": [
+         "Topographic shadow and canopy structure complicate index interpretation.",
+         "Composites are robust within-period summaries of a few observations, not a dense time series; inter-annual change is represented by two period composites only.",
+         "Index differences are candidate spectral signals. They are not verified deforestation, wetland loss, construction, glacier damage or any other causal land-cover label.",
+         "Cloud, shadow and saturated-pixel exclusion relies on the provider SCL product; terrain shadow is not independently re-derived.",
+         "Surface reflectance is the provider L2A product; no independent atmospheric correction is performed.",
+         "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
+        ],
+        "threshold_sensitivity": {
+         "status": "evaluated in M4-R2 G6",
+         "result": null
+        },
+        "confounding_factors": [
+         "Terrain shadow and illumination differences between acquisitions.",
+         "Canopy density or phenology differences between the windows.",
+         "Canopy disturbance \u2014 candidate only; independent evidence would be required to establish it."
+        ]
+       },
+       "method_provenance": {
+        "algorithm": "threshold candidate mask \u2192 4-connected components (scipy.ndimage.label) \u2192 MMU filter \u2192 top-K selection",
+        "algorithm_version": "0.2.0-m1",
+        "parameters": {
+         "threshold": 0.15,
+         "minimum_mapping_unit_px": 25,
+         "minimum_mapping_unit_ha": 0.25,
+         "max_regions_per_index_direction": 5,
+         "connectivity": 4
+        },
+        "input_hashes": {
+         "delta_raster": "0b1555f043f40127144c1d3c4ba032b953aadca26047e5461bff40fe4928ada7",
+         "common_valid_mask": "a4b61c260d98f178e84f6beadf0e53263e5ed98f2b721f2dd5bd37e6a622dc2e"
+        },
+        "source_experiment_run": {
+         "experiment_id": "western_ghats_m4",
+         "run_generated_utc": "2026-11-07T13:11:08.092457+00:00",
+         "pipeline_verification": {
+          "all_passed": true,
+          "check_count": 20,
+          "failed_checks": []
+         }
+        },
+        "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+        "software": {
+         "numpy": "2.2.6",
+         "rasterio": "1.4.3",
+         "scipy": "1.17.1",
+         "pyproj": "3.7.1"
+        },
+        "generated_utc": "2026-11-07T19:02:34Z",
+        "output_checksum": "6773fc134c8caf30a44ec78b0b3f61f4680dfddea0f7d4b824e65e37205786b0"
+       }
       }
      },
      {
       "id": "region_09",
       "display_id": "Region 09",
+      "evidence_id": "ev-western_ghats_m4-ndwi-dec-433177-1673477",
       "index": "ndwi",
       "direction": "decrease",
       "threshold": 0.15,
@@ -2970,6 +4501,7 @@
       "mean_delta": -0.226632,
       "median_delta": -0.227479,
       "common_valid_pixels": 237774,
+      "hole_pixel_count": 0,
       "centroid_utm": [
        433177.06,
        1673477.45
@@ -3213,11 +4745,193 @@
         "valid_mask": "data/processed/m4/western_ghats_m4/common_valid_ndwi.tif",
         "method": "frozen M1 difference rasters + common-valid masks"
        }
+      },
+      "evidence": {
+       "schema": "habitatshift-evidence-record/1",
+       "identification": {
+        "evidence_id": "ev-western_ghats_m4-ndwi-dec-433177-1673477",
+        "finding_id": "region_09",
+        "display_id": "Region 09",
+        "schema_version": 1,
+        "study_id": "western_ghats_forest",
+        "experiment_id": "western_ghats_m4",
+        "finding_type": "threshold-connected-region",
+        "candidate_direction": "decrease",
+        "evidence_status": "processed"
+       },
+       "source_observations": {
+        "earlier": {
+         "item_ids": [
+          "S2B_43PDS_20200219_1_L2A",
+          "S2A_43PDS_20200214_1_L2A",
+          "S2A_43PDS_20200224_1_L2A"
+         ],
+         "observation_dates": [
+          "2020-02-19",
+          "2020-02-14",
+          "2020-02-24"
+         ],
+         "anchor_date": "2020-02-19",
+         "composite_method": "median",
+         "observation_count": 3,
+         "valid_pixels": 237774,
+         "aoi_pixels": 237774,
+         "valid_fraction": 1.0
+        },
+        "later": {
+         "item_ids": [
+          "S2B_43PDS_20250222_0_L2A",
+          "S2C_43PDS_20250217_0_L2A",
+          "S2C_43PDS_20250227_0_L2A"
+         ],
+         "observation_dates": [
+          "2025-02-22",
+          "2025-02-17",
+          "2025-02-27"
+         ],
+         "anchor_date": "2025-02-22",
+         "composite_method": "median",
+         "observation_count": 3,
+         "valid_pixels": 237774,
+         "aoi_pixels": 237774,
+         "valid_fraction": 1.0
+        },
+        "dataset": {
+         "collection": "sentinel-2-l2a",
+         "provider": "Element 84 Earth Search (AWS Open Data)",
+         "license": "Copernicus Sentinel data: free, open and unrestricted use with attribution (ESA Copernicus data policy). Catalogue: Element 84 Earth Search, AWS Open Data.",
+         "processing_level": "Sentinel-2 L2A surface reflectance",
+         "attribution": "Contains modified Copernicus Sentinel data, processed by ESA; L2A products distributed by the Element 84 Earth Search STAC catalogue (AWS Open Data)."
+        },
+        "study_aoi": {
+         "bounds_lonlat": [
+          74.33,
+          15.13,
+          74.38,
+          15.17
+         ],
+         "area_km2": 23.768086,
+         "aoi_pixels": 237774
+        }
+       },
+       "input_measurements": {
+        "index": "ndwi",
+        "index_label": "observed index difference (later - earlier); not a land-cover verdict",
+        "formula": "(Green - NIR) / (Green + NIR)",
+        "bands": [
+         "green",
+         "nir"
+        ],
+        "native_band_resolution_m": 10.0,
+        "band_resolution_note": "native 10 m band resolution",
+        "delta_definition": "I_later(p) - I_earlier(p) on the shared analysis grid",
+        "threshold": 0.15,
+        "threshold_rule": "|\u0394I| \u2265 t, inclusive; sign selects the candidate direction",
+        "input_raster": "data/processed/m4/western_ghats_m4/delta_ndwi.tif",
+        "input_raster_sha256": "44a333a24866b716c87a785ef501a1b744f24657edf5ec4e95cb6ad163dfd06f",
+        "valid_mask": "data/processed/m4/western_ghats_m4/common_valid_ndwi.tif",
+        "valid_mask_sha256": "a4b61c260d98f178e84f6beadf0e53263e5ed98f2b721f2dd5bd37e6a622dc2e",
+        "analysis_grid": {
+         "crs": "EPSG:32643",
+         "resolution_m": 10.0,
+         "width": 539,
+         "height": 445,
+         "transform": [
+          10.0,
+          0.0,
+          428010.0,
+          0.0,
+          -10.0,
+          1677240.0
+         ],
+         "pixel_area_m2": 100.0
+        }
+       },
+       "spatial_measurements": {
+        "pixel_count": 163,
+        "area_ha": 1.63,
+        "area_units": "ha (projected analysis grid, pixel count \u00d7 pixel area)",
+        "mean_delta": -0.226632,
+        "median_delta": -0.227479,
+        "valid_pixel_denominator": 237774,
+        "share_of_common_valid_percent": 0.0686,
+        "hole_pixel_count": 0,
+        "centroid_utm": [
+         433177.06,
+         1673477.45
+        ],
+        "centroid_lonlat": [
+         74.37805,
+         15.136131
+        ],
+        "geometry_wgs84_ref": "finding.geometry_wgs84"
+       },
+       "evidence_quality": {
+        "earlier_valid_fraction": 1.0,
+        "later_valid_fraction": 1.0,
+        "shared_valid_fraction_of_aoi": 1.0,
+        "observation_support": {
+         "earlier_observations": 3,
+         "later_observations": 3,
+         "min_observations_required": 1
+        },
+        "masking_and_cloud_limitations": [
+         "Topographic shadow and canopy structure complicate index interpretation.",
+         "Composites are robust within-period summaries of a few observations, not a dense time series; inter-annual change is represented by two period composites only.",
+         "Index differences are candidate spectral signals. They are not verified deforestation, wetland loss, construction, glacier damage or any other causal land-cover label.",
+         "Cloud, shadow and saturated-pixel exclusion relies on the provider SCL product; terrain shadow is not independently re-derived.",
+         "Surface reflectance is the provider L2A product; no independent atmospheric correction is performed.",
+         "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
+        ],
+        "threshold_sensitivity": {
+         "status": "evaluated in M4-R2 G6",
+         "result": null
+        },
+        "confounding_factors": [
+         "Terrain shadow and illumination differences between acquisitions.",
+         "Canopy density or phenology differences between the windows.",
+         "Canopy disturbance \u2014 candidate only; independent evidence would be required to establish it."
+        ]
+       },
+       "method_provenance": {
+        "algorithm": "threshold candidate mask \u2192 4-connected components (scipy.ndimage.label) \u2192 MMU filter \u2192 top-K selection",
+        "algorithm_version": "0.2.0-m1",
+        "parameters": {
+         "threshold": 0.15,
+         "minimum_mapping_unit_px": 25,
+         "minimum_mapping_unit_ha": 0.25,
+         "max_regions_per_index_direction": 5,
+         "connectivity": 4
+        },
+        "input_hashes": {
+         "delta_raster": "44a333a24866b716c87a785ef501a1b744f24657edf5ec4e95cb6ad163dfd06f",
+         "common_valid_mask": "a4b61c260d98f178e84f6beadf0e53263e5ed98f2b721f2dd5bd37e6a622dc2e"
+        },
+        "source_experiment_run": {
+         "experiment_id": "western_ghats_m4",
+         "run_generated_utc": "2026-11-07T13:11:08.092457+00:00",
+         "pipeline_verification": {
+          "all_passed": true,
+          "check_count": 20,
+          "failed_checks": []
+         }
+        },
+        "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+        "software": {
+         "numpy": "2.2.6",
+         "rasterio": "1.4.3",
+         "scipy": "1.17.1",
+         "pyproj": "3.7.1"
+        },
+        "generated_utc": "2026-11-07T19:02:34Z",
+        "output_checksum": "a20e9463a47ab5acd33fe26add879810be239354198d0d73acfb5a884b86b429"
+       }
       }
      },
      {
       "id": "region_10",
       "display_id": "Region 10",
+      "evidence_id": "ev-western_ghats_m4-ndwi-dec-432934-1673404",
       "index": "ndwi",
       "direction": "decrease",
       "threshold": 0.15,
@@ -3227,6 +4941,7 @@
       "mean_delta": -0.193258,
       "median_delta": -0.196036,
       "common_valid_pixels": 237774,
+      "hole_pixel_count": 0,
       "centroid_utm": [
        432933.53,
        1673404.12
@@ -3334,11 +5049,193 @@
         "valid_mask": "data/processed/m4/western_ghats_m4/common_valid_ndwi.tif",
         "method": "frozen M1 difference rasters + common-valid masks"
        }
+      },
+      "evidence": {
+       "schema": "habitatshift-evidence-record/1",
+       "identification": {
+        "evidence_id": "ev-western_ghats_m4-ndwi-dec-432934-1673404",
+        "finding_id": "region_10",
+        "display_id": "Region 10",
+        "schema_version": 1,
+        "study_id": "western_ghats_forest",
+        "experiment_id": "western_ghats_m4",
+        "finding_type": "threshold-connected-region",
+        "candidate_direction": "decrease",
+        "evidence_status": "processed"
+       },
+       "source_observations": {
+        "earlier": {
+         "item_ids": [
+          "S2B_43PDS_20200219_1_L2A",
+          "S2A_43PDS_20200214_1_L2A",
+          "S2A_43PDS_20200224_1_L2A"
+         ],
+         "observation_dates": [
+          "2020-02-19",
+          "2020-02-14",
+          "2020-02-24"
+         ],
+         "anchor_date": "2020-02-19",
+         "composite_method": "median",
+         "observation_count": 3,
+         "valid_pixels": 237774,
+         "aoi_pixels": 237774,
+         "valid_fraction": 1.0
+        },
+        "later": {
+         "item_ids": [
+          "S2B_43PDS_20250222_0_L2A",
+          "S2C_43PDS_20250217_0_L2A",
+          "S2C_43PDS_20250227_0_L2A"
+         ],
+         "observation_dates": [
+          "2025-02-22",
+          "2025-02-17",
+          "2025-02-27"
+         ],
+         "anchor_date": "2025-02-22",
+         "composite_method": "median",
+         "observation_count": 3,
+         "valid_pixels": 237774,
+         "aoi_pixels": 237774,
+         "valid_fraction": 1.0
+        },
+        "dataset": {
+         "collection": "sentinel-2-l2a",
+         "provider": "Element 84 Earth Search (AWS Open Data)",
+         "license": "Copernicus Sentinel data: free, open and unrestricted use with attribution (ESA Copernicus data policy). Catalogue: Element 84 Earth Search, AWS Open Data.",
+         "processing_level": "Sentinel-2 L2A surface reflectance",
+         "attribution": "Contains modified Copernicus Sentinel data, processed by ESA; L2A products distributed by the Element 84 Earth Search STAC catalogue (AWS Open Data)."
+        },
+        "study_aoi": {
+         "bounds_lonlat": [
+          74.33,
+          15.13,
+          74.38,
+          15.17
+         ],
+         "area_km2": 23.768086,
+         "aoi_pixels": 237774
+        }
+       },
+       "input_measurements": {
+        "index": "ndwi",
+        "index_label": "observed index difference (later - earlier); not a land-cover verdict",
+        "formula": "(Green - NIR) / (Green + NIR)",
+        "bands": [
+         "green",
+         "nir"
+        ],
+        "native_band_resolution_m": 10.0,
+        "band_resolution_note": "native 10 m band resolution",
+        "delta_definition": "I_later(p) - I_earlier(p) on the shared analysis grid",
+        "threshold": 0.15,
+        "threshold_rule": "|\u0394I| \u2265 t, inclusive; sign selects the candidate direction",
+        "input_raster": "data/processed/m4/western_ghats_m4/delta_ndwi.tif",
+        "input_raster_sha256": "44a333a24866b716c87a785ef501a1b744f24657edf5ec4e95cb6ad163dfd06f",
+        "valid_mask": "data/processed/m4/western_ghats_m4/common_valid_ndwi.tif",
+        "valid_mask_sha256": "a4b61c260d98f178e84f6beadf0e53263e5ed98f2b721f2dd5bd37e6a622dc2e",
+        "analysis_grid": {
+         "crs": "EPSG:32643",
+         "resolution_m": 10.0,
+         "width": 539,
+         "height": 445,
+         "transform": [
+          10.0,
+          0.0,
+          428010.0,
+          0.0,
+          -10.0,
+          1677240.0
+         ],
+         "pixel_area_m2": 100.0
+        }
+       },
+       "spatial_measurements": {
+        "pixel_count": 25,
+        "area_ha": 0.25,
+        "area_units": "ha (projected analysis grid, pixel count \u00d7 pixel area)",
+        "mean_delta": -0.193258,
+        "median_delta": -0.196036,
+        "valid_pixel_denominator": 237774,
+        "share_of_common_valid_percent": 0.0105,
+        "hole_pixel_count": 0,
+        "centroid_utm": [
+         432933.53,
+         1673404.12
+        ],
+        "centroid_lonlat": [
+         74.375785,
+         15.135462
+        ],
+        "geometry_wgs84_ref": "finding.geometry_wgs84"
+       },
+       "evidence_quality": {
+        "earlier_valid_fraction": 1.0,
+        "later_valid_fraction": 1.0,
+        "shared_valid_fraction_of_aoi": 1.0,
+        "observation_support": {
+         "earlier_observations": 3,
+         "later_observations": 3,
+         "min_observations_required": 1
+        },
+        "masking_and_cloud_limitations": [
+         "Topographic shadow and canopy structure complicate index interpretation.",
+         "Composites are robust within-period summaries of a few observations, not a dense time series; inter-annual change is represented by two period composites only.",
+         "Index differences are candidate spectral signals. They are not verified deforestation, wetland loss, construction, glacier damage or any other causal land-cover label.",
+         "Cloud, shadow and saturated-pixel exclusion relies on the provider SCL product; terrain shadow is not independently re-derived.",
+         "Surface reflectance is the provider L2A product; no independent atmospheric correction is performed.",
+         "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
+        ],
+        "threshold_sensitivity": {
+         "status": "evaluated in M4-R2 G6",
+         "result": null
+        },
+        "confounding_factors": [
+         "Terrain shadow and illumination differences between acquisitions.",
+         "Canopy density or phenology differences between the windows.",
+         "Canopy disturbance \u2014 candidate only; independent evidence would be required to establish it."
+        ]
+       },
+       "method_provenance": {
+        "algorithm": "threshold candidate mask \u2192 4-connected components (scipy.ndimage.label) \u2192 MMU filter \u2192 top-K selection",
+        "algorithm_version": "0.2.0-m1",
+        "parameters": {
+         "threshold": 0.15,
+         "minimum_mapping_unit_px": 25,
+         "minimum_mapping_unit_ha": 0.25,
+         "max_regions_per_index_direction": 5,
+         "connectivity": 4
+        },
+        "input_hashes": {
+         "delta_raster": "44a333a24866b716c87a785ef501a1b744f24657edf5ec4e95cb6ad163dfd06f",
+         "common_valid_mask": "a4b61c260d98f178e84f6beadf0e53263e5ed98f2b721f2dd5bd37e6a622dc2e"
+        },
+        "source_experiment_run": {
+         "experiment_id": "western_ghats_m4",
+         "run_generated_utc": "2026-11-07T13:11:08.092457+00:00",
+         "pipeline_verification": {
+          "all_passed": true,
+          "check_count": 20,
+          "failed_checks": []
+         }
+        },
+        "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+        "software": {
+         "numpy": "2.2.6",
+         "rasterio": "1.4.3",
+         "scipy": "1.17.1",
+         "pyproj": "3.7.1"
+        },
+        "generated_utc": "2026-11-07T19:02:34Z",
+        "output_checksum": "efa03bbe9f19db824c9b103d794887bff8b251ad83a6fdf7aede85f2e9e8dcc4"
+       }
       }
      },
      {
       "id": "region_11",
       "display_id": "Region 11",
+      "evidence_id": "ev-western_ghats_m4-ndwi-inc-432988-1673426",
       "index": "ndwi",
       "direction": "increase",
       "threshold": 0.15,
@@ -3348,6 +5245,7 @@
       "mean_delta": 0.226352,
       "median_delta": 0.225338,
       "common_valid_pixels": 237774,
+      "hole_pixel_count": 0,
       "centroid_utm": [
        432988.1,
        1673426.19
@@ -3470,6 +5368,187 @@
         "input_raster": "data/processed/m4/western_ghats_m4/delta_ndwi.tif",
         "valid_mask": "data/processed/m4/western_ghats_m4/common_valid_ndwi.tif",
         "method": "frozen M1 difference rasters + common-valid masks"
+       }
+      },
+      "evidence": {
+       "schema": "habitatshift-evidence-record/1",
+       "identification": {
+        "evidence_id": "ev-western_ghats_m4-ndwi-inc-432988-1673426",
+        "finding_id": "region_11",
+        "display_id": "Region 11",
+        "schema_version": 1,
+        "study_id": "western_ghats_forest",
+        "experiment_id": "western_ghats_m4",
+        "finding_type": "threshold-connected-region",
+        "candidate_direction": "increase",
+        "evidence_status": "processed"
+       },
+       "source_observations": {
+        "earlier": {
+         "item_ids": [
+          "S2B_43PDS_20200219_1_L2A",
+          "S2A_43PDS_20200214_1_L2A",
+          "S2A_43PDS_20200224_1_L2A"
+         ],
+         "observation_dates": [
+          "2020-02-19",
+          "2020-02-14",
+          "2020-02-24"
+         ],
+         "anchor_date": "2020-02-19",
+         "composite_method": "median",
+         "observation_count": 3,
+         "valid_pixels": 237774,
+         "aoi_pixels": 237774,
+         "valid_fraction": 1.0
+        },
+        "later": {
+         "item_ids": [
+          "S2B_43PDS_20250222_0_L2A",
+          "S2C_43PDS_20250217_0_L2A",
+          "S2C_43PDS_20250227_0_L2A"
+         ],
+         "observation_dates": [
+          "2025-02-22",
+          "2025-02-17",
+          "2025-02-27"
+         ],
+         "anchor_date": "2025-02-22",
+         "composite_method": "median",
+         "observation_count": 3,
+         "valid_pixels": 237774,
+         "aoi_pixels": 237774,
+         "valid_fraction": 1.0
+        },
+        "dataset": {
+         "collection": "sentinel-2-l2a",
+         "provider": "Element 84 Earth Search (AWS Open Data)",
+         "license": "Copernicus Sentinel data: free, open and unrestricted use with attribution (ESA Copernicus data policy). Catalogue: Element 84 Earth Search, AWS Open Data.",
+         "processing_level": "Sentinel-2 L2A surface reflectance",
+         "attribution": "Contains modified Copernicus Sentinel data, processed by ESA; L2A products distributed by the Element 84 Earth Search STAC catalogue (AWS Open Data)."
+        },
+        "study_aoi": {
+         "bounds_lonlat": [
+          74.33,
+          15.13,
+          74.38,
+          15.17
+         ],
+         "area_km2": 23.768086,
+         "aoi_pixels": 237774
+        }
+       },
+       "input_measurements": {
+        "index": "ndwi",
+        "index_label": "observed index difference (later - earlier); not a land-cover verdict",
+        "formula": "(Green - NIR) / (Green + NIR)",
+        "bands": [
+         "green",
+         "nir"
+        ],
+        "native_band_resolution_m": 10.0,
+        "band_resolution_note": "native 10 m band resolution",
+        "delta_definition": "I_later(p) - I_earlier(p) on the shared analysis grid",
+        "threshold": 0.15,
+        "threshold_rule": "|\u0394I| \u2265 t, inclusive; sign selects the candidate direction",
+        "input_raster": "data/processed/m4/western_ghats_m4/delta_ndwi.tif",
+        "input_raster_sha256": "44a333a24866b716c87a785ef501a1b744f24657edf5ec4e95cb6ad163dfd06f",
+        "valid_mask": "data/processed/m4/western_ghats_m4/common_valid_ndwi.tif",
+        "valid_mask_sha256": "a4b61c260d98f178e84f6beadf0e53263e5ed98f2b721f2dd5bd37e6a622dc2e",
+        "analysis_grid": {
+         "crs": "EPSG:32643",
+         "resolution_m": 10.0,
+         "width": 539,
+         "height": 445,
+         "transform": [
+          10.0,
+          0.0,
+          428010.0,
+          0.0,
+          -10.0,
+          1677240.0
+         ],
+         "pixel_area_m2": 100.0
+        }
+       },
+       "spatial_measurements": {
+        "pixel_count": 31,
+        "area_ha": 0.31,
+        "area_units": "ha (projected analysis grid, pixel count \u00d7 pixel area)",
+        "mean_delta": 0.226352,
+        "median_delta": 0.225338,
+        "valid_pixel_denominator": 237774,
+        "share_of_common_valid_percent": 0.013,
+        "hole_pixel_count": 0,
+        "centroid_utm": [
+         432988.1,
+         1673426.19
+        ],
+        "centroid_lonlat": [
+         74.376292,
+         15.135662
+        ],
+        "geometry_wgs84_ref": "finding.geometry_wgs84"
+       },
+       "evidence_quality": {
+        "earlier_valid_fraction": 1.0,
+        "later_valid_fraction": 1.0,
+        "shared_valid_fraction_of_aoi": 1.0,
+        "observation_support": {
+         "earlier_observations": 3,
+         "later_observations": 3,
+         "min_observations_required": 1
+        },
+        "masking_and_cloud_limitations": [
+         "Topographic shadow and canopy structure complicate index interpretation.",
+         "Composites are robust within-period summaries of a few observations, not a dense time series; inter-annual change is represented by two period composites only.",
+         "Index differences are candidate spectral signals. They are not verified deforestation, wetland loss, construction, glacier damage or any other causal land-cover label.",
+         "Cloud, shadow and saturated-pixel exclusion relies on the provider SCL product; terrain shadow is not independently re-derived.",
+         "Surface reflectance is the provider L2A product; no independent atmospheric correction is performed.",
+         "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
+        ],
+        "threshold_sensitivity": {
+         "status": "evaluated in M4-R2 G6",
+         "result": null
+        },
+        "confounding_factors": [
+         "Terrain shadow and illumination differences between acquisitions.",
+         "Canopy density or phenology differences between the windows.",
+         "Canopy disturbance \u2014 candidate only; independent evidence would be required to establish it."
+        ]
+       },
+       "method_provenance": {
+        "algorithm": "threshold candidate mask \u2192 4-connected components (scipy.ndimage.label) \u2192 MMU filter \u2192 top-K selection",
+        "algorithm_version": "0.2.0-m1",
+        "parameters": {
+         "threshold": 0.15,
+         "minimum_mapping_unit_px": 25,
+         "minimum_mapping_unit_ha": 0.25,
+         "max_regions_per_index_direction": 5,
+         "connectivity": 4
+        },
+        "input_hashes": {
+         "delta_raster": "44a333a24866b716c87a785ef501a1b744f24657edf5ec4e95cb6ad163dfd06f",
+         "common_valid_mask": "a4b61c260d98f178e84f6beadf0e53263e5ed98f2b721f2dd5bd37e6a622dc2e"
+        },
+        "source_experiment_run": {
+         "experiment_id": "western_ghats_m4",
+         "run_generated_utc": "2026-11-07T13:11:08.092457+00:00",
+         "pipeline_verification": {
+          "all_passed": true,
+          "check_count": 20,
+          "failed_checks": []
+         }
+        },
+        "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+        "software": {
+         "numpy": "2.2.6",
+         "rasterio": "1.4.3",
+         "scipy": "1.17.1",
+         "pyproj": "3.7.1"
+        },
+        "generated_utc": "2026-11-07T19:02:34Z",
+        "output_checksum": "b0a70de97cc65b1821d172b6ed6acb10935e82937b1a244719bf643a61ed0519"
        }
       }
      }
