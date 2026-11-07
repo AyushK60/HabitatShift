@@ -4,8 +4,21 @@
  * (M4-R1 §15.5), guided findings (§15.3), acquisition context, pixel probe
  * (server-measured full-resolution values) and the ROI tool.
  */
+import { useState } from "react";
 import type { G0Quality, M1Summary, PixelSample, RoiResult } from "../api/types";
 import type { BundleFindings, StudyBundle } from "../api/bundle";
+import {
+  buildEvidenceOverview,
+  findingByEvidenceId,
+  formatPercent,
+  relatedFindingsFor,
+  selectionForExperiment,
+  sensitivityKey,
+  sensitivityPlainLanguage,
+  thresholdSensitivity,
+  formatHa,
+  type SelectionPolicy,
+} from "../evidence/adapter";
 import type { Analysis, AssetResolver, LayerSpec } from "./layers";
 import { layerGuide, layerLegend, qualityExplanation } from "./layers";
 import type { RoiBox } from "./MapCompare";
@@ -21,8 +34,13 @@ interface InspectorProps {
   live: boolean;
   analysis: Analysis;
   findings: BundleFindings | null;
-  selectedFindingId: string | null;
-  onSelectFinding: (id: string | null) => void;
+  /** Stable content-derived evidence_id of the selected finding (M4-R3). */
+  selectedEvidenceId: string | null;
+  onSelectFinding: (evidenceId: string | null) => void;
+  /** Open the Research Mode record for the same evidence_id. */
+  onOpenResearch: () => void;
+  /** Generated top-five selection disclosure; null when unavailable. */
+  selectionPolicy: SelectionPolicy | null;
   pixel: PixelSample | null;
   pixelError: string | null;
   pixelLoading: boolean;
@@ -333,17 +351,29 @@ function RoiPanel({
   );
 }
 
-/** Guided "What Changed?" findings panel (M4-R1 §15.3/§15.6). Everything
- *  renders from the recorded findings payload — same numbers as the map. */
-function FindingsPanel({
+/** Explore the Evidence (M4-R3 §3) — the public-facing guided experience
+ *  over the same evidence records Research Mode reads. Everything renders
+ *  from the recorded findings payload through the shared adapter; no value
+ *  is recomputed and no confidence score is invented. */
+function ExploreFindingsPanel({
   findings,
   selectedId,
   onSelect,
+  onOpenResearch,
+  selectionPolicy,
 }: {
   findings: BundleFindings | null;
   selectedId: string | null;
   onSelect: (id: string | null) => void;
+  onOpenResearch: () => void;
+  selectionPolicy: SelectionPolicy | null;
 }) {
+  const [filterDirection, setFilterDirection] = useState<"all" | "decrease" | "increase">("all");
+  const [filterIndex, setFilterIndex] = useState<string>("all");
+  const [filterSensitivity, setFilterSensitivity] = useState<string>("all");
+  const [filterOverlap, setFilterOverlap] = useState<"all" | "with" | "without">("all");
+  const [search, setSearch] = useState("");
+
   if (!findings) {
     return (
       <p className="insp-note">
@@ -353,12 +383,47 @@ function FindingsPanel({
       </p>
     );
   }
-  const { overview, method, periods } = findings;
-  const selected = findings.findings.find((f) => f.id === selectedId) ?? null;
+  const overview = buildEvidenceOverview(
+    findings,
+    selectionForExperiment(selectionPolicy, findings.experiment_id)
+  );
+  const selected = selectedId
+    ? findingByEvidenceId(findings, selectedId) ?? null
+    : null;
   const indicesOrder = [...new Set(findings.findings.map((f) => f.index))];
+
+  const matches = findings.findings.filter((finding) => {
+    if (filterDirection !== "all" && finding.direction !== filterDirection) return false;
+    if (filterIndex !== "all" && finding.index !== filterIndex) return false;
+    if (filterOverlap === "with" && (finding.evidence?.relationships?.links?.length ?? 0) === 0) return false;
+    if (filterOverlap === "without" && (finding.evidence?.relationships?.links?.length ?? 0) > 0) return false;
+    if (filterSensitivity !== "all") {
+      const sensitivity = finding.evidence?.evidence_quality as
+        | { threshold_sensitivity?: { label?: string } }
+        | undefined;
+      if (sensitivityKey(sensitivity?.threshold_sensitivity?.label) !== filterSensitivity) return false;
+    }
+    if (search.trim()) {
+      const needle = search.trim().toLowerCase();
+      const haystack = [
+        finding.display_id,
+        finding.interpretation.title,
+        finding.interpretation.location,
+      ].join(" ").toLowerCase();
+      if (!haystack.includes(needle)) return false;
+    }
+    return true;
+  });
+  const filtersActive =
+    filterDirection !== "all" ||
+    filterIndex !== "all" ||
+    filterSensitivity !== "all" ||
+    filterOverlap !== "all" ||
+    search.trim() !== "";
+
   return (
-    <div className="findings-panel">
-      <h3 className="insp-heading">What changed here?</h3>
+    <div className="findings-panel explore-panel">
+      <h3 className="insp-heading">Explore the Evidence</h3>
       {overview.findings_total === 0 ? (
         <p className="insp-note insp-meaning">
           {overview.no_finding_statement ??
@@ -366,46 +431,191 @@ function FindingsPanel({
         </p>
       ) : (
         <p className="insp-note insp-meaning">
-          {overview.findings_total} defensible mapped regions:{" "}
+          {overview.findings_total} recorded candidate findings:{" "}
           {overview.by_direction.decrease} candidate decrease,{" "}
-          {overview.by_direction.increase} candidate increase, across{" "}
-          {overview.signal_types.join(", ")}. Every region is a connected
-          component of the recorded difference map at its stated threshold —
-          not a confirmed environmental change.
+          {overview.by_direction.increase} candidate increase, measured with{" "}
+          {overview.indices.map((index) => `Δ${index.toUpperCase()}`).join(", ")}.
+          These are candidate spectral signals from satellite measurements —
+          not confirmed environmental events.
         </p>
       )}
       <dl className="insp-facts">
         <div>
           <dt>Observation period</dt>
           <dd>
-            {periods.earlier.anchor_date} → {periods.later.anchor_date} (
-            {periods.earlier.composite_method} composites)
+            {overview.observation_period.earlier} → {overview.observation_period.later} (
+            {findings.periods.earlier.composite_method} composites)
           </dd>
         </div>
         <div>
           <dt>Shared-valid footprint</dt>
           <dd>
-            {findings.common_valid_pixels.toLocaleString("en-GB")} px ·{" "}
-            {(findings.common_valid_fraction_of_aoi * 100).toFixed(1)}% of AOI
+            {overview.common_valid_pixels.toLocaleString("en-GB")} px ·{" "}
+            {formatPercent(overview.common_valid_fraction_of_aoi, 1)} of AOI
+          </dd>
+        </div>
+        <div>
+          <dt>Overlapping measurements</dt>
+          <dd>
+            {overview.relationship_link_count} recorded links across{" "}
+            {overview.findings_with_relationships} regions — separate
+            measurements of one geography, never independent events
           </dd>
         </div>
         <div>
           <dt>Minimum mapping unit</dt>
           <dd>
-            {method.minimum_mapping_unit_px} px ({method.minimum_mapping_unit_ha}{" "}
-            ha) · smaller clusters are never reported
+            {overview.method.minimum_mapping_unit_px} px (
+            {overview.method.minimum_mapping_unit_ha} ha) · smaller clusters
+            are never reported
           </dd>
         </div>
       </dl>
+
+      {/* Curated-selection disclosure (M4-R3 §5). Counts come from the
+          generated policy artifact (audited); wording never implies the
+          recorded list is a complete inventory. */}
+      <p className="insp-note insp-guardrail selection-disclosure">
+        <strong>Curated selection.</strong>{" "}
+        {overview.selection
+          ? `The recorded rule keeps the largest ${overview.method.max_regions_per_index_direction} components per index and direction. This experiment records ${overview.selection.recorded_findings} findings; ${overview.selection.components_at_or_above_mmu_unrecorded_top5_cap} additional qualifying components met the minimum mapping unit but were not recorded and have no evidence records. `
+          : "The recorded rule keeps the largest components per index and direction (exact counts unavailable offline). "}
+        This list is not a complete inventory of every qualifying region.
+      </p>
       <p className="insp-note mono-label">
         Categories: candidate increase / candidate decrease / little measurable
-        difference / insufficient evidence. All mapped regions here are
-        <strong> candidates</strong>; "insufficient evidence" is exactly what
-        an empty list means.
+        difference / insufficient evidence. "Insufficient evidence" is exactly
+        what an empty list means.
       </p>
 
+      {/* ---------------------------------------------- filters (§3.5) --- */}
+      {overview.findings_total > 0 && (
+        <div className="explore-filters" role="group" aria-label="Findings filters">
+          <div className="explore-filter-row">
+            <span className="control-label">Direction</span>
+            <div className="segmented" role="group" aria-label="Direction filter">
+              {(["all", "decrease", "increase"] as const).map((value) => (
+                <button
+                  key={value}
+                  type="button"
+                  className={filterDirection === value ? "is-active" : ""}
+                  aria-pressed={filterDirection === value}
+                  onClick={() => setFilterDirection(value)}
+                >
+                  {value === "all" ? "All" : value === "decrease" ? "Decrease" : "Increase"}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div className="explore-filter-row">
+            <span className="control-label">Index</span>
+            <div className="segmented" role="group" aria-label="Index filter">
+              <button
+                type="button"
+                className={filterIndex === "all" ? "is-active" : ""}
+                aria-pressed={filterIndex === "all"}
+                onClick={() => setFilterIndex("all")}
+              >
+                All
+              </button>
+              {indicesOrder.map((index) => (
+                <button
+                  key={index}
+                  type="button"
+                  className={filterIndex === index ? "is-active" : ""}
+                  aria-pressed={filterIndex === index}
+                  onClick={() => setFilterIndex(index)}
+                >
+                  {index.toUpperCase()}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div className="explore-filter-row">
+            <span className="control-label">Threshold behaviour</span>
+            <div className="segmented" role="group" aria-label="Threshold-sensitivity filter">
+              {[
+                ["all", "All"],
+                ["persistent", "Persistent"],
+                ["moderate", "Moderate"],
+                ["sensitive", "Sensitive"],
+              ].map(([value, label]) => (
+                <button
+                  key={value}
+                  type="button"
+                  className={filterSensitivity === value ? "is-active" : ""}
+                  aria-pressed={filterSensitivity === value}
+                  onClick={() => setFilterSensitivity(value)}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div className="explore-filter-row">
+            <span className="control-label">Related</span>
+            <div className="segmented" role="group" aria-label="Overlap filter">
+              {(
+                [
+                  ["all", "All"],
+                  ["with", "Has overlapping measurements"],
+                  ["without", "No overlaps"],
+                ] as const
+              ).map(([value, label]) => (
+                <button
+                  key={value}
+                  type="button"
+                  className={filterOverlap === value ? "is-active" : ""}
+                  aria-pressed={filterOverlap === value}
+                  onClick={() => setFilterOverlap(value)}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div className="explore-filter-row">
+            <label className="control-label" htmlFor="explore-region-search">
+              Region
+            </label>
+            <input
+              id="explore-region-search"
+              type="search"
+              className="explore-search"
+              placeholder="Search region name or description…"
+              value={search}
+              onChange={(event) => setSearch(event.target.value)}
+            />
+          </div>
+          <p className="mono-label explore-filter-count">
+            Showing {matches.length} of {overview.findings_total} recorded
+            findings
+            {filtersActive && (
+              <>
+                {" · "}
+                <button
+                  type="button"
+                  className="insp-link"
+                  onClick={() => {
+                    setFilterDirection("all");
+                    setFilterIndex("all");
+                    setFilterSensitivity("all");
+                    setFilterOverlap("all");
+                    setSearch("");
+                  }}
+                >
+                  Clear filters
+                </button>
+              </>
+            )}
+          </p>
+        </div>
+      )}
+
+      {/* ---------------------------------------- filtered finding list --- */}
       {indicesOrder.map((index) => {
-        const entries = findings.findings.filter((f) => f.index === index);
+        const entries = matches.filter((f) => f.index === index);
+        if (entries.length === 0) return null;
         const stats = findings.indices[index];
         return (
           <div key={index} className="finding-group">
@@ -415,16 +625,18 @@ function FindingsPanel({
             </h4>
             <ul className="finding-list">
               {entries.map((finding) => (
-                <li key={finding.id}>
+                <li key={finding.evidence_id}>
                   <button
                     type="button"
                     className={
-                      finding.id === selectedId
+                      finding.evidence_id === selectedId
                         ? "finding-entry is-selected"
                         : "finding-entry"
                     }
-                    aria-pressed={finding.id === selectedId}
-                    onClick={() => onSelect(finding.id === selectedId ? null : finding.id)}
+                    aria-pressed={finding.evidence_id === selectedId}
+                    onClick={() =>
+                      onSelect(finding.evidence_id === selectedId ? null : finding.evidence_id)
+                    }
                   >
                     <span className="finding-arrow" data-direction={finding.direction}>
                       {finding.direction === "decrease" ? "▼" : "▲"}
@@ -442,77 +654,114 @@ function FindingsPanel({
           </div>
         );
       })}
+      {matches.length === 0 && overview.findings_total > 0 && (
+        <p className="insp-note">
+          No recorded finding matches these filters. Filters only narrow the
+          recorded list — they never add regions.
+        </p>
+      )}
 
+      {/* --------------------------------- selected finding card (§3.4) --- */}
       {selected && (
         <article className="finding-detail" aria-live="polite">
           <h4 className="insp-heading">{selected.interpretation.title}</h4>
-          <Facts
-            rows={[
-              ["Location", selected.interpretation.location],
-              ["Observation period", selected.interpretation.observation_period],
-              ["Observed measurement", selected.interpretation.observed_measurement],
-            ]}
-          />
+          <h5 className="insp-question">What was observed?</h5>
+          <p className="insp-note">{selected.interpretation.observed_measurement}</p>
+          <h5 className="insp-question">Where was it observed?</h5>
+          <p className="insp-note">
+            {selected.interpretation.location} The region is highlighted on the
+            map ({selected.centroid_lonlat[0].toFixed(4)}°E,{" "}
+            {selected.centroid_lonlat[1].toFixed(4)}°N).
+          </p>
+          <h5 className="insp-question">When was it observed?</h5>
+          <p className="insp-note">{selected.interpretation.observation_period}</p>
+          <h5 className="insp-question">What was measured?</h5>
+          {(() => {
+            const sp = selected.evidence.spatial_measurements as Record<string, unknown>;
+            const pixels = Number(sp.pixel_count);
+            const holes = Number(sp.hole_pixel_count ?? 0);
+            return (
+              <Facts
+                rows={[
+                  ["Measured signal", `Δ${selected.index.toUpperCase()} · mean ${Number(sp.mean_delta).toFixed(3)}, median ${Number(sp.median_delta).toFixed(3)} (index units)`],
+                  ["Threshold", `|Δ${selected.index.toUpperCase()}| ≥ ${selected.threshold}`],
+                  ["Candidate area", `${formatHa(Number(sp.area_ha))} from ${pixels.toLocaleString("en-GB")} pixels${holes > 0 ? ` (${holes.toLocaleString("en-GB")} masked px enclosed as holes)` : ""}`],
+                  ["Denominator", `${Number(sp.valid_pixel_denominator).toLocaleString("en-GB")} shared-valid pixels — the area share below is of this footprint, not the whole map`],
+                  ["Share of footprint", `${sp.share_of_common_valid_percent} %`],
+                ]}
+              />
+            );
+          })()}
+          <h5 className="insp-question">What does it mean?</h5>
           <p className="insp-note insp-meaning">{selected.interpretation.meaning}</p>
-          <h4 className="insp-subheading">What could explain it?</h4>
+          <h5 className="insp-question">What could explain it?</h5>
           <ul className="insp-note">
             {selected.interpretation.explanations.map((item) => (
               <li key={item}>{item}</li>
             ))}
           </ul>
-          <h4 className="insp-subheading">How strong is the evidence?</h4>
-          <p className="insp-note">{selected.interpretation.evidence_strength}</p>
-          <h4 className="insp-subheading">What cannot be concluded?</h4>
+          <h5 className="insp-question">How much evidence supports it?</h5>
+          {(() => {
+            const q = selected.evidence.evidence_quality as Record<string, any>;
+            const support = q.observation_support as Record<string, number> | undefined;
+            const sensitivity = thresholdSensitivity(selected.evidence);
+            const linkCount = selected.evidence.relationships?.links?.length ?? 0;
+            return (
+              <Facts
+                rows={[
+                  [
+                    "Observations",
+                    `${support?.earlier_observations ?? "?"} earlier / ${support?.later_observations ?? "?"} later satellite acquisitions in the composites`,
+                  ],
+                  [
+                    "Valid coverage",
+                    `${formatPercent(Number(q.shared_valid_fraction_of_aoi) || 0, 1)} of the study area shared-valid for this comparison`,
+                  ],
+                  [
+                    "Threshold behaviour",
+                    sensitivity
+                      ? `${sensitivityPlainLanguage(sensitivity.label)} (recorded category: ${sensitivity.label})`
+                      : "Sensitivity not recorded for this finding",
+                  ],
+                  [
+                    "Related measurements",
+                    linkCount > 0
+                      ? `${linkCount} overlapping ${linkCount === 1 ? "measurement" : "measurements"} of the same geography (not independent events)`
+                      : "No overlapping measurement recorded",
+                  ],
+                ]}
+              />
+            );
+          })()}
+          <h5 className="insp-question">What should we not conclude?</h5>
           <ul className="insp-note insp-guardrail">
             {selected.interpretation.cannot_conclude.map((item) => (
               <li key={item}>{item}</li>
             ))}
           </ul>
           {(() => {
-            const sensitivity = selected.evidence.evidence_quality
-              .threshold_sensitivity as
-              | { label?: string; neighbours?: Record<string, unknown> }
-              | undefined;
-            if (!sensitivity?.label) return null;
-            const plain: Record<string, string> = {
-              "spatially persistent across tested thresholds":
-                "This region survives when the threshold is made stricter or looser by 0.05 index units — its footprint is robust to that choice.",
-              "threshold-sensitive":
-                "This region's footprint changes substantially when the threshold moves by 0.05 index units, so read its size as threshold-dependent.",
-              "moderately threshold-sensitive":
-                "This region changes moderately when the threshold moves by 0.05 index units.",
-            };
-            return (
-              <>
-                <h4 className="insp-subheading">Threshold behaviour</h4>
-                <p className="insp-note">
-                  {plain[sensitivity.label] ?? sensitivity.label}
-                </p>
-              </>
-            );
-          })()}
-          {(() => {
-            const links = (
-              selected.evidence.relationships as
-                | { links?: { with_evidence_id: string; relation: string; overlap_percent_of_smaller: number }[] }
-                | undefined
-            )?.links ?? [];
+            const links = relatedFindingsFor(findings, selected);
             if (links.length === 0) return null;
-            const nameOf = (evidenceId: string) => {
-              const other = findings?.findings.find((f) => f.evidence_id === evidenceId);
-              return other ? `${other.display_id} (Δ${other.index.toUpperCase()} ${other.direction})` : evidenceId;
-            };
             return (
               <>
-                <h4 className="insp-subheading">Overlapping measurements</h4>
+                <h5 className="insp-question">Overlapping measurements</h5>
                 <p className="insp-note">
                   Other indices flag parts of the same area. These are separate
-                  measurements of one geography — not independent events:
+                  measurements of one geography — not independent events. Open
+                  one to see its record:
                 </p>
                 <ul className="insp-note">
                   {links.map((link) => (
-                    <li key={link.with_evidence_id}>
-                      {nameOf(link.with_evidence_id)} — {link.relation === "same-direction-overlap" ? "same-direction candidate signal" : "opposite-direction candidate signal"} ·{" "}
+                    <li key={link.finding.evidence_id}>
+                      <button
+                        type="button"
+                        className="insp-link"
+                        onClick={() => onSelect(link.finding.evidence_id)}
+                      >
+                        {link.finding.display_id} (Δ{link.finding.index.toUpperCase()}{" "}
+                        {link.finding.direction})
+                      </button>{" "}
+                      — {link.relation === "same-direction-overlap" ? "same-direction candidate signal" : "opposite-direction candidate signal"} ·{" "}
                       {link.overlap_percent_of_smaller.toFixed(0)}% overlap
                     </li>
                   ))}
@@ -525,6 +774,9 @@ function FindingsPanel({
             {selected.interpretation.source.input_raster} ·{" "}
             {selected.interpretation.source.method}
           </p>
+          <button type="button" className="insp-link" onClick={onOpenResearch}>
+            Open the Research Mode record →
+          </button>
         </article>
       )}
 
@@ -562,13 +814,15 @@ function EvidenceRecordPanel({
       </p>
     );
   }
-  const selected = findings.findings.find((f) => f.id === selectedId) ?? null;
+  const selected = selectedId
+    ? findingByEvidenceId(findings, selectedId) ?? null
+    : null;
   if (!selected) {
     return (
       <div className="evidence-record">
-        <h3 className="insp-heading">Evidence record</h3>
+        <h3 className="insp-heading">Research Mode</h3>
         <p className="insp-note">
-          Select a finding in the Findings tab to open its full evidence
+          Select a finding in Explore the Evidence to open its full evidence
           record. Every mapped region carries one sealed record: identification,
           source observations, input measurements, spatial measurements,
           evidence quality, relationships and method provenance.
@@ -596,7 +850,7 @@ function EvidenceRecordPanel({
   };
   return (
     <div className="evidence-record">
-      <h3 className="insp-heading">Evidence record</h3>
+      <h3 className="insp-heading">Research Mode</h3>
       <p className="insp-note mono-label">
         {ev.schema} · {selected.evidence_id} · checksum-sealed
       </p>
@@ -694,8 +948,8 @@ function EvidenceRecordPanel({
       />
       <h4 className="insp-subheading">Interpretation</h4>
       <p className="insp-note">
-        The plain-language interpretation for this record is the Findings tab
-        card — same evidence_id, same numbers, no separate computation.
+        The plain-language interpretation for this record is the Explore the
+        Evidence card — same evidence_id, same numbers, no separate computation.
       </p>
       <button type="button" className="insp-link" onClick={() => onSelect(null)}>
         Clear selection
@@ -771,8 +1025,10 @@ export function Inspector({
   live,
   analysis,
   findings,
-  selectedFindingId,
+  selectedEvidenceId,
   onSelectFinding,
+  onOpenResearch,
+  selectionPolicy,
   pixel,
   pixelError,
   pixelLoading,
@@ -800,8 +1056,8 @@ export function Inspector({
     { id: "guide", label: "What am I looking at?" },
     ...(analysis === "what_changed"
       ? ([
-          { id: "findings", label: "Findings" },
-          { id: "evidence", label: "Evidence record" },
+          { id: "findings", label: "Explore the Evidence" },
+          { id: "evidence", label: "Research Mode" },
         ] as { id: InspectorTab; label: string }[])
       : []),
     { id: "context", label: "Acquisition" },
@@ -887,17 +1143,19 @@ export function Inspector({
         )}
 
         {tab === "findings" && (
-          <FindingsPanel
+          <ExploreFindingsPanel
             findings={findings}
-            selectedId={selectedFindingId}
+            selectedId={selectedEvidenceId}
             onSelect={onSelectFinding}
+            onOpenResearch={onOpenResearch}
+            selectionPolicy={selectionPolicy}
           />
         )}
 
         {tab === "evidence" && (
           <EvidenceRecordPanel
             findings={findings}
-            selectedId={selectedFindingId}
+            selectedId={selectedEvidenceId}
             onSelect={onSelectFinding}
           />
         )}

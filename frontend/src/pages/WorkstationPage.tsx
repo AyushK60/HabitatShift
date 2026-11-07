@@ -35,6 +35,7 @@ import { Inspector, type InspectorTab } from "../workstation/Inspector";
 import { Dock } from "../workstation/Dock";
 import { StudyPicker } from "../workstation/StudyPicker";
 import { buildLayers, type Analysis, type AssetResolver, type LayerSpec } from "../workstation/layers";
+import { loadSelectionPolicy, type SelectionPolicy } from "../evidence/adapter";
 import "../styles/workstation.css";
 
 type ModeState = Record<Analysis, CompareMode>;
@@ -148,7 +149,7 @@ function WorkstationForStudy({ studyId }: { studyId: string }) {
     setRoiError(null);
     setRoiMode(false);
     setRoiBox(null);
-    setSelectedFindingId(null);
+    setSelectedEvidenceId(null);
     setFindingsOverlay(true);
     loadStudyBundle(studyId)
       .then((payload) => {
@@ -211,8 +212,20 @@ function WorkstationForStudy({ studyId }: { studyId: string }) {
     analysisLayers.find((item) => item.id === layerIds[analysis]) ?? analysisLayers[0];
 
   /* ------------------------------------- What Changed? state (M4-R1 §15) --- */
+  const [selectionPolicy, setSelectionPolicy] = useState<SelectionPolicy | null>(null);
+  useEffect(() => {
+    let cancelled = false;
+    loadSelectionPolicy().then((policy) => {
+      if (!cancelled) setSelectionPolicy(policy);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
   const [findingsOverlay, setFindingsOverlay] = useState(true);
-  const [selectedFindingId, setSelectedFindingId] = useState<string | null>(null);
+  // Selection carries the stable content-derived evidence_id (M4-R3 §2),
+  // shared verbatim by the Explore card, Research Mode record and map overlay.
+  const [selectedEvidenceId, setSelectedEvidenceId] = useState<string | null>(null);
   const findings: BundleFindings | null =
     bundle?.experiments[experimentIndex]?.findings ?? null;
   const findingsFC = useMemo(
@@ -224,16 +237,17 @@ function WorkstationForStudy({ studyId }: { studyId: string }) {
     focusRef.current = focus;
   }, []);
   const handleFindingSelect = useCallback(
-    (id: string | null) => {
-      setSelectedFindingId(id);
-      if (id && findings) {
-        const finding = findings.findings.find((item) => item.id === id);
+    (evidenceId: string | null) => {
+      setSelectedEvidenceId(evidenceId);
+      if (evidenceId && findings) {
+        const finding = findings.findings.find((item) => item.evidence_id === evidenceId);
         if (finding) focusRef.current?.(finding.geometry_wgs84);
       }
       setInspectorTab("findings");
     },
     [findings]
   );
+  const handleOpenResearch = useCallback(() => setInspectorTab("evidence"), []);
 
   const handleMapClick = useCallback(
     (lonLat: [number, number]) => {
@@ -488,7 +502,7 @@ function WorkstationForStudy({ studyId }: { studyId: string }) {
                 type="button"
                 className="toggle-btn"
                 onClick={() => {
-                  setSelectedFindingId(null);
+                  setSelectedEvidenceId(null);
                   fitStudy();
                 }}
                 title="Clear the selection and restore the complete study extent"
@@ -572,7 +586,7 @@ function WorkstationForStudy({ studyId }: { studyId: string }) {
             onMarkerSetter={handleMarkerSetter}
             onFitSetter={handleFitSetter}
             findings={findingsFC}
-            selectedFindingId={selectedFindingId}
+            selectedEvidenceId={selectedEvidenceId}
             findingsVisible={analysis === "what_changed" && findingsOverlay}
             onFindingSelect={handleFindingSelect}
             onFocusSetter={handleFocusSetter}
@@ -587,8 +601,10 @@ function WorkstationForStudy({ studyId }: { studyId: string }) {
             live={live}
             analysis={analysis}
             findings={findings}
-            selectedFindingId={selectedFindingId}
+            selectedEvidenceId={selectedEvidenceId}
             onSelectFinding={handleFindingSelect}
+            onOpenResearch={handleOpenResearch}
+            selectionPolicy={selectionPolicy}
             pixel={pixel}
             pixelError={pixelError}
             pixelLoading={pixelLoading}

@@ -43,7 +43,7 @@ await page.goto(BASE_URL + "#/workstation/kathmandu_urban", { waitUntil: "domcon
 await page.waitForTimeout(3000);
 await page.getByRole("button", { name: "What changed?", exact: true }).click();
 await page.waitForTimeout(800);
-await page.getByRole("tab", { name: "Findings" }).click();
+await page.getByRole("tab", { name: "Explore the Evidence" }).click();
 await page.waitForTimeout(500);
 const wcState = await page.evaluate(async () => {
   const src = window.__hsMaps?.earlier?.getSource("findings-overlay");

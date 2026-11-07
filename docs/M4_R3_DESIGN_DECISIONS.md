@@ -94,3 +94,51 @@ Decisions:
 - G5 study-specific interpretation guardrails + top-five disclosure
 - G6 portable showcase integration (offline verification)
 - G7 full testing + visual QA + handoff documents
+
+## G1 — Explore the Evidence overview, cards, filters
+
+- **Selection now carries `evidence_id` everywhere.** The workstation's
+  selection state, the map overlay (`["get","evidence_id"]` paint expression,
+  click handler) and both inspector panels resolve findings by the stable
+  content-derived `evidence_id`; the GeoJSON features carry it as a property.
+  Array indices and per-experiment `finding.id` are no longer selection keys.
+- **Tab naming (§8):** the two What-Changed inspector tabs are now labelled
+  "Explore the Evidence" and "Research Mode" (internal ids unchanged, so
+  `.finding-detail` / `.evidence-record` class contracts survive).
+- **Overview summary (§3.2):** recorded candidate findings with direction
+  split, indices involved, recorded relationship links (count + how many
+  regions), observation period, shared-valid footprint with denominator
+  wording, MMU — all read through `buildEvidenceOverview()` from the
+  container, no recomputation.
+- **Curated-selection disclosure (§5) placed in the overview:** states the
+  top-5-per-index-direction rule, the recorded count, the audited count of
+  additional qualifying components (from `selection_policy.json`), and that
+  the list is not a complete inventory. When the artifact is unavailable the
+  policy text renders without counts — counts are never invented.
+- **Filters (§3.5):** direction, index, threshold-sensitivity category
+  (persistent / moderate / sensitive — the recorded M4-R2 labels via
+  `sensitivityKey`, not a new score), overlap availability, and a region text
+  search over display id / title / location. Filters only narrow the recorded
+  list; the UI says so explicitly.
+- **Finding cards (§3.4)** restructured to the eight guided questions (What
+  was observed / Where / When / What was measured / What does it mean / What
+  could explain it / How much evidence supports it / What should we not
+  conclude), with the measurement block read from `spatial_measurements`
+  (mean/median Δ, threshold, area with hole accounting, shared-valid
+  denominator, share) and the evidence block from `evidence_quality`
+  (observation support, valid coverage, sensitivity in plain language with
+  the recorded category named, related-measurement count).
+- **Overlapping measurements are clickable:** opening a related finding
+  selects it by evidence_id and flies the map (panel→map selection).
+- **"Open the Research Mode record →"** switches to the Research Mode tab for
+  the same evidence_id.
+- **Responsive fix (pre-existing):** the finding card's long record/source
+  line forced 14 px horizontal overflow at 390 px on the unmodified build
+  too; fixed with `overflow-wrap: anywhere` on the card's mono/fact lines.
+- Suite contract updates: `verify_m4.mjs` and `verify_m4_showcase.mjs` click
+  the renamed tabs and assert the evolved card wording; candidate-framing and
+  card-content checks keep their semantics.
+
+G1 verification: verify_m4 **51/51**, showcase **11/11**, m2_experiments
+**31/31**, production build clean; screenshots at 1440 and 390 confirm the
+Midnight Teal & Copper identity and no overflow.

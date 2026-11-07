@@ -248,6 +248,36 @@ export function directionTerm(direction: "decrease" | "increase"): string {
   return direction === "decrease" ? "candidate decrease" : "candidate increase";
 }
 
+/** Plain-language rendering of the recorded sensitivity label (M4-R2 G6).
+ *  The label is a transparency category with recorded rules — never a
+ *  confidence score and never a verified-change statement. */
+export function sensitivityPlainLanguage(label: string | undefined): string {
+  switch (label) {
+    case "spatially persistent across tested thresholds":
+      return "This region survives when the threshold is made stricter or looser by 0.05 index units — its footprint is robust to that choice.";
+    case "threshold-sensitive":
+      return "This region's footprint changes substantially when the threshold moves by 0.05 index units, so read its size as threshold-dependent.";
+    case "moderately threshold-sensitive":
+      return "This region changes moderately when the threshold moves by 0.05 index units.";
+    default:
+      return label ?? "";
+  }
+}
+
+/** Compact filter key for the recorded sensitivity label. */
+export function sensitivityKey(label: string | undefined): string | null {
+  switch (label) {
+    case "spatially persistent across tested thresholds":
+      return "persistent";
+    case "threshold-sensitive":
+      return "sensitive";
+    case "moderately threshold-sensitive":
+      return "moderate";
+    default:
+      return null;
+  }
+}
+
 export function formatHa(areaHectares: number): string {
   return `${areaHectares.toLocaleString("en-GB", {
     minimumFractionDigits: 2,

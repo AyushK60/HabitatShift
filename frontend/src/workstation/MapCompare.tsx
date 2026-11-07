@@ -65,7 +65,7 @@ interface MapCompareProps {
   onFitSetter?: (fit: () => void) => void;
   /** "What Changed?" findings overlay (M4-R1 §15.2): recorded regions, */
   findings?: GeoJSON.FeatureCollection | null;
-  selectedFindingId?: string | null;
+  selectedEvidenceId?: string | null;
   findingsVisible?: boolean;
   onFindingSelect?: (id: string | null) => void;
   /** Receives a setter to focus (fit) a finding's geometry (§15.2.6). */
@@ -256,7 +256,7 @@ export function MapCompare({
   onMarkerSetter,
   onFitSetter,
   findings,
-  selectedFindingId,
+  selectedEvidenceId,
   findingsVisible,
   onFindingSelect,
   onFocusSetter,
@@ -595,17 +595,17 @@ export function MapCompare({
           paint: {
             "line-color": [
               "case",
-              ["==", ["get", "id"], ["literal", selectedFindingId ?? "__none__"]],
+              ["==", ["get", "evidence_id"], ["literal", selectedEvidenceId ?? "__none__"]],
               "#193c43",
               ["match", ["get", "direction"], "decrease", "#3c655d", "#8a5a3a"],
             ],
             "line-width": ["case",
-              ["==", ["get", "id"], ["literal", selectedFindingId ?? "__none__"]], 3, 1.6],
+              ["==", ["get", "evidence_id"], ["literal", selectedEvidenceId ?? "__none__"]], 3, 1.6],
           },
         });
         earlier.on("click", "findings-fill", (event) => {
-          const id = event.features?.[0]?.properties?.id;
-          if (typeof id === "string") onFindingSelectRef.current?.(id);
+          const evidenceId = event.features?.[0]?.properties?.evidence_id;
+          if (typeof evidenceId === "string") onFindingSelectRef.current?.(evidenceId);
         });
         // Pointer affordance over findings.
         earlier.on("mouseenter", "findings-fill", () => {
@@ -622,18 +622,18 @@ export function MapCompare({
       if (earlier.getLayer("findings-line")) {
         earlier.setPaintProperty("findings-line", "line-color", [
           "case",
-          ["==", ["get", "id"], ["literal", selectedFindingId ?? "__none__"]],
+          ["==", ["get", "evidence_id"], ["literal", selectedEvidenceId ?? "__none__"]],
           "#193c43",
           ["match", ["get", "direction"], "decrease", "#3c655d", "#8a5a3a"],
         ]);
         earlier.setPaintProperty("findings-line", "line-width", [
           "case",
-          ["==", ["get", "id"], ["literal", selectedFindingId ?? "__none__"]], 3, 1.6,
+          ["==", ["get", "evidence_id"], ["literal", selectedEvidenceId ?? "__none__"]], 3, 1.6,
         ]);
       }
     };
     whenStyleReady(earlier, run);
-  }, [ready, findings, findingsVisible, selectedFindingId]);
+  }, [ready, findings, findingsVisible, selectedEvidenceId]);
 
   /* --------------------------------------------------- layer painting --- */
   useEffect(() => {

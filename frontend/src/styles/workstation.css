@@ -1089,3 +1089,70 @@
 .insp-link:hover {
   background: color-mix(in srgb, var(--teal) 12%, transparent);
 }
+
+/* ------------------------------------------- M4-R3 Explore the Evidence --- */
+
+/* Filter block: compact control rows so general visitors can narrow the
+   recorded list without technical vocabulary. */
+.explore-filters {
+  margin-top: 0.7rem;
+  border: 1px solid var(--rule);
+  background: var(--paper);
+  padding: 0.55rem 0.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.explore-filter-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.explore-filter-row .control-label {
+  min-width: 7.2rem;
+}
+
+.explore-search {
+  font: inherit;
+  font-size: 0.8rem;
+  padding: 0.24rem 0.5rem;
+  border: 1px solid var(--rule);
+  background: var(--panel);
+  color: var(--charcoal);
+  flex: 1 1 9rem;
+  min-width: 0;
+}
+
+.explore-search:focus-visible {
+  outline: 2px solid var(--charcoal);
+  outline-offset: 1px;
+}
+
+.explore-filter-count {
+  margin: 0;
+}
+
+/* The eight guided questions of a finding card (§3.4). */
+.insp-question {
+  margin: 0.65rem 0 0.2rem;
+  font-family: var(--serif);
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--teal-deep);
+}
+
+/* Curated-selection disclosure (§5): visible guardrail, never decorative. */
+.selection-disclosure {
+  border-left: 3px solid var(--copper);
+  padding-left: 0.55rem;
+}
+
+/* Long record identifiers and raster paths inside a finding card must wrap
+   instead of forcing horizontal overflow on narrow viewports. */
+.finding-detail .mono-label,
+.finding-detail .insp-facts dd {
+  overflow-wrap: anywhere;
+}

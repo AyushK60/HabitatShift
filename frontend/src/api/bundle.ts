@@ -257,7 +257,9 @@ export interface BundleFindings {
 
 /** Convert recorded findings to the GeoJSON the map overlay renders.
  *  The geometry comes verbatim from the findings payload — the browser never
- *  redraws or approximates a region. */
+ *  redraws or approximates a region. Feature identity is the stable
+ *  content-derived evidence_id (M4-R3 §2): selection, navigation and exports
+ *  all carry it. */
 export function findingsToFeatureCollection(
   payload: BundleFindings
 ): GeoJSON.FeatureCollection {
@@ -268,6 +270,7 @@ export function findingsToFeatureCollection(
       id: finding.id,
       properties: {
         id: finding.id,
+        evidence_id: finding.evidence_id,
         display_id: finding.display_id,
         index: finding.index,
         direction: finding.direction,

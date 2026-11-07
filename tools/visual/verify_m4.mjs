@@ -461,7 +461,7 @@ async function run() {
   await app(page, "/workstation/kathmandu_urban");
   await page.getByRole("button", { name: "What changed?", exact: true }).click();
   await page.waitForTimeout(1000);
-  await page.getByRole("tab", { name: "Findings" }).click();
+  await page.getByRole("tab", { name: "Explore the Evidence" }).click();
   await page.waitForTimeout(500);
   const whatChanged = await page.evaluate(async () => {
     const maps = window.__hsMaps ?? {};
@@ -482,7 +482,7 @@ async function run() {
   check(
     "12b. What Changed? overview frames regions as candidates (§15.6)",
     whatChanged.overview.includes("candidate") &&
-      whatChanged.overview.includes("not a confirmed environmental change"),
+      whatChanged.overview.includes("not confirmed environmental events"),
   );
   // Selecting a finding zooms the map and reveals the measurement + limits.
   const zoomBeforeSelect = await page.evaluate(() => window.__hsMaps.earlier.getZoom());
@@ -495,8 +495,8 @@ async function run() {
   check(
     "12b. selecting a finding zooms and shows measurement + limitations (§15.3)",
     findingSelection.zoom > zoomBeforeSelect &&
-      findingSelection.detail.includes("Observed measurement") &&
-      findingSelection.detail.includes("cannot be concluded"),
+      findingSelection.detail.includes("What was measured?") &&
+      findingSelection.detail.includes("What should we not conclude?"),
   );
   await shot(page, "m4_r1_what_changed_1440");
 
@@ -521,7 +521,7 @@ async function run() {
 
   // M4-R2 G7: Research-mode evidence record shares the Explore selection and
   // shows the same sealed record (same evidence_id, no separate computation).
-  await page.getByRole("tab", { name: "Findings" }).click();
+  await page.getByRole("tab", { name: "Explore the Evidence" }).click();
   await page.waitForTimeout(400);
   // The first entry is still selected from the earlier check — select the
   // second one (the click toggles selection).
@@ -531,14 +531,14 @@ async function run() {
     evidenceId: document.querySelector(".finding-detail .mono-label")?.textContent ?? "",
     hasSensitivity: (document.querySelector(".finding-detail")?.textContent ?? "").includes("Threshold behaviour"),
   }));
-  await page.getByRole("tab", { name: "Evidence record" }).click();
+  await page.getByRole("tab", { name: "Research Mode" }).click();
   await page.waitForTimeout(400);
   const evidenceRecord = await page.evaluate(() => {
     const panel = document.querySelector(".evidence-record");
     const text = panel?.textContent ?? "";
     return {
       present: !!panel,
-      heading: text.includes("Evidence record"),
+      heading: text.includes("Research Mode"),
       identification: text.includes("Identification") && text.includes("threshold-connected-region"),
       provenance: text.includes("Method provenance") && text.includes("Git commit"),
       measurements: text.includes("Spatial measurements") && text.includes("Valid denominator"),
@@ -548,7 +548,7 @@ async function run() {
     };
   });
   check(
-    "12b. M4-R2 evidence record tab renders the full research record",
+    "12b. M4-R2 Research Mode tab renders the full research record",
     evidenceRecord.present &&
       evidenceRecord.heading &&
       evidenceRecord.identification &&
