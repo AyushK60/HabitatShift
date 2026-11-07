@@ -140,11 +140,38 @@ def test_evidence_quality_states_support_and_limitations(experiment_id: str) -> 
         assert q["shared_valid_fraction_of_aoi"] is not None
         support = q["observation_support"]
         assert support["earlier_observations"] >= 1 and support["later_observations"] >= 1
-        # Honesty: threshold sensitivity is null-with-status until G6 fills it.
+        # G6: a computed, labelled sensitivity evaluation with its rule.
         ts = q["threshold_sensitivity"]
-        assert ts["result"] is None or isinstance(ts["result"], dict)
+        assert ts["status"] == "computed"
+        assert ts["label"] in (
+            "spatially persistent across tested thresholds",
+            "threshold-sensitive",
+            "moderately threshold-sensitive",
+        )
+        assert ts["label_rules"], "the label rule must be recorded with the label"
+        assert "t_plus_0.05" in ts["neighbours"]
         assert isinstance(q["masking_and_cloud_limitations"], list)
         assert q["confounding_factors"], "confounders must be stated"
+
+
+def test_relationships_reference_existing_findings_only() -> None:
+    for experiment_id in sorted(EXPECTED_EXPERIMENTS):
+        payload = _load(experiment_id)
+        ids = {f["evidence_id"] for f in payload["findings"]}
+        for finding in payload["findings"]:
+            links = finding["evidence"]["relationships"]["links"]
+            assert len(links) <= 8, "relationship links are bounded"
+            for link in links:
+                assert link["with_evidence_id"] in ids
+                assert link["with_evidence_id"] != finding["evidence_id"]
+                assert link["relation"] in (
+                    "same-direction-overlap",
+                    "opposite-direction-overlap",
+                )
+                assert 10.0 <= link["overlap_percent_of_smaller"] <= 100.0
+                assert finding["index"] in link["indices"]
+                # Cross-index only: same-index components are disjoint.
+                assert len(link["indices"]) == 2
 
 
 def test_partial_status_only_for_partial_studies() -> None:

@@ -2,7 +2,7 @@
   "schema": "habitatshift-findings/2",
   "study_id": "himalaya_langtang_2026",
   "experiment_id": "himalaya_langtang_2026_m4",
-  "generated_utc": "2026-11-07T19:02:36Z",
+  "generated_utc": "2026-11-07T19:09:36Z",
   "evidence_status": "processed",
   "method": {
     "source": "frozen M1 difference rasters + common-valid masks",
@@ -12722,13 +12722,107 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 86230,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 1.0248
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 82375,
+                "retained_fraction_of_region": 0.9805,
+                "component_growth_factor": 0.979
+              }
+            },
+            "label": "spatially persistent across tested thresholds",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal snow-cover evolution between the acquisition windows.",
             "Debris or exposed-ground signatures where observable.",
             "Cloud and topographic visibility limits at the mask boundary."
+          ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": [
+            {
+              "with_evidence_id": "ev-himalaya_langtang_2026_m4-ndvi-dec-357231-3115469",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "ndsi",
+                "ndvi"
+              ],
+              "overlap_percent_of_smaller": 100.0
+            },
+            {
+              "with_evidence_id": "ev-himalaya_langtang_2026_m4-ndvi-dec-358345-3115620",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "ndsi",
+                "ndvi"
+              ],
+              "overlap_percent_of_smaller": 100.0
+            },
+            {
+              "with_evidence_id": "ev-himalaya_langtang_2026_m4-ndvi-dec-358891-3116911",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "ndsi",
+                "ndvi"
+              ],
+              "overlap_percent_of_smaller": 100.0
+            },
+            {
+              "with_evidence_id": "ev-himalaya_langtang_2026_m4-ndvi-dec-358992-3116356",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "ndsi",
+                "ndvi"
+              ],
+              "overlap_percent_of_smaller": 100.0
+            },
+            {
+              "with_evidence_id": "ev-himalaya_langtang_2026_m4-ndwi-inc-357197-3118059",
+              "relation": "same-direction-overlap",
+              "indices": [
+                "ndsi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 100.0
+            },
+            {
+              "with_evidence_id": "ev-himalaya_langtang_2026_m4-ndwi-inc-357212-3116193",
+              "relation": "same-direction-overlap",
+              "indices": [
+                "ndsi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 100.0
+            },
+            {
+              "with_evidence_id": "ev-himalaya_langtang_2026_m4-ndwi-inc-357913-3117981",
+              "relation": "same-direction-overlap",
+              "indices": [
+                "ndsi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 100.0
+            },
+            {
+              "with_evidence_id": "ev-himalaya_langtang_2026_m4-ndwi-inc-358056-3116067",
+              "relation": "same-direction-overlap",
+              "indices": [
+                "ndsi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 100.0
+            }
           ]
         },
         "method_provenance": {
@@ -12754,15 +12848,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:36Z",
-          "output_checksum": "419daf2725ef9974f4eb0a704eb90fc0ca0e3cf8df75689239c96c84fe5444ee"
+          "generated_utc": "2026-11-07T19:09:36Z",
+          "output_checksum": "26c7c820e5dc994894ac815755da1e562340defb5ee90d0f9a137b03c2516441"
         }
       }
     },
@@ -13129,14 +13223,35 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 86230,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 525.7927
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 150,
+                "retained_fraction_of_region": 0.9146,
+                "component_growth_factor": 0.9146
+              }
+            },
+            "label": "threshold-sensitive",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal snow-cover evolution between the acquisition windows.",
             "Debris or exposed-ground signatures where observable.",
             "Cloud and topographic visibility limits at the mask boundary."
           ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": []
         },
         "method_provenance": {
           "algorithm": "threshold candidate mask \u2192 4-connected components (scipy.ndimage.label) \u2192 MMU filter \u2192 top-K selection",
@@ -13161,15 +13276,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:36Z",
-          "output_checksum": "da57da0c049c7dd99fd6d75a567a951560b96b9c6d04453e1baaebf27dbbd8d0"
+          "generated_utc": "2026-11-07T19:09:36Z",
+          "output_checksum": "0b0a2e116f309eca1eb07d871e8f041fe2f0e3e396bca8d5b316baa3dc5efaaa"
         }
       }
     },
@@ -21230,13 +21345,53 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 32176,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 1.1796
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 24387,
+                "retained_fraction_of_region": 0.9196,
+                "component_growth_factor": 0.8941
+              }
+            },
+            "label": "spatially persistent across tested thresholds",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal snow-cover evolution between the acquisition windows.",
             "Debris or exposed-ground signatures where observable.",
             "Cloud and topographic visibility limits at the mask boundary."
+          ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": [
+            {
+              "with_evidence_id": "ev-himalaya_langtang_2026_m4-ndsi-inc-357221-3117093",
+              "relation": "same-direction-overlap",
+              "indices": [
+                "ndsi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 100.0
+            },
+            {
+              "with_evidence_id": "ev-himalaya_langtang_2026_m4-ndvi-dec-357307-3118326",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "ndvi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 99.54
+            }
           ]
         },
         "method_provenance": {
@@ -21262,15 +21417,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:36Z",
-          "output_checksum": "77a17f8569205cd8b77a455cd60df8a5f905e56ff914c55cb12a460e9df04961"
+          "generated_utc": "2026-11-07T19:09:36Z",
+          "output_checksum": "c1c80598bd418678b74fa3921a563250f05a6dfd7f0cb7c7eef0039685d43de7"
         }
       }
     },
@@ -32811,13 +32966,80 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 23125,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 1.3182
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 6814,
+                "retained_fraction_of_region": 0.7185,
+                "component_growth_factor": 0.3884
+              }
+            },
+            "label": "moderately threshold-sensitive",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal snow-cover evolution between the acquisition windows.",
             "Debris or exposed-ground signatures where observable.",
             "Cloud and topographic visibility limits at the mask boundary."
+          ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": [
+            {
+              "with_evidence_id": "ev-himalaya_langtang_2026_m4-ndsi-inc-357221-3117093",
+              "relation": "same-direction-overlap",
+              "indices": [
+                "ndsi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 100.0
+            },
+            {
+              "with_evidence_id": "ev-himalaya_langtang_2026_m4-ndvi-dec-358992-3116356",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "ndvi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 100.0
+            },
+            {
+              "with_evidence_id": "ev-himalaya_langtang_2026_m4-ndvi-dec-358345-3115620",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "ndvi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 99.79
+            },
+            {
+              "with_evidence_id": "ev-himalaya_langtang_2026_m4-ndvi-dec-358891-3116911",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "ndvi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 99.75
+            },
+            {
+              "with_evidence_id": "ev-himalaya_langtang_2026_m4-ndvi-dec-357231-3115469",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "ndvi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 99.27
+            }
           ]
         },
         "method_provenance": {
@@ -32843,15 +33065,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:36Z",
-          "output_checksum": "8f7f2ef00d35f9b492d4996bce1a153edcfe5e0d7b09710ab03215dedf454ac7"
+          "generated_utc": "2026-11-07T19:09:36Z",
+          "output_checksum": "dd05b9da2e49a4ab21c853fe22692bc0008a2c39e54c36d1bcdea04afca90db2"
         }
       }
     },
@@ -34938,13 +35160,44 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 32176,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 29.3309
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 275,
+                "retained_fraction_of_region": 0.608,
+                "component_growth_factor": 0.2507
+              }
+            },
+            "label": "threshold-sensitive",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal snow-cover evolution between the acquisition windows.",
             "Debris or exposed-ground signatures where observable.",
             "Cloud and topographic visibility limits at the mask boundary."
+          ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": [
+            {
+              "with_evidence_id": "ev-himalaya_langtang_2026_m4-ndsi-inc-357221-3117093",
+              "relation": "same-direction-overlap",
+              "indices": [
+                "ndsi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 100.0
+            }
           ]
         },
         "method_provenance": {
@@ -34970,15 +35223,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:36Z",
-          "output_checksum": "08daaacc7582bc2a76b9c6213c0c072a2a155ae52374149f353aad2674bd913d"
+          "generated_utc": "2026-11-07T19:09:36Z",
+          "output_checksum": "95f0f1b22f1340e5e848240ef36546163f9abdfcc4770f4c28adfe5cc0400af1"
         }
       }
     },
@@ -35781,13 +36034,44 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 23125,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 97.1639
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 49,
+                "retained_fraction_of_region": 0.3235,
+                "component_growth_factor": 0.2059
+              }
+            },
+            "label": "threshold-sensitive",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal snow-cover evolution between the acquisition windows.",
             "Debris or exposed-ground signatures where observable.",
             "Cloud and topographic visibility limits at the mask boundary."
+          ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": [
+            {
+              "with_evidence_id": "ev-himalaya_langtang_2026_m4-ndsi-inc-357221-3117093",
+              "relation": "same-direction-overlap",
+              "indices": [
+                "ndsi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 100.0
+            }
           ]
         },
         "method_provenance": {
@@ -35813,15 +36097,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:36Z",
-          "output_checksum": "2446fc6116155c884a12260d05c41907d91ee5862273a4415d448ce79aed0b83"
+          "generated_utc": "2026-11-07T19:09:36Z",
+          "output_checksum": "54dbdbe87d64ca2c86bdfd9e56de33628f088570f6bc24b72c3353ce890bb0be"
         }
       }
     },
@@ -36364,13 +36648,44 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 341,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 1.5088
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 30,
+                "retained_fraction_of_region": 0.3805,
+                "component_growth_factor": 0.1327
+              }
+            },
+            "label": "threshold-sensitive",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal snow-cover evolution between the acquisition windows.",
             "Debris or exposed-ground signatures where observable.",
             "Cloud and topographic visibility limits at the mask boundary."
+          ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": [
+            {
+              "with_evidence_id": "ev-himalaya_langtang_2026_m4-ndsi-inc-357221-3117093",
+              "relation": "same-direction-overlap",
+              "indices": [
+                "ndsi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 100.0
+            }
           ]
         },
         "method_provenance": {
@@ -36396,15 +36711,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:36Z",
-          "output_checksum": "98ef11584a61bb03005fc472197d5d8c64bdd6c9b0aa72f69370b7ffe7088228"
+          "generated_utc": "2026-11-07T19:09:36Z",
+          "output_checksum": "54a22ade85aa05c5f9b6c80d8f7556a96a2c0b1940cb4b664d83477bb89159e9"
         }
       }
     },
@@ -43247,13 +43562,53 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 28565,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 1.1464
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 22953,
+                "retained_fraction_of_region": 0.9286,
+                "component_growth_factor": 0.9211
+              }
+            },
+            "label": "spatially persistent across tested thresholds",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal snow-cover evolution between the acquisition windows.",
             "Debris or exposed-ground signatures where observable.",
             "Cloud and topographic visibility limits at the mask boundary."
+          ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": [
+            {
+              "with_evidence_id": "ev-himalaya_langtang_2026_m4-ndsi-inc-357221-3117093",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "ndsi",
+                "ndvi"
+              ],
+              "overlap_percent_of_smaller": 99.94
+            },
+            {
+              "with_evidence_id": "ev-himalaya_langtang_2026_m4-ndwi-inc-357197-3118059",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "ndvi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 99.54
+            }
           ]
         },
         "method_provenance": {
@@ -43279,15 +43634,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:36Z",
-          "output_checksum": "f057521e334cc0cb15a8866ac91bef5493b5f327c94f05180a07ebd022c0bd3f"
+          "generated_utc": "2026-11-07T19:09:36Z",
+          "output_checksum": "3e2cfebfdb2b27958b7c66e2cbe6da6803418ca82342e841178630c1274c413f"
         }
       }
     },
@@ -47420,13 +47775,53 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 17066,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 3.0318
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 2917,
+                "retained_fraction_of_region": 0.6337,
+                "component_growth_factor": 0.5182
+              }
+            },
+            "label": "threshold-sensitive",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal snow-cover evolution between the acquisition windows.",
             "Debris or exposed-ground signatures where observable.",
             "Cloud and topographic visibility limits at the mask boundary."
+          ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": [
+            {
+              "with_evidence_id": "ev-himalaya_langtang_2026_m4-ndsi-inc-357221-3117093",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "ndsi",
+                "ndvi"
+              ],
+              "overlap_percent_of_smaller": 100.0
+            },
+            {
+              "with_evidence_id": "ev-himalaya_langtang_2026_m4-ndwi-inc-358056-3116067",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "ndvi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 99.79
+            }
           ]
         },
         "method_provenance": {
@@ -47452,15 +47847,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:36Z",
-          "output_checksum": "f97c588720d8544a41104736bd03f6c192015d790fe63ac79af7eeb78cf4efc3"
+          "generated_utc": "2026-11-07T19:09:36Z",
+          "output_checksum": "f382a06b0b1580a5dc2334872c4c10dba18e75d80bba4968c5819a2284f682e1"
         }
       }
     },
@@ -49293,13 +49688,53 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 17066,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 8.3289
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 1084,
+                "retained_fraction_of_region": 0.6418,
+                "component_growth_factor": 0.529
+              }
+            },
+            "label": "threshold-sensitive",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal snow-cover evolution between the acquisition windows.",
             "Debris or exposed-ground signatures where observable.",
             "Cloud and topographic visibility limits at the mask boundary."
+          ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": [
+            {
+              "with_evidence_id": "ev-himalaya_langtang_2026_m4-ndsi-inc-357221-3117093",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "ndsi",
+                "ndvi"
+              ],
+              "overlap_percent_of_smaller": 100.0
+            },
+            {
+              "with_evidence_id": "ev-himalaya_langtang_2026_m4-ndwi-inc-358056-3116067",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "ndvi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 99.75
+            }
           ]
         },
         "method_provenance": {
@@ -49325,15 +49760,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:36Z",
-          "output_checksum": "fb22a2cf8e5bf6e8b3539ae37e10d4de7b0c354ec1f22585d8d8c61d9f830148"
+          "generated_utc": "2026-11-07T19:09:36Z",
+          "output_checksum": "9e222fa56bb16b5405fbf6ddae3a4b4a09f50a3047f1b223ccb4803130629d0f"
         }
       }
     },
@@ -51048,13 +51483,53 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 17066,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 13.7963
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 382,
+                "retained_fraction_of_region": 0.5109,
+                "component_growth_factor": 0.3088
+              }
+            },
+            "label": "threshold-sensitive",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal snow-cover evolution between the acquisition windows.",
             "Debris or exposed-ground signatures where observable.",
             "Cloud and topographic visibility limits at the mask boundary."
+          ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": [
+            {
+              "with_evidence_id": "ev-himalaya_langtang_2026_m4-ndsi-inc-357221-3117093",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "ndsi",
+                "ndvi"
+              ],
+              "overlap_percent_of_smaller": 100.0
+            },
+            {
+              "with_evidence_id": "ev-himalaya_langtang_2026_m4-ndwi-inc-358056-3116067",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "ndvi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 99.27
+            }
           ]
         },
         "method_provenance": {
@@ -51080,15 +51555,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:36Z",
-          "output_checksum": "e3b659ab5f9878e483d45a70b9d6858bb364390f7f5590a81bce480dc0e2d75b"
+          "generated_utc": "2026-11-07T19:09:36Z",
+          "output_checksum": "3ba75792fbd8375baf1b4d7ba23d351bb624fe877563098110baa5011a4ea5bb"
         }
       }
     },
@@ -51767,13 +52242,53 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 17066,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 36.6223
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 238,
+                "retained_fraction_of_region": 0.5558,
+                "component_growth_factor": 0.5107
+              }
+            },
+            "label": "threshold-sensitive",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal snow-cover evolution between the acquisition windows.",
             "Debris or exposed-ground signatures where observable.",
             "Cloud and topographic visibility limits at the mask boundary."
+          ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": [
+            {
+              "with_evidence_id": "ev-himalaya_langtang_2026_m4-ndsi-inc-357221-3117093",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "ndsi",
+                "ndvi"
+              ],
+              "overlap_percent_of_smaller": 100.0
+            },
+            {
+              "with_evidence_id": "ev-himalaya_langtang_2026_m4-ndwi-inc-358056-3116067",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "ndvi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 100.0
+            }
           ]
         },
         "method_provenance": {
@@ -51799,15 +52314,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:36Z",
-          "output_checksum": "faf235707fcdcc3002ba2a33765dacbd801ccb0d8510d4157582036248d33e34"
+          "generated_utc": "2026-11-07T19:09:36Z",
+          "output_checksum": "0c6c8151ce70cd1bdb6f8b4ca4a8ce0c7f61f2904a9dfc8b88945db5afbe3c7c"
         }
       }
     }
@@ -51823,7 +52338,12 @@
       "NDVI",
       "NDWI"
     ],
-    "no_finding_statement": null
+    "no_finding_statement": null,
+    "related_findings": 11,
+    "relationship_kinds": [
+      "opposite-direction-overlap",
+      "same-direction-overlap"
+    ]
   },
   "limitations": [
     "Heavy monsoon cloud; snow/shadow confusion; optical only.",

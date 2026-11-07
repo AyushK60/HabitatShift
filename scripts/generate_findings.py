@@ -260,6 +260,106 @@ def _interpretation(study_id: str, finding: dict[str, Any], ctx: dict[str, Any])
     }
 
 
+#: Neighbour thresholds (± 0.05 index units) for the per-finding
+#: threshold-sensitivity evaluation (M4-R2 G6).
+SENSITIVITY_NEIGHBOURS = (0.05,)
+
+
+def _threshold_sensitivity(
+    *,
+    delta: np.ndarray,
+    usable: np.ndarray,
+    region_mask: np.ndarray,
+    threshold: float,
+    direction: str,
+    pixel_area_m2: float,
+) -> dict[str, Any]:
+    """Evaluate the recorded region under neighbour thresholds.
+
+    Transparent descriptive categories — never a confidence score:
+    the region's pixels are a subset of the looser (t − 0.05) mask, so the
+    informative quantities are component growth at t − 0.05 and the retained
+    fraction of the region plus component shrinkage at t + 0.05. Labels and
+    their exact rules are recorded with the result.
+    """
+    label_rules = (
+        "spatially persistent across tested thresholds: ≥ 80 % of the region's "
+        "pixels remain candidates at t + 0.05 AND the containing component "
+        "area stays within 2× at both neighbour thresholds; "
+        "threshold-sensitive: < 50 % retained at t + 0.05 OR the component "
+        "grows/shrinks beyond 3×/⅓× at a neighbour; otherwise moderately "
+        "threshold-sensitive"
+    )
+    neighbours: dict[str, Any] = {}
+    growth = 1.0
+    shrink = 1.0
+    retention_hi = 1.0
+    for delta_t in SENSITIVITY_NEIGHBOURS:
+        t_lo = round(threshold - delta_t, 6)
+        t_hi = round(threshold + delta_t, 6)
+        if t_lo <= 0:
+            continue
+        for tag, t_value in ((f"t_minus_{delta_t}", t_lo), (f"t_plus_{delta_t}", t_hi)):
+            mask = (
+                usable & (delta >= t_value)
+                if direction == "increase"
+                else usable & (delta <= -t_value)
+            )
+            if not mask.any():
+                neighbours[tag] = {
+                    "threshold": t_value,
+                    "component_pixels": 0,
+                    "retained_fraction_of_region": 0.0,
+                    "component_growth_factor": 0.0,
+                }
+                shrink = min(shrink, 0.0)
+                continue
+            labels, _ = ndimage.label(mask, structure=CONNECTIVITY_STRUCTURE)
+            overlap_ids = labels[region_mask]
+            overlap_ids = overlap_ids[overlap_ids > 0]
+            if overlap_ids.size == 0:
+                neighbours[tag] = {
+                    "threshold": t_value,
+                    "component_pixels": 0,
+                    "retained_fraction_of_region": 0.0,
+                    "component_growth_factor": 0.0,
+                }
+                shrink = min(shrink, 0.0)
+                continue
+            component_id = np.bincount(overlap_ids).argmax()
+            component_px = int((labels == component_id).sum())
+            retained = float(overlap_ids.size) / float(region_mask.sum())
+            growth_factor = component_px / max(1, int(region_mask.sum()))
+            neighbours[tag] = {
+                "threshold": t_value,
+                "component_pixels": component_px,
+                "retained_fraction_of_region": round(retained, 4),
+                "component_growth_factor": round(growth_factor, 4),
+            }
+            if tag.startswith("t_minus"):
+                growth = max(growth, growth_factor)
+            else:
+                retention_hi = retained
+                shrink = min(shrink, growth_factor)
+    if retention_hi >= 0.8 and growth <= 2.0 and shrink >= 0.5:
+        label = "spatially persistent across tested thresholds"
+    elif retention_hi < 0.5 or growth > 3.0 or shrink < 1 / 3.0:
+        label = "threshold-sensitive"
+    else:
+        label = "moderately threshold-sensitive"
+    return {
+        "status": "computed",
+        "method": (
+            "candidate mask relabelled at t ± 0.05; the containing component "
+            "of the recorded region is tracked (max-overlap component)"
+        ),
+        "neighbour_delta": SENSITIVITY_NEIGHBOURS[0],
+        "neighbours": neighbours,
+        "label": label,
+        "label_rules": label_rules,
+    }
+
+
 def _polygon_wgs84(ring_utm: list[tuple[float, float]], transformer) -> list[list[float]]:
     return [
         [round(lon, 6), round(lat, 6)]
@@ -409,6 +509,17 @@ def _region_findings(
                     },
                     "input_raster": str(delta_path.relative_to(PROJECT_ROOT)).replace("\\", "/"),
                     "valid_mask": str(common_path.relative_to(PROJECT_ROOT)).replace("\\", "/"),
+                    # M4-R2 G6: threshold-sensitivity evaluation (moved into
+                    # the evidence record by generate(); the flat key is
+                    # removed before serialisation).
+                    "_threshold_sensitivity": _threshold_sensitivity(
+                        delta=delta,
+                        usable=usable,
+                        region_mask=region_mask,
+                        threshold=threshold,
+                        direction=direction,
+                        pixel_area_m2=pixel_area_m2,
+                    ),
                 }
             )
 
@@ -582,11 +693,14 @@ def _evidence_record(
                 "min_observations_required": earlier.get("min_observations"),
             },
             "masking_and_cloud_limitations": quality_limitations,
-            "threshold_sensitivity": {
-                "status": "evaluated in M4-R2 G6",
-                "result": None,
-            },
+            # Replaced by the computed G6 evaluation in generate().
+            "threshold_sensitivity": {"status": "computed in generate()", "result": None},
             "confounding_factors": finding["interpretation"]["explanations"],
+        },
+        # Replaced by the computed overlap links in generate().
+        "relationships": {
+            "overlap_rule": "equal-area UTM intersection ≥ 10 % of the smaller region",
+            "links": [],
         },
         "method_provenance": {
             "algorithm": "threshold candidate mask → 4-connected components (scipy.ndimage.label) → MMU filter → top-K selection",
@@ -613,6 +727,81 @@ def _evidence_record(
             "output_checksum": None,  # filled by _finding_checksum below
         },
     }
+
+
+MAX_RELATIONSHIPS_PER_FINDING = 8
+
+
+def _attach_relationships(payload: dict[str, Any], summary: dict[str, Any]) -> None:
+    """Link overlapping findings within one experiment (M4-R2 G6).
+
+    Measurements of the same geography stay separate records — the links
+    exist so overlapping candidate regions are never presented as
+    independent environmental events. Relationship kinds:
+
+    - ``same-direction-overlap``: two indices flag the same candidate change
+      in the same area (multiple measurements of one region);
+    - ``opposite-direction-overlap``: different candidate signals overlap
+      (e.g. an NDVI decrease inside an NDWI increase area — typically the
+      water/sub vegetation contrast).
+
+    Cross-index only: components of one index-direction mask are disjoint by
+    construction, so same-index links cannot exist.
+    """
+    from shapely.geometry import Polygon as ShapelyPolygon
+    from shapely.ops import transform as shp_transform
+    from pyproj import CRS as PyCRS, Transformer
+
+    findings = payload["findings"]
+    if len(findings) < 2:
+        return
+    to_utm = Transformer.from_crs(
+        PyCRS.from_epsg(4326), PyCRS.from_string(summary["grid"]["crs"]), always_xy=True
+    )
+    polygons = []
+    for finding in findings:
+        rings = finding["geometry_wgs84"]["coordinates"]
+        shp = ShapelyPolygon(rings[0], rings[1:])
+        polygons.append(shp_transform(lambda x, y, t=to_utm: t.transform(x, y), shp))
+
+    for i, finding in enumerate(findings):
+        links = []
+        for j, other in enumerate(findings):
+            if i == j or finding["index"] == other["index"]:
+                continue
+            inter = polygons[i].intersection(polygons[j]).area
+            smaller = min(polygons[i].area, polygons[j].area)
+            if smaller <= 0:
+                continue
+            overlap = inter / smaller
+            if overlap < 0.10:
+                continue
+            links.append(
+                {
+                    "with_evidence_id": other["evidence_id"],
+                    "relation": (
+                        "same-direction-overlap"
+                        if finding["direction"] == other["direction"]
+                        else "opposite-direction-overlap"
+                    ),
+                    "indices": sorted({finding["index"], other["index"]}),
+                    "overlap_percent_of_smaller": round(overlap * 100, 2),
+                }
+            )
+        links.sort(key=lambda item: (-item["overlap_percent_of_smaller"], item["with_evidence_id"]))
+        finding["evidence"]["relationships"]["links"] = links[:MAX_RELATIONSHIPS_PER_FINDING]
+
+    overview = payload["overview"]
+    overview["related_findings"] = sum(
+        1 for f in findings if f["evidence"]["relationships"]["links"]
+    )
+    overview["relationship_kinds"] = sorted(
+        {
+            link["relation"]
+            for f in findings
+            for link in f["evidence"]["relationships"]["links"]
+        }
+    )
 
 
 def generate(experiment_id: str, processed_rel: str) -> int:
@@ -716,9 +905,20 @@ def generate(experiment_id: str, processed_rel: str) -> int:
     # explanatory interpretation stays at finding level and belongs to the
     # record by reference). Then seal each record with a checksum.
     for finding in payload["findings"]:
+        sensitivity = finding.pop("_threshold_sensitivity")
         record = _evidence_record(finding, summary=summary, method=method, ctx=ctx)
+        record["evidence_quality"]["threshold_sensitivity"] = sensitivity
         finding["evidence"] = record
         record["method_provenance"]["output_checksum"] = _finding_checksum(finding)
+
+    # M4-R2 G6: overlap relationships within the experiment. Overlapping
+    # measurements are recorded as related — never merged, never discarded —
+    # so overlapping candidate regions are not misrepresented as independent
+    # events. Rule: an equal-area UTM intersection ≥ 10 % of the smaller
+    # region's area creates a link, strongest first (bounded per finding).
+    _attach_relationships(payload, summary)
+    for finding in payload["findings"]:
+        finding["evidence"]["method_provenance"]["output_checksum"] = _finding_checksum(finding)
 
     out_dir = PROJECT_ROOT / "data" / "findings"
     out_dir.mkdir(parents=True, exist_ok=True)

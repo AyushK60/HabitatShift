@@ -1207,7 +1207,7 @@
     "schema": "habitatshift-findings/2",
     "study_id": "western_ghats_forest",
     "experiment_id": "western_ghats_m4",
-    "generated_utc": "2026-11-07T19:02:34Z",
+    "generated_utc": "2026-11-07T19:09:35Z",
     "evidence_status": "processed",
     "method": {
      "source": "frozen M1 difference rasters + common-valid masks",
@@ -1538,13 +1538,44 @@
          "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
         ],
         "threshold_sensitivity": {
-         "status": "evaluated in M4-R2 G6",
-         "result": null
+         "status": "computed",
+         "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+         "neighbour_delta": 0.05,
+         "neighbours": {
+          "t_minus_0.05": {
+           "threshold": 0.1,
+           "component_pixels": 64,
+           "retained_fraction_of_region": 1.0,
+           "component_growth_factor": 1.3617
+          },
+          "t_plus_0.05": {
+           "threshold": 0.2,
+           "component_pixels": 42,
+           "retained_fraction_of_region": 0.8936,
+           "component_growth_factor": 0.8936
+          }
+         },
+         "label": "spatially persistent across tested thresholds",
+         "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
         },
         "confounding_factors": [
          "Terrain shadow and illumination differences between acquisitions.",
          "Canopy density or phenology differences between the windows.",
          "Canopy disturbance \u2014 candidate only; independent evidence would be required to establish it."
+        ]
+       },
+       "relationships": {
+        "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+        "links": [
+         {
+          "with_evidence_id": "ev-western_ghats_m4-ndwi-inc-432988-1673426",
+          "relation": "opposite-direction-overlap",
+          "indices": [
+           "ndvi",
+           "ndwi"
+          ],
+          "overlap_percent_of_smaller": 99.87
+         }
         ]
        },
        "method_provenance": {
@@ -1570,15 +1601,15 @@
           "failed_checks": []
          }
         },
-        "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+        "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
         "software": {
          "numpy": "2.2.6",
          "rasterio": "1.4.3",
          "scipy": "1.17.1",
          "pyproj": "3.7.1"
         },
-        "generated_utc": "2026-11-07T19:02:34Z",
-        "output_checksum": "e943f69f084ccf87a864af1310444788e49d71c8787062ce7d28374aca7c18af"
+        "generated_utc": "2026-11-07T19:09:35Z",
+        "output_checksum": "26f33185aa0c27b6059b3e84124eff1ad5d6bf1f54802a40da2e40fb8d438bea"
        }
       }
      },
@@ -1896,14 +1927,35 @@
          "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
         ],
         "threshold_sensitivity": {
-         "status": "evaluated in M4-R2 G6",
-         "result": null
+         "status": "computed",
+         "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+         "neighbour_delta": 0.05,
+         "neighbours": {
+          "t_minus_0.05": {
+           "threshold": 0.1,
+           "component_pixels": 61,
+           "retained_fraction_of_region": 1.0,
+           "component_growth_factor": 1.3864
+          },
+          "t_plus_0.05": {
+           "threshold": 0.2,
+           "component_pixels": 37,
+           "retained_fraction_of_region": 0.8409,
+           "component_growth_factor": 0.8409
+          }
+         },
+         "label": "spatially persistent across tested thresholds",
+         "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
         },
         "confounding_factors": [
          "Terrain shadow and illumination differences between acquisitions.",
          "Canopy density or phenology differences between the windows.",
          "Canopy disturbance \u2014 candidate only; independent evidence would be required to establish it."
         ]
+       },
+       "relationships": {
+        "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+        "links": []
        },
        "method_provenance": {
         "algorithm": "threshold candidate mask \u2192 4-connected components (scipy.ndimage.label) \u2192 MMU filter \u2192 top-K selection",
@@ -1928,15 +1980,15 @@
           "failed_checks": []
          }
         },
-        "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+        "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
         "software": {
          "numpy": "2.2.6",
          "rasterio": "1.4.3",
          "scipy": "1.17.1",
          "pyproj": "3.7.1"
         },
-        "generated_utc": "2026-11-07T19:02:34Z",
-        "output_checksum": "341df5ed63fabf6868e8e8449fd2404b97b527099256e510dc0b0ca407987b36"
+        "generated_utc": "2026-11-07T19:09:35Z",
+        "output_checksum": "fedb691aa837dd03dfdfb7af4906d241445f2d14c1ba8e3ea3cae95957c15a39"
        }
       }
      },
@@ -2224,14 +2276,35 @@
          "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
         ],
         "threshold_sensitivity": {
-         "status": "evaluated in M4-R2 G6",
-         "result": null
+         "status": "computed",
+         "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+         "neighbour_delta": 0.05,
+         "neighbours": {
+          "t_minus_0.05": {
+           "threshold": 0.1,
+           "component_pixels": 38,
+           "retained_fraction_of_region": 1.0,
+           "component_growth_factor": 1.2258
+          },
+          "t_plus_0.05": {
+           "threshold": 0.2,
+           "component_pixels": 25,
+           "retained_fraction_of_region": 0.8065,
+           "component_growth_factor": 0.8065
+          }
+         },
+         "label": "spatially persistent across tested thresholds",
+         "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
         },
         "confounding_factors": [
          "Terrain shadow and illumination differences between acquisitions.",
          "Canopy density or phenology differences between the windows.",
          "Canopy disturbance \u2014 candidate only; independent evidence would be required to establish it."
         ]
+       },
+       "relationships": {
+        "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+        "links": []
        },
        "method_provenance": {
         "algorithm": "threshold candidate mask \u2192 4-connected components (scipy.ndimage.label) \u2192 MMU filter \u2192 top-K selection",
@@ -2256,15 +2329,15 @@
           "failed_checks": []
          }
         },
-        "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+        "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
         "software": {
          "numpy": "2.2.6",
          "rasterio": "1.4.3",
          "scipy": "1.17.1",
          "pyproj": "3.7.1"
         },
-        "generated_utc": "2026-11-07T19:02:34Z",
-        "output_checksum": "b406e28a745e8d75e6011691760ffacf529baea32d88945c5da172b31a88d974"
+        "generated_utc": "2026-11-07T19:09:35Z",
+        "output_checksum": "008b1b656eb3a45b5822374c9252abefdf51cf7f6b44a6dd48f06263ee4ab91e"
        }
       }
      },
@@ -2648,13 +2721,44 @@
          "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
         ],
         "threshold_sensitivity": {
-         "status": "evaluated in M4-R2 G6",
-         "result": null
+         "status": "computed",
+         "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+         "neighbour_delta": 0.05,
+         "neighbours": {
+          "t_minus_0.05": {
+           "threshold": 0.1,
+           "component_pixels": 206,
+           "retained_fraction_of_region": 1.0,
+           "component_growth_factor": 1.0785
+          },
+          "t_plus_0.05": {
+           "threshold": 0.2,
+           "component_pixels": 179,
+           "retained_fraction_of_region": 0.9372,
+           "component_growth_factor": 0.9372
+          }
+         },
+         "label": "spatially persistent across tested thresholds",
+         "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
         },
         "confounding_factors": [
          "Terrain shadow and illumination differences between acquisitions.",
          "Canopy density or phenology differences between the windows.",
          "Canopy disturbance \u2014 candidate only; independent evidence would be required to establish it."
+        ]
+       },
+       "relationships": {
+        "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+        "links": [
+         {
+          "with_evidence_id": "ev-western_ghats_m4-ndwi-dec-433177-1673477",
+          "relation": "opposite-direction-overlap",
+          "indices": [
+           "ndvi",
+           "ndwi"
+          ],
+          "overlap_percent_of_smaller": 99.98
+         }
         ]
        },
        "method_provenance": {
@@ -2680,15 +2784,15 @@
           "failed_checks": []
          }
         },
-        "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+        "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
         "software": {
          "numpy": "2.2.6",
          "rasterio": "1.4.3",
          "scipy": "1.17.1",
          "pyproj": "3.7.1"
         },
-        "generated_utc": "2026-11-07T19:02:34Z",
-        "output_checksum": "69fa9735431b9f01de1c1f41fdfc99cdc9de6f1054895d6bef4f93660c6cfdd8"
+        "generated_utc": "2026-11-07T19:09:35Z",
+        "output_checksum": "b630aedd8ad0581f186087d259faf28328ac24ff595a274629d23dbf49847ceb"
        }
       }
      },
@@ -3104,14 +3208,35 @@
          "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
         ],
         "threshold_sensitivity": {
-         "status": "evaluated in M4-R2 G6",
-         "result": null
+         "status": "computed",
+         "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+         "neighbour_delta": 0.05,
+         "neighbours": {
+          "t_minus_0.05": {
+           "threshold": 0.1,
+           "component_pixels": 109,
+           "retained_fraction_of_region": 1.0,
+           "component_growth_factor": 1.2386
+          },
+          "t_plus_0.05": {
+           "threshold": 0.2,
+           "component_pixels": 57,
+           "retained_fraction_of_region": 0.7045,
+           "component_growth_factor": 0.6477
+          }
+         },
+         "label": "moderately threshold-sensitive",
+         "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
         },
         "confounding_factors": [
          "Terrain shadow and illumination differences between acquisitions.",
          "Canopy density or phenology differences between the windows.",
          "Canopy disturbance \u2014 candidate only; independent evidence would be required to establish it."
         ]
+       },
+       "relationships": {
+        "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+        "links": []
        },
        "method_provenance": {
         "algorithm": "threshold candidate mask \u2192 4-connected components (scipy.ndimage.label) \u2192 MMU filter \u2192 top-K selection",
@@ -3136,15 +3261,15 @@
           "failed_checks": []
          }
         },
-        "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+        "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
         "software": {
          "numpy": "2.2.6",
          "rasterio": "1.4.3",
          "scipy": "1.17.1",
          "pyproj": "3.7.1"
         },
-        "generated_utc": "2026-11-07T19:02:34Z",
-        "output_checksum": "aa10655f3d42c5af3397226f269d02daef826f8d8d49db143f11d402be74ab5f"
+        "generated_utc": "2026-11-07T19:09:35Z",
+        "output_checksum": "366d3654bb8db522203e995913ea55fcd51333d860c8b2568e4958881b3e4d87"
        }
       }
      },
@@ -3614,14 +3739,35 @@
          "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
         ],
         "threshold_sensitivity": {
-         "status": "evaluated in M4-R2 G6",
-         "result": null
+         "status": "computed",
+         "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+         "neighbour_delta": 0.05,
+         "neighbours": {
+          "t_minus_0.05": {
+           "threshold": 0.1,
+           "component_pixels": 182,
+           "retained_fraction_of_region": 1.0,
+           "component_growth_factor": 2.2469
+          },
+          "t_plus_0.05": {
+           "threshold": 0.2,
+           "component_pixels": 10,
+           "retained_fraction_of_region": 0.321,
+           "component_growth_factor": 0.1235
+          }
+         },
+         "label": "threshold-sensitive",
+         "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
         },
         "confounding_factors": [
          "Terrain shadow and illumination differences between acquisitions.",
          "Canopy density or phenology differences between the windows.",
          "Canopy disturbance \u2014 candidate only; independent evidence would be required to establish it."
         ]
+       },
+       "relationships": {
+        "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+        "links": []
        },
        "method_provenance": {
         "algorithm": "threshold candidate mask \u2192 4-connected components (scipy.ndimage.label) \u2192 MMU filter \u2192 top-K selection",
@@ -3646,15 +3792,15 @@
           "failed_checks": []
          }
         },
-        "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+        "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
         "software": {
          "numpy": "2.2.6",
          "rasterio": "1.4.3",
          "scipy": "1.17.1",
          "pyproj": "3.7.1"
         },
-        "generated_utc": "2026-11-07T19:02:34Z",
-        "output_checksum": "e8032fa253383a93c18079a331e22b04f65406e17926420a2a79c7c97849468d"
+        "generated_utc": "2026-11-07T19:09:35Z",
+        "output_checksum": "8f28efec513780a0036577ab82c25c4c514dd5ed0a2610d9e64dd6197a4e8d91"
        }
       }
      },
@@ -3990,13 +4136,44 @@
          "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
         ],
         "threshold_sensitivity": {
-         "status": "evaluated in M4-R2 G6",
-         "result": null
+         "status": "computed",
+         "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+         "neighbour_delta": 0.05,
+         "neighbours": {
+          "t_minus_0.05": {
+           "threshold": 0.1,
+           "component_pixels": 107,
+           "retained_fraction_of_region": 1.0,
+           "component_growth_factor": 1.4079
+          },
+          "t_plus_0.05": {
+           "threshold": 0.2,
+           "component_pixels": 35,
+           "retained_fraction_of_region": 0.7237,
+           "component_growth_factor": 0.4605
+          }
+         },
+         "label": "moderately threshold-sensitive",
+         "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
         },
         "confounding_factors": [
          "Terrain shadow and illumination differences between acquisitions.",
          "Canopy density or phenology differences between the windows.",
          "Canopy disturbance \u2014 candidate only; independent evidence would be required to establish it."
+        ]
+       },
+       "relationships": {
+        "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+        "links": [
+         {
+          "with_evidence_id": "ev-western_ghats_m4-ndwi-dec-432934-1673404",
+          "relation": "opposite-direction-overlap",
+          "indices": [
+           "ndvi",
+           "ndwi"
+          ],
+          "overlap_percent_of_smaller": 99.95
+         }
         ]
        },
        "method_provenance": {
@@ -4022,15 +4199,15 @@
           "failed_checks": []
          }
         },
-        "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+        "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
         "software": {
          "numpy": "2.2.6",
          "rasterio": "1.4.3",
          "scipy": "1.17.1",
          "pyproj": "3.7.1"
         },
-        "generated_utc": "2026-11-07T19:02:34Z",
-        "output_checksum": "c5a731acf096c3bb3b53fe679d8a75ff943cca0f32bc7d5d660fbf04953ae7dc"
+        "generated_utc": "2026-11-07T19:09:35Z",
+        "output_checksum": "80a3bd58c1f34cbbcce2b32e818c5713abde3c7c092d5133eb2adef7fc61c684"
        }
       }
      },
@@ -4444,14 +4621,35 @@
          "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
         ],
         "threshold_sensitivity": {
-         "status": "evaluated in M4-R2 G6",
-         "result": null
+         "status": "computed",
+         "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+         "neighbour_delta": 0.05,
+         "neighbours": {
+          "t_minus_0.05": {
+           "threshold": 0.1,
+           "component_pixels": 153,
+           "retained_fraction_of_region": 1.0,
+           "component_growth_factor": 2.4677
+          },
+          "t_plus_0.05": {
+           "threshold": 0.2,
+           "component_pixels": 17,
+           "retained_fraction_of_region": 0.5806,
+           "component_growth_factor": 0.2742
+          }
+         },
+         "label": "threshold-sensitive",
+         "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
         },
         "confounding_factors": [
          "Terrain shadow and illumination differences between acquisitions.",
          "Canopy density or phenology differences between the windows.",
          "Canopy disturbance \u2014 candidate only; independent evidence would be required to establish it."
         ]
+       },
+       "relationships": {
+        "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+        "links": []
        },
        "method_provenance": {
         "algorithm": "threshold candidate mask \u2192 4-connected components (scipy.ndimage.label) \u2192 MMU filter \u2192 top-K selection",
@@ -4476,15 +4674,15 @@
           "failed_checks": []
          }
         },
-        "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+        "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
         "software": {
          "numpy": "2.2.6",
          "rasterio": "1.4.3",
          "scipy": "1.17.1",
          "pyproj": "3.7.1"
         },
-        "generated_utc": "2026-11-07T19:02:34Z",
-        "output_checksum": "6773fc134c8caf30a44ec78b0b3f61f4680dfddea0f7d4b824e65e37205786b0"
+        "generated_utc": "2026-11-07T19:09:35Z",
+        "output_checksum": "c1e11033c939c960ec5c6ce1a98e64bea73b7e745477df1ed6d68e75e6c32fd1"
        }
       }
      },
@@ -4884,13 +5082,44 @@
          "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
         ],
         "threshold_sensitivity": {
-         "status": "evaluated in M4-R2 G6",
-         "result": null
+         "status": "computed",
+         "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+         "neighbour_delta": 0.05,
+         "neighbours": {
+          "t_minus_0.05": {
+           "threshold": 0.1,
+           "component_pixels": 187,
+           "retained_fraction_of_region": 1.0,
+           "component_growth_factor": 1.1472
+          },
+          "t_plus_0.05": {
+           "threshold": 0.2,
+           "component_pixels": 127,
+           "retained_fraction_of_region": 0.7853,
+           "component_growth_factor": 0.7791
+          }
+         },
+         "label": "moderately threshold-sensitive",
+         "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
         },
         "confounding_factors": [
          "Terrain shadow and illumination differences between acquisitions.",
          "Canopy density or phenology differences between the windows.",
          "Canopy disturbance \u2014 candidate only; independent evidence would be required to establish it."
+        ]
+       },
+       "relationships": {
+        "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+        "links": [
+         {
+          "with_evidence_id": "ev-western_ghats_m4-ndvi-inc-433173-1673484",
+          "relation": "opposite-direction-overlap",
+          "indices": [
+           "ndvi",
+           "ndwi"
+          ],
+          "overlap_percent_of_smaller": 99.98
+         }
         ]
        },
        "method_provenance": {
@@ -4916,15 +5145,15 @@
           "failed_checks": []
          }
         },
-        "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+        "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
         "software": {
          "numpy": "2.2.6",
          "rasterio": "1.4.3",
          "scipy": "1.17.1",
          "pyproj": "3.7.1"
         },
-        "generated_utc": "2026-11-07T19:02:34Z",
-        "output_checksum": "a20e9463a47ab5acd33fe26add879810be239354198d0d73acfb5a884b86b429"
+        "generated_utc": "2026-11-07T19:09:35Z",
+        "output_checksum": "8680641341294ce72b166fbe7e9403793b97684f9a7b3f50af858d76df47dab2"
        }
       }
      },
@@ -5188,13 +5417,44 @@
          "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
         ],
         "threshold_sensitivity": {
-         "status": "evaluated in M4-R2 G6",
-         "result": null
+         "status": "computed",
+         "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+         "neighbour_delta": 0.05,
+         "neighbours": {
+          "t_minus_0.05": {
+           "threshold": 0.1,
+           "component_pixels": 65,
+           "retained_fraction_of_region": 1.0,
+           "component_growth_factor": 2.6
+          },
+          "t_plus_0.05": {
+           "threshold": 0.2,
+           "component_pixels": 9,
+           "retained_fraction_of_region": 0.44,
+           "component_growth_factor": 0.36
+          }
+         },
+         "label": "threshold-sensitive",
+         "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
         },
         "confounding_factors": [
          "Terrain shadow and illumination differences between acquisitions.",
          "Canopy density or phenology differences between the windows.",
          "Canopy disturbance \u2014 candidate only; independent evidence would be required to establish it."
+        ]
+       },
+       "relationships": {
+        "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+        "links": [
+         {
+          "with_evidence_id": "ev-western_ghats_m4-ndvi-inc-432878-1673396",
+          "relation": "opposite-direction-overlap",
+          "indices": [
+           "ndvi",
+           "ndwi"
+          ],
+          "overlap_percent_of_smaller": 99.95
+         }
         ]
        },
        "method_provenance": {
@@ -5220,15 +5480,15 @@
           "failed_checks": []
          }
         },
-        "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+        "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
         "software": {
          "numpy": "2.2.6",
          "rasterio": "1.4.3",
          "scipy": "1.17.1",
          "pyproj": "3.7.1"
         },
-        "generated_utc": "2026-11-07T19:02:34Z",
-        "output_checksum": "efa03bbe9f19db824c9b103d794887bff8b251ad83a6fdf7aede85f2e9e8dcc4"
+        "generated_utc": "2026-11-07T19:09:35Z",
+        "output_checksum": "3c7fd471db1a7be1fc18308e934f47aa9f9d75bd6bf6dcfea8fe10ce78982766"
        }
       }
      },
@@ -5508,13 +5768,44 @@
          "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
         ],
         "threshold_sensitivity": {
-         "status": "evaluated in M4-R2 G6",
-         "result": null
+         "status": "computed",
+         "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+         "neighbour_delta": 0.05,
+         "neighbours": {
+          "t_minus_0.05": {
+           "threshold": 0.1,
+           "component_pixels": 38,
+           "retained_fraction_of_region": 1.0,
+           "component_growth_factor": 1.2258
+          },
+          "t_plus_0.05": {
+           "threshold": 0.2,
+           "component_pixels": 23,
+           "retained_fraction_of_region": 0.7419,
+           "component_growth_factor": 0.7419
+          }
+         },
+         "label": "moderately threshold-sensitive",
+         "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
         },
         "confounding_factors": [
          "Terrain shadow and illumination differences between acquisitions.",
          "Canopy density or phenology differences between the windows.",
          "Canopy disturbance \u2014 candidate only; independent evidence would be required to establish it."
+        ]
+       },
+       "relationships": {
+        "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+        "links": [
+         {
+          "with_evidence_id": "ev-western_ghats_m4-ndvi-dec-432990-1673421",
+          "relation": "opposite-direction-overlap",
+          "indices": [
+           "ndvi",
+           "ndwi"
+          ],
+          "overlap_percent_of_smaller": 99.87
+         }
         ]
        },
        "method_provenance": {
@@ -5540,15 +5831,15 @@
           "failed_checks": []
          }
         },
-        "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+        "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
         "software": {
          "numpy": "2.2.6",
          "rasterio": "1.4.3",
          "scipy": "1.17.1",
          "pyproj": "3.7.1"
         },
-        "generated_utc": "2026-11-07T19:02:34Z",
-        "output_checksum": "b0a70de97cc65b1821d172b6ed6acb10935e82937b1a244719bf643a61ed0519"
+        "generated_utc": "2026-11-07T19:09:35Z",
+        "output_checksum": "e55c2494d6c50bb80c2f29a18b688f0ce9ad4cb5f81bb637dab3a16a12421ea1"
        }
       }
      }
@@ -5563,7 +5854,11 @@
       "NDVI",
       "NDWI"
      ],
-     "no_finding_statement": null
+     "no_finding_statement": null,
+     "related_findings": 6,
+     "relationship_kinds": [
+      "opposite-direction-overlap"
+     ]
     },
     "limitations": [
      "Topographic shadow and canopy structure complicate index interpretation.",

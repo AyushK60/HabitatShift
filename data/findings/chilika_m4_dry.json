@@ -2,7 +2,7 @@
   "schema": "habitatshift-findings/2",
   "study_id": "chilika_wetland",
   "experiment_id": "chilika_m4_dry",
-  "generated_utc": "2026-11-07T19:02:31Z",
+  "generated_utc": "2026-11-07T19:09:30Z",
   "evidence_status": "processed",
   "method": {
     "source": "frozen M1 difference rasters + common-valid masks",
@@ -6943,13 +6943,62 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 11231,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 1.1343
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 8621,
+                "retained_fraction_of_region": 0.8922,
+                "component_growth_factor": 0.8707
+              }
+            },
+            "label": "spatially persistent across tested thresholds",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal water-level change exposing or re-submerging lakebed.",
             "Turbidity and aquatic-vegetation differences between the windows.",
             "Longer-term wetland change \u2014 possible, but it cannot be separated from the seasonal signal with one matched pair."
+          ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": [
+            {
+              "with_evidence_id": "ev-chilika_m4_dry-mndwi-dec-326475-2179053",
+              "relation": "same-direction-overlap",
+              "indices": [
+                "mndwi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 100.0
+            },
+            {
+              "with_evidence_id": "ev-chilika_m4_dry-ndvi-inc-326000-2178989",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "ndvi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 97.32
+            },
+            {
+              "with_evidence_id": "ev-chilika_m4_dry-mndwi-dec-326000-2179197",
+              "relation": "same-direction-overlap",
+              "indices": [
+                "mndwi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 93.82
+            }
           ]
         },
         "method_provenance": {
@@ -6975,15 +7024,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:31Z",
-          "output_checksum": "d247d23920f6de62c5f328eeb48c9845fd161d8aba6067f0f98e4eb1737b8e69"
+          "generated_utc": "2026-11-07T19:09:30Z",
+          "output_checksum": "1abd9c56ff16307b4fe19dee5b57c555be56318b06f2ee831e40e7d25a561dbb"
         }
       }
     },
@@ -8327,13 +8376,44 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 979,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 1.3284
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 558,
+                "retained_fraction_of_region": 0.81,
+                "component_growth_factor": 0.7571
+              }
+            },
+            "label": "spatially persistent across tested thresholds",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal water-level change exposing or re-submerging lakebed.",
             "Turbidity and aquatic-vegetation differences between the windows.",
             "Longer-term wetland change \u2014 possible, but it cannot be separated from the seasonal signal with one matched pair."
+          ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": [
+            {
+              "with_evidence_id": "ev-chilika_m4_dry-ndvi-inc-324647-2179162",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "ndvi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 94.89
+            }
           ]
         },
         "method_provenance": {
@@ -8359,15 +8439,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:31Z",
-          "output_checksum": "644088c930e4a45857c3dc044d2e121ef7a69b6cd856c3331fe0f9d4478ee8bc"
+          "generated_utc": "2026-11-07T19:09:30Z",
+          "output_checksum": "8a37299bc06627f8e2dd307c2701a9f3ce7f92d63bd98a572b4f11d538fdbdbb"
         }
       }
     },
@@ -9049,13 +9129,53 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 850,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 1.8559
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 372,
+                "retained_fraction_of_region": 0.821,
+                "component_growth_factor": 0.8122
+              }
+            },
+            "label": "spatially persistent across tested thresholds",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal water-level change exposing or re-submerging lakebed.",
             "Turbidity and aquatic-vegetation differences between the windows.",
             "Longer-term wetland change \u2014 possible, but it cannot be separated from the seasonal signal with one matched pair."
+          ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": [
+            {
+              "with_evidence_id": "ev-chilika_m4_dry-mndwi-dec-324066-2178263",
+              "relation": "same-direction-overlap",
+              "indices": [
+                "mndwi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 100.0
+            },
+            {
+              "with_evidence_id": "ev-chilika_m4_dry-ndvi-inc-323911-2178226",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "ndvi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 97.38
+            }
           ]
         },
         "method_provenance": {
@@ -9081,15 +9201,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:31Z",
-          "output_checksum": "c90ba58663a21b4703ddd6bb4d8206bb92d6dc7ec66dfd2035997cffac80e5af"
+          "generated_utc": "2026-11-07T19:09:30Z",
+          "output_checksum": "b76c5345633c4931ff41ddad03a245f8be797a417e9c064355363fcbe67c4ef0"
         }
       }
     },
@@ -9801,14 +9921,35 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 663,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 2.1387
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 44,
+                "retained_fraction_of_region": 0.4032,
+                "component_growth_factor": 0.1419
+              }
+            },
+            "label": "threshold-sensitive",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal water-level change exposing or re-submerging lakebed.",
             "Turbidity and aquatic-vegetation differences between the windows.",
             "Longer-term wetland change \u2014 possible, but it cannot be separated from the seasonal signal with one matched pair."
           ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": []
         },
         "method_provenance": {
           "algorithm": "threshold candidate mask \u2192 4-connected components (scipy.ndimage.label) \u2192 MMU filter \u2192 top-K selection",
@@ -9833,15 +9974,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:31Z",
-          "output_checksum": "0886595b8a7ad80b4b3ee9a6ab8772165f43808d517770eb2a34564d6e2c862f"
+          "generated_utc": "2026-11-07T19:09:30Z",
+          "output_checksum": "413afa8335f8f00897cb7082ac972d2851ea149fb9520a62b7c92e0725c3bfd0"
         }
       }
     },
@@ -10451,13 +10592,44 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 561,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 2.0933
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 215,
+                "retained_fraction_of_region": 0.806,
+                "component_growth_factor": 0.8022
+              }
+            },
+            "label": "moderately threshold-sensitive",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal water-level change exposing or re-submerging lakebed.",
             "Turbidity and aquatic-vegetation differences between the windows.",
             "Longer-term wetland change \u2014 possible, but it cannot be separated from the seasonal signal with one matched pair."
+          ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": [
+            {
+              "with_evidence_id": "ev-chilika_m4_dry-mndwi-dec-325031-2178114",
+              "relation": "same-direction-overlap",
+              "indices": [
+                "mndwi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 85.06
+            }
           ]
         },
         "method_provenance": {
@@ -10483,15 +10655,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:31Z",
-          "output_checksum": "18e47157b1d637a987dd052ef449656356b90aa96e0f4764684a9acc3caade8a"
+          "generated_utc": "2026-11-07T19:09:30Z",
+          "output_checksum": "db2a87d0fe28963375f70a78056f128658b5420511f2b9300812f6849962e473"
         }
       }
     },
@@ -19163,13 +19335,71 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 51228,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 2.2157
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 21668,
+                "retained_fraction_of_region": 0.9449,
+                "component_growth_factor": 0.9372
+              }
+            },
+            "label": "moderately threshold-sensitive",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal water-level change exposing or re-submerging lakebed.",
             "Turbidity and aquatic-vegetation differences between the windows.",
             "Longer-term wetland change \u2014 possible, but it cannot be separated from the seasonal signal with one matched pair."
+          ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": [
+            {
+              "with_evidence_id": "ev-chilika_m4_dry-ndvi-dec-323754-2179340",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "ndvi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 96.64
+            },
+            {
+              "with_evidence_id": "ev-chilika_m4_dry-mndwi-inc-322442-2178538",
+              "relation": "same-direction-overlap",
+              "indices": [
+                "mndwi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 90.26
+            },
+            {
+              "with_evidence_id": "ev-chilika_m4_dry-mndwi-inc-322840-2179108",
+              "relation": "same-direction-overlap",
+              "indices": [
+                "mndwi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 84.68
+            },
+            {
+              "with_evidence_id": "ev-chilika_m4_dry-mndwi-inc-323330-2179277",
+              "relation": "same-direction-overlap",
+              "indices": [
+                "mndwi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 81.17
+            }
           ]
         },
         "method_provenance": {
@@ -19195,15 +19425,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:31Z",
-          "output_checksum": "53e3f71e34bbf709ec40ab2d9d0773c7925a7e96646d6ce20e4bc9f65e777e78"
+          "generated_utc": "2026-11-07T19:09:30Z",
+          "output_checksum": "203e8274f57bfac85b2f4eba8ff3aad05078661ecfb9f1a9e5cf162f0c9825f4"
         }
       }
     },
@@ -34601,13 +34831,53 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 51228,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 2.3665
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 16127,
+                "retained_fraction_of_region": 0.8041,
+                "component_growth_factor": 0.745
+              }
+            },
+            "label": "moderately threshold-sensitive",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal water-level change exposing or re-submerging lakebed.",
             "Turbidity and aquatic-vegetation differences between the windows.",
             "Longer-term wetland change \u2014 possible, but it cannot be separated from the seasonal signal with one matched pair."
+          ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": [
+            {
+              "with_evidence_id": "ev-chilika_m4_dry-ndvi-dec-323754-2179340",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "ndvi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 99.47
+            },
+            {
+              "with_evidence_id": "ev-chilika_m4_dry-mndwi-inc-323259-2179545",
+              "relation": "same-direction-overlap",
+              "indices": [
+                "mndwi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 87.65
+            }
           ]
         },
         "method_provenance": {
@@ -34633,15 +34903,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:31Z",
-          "output_checksum": "9584008f8f541906d67e324e9d0c4f129f45a02819fc7001026e1ec9c814bb06"
+          "generated_utc": "2026-11-07T19:09:30Z",
+          "output_checksum": "8c4e1a4135970ac1185e0dfef7efe84234a6eb93eac9ff24ce37b691cc4154ec"
         }
       }
     },
@@ -44809,13 +45079,44 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 37555,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 3.7862
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 1934,
+                "retained_fraction_of_region": 0.4309,
+                "component_growth_factor": 0.195
+              }
+            },
+            "label": "threshold-sensitive",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal water-level change exposing or re-submerging lakebed.",
             "Turbidity and aquatic-vegetation differences between the windows.",
             "Longer-term wetland change \u2014 possible, but it cannot be separated from the seasonal signal with one matched pair."
+          ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": [
+            {
+              "with_evidence_id": "ev-chilika_m4_dry-ndvi-dec-322352-2182239",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "ndvi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 98.74
+            }
           ]
         },
         "method_provenance": {
@@ -44841,15 +45142,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:31Z",
-          "output_checksum": "cf694527a8df9d1964d3e215fc46fc4f512dcad6dce0cc1db3c1f6fe68875cd7"
+          "generated_utc": "2026-11-07T19:09:30Z",
+          "output_checksum": "1e5b90d2ff92d48b539ecfd8ccb9a0a3776701f80bdf170c928bcf013a3f38f7"
         }
       }
     },
@@ -55643,13 +55944,44 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 37555,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 4.9584
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 626,
+                "retained_fraction_of_region": 0.3233,
+                "component_growth_factor": 0.0827
+              }
+            },
+            "label": "threshold-sensitive",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal water-level change exposing or re-submerging lakebed.",
             "Turbidity and aquatic-vegetation differences between the windows.",
             "Longer-term wetland change \u2014 possible, but it cannot be separated from the seasonal signal with one matched pair."
+          ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": [
+            {
+              "with_evidence_id": "ev-chilika_m4_dry-ndvi-dec-323459-2181346",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "ndvi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 99.99
+            }
           ]
         },
         "method_provenance": {
@@ -55675,15 +56007,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:31Z",
-          "output_checksum": "19af1b54571b819ba2e15737b7f76d4bb2541398f8dbc28d9a42ad835276361b"
+          "generated_utc": "2026-11-07T19:09:30Z",
+          "output_checksum": "da91569f68c3dcdfe46ec5c26c63588af431fa2a26a9cfb50774fb4206e927df"
         }
       }
     },
@@ -57637,13 +57969,44 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 4355,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 3.4427
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 549,
+                "retained_fraction_of_region": 0.5273,
+                "component_growth_factor": 0.434
+              }
+            },
+            "label": "threshold-sensitive",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal water-level change exposing or re-submerging lakebed.",
             "Turbidity and aquatic-vegetation differences between the windows.",
             "Longer-term wetland change \u2014 possible, but it cannot be separated from the seasonal signal with one matched pair."
+          ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": [
+            {
+              "with_evidence_id": "ev-chilika_m4_dry-ndvi-dec-326860-2178409",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "ndvi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 100.0
+            }
           ]
         },
         "method_provenance": {
@@ -57669,15 +58032,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:31Z",
-          "output_checksum": "09af9be5957d5bacb52c9137eecd742ceae2163ae5ca3d1a89eaa1bcb166abe0"
+          "generated_utc": "2026-11-07T19:09:30Z",
+          "output_checksum": "cea2eb6217a9056decde6a3ae83c4d8d314cfbde95581d569b43fe387f5440c6"
         }
       }
     },
@@ -61621,13 +61984,53 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 10743,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 1.3943
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 6174,
+                "retained_fraction_of_region": 0.8192,
+                "component_growth_factor": 0.8013
+              }
+            },
+            "label": "spatially persistent across tested thresholds",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal water-level change exposing or re-submerging lakebed.",
             "Turbidity and aquatic-vegetation differences between the windows.",
             "Longer-term wetland change \u2014 possible, but it cannot be separated from the seasonal signal with one matched pair."
+          ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": [
+            {
+              "with_evidence_id": "ev-chilika_m4_dry-ndwi-dec-325977-2178967",
+              "relation": "same-direction-overlap",
+              "indices": [
+                "mndwi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 93.82
+            },
+            {
+              "with_evidence_id": "ev-chilika_m4_dry-ndvi-inc-326000-2178989",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "mndwi",
+                "ndvi"
+              ],
+              "overlap_percent_of_smaller": 92.25
+            }
           ]
         },
         "method_provenance": {
@@ -61653,15 +62056,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:31Z",
-          "output_checksum": "afa47fb044501256809f860282c62a670c5f88aa3ce2e1416fdd3515c7b3736c"
+          "generated_utc": "2026-11-07T19:09:30Z",
+          "output_checksum": "a4b7eb309e7ebc5c16e2906078cee3862084ae877612fcab01bfe2b682bfb17d"
         }
       }
     },
@@ -62543,13 +62946,44 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 1002,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 1.5981
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 515,
+                "retained_fraction_of_region": 0.8246,
+                "component_growth_factor": 0.8214
+              }
+            },
+            "label": "spatially persistent across tested thresholds",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal water-level change exposing or re-submerging lakebed.",
             "Turbidity and aquatic-vegetation differences between the windows.",
             "Longer-term wetland change \u2014 possible, but it cannot be separated from the seasonal signal with one matched pair."
+          ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": [
+            {
+              "with_evidence_id": "ev-chilika_m4_dry-ndvi-inc-322233-2179323",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "mndwi",
+                "ndvi"
+              ],
+              "overlap_percent_of_smaller": 85.87
+            }
           ]
         },
         "method_provenance": {
@@ -62575,15 +63009,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:31Z",
-          "output_checksum": "ef14cf7a8d629558c63aac6ac24fa1c78c96b3b1331e5b01309349ff01bab20d"
+          "generated_utc": "2026-11-07T19:09:30Z",
+          "output_checksum": "c707a5cfa91519cb50f8f9049dc94e0d1702242b95147bf150bc6fef218852b6"
         }
       }
     },
@@ -63063,13 +63497,44 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 456,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 1.551
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 213,
+                "retained_fraction_of_region": 0.7347,
+                "component_growth_factor": 0.7245
+              }
+            },
+            "label": "moderately threshold-sensitive",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal water-level change exposing or re-submerging lakebed.",
             "Turbidity and aquatic-vegetation differences between the windows.",
             "Longer-term wetland change \u2014 possible, but it cannot be separated from the seasonal signal with one matched pair."
+          ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": [
+            {
+              "with_evidence_id": "ev-chilika_m4_dry-ndwi-dec-325033-2178113",
+              "relation": "same-direction-overlap",
+              "indices": [
+                "mndwi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 85.06
+            }
           ]
         },
         "method_provenance": {
@@ -63095,15 +63560,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:31Z",
-          "output_checksum": "3e23026b5337aa2be8f13582f70373901a09f0b2d3e5645630ccb61d21bd58a9"
+          "generated_utc": "2026-11-07T19:09:30Z",
+          "output_checksum": "a56325476f15340488d615a45a3dd75d86f730aa5b5c76328e0f541a0c9a915d"
         }
       }
     },
@@ -63687,13 +64152,53 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 10743,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 53.715
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 61,
+                "retained_fraction_of_region": 0.485,
+                "component_growth_factor": 0.305
+              }
+            },
+            "label": "threshold-sensitive",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal water-level change exposing or re-submerging lakebed.",
             "Turbidity and aquatic-vegetation differences between the windows.",
             "Longer-term wetland change \u2014 possible, but it cannot be separated from the seasonal signal with one matched pair."
+          ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": [
+            {
+              "with_evidence_id": "ev-chilika_m4_dry-ndwi-dec-325977-2178967",
+              "relation": "same-direction-overlap",
+              "indices": [
+                "mndwi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 100.0
+            },
+            {
+              "with_evidence_id": "ev-chilika_m4_dry-ndvi-inc-326000-2178989",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "mndwi",
+                "ndvi"
+              ],
+              "overlap_percent_of_smaller": 99.99
+            }
           ]
         },
         "method_provenance": {
@@ -63719,15 +64224,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:31Z",
-          "output_checksum": "e7fa43f2c834e84f02039731773f92134d9c10e3f0ae08094c993f32f75d4055"
+          "generated_utc": "2026-11-07T19:09:30Z",
+          "output_checksum": "bc74afdcc057d0a78182d9c4b2702f133040646c2e1ce642707b23ed38363c98"
         }
       }
     },
@@ -64249,13 +64754,53 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 354,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 1.9667
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 69,
+                "retained_fraction_of_region": 0.45,
+                "component_growth_factor": 0.3833
+              }
+            },
+            "label": "threshold-sensitive",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal water-level change exposing or re-submerging lakebed.",
             "Turbidity and aquatic-vegetation differences between the windows.",
             "Longer-term wetland change \u2014 possible, but it cannot be separated from the seasonal signal with one matched pair."
+          ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": [
+            {
+              "with_evidence_id": "ev-chilika_m4_dry-ndwi-dec-324057-2178279",
+              "relation": "same-direction-overlap",
+              "indices": [
+                "mndwi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 100.0
+            },
+            {
+              "with_evidence_id": "ev-chilika_m4_dry-ndvi-inc-323911-2178226",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "mndwi",
+                "ndvi"
+              ],
+              "overlap_percent_of_smaller": 97.78
+            }
           ]
         },
         "method_provenance": {
@@ -64281,15 +64826,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:31Z",
-          "output_checksum": "8e4839e1b01b1a03a7906b5333acc5ebcd234c469b2591c9725aea242a646f54"
+          "generated_utc": "2026-11-07T19:09:30Z",
+          "output_checksum": "a925ff7f3265ec78a38fa5102b92d40e806df72c0f76bb3a2692d50cf76573de"
         }
       }
     },
@@ -69081,13 +69626,53 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 19376,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 3.3975
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 3275,
+                "retained_fraction_of_region": 0.7033,
+                "component_growth_factor": 0.5743
+              }
+            },
+            "label": "threshold-sensitive",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal water-level change exposing or re-submerging lakebed.",
             "Turbidity and aquatic-vegetation differences between the windows.",
             "Longer-term wetland change \u2014 possible, but it cannot be separated from the seasonal signal with one matched pair."
+          ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": [
+            {
+              "with_evidence_id": "ev-chilika_m4_dry-ndvi-dec-323754-2179340",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "mndwi",
+                "ndvi"
+              ],
+              "overlap_percent_of_smaller": 88.37
+            },
+            {
+              "with_evidence_id": "ev-chilika_m4_dry-ndwi-inc-323825-2179574",
+              "relation": "same-direction-overlap",
+              "indices": [
+                "mndwi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 87.65
+            }
           ]
         },
         "method_provenance": {
@@ -69113,15 +69698,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:31Z",
-          "output_checksum": "ffc6cd469182cad59b10a2b6004bea63694a57a387a034284020d67913b989e6"
+          "generated_utc": "2026-11-07T19:09:30Z",
+          "output_checksum": "dc77cc9da0e6927ddffa60a5c5614c3cb43578ce6f7826fdcf606cb48e8bc015"
         }
       }
     },
@@ -71965,13 +72550,53 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 19376,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 6.7891
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 989,
+                "retained_fraction_of_region": 0.8637,
+                "component_growth_factor": 0.3465
+              }
+            },
+            "label": "threshold-sensitive",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal water-level change exposing or re-submerging lakebed.",
             "Turbidity and aquatic-vegetation differences between the windows.",
             "Longer-term wetland change \u2014 possible, but it cannot be separated from the seasonal signal with one matched pair."
+          ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": [
+            {
+              "with_evidence_id": "ev-chilika_m4_dry-ndwi-inc-323026-2178776",
+              "relation": "same-direction-overlap",
+              "indices": [
+                "mndwi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 90.26
+            },
+            {
+              "with_evidence_id": "ev-chilika_m4_dry-ndvi-dec-323754-2179340",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "mndwi",
+                "ndvi"
+              ],
+              "overlap_percent_of_smaller": 89.63
+            }
           ]
         },
         "method_provenance": {
@@ -71997,15 +72622,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:31Z",
-          "output_checksum": "3a4714050a1004c593a65ed7d7e153306db1f9f11ef04a25c56823026c43ee46"
+          "generated_utc": "2026-11-07T19:09:30Z",
+          "output_checksum": "fec504bfad781700b05b9bed3e1d77c213cc835ef4e60b28e1d16e28ebfa99a1"
         }
       }
     },
@@ -73743,13 +74368,53 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 19376,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 8.8637
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 1949,
+                "retained_fraction_of_region": 0.8916,
+                "component_growth_factor": 0.8916
+              }
+            },
+            "label": "threshold-sensitive",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal water-level change exposing or re-submerging lakebed.",
             "Turbidity and aquatic-vegetation differences between the windows.",
             "Longer-term wetland change \u2014 possible, but it cannot be separated from the seasonal signal with one matched pair."
+          ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": [
+            {
+              "with_evidence_id": "ev-chilika_m4_dry-ndvi-dec-323754-2179340",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "mndwi",
+                "ndvi"
+              ],
+              "overlap_percent_of_smaller": 85.41
+            },
+            {
+              "with_evidence_id": "ev-chilika_m4_dry-ndwi-inc-323026-2178776",
+              "relation": "same-direction-overlap",
+              "indices": [
+                "mndwi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 84.68
+            }
           ]
         },
         "method_provenance": {
@@ -73775,15 +74440,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:31Z",
-          "output_checksum": "d822269a8121a20082954a419b6624aef75755496ab32c4c7ec4008fe0024171"
+          "generated_utc": "2026-11-07T19:09:30Z",
+          "output_checksum": "d9565279f87f5c0e4625aaa7e39478e1ed465e3005952255e2b766d7c3b611b1"
         }
       }
     },
@@ -75279,13 +75944,53 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 19376,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 12.005
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 1366,
+                "retained_fraction_of_region": 0.8705,
+                "component_growth_factor": 0.8463
+              }
+            },
+            "label": "threshold-sensitive",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal water-level change exposing or re-submerging lakebed.",
             "Turbidity and aquatic-vegetation differences between the windows.",
             "Longer-term wetland change \u2014 possible, but it cannot be separated from the seasonal signal with one matched pair."
+          ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": [
+            {
+              "with_evidence_id": "ev-chilika_m4_dry-ndwi-inc-323026-2178776",
+              "relation": "same-direction-overlap",
+              "indices": [
+                "mndwi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 81.17
+            },
+            {
+              "with_evidence_id": "ev-chilika_m4_dry-ndvi-dec-323754-2179340",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "mndwi",
+                "ndvi"
+              ],
+              "overlap_percent_of_smaller": 80.05
+            }
           ]
         },
         "method_provenance": {
@@ -75311,15 +76016,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:31Z",
-          "output_checksum": "ca6426c488cc8f28c86fd63a0e3d7be320252fea48192349d064e9eeb1e1cfa3"
+          "generated_utc": "2026-11-07T19:09:30Z",
+          "output_checksum": "7c1f2c3908c4d9b654fb8e9b061b993aa1bc40d069043b0ec4d85960a7b72a77"
         }
       }
     },
@@ -76041,14 +76746,35 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 697,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 1.1483
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 455,
+                "retained_fraction_of_region": 0.8386,
+                "component_growth_factor": 0.7496
+              }
+            },
+            "label": "spatially persistent across tested thresholds",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal water-level change exposing or re-submerging lakebed.",
             "Turbidity and aquatic-vegetation differences between the windows.",
             "Longer-term wetland change \u2014 possible, but it cannot be separated from the seasonal signal with one matched pair."
           ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": []
         },
         "method_provenance": {
           "algorithm": "threshold candidate mask \u2192 4-connected components (scipy.ndimage.label) \u2192 MMU filter \u2192 top-K selection",
@@ -76073,15 +76799,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:31Z",
-          "output_checksum": "e99c1942a30508056bcb0885b2f41c745a948350a2c4a0602957d09aa93676e4"
+          "generated_utc": "2026-11-07T19:09:30Z",
+          "output_checksum": "c52800ed0c7018a71632354be9aa0f8058d7e07ee2b092f340d2d19b13112153"
         }
       }
     },
@@ -99479,13 +100205,89 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 110820,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 2.2679
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 21071,
+                "retained_fraction_of_region": 0.8904,
+                "component_growth_factor": 0.4312
+              }
+            },
+            "label": "moderately threshold-sensitive",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal water-level change exposing or re-submerging lakebed.",
             "Turbidity and aquatic-vegetation differences between the windows.",
             "Longer-term wetland change \u2014 possible, but it cannot be separated from the seasonal signal with one matched pair."
+          ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": [
+            {
+              "with_evidence_id": "ev-chilika_m4_dry-ndwi-inc-323825-2179574",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "ndvi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 99.47
+            },
+            {
+              "with_evidence_id": "ev-chilika_m4_dry-ndwi-inc-323026-2178776",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "ndvi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 96.64
+            },
+            {
+              "with_evidence_id": "ev-chilika_m4_dry-mndwi-inc-322442-2178538",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "mndwi",
+                "ndvi"
+              ],
+              "overlap_percent_of_smaller": 89.63
+            },
+            {
+              "with_evidence_id": "ev-chilika_m4_dry-mndwi-inc-323259-2179545",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "mndwi",
+                "ndvi"
+              ],
+              "overlap_percent_of_smaller": 88.37
+            },
+            {
+              "with_evidence_id": "ev-chilika_m4_dry-mndwi-inc-322840-2179108",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "mndwi",
+                "ndvi"
+              ],
+              "overlap_percent_of_smaller": 85.41
+            },
+            {
+              "with_evidence_id": "ev-chilika_m4_dry-mndwi-inc-323330-2179277",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "mndwi",
+                "ndvi"
+              ],
+              "overlap_percent_of_smaller": 80.05
+            }
           ]
         },
         "method_provenance": {
@@ -99511,15 +100313,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:31Z",
-          "output_checksum": "a9572610fc9deb08d64e05e675f35d3136af726c19c789b85bd3222c01f8a5f0"
+          "generated_utc": "2026-11-07T19:09:30Z",
+          "output_checksum": "b66679c516ac8d77308c73ca5759e51dafabb18b993abd43353dccf747477187"
         }
       }
     },
@@ -117207,13 +118009,44 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 110820,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 6.1132
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 5804,
+                "retained_fraction_of_region": 0.5143,
+                "component_growth_factor": 0.3202
+              }
+            },
+            "label": "threshold-sensitive",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal water-level change exposing or re-submerging lakebed.",
             "Turbidity and aquatic-vegetation differences between the windows.",
             "Longer-term wetland change \u2014 possible, but it cannot be separated from the seasonal signal with one matched pair."
+          ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": [
+            {
+              "with_evidence_id": "ev-chilika_m4_dry-ndwi-inc-322426-2182611",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "ndvi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 98.74
+            }
           ]
         },
         "method_provenance": {
@@ -117239,15 +118072,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:31Z",
-          "output_checksum": "40aa0fe0107de4e4b250fdfb73ed61a26361db4c8989295b7f1041ef3db195ac"
+          "generated_utc": "2026-11-07T19:09:30Z",
+          "output_checksum": "710d9c45e0c16f471049288376c836780c5e20b08dbc0b6db408998a21680f94"
         }
       }
     },
@@ -132387,13 +133220,44 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 110820,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 6.1963
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 8943,
+                "retained_fraction_of_region": 0.6029,
+                "component_growth_factor": 0.5
+              }
+            },
+            "label": "threshold-sensitive",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal water-level change exposing or re-submerging lakebed.",
             "Turbidity and aquatic-vegetation differences between the windows.",
             "Longer-term wetland change \u2014 possible, but it cannot be separated from the seasonal signal with one matched pair."
+          ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": [
+            {
+              "with_evidence_id": "ev-chilika_m4_dry-ndwi-inc-323410-2181263",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "ndvi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 99.99
+            }
           ]
         },
         "method_provenance": {
@@ -132419,15 +133283,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:31Z",
-          "output_checksum": "77f0bb5db074fb3ac160f03d31b6d2789387353698e6da0e6f811038802a9dfb"
+          "generated_utc": "2026-11-07T19:09:30Z",
+          "output_checksum": "1ac7430509328f1c112c4190124f22b062259656c555c5754ae0d15f1e8be316"
         }
       }
     },
@@ -139637,14 +140501,35 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 11485,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 2.4271
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 1475,
+                "retained_fraction_of_region": 0.5568,
+                "component_growth_factor": 0.3117
+              }
+            },
+            "label": "threshold-sensitive",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal water-level change exposing or re-submerging lakebed.",
             "Turbidity and aquatic-vegetation differences between the windows.",
             "Longer-term wetland change \u2014 possible, but it cannot be separated from the seasonal signal with one matched pair."
           ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": []
         },
         "method_provenance": {
           "algorithm": "threshold candidate mask \u2192 4-connected components (scipy.ndimage.label) \u2192 MMU filter \u2192 top-K selection",
@@ -139669,15 +140554,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:31Z",
-          "output_checksum": "b7e560883def0af46e88928716555b40ab49e78c0a53ecf61f6129d95f7d2ff3"
+          "generated_utc": "2026-11-07T19:09:30Z",
+          "output_checksum": "aeb791904daa35543e82ec4c3fdabb227de6c96ac8380f66c1e45890433779a4"
         }
       }
     },
@@ -145925,13 +146810,44 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 7604,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 2.0624
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 1843,
+                "retained_fraction_of_region": 0.5915,
+                "component_growth_factor": 0.4999
+              }
+            },
+            "label": "moderately threshold-sensitive",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal water-level change exposing or re-submerging lakebed.",
             "Turbidity and aquatic-vegetation differences between the windows.",
             "Longer-term wetland change \u2014 possible, but it cannot be separated from the seasonal signal with one matched pair."
+          ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": [
+            {
+              "with_evidence_id": "ev-chilika_m4_dry-ndwi-inc-326856-2178275",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "ndvi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 100.0
+            }
           ]
         },
         "method_provenance": {
@@ -145957,15 +146873,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:31Z",
-          "output_checksum": "9af0f31d05060bf108efbdaa6bcf519e1f87a8ff909d20e9a29bd6de2e44c0ac"
+          "generated_utc": "2026-11-07T19:09:30Z",
+          "output_checksum": "0dfad9b0dabb4a17b55eaf747bb65145f92141655a7f6fb2fb034cdbf62d5b59"
         }
       }
     },
@@ -153037,13 +153953,62 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 11305,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 1.1456
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 8615,
+                "retained_fraction_of_region": 0.8911,
+                "component_growth_factor": 0.873
+              }
+            },
+            "label": "spatially persistent across tested thresholds",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal water-level change exposing or re-submerging lakebed.",
             "Turbidity and aquatic-vegetation differences between the windows.",
             "Longer-term wetland change \u2014 possible, but it cannot be separated from the seasonal signal with one matched pair."
+          ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": [
+            {
+              "with_evidence_id": "ev-chilika_m4_dry-mndwi-dec-326475-2179053",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "mndwi",
+                "ndvi"
+              ],
+              "overlap_percent_of_smaller": 99.99
+            },
+            {
+              "with_evidence_id": "ev-chilika_m4_dry-ndwi-dec-325977-2178967",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "ndvi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 97.32
+            },
+            {
+              "with_evidence_id": "ev-chilika_m4_dry-mndwi-dec-326000-2179197",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "mndwi",
+                "ndvi"
+              ],
+              "overlap_percent_of_smaller": 92.25
+            }
           ]
         },
         "method_provenance": {
@@ -153069,15 +154034,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:31Z",
-          "output_checksum": "f203ccd93e7743c06f5453b54c232a82fb0bce6370bd9d2706a102816e74cfe9"
+          "generated_utc": "2026-11-07T19:09:30Z",
+          "output_checksum": "2731cbc253bbbe67056dc8f3d4446c9e3b92f106883f5eb4dc2eaa9bfa8620af"
         }
       }
     },
@@ -154275,13 +155240,44 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 951,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 1.3135
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 343,
+                "retained_fraction_of_region": 0.8204,
+                "component_growth_factor": 0.4738
+              }
+            },
+            "label": "moderately threshold-sensitive",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal water-level change exposing or re-submerging lakebed.",
             "Turbidity and aquatic-vegetation differences between the windows.",
             "Longer-term wetland change \u2014 possible, but it cannot be separated from the seasonal signal with one matched pair."
+          ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": [
+            {
+              "with_evidence_id": "ev-chilika_m4_dry-ndwi-dec-324654-2179158",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "ndvi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 94.89
+            }
           ]
         },
         "method_provenance": {
@@ -154307,15 +155303,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:31Z",
-          "output_checksum": "29b39ccf6f21051510c7cd3dc96b31bde50dfd42416bd2a3b1fc43b2e7bf2954"
+          "generated_utc": "2026-11-07T19:09:30Z",
+          "output_checksum": "fce51669b7c6d118a643fe51328e107529d0948530b88ef7e0f401c0ee6402fc"
         }
       }
     },
@@ -155497,13 +156493,53 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 1062,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 1.4916
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 400,
+                "retained_fraction_of_region": 0.7669,
+                "component_growth_factor": 0.5618
+              }
+            },
+            "label": "moderately threshold-sensitive",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal water-level change exposing or re-submerging lakebed.",
             "Turbidity and aquatic-vegetation differences between the windows.",
             "Longer-term wetland change \u2014 possible, but it cannot be separated from the seasonal signal with one matched pair."
+          ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": [
+            {
+              "with_evidence_id": "ev-chilika_m4_dry-mndwi-dec-324066-2178263",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "mndwi",
+                "ndvi"
+              ],
+              "overlap_percent_of_smaller": 97.78
+            },
+            {
+              "with_evidence_id": "ev-chilika_m4_dry-ndwi-dec-324057-2178279",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "ndvi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 97.38
+            }
           ]
         },
         "method_provenance": {
@@ -155529,15 +156565,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:31Z",
-          "output_checksum": "c7b074712d4aa93dc789b5d36e45a8405bec0e90fec3695835fe5dc1e3c41bc4"
+          "generated_utc": "2026-11-07T19:09:30Z",
+          "output_checksum": "c973db2dab8b7d9716de091c2741c029e8014972f50ae1f0976ab81a2bd01b8f"
         }
       }
     },
@@ -157929,14 +158965,35 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 2112,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 3.0968
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 9,
+                "retained_fraction_of_region": 0.1305,
+                "component_growth_factor": 0.0132
+              }
+            },
+            "label": "threshold-sensitive",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal water-level change exposing or re-submerging lakebed.",
             "Turbidity and aquatic-vegetation differences between the windows.",
             "Longer-term wetland change \u2014 possible, but it cannot be separated from the seasonal signal with one matched pair."
           ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": []
         },
         "method_provenance": {
           "algorithm": "threshold candidate mask \u2192 4-connected components (scipy.ndimage.label) \u2192 MMU filter \u2192 top-K selection",
@@ -157961,15 +159018,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:31Z",
-          "output_checksum": "2825dfc8686223f1729ce82c99619eefd6029e12cd7b57bf96d1f2f2f2585535"
+          "generated_utc": "2026-11-07T19:09:30Z",
+          "output_checksum": "835b05e55053cfaa12ef5dba9a917497642c638daeb1585f7d4c220d655e3c70"
         }
       }
     },
@@ -159153,13 +160210,44 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 448,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 1.2174
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 129,
+                "retained_fraction_of_region": 0.8043,
+                "component_growth_factor": 0.3505
+              }
+            },
+            "label": "moderately threshold-sensitive",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal water-level change exposing or re-submerging lakebed.",
             "Turbidity and aquatic-vegetation differences between the windows.",
             "Longer-term wetland change \u2014 possible, but it cannot be separated from the seasonal signal with one matched pair."
+          ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": [
+            {
+              "with_evidence_id": "ev-chilika_m4_dry-mndwi-dec-322168-2179264",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "mndwi",
+                "ndvi"
+              ],
+              "overlap_percent_of_smaller": 85.87
+            }
           ]
         },
         "method_provenance": {
@@ -159185,15 +160273,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:31Z",
-          "output_checksum": "4810cfc310abdc9ddca380236b9823561db1cf7efb1499f0475f14c0c47975a8"
+          "generated_utc": "2026-11-07T19:09:30Z",
+          "output_checksum": "d9e34187f3b00d45b40716f00e464c3971c3400c1bbc5d67c7151524a159ed5b"
         }
       }
     }
@@ -159209,7 +160297,12 @@
       "NDVI",
       "NDWI"
     ],
-    "no_finding_statement": null
+    "no_finding_statement": null,
+    "related_findings": 26,
+    "relationship_kinds": [
+      "opposite-direction-overlap",
+      "same-direction-overlap"
+    ]
   },
   "limitations": [
     "Water level and seasonality dominate; no hydrological cause claims.",

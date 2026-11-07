@@ -2,7 +2,7 @@
   "schema": "habitatshift-findings/2",
   "study_id": "coringa_coastal",
   "experiment_id": "coringa_m1",
-  "generated_utc": "2026-11-07T19:02:30Z",
+  "generated_utc": "2026-11-07T19:09:28Z",
   "evidence_status": "processed",
   "method": {
     "source": "frozen M1 difference rasters + common-valid masks",
@@ -1554,13 +1554,53 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 2323,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 1.8886
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 732,
+                "retained_fraction_of_region": 0.6919,
+                "component_growth_factor": 0.5951
+              }
+            },
+            "label": "moderately threshold-sensitive",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal or tidal water-level differences change the spectral mix of the cell.",
             "Turbidity and sun-glint differences between the composite windows.",
             "Genuine canopy thinning or regrowth \u2014 plausible, but it cannot be separated from the options above using optical indices alone."
+          ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": [
+            {
+              "with_evidence_id": "ev-coringa_m1-ndwi-inc-634474-1848167",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "ndvi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 99.26
+            },
+            {
+              "with_evidence_id": "ev-coringa_m1-mndwi-inc-633719-1848250",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "mndwi",
+                "ndvi"
+              ],
+              "overlap_percent_of_smaller": 94.14
+            }
           ]
         },
         "method_provenance": {
@@ -1586,15 +1626,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:30Z",
-          "output_checksum": "97ec9d1ebb10508e846f217f07ff5c424fc05ecf31db6aba03e7a48aaa0565aa"
+          "generated_utc": "2026-11-07T19:09:28Z",
+          "output_checksum": "521a3cea8d45005b4a0991c9f713c89e92e3e994be772881d8f27e7914a9609f"
         }
       }
     },
@@ -2391,13 +2431,53 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 990,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 1.6611
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 313,
+                "retained_fraction_of_region": 0.8691,
+                "component_growth_factor": 0.5252
+              }
+            },
+            "label": "spatially persistent across tested thresholds",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal or tidal water-level differences change the spectral mix of the cell.",
             "Turbidity and sun-glint differences between the composite windows.",
             "Genuine canopy thinning or regrowth \u2014 plausible, but it cannot be separated from the options above using optical indices alone."
+          ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": [
+            {
+              "with_evidence_id": "ev-coringa_m1-ndwi-inc-634431-1851226",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "ndvi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 54.38
+            },
+            {
+              "with_evidence_id": "ev-coringa_m1-mndwi-inc-634475-1851277",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "mndwi",
+                "ndvi"
+              ],
+              "overlap_percent_of_smaller": 30.8
+            }
           ]
         },
         "method_provenance": {
@@ -2423,15 +2503,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:30Z",
-          "output_checksum": "c7c7be8a5733494ddfd7ccc27bce354558be66fd3f272d832247caa53abe3e8f"
+          "generated_utc": "2026-11-07T19:09:28Z",
+          "output_checksum": "89fe296afebc813c1c33407f3eb1201bdcc89b9f1cc9b6defd3ed1c2bcd108bc"
         }
       }
     },
@@ -3420,14 +3500,35 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 633,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 1.1243
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 454,
+                "retained_fraction_of_region": 0.8508,
+                "component_growth_factor": 0.8064
+              }
+            },
+            "label": "spatially persistent across tested thresholds",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal or tidal water-level differences change the spectral mix of the cell.",
             "Turbidity and sun-glint differences between the composite windows.",
             "Genuine canopy thinning or regrowth \u2014 plausible, but it cannot be separated from the options above using optical indices alone."
           ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": []
         },
         "method_provenance": {
           "algorithm": "threshold candidate mask \u2192 4-connected components (scipy.ndimage.label) \u2192 MMU filter \u2192 top-K selection",
@@ -3452,15 +3553,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:30Z",
-          "output_checksum": "b95884818263b26839c20686121b8499aa2a73aa755d63b491e26dd1c39cd97b"
+          "generated_utc": "2026-11-07T19:09:28Z",
+          "output_checksum": "10bd854a99f4b249311ee7367b9084559b13b435dbf188f30aed25ac92acb5d8"
         }
       }
     },
@@ -4045,14 +4146,35 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 452,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 1.1414
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 353,
+                "retained_fraction_of_region": 0.8914,
+                "component_growth_factor": 0.8914
+              }
+            },
+            "label": "spatially persistent across tested thresholds",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal or tidal water-level differences change the spectral mix of the cell.",
             "Turbidity and sun-glint differences between the composite windows.",
             "Genuine canopy thinning or regrowth \u2014 plausible, but it cannot be separated from the options above using optical indices alone."
           ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": []
         },
         "method_provenance": {
           "algorithm": "threshold candidate mask \u2192 4-connected components (scipy.ndimage.label) \u2192 MMU filter \u2192 top-K selection",
@@ -4077,15 +4199,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:30Z",
-          "output_checksum": "4d93342c76b143d2da3391bbd6974dd9ad0ff7831d4216c23d39d8be494f17e1"
+          "generated_utc": "2026-11-07T19:09:28Z",
+          "output_checksum": "35f293cfd879fdbd320ad379e5adfbe5e01e12cc31b627ea7fc403871baad086"
         }
       }
     },
@@ -4512,14 +4634,35 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 369,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 1.1081
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 301,
+                "retained_fraction_of_region": 0.9039,
+                "component_growth_factor": 0.9039
+              }
+            },
+            "label": "spatially persistent across tested thresholds",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal or tidal water-level differences change the spectral mix of the cell.",
             "Turbidity and sun-glint differences between the composite windows.",
             "Genuine canopy thinning or regrowth \u2014 plausible, but it cannot be separated from the options above using optical indices alone."
           ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": []
         },
         "method_provenance": {
           "algorithm": "threshold candidate mask \u2192 4-connected components (scipy.ndimage.label) \u2192 MMU filter \u2192 top-K selection",
@@ -4544,15 +4687,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:30Z",
-          "output_checksum": "73a489e1af9dd18608ea2bf6515a08bda51bebec7d2470780f2788aebc22c068"
+          "generated_utc": "2026-11-07T19:09:28Z",
+          "output_checksum": "d965375a54ce45c724930adf8cc57d7cd78bcdb8c7a0a758b6d8c517fcc343a9"
         }
       }
     },
@@ -6641,14 +6784,35 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 1743,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 1.4885
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 298,
+                "retained_fraction_of_region": 0.7464,
+                "component_growth_factor": 0.2545
+              }
+            },
+            "label": "threshold-sensitive",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal or tidal water-level differences change the spectral mix of the cell.",
             "Turbidity and sun-glint differences between the composite windows.",
             "Genuine canopy thinning or regrowth \u2014 plausible, but it cannot be separated from the options above using optical indices alone."
           ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": []
         },
         "method_provenance": {
           "algorithm": "threshold candidate mask \u2192 4-connected components (scipy.ndimage.label) \u2192 MMU filter \u2192 top-K selection",
@@ -6673,15 +6837,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:30Z",
-          "output_checksum": "8014540526cadc25a841b550e27bcbcb7e30929e57b9e4226cf2dd0ae454261d"
+          "generated_utc": "2026-11-07T19:09:28Z",
+          "output_checksum": "b0ed7f2aa05994c9ab827e6d93e0d8c8914d2a1490b58d1bf6e5005ef5be342d"
         }
       }
     },
@@ -8038,13 +8202,44 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 2864,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 3.1577
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 485,
+                "retained_fraction_of_region": 0.7806,
+                "component_growth_factor": 0.5347
+              }
+            },
+            "label": "threshold-sensitive",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal or tidal water-level differences change the spectral mix of the cell.",
             "Turbidity and sun-glint differences between the composite windows.",
             "Genuine canopy thinning or regrowth \u2014 plausible, but it cannot be separated from the options above using optical indices alone."
+          ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": [
+            {
+              "with_evidence_id": "ev-coringa_m1-ndwi-dec-636890-1850341",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "ndvi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 99.72
+            }
           ]
         },
         "method_provenance": {
@@ -8070,15 +8265,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:30Z",
-          "output_checksum": "32fbc040733645dcdaf051f5db2bcb4097351d63abdfd9133144b5682fba95a3"
+          "generated_utc": "2026-11-07T19:09:28Z",
+          "output_checksum": "907473fa87c20e844e5e683e04577e48ae97dc782711885a21838f748cac3ed0"
         }
       }
     },
@@ -9299,13 +9494,53 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 789,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 1.3698
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 263,
+                "retained_fraction_of_region": 0.8229,
+                "component_growth_factor": 0.4566
+              }
+            },
+            "label": "moderately threshold-sensitive",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal or tidal water-level differences change the spectral mix of the cell.",
             "Turbidity and sun-glint differences between the composite windows.",
             "Genuine canopy thinning or regrowth \u2014 plausible, but it cannot be separated from the options above using optical indices alone."
+          ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": [
+            {
+              "with_evidence_id": "ev-coringa_m1-ndwi-dec-635794-1849136",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "ndvi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 94.95
+            },
+            {
+              "with_evidence_id": "ev-coringa_m1-mndwi-dec-635707-1848925",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "mndwi",
+                "ndvi"
+              ],
+              "overlap_percent_of_smaller": 72.79
+            }
           ]
         },
         "method_provenance": {
@@ -9331,15 +9566,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:30Z",
-          "output_checksum": "a04fb61fa9c95064c1add7d799a13bcee4abdabd9a1c239e97d8a27da61bd5b6"
+          "generated_utc": "2026-11-07T19:09:28Z",
+          "output_checksum": "c4862166685c9f59e25066abdc7c516156c90f2b2f6814e1dd3591579aacb338"
         }
       }
     },
@@ -10216,13 +10451,44 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 665,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 1.3142
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 418,
+                "retained_fraction_of_region": 0.8597,
+                "component_growth_factor": 0.8261
+              }
+            },
+            "label": "spatially persistent across tested thresholds",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal or tidal water-level differences change the spectral mix of the cell.",
             "Turbidity and sun-glint differences between the composite windows.",
             "Genuine canopy thinning or regrowth \u2014 plausible, but it cannot be separated from the options above using optical indices alone."
+          ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": [
+            {
+              "with_evidence_id": "ev-coringa_m1-ndwi-dec-635794-1849136",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "ndvi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 95.03
+            }
           ]
         },
         "method_provenance": {
@@ -10248,15 +10514,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:30Z",
-          "output_checksum": "bd6f7d8a4e7a4353f6960d459fcc869ab71b503aa706a7d50596116b0c5e4373"
+          "generated_utc": "2026-11-07T19:09:28Z",
+          "output_checksum": "72d2ac8952eb3a9a859bacba56613b336eebd4d75dc8aff4a7c2b8d894781d33"
         }
       }
     },
@@ -11485,14 +11751,35 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 2864,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 5.6938
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 95,
+                "retained_fraction_of_region": 0.7078,
+                "component_growth_factor": 0.1889
+              }
+            },
+            "label": "threshold-sensitive",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal or tidal water-level differences change the spectral mix of the cell.",
             "Turbidity and sun-glint differences between the composite windows.",
             "Genuine canopy thinning or regrowth \u2014 plausible, but it cannot be separated from the options above using optical indices alone."
           ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": []
         },
         "method_provenance": {
           "algorithm": "threshold candidate mask \u2192 4-connected components (scipy.ndimage.label) \u2192 MMU filter \u2192 top-K selection",
@@ -11517,15 +11804,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:30Z",
-          "output_checksum": "96f0b621b336b28342a63e7af69077126dcb565f9cbe047196bca38193597e86"
+          "generated_utc": "2026-11-07T19:09:28Z",
+          "output_checksum": "eab178e93ebd9a4d54bcafb85adbb96e963bf6aa0f46963ed25aa307203e84ac"
         }
       }
     },
@@ -13212,13 +13499,62 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 1430,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 1.215
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 564,
+                "retained_fraction_of_region": 0.8624,
+                "component_growth_factor": 0.4792
+              }
+            },
+            "label": "moderately threshold-sensitive",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal or tidal water-level differences change the spectral mix of the cell.",
             "Turbidity and sun-glint differences between the composite windows.",
             "Genuine canopy thinning or regrowth \u2014 plausible, but it cannot be separated from the options above using optical indices alone."
+          ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": [
+            {
+              "with_evidence_id": "ev-coringa_m1-ndvi-inc-635913-1849407",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "ndvi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 95.03
+            },
+            {
+              "with_evidence_id": "ev-coringa_m1-ndvi-inc-635684-1848892",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "ndvi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 94.95
+            },
+            {
+              "with_evidence_id": "ev-coringa_m1-mndwi-dec-635707-1848925",
+              "relation": "same-direction-overlap",
+              "indices": [
+                "mndwi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 88.75
+            }
           ]
         },
         "method_provenance": {
@@ -13244,15 +13580,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:30Z",
-          "output_checksum": "46535bef81f04fa5224225fe10a1064fbb0f55609083b76f840a9d5dd588ff1a"
+          "generated_utc": "2026-11-07T19:09:28Z",
+          "output_checksum": "d14f3a8acadc5a22ee517861b130372cc8a67f700c7376a0bc3b274f6ce34bf7"
         }
       }
     },
@@ -14507,13 +14843,44 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 2196,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 4.3059
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 187,
+                "retained_fraction_of_region": 0.6627,
+                "component_growth_factor": 0.3667
+              }
+            },
+            "label": "threshold-sensitive",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal or tidal water-level differences change the spectral mix of the cell.",
             "Turbidity and sun-glint differences between the composite windows.",
             "Genuine canopy thinning or regrowth \u2014 plausible, but it cannot be separated from the options above using optical indices alone."
+          ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": [
+            {
+              "with_evidence_id": "ev-coringa_m1-mndwi-dec-635630-1851392",
+              "relation": "same-direction-overlap",
+              "indices": [
+                "mndwi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 86.27
+            }
           ]
         },
         "method_provenance": {
@@ -14539,15 +14906,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:30Z",
-          "output_checksum": "f5c72ae60597e51a90ddfa8980200ec665227d180d299c753da0619890d86f50"
+          "generated_utc": "2026-11-07T19:09:28Z",
+          "output_checksum": "27d1bf1219c36c93561791dd115508854e3f767c8ec8c1231d19c05545372c3d"
         }
       }
     },
@@ -15318,13 +15685,44 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 592,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 1.4265
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 263,
+                "retained_fraction_of_region": 0.8337,
+                "component_growth_factor": 0.6337
+              }
+            },
+            "label": "spatially persistent across tested thresholds",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal or tidal water-level differences change the spectral mix of the cell.",
             "Turbidity and sun-glint differences between the composite windows.",
             "Genuine canopy thinning or regrowth \u2014 plausible, but it cannot be separated from the options above using optical indices alone."
+          ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": [
+            {
+              "with_evidence_id": "ev-coringa_m1-mndwi-dec-634558-1849080",
+              "relation": "same-direction-overlap",
+              "indices": [
+                "mndwi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 79.51
+            }
           ]
         },
         "method_provenance": {
@@ -15350,15 +15748,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:30Z",
-          "output_checksum": "05222f5ce0b15cc2fc84cc79615946350bc399bf62e81f70a3e471c92893936b"
+          "generated_utc": "2026-11-07T19:09:28Z",
+          "output_checksum": "df45bbe9ce65d1615985bb77f368247db4c2b4badbcd52afd5f7fe7a95912a03"
         }
       }
     },
@@ -16341,13 +16739,44 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 1235,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 3.2415
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 56,
+                "retained_fraction_of_region": 0.5564,
+                "component_growth_factor": 0.147
+              }
+            },
+            "label": "threshold-sensitive",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal or tidal water-level differences change the spectral mix of the cell.",
             "Turbidity and sun-glint differences between the composite windows.",
             "Genuine canopy thinning or regrowth \u2014 plausible, but it cannot be separated from the options above using optical indices alone."
+          ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": [
+            {
+              "with_evidence_id": "ev-coringa_m1-ndvi-inc-636842-1850257",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "ndvi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 99.72
+            }
           ]
         },
         "method_provenance": {
@@ -16373,15 +16802,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:30Z",
-          "output_checksum": "ed447e8e3b86217a6a40281162072445e1565490a73ce1fe3d278740185f5b3f"
+          "generated_utc": "2026-11-07T19:09:28Z",
+          "output_checksum": "cc22e0f911ae7c1f409588c6872a055b854f9d9487572f237f0ce0d8bc11bbe3"
         }
       }
     },
@@ -17152,13 +17581,44 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 2196,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 8.1333
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 165,
+                "retained_fraction_of_region": 0.8074,
+                "component_growth_factor": 0.6111
+              }
+            },
+            "label": "threshold-sensitive",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal or tidal water-level differences change the spectral mix of the cell.",
             "Turbidity and sun-glint differences between the composite windows.",
             "Genuine canopy thinning or regrowth \u2014 plausible, but it cannot be separated from the options above using optical indices alone."
+          ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": [
+            {
+              "with_evidence_id": "ev-coringa_m1-mndwi-dec-635630-1851392",
+              "relation": "same-direction-overlap",
+              "indices": [
+                "mndwi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 95.18
+            }
           ]
         },
         "method_provenance": {
@@ -17184,15 +17644,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:30Z",
-          "output_checksum": "35ced7cf515bf72a51d674a7251c222040fe2d663cf58f11acdc247cf77c4a03"
+          "generated_utc": "2026-11-07T19:09:28Z",
+          "output_checksum": "a9f3c947a0503589f83fd4f4c7cada27211eb0f2f08d6d7b10db7257da72e654"
         }
       }
     },
@@ -19521,13 +19981,53 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 5304,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 3.0999
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 1041,
+                "retained_fraction_of_region": 0.6569,
+                "component_growth_factor": 0.6084
+              }
+            },
+            "label": "threshold-sensitive",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal or tidal water-level differences change the spectral mix of the cell.",
             "Turbidity and sun-glint differences between the composite windows.",
             "Genuine canopy thinning or regrowth \u2014 plausible, but it cannot be separated from the options above using optical indices alone."
+          ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": [
+            {
+              "with_evidence_id": "ev-coringa_m1-ndvi-dec-634514-1848248",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "ndvi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 99.26
+            },
+            {
+              "with_evidence_id": "ev-coringa_m1-mndwi-inc-633719-1848250",
+              "relation": "same-direction-overlap",
+              "indices": [
+                "mndwi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 95.44
+            }
           ]
         },
         "method_provenance": {
@@ -19553,15 +20053,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:30Z",
-          "output_checksum": "84eea072cd69cca4ae1c646f650da6259f0f6589480060f8abe4d312d66ed0c6"
+          "generated_utc": "2026-11-07T19:09:28Z",
+          "output_checksum": "4d019992ddc2f419c5e299733fee1132d3941779381e0bac76da94eecefd6d9b"
         }
       }
     },
@@ -20040,13 +20540,53 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 1128,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 2.6793
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 397,
+                "retained_fraction_of_region": 0.943,
+                "component_growth_factor": 0.943
+              }
+            },
+            "label": "moderately threshold-sensitive",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal or tidal water-level differences change the spectral mix of the cell.",
             "Turbidity and sun-glint differences between the composite windows.",
             "Genuine canopy thinning or regrowth \u2014 plausible, but it cannot be separated from the options above using optical indices alone."
+          ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": [
+            {
+              "with_evidence_id": "ev-coringa_m1-mndwi-inc-634475-1851277",
+              "relation": "same-direction-overlap",
+              "indices": [
+                "mndwi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 86.68
+            },
+            {
+              "with_evidence_id": "ev-coringa_m1-ndvi-dec-634628-1851053",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "ndvi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 54.38
+            }
           ]
         },
         "method_provenance": {
@@ -20072,15 +20612,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:30Z",
-          "output_checksum": "ebbc3eda6e6b790f6e12bc05f2d2c94ee57727a421279cb8e9bd7a4ab814af15"
+          "generated_utc": "2026-11-07T19:09:28Z",
+          "output_checksum": "9784e1ce4456bd1fe79559c0a7deb3fffd3f6881d001972105f5cf3724bfd83a"
         }
       }
     },
@@ -20483,13 +21023,44 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 440,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 1.2088
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 313,
+                "retained_fraction_of_region": 0.8654,
+                "component_growth_factor": 0.8599
+              }
+            },
+            "label": "spatially persistent across tested thresholds",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal or tidal water-level differences change the spectral mix of the cell.",
             "Turbidity and sun-glint differences between the composite windows.",
             "Genuine canopy thinning or regrowth \u2014 plausible, but it cannot be separated from the options above using optical indices alone."
+          ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": [
+            {
+              "with_evidence_id": "ev-coringa_m1-mndwi-inc-636496-1850444",
+              "relation": "same-direction-overlap",
+              "indices": [
+                "mndwi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 98.08
+            }
           ]
         },
         "method_provenance": {
@@ -20515,15 +21086,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:30Z",
-          "output_checksum": "dbb2ecc0d8407a7d7c1387b743dbbc9394c4754d89293153976df2977b2c0eb1"
+          "generated_utc": "2026-11-07T19:09:28Z",
+          "output_checksum": "1109d3f2be73d9618d187c425a7a905c6a7465af69e2467b44fa0f105950aae6"
         }
       }
     },
@@ -21348,13 +21919,44 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 5304,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 17.9797
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 26,
+                "retained_fraction_of_region": 0.3153,
+                "component_growth_factor": 0.0881
+              }
+            },
+            "label": "threshold-sensitive",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal or tidal water-level differences change the spectral mix of the cell.",
             "Turbidity and sun-glint differences between the composite windows.",
             "Genuine canopy thinning or regrowth \u2014 plausible, but it cannot be separated from the options above using optical indices alone."
+          ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": [
+            {
+              "with_evidence_id": "ev-coringa_m1-mndwi-inc-633719-1848250",
+              "relation": "same-direction-overlap",
+              "indices": [
+                "mndwi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 100.0
+            }
           ]
         },
         "method_provenance": {
@@ -21380,15 +21982,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:30Z",
-          "output_checksum": "9b0a2f66ba47659ec20af9c05a09891cb12551198898269a0daefd9c78ed8be8"
+          "generated_utc": "2026-11-07T19:09:28Z",
+          "output_checksum": "cc9e45e00e9d2da4607062f2d78e9ca7541a7d01c0e63f2e353a199e084668e4"
         }
       }
     },
@@ -21703,14 +22305,35 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 311,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 1.2958
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 222,
+                "retained_fraction_of_region": 0.925,
+                "component_growth_factor": 0.925
+              }
+            },
+            "label": "spatially persistent across tested thresholds",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal or tidal water-level differences change the spectral mix of the cell.",
             "Turbidity and sun-glint differences between the composite windows.",
             "Genuine canopy thinning or regrowth \u2014 plausible, but it cannot be separated from the options above using optical indices alone."
           ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": []
         },
         "method_provenance": {
           "algorithm": "threshold candidate mask \u2192 4-connected components (scipy.ndimage.label) \u2192 MMU filter \u2192 top-K selection",
@@ -21735,15 +22358,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:30Z",
-          "output_checksum": "b44c798301daebef7cb30160dda31e89263e2a3138c5c257d18abe0d9316d0d2"
+          "generated_utc": "2026-11-07T19:09:28Z",
+          "output_checksum": "8d96f87f2c32f5d8321585c476197d062646c545c79a07b957fd86185d415bc6"
         }
       }
     },
@@ -24310,13 +24933,53 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 6811,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 3.7671
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 964,
+                "retained_fraction_of_region": 0.7788,
+                "component_growth_factor": 0.5332
+              }
+            },
+            "label": "threshold-sensitive",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal or tidal water-level differences change the spectral mix of the cell.",
             "Turbidity and sun-glint differences between the composite windows.",
             "Genuine canopy thinning or regrowth \u2014 plausible, but it cannot be separated from the options above using optical indices alone."
+          ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": [
+            {
+              "with_evidence_id": "ev-coringa_m1-ndwi-dec-635624-1851210",
+              "relation": "same-direction-overlap",
+              "indices": [
+                "mndwi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 95.18
+            },
+            {
+              "with_evidence_id": "ev-coringa_m1-ndwi-dec-635606-1851534",
+              "relation": "same-direction-overlap",
+              "indices": [
+                "mndwi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 86.27
+            }
           ]
         },
         "method_provenance": {
@@ -24342,15 +25005,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:30Z",
-          "output_checksum": "04b44929134fa16c24e031cf72c49d0062c1d6fbd3a0c90f335fb1551a806679"
+          "generated_utc": "2026-11-07T19:09:28Z",
+          "output_checksum": "f2ff857461fe556777fd004e61cae54dfeb78f3562e27703494e8c65bd97c83b"
         }
       }
     },
@@ -26087,14 +26750,35 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 6811,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 8.4925
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 431,
+                "retained_fraction_of_region": 0.712,
+                "component_growth_factor": 0.5374
+              }
+            },
+            "label": "threshold-sensitive",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal or tidal water-level differences change the spectral mix of the cell.",
             "Turbidity and sun-glint differences between the composite windows.",
             "Genuine canopy thinning or regrowth \u2014 plausible, but it cannot be separated from the options above using optical indices alone."
           ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": []
         },
         "method_provenance": {
           "algorithm": "threshold candidate mask \u2192 4-connected components (scipy.ndimage.label) \u2192 MMU filter \u2192 top-K selection",
@@ -26119,15 +26803,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:30Z",
-          "output_checksum": "3bdd78197b8270ea4340e0cd42a28b5904e64dd1f58f19cbecce48333c7aa612"
+          "generated_utc": "2026-11-07T19:09:28Z",
+          "output_checksum": "889173d511dddbc6faefa39e30f78cffb5d1bc58b4155fd4dd37299a41b2ff04"
         }
       }
     },
@@ -27120,14 +27804,35 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 1746,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 3.0957
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 155,
+                "retained_fraction_of_region": 0.4716,
+                "component_growth_factor": 0.2748
+              }
+            },
+            "label": "threshold-sensitive",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal or tidal water-level differences change the spectral mix of the cell.",
             "Turbidity and sun-glint differences between the composite windows.",
             "Genuine canopy thinning or regrowth \u2014 plausible, but it cannot be separated from the options above using optical indices alone."
           ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": []
         },
         "method_provenance": {
           "algorithm": "threshold candidate mask \u2192 4-connected components (scipy.ndimage.label) \u2192 MMU filter \u2192 top-K selection",
@@ -27152,15 +27857,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:30Z",
-          "output_checksum": "4e53db490677c71a72f059c3773e4e9f42e5a2c87f69e0b1df16ee16a2f215aa"
+          "generated_utc": "2026-11-07T19:09:28Z",
+          "output_checksum": "414aaf29a11cb9b303ad14e5956e592542fa83cf54970fe5004cdcab53870864"
         }
       }
     },
@@ -28255,13 +28960,44 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 866,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 1.7217
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 295,
+                "retained_fraction_of_region": 0.6759,
+                "component_growth_factor": 0.5865
+              }
+            },
+            "label": "moderately threshold-sensitive",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal or tidal water-level differences change the spectral mix of the cell.",
             "Turbidity and sun-glint differences between the composite windows.",
             "Genuine canopy thinning or regrowth \u2014 plausible, but it cannot be separated from the options above using optical indices alone."
+          ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": [
+            {
+              "with_evidence_id": "ev-coringa_m1-ndwi-dec-634573-1848995",
+              "relation": "same-direction-overlap",
+              "indices": [
+                "mndwi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 79.51
+            }
           ]
         },
         "method_provenance": {
@@ -28287,15 +29023,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:30Z",
-          "output_checksum": "3db7b93a0033b6847bdfd6c5f214f2f22943561103c642c527505a9bdbae891b"
+          "generated_utc": "2026-11-07T19:09:28Z",
+          "output_checksum": "15885d5bc43b9aaec9d4256f86a171711cb69432340e4737bb33164545ff83ae"
         }
       }
     },
@@ -29248,13 +29984,53 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 4177,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 8.5419
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 358,
+                "retained_fraction_of_region": 0.773,
+                "component_growth_factor": 0.7321
+              }
+            },
+            "label": "threshold-sensitive",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal or tidal water-level differences change the spectral mix of the cell.",
             "Turbidity and sun-glint differences between the composite windows.",
             "Genuine canopy thinning or regrowth \u2014 plausible, but it cannot be separated from the options above using optical indices alone."
+          ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": [
+            {
+              "with_evidence_id": "ev-coringa_m1-ndwi-dec-635794-1849136",
+              "relation": "same-direction-overlap",
+              "indices": [
+                "mndwi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 88.75
+            },
+            {
+              "with_evidence_id": "ev-coringa_m1-ndvi-inc-635684-1848892",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "mndwi",
+                "ndvi"
+              ],
+              "overlap_percent_of_smaller": 72.79
+            }
           ]
         },
         "method_provenance": {
@@ -29280,15 +30056,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:30Z",
-          "output_checksum": "63176fae8306d7fb0461756e41449c269ca53b30cb1abe903f41bdad484efadb"
+          "generated_utc": "2026-11-07T19:09:28Z",
+          "output_checksum": "42961edf1089abb585f6f069c391ad55b8fcb25f7c9cafb650844d1193852800"
         }
       }
     },
@@ -34387,13 +35163,62 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 11457,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 1.1964
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 5878,
+                "retained_fraction_of_region": 0.7954,
+                "component_growth_factor": 0.6138
+              }
+            },
+            "label": "moderately threshold-sensitive",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal or tidal water-level differences change the spectral mix of the cell.",
             "Turbidity and sun-glint differences between the composite windows.",
             "Genuine canopy thinning or regrowth \u2014 plausible, but it cannot be separated from the options above using optical indices alone."
+          ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": [
+            {
+              "with_evidence_id": "ev-coringa_m1-ndwi-inc-633833-1848427",
+              "relation": "same-direction-overlap",
+              "indices": [
+                "mndwi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 100.0
+            },
+            {
+              "with_evidence_id": "ev-coringa_m1-ndwi-inc-634474-1848167",
+              "relation": "same-direction-overlap",
+              "indices": [
+                "mndwi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 95.44
+            },
+            {
+              "with_evidence_id": "ev-coringa_m1-ndvi-dec-634514-1848248",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "mndwi",
+                "ndvi"
+              ],
+              "overlap_percent_of_smaller": 94.14
+            }
           ]
         },
         "method_provenance": {
@@ -34419,15 +35244,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:30Z",
-          "output_checksum": "723c174495f7e7e7612b70d06e40c169cfb435dc013837def21697b6d3bdd800"
+          "generated_utc": "2026-11-07T19:09:28Z",
+          "output_checksum": "6b69aed5832714894d29670eeb0660e4f16d5b4ead8523de88533cdccdbe628b"
         }
       }
     },
@@ -35210,13 +36035,44 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 1274,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 1.0769
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 1067,
+                "retained_fraction_of_region": 0.9155,
+                "component_growth_factor": 0.9019
+              }
+            },
+            "label": "spatially persistent across tested thresholds",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal or tidal water-level differences change the spectral mix of the cell.",
             "Turbidity and sun-glint differences between the composite windows.",
             "Genuine canopy thinning or regrowth \u2014 plausible, but it cannot be separated from the options above using optical indices alone."
+          ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": [
+            {
+              "with_evidence_id": "ev-coringa_m1-ndwi-inc-636516-1850403",
+              "relation": "same-direction-overlap",
+              "indices": [
+                "mndwi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 98.08
+            }
           ]
         },
         "method_provenance": {
@@ -35242,15 +36098,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:30Z",
-          "output_checksum": "c95e909195f95623d4eb4d0c9291542d88cc59fe96597fa830ede179708af545"
+          "generated_utc": "2026-11-07T19:09:28Z",
+          "output_checksum": "ba968b1f171b73a8739cccca8f2329bffe1fe565d574582fcb8643d5cf624c77"
         }
       }
     },
@@ -37051,14 +37907,35 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 1227,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 1.3802
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 192,
+                "retained_fraction_of_region": 0.7019,
+                "component_growth_factor": 0.216
+              }
+            },
+            "label": "threshold-sensitive",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal or tidal water-level differences change the spectral mix of the cell.",
             "Turbidity and sun-glint differences between the composite windows.",
             "Genuine canopy thinning or regrowth \u2014 plausible, but it cannot be separated from the options above using optical indices alone."
           ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": []
         },
         "method_provenance": {
           "algorithm": "threshold candidate mask \u2192 4-connected components (scipy.ndimage.label) \u2192 MMU filter \u2192 top-K selection",
@@ -37083,15 +37960,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:30Z",
-          "output_checksum": "4ee00de202d55a5ce6b1785478f092cba7ad4ce65e2aa5db81e37b6691207ce9"
+          "generated_utc": "2026-11-07T19:09:28Z",
+          "output_checksum": "cd8db50c7950be5af27402a3f83f82b448d1853251091db6ecb31657480274f1"
         }
       }
     },
@@ -37736,14 +38613,35 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 733,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 1.1766
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 515,
+                "retained_fraction_of_region": 0.8555,
+                "component_growth_factor": 0.8266
+              }
+            },
+            "label": "spatially persistent across tested thresholds",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal or tidal water-level differences change the spectral mix of the cell.",
             "Turbidity and sun-glint differences between the composite windows.",
             "Genuine canopy thinning or regrowth \u2014 plausible, but it cannot be separated from the options above using optical indices alone."
           ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": []
         },
         "method_provenance": {
           "algorithm": "threshold candidate mask \u2192 4-connected components (scipy.ndimage.label) \u2192 MMU filter \u2192 top-K selection",
@@ -37768,15 +38666,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:30Z",
-          "output_checksum": "3d0fb09a238fec0e8543aeda1dd1bb402dd5afe18f3c111ba148dccf47b92183"
+          "generated_utc": "2026-11-07T19:09:28Z",
+          "output_checksum": "573aa6f2eeed1cca8a1eaeed5fe44e10f7dd123fca84bbc36b329cf7ff4ed298"
         }
       }
     },
@@ -38395,13 +39293,53 @@
             "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
           ],
           "threshold_sensitivity": {
-            "status": "evaluated in M4-R2 G6",
-            "result": null
+            "status": "computed",
+            "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+            "neighbour_delta": 0.05,
+            "neighbours": {
+              "t_minus_0.05": {
+                "threshold": 0.1,
+                "component_pixels": 916,
+                "retained_fraction_of_region": 1.0,
+                "component_growth_factor": 1.5421
+              },
+              "t_plus_0.05": {
+                "threshold": 0.2,
+                "component_pixels": 366,
+                "retained_fraction_of_region": 0.8939,
+                "component_growth_factor": 0.6162
+              }
+            },
+            "label": "spatially persistent across tested thresholds",
+            "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
           },
           "confounding_factors": [
             "Seasonal or tidal water-level differences change the spectral mix of the cell.",
             "Turbidity and sun-glint differences between the composite windows.",
             "Genuine canopy thinning or regrowth \u2014 plausible, but it cannot be separated from the options above using optical indices alone."
+          ]
+        },
+        "relationships": {
+          "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+          "links": [
+            {
+              "with_evidence_id": "ev-coringa_m1-ndwi-inc-634431-1851226",
+              "relation": "same-direction-overlap",
+              "indices": [
+                "mndwi",
+                "ndwi"
+              ],
+              "overlap_percent_of_smaller": 86.68
+            },
+            {
+              "with_evidence_id": "ev-coringa_m1-ndvi-dec-634628-1851053",
+              "relation": "opposite-direction-overlap",
+              "indices": [
+                "mndwi",
+                "ndvi"
+              ],
+              "overlap_percent_of_smaller": 30.8
+            }
           ]
         },
         "method_provenance": {
@@ -38427,15 +39365,15 @@
               "failed_checks": []
             }
           },
-          "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+          "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
           "software": {
             "numpy": "2.2.6",
             "rasterio": "1.4.3",
             "scipy": "1.17.1",
             "pyproj": "3.7.1"
           },
-          "generated_utc": "2026-11-07T19:02:30Z",
-          "output_checksum": "431000a392de6d2411cbdfa3e324d7823490682a6c21574f54cd82b61cb75e76"
+          "generated_utc": "2026-11-07T19:09:28Z",
+          "output_checksum": "b3b95d3e0388ade0c151b82c593dbe79e85ca1b7ef50cfa8057b253d353762cf"
         }
       }
     }
@@ -38451,7 +39389,12 @@
       "NDVI",
       "NDWI"
     ],
-    "no_finding_statement": null
+    "no_finding_statement": null,
+    "related_findings": 20,
+    "relationship_kinds": [
+      "opposite-direction-overlap",
+      "same-direction-overlap"
+    ]
   },
   "limitations": [
     "Tidal stage and turbidity are uncontrolled confounders.",

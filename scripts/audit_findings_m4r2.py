@@ -34,6 +34,7 @@ import numpy as np
 import rasterio
 from pyproj import CRS, Transformer
 from shapely.geometry import Polygon as ShapelyPolygon
+from shapely.ops import transform as shp_transform
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
@@ -330,6 +331,57 @@ def audit_experiment(experiment_id: str, processed_rel: str, report: Report) -> 
             and ev["input_measurements"]["analysis_grid"]["crs"],
             f"{fid}: input measurement definition populated",
         )
+        # G6 sensitivity: label matches the recorded rule inputs.
+        ts = ev["evidence_quality"]["threshold_sensitivity"]
+        nb = ts.get("neighbours", {})
+        ok_label = ts["label"] in (
+            "spatially persistent across tested thresholds",
+            "threshold-sensitive",
+            "moderately threshold-sensitive",
+        )
+        report.check(ok_label and "t_plus_0.05" in nb, f"{fid}: sensitivity label + neighbour data present")
+
+    # Relationships: every link must satisfy the recorded overlap rule,
+    # independently recomputed with shapely on the equal-area UTM polygons.
+    by_id = {f["evidence_id"]: f for f in recorded_findings}
+    to_utm_rel = None
+    if len(recorded_findings) >= 2:
+        to_utm_rel = Transformer.from_crs(
+            CRS.from_epsg(4326),
+            CRS.from_string(findings_doc.get("grid", {}).get("crs", "")) if findings_doc.get("grid") else CRS.from_string(
+                # fall back to the recorded analysis grid of any record
+                recorded_findings[0]["evidence"]["input_measurements"]["analysis_grid"]["crs"]
+            ),
+            always_xy=True,
+        )
+        polys = {}
+        for f in recorded_findings:
+            rings = f["geometry_wgs84"]["coordinates"]
+            polys[f["evidence_id"]] = shp_transform(
+                lambda x, y, t=to_utm_rel: t.transform(x, y), ShapelyPolygon(rings[0], rings[1:])
+            )
+    for f in recorded_findings:
+        fid = f"{experiment_id}/{f.get('display_id', f['id'])}"
+        links = f["evidence"]["relationships"]["links"]
+        ok_all = True
+        for link in links:
+            other = by_id.get(link["with_evidence_id"])
+            if other is None or link["with_evidence_id"] == f["evidence_id"]:
+                ok_all = False
+                continue
+            inter = polys[f["evidence_id"]].intersection(polys[other["evidence_id"]]).area
+            smaller = min(polys[f["evidence_id"]].area, polys[other["evidence_id"]].area)
+            overlap = inter / smaller * 100.0 if smaller > 0 else 0.0
+            if overlap < 9.5 or abs(overlap - link["overlap_percent_of_smaller"]) > 1.0:
+                ok_all = False
+            expected_rel = (
+                "same-direction-overlap"
+                if f["direction"] == other["direction"]
+                else "opposite-direction-overlap"
+            )
+            if link["relation"] != expected_rel or f["index"] == other["index"]:
+                ok_all = False
+        report.check(ok_all, f"{fid}: relationship links satisfy the recorded overlap rule")
 
     return {
         "experiment_id": experiment_id,

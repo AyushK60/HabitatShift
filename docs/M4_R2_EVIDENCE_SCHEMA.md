@@ -44,9 +44,29 @@ only.
 | `source_observations` | earlier/later `item_ids` (scene IDs), `observation_dates`, `anchor_date`, `composite_method`, `observation_count`, `valid_pixels`, `aoi_pixels`, `valid_fraction`; `dataset` (collection, provider, license, processing level, attribution); `study_aoi` (bounds, area, pixels) |
 | `input_measurements` | index, label, formula, bands, native band resolution + resolution note, `delta_definition` (`I_later − I_earlier`), `threshold`, `threshold_rule` (`|ΔI| ≥ t` inclusive), delta raster path + sha256, valid-mask path + sha256, `analysis_grid` (CRS, resolution, size, transform, pixel area) |
 | `spatial_measurements` | `pixel_count`, `area_ha` + area units/convention, `mean_delta`, `median_delta`, `valid_pixel_denominator`, `share_of_common_valid_percent`, `hole_pixel_count`, centroids (UTM + WGS84), geometry reference |
-| `evidence_quality` | earlier/later valid fractions, `shared_valid_fraction_of_aoi`, `observation_support` (counts + minimum required), `masking_and_cloud_limitations` (study's recorded limitations), `threshold_sensitivity` (G6 result or explicit `null` + status), `confounding_factors` (deterministic study-specific list) |
+| `evidence_quality` | earlier/later valid fractions, `shared_valid_fraction_of_aoi`, `observation_support` (counts + minimum required), `masking_and_cloud_limitations` (study's recorded limitations), `threshold_sensitivity` (computed G6 evaluation — see below), `confounding_factors` (deterministic study-specific list) |
+| `relationships` | `overlap_rule` + `links[]`: every same-experiment finding whose equal-area UTM polygon overlaps this one by ≥ 10 % of the smaller region. `relation` is `same-direction-overlap` (multiple measurements of one candidate change — not independent events) or `opposite-direction-overlap` (different candidate signals in the same area, e.g. vegetation vs water). Cross-index only (same-index components are disjoint by construction); strongest overlap first, max 8 links. Nothing is merged or discarded. |
 | `method_provenance` | `algorithm`, `algorithm_version` (pipeline version), `parameters` (threshold, MMU px + ha, top-K, connectivity), `input_hashes` (delta + mask sha256), `source_experiment_run` (experiment id, run timestamp, pipeline verification result), `git_commit`, `software` (numpy/rasterio/scipy/pyproj versions), `generated_utc`, `output_checksum` |
 | interpretation (by reference) | `finding.interpretation`: title, location, observation period, observed measurement, meaning, explanations, evidence strength, cannot-conclude, source |
+
+## Threshold sensitivity (descriptive, never a score)
+
+`evidence_quality.threshold_sensitivity` records, per finding, the
+containing component's behaviour at t ± 0.05 (max-overlap tracking) and a
+transparent descriptive label with its exact rule:
+
+- **spatially persistent across tested thresholds** — ≥ 80 % of the region's
+  pixels remain candidates at t + 0.05 and the component stays within 2× at
+  both neighbours;
+- **threshold-sensitive** — < 50 % retained at t + 0.05, or the component
+  grows beyond 3× / shrinks below ⅓× at a neighbour;
+- **moderately threshold-sensitive** — everything in between.
+
+A threshold-stable label is **not** a verified-change statement; it says the
+candidate footprint is robust to the threshold choice. The sensitivity
+evaluation does not consider observation-selection variability, reference-data
+uncertainty or classification uncertainty — those are different uncertainty
+sources and are not claimed to be covered.
 
 ## Honesty rules
 

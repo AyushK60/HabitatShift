@@ -1526,7 +1526,7 @@
     "schema": "habitatshift-findings/2",
     "study_id": "kathmandu_urban",
     "experiment_id": "kathmandu_m4",
-    "generated_utc": "2026-11-07T19:02:36Z",
+    "generated_utc": "2026-11-07T19:09:37Z",
     "evidence_status": "processed",
     "method": {
      "source": "frozen M1 difference rasters + common-valid masks",
@@ -1874,13 +1874,44 @@
          "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
         ],
         "threshold_sensitivity": {
-         "status": "evaluated in M4-R2 G6",
-         "result": null
+         "status": "computed",
+         "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+         "neighbour_delta": 0.05,
+         "neighbours": {
+          "t_minus_0.05": {
+           "threshold": 0.1,
+           "component_pixels": 246,
+           "retained_fraction_of_region": 1.0,
+           "component_growth_factor": 1.64
+          },
+          "t_plus_0.05": {
+           "threshold": 0.2,
+           "component_pixels": 139,
+           "retained_fraction_of_region": 0.94,
+           "component_growth_factor": 0.9267
+          }
+         },
+         "label": "spatially persistent across tested thresholds",
+         "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
         },
         "confounding_factors": [
          "New or extended impervious surfaces (candidate built-up change).",
          "Bare soil, construction sites or cleared ground between the windows.",
          "Vegetation loss on the \u0394NDVI counter-evidence panel."
+        ]
+       },
+       "relationships": {
+        "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+        "links": [
+         {
+          "with_evidence_id": "ev-kathmandu_m4-ndwi-inc-333915-3065985",
+          "relation": "opposite-direction-overlap",
+          "indices": [
+           "ndbi",
+           "ndwi"
+          ],
+          "overlap_percent_of_smaller": 97.99
+         }
         ]
        },
        "method_provenance": {
@@ -1906,15 +1937,15 @@
           "failed_checks": []
          }
         },
-        "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+        "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
         "software": {
          "numpy": "2.2.6",
          "rasterio": "1.4.3",
          "scipy": "1.17.1",
          "pyproj": "3.7.1"
         },
-        "generated_utc": "2026-11-07T19:02:36Z",
-        "output_checksum": "1d514d4299142127de3a60a97f8f54d5fe5bac5ede53157b48271b71ab62079d"
+        "generated_utc": "2026-11-07T19:09:37Z",
+        "output_checksum": "a07776c6c873237b120f1d8143439551b0eb3633134209622ec8305250a1efb4"
        }
       }
      },
@@ -2493,13 +2524,53 @@
          "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
         ],
         "threshold_sensitivity": {
-         "status": "evaluated in M4-R2 G6",
-         "result": null
+         "status": "computed",
+         "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+         "neighbour_delta": 0.05,
+         "neighbours": {
+          "t_minus_0.05": {
+           "threshold": 0.1,
+           "component_pixels": 550,
+           "retained_fraction_of_region": 1.0,
+           "component_growth_factor": 1.9298
+          },
+          "t_plus_0.05": {
+           "threshold": 0.2,
+           "component_pixels": 88,
+           "retained_fraction_of_region": 0.414,
+           "component_growth_factor": 0.3088
+          }
+         },
+         "label": "threshold-sensitive",
+         "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
         },
         "confounding_factors": [
          "New or extended impervious surfaces (candidate built-up change).",
          "Bare soil, construction sites or cleared ground between the windows.",
          "Vegetation loss on the \u0394NDVI counter-evidence panel."
+        ]
+       },
+       "relationships": {
+        "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+        "links": [
+         {
+          "with_evidence_id": "ev-kathmandu_m4-ndvi-dec-333878-3065411",
+          "relation": "opposite-direction-overlap",
+          "indices": [
+           "ndbi",
+           "ndvi"
+          ],
+          "overlap_percent_of_smaller": 85.97
+         },
+         {
+          "with_evidence_id": "ev-kathmandu_m4-ndwi-inc-333923-3065409",
+          "relation": "same-direction-overlap",
+          "indices": [
+           "ndbi",
+           "ndwi"
+          ],
+          "overlap_percent_of_smaller": 84.18
+         }
         ]
        },
        "method_provenance": {
@@ -2525,15 +2596,15 @@
           "failed_checks": []
          }
         },
-        "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+        "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
         "software": {
          "numpy": "2.2.6",
          "rasterio": "1.4.3",
          "scipy": "1.17.1",
          "pyproj": "3.7.1"
         },
-        "generated_utc": "2026-11-07T19:02:36Z",
-        "output_checksum": "d00577910dc68d507728f8e1469463869c2857754c50baf780bb7002a9376cad"
+        "generated_utc": "2026-11-07T19:09:37Z",
+        "output_checksum": "4f3f4174a7f61461bb56e285384a72fe2c7aaf243fa86c7e929fd4a5637d3fb1"
        }
       }
      },
@@ -2958,13 +3029,53 @@
          "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
         ],
         "threshold_sensitivity": {
-         "status": "evaluated in M4-R2 G6",
-         "result": null
+         "status": "computed",
+         "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+         "neighbour_delta": 0.05,
+         "neighbours": {
+          "t_minus_0.05": {
+           "threshold": 0.1,
+           "component_pixels": 170,
+           "retained_fraction_of_region": 1.0,
+           "component_growth_factor": 1.5741
+          },
+          "t_plus_0.05": {
+           "threshold": 0.2,
+           "component_pixels": 46,
+           "retained_fraction_of_region": 0.6481,
+           "component_growth_factor": 0.4259
+          }
+         },
+         "label": "moderately threshold-sensitive",
+         "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
         },
         "confounding_factors": [
          "New or extended impervious surfaces (candidate built-up change).",
          "Bare soil, construction sites or cleared ground between the windows.",
          "Vegetation loss on the \u0394NDVI counter-evidence panel."
+        ]
+       },
+       "relationships": {
+        "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+        "links": [
+         {
+          "with_evidence_id": "ev-kathmandu_m4-ndvi-dec-333822-3066504",
+          "relation": "opposite-direction-overlap",
+          "indices": [
+           "ndbi",
+           "ndvi"
+          ],
+          "overlap_percent_of_smaller": 95.36
+         },
+         {
+          "with_evidence_id": "ev-kathmandu_m4-ndwi-inc-333825-3066499",
+          "relation": "same-direction-overlap",
+          "indices": [
+           "ndbi",
+           "ndwi"
+          ],
+          "overlap_percent_of_smaller": 93.49
+         }
         ]
        },
        "method_provenance": {
@@ -2990,15 +3101,15 @@
           "failed_checks": []
          }
         },
-        "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+        "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
         "software": {
          "numpy": "2.2.6",
          "rasterio": "1.4.3",
          "scipy": "1.17.1",
          "pyproj": "3.7.1"
         },
-        "generated_utc": "2026-11-07T19:02:36Z",
-        "output_checksum": "b87f182f763e3d6b55a7704707a9c7ccad41e1f1f2a6f5b440137ae6d663d7df"
+        "generated_utc": "2026-11-07T19:09:37Z",
+        "output_checksum": "35e83e3a393a3636145dba5f753f944d02c8ddf088aef35dc3966c719f8f4a77"
        }
       }
      },
@@ -3495,13 +3606,44 @@
          "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
         ],
         "threshold_sensitivity": {
-         "status": "evaluated in M4-R2 G6",
-         "result": null
+         "status": "computed",
+         "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+         "neighbour_delta": 0.05,
+         "neighbours": {
+          "t_minus_0.05": {
+           "threshold": 0.1,
+           "component_pixels": 343,
+           "retained_fraction_of_region": 1.0,
+           "component_growth_factor": 3.1759
+          },
+          "t_plus_0.05": {
+           "threshold": 0.2,
+           "component_pixels": 18,
+           "retained_fraction_of_region": 0.3889,
+           "component_growth_factor": 0.1667
+          }
+         },
+         "label": "threshold-sensitive",
+         "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
         },
         "confounding_factors": [
          "New or extended impervious surfaces (candidate built-up change).",
          "Bare soil, construction sites or cleared ground between the windows.",
          "Vegetation loss on the \u0394NDVI counter-evidence panel."
+        ]
+       },
+       "relationships": {
+        "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+        "links": [
+         {
+          "with_evidence_id": "ev-kathmandu_m4-ndvi-dec-334628-3064956",
+          "relation": "opposite-direction-overlap",
+          "indices": [
+           "ndbi",
+           "ndvi"
+          ],
+          "overlap_percent_of_smaller": 58.3
+         }
         ]
        },
        "method_provenance": {
@@ -3527,15 +3669,15 @@
           "failed_checks": []
          }
         },
-        "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+        "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
         "software": {
          "numpy": "2.2.6",
          "rasterio": "1.4.3",
          "scipy": "1.17.1",
          "pyproj": "3.7.1"
         },
-        "generated_utc": "2026-11-07T19:02:36Z",
-        "output_checksum": "be4e9d5b0284b92be3da7694fe7b8feb43bb59b453ad8df628c2d10224e25d9b"
+        "generated_utc": "2026-11-07T19:09:37Z",
+        "output_checksum": "a7eaeb55b1e3caecabfb80a4b940379b3c7affe798a424331a004c87f5e7d9ae"
        }
       }
      },
@@ -4048,13 +4190,53 @@
          "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
         ],
         "threshold_sensitivity": {
-         "status": "evaluated in M4-R2 G6",
-         "result": null
+         "status": "computed",
+         "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+         "neighbour_delta": 0.05,
+         "neighbours": {
+          "t_minus_0.05": {
+           "threshold": 0.1,
+           "component_pixels": 221,
+           "retained_fraction_of_region": 1.0,
+           "component_growth_factor": 2.125
+          },
+          "t_plus_0.05": {
+           "threshold": 0.2,
+           "component_pixels": 16,
+           "retained_fraction_of_region": 0.3173,
+           "component_growth_factor": 0.1538
+          }
+         },
+         "label": "threshold-sensitive",
+         "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
         },
         "confounding_factors": [
          "New or extended impervious surfaces (candidate built-up change).",
          "Bare soil, construction sites or cleared ground between the windows.",
          "Vegetation loss on the \u0394NDVI counter-evidence panel."
+        ]
+       },
+       "relationships": {
+        "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+        "links": [
+         {
+          "with_evidence_id": "ev-kathmandu_m4-ndvi-dec-334230-3065284",
+          "relation": "opposite-direction-overlap",
+          "indices": [
+           "ndbi",
+           "ndvi"
+          ],
+          "overlap_percent_of_smaller": 75.01
+         },
+         {
+          "with_evidence_id": "ev-kathmandu_m4-ndwi-inc-334227-3065287",
+          "relation": "same-direction-overlap",
+          "indices": [
+           "ndbi",
+           "ndwi"
+          ],
+          "overlap_percent_of_smaller": 63.42
+         }
         ]
        },
        "method_provenance": {
@@ -4080,15 +4262,15 @@
           "failed_checks": []
          }
         },
-        "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+        "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
         "software": {
          "numpy": "2.2.6",
          "rasterio": "1.4.3",
          "scipy": "1.17.1",
          "pyproj": "3.7.1"
         },
-        "generated_utc": "2026-11-07T19:02:36Z",
-        "output_checksum": "7e2c7b9fd53ad1a7f3a293f186c99109ca5230987c705cc09c57116f981bd671"
+        "generated_utc": "2026-11-07T19:09:37Z",
+        "output_checksum": "292df1cde04c393635a2578142819f63436e9bc8677a859894ac08ccef07d2a2"
        }
       }
      },
@@ -4417,14 +4599,35 @@
          "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
         ],
         "threshold_sensitivity": {
-         "status": "evaluated in M4-R2 G6",
-         "result": null
+         "status": "computed",
+         "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+         "neighbour_delta": 0.05,
+         "neighbours": {
+          "t_minus_0.05": {
+           "threshold": 0.1,
+           "component_pixels": 236,
+           "retained_fraction_of_region": 1.0,
+           "component_growth_factor": 3.3714
+          },
+          "t_plus_0.05": {
+           "threshold": 0.2,
+           "component_pixels": 38,
+           "retained_fraction_of_region": 0.7286,
+           "component_growth_factor": 0.5429
+          }
+         },
+         "label": "threshold-sensitive",
+         "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
         },
         "confounding_factors": [
          "New or extended impervious surfaces (candidate built-up change).",
          "Bare soil, construction sites or cleared ground between the windows.",
          "Vegetation loss on the \u0394NDVI counter-evidence panel."
         ]
+       },
+       "relationships": {
+        "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+        "links": []
        },
        "method_provenance": {
         "algorithm": "threshold candidate mask \u2192 4-connected components (scipy.ndimage.label) \u2192 MMU filter \u2192 top-K selection",
@@ -4449,15 +4652,15 @@
           "failed_checks": []
          }
         },
-        "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+        "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
         "software": {
          "numpy": "2.2.6",
          "rasterio": "1.4.3",
          "scipy": "1.17.1",
          "pyproj": "3.7.1"
         },
-        "generated_utc": "2026-11-07T19:02:36Z",
-        "output_checksum": "c2a780e2218041c99036199f15ad6468a3ef28386763a50aac37d3c930fe5d84"
+        "generated_utc": "2026-11-07T19:09:37Z",
+        "output_checksum": "49496b42fb778377b11a79e2a0e9b95ae1ccde0d157b117a25e5da6d9e48d107"
        }
       }
      },
@@ -5054,13 +5257,53 @@
          "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
         ],
         "threshold_sensitivity": {
-         "status": "evaluated in M4-R2 G6",
-         "result": null
+         "status": "computed",
+         "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+         "neighbour_delta": 0.05,
+         "neighbours": {
+          "t_minus_0.05": {
+           "threshold": 0.1,
+           "component_pixels": 807,
+           "retained_fraction_of_region": 1.0,
+           "component_growth_factor": 2.1694
+          },
+          "t_plus_0.05": {
+           "threshold": 0.2,
+           "component_pixels": 261,
+           "retained_fraction_of_region": 0.7446,
+           "component_growth_factor": 0.7016
+          }
+         },
+         "label": "moderately threshold-sensitive",
+         "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
         },
         "confounding_factors": [
          "New or extended impervious surfaces (candidate built-up change).",
          "Bare soil, construction sites or cleared ground between the windows.",
          "Vegetation loss on the \u0394NDVI counter-evidence panel."
+        ]
+       },
+       "relationships": {
+        "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+        "links": [
+         {
+          "with_evidence_id": "ev-kathmandu_m4-ndwi-inc-333923-3065409",
+          "relation": "opposite-direction-overlap",
+          "indices": [
+           "ndvi",
+           "ndwi"
+          ],
+          "overlap_percent_of_smaller": 99.59
+         },
+         {
+          "with_evidence_id": "ev-kathmandu_m4-ndbi-inc-333910-3065371",
+          "relation": "opposite-direction-overlap",
+          "indices": [
+           "ndbi",
+           "ndvi"
+          ],
+          "overlap_percent_of_smaller": 85.97
+         }
         ]
        },
        "method_provenance": {
@@ -5086,15 +5329,15 @@
           "failed_checks": []
          }
         },
-        "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+        "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
         "software": {
          "numpy": "2.2.6",
          "rasterio": "1.4.3",
          "scipy": "1.17.1",
          "pyproj": "3.7.1"
         },
-        "generated_utc": "2026-11-07T19:02:36Z",
-        "output_checksum": "a3977c31d96b6e5b522a5978dcb3ae438f573d07fe883c85cc986d8c55187a94"
+        "generated_utc": "2026-11-07T19:09:37Z",
+        "output_checksum": "8e27014d7b86d9fa5cad562692b5291d6ff5ad2a99d00dd8d14f78a1d702ef02"
        }
       }
      },
@@ -5689,13 +5932,44 @@
          "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
         ],
         "threshold_sensitivity": {
-         "status": "evaluated in M4-R2 G6",
-         "result": null
+         "status": "computed",
+         "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+         "neighbour_delta": 0.05,
+         "neighbours": {
+          "t_minus_0.05": {
+           "threshold": 0.1,
+           "component_pixels": 399,
+           "retained_fraction_of_region": 1.0,
+           "component_growth_factor": 1.9183
+          },
+          "t_plus_0.05": {
+           "threshold": 0.2,
+           "component_pixels": 49,
+           "retained_fraction_of_region": 0.7308,
+           "component_growth_factor": 0.2356
+          }
+         },
+         "label": "threshold-sensitive",
+         "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
         },
         "confounding_factors": [
          "New or extended impervious surfaces (candidate built-up change).",
          "Bare soil, construction sites or cleared ground between the windows.",
          "Vegetation loss on the \u0394NDVI counter-evidence panel."
+        ]
+       },
+       "relationships": {
+        "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+        "links": [
+         {
+          "with_evidence_id": "ev-kathmandu_m4-ndbi-inc-334685-3064957",
+          "relation": "opposite-direction-overlap",
+          "indices": [
+           "ndbi",
+           "ndvi"
+          ],
+          "overlap_percent_of_smaller": 58.3
+         }
         ]
        },
        "method_provenance": {
@@ -5721,15 +5995,15 @@
           "failed_checks": []
          }
         },
-        "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+        "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
         "software": {
          "numpy": "2.2.6",
          "rasterio": "1.4.3",
          "scipy": "1.17.1",
          "pyproj": "3.7.1"
         },
-        "generated_utc": "2026-11-07T19:02:36Z",
-        "output_checksum": "f7d9ca64cc3017b58add89d2fca11caf144a1edff72af7de14163b49b9d6612d"
+        "generated_utc": "2026-11-07T19:09:37Z",
+        "output_checksum": "c181a4999a3dd3530729e41e2db132cd93509640a3dbd630574fd7eddc753035"
        }
       }
      },
@@ -6240,13 +6514,53 @@
          "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
         ],
         "threshold_sensitivity": {
-         "status": "evaluated in M4-R2 G6",
-         "result": null
+         "status": "computed",
+         "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+         "neighbour_delta": 0.05,
+         "neighbours": {
+          "t_minus_0.05": {
+           "threshold": 0.1,
+           "component_pixels": 302,
+           "retained_fraction_of_region": 1.0,
+           "component_growth_factor": 1.6413
+          },
+          "t_plus_0.05": {
+           "threshold": 0.2,
+           "component_pixels": 129,
+           "retained_fraction_of_region": 0.7337,
+           "component_growth_factor": 0.7011
+          }
+         },
+         "label": "moderately threshold-sensitive",
+         "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
         },
         "confounding_factors": [
          "New or extended impervious surfaces (candidate built-up change).",
          "Bare soil, construction sites or cleared ground between the windows.",
          "Vegetation loss on the \u0394NDVI counter-evidence panel."
+        ]
+       },
+       "relationships": {
+        "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+        "links": [
+         {
+          "with_evidence_id": "ev-kathmandu_m4-ndwi-inc-334227-3065287",
+          "relation": "opposite-direction-overlap",
+          "indices": [
+           "ndvi",
+           "ndwi"
+          ],
+          "overlap_percent_of_smaller": 94.85
+         },
+         {
+          "with_evidence_id": "ev-kathmandu_m4-ndbi-inc-334270-3065229",
+          "relation": "opposite-direction-overlap",
+          "indices": [
+           "ndbi",
+           "ndvi"
+          ],
+          "overlap_percent_of_smaller": 75.01
+         }
         ]
        },
        "method_provenance": {
@@ -6272,15 +6586,15 @@
           "failed_checks": []
          }
         },
-        "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+        "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
         "software": {
          "numpy": "2.2.6",
          "rasterio": "1.4.3",
          "scipy": "1.17.1",
          "pyproj": "3.7.1"
         },
-        "generated_utc": "2026-11-07T19:02:36Z",
-        "output_checksum": "fdc7975003f96454bbe03d8b3164d02fb0724685f0186ebb0d7656b9c0771561"
+        "generated_utc": "2026-11-07T19:09:37Z",
+        "output_checksum": "91c1aaff49517b61bcc156d712d437d700846850eec617d730602feb6c57b84e"
        }
       }
      },
@@ -6659,13 +6973,53 @@
          "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
         ],
         "threshold_sensitivity": {
-         "status": "evaluated in M4-R2 G6",
-         "result": null
+         "status": "computed",
+         "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+         "neighbour_delta": 0.05,
+         "neighbours": {
+          "t_minus_0.05": {
+           "threshold": 0.1,
+           "component_pixels": 165,
+           "retained_fraction_of_region": 1.0,
+           "component_growth_factor": 1.1458
+          },
+          "t_plus_0.05": {
+           "threshold": 0.2,
+           "component_pixels": 122,
+           "retained_fraction_of_region": 0.8472,
+           "component_growth_factor": 0.8472
+          }
+         },
+         "label": "spatially persistent across tested thresholds",
+         "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
         },
         "confounding_factors": [
          "New or extended impervious surfaces (candidate built-up change).",
          "Bare soil, construction sites or cleared ground between the windows.",
          "Vegetation loss on the \u0394NDVI counter-evidence panel."
+        ]
+       },
+       "relationships": {
+        "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+        "links": [
+         {
+          "with_evidence_id": "ev-kathmandu_m4-ndwi-inc-333825-3066499",
+          "relation": "opposite-direction-overlap",
+          "indices": [
+           "ndvi",
+           "ndwi"
+          ],
+          "overlap_percent_of_smaller": 98.45
+         },
+         {
+          "with_evidence_id": "ev-kathmandu_m4-ndbi-inc-333838-3066494",
+          "relation": "opposite-direction-overlap",
+          "indices": [
+           "ndbi",
+           "ndvi"
+          ],
+          "overlap_percent_of_smaller": 95.36
+         }
         ]
        },
        "method_provenance": {
@@ -6691,15 +7045,15 @@
           "failed_checks": []
          }
         },
-        "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+        "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
         "software": {
          "numpy": "2.2.6",
          "rasterio": "1.4.3",
          "scipy": "1.17.1",
          "pyproj": "3.7.1"
         },
-        "generated_utc": "2026-11-07T19:02:36Z",
-        "output_checksum": "7d1bb6094cf1e9fbd1252029c6e2d1abfcf23bacc0e69db2c5fc9eac564cea78"
+        "generated_utc": "2026-11-07T19:09:37Z",
+        "output_checksum": "4d467d1953054e823996bfb17fff461e1348a676262e37af33fcc4b2f135fcfd"
        }
       }
      },
@@ -7078,13 +7432,44 @@
          "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
         ],
         "threshold_sensitivity": {
-         "status": "evaluated in M4-R2 G6",
-         "result": null
+         "status": "computed",
+         "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+         "neighbour_delta": 0.05,
+         "neighbours": {
+          "t_minus_0.05": {
+           "threshold": 0.1,
+           "component_pixels": 147,
+           "retained_fraction_of_region": 1.0,
+           "component_growth_factor": 1.3486
+          },
+          "t_plus_0.05": {
+           "threshold": 0.2,
+           "component_pixels": 92,
+           "retained_fraction_of_region": 0.844,
+           "component_growth_factor": 0.844
+          }
+         },
+         "label": "spatially persistent across tested thresholds",
+         "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
         },
         "confounding_factors": [
          "New or extended impervious surfaces (candidate built-up change).",
          "Bare soil, construction sites or cleared ground between the windows.",
          "Vegetation loss on the \u0394NDVI counter-evidence panel."
+        ]
+       },
+       "relationships": {
+        "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+        "links": [
+         {
+          "with_evidence_id": "ev-kathmandu_m4-ndwi-inc-334594-3064614",
+          "relation": "opposite-direction-overlap",
+          "indices": [
+           "ndvi",
+           "ndwi"
+          ],
+          "overlap_percent_of_smaller": 96.66
+         }
         ]
        },
        "method_provenance": {
@@ -7110,15 +7495,15 @@
           "failed_checks": []
          }
         },
-        "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+        "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
         "software": {
          "numpy": "2.2.6",
          "rasterio": "1.4.3",
          "scipy": "1.17.1",
          "pyproj": "3.7.1"
         },
-        "generated_utc": "2026-11-07T19:02:36Z",
-        "output_checksum": "78f6876359af469311b4a6e7f5c29bdb3a618e7bab8726515dbc42c536ee2c31"
+        "generated_utc": "2026-11-07T19:09:37Z",
+        "output_checksum": "41eb1a1e1b10555af14c8ecf1a6955bc622169703291afa19dfe1c4e21d2f94f"
        }
       }
      },
@@ -7489,13 +7874,44 @@
          "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
         ],
         "threshold_sensitivity": {
-         "status": "evaluated in M4-R2 G6",
-         "result": null
+         "status": "computed",
+         "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+         "neighbour_delta": 0.05,
+         "neighbours": {
+          "t_minus_0.05": {
+           "threshold": 0.1,
+           "component_pixels": 129,
+           "retained_fraction_of_region": 1.0,
+           "component_growth_factor": 1.7432
+          },
+          "t_plus_0.05": {
+           "threshold": 0.2,
+           "component_pixels": 33,
+           "retained_fraction_of_region": 0.5135,
+           "component_growth_factor": 0.4459
+          }
+         },
+         "label": "moderately threshold-sensitive",
+         "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
         },
         "confounding_factors": [
          "New or extended impervious surfaces (candidate built-up change).",
          "Bare soil, construction sites or cleared ground between the windows.",
          "Vegetation loss on the \u0394NDVI counter-evidence panel."
+        ]
+       },
+       "relationships": {
+        "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+        "links": [
+         {
+          "with_evidence_id": "ev-kathmandu_m4-ndwi-dec-333898-3065673",
+          "relation": "opposite-direction-overlap",
+          "indices": [
+           "ndvi",
+           "ndwi"
+          ],
+          "overlap_percent_of_smaller": 100.0
+         }
         ]
        },
        "method_provenance": {
@@ -7521,15 +7937,15 @@
           "failed_checks": []
          }
         },
-        "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+        "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
         "software": {
          "numpy": "2.2.6",
          "rasterio": "1.4.3",
          "scipy": "1.17.1",
          "pyproj": "3.7.1"
         },
-        "generated_utc": "2026-11-07T19:02:36Z",
-        "output_checksum": "7389204c7f01f6a6a128375043137a8290b69e02f1472dbae82d9e5b91434c0d"
+        "generated_utc": "2026-11-07T19:09:37Z",
+        "output_checksum": "ae2e754984c0472eea4a6b811ee2a377e6a22e78f15042865f0632d4a5cd8126"
        }
       }
      },
@@ -7852,13 +8268,44 @@
          "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
         ],
         "threshold_sensitivity": {
-         "status": "evaluated in M4-R2 G6",
-         "result": null
+         "status": "computed",
+         "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+         "neighbour_delta": 0.05,
+         "neighbours": {
+          "t_minus_0.05": {
+           "threshold": 0.1,
+           "component_pixels": 94,
+           "retained_fraction_of_region": 1.0,
+           "component_growth_factor": 1.9583
+          },
+          "t_plus_0.05": {
+           "threshold": 0.2,
+           "component_pixels": 19,
+           "retained_fraction_of_region": 0.3958,
+           "component_growth_factor": 0.3958
+          }
+         },
+         "label": "threshold-sensitive",
+         "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
         },
         "confounding_factors": [
          "New or extended impervious surfaces (candidate built-up change).",
          "Bare soil, construction sites or cleared ground between the windows.",
          "Vegetation loss on the \u0394NDVI counter-evidence panel."
+        ]
+       },
+       "relationships": {
+        "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+        "links": [
+         {
+          "with_evidence_id": "ev-kathmandu_m4-ndvi-inc-333884-3065663",
+          "relation": "opposite-direction-overlap",
+          "indices": [
+           "ndvi",
+           "ndwi"
+          ],
+          "overlap_percent_of_smaller": 100.0
+         }
         ]
        },
        "method_provenance": {
@@ -7884,15 +8331,15 @@
           "failed_checks": []
          }
         },
-        "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+        "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
         "software": {
          "numpy": "2.2.6",
          "rasterio": "1.4.3",
          "scipy": "1.17.1",
          "pyproj": "3.7.1"
         },
-        "generated_utc": "2026-11-07T19:02:36Z",
-        "output_checksum": "cdcd0babe90a795d0c79a4b9d03375380768e0efc5b24d9fe7a3990f98a0da2a"
+        "generated_utc": "2026-11-07T19:09:37Z",
+        "output_checksum": "45722ac83e462b891e1b90c1c79da7b8dffaf76bb8b16bf9860a8b3c7e5a7b88"
        }
       }
      },
@@ -8213,14 +8660,35 @@
          "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
         ],
         "threshold_sensitivity": {
-         "status": "evaluated in M4-R2 G6",
-         "result": null
+         "status": "computed",
+         "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+         "neighbour_delta": 0.05,
+         "neighbours": {
+          "t_minus_0.05": {
+           "threshold": 0.1,
+           "component_pixels": 48,
+           "retained_fraction_of_region": 1.0,
+           "component_growth_factor": 1.7143
+          },
+          "t_plus_0.05": {
+           "threshold": 0.2,
+           "component_pixels": 12,
+           "retained_fraction_of_region": 0.6071,
+           "component_growth_factor": 0.4286
+          }
+         },
+         "label": "moderately threshold-sensitive",
+         "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
         },
         "confounding_factors": [
          "New or extended impervious surfaces (candidate built-up change).",
          "Bare soil, construction sites or cleared ground between the windows.",
          "Vegetation loss on the \u0394NDVI counter-evidence panel."
         ]
+       },
+       "relationships": {
+        "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+        "links": []
        },
        "method_provenance": {
         "algorithm": "threshold candidate mask \u2192 4-connected components (scipy.ndimage.label) \u2192 MMU filter \u2192 top-K selection",
@@ -8245,15 +8713,15 @@
           "failed_checks": []
          }
         },
-        "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+        "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
         "software": {
          "numpy": "2.2.6",
          "rasterio": "1.4.3",
          "scipy": "1.17.1",
          "pyproj": "3.7.1"
         },
-        "generated_utc": "2026-11-07T19:02:36Z",
-        "output_checksum": "b694d5e4e04db643f30b646c3b60ce90b16ad9ab2964cad96d72b65aadd5dbe7"
+        "generated_utc": "2026-11-07T19:09:37Z",
+        "output_checksum": "78647f5629bc28c0c2f2553a61558ccf6d1091d4cdf6c4565d486a6b2486737e"
        }
       }
      },
@@ -8794,13 +9262,53 @@
          "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
         ],
         "threshold_sensitivity": {
-         "status": "evaluated in M4-R2 G6",
-         "result": null
+         "status": "computed",
+         "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+         "neighbour_delta": 0.05,
+         "neighbours": {
+          "t_minus_0.05": {
+           "threshold": 0.1,
+           "component_pixels": 486,
+           "retained_fraction_of_region": 1.0,
+           "component_growth_factor": 1.9209
+          },
+          "t_plus_0.05": {
+           "threshold": 0.2,
+           "component_pixels": 62,
+           "retained_fraction_of_region": 0.3399,
+           "component_growth_factor": 0.2451
+          }
+         },
+         "label": "threshold-sensitive",
+         "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
         },
         "confounding_factors": [
          "New or extended impervious surfaces (candidate built-up change).",
          "Bare soil, construction sites or cleared ground between the windows.",
          "Vegetation loss on the \u0394NDVI counter-evidence panel."
+        ]
+       },
+       "relationships": {
+        "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+        "links": [
+         {
+          "with_evidence_id": "ev-kathmandu_m4-ndvi-dec-333878-3065411",
+          "relation": "opposite-direction-overlap",
+          "indices": [
+           "ndvi",
+           "ndwi"
+          ],
+          "overlap_percent_of_smaller": 99.59
+         },
+         {
+          "with_evidence_id": "ev-kathmandu_m4-ndbi-inc-333910-3065371",
+          "relation": "same-direction-overlap",
+          "indices": [
+           "ndbi",
+           "ndwi"
+          ],
+          "overlap_percent_of_smaller": 84.18
+         }
         ]
        },
        "method_provenance": {
@@ -8826,15 +9334,15 @@
           "failed_checks": []
          }
         },
-        "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+        "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
         "software": {
          "numpy": "2.2.6",
          "rasterio": "1.4.3",
          "scipy": "1.17.1",
          "pyproj": "3.7.1"
         },
-        "generated_utc": "2026-11-07T19:02:36Z",
-        "output_checksum": "91c5ba4ab7965893c7b686af735accdc81b77454bb72a7ca52e07d1bf2bec37b"
+        "generated_utc": "2026-11-07T19:09:37Z",
+        "output_checksum": "dff1ecc4d6d563fe235198a2345a1645fd1a550dddeb3ea338e1d31e0f80d0ac"
        }
       }
      },
@@ -9117,13 +9625,44 @@
          "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
         ],
         "threshold_sensitivity": {
-         "status": "evaluated in M4-R2 G6",
-         "result": null
+         "status": "computed",
+         "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+         "neighbour_delta": 0.05,
+         "neighbours": {
+          "t_minus_0.05": {
+           "threshold": 0.1,
+           "component_pixels": 208,
+           "retained_fraction_of_region": 1.0,
+           "component_growth_factor": 1.0722
+          },
+          "t_plus_0.05": {
+           "threshold": 0.2,
+           "component_pixels": 188,
+           "retained_fraction_of_region": 0.9691,
+           "component_growth_factor": 0.9691
+          }
+         },
+         "label": "spatially persistent across tested thresholds",
+         "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
         },
         "confounding_factors": [
          "New or extended impervious surfaces (candidate built-up change).",
          "Bare soil, construction sites or cleared ground between the windows.",
          "Vegetation loss on the \u0394NDVI counter-evidence panel."
+        ]
+       },
+       "relationships": {
+        "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+        "links": [
+         {
+          "with_evidence_id": "ev-kathmandu_m4-ndbi-dec-333901-3066014",
+          "relation": "opposite-direction-overlap",
+          "indices": [
+           "ndbi",
+           "ndwi"
+          ],
+          "overlap_percent_of_smaller": 97.99
+         }
         ]
        },
        "method_provenance": {
@@ -9149,15 +9688,15 @@
           "failed_checks": []
          }
         },
-        "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+        "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
         "software": {
          "numpy": "2.2.6",
          "rasterio": "1.4.3",
          "scipy": "1.17.1",
          "pyproj": "3.7.1"
         },
-        "generated_utc": "2026-11-07T19:02:36Z",
-        "output_checksum": "d4876f906bfea0900f38fd151e53bf1c54d29417b1ace598a351bf4a6546166d"
+        "generated_utc": "2026-11-07T19:09:37Z",
+        "output_checksum": "58f4ab4c7fe02e66febccb35060fb9030803faa904b650366c6da909925930e7"
        }
       }
      },
@@ -9778,13 +10317,53 @@
          "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
         ],
         "threshold_sensitivity": {
-         "status": "evaluated in M4-R2 G6",
-         "result": null
+         "status": "computed",
+         "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+         "neighbour_delta": 0.05,
+         "neighbours": {
+          "t_minus_0.05": {
+           "threshold": 0.1,
+           "component_pixels": 232,
+           "retained_fraction_of_region": 1.0,
+           "component_growth_factor": 1.7059
+          },
+          "t_plus_0.05": {
+           "threshold": 0.2,
+           "component_pixels": 31,
+           "retained_fraction_of_region": 0.4118,
+           "component_growth_factor": 0.2279
+          }
+         },
+         "label": "threshold-sensitive",
+         "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
         },
         "confounding_factors": [
          "New or extended impervious surfaces (candidate built-up change).",
          "Bare soil, construction sites or cleared ground between the windows.",
          "Vegetation loss on the \u0394NDVI counter-evidence panel."
+        ]
+       },
+       "relationships": {
+        "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+        "links": [
+         {
+          "with_evidence_id": "ev-kathmandu_m4-ndvi-dec-334230-3065284",
+          "relation": "opposite-direction-overlap",
+          "indices": [
+           "ndvi",
+           "ndwi"
+          ],
+          "overlap_percent_of_smaller": 94.85
+         },
+         {
+          "with_evidence_id": "ev-kathmandu_m4-ndbi-inc-334270-3065229",
+          "relation": "same-direction-overlap",
+          "indices": [
+           "ndbi",
+           "ndwi"
+          ],
+          "overlap_percent_of_smaller": 63.42
+         }
         ]
        },
        "method_provenance": {
@@ -9810,15 +10389,15 @@
           "failed_checks": []
          }
         },
-        "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+        "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
         "software": {
          "numpy": "2.2.6",
          "rasterio": "1.4.3",
          "scipy": "1.17.1",
          "pyproj": "3.7.1"
         },
-        "generated_utc": "2026-11-07T19:02:36Z",
-        "output_checksum": "c53cf3d4b98ad7f175a7f64f7e9aa9d77b5c98457bb28c77e44e94d03dcde5c6"
+        "generated_utc": "2026-11-07T19:09:37Z",
+        "output_checksum": "e41b552fe5f46a6a5e1be80227419501f40cce642983a3d8f76facd091cd1a92"
        }
       }
      },
@@ -10203,13 +10782,53 @@
          "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
         ],
         "threshold_sensitivity": {
-         "status": "evaluated in M4-R2 G6",
-         "result": null
+         "status": "computed",
+         "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+         "neighbour_delta": 0.05,
+         "neighbours": {
+          "t_minus_0.05": {
+           "threshold": 0.1,
+           "component_pixels": 167,
+           "retained_fraction_of_region": 1.0,
+           "component_growth_factor": 1.2652
+          },
+          "t_plus_0.05": {
+           "threshold": 0.2,
+           "component_pixels": 48,
+           "retained_fraction_of_region": 0.5909,
+           "component_growth_factor": 0.3636
+          }
+         },
+         "label": "moderately threshold-sensitive",
+         "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
         },
         "confounding_factors": [
          "New or extended impervious surfaces (candidate built-up change).",
          "Bare soil, construction sites or cleared ground between the windows.",
          "Vegetation loss on the \u0394NDVI counter-evidence panel."
+        ]
+       },
+       "relationships": {
+        "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+        "links": [
+         {
+          "with_evidence_id": "ev-kathmandu_m4-ndvi-dec-333822-3066504",
+          "relation": "opposite-direction-overlap",
+          "indices": [
+           "ndvi",
+           "ndwi"
+          ],
+          "overlap_percent_of_smaller": 98.45
+         },
+         {
+          "with_evidence_id": "ev-kathmandu_m4-ndbi-inc-333838-3066494",
+          "relation": "same-direction-overlap",
+          "indices": [
+           "ndbi",
+           "ndwi"
+          ],
+          "overlap_percent_of_smaller": 93.49
+         }
         ]
        },
        "method_provenance": {
@@ -10235,15 +10854,15 @@
           "failed_checks": []
          }
         },
-        "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+        "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
         "software": {
          "numpy": "2.2.6",
          "rasterio": "1.4.3",
          "scipy": "1.17.1",
          "pyproj": "3.7.1"
         },
-        "generated_utc": "2026-11-07T19:02:36Z",
-        "output_checksum": "b1b3db2653542127b57835b0524ece21883b44c860aebc78e1121a8b59b02c94"
+        "generated_utc": "2026-11-07T19:09:37Z",
+        "output_checksum": "49666ea3b65ad4732908176d23bc17782c6b431a17fbaa1e46b88b26cd57cf3f"
        }
       }
      },
@@ -10652,13 +11271,44 @@
          "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
         ],
         "threshold_sensitivity": {
-         "status": "evaluated in M4-R2 G6",
-         "result": null
+         "status": "computed",
+         "method": "candidate mask relabelled at t \u00b1 0.05; the containing component of the recorded region is tracked (max-overlap component)",
+         "neighbour_delta": 0.05,
+         "neighbours": {
+          "t_minus_0.05": {
+           "threshold": 0.1,
+           "component_pixels": 190,
+           "retained_fraction_of_region": 1.0,
+           "component_growth_factor": 2.0879
+          },
+          "t_plus_0.05": {
+           "threshold": 0.2,
+           "component_pixels": 68,
+           "retained_fraction_of_region": 0.8022,
+           "component_growth_factor": 0.7473
+          }
+         },
+         "label": "moderately threshold-sensitive",
+         "label_rules": "spatially persistent across tested thresholds: \u2265 80 % of the region's pixels remain candidates at t + 0.05 AND the containing component area stays within 2\u00d7 at both neighbour thresholds; threshold-sensitive: < 50 % retained at t + 0.05 OR the component grows/shrinks beyond 3\u00d7/\u2153\u00d7 at a neighbour; otherwise moderately threshold-sensitive"
         },
         "confounding_factors": [
          "New or extended impervious surfaces (candidate built-up change).",
          "Bare soil, construction sites or cleared ground between the windows.",
          "Vegetation loss on the \u0394NDVI counter-evidence panel."
+        ]
+       },
+       "relationships": {
+        "overlap_rule": "equal-area UTM intersection \u2265 10 % of the smaller region",
+        "links": [
+         {
+          "with_evidence_id": "ev-kathmandu_m4-ndvi-dec-334594-3064632",
+          "relation": "opposite-direction-overlap",
+          "indices": [
+           "ndvi",
+           "ndwi"
+          ],
+          "overlap_percent_of_smaller": 96.66
+         }
         ]
        },
        "method_provenance": {
@@ -10684,15 +11334,15 @@
           "failed_checks": []
          }
         },
-        "git_commit": "3eb41003b8ee50c6ddc493c2cff2bc73c08052bd",
+        "git_commit": "2e14076d22b854de586304e4d6aa5084810fe1d3",
         "software": {
          "numpy": "2.2.6",
          "rasterio": "1.4.3",
          "scipy": "1.17.1",
          "pyproj": "3.7.1"
         },
-        "generated_utc": "2026-11-07T19:02:36Z",
-        "output_checksum": "936f6c76fbb5ca72eec7ee4dc7f6cb0aa15a679348b6536d8a325441057de259"
+        "generated_utc": "2026-11-07T19:09:37Z",
+        "output_checksum": "32561485b0ff8e52819cb81c3a7888cbff29aaf87a2f2796f0f8a3d9c9cd0be8"
        }
       }
      }
@@ -10708,7 +11358,12 @@
       "NDVI",
       "NDWI"
      ],
-     "no_finding_statement": null
+     "no_finding_statement": null,
+     "related_findings": 17,
+     "relationship_kinds": [
+      "opposite-direction-overlap",
+      "same-direction-overlap"
+     ]
     },
     "limitations": [
      "Bare soil, construction sites and dry riverbeds mimic built-up spectra.",
