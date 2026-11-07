@@ -346,16 +346,20 @@ export function qualityFromSummary(summary: M1Summary): G0Quality {
   const gridPixels = (summary.grid?.width ?? 0) * (summary.grid?.height ?? 0);
   const uniform =
     earlier?.valid_pixels === common && later?.valid_pixels === common;
+  const gridTotal = gridPixels || aoi;
   return {
     presentation_version: "bundle-derived/1",
     study_id: summary.study.study_id,
     coverage: {
       aoi_pixels: aoi,
-      grid_pixels: gridPixels || aoi,
+      grid_pixels: gridTotal,
       earlier_valid_pixels: earlier?.valid_pixels ?? 0,
       later_valid_pixels: later?.valid_pixels ?? 0,
       common_valid_pixels: common,
       masked_pixels: Math.max(0, aoi - common),
+      // M4-R1 §4: the two footprints are distinct and must never be summed.
+      outside_aoi_pixels: Math.max(0, gridTotal - aoi),
+      masked_inside_aoi_pixels: Math.max(0, aoi - common),
       earlier_valid_fraction_of_aoi: earlier?.valid_fraction ?? 0,
       later_valid_fraction_of_aoi: later?.valid_fraction ?? 0,
       common_valid_fraction_of_aoi: changeBlocks[0]?.common_valid_fraction_of_aoi ?? 0,

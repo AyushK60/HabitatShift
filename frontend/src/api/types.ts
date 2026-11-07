@@ -205,6 +205,12 @@ export interface G0Quality {
     later_valid_pixels: number;
     common_valid_pixels: number;
     masked_pixels: number;
+    /** M4-R1 §4: pixels of the rectangular grid that lie outside the AOI.
+     *  These are NOT masked-inside-AOI observations. */
+    outside_aoi_pixels?: number;
+    /** M4-R1 §4: AOI pixels unusable in at least one period
+     *  (aoi − shared valid). Never mixed with outside-AOI pixels. */
+    masked_inside_aoi_pixels?: number;
     earlier_valid_fraction_of_aoi: number;
     later_valid_fraction_of_aoi: number;
     common_valid_fraction_of_aoi: number;

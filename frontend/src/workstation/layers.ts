@@ -274,7 +274,7 @@ function defaultQualityNote(layer: LayerSpec): string {
     if (layer.quality === "masked") {
       return "Light canvas: inside the AOI with valid observations. Hatched: masked (cloud, shadow, cirrus, saturation or nodata via the SCL layer) or outside the rectangular grid footprint. No specific cause is assigned per pixel — the SCL mask does not record one.";
     }
-    return "Neutral validity colours generated from the same valid-mask rasters the engine exported. Masked pixels are never interpolated or filled.";
+    return "Neutral validity colours generated from the same valid-mask rasters the engine exported. This layer records observation validity (was there a usable, unmasked observation?), not visual image sharpness and not a general quality score. Masked pixels are never interpolated or filled.";
   }
   if (layer.kind === "period" && layer.previewKey === "false_colour") {
     return "False colour (NIR, red, green) composite; vegetation appears in red tones. Per-band 2–98 percentile stretch on valid pixels.";

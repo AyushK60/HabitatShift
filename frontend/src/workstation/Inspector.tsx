@@ -56,9 +56,9 @@ function Facts({ rows }: { rows: [string, string][] }) {
   );
 }
 
-/** Measured coverage accounting with the correct denominators (M3 §8).
- *  Percentages of AOI use AOI pixels; the masked count is stated against the
- *  rectangular raster-grid footprint. */
+/** Measured coverage accounting with the correct denominators (M3 §8,
+ *  M4-R1 §4). Outside-AOI pixels and masked-inside-AOI pixels are distinct
+ *  quantities and are never merged into one number. */
 function QualityCoverage({ quality }: { quality: G0Quality | null }) {
   const coverage = quality?.coverage;
   const px = (value: number | undefined) =>
@@ -68,26 +68,55 @@ function QualityCoverage({ quality }: { quality: G0Quality | null }) {
       ? `${((pixels / coverage.aoi_pixels) * 100).toFixed(1)}% of AOI`
       : "";
   const uniform = coverage?.uniform_common ?? false;
+  // Derived with pure display arithmetic from the recorded counts; the two
+  // footprint differences are kept separate (M4-R1 §4).
+  const aoi = coverage?.aoi_pixels;
+  const grid = coverage?.grid_pixels;
+  const common = coverage?.common_valid_pixels;
+  const outsideAoi = coverage?.outside_aoi_pixels ??
+    (aoi !== undefined && grid !== undefined ? Math.max(0, grid - aoi) : undefined);
+  const maskedInsideAoi = coverage?.masked_inside_aoi_pixels ??
+    (aoi !== undefined && common !== undefined ? Math.max(0, aoi - common) : undefined);
+  const earlierInvalidInside =
+    aoi !== undefined && coverage?.earlier_valid_pixels !== undefined
+      ? Math.max(0, aoi - coverage.earlier_valid_pixels)
+      : undefined;
+  const laterInvalidInside =
+    aoi !== undefined && coverage?.later_valid_pixels !== undefined
+      ? Math.max(0, aoi - coverage.later_valid_pixels)
+      : undefined;
   return (
     <div className="quality-coverage">
       <h4 className="insp-subheading">Measured coverage</h4>
       <Facts
         rows={[
-          ["AOI pixels", px(coverage?.aoi_pixels)],
-          ["Grid pixels (rectangular footprint)", px(coverage?.grid_pixels)],
+          ["AOI pixels (study window)", px(coverage?.aoi_pixels)],
+          ["Grid pixels (rectangular raster footprint)", px(coverage?.grid_pixels)],
+          ["Outside AOI, inside grid footprint", `${px(outsideAoi)} (not observations)`],
           [
-            "Earlier valid",
+            "Earlier valid inside AOI",
             `${px(coverage?.earlier_valid_pixels)} ${pctOfAoi(coverage?.earlier_valid_pixels)}`,
           ],
           [
-            "Later valid",
+            "Later valid inside AOI",
             `${px(coverage?.later_valid_pixels)} ${pctOfAoi(coverage?.later_valid_pixels)}`,
+          ],
+          [
+            "Earlier-invalid inside AOI",
+            `${px(earlierInvalidInside)} ${pctOfAoi(earlierInvalidInside)}`,
+          ],
+          [
+            "Later-invalid inside AOI",
+            `${px(laterInvalidInside)} ${pctOfAoi(laterInvalidInside)}`,
           ],
           [
             "Shared valid (both periods)",
             `${px(coverage?.common_valid_pixels)} ${pctOfAoi(coverage?.common_valid_pixels)}`,
           ],
-          ["Masked or outside grid", px(coverage?.masked_pixels)],
+          [
+            "Masked inside AOI (≥1 period unusable)",
+            `${px(maskedInsideAoi)} ${pctOfAoi(maskedInsideAoi)}`,
+          ],
         ]}
       />
       {uniform ? (
@@ -107,12 +136,12 @@ function QualityCoverage({ quality }: { quality: G0Quality | null }) {
         </p>
       )}
       <p className="insp-note">
-        The AOI ({px(coverage?.aoi_pixels)} px) is the hand-chosen study window;
-        the exported rasters cover a slightly larger rectangular grid (
-        {px(coverage?.grid_pixels)} px). The {px(coverage?.masked_pixels)}-pixel
-        difference between those footprints is masked/outside-AOI — it is not
-        cloud damage. SCL flags do not record a per-pixel masking cause, so no
-        specific cause is claimed anywhere.
+        Two different footprint differences appear above and are kept separate:
+        the {px(outsideAoi)} pixels outside the AOI but inside the rectangular
+        grid are simply not part of the study window (not cloud damage), while
+        the {px(maskedInsideAoi)} masked-inside-AOI pixels were excluded by the
+        SCL quality flags in at least one period. SCL flags do not record a
+        per-pixel masking cause, so no specific cause is claimed anywhere.
       </p>
     </div>
   );
