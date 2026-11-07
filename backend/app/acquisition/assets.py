@@ -172,3 +172,82 @@ def to_reflectance(dn: np.ndarray, radiometry: Radiometry) -> np.ndarray:
     # otherwise leave a plausible-looking -0.1; keep nodata masked regardless.
     work[~np.isfinite(work)] = np.nan
     return work
+
+
+#: Smallest window-mean reflectance any natural surface produces.  Individual
+#: dark pixels can be slightly negative from sensor noise, but a window *mean*
+#: below this can only come from a wrongly applied offset convention, so it is
+#: used as an empirical acceptance test on the transform that was applied.
+PHYSICAL_MIN_MEAN = -0.005
+
+#: Provenance marker embedded in the source string of empirically corrected
+#: records.  Kept free of pixel statistics so a cached record can be
+#: re-validated deterministically from metadata alone.
+EMPIRICAL_CORRECTION_MARKER = (
+    "empirical correction: declared transform rejected as non-physical "
+    "(see radiometry_evidence), applied scale-only"
+)
+
+
+def empirical_offset_rejection(
+    reflectance: dict[str, np.ndarray]
+) -> dict[str, object] | None:
+    """Return rejection evidence when the applied transform is non-physical.
+
+    BOA reflectance of any daytime natural surface is essentially
+    non-negative; deep water, shadowed terrain and sensor noise keep the
+    window *mean* of every band at or above :data:`PHYSICAL_MIN_MEAN`.  A mean
+    below that is only reachable when the declared DN convention does not
+    match the stored DNs — observed on the 2025 Earth Search reprocessing,
+    where baseline-05.11 items store ``reflectance * 10000`` without the
+    baked ``+1000`` offset while ``earthsearch:boa_offset_applied`` is false
+    and ``raster:bands`` still declares ``-0.1``.
+
+    Returns ``None`` while the applied transform is physically plausible,
+    otherwise a dict recording which bands failed and their means (over
+    finite pixels only), for the run's provenance.
+    """
+    evidence: dict[str, object] = {}
+    for key in sorted(reflectance):
+        values = reflectance[key]
+        finite = values[np.isfinite(values)]
+        if finite.size == 0:
+            continue
+        mean = float(finite.mean())
+        if mean < PHYSICAL_MIN_MEAN:
+            evidence[key] = {
+                "mean_reflectance": round(mean, 6),
+                "threshold": PHYSICAL_MIN_MEAN,
+                "finite_pixels": int(finite.size),
+            }
+    if not evidence:
+        return None
+    return {
+        "verdict": "declared_transform_non_physical",
+        "bands": evidence,
+        "reason": (
+            "window-mean reflectance below "
+            f"{PHYSICAL_MIN_MEAN} after the declared transform; BOA "
+            "reflectance of natural surfaces is non-negative in the mean, so "
+            "the declared DN convention does not match the stored DNs"
+        ),
+    }
+
+
+def with_scale_only_offset(record: Radiometry) -> Radiometry:
+    """Return a scale-only copy of one radiometry record.
+
+    The corrected source string appends a deterministic marker (no pixel
+    statistics) so a cached record can be re-validated from metadata alone;
+    the measured evidence is stored separately per observation.
+    """
+    if record.offset == 0.0:
+        return record
+    return Radiometry(
+        asset_key=record.asset_key,
+        scale=record.scale,
+        offset=0.0,
+        nodata=record.nodata,
+        gsd=record.gsd,
+        source=f"{record.source} ; {EMPIRICAL_CORRECTION_MARKER}",
+    )

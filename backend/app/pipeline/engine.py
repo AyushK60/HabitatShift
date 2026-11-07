@@ -37,7 +37,13 @@ from pyproj import Geod
 from rasterio.enums import Resampling
 
 from .. import config
-from ..acquisition.assets import to_reflectance, verify_radiometry
+from ..acquisition.assets import (
+    RadiometryError,
+    empirical_offset_rejection,
+    to_reflectance,
+    verify_radiometry,
+    with_scale_only_offset,
+)
 from ..acquisition.cog import WindowRequest, read_window
 from ..analysis.change import (
     CLASS_DECREASE,
@@ -152,9 +158,21 @@ class ObservationCache:
             current_radiometry = verify_radiometry(candidate, band_keys)
         except Exception:
             return None
-        if meta.get("radiometry") != {
-            k: v.to_dict() for k, v in current_radiometry.items()
-        }:
+        # A cached record's radiometry must be consistent with its own
+        # stored decision: records with empirical-correction evidence must
+        # carry the deterministic scale-only correction of the declared
+        # resolution; records without evidence must match the declared
+        # resolution.  The cache key additionally carries the radiometry
+        # policy version, so records written under an older policy can
+        # never surface here at all.
+        declared_form = {k: v.to_dict() for k, v in current_radiometry.items()}
+        corrected_radiometry = {
+            k: with_scale_only_offset(v) for k, v in current_radiometry.items()
+        }
+        corrected_form = {k: v.to_dict() for k, v in corrected_radiometry.items()}
+        has_evidence = bool(meta.get("radiometry_evidence"))
+        expected = corrected_form if has_evidence else declared_form
+        if meta.get("radiometry") != expected:
             return None
         try:
             with np.load(npz_path) as data:
@@ -164,6 +182,17 @@ class ObservationCache:
                 }
                 valid = data["valid"].astype(bool)
         except (OSError, KeyError, ValueError):
+            return None
+        # Independent plausibility gate on the cached pixels themselves: a
+        # record whose reflectance means fall below the physical floor is
+        # corrupt or was written under a wrong convention, and is discarded
+        # whatever its metadata claims.
+        if empirical_offset_rejection(reflectance) is not None:
+            LOGGER.warning(
+                "observation cache record %s discarded: cached reflectance "
+                "is physically implausible",
+                candidate.item_id,
+            )
             return None
         if valid.shape != window.shape:
             return None
@@ -181,8 +210,11 @@ class ObservationCache:
             reflectance=reflectance,
             valid=valid,
             mask_report=report,
-            radiometry=current_radiometry,
+            radiometry=(
+                corrected_radiometry if has_evidence else current_radiometry
+            ),
             grid_signature=window.signature(),
+            radiometry_evidence=dict(meta.get("radiometry_evidence") or {}),
         )
 
     def save(self, key: str, observation: Observation) -> None:
@@ -205,6 +237,7 @@ class ObservationCache:
             "radiometry": {
                 k: v.to_dict() for k, v in observation.radiometry.items()
             },
+            "radiometry_evidence": dict(observation.radiometry_evidence),
             "total_pixels": observation.mask_report.total_pixels,
             "valid_pixels": observation.mask_report.valid_pixels,
             "class_counts": {
@@ -348,7 +381,7 @@ def read_observation(
     scl = read_window(candidate.asset(config.ASSET_SCL).href, scl_request)
     scl_valid, scl_report = mask_mod.build_valid_mask(scl)
 
-    reflectance: dict[str, np.ndarray] = {}
+    dn_bands: dict[str, np.ndarray] = {}
     for band_key in band_keys:
         request = WindowRequest(
             dst_crs=window.crs,
@@ -358,8 +391,44 @@ def read_observation(
             resampling=Resampling.bilinear,   # continuous reflectance
             dtype="float32",
         )
-        dn = read_window(candidate.asset(band_key).href, request)
-        reflectance[band_key] = to_reflectance(dn, radiometry[band_key])
+        dn_bands[band_key] = read_window(candidate.asset(band_key).href, request)
+
+    reflectance = {
+        band_key: to_reflectance(dn_bands[band_key], radiometry[band_key])
+        for band_key in band_keys
+    }
+    # Empirical acceptance test on the applied DN convention: a window mean
+    # below the physical floor is only reachable when the declared offset
+    # does not match the stored DNs (2025 Earth Search reprocessing).  The
+    # alternative Sentinel-2 convention — scale only, offset 0 — is then
+    # tried and must itself be plausible, otherwise the observation is
+    # refused outright.  The decision and its measured evidence are recorded.
+    radiometry_evidence: dict[str, object] = {}
+    rejection = empirical_offset_rejection(reflectance)
+    if rejection is not None:
+        alt_radiometry = {
+            key: with_scale_only_offset(record) for key, record in radiometry.items()
+        }
+        alt_reflectance = {
+            key: to_reflectance(dn_bands[key], alt_radiometry[key])
+            for key in band_keys
+        }
+        alt_rejection = empirical_offset_rejection(alt_reflectance)
+        if alt_rejection is not None:
+            raise RadiometryError(
+                f"item {candidate.item_id}: neither the declared DN->"
+                f"reflectance transform nor the scale-only alternative "
+                f"produces physically plausible reflectance over the read "
+                f"window; refusing the observation"
+            )
+        LOGGER.warning(
+            "%s: declared offset rejected empirically (%s); applied "
+            "scale-only reflectance for %s",
+            period_id, rejection.get("reason", ""), candidate.item_id,
+        )
+        radiometry = alt_radiometry
+        reflectance = alt_reflectance
+        radiometry_evidence = rejection
 
     finite = mask_mod.reflectance_valid_mask(
         *[reflectance[k] for k in band_keys]
@@ -382,6 +451,7 @@ def read_observation(
         mask_report=report,
         radiometry=radiometry,
         grid_signature=window.signature(),
+        radiometry_evidence=radiometry_evidence,
     )
     if cache is not None:
         cache.save(key, observation)
@@ -570,14 +640,21 @@ def _export_period(
     date_tag = period.anchor_date
     tag = f"{stem}_{date_tag}"
 
+    # Export exactly the bands the composite actually holds, in canonical
+    # order. Studies whose selected indices need no SWIR never read B11, so
+    # the composite does not contain it; exporting a fabricated band would
+    # misrepresent what was processed.
+    export_keys = tuple(
+        key for key in BAND_EXPORT_ORDER if key in period.composite.bands
+    )
     bands = np.stack(
-        [period.composite.bands[key] for key in BAND_EXPORT_ORDER]
+        [period.composite.bands[key] for key in export_keys]
     )
     path = write_geotiff(
         processed_dir / f"{tag}_reflectance_composite.tif",
         bands,
         window,
-        descriptions=tuple(BAND_DESCRIPTIONS[key] for key in BAND_EXPORT_ORDER),
+        descriptions=tuple(BAND_DESCRIPTIONS[key] for key in export_keys),
         producer="HabitatShift M1",
     )
     period.raster_paths["reflectance"] = path

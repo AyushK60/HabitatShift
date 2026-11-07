@@ -1,0 +1,16 @@
+{
+  "index": "ndbi",
+  "label": "NDBI",
+  "formula": "(SWIR1 - NIR) / (SWIR1 + NIR)",
+  "breaks": [
+    -0.1,
+    0.0,
+    0.1,
+    0.3
+  ],
+  "range": [
+    -1.0,
+    1.0
+  ],
+  "left_low": true
+}

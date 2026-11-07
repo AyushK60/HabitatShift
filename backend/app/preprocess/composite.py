@@ -44,6 +44,7 @@ class Observation:
     mask_report: MaskReport
     radiometry: dict[str, Radiometry]
     grid_signature: str = ""
+    radiometry_evidence: dict[str, object] = field(default_factory=dict)
 
     @property
     def item_id(self) -> str:
@@ -73,6 +74,7 @@ class Observation:
             "radiometry": {
                 key: record.to_dict() for key, record in self.radiometry.items()
             },
+            "radiometry_evidence": dict(self.radiometry_evidence),
         }
 
 
@@ -221,9 +223,25 @@ def composite_observations(
     )
 
 
+#: Version of the radiometry resolution policy baked into observation cache
+#: keys.  Bump when the DN -> reflectance policy changes so no record read
+#: under an older policy can ever be silently reused.  The 2026-11-07 bump
+#: covers the empirical physical-plausibility check added after the 2025
+#: Earth Search reprocessing stored baseline-05.11 DNs without the baked
+#: offset while their metadata still declared it.
+RADIOMETRY_POLICY_VERSION = "2026-11-07-empirical-boa-1"
+
+
 def observation_cache_key(
     item_id: str, grid_signature: str, band_keys: tuple[str, ...]
 ) -> str:
     """Stable cache key for one observation on one grid with one band set."""
-    payload = "|".join((item_id, grid_signature, ",".join(sorted(band_keys))))
+    payload = "|".join(
+        (
+            RADIOMETRY_POLICY_VERSION,
+            item_id,
+            grid_signature,
+            ",".join(sorted(band_keys)),
+        )
+    )
     return hashlib.sha256(payload.encode("utf-8")).hexdigest()[:32]

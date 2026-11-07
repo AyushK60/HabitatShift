@@ -1,0 +1,16 @@
+{
+  "kind": "difference_map",
+  "label": "later period minus earlier period (index units)",
+  "breaks": [
+    -0.15,
+    0.0,
+    0.15
+  ],
+  "range": [
+    -0.3,
+    0.3
+  ],
+  "saturated_at": 0.3,
+  "left_low": true,
+  "note": "blue/teal = lower later index; ivory = unchanged; copper = higher later index; charcoal = masked or not common-valid"
+}

@@ -1,0 +1,55 @@
+# M4 experiment: Western Ghats forest landscape (Supa taluk, Uttara Kannada,
+# Karnataka — forested Kali-basin block).
+#
+# AOI selection rationale and scene selection: docs/M4_FEASIBILITY.md (M4-G0).
+# Anchors are fully valid dry-season acquisitions with a 3-day day-of-year gap
+# (2020-02-19 → 2025-02-22), which minimises phenology confounding between the
+# compared periods.
+#
+# Terrain context: Copernicus GLO-30 DEM is catalogued over the window and is
+# used in the study presentation for elevation/slope interpretation of
+# topographic-shadow effects (context only — it is not a co-registered input
+# to the index computation).
+#
+# Interpretation guard: NDVI decrease is a candidate spectral change signal.
+# Topographic shadow, dry-season leaf drop and plantation/natural-forest
+# confusion are recorded limitations. No deforestation claim.
+experiment_id: western_ghats_m4
+study_id: western_ghats_forest
+registry: studies/registry.yaml
+
+analysis:
+  resolution_m: 10.0
+  indices: [ndvi, ndwi]
+  composite:
+    method: median
+    max_observations: 3
+    min_observations: 1
+    anchor_max_offset_days: 30
+  selection:
+    max_cloud_cover: 60.0
+    min_scene_valid_fraction: 0.60
+    min_comparable_valid_fraction: 0.50
+    measurement_budget: 24
+
+periods:
+  earlier:
+    anchor: "2020-02-19"
+    search_start: "2020-01-20"
+    search_end: "2020-03-20"
+    max_offset_days: 30
+  later:
+    anchor: "2025-02-22"
+    search_start: "2025-01-23"
+    search_end: "2025-03-24"
+    max_offset_days: 30
+
+change:
+  thresholds: [0.10, 0.15, 0.20]
+  primary_threshold: 0.15
+
+outputs:
+  processed_dir: data/processed/m4/western_ghats_m4
+  preview_dir: data/previews/m4/western_ghats_m4
+  manifest: data/manifests/m4_western_ghats_m4.json
+  status: data/processed/m4/western_ghats_m4/status.json

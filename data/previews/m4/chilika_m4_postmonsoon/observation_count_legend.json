@@ -1,0 +1,14 @@
+{
+  "kind": "observation_count",
+  "label": "valid observations contributing per pixel",
+  "range": [
+    0,
+    4
+  ],
+  "breaks": [
+    1,
+    2,
+    3
+  ],
+  "note": "charcoal = 0 valid observations"
+}

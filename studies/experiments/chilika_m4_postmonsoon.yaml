@@ -1,0 +1,48 @@
+# M4 experiment: Chilika Lake post-monsoon pair — the seasonal-sensitivity
+# counterpart to chilika_m4_dry.
+#
+# Feasibility and scene selection: docs/M4_FEASIBILITY.md (M4-G0). Anchors are
+# fully valid post-monsoon acquisitions (2020-11-08, 2025-11-17). Comparing
+# THIS pair against the dry-season pair within each year bounds how much of
+# the apparent 2020→2025 water-extent change is seasonal amplitude rather
+# than inter-annual change. The comparison of the two experiments is the
+# documented seasonal-sensitivity investigation required for this study.
+experiment_id: chilika_m4_postmonsoon
+study_id: chilika_wetland
+registry: studies/registry.yaml
+
+analysis:
+  resolution_m: 10.0
+  indices: [ndwi, mndwi, ndvi]
+  composite:
+    method: median
+    max_observations: 3
+    min_observations: 1
+    anchor_max_offset_days: 30
+  selection:
+    max_cloud_cover: 60.0
+    min_scene_valid_fraction: 0.60
+    min_comparable_valid_fraction: 0.50
+    measurement_budget: 24
+
+periods:
+  earlier:
+    anchor: "2020-11-08"
+    search_start: "2020-10-09"
+    search_end: "2020-12-08"
+    max_offset_days: 30
+  later:
+    anchor: "2025-11-17"
+    search_start: "2025-10-18"
+    search_end: "2025-12-17"
+    max_offset_days: 30
+
+change:
+  thresholds: [0.10, 0.15, 0.20]
+  primary_threshold: 0.15
+
+outputs:
+  processed_dir: data/processed/m4/chilika_m4_postmonsoon
+  preview_dir: data/previews/m4/chilika_m4_postmonsoon
+  manifest: data/manifests/m4_chilika_m4_postmonsoon.json
+  status: data/processed/m4/chilika_m4_postmonsoon/status.json

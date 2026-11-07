@@ -1,0 +1,52 @@
+# M4 experiment: Kathmandu Valley urban pilot (2.2 x 2.2 km inner-city window).
+#
+# Scene selection: docs/M4_FEASIBILITY.md and docs/M0_HIMALAYAN_DATA_FEASIBILITY.md.
+# Anchors are the near-exact seasonal match 2020-03-31 → 2025-03-29 (2-day
+# day-of-year gap), both fully valid.
+#
+# Indices are built-up-led: NDBI is a candidate built-up *signal*, not a
+# building detector. NDVI and NDWI provide the vegetation/water context that
+# exposes the known confounders (bare soil, construction sites, dry riverbeds).
+#
+# Interpretation guard: no independent reference labels exist for this AOI
+# (docs/M2_LABEL_FEASIBILITY.md finding). No classifier accuracy figures and
+# no "hectares of new buildings" claims are permitted from this run.
+experiment_id: kathmandu_m4
+study_id: kathmandu_urban
+registry: studies/registry.yaml
+
+analysis:
+  resolution_m: 10.0
+  indices: [ndbi, ndvi, ndwi]
+  composite:
+    method: median
+    max_observations: 3
+    min_observations: 1
+    anchor_max_offset_days: 30
+  selection:
+    max_cloud_cover: 60.0
+    min_scene_valid_fraction: 0.60
+    min_comparable_valid_fraction: 0.50
+    measurement_budget: 24
+
+periods:
+  earlier:
+    anchor: "2020-03-31"
+    search_start: "2020-03-01"
+    search_end: "2020-04-30"
+    max_offset_days: 30
+  later:
+    anchor: "2025-03-29"
+    search_start: "2025-02-27"
+    search_end: "2025-04-28"
+    max_offset_days: 30
+
+change:
+  thresholds: [0.10, 0.15, 0.20]
+  primary_threshold: 0.15
+
+outputs:
+  processed_dir: data/processed/m4/kathmandu_m4
+  preview_dir: data/previews/m4/kathmandu_m4
+  manifest: data/manifests/m4_kathmandu_m4.json
+  status: data/processed/m4/kathmandu_m4/status.json

@@ -1,0 +1,49 @@
+# M4 experiment: Chilika Lake dry-season matched pair (near Satapada).
+#
+# Feasibility and scene selection: docs/M4_FEASIBILITY.md (M4-G0). The anchors
+# are real catalogue acquisitions with measured in-AOI validity ~1.0 and a
+# ~2-day day-of-year gap between years. Indices are water-led because the
+# study question is surface-water extent in a seasonally dynamic brackish
+# lagoon; NDVI is included for the shore/mudflat vegetation context.
+#
+# Interpretation guard: seasonal water-level variation and turbidity dominate
+# this site. Nothing in this run may be presented as permanent wetland loss.
+experiment_id: chilika_m4_dry
+study_id: chilika_wetland
+registry: studies/registry.yaml
+
+analysis:
+  resolution_m: 10.0
+  indices: [ndwi, mndwi, ndvi]
+  composite:
+    method: median
+    max_observations: 3
+    min_observations: 1
+    anchor_max_offset_days: 30
+  selection:
+    max_cloud_cover: 60.0
+    min_scene_valid_fraction: 0.60
+    min_comparable_valid_fraction: 0.50
+    measurement_budget: 24
+
+periods:
+  earlier:
+    anchor: "2020-02-17"
+    search_start: "2020-01-18"
+    search_end: "2020-03-19"
+    max_offset_days: 30
+  later:
+    anchor: "2025-02-15"
+    search_start: "2025-01-16"
+    search_end: "2025-03-17"
+    max_offset_days: 30
+
+change:
+  thresholds: [0.10, 0.15, 0.20]
+  primary_threshold: 0.15
+
+outputs:
+  processed_dir: data/processed/m4/chilika_m4_dry
+  preview_dir: data/previews/m4/chilika_m4_dry
+  manifest: data/manifests/m4_chilika_m4_dry.json
+  status: data/processed/m4/chilika_m4_dry/status.json
