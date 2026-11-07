@@ -265,3 +265,29 @@ G4 verification: verify_m4 **51/51**, showcase **11/11**, m2_experiments
 
 G5 verification: disclosure audit **106/106**, verify_m4 **51/51**,
 showcase **11/11**, m2_experiments **31/31**, build clean.
+
+## G6 — portable showcase integration (§9)
+
+The showcase suite (`verify_m4_showcase.mjs`, static file server only, no
+Python backend) was extended from 11 to **17 checks**, all passing, now
+covering the two M4-R3 experiences offline:
+
+- Explore the Evidence renders its overview, filters and the
+  curated-selection disclosure **with the audited counts**
+  (19 findings / 76 additional qualifying components for Kathmandu) —
+  `selection_policy.json` is a small static file copied into `dist/` like
+  the registry, so the completeness disclosure needs no backend.
+- Finding selection → Research Mode offline: math method block, recorded
+  sensitivity-neighbours table, provenance with git commit.
+- Record JSON export fires offline with the correct
+  `ev-kathmandu_m4-….json` filename (client-side blob; no server).
+- Direct finding deep-links (`?finding=…&view=research`) resolve on the
+  static server.
+- Screenshot: `docs/evidence/m4-r3/showcase_research_mode.png`.
+
+No raster files were duplicated; the study bundles and their checksum
+mechanisms are untouched (only the small policy JSON was added next to
+`registry.json`). Bundle byte-identity with `data/findings/` remains
+pytest-verified (`test_m4_bundles.py`, run again at G7).
+
+G6 verification: showcase **17/17** (backend stopped), build clean.

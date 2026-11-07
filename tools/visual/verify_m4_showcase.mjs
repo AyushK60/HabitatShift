@@ -60,6 +60,76 @@ check(
   JSON.stringify({ entries: wcState.entries, features: wcState.features }),
 );
 await page.screenshot({ path: "../../docs/evidence/m4-r1/g9_showcase_what_changed.png" });
+
+// M4-R3 §9: Explore the Evidence + Research Mode work fully offline from the
+// static bundles, including the audited selection-policy counts, the
+// technical record and the verbatim JSON export.
+const m4r3Explore = await page.evaluate(() => ({
+  disclosure: (document.querySelector(".selection-disclosure")?.textContent ?? "").replace(/\s+/g, " "),
+  facts: document.querySelectorAll(".findings-panel .insp-facts > div").length,
+}));
+check(
+  "m4-r3 showcase: curated-selection disclosure with audited counts offline",
+  m4r3Explore.disclosure.includes("Curated selection") &&
+    m4r3Explore.disclosure.includes("additional qualifying components") &&
+    m4r3Explore.disclosure.includes("not a complete inventory"),
+  m4r3Explore.disclosure.slice(0, 140),
+);
+check(
+  "m4-r3 showcase: overview summary facts offline",
+  m4r3Explore.facts >= 4,
+  `facts=${m4r3Explore.facts}`,
+);
+await page.locator(".finding-entry").first().click();
+await page.waitForTimeout(800);
+const exploreId = await page.evaluate(
+  () => (document.querySelector(".finding-detail .mono-label")?.textContent ?? "").trim(),
+);
+await page.getByRole("tab", { name: "Research Mode" }).click();
+await page.waitForTimeout(600);
+const research = await page.evaluate(() => {
+  const text = document.querySelector(".evidence-record")?.textContent ?? "";
+  return {
+    math: text.includes("Candidate selection:") && text.includes("(inclusive)"),
+    sensitivity: document.querySelectorAll(".sensitivity-table tbody tr").length,
+    provenance: text.includes("Method provenance") && text.includes("Git commit"),
+    exports: text.includes("Download record JSON") && text.includes("Download record CSV"),
+  };
+});
+check(
+  "m4-r3 showcase: Research Mode math + record offline",
+  research.math && research.sensitivity >= 2 && research.provenance,
+  JSON.stringify(research),
+);
+check(
+  "m4-r3 showcase: record exports offered offline",
+  research.exports,
+);
+const [download] = await Promise.all([
+  page.waitForEvent("download"),
+  page.getByRole("button", { name: "Download record JSON" }).click(),
+]);
+check(
+  "m4-r3 showcase: record JSON export fires offline",
+  download.suggestedFilename().endsWith(".json") &&
+    download.suggestedFilename().includes("ev-kathmandu_m4-"),
+  download.suggestedFilename(),
+);
+// Direct finding link works on the static server (M4-R3 §8).
+const deepId = (exploreId.match(/ev-[a-z0-9_-]+/) ?? [""])[0];
+await page.goto(BASE_URL + `#/workstation/kathmandu_urban?finding=${encodeURIComponent(deepId)}&view=research`, { waitUntil: "domcontentloaded" });
+await page.waitForTimeout(3200);
+const deepState = await page.evaluate((expected) => ({
+  tab: document.querySelector(".insp-tab.is-active")?.textContent ?? "",
+  record: (document.querySelector(".evidence-record")?.textContent ?? "").includes(expected),
+}), deepId);
+check(
+  "m4-r3 showcase: direct finding deep-link works offline",
+  deepState.tab === "Research Mode" && deepState.record,
+  JSON.stringify(deepState),
+);
+await page.screenshot({ path: "../../docs/evidence/m4-r3/showcase_research_mode.png" });
+
 check("showcase: no unexpected console errors", results.console_errors.length === 0, results.console_errors.slice(0, 3).join(" | "));
 check("showcase: no page errors", results.page_errors.length === 0, results.page_errors.slice(0, 3).join(" | "));
 results.passed = results.checks.filter(c => c.passed).length;
