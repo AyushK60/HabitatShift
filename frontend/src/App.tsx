@@ -1,9 +1,33 @@
-/** M3-G0 scaffold proof: the product shell replaces this in M3-G1. */
+import { Route, Routes } from "react-router-dom";
+import { Footer, TopNav } from "./components/shell";
+import { LandingPage } from "./pages/LandingPage";
+import { WorkstationPage } from "./pages/WorkstationPage";
+import { ExperimentsPage } from "./pages/ExperimentsPage";
+import { MethodsPage } from "./pages/MethodsPage";
+
 export default function App() {
   return (
-    <main style={{ padding: "3rem" }}>
-      <h1>HabitatShift · M3 scaffold proof</h1>
-      <p>React + TypeScript + Vite + MapLibre GL JS stack builds and serves.</p>
-    </main>
+    <>
+      <a className="skip" href="#main">
+        Skip to content
+      </a>
+      <TopNav />
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/workstation" element={<WorkstationPage />} />
+        <Route path="/experiments" element={<ExperimentsPage />} />
+        <Route path="/methods" element={<MethodsPage />} />
+        <Route
+          path="*"
+          element={
+            <main id="main" style={{ padding: "3rem 1.5rem" }}>
+              <h1>Page not found</h1>
+              <p>The address does not match any HabitatShift page.</p>
+            </main>
+          }
+        />
+      </Routes>
+      <Footer />
+    </>
   );
 }

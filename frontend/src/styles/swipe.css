@@ -1,0 +1,166 @@
+/* Swipe stage: one geographic frame, one clip boundary, one divider.
+ * The later period is a clipped overlay over the earlier period so the two
+ * rasters stay exactly registered at every split. */
+
+.swipe-figure {
+  margin: 0;
+  min-width: 0;
+}
+
+.swipe-stage {
+  position: relative;
+  overflow: hidden;
+  background: #dfe3de;
+  isolation: isolate;
+  touch-action: none;
+  cursor: ew-resize;
+  user-select: none;
+  width: 100%;
+}
+
+.swipe-stage.is-dragging {
+  cursor: grabbing;
+}
+
+.swipe-stage > img,
+.swipe-stage > .swipe-later {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.swipe-stage > img {
+  object-fit: contain;
+  object-position: center;
+  z-index: 1;
+}
+
+.swipe-stage > .swipe-later {
+  z-index: 3;
+  clip-path: inset(0 0 0 var(--split, 50%));
+}
+
+.swipe-later img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+.swipe-divider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--split, 50%);
+  width: 0;
+  z-index: 5;
+}
+
+.swipe-divider:focus-visible {
+  outline: none;
+}
+
+.swipe-divider:focus-visible .swipe-divider-grip {
+  outline: 3px solid var(--charcoal);
+  outline-offset: 3px;
+}
+
+.swipe-divider-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 2px;
+  transform: translateX(-1px);
+  background: var(--copper);
+  box-shadow: 0 0 0 1px rgba(24, 39, 45, 0.25);
+}
+
+.swipe-divider-grip {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 2.4rem;
+  height: 2.4rem;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 2px solid var(--copper);
+  background: var(--paper);
+  box-shadow: 0 2px 10px rgba(24, 39, 45, 0.3);
+  display: grid;
+  place-items: center;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--teal);
+}
+
+.swipe-divider-grip::before {
+  content: "‹  ›";
+  letter-spacing: -0.08em;
+}
+
+.swipe-missing-note {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0.75rem;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--copper-deep);
+  z-index: 9;
+}
+
+.swipe-stage[data-missing] > img,
+.swipe-stage[data-missing] > .swipe-later {
+  visibility: hidden;
+}
+
+.swipe-stage[data-missing] {
+  background: repeating-linear-gradient(
+    135deg,
+    var(--hatch),
+    var(--hatch) 8px,
+    var(--hatch-alt) 8px,
+    var(--hatch-alt) 16px
+  );
+}
+
+.swipe-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 1rem;
+  padding: 0.45rem 0.1rem;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--text-muted);
+}
+
+.swipe-hint {
+  max-width: 52ch;
+}
+
+.swipe-readout {
+  margin-left: auto;
+  color: var(--teal);
+  white-space: nowrap;
+}
+
+.swipe-reset {
+  font: inherit;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  padding: 0.25rem 0.55rem;
+  border: 1px solid var(--rule);
+  background: var(--ivory);
+  color: var(--teal);
+  cursor: pointer;
+}
+
+.swipe-reset:hover {
+  border-color: var(--teal);
+}
