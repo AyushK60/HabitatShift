@@ -1,0 +1,57 @@
+# M4 experiment: Purepu supraglacial-lake drainage, Rasuwa (event 8 July 2025).
+#
+# Feasibility verdict PARTIAL — see docs/M4_FEASIBILITY.md. No clean immediate
+# post-event observation exists: the only usable post-event July acquisition is
+# the same-day 2025-07-08 pass at 63.2 % in-AOI validity, every later July pass
+# being monsoon-obscured. The defensible processed comparison is therefore
+# BEFORE the monsoon (2025-04-21, fully valid) versus AFTER the monsoon
+# (2025-10-21, fully valid), with the seasonal gap and snow-cover change
+# recorded as confounders of the same order as any event signal.
+#
+# Interpretation guard — none of the outputs of this run may be presented as:
+# discharged water volume, flood depth or discharge, the causal mechanism, or
+# casualties. Lake surface area is not discharged-water volume. NDSI/NDWI
+# changes across a 6-month seasonal gap are candidate spectral signals under
+# an explicit seasonal caveat, never event attribution.
+experiment_id: himalaya_purepu_2025_m4
+study_id: himalaya_purepu_2025
+registry: studies/registry.yaml
+
+analysis:
+  resolution_m: 10.0
+  # NDSI is used for the snow/ice context; MNDWI is deliberately absent
+  # because on Sentinel-2 it is the identical formula (green, SWIR1) and
+  # would only duplicate NDSI pixel-for-pixel.
+  indices: [ndwi, ndsi, ndvi]
+  composite:
+    method: median
+    max_observations: 3
+    min_observations: 1
+    anchor_max_offset_days: 30
+  selection:
+    max_cloud_cover: 60.0
+    min_scene_valid_fraction: 0.60
+    min_comparable_valid_fraction: 0.50
+    measurement_budget: 24
+
+periods:
+  earlier:
+    anchor: "2025-04-21"
+    search_start: "2025-04-01"
+    search_end: "2025-05-11"
+    max_offset_days: 30
+  later:
+    anchor: "2025-10-21"
+    search_start: "2025-09-21"
+    search_end: "2025-11-10"
+    max_offset_days: 30
+
+change:
+  thresholds: [0.10, 0.15, 0.20]
+  primary_threshold: 0.15
+
+outputs:
+  processed_dir: data/processed/m4/himalaya_purepu_2025_m4
+  preview_dir: data/previews/m4/himalaya_purepu_2025_m4
+  manifest: data/manifests/m4_himalaya_purepu_2025_m4.json
+  status: data/processed/m4/himalaya_purepu_2025_m4/status.json

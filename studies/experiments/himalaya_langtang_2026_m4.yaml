@@ -1,0 +1,53 @@
+# M4 experiment: Langtang Lirung rock-ice collapse and cascading flood
+# (event 26 August 2026) — a distinct investigation from the 2025 event,
+# NOT a conventional glacial-lake outburst.
+#
+# Scene selection: docs/M4_FEASIBILITY.md / docs/M0_HIMALAYAN_DATA_FEASIBILITY.md.
+# Tightest usable pair: 2026-08-12 (-14 days, in-AOI valid 0.707) versus
+# 2026-09-28 (+33 days, in-AOI valid 1.000). Both dates sit in the monsoon /
+# early post-monsoon period, so residual cloud, snow-cover evolution and
+# terrain shadow remain confounders.
+#
+# Interpretation guard: outputs support a documented optical change
+# observation at the source zone only — not a debris-volume estimate, not
+# flood routing, and no InSAR claim (radar-based findings in external
+# research stay external, cited literature).
+experiment_id: himalaya_langtang_2026_m4
+study_id: himalaya_langtang_2026
+registry: studies/registry.yaml
+
+analysis:
+  resolution_m: 10.0
+  indices: [ndsi, ndwi, ndvi]
+  composite:
+    method: median
+    max_observations: 3
+    min_observations: 1
+    anchor_max_offset_days: 30
+  selection:
+    max_cloud_cover: 60.0
+    min_scene_valid_fraction: 0.60
+    min_comparable_valid_fraction: 0.50
+    measurement_budget: 24
+
+periods:
+  earlier:
+    anchor: "2026-08-12"
+    search_start: "2026-08-02"
+    search_end: "2026-08-22"
+    max_offset_days: 30
+  later:
+    anchor: "2026-09-28"
+    search_start: "2026-09-18"
+    search_end: "2026-10-28"
+    max_offset_days: 30
+
+change:
+  thresholds: [0.10, 0.15, 0.20]
+  primary_threshold: 0.15
+
+outputs:
+  processed_dir: data/processed/m4/himalaya_langtang_2026_m4
+  preview_dir: data/previews/m4/himalaya_langtang_2026_m4
+  manifest: data/manifests/m4_himalaya_langtang_2026_m4.json
+  status: data/processed/m4/himalaya_langtang_2026_m4/status.json

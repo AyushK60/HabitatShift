@@ -1,0 +1,16 @@
+{
+  "index": "ndsi",
+  "label": "NDSI",
+  "formula": "(Green - SWIR1) / (Green + SWIR1)",
+  "breaks": [
+    -0.1,
+    0.0,
+    0.2,
+    0.4
+  ],
+  "range": [
+    -1.0,
+    1.0
+  ],
+  "left_low": true
+}
