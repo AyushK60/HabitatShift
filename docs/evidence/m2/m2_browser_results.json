@@ -1,12 +1,176 @@
 {
-  "base_url": "http://127.0.0.1:8097/",
-  "started_utc": "2026-11-07T19:24:58.252Z",
+  "base_url": "http://127.0.0.1:8098/",
+  "started_utc": "2026-11-07T20:12:42.281Z",
   "console_errors": [],
   "page_errors": [],
   "failed_requests": [],
-  "screenshots": [],
-  "checks": [],
-  "completed_utc": "2026-11-07T19:25:29.309Z",
-  "passed": 0,
+  "screenshots": [
+    "m2_experiments_overview_1440.png",
+    "m2_experiments_threshold_1440.png",
+    "m2_experiments_uncertainty_1440.png",
+    "m2_experiments_section_1440.png",
+    "m2_experiments_kathmandu_1440.png",
+    "m2_experiments_390.png",
+    "m2_experiments_missing_run.png"
+  ],
+  "checks": [
+    {
+      "name": "experiments page renders",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "page headline names per-investigation measurements",
+      "passed": true,
+      "detail": "Recorded measurements per investigation"
+    },
+    {
+      "name": "six investigations in study selector",
+      "passed": true,
+      "detail": "count=6"
+    },
+    {
+      "name": "availability rows present",
+      "passed": true,
+      "detail": "rows=3"
+    },
+    {
+      "name": "planned / not-available gaps stated",
+      "passed": true,
+      "detail": "planned=1"
+    },
+    {
+      "name": "descriptive facts listed",
+      "passed": true,
+      "detail": "dt=3"
+    },
+    {
+      "name": "facts name evidence status",
+      "passed": true,
+      "detail": "EVIDENCE STATUS PROCESSED INDICES NDVI, NDWI, MNDWI ANALYSIS GRID 429 × 390 px @ 10 m"
+    },
+    {
+      "name": "facts name analysis grid",
+      "passed": true,
+      "detail": "EVIDENCE STATUS PROCESSED INDICES NDVI, NDWI, MNDWI ANALYSIS GRID 429 × 390 px @ 10 m"
+    },
+    {
+      "name": "interactive charts rendered as svg",
+      "passed": true,
+      "detail": "charts=4"
+    },
+    {
+      "name": "threshold chart visible",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "threshold area rows present",
+      "passed": true,
+      "detail": "rows=3"
+    },
+    {
+      "name": "areas labelled candidate, not verified",
+      "passed": true,
+      "detail": "DESCRIPTIVE MEASUREMENT Candidate change areas at stated thresholds |ΔNDVI| ≥ lower ha higher ha 0.10 347.71 234.75 0.15 192.91 143.98 0.20 113.45 90.16 READING THIS TABLE Areas are the shared-valid footprint satisfying the threshold criterion — candidate spectral signals with a stated cut-off, not verified land-cover change. The primary threshold is ±0.15: 192.91 ha lower / 143.98 ha higher. observed index difference at the stated threshold; not a land-cover classification, deforestation/wetland-loss verdict, building count or causal attribution"
+    },
+    {
+      "name": "looser threshold yields larger-or-equal candidate decrease area",
+      "passed": true,
+      "detail": "areas=347.71,192.91,113.45"
+    },
+    {
+      "name": "can/cannot guardrail lists present",
+      "passed": true,
+      "detail": "lists=2"
+    },
+    {
+      "name": "cannot-conclude list non-empty",
+      "passed": true,
+      "detail": "Proven mangrove loss or gain, ecological causation, or tidal-stage effects. Any population-level confidence interval: the uncertainty recorded is resampling variability for this AOI and grid."
+    },
+    {
+      "name": "bundle export link present",
+      "passed": true,
+      "detail": "/studies/coringa_coastal/bundle.json"
+    },
+    {
+      "name": "bundle export reachable",
+      "passed": true,
+      "detail": "status=200"
+    },
+    {
+      "name": "bundle payload has no supervised-accuracy keys",
+      "passed": true,
+      "detail": "keys: schema,bundle_version,study_id,evidence_status,study,interpretation,attribution,catalog,georef,experiments,charts,assets,sources,bundle_sha256_inputs"
+    },
+    {
+      "name": "methods link present",
+      "passed": true,
+      "detail": "#/methods"
+    },
+    {
+      "name": "recorded M2 run id displayed",
+      "passed": true,
+      "detail": "20261107T102819Z_d70f3978"
+    },
+    {
+      "name": "recorded run reports no supervised labels",
+      "passed": true,
+      "detail": "Recorded run 20261107T102819Z_d70f3978 · generated 2026-11-07T10:28:21Z · fingerprint d70f397838dea33e… . Every number and chart below is read from that run; no supervised labels were used anywhere."
+    },
+    {
+      "name": "five hypothesis verdicts",
+      "passed": true,
+      "detail": "count=5"
+    },
+    {
+      "name": "verdict chips rendered",
+      "passed": true,
+      "detail": "chips=5"
+    },
+    {
+      "name": "non-M2 study states the gap plainly",
+      "passed": true,
+      "detail": "Every study reports exactly what has been measured for it. Nothing is invented to make the sections look alike — this investigation has descriptive measurements but no hypothesis-testing run yet."
+    },
+    {
+      "name": "study switch renders that study's charts",
+      "passed": true,
+      "detail": "charts=2"
+    },
+    {
+      "name": "switch back to Coringa restores recorded run",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "no horizontal overflow at 390px",
+      "passed": true,
+      "detail": "overflow=0px"
+    },
+    {
+      "name": "missing-run state names the bundle fallback",
+      "passed": true,
+      "detail": "The backend is not serving the recorded M2 run right now — the sections below render the same recorded numbers from the portable showcase bundle."
+    },
+    {
+      "name": "no console errors",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "no page errors",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "no failed requests",
+      "passed": true,
+      "detail": ""
+    }
+  ],
+  "completed_utc": "2026-11-07T20:12:45.313Z",
+  "passed": 31,
   "failed": 0
 }

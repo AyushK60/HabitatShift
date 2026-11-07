@@ -1,0 +1,181 @@
+{
+  "schema": "habitatshift-selection-policy/1",
+  "generated_utc": "2026-11-07T20:14:47Z",
+  "policy": {
+    "rule": "top 5 components per index x direction, sorted by (-area_ha, x, y)",
+    "minimum_mapping_unit_px": 25,
+    "recorded_findings_are": "a curated selection of candidate spectral signals, not a complete inventory of qualifying regions",
+    "unrecorded_components_are": "components at or above the minimum mapping unit that the selection rule did not record; they have no evidence records and are not findings by the recorded rule"
+  },
+  "source": {
+    "generator": "scripts/build_selection_policy.py",
+    "audit_artifact": "docs/evidence/m4-r2/findings_audit_results.json",
+    "audit_checks_passed": 2837,
+    "audit_checks_failed": 0,
+    "git_commit": "b738b62cbf064a569cb0c6fb86234127ad5a06eb"
+  },
+  "experiments": [
+    {
+      "experiment_id": "coringa_m1",
+      "findings_recorded": 30,
+      "components_at_or_above_mmu_total": 686,
+      "components_at_or_above_mmu_unrecorded_top5_cap": 656,
+      "by_index": {
+        "mndwi": {
+          "recorded_findings": 10,
+          "components_at_or_above_mmu_total": 210,
+          "components_at_or_above_mmu_unrecorded_top5_cap": 200
+        },
+        "ndvi": {
+          "recorded_findings": 10,
+          "components_at_or_above_mmu_total": 234,
+          "components_at_or_above_mmu_unrecorded_top5_cap": 224
+        },
+        "ndwi": {
+          "recorded_findings": 10,
+          "components_at_or_above_mmu_total": 242,
+          "components_at_or_above_mmu_unrecorded_top5_cap": 232
+        }
+      }
+    },
+    {
+      "experiment_id": "chilika_m4_dry",
+      "findings_recorded": 30,
+      "components_at_or_above_mmu_total": 294,
+      "components_at_or_above_mmu_unrecorded_top5_cap": 264,
+      "by_index": {
+        "mndwi": {
+          "recorded_findings": 10,
+          "components_at_or_above_mmu_total": 77,
+          "components_at_or_above_mmu_unrecorded_top5_cap": 67
+        },
+        "ndvi": {
+          "recorded_findings": 10,
+          "components_at_or_above_mmu_total": 110,
+          "components_at_or_above_mmu_unrecorded_top5_cap": 100
+        },
+        "ndwi": {
+          "recorded_findings": 10,
+          "components_at_or_above_mmu_total": 107,
+          "components_at_or_above_mmu_unrecorded_top5_cap": 97
+        }
+      }
+    },
+    {
+      "experiment_id": "chilika_m4_postmonsoon",
+      "findings_recorded": 30,
+      "components_at_or_above_mmu_total": 230,
+      "components_at_or_above_mmu_unrecorded_top5_cap": 200,
+      "by_index": {
+        "mndwi": {
+          "recorded_findings": 10,
+          "components_at_or_above_mmu_total": 62,
+          "components_at_or_above_mmu_unrecorded_top5_cap": 52
+        },
+        "ndvi": {
+          "recorded_findings": 10,
+          "components_at_or_above_mmu_total": 108,
+          "components_at_or_above_mmu_unrecorded_top5_cap": 98
+        },
+        "ndwi": {
+          "recorded_findings": 10,
+          "components_at_or_above_mmu_total": 60,
+          "components_at_or_above_mmu_unrecorded_top5_cap": 50
+        }
+      }
+    },
+    {
+      "experiment_id": "western_ghats_m4",
+      "findings_recorded": 11,
+      "components_at_or_above_mmu_total": 13,
+      "components_at_or_above_mmu_unrecorded_top5_cap": 2,
+      "by_index": {
+        "ndvi": {
+          "recorded_findings": 8,
+          "components_at_or_above_mmu_total": 10,
+          "components_at_or_above_mmu_unrecorded_top5_cap": 2
+        },
+        "ndwi": {
+          "recorded_findings": 3,
+          "components_at_or_above_mmu_total": 3,
+          "components_at_or_above_mmu_unrecorded_top5_cap": 0
+        }
+      }
+    },
+    {
+      "experiment_id": "himalaya_purepu_2025_m4",
+      "findings_recorded": 20,
+      "components_at_or_above_mmu_total": 139,
+      "components_at_or_above_mmu_unrecorded_top5_cap": 119,
+      "by_index": {
+        "ndsi": {
+          "recorded_findings": 10,
+          "components_at_or_above_mmu_total": 63,
+          "components_at_or_above_mmu_unrecorded_top5_cap": 53
+        },
+        "ndvi": {
+          "recorded_findings": 5,
+          "components_at_or_above_mmu_total": 18,
+          "components_at_or_above_mmu_unrecorded_top5_cap": 13
+        },
+        "ndwi": {
+          "recorded_findings": 5,
+          "components_at_or_above_mmu_total": 58,
+          "components_at_or_above_mmu_unrecorded_top5_cap": 53
+        }
+      }
+    },
+    {
+      "experiment_id": "himalaya_langtang_2026_m4",
+      "findings_recorded": 12,
+      "components_at_or_above_mmu_total": 63,
+      "components_at_or_above_mmu_unrecorded_top5_cap": 51,
+      "by_index": {
+        "ndsi": {
+          "recorded_findings": 2,
+          "components_at_or_above_mmu_total": 2,
+          "components_at_or_above_mmu_unrecorded_top5_cap": 0
+        },
+        "ndvi": {
+          "recorded_findings": 5,
+          "components_at_or_above_mmu_total": 32,
+          "components_at_or_above_mmu_unrecorded_top5_cap": 27
+        },
+        "ndwi": {
+          "recorded_findings": 5,
+          "components_at_or_above_mmu_total": 29,
+          "components_at_or_above_mmu_unrecorded_top5_cap": 24
+        }
+      }
+    },
+    {
+      "experiment_id": "kathmandu_m4",
+      "findings_recorded": 19,
+      "components_at_or_above_mmu_total": 95,
+      "components_at_or_above_mmu_unrecorded_top5_cap": 76,
+      "by_index": {
+        "ndbi": {
+          "recorded_findings": 6,
+          "components_at_or_above_mmu_total": 21,
+          "components_at_or_above_mmu_unrecorded_top5_cap": 15
+        },
+        "ndvi": {
+          "recorded_findings": 6,
+          "components_at_or_above_mmu_total": 46,
+          "components_at_or_above_mmu_unrecorded_top5_cap": 40
+        },
+        "ndwi": {
+          "recorded_findings": 7,
+          "components_at_or_above_mmu_total": 28,
+          "components_at_or_above_mmu_unrecorded_top5_cap": 21
+        }
+      }
+    }
+  ],
+  "totals": {
+    "experiments": 7,
+    "findings_recorded": 152,
+    "components_at_or_above_mmu_total": 1520,
+    "components_at_or_above_mmu_unrecorded_top5_cap": 1368
+  }
+}

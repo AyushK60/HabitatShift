@@ -1,7 +1,7 @@
 {
   "base_url": "http://127.0.0.1:8098/",
   "suite": "habitatshift-m4-browser/1",
-  "started_utc": "2026-11-07T19:17:16.531Z",
+  "started_utc": "2026-11-07T20:06:19.828Z",
   "checks": [
     {
       "name": "1. landing renders hero headline",
@@ -121,7 +121,7 @@
     {
       "name": "10. side-by-side maps stay synchronised",
       "passed": true,
-      "detail": "{\"earlier\":15.070462906210379,\"later\":15.070462906210379}"
+      "detail": "{\"earlier\":15.110527763720528,\"later\":15.110527763720528}"
     },
     {
       "name": "10. divider follows mouse hover with no click",
@@ -141,7 +141,7 @@
     {
       "name": "11. pixel probe returns measured reflectance + indices",
       "passed": true,
-      "detail": "82.26393°E, 16.72858°N · UTM 634738, 1849958 · pixel 203, 183 · 10 mEarlier · 2020-03-26Valid observation · 3 obs behind"
+      "detail": "82.26395°E, 16.72855°N · UTM 634741, 1849955 · pixel 204, 183 · 10 mEarlier · 2020-03-26Valid observation · 3 obs behind"
     },
     {
       "name": "12. experiments page shows recorded charts",
@@ -201,7 +201,7 @@
     {
       "name": "12b. Fit Entire Study Area restores the overview zoom (§9)",
       "passed": true,
-      "detail": "zoom 14.855885607348652 → 13.715334944180896"
+      "detail": "zoom 15.052650176728086 → 13.715334944180848"
     },
     {
       "name": "12b. native-resolution tag renders beside the imagery (§8)",
@@ -288,7 +288,7 @@
   "console_errors": [],
   "page_errors": [],
   "failed_requests": [],
-  "finished_utc": "2026-11-07T19:18:31.866Z",
+  "finished_utc": "2026-11-07T20:07:36.789Z",
   "passed": 51,
   "failed": 0
 }
