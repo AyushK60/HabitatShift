@@ -1,0 +1,1913 @@
+{
+ "schema": "habitatshift-m4-bundle/1",
+ "bundle_version": "1",
+ "study_id": "himalaya_langtang_2026",
+ "study": {
+  "study_id": "himalaya_langtang_2026",
+  "id": "D2",
+  "slug": "himalayan_rasuwa",
+  "title": "Langtang Lirung rock-ice collapse, Rasuwa (26 August 2026)",
+  "study_type": "hazard_cryosphere",
+  "status": "feasibility",
+  "question": "Are usable Sentinel-2 observations available before and after 26 August 2026 around the high source zone, and where does optical visibility fail?",
+  "phenomena": [
+   "snow/ice and exposed-ground contrast",
+   "candidate debris signature"
+  ],
+  "limitations": [
+   "Heavy monsoon cloud; snow/shadow confusion; optical only.",
+   "InSAR deformation is external literature, not reproduced here."
+  ],
+  "target_periods": {
+   "previous": {
+    "start": "2026-06-01",
+    "end": "2026-08-26"
+   },
+   "post": {
+    "start": "2026-08-26",
+    "end": "2026-09-30"
+   },
+   "later": {
+    "start": "2026-10-01",
+    "end": "2026-12-15"
+   }
+  },
+  "aoi": {
+   "crs": "EPSG:4326",
+   "kind": "approximate rectangular source-zone window",
+   "boundary_source": "Centred on the Langtang Lirung massif from published ICIMOD/ESA context; exact detachment scar not verified at M0.",
+   "bounds": {
+    "west": 85.53,
+    "south": 28.155,
+    "east": 85.565,
+    "north": 28.19
+   },
+   "approx_km": "3.4 x 3.9"
+  }
+ },
+ "interpretation": {
+  "can_conclude": [
+   "Which optical observations bracket the 26 August 2026 event and at what validity (a usable pair 14 days before and 33 days after).",
+   "Candidate optical change at the source zone between those dates, with snow-cover evolution recorded as the dominant seasonal confounder."
+  ],
+  "cannot_conclude": [
+   "Debris volume, flood routing or discharge.",
+   "Any InSAR deformation claim: radar-based findings in external research remain external, cited literature.",
+   "A conventional-GLOF description: this investigation is a rock-ice collapse with a cascading debris-laden flood, a distinct mechanism."
+  ]
+ },
+ "attribution": "Contains modified Copernicus Sentinel data (2020-2026), processed by ESA; L2A products distributed by the Element 84 Earth Search STAC catalogue (AWS Open Data). DEM: Copernicus DEM GLO-30 (ESA/DLR) where included. Event context: NDRRMA (2025) and ICIMOD (2026) situation reporting, cited as external literature, not project measurements.",
+ "catalog": {
+  "endpoint": "https://earth-search.aws.element84.com/v1",
+  "collection": "sentinel-2-l2a",
+  "provider": "Element 84 Earth Search (AWS Open Data)",
+  "license": "Copernicus Sentinel data: free, open and unrestricted use with attribution (ESA Copernicus data policy). Catalogue: Element 84 Earth Search, AWS Open Data.",
+  "collection_license": "proprietary"
+ },
+ "georef": {
+  "native_crs": "EPSG:32645",
+  "native_bounds": [
+   355660.0,
+   3115210.0,
+   359150.0,
+   3119130.0
+  ],
+  "native_transform": [
+   10.0,
+   0.0,
+   355660.0,
+   0.0,
+   -10.0,
+   3119130.0
+  ],
+  "shape": [
+   392,
+   349
+  ],
+  "resolution_m": [
+   10.0,
+   10.0
+  ],
+  "nodata": NaN,
+  "lonlat_bounds": [
+   85.52947611376744,
+   28.154670073104175,
+   85.5654947660987,
+   28.19042180762769
+  ],
+  "lonlat_corners": {
+   "upper_left": [
+    85.52947611376744,
+    28.19042180762769
+   ],
+   "upper_right": [
+    85.5654947660987,
+    28.19042180762769
+   ],
+   "lower_left": [
+    85.52947611376744,
+    28.154670073104175
+   ],
+   "lower_right": [
+    85.5654947660987,
+    28.154670073104175
+   ]
+  }
+ },
+ "experiments": [
+  {
+   "experiment_id": "himalaya_langtang_2026_m4",
+   "label": null,
+   "config_path": "studies/experiments/himalaya_langtang_2026_m4.yaml",
+   "config_sha256": "03762bc2fe07d0dbe97598972cd05c12358d306b553d016c4056ea0d01674a33",
+   "summary_sha256": "754a2bb513b8eb9b23498556ef90409430dc47a292ed7ff4dc57765144181802",
+   "summary": {
+    "schema": "habitatshift-m1-summary/1",
+    "experiment_id": "himalaya_langtang_2026_m4",
+    "study": {
+     "study_id": "himalaya_langtang_2026",
+     "title": "Langtang Lirung rock-ice collapse, Rasuwa (26 August 2026)",
+     "study_type": "hazard_cryosphere",
+     "question": "Are usable Sentinel-2 observations available before and after 26 August 2026 around the high source zone, and where does optical visibility fail?",
+     "phenomena": [
+      "snow/ice and exposed-ground contrast",
+      "candidate debris signature"
+     ],
+     "limitations": [
+      "Heavy monsoon cloud; snow/shadow confusion; optical only.",
+      "InSAR deformation is external literature, not reproduced here."
+     ],
+     "status": "feasibility"
+    },
+    "aoi": {
+     "geojson": {
+      "type": "Feature",
+      "properties": {
+       "study_id": "himalaya_langtang_2026",
+       "description": "approximate rectangular source-zone window",
+       "source": "Centred on the Langtang Lirung massif from published ICIMOD/ESA context; exact detachment scar not verified at M0.",
+       "crs": "EPSG:4326",
+       "area_km2": 13.328037,
+       "utm_epsg": 32645
+      },
+      "geometry": {
+       "type": "Polygon",
+       "coordinates": [
+        [
+         [
+          85.565,
+          28.155
+         ],
+         [
+          85.565,
+          28.19
+         ],
+         [
+          85.53,
+          28.19
+         ],
+         [
+          85.53,
+          28.155
+         ],
+         [
+          85.565,
+          28.155
+         ]
+        ]
+       ]
+      }
+     },
+     "bounds_4326": [
+      85.53,
+      28.155,
+      85.565,
+      28.19
+     ],
+     "analysis_crs": "EPSG:32645",
+     "area_km2": 13.328037,
+     "aoi_pixels": 133262
+    },
+    "grid": {
+     "crs": "EPSG:32645",
+     "resolution_m": 10.0,
+     "width": 349,
+     "height": 392,
+     "transform": [
+      10.0,
+      0.0,
+      355660.0,
+      0.0,
+      -10.0,
+      3119130.0
+     ],
+     "bounds": [
+      355660.0,
+      3115210.0,
+      359150.0,
+      3119130.0
+     ],
+     "signature": "fd33a58502fe0b20",
+     "utm_epsg": 32645,
+     "pixel_area_m2": 100.0,
+     "native_band_resolutions_m": {
+      "blue": 10.0,
+      "green": 10.0,
+      "nir": 10.0,
+      "red": 10.0,
+      "swir16": 20.0
+     }
+    },
+    "catalog": {
+     "endpoint": "https://earth-search.aws.element84.com/v1",
+     "collection": "sentinel-2-l2a",
+     "provider": "Element 84 Earth Search (AWS Open Data)",
+     "license": "Copernicus Sentinel data: free, open and unrestricted use with attribution (ESA Copernicus data policy). Catalogue: Element 84 Earth Search, AWS Open Data.",
+     "collection_license": "proprietary"
+    },
+    "periods": [
+     {
+      "period_id": "earlier",
+      "anchor_date": "2026-08-12",
+      "composite_method": "median",
+      "min_observations": 1,
+      "observation_count": 1,
+      "observation_dates": [
+       "2026-08-12"
+      ],
+      "item_ids": [
+       "S2C_45RUM_20260812_0_L2A"
+      ],
+      "valid_pixels": 93736,
+      "aoi_pixels": 133262,
+      "valid_fraction": 0.703396,
+      "valid_fraction_of_grid": 0.685165,
+      "observation_count_stats": {
+       "min": 1,
+       "max": 1,
+       "mean": 1.0,
+       "median": 1.0
+      },
+      "indices": {
+       "ndsi": {
+        "key": "ndsi",
+        "label": "NDSI",
+        "formula": "(Green - SWIR1) / (Green + SWIR1)",
+        "bands": [
+         "green",
+         "swir16"
+        ],
+        "native_resolution_m": 20.0,
+        "value_range": [
+         -1.0,
+         1.0
+        ],
+        "description": "Normalised Difference Snow Index, identical band algebra to MNDWI but a different physical interpretation; gated for cryosphere profiles only",
+        "legend_breaks": [
+         -0.1,
+         0.0,
+         0.2,
+         0.4
+        ],
+        "analysis_resolution_m": 10.0,
+        "upsampled": true,
+        "resolution_note": "computed on a 10 m grid from 20 m native bands; upsampled data contain no genuine 10 m detail",
+        "stats": {
+         "valid_count": 93736,
+         "total_count": 136808,
+         "valid_fraction": 0.685165,
+         "min": -0.913974,
+         "max": 0.96325,
+         "mean": -0.08495,
+         "std": 0.463974,
+         "quantiles": {
+          "p05": -0.627029,
+          "p25": -0.436751,
+          "p50": -0.217318,
+          "p75": 0.169317,
+          "p95": 0.861031
+         }
+        }
+       },
+       "ndwi": {
+        "key": "ndwi",
+        "label": "NDWI",
+        "formula": "(Green - NIR) / (Green + NIR)",
+        "bands": [
+         "green",
+         "nir"
+        ],
+        "native_resolution_m": 10.0,
+        "value_range": [
+         -1.0,
+         1.0
+        ],
+        "description": "McFeeters Normalised Difference Water Index (1996)",
+        "legend_breaks": [
+         -0.3,
+         -0.1,
+         0.0,
+         0.1,
+         0.3
+        ],
+        "analysis_resolution_m": 10.0,
+        "upsampled": false,
+        "resolution_note": "native 10 m band resolution",
+        "stats": {
+         "valid_count": 93736,
+         "total_count": 136808,
+         "valid_fraction": 0.685165,
+         "min": -0.70729,
+         "max": 0.754069,
+         "mean": -0.138052,
+         "std": 0.185469,
+         "quantiles": {
+          "p05": -0.526588,
+          "p25": -0.237863,
+          "p50": -0.089345,
+          "p75": 0.001909,
+          "p95": 0.082057
+         }
+        }
+       },
+       "ndvi": {
+        "key": "ndvi",
+        "label": "NDVI",
+        "formula": "(NIR - Red) / (NIR + Red)",
+        "bands": [
+         "nir",
+         "red"
+        ],
+        "native_resolution_m": 10.0,
+        "value_range": [
+         -1.0,
+         1.0
+        ],
+        "description": "Normalised Difference Vegetation Index (Rouse et al. 1974)",
+        "legend_breaks": [
+         -0.6,
+         -0.35,
+         -0.12,
+         0.02,
+         0.16,
+         0.3,
+         0.5
+        ],
+        "analysis_resolution_m": 10.0,
+        "upsampled": false,
+        "resolution_note": "native 10 m band resolution",
+        "stats": {
+         "valid_count": 93736,
+         "total_count": 136808,
+         "valid_fraction": 0.685165,
+         "min": -0.476923,
+         "max": 0.803456,
+         "mean": 0.110994,
+         "std": 0.186981,
+         "quantiles": {
+          "p05": -0.083715,
+          "p25": -0.019469,
+          "p50": 0.045964,
+          "p75": 0.19306,
+          "p95": 0.525998
+         }
+        }
+       }
+      },
+      "anchor_single_observation": {
+       "item_id": "S2C_45RUM_20260812_0_L2A",
+       "date": "2026-08-12",
+       "indices": {
+        "ndsi": {
+         "valid_count": 93736,
+         "total_count": 136808,
+         "valid_fraction": 0.685165,
+         "min": -0.913974,
+         "max": 0.96325,
+         "mean": -0.08495,
+         "std": 0.463974,
+         "quantiles": {
+          "p05": -0.627029,
+          "p25": -0.436751,
+          "p50": -0.217318,
+          "p75": 0.169317,
+          "p95": 0.861031
+         }
+        },
+        "ndwi": {
+         "valid_count": 93736,
+         "total_count": 136808,
+         "valid_fraction": 0.685165,
+         "min": -0.70729,
+         "max": 0.754069,
+         "mean": -0.138052,
+         "std": 0.185469,
+         "quantiles": {
+          "p05": -0.526588,
+          "p25": -0.237863,
+          "p50": -0.089345,
+          "p75": 0.001909,
+          "p95": 0.082057
+         }
+        },
+        "ndvi": {
+         "valid_count": 93736,
+         "total_count": 136808,
+         "valid_fraction": 0.685165,
+         "min": -0.476923,
+         "max": 0.803456,
+         "mean": 0.110994,
+         "std": 0.186981,
+         "quantiles": {
+          "p05": -0.083715,
+          "p25": -0.019469,
+          "p50": 0.045964,
+          "p75": 0.19306,
+          "p95": 0.525998
+         }
+        }
+       },
+       "note": "single-observation reconstruction used only to compare the M1 composite against the M0 two-scene baseline; it is not the headline M1 result"
+      },
+      "selection": {
+       "anchor_date": "2026-08-12",
+       "max_offset_days": 30,
+       "usable_candidate_total": 1,
+       "distinct_usable_dates": [
+        "2026-08-12"
+       ],
+       "chosen_item_ids": [
+        "S2C_45RUM_20260812_0_L2A"
+       ],
+       "chosen_dates": [
+        "2026-08-12"
+       ],
+       "offset_days": {
+        "S2C_45RUM_20260812_0_L2A": 0
+       },
+       "within_anchor_window": true,
+       "fallback_used": false,
+       "single_observation_limitation": true
+      },
+      "stretch": {
+       "true_colour": {
+        "low": [
+         0.034299999475479126,
+         0.030299998819828033,
+         0.020999999716877937
+        ],
+        "high": [
+         0.8104999661445618,
+         0.818399965763092,
+         0.82669997215271
+        ],
+        "gamma": 1.0,
+        "method": "per-band 2-98 percentile linear stretch on valid pixels"
+       },
+       "false_colour": {
+        "low": [
+         0.044199999421834946,
+         0.034299999475479126,
+         0.030299998819828033
+        ],
+        "high": [
+         0.7304999828338623,
+         0.8104999661445618,
+         0.818399965763092
+        ],
+        "gamma": 1.0,
+        "method": "per-band 2-98 percentile linear stretch on valid pixels"
+       }
+      },
+      "previews": {
+       "ndsi": "data/previews/m4/himalaya_langtang_2026_m4/earlier_2026-08-12_ndsi.png",
+       "ndwi": "data/previews/m4/himalaya_langtang_2026_m4/earlier_2026-08-12_ndwi.png",
+       "ndvi": "data/previews/m4/himalaya_langtang_2026_m4/earlier_2026-08-12_ndvi.png",
+       "true_colour": "data/previews/m4/himalaya_langtang_2026_m4/earlier_2026-08-12_true_colour.png",
+       "false_colour": "data/previews/m4/himalaya_langtang_2026_m4/earlier_2026-08-12_false_colour.png",
+       "valid_mask": "data/previews/m4/himalaya_langtang_2026_m4/earlier_2026-08-12_valid_mask.png",
+       "observation_count": "data/previews/m4/himalaya_langtang_2026_m4/earlier_2026-08-12_observation_count.png"
+      }
+     },
+     {
+      "period_id": "later",
+      "anchor_date": "2026-09-28",
+      "composite_method": "median",
+      "min_observations": 1,
+      "observation_count": 3,
+      "observation_dates": [
+       "2026-09-28",
+       "2026-10-01",
+       "2026-10-03"
+      ],
+      "item_ids": [
+       "S2C_45RUM_20260928_0_L2A",
+       "S2C_45RUM_20261001_0_L2A",
+       "S2B_45RUM_20261003_0_L2A"
+      ],
+      "valid_pixels": 133262,
+      "aoi_pixels": 133262,
+      "valid_fraction": 1.0,
+      "valid_fraction_of_grid": 0.97408,
+      "observation_count_stats": {
+       "min": 3,
+       "max": 3,
+       "mean": 3.0,
+       "median": 3.0
+      },
+      "indices": {
+       "ndsi": {
+        "key": "ndsi",
+        "label": "NDSI",
+        "formula": "(Green - SWIR1) / (Green + SWIR1)",
+        "bands": [
+         "green",
+         "swir16"
+        ],
+        "native_resolution_m": 20.0,
+        "value_range": [
+         -1.0,
+         1.0
+        ],
+        "description": "Normalised Difference Snow Index, identical band algebra to MNDWI but a different physical interpretation; gated for cryosphere profiles only",
+        "legend_breaks": [
+         -0.1,
+         0.0,
+         0.2,
+         0.4
+        ],
+        "analysis_resolution_m": 10.0,
+        "upsampled": true,
+        "resolution_note": "computed on a 10 m grid from 20 m native bands; upsampled data contain no genuine 10 m detail",
+        "stats": {
+         "valid_count": 133262,
+         "total_count": 136808,
+         "valid_fraction": 0.97408,
+         "min": -0.990482,
+         "max": 0.977743,
+         "mean": 0.867543,
+         "std": 0.149299,
+         "quantiles": {
+          "p05": 0.60826,
+          "p25": 0.860233,
+          "p50": 0.91152,
+          "p75": 0.944877,
+          "p95": 0.96327
+         }
+        }
+       },
+       "ndwi": {
+        "key": "ndwi",
+        "label": "NDWI",
+        "formula": "(Green - NIR) / (Green + NIR)",
+        "bands": [
+         "green",
+         "nir"
+        ],
+        "native_resolution_m": 10.0,
+        "value_range": [
+         -1.0,
+         1.0
+        ],
+        "description": "McFeeters Normalised Difference Water Index (1996)",
+        "legend_breaks": [
+         -0.3,
+         -0.1,
+         0.0,
+         0.1,
+         0.3
+        ],
+        "analysis_resolution_m": 10.0,
+        "upsampled": false,
+        "resolution_note": "native 10 m band resolution",
+        "stats": {
+         "valid_count": 133262,
+         "total_count": 136808,
+         "valid_fraction": 0.97408,
+         "min": -0.995215,
+         "max": 0.247607,
+         "mean": 0.068257,
+         "std": 0.053551,
+         "quantiles": {
+          "p05": -0.011073,
+          "p25": 0.044639,
+          "p50": 0.07945,
+          "p75": 0.100913,
+          "p95": 0.125316
+         }
+        }
+       },
+       "ndvi": {
+        "key": "ndvi",
+        "label": "NDVI",
+        "formula": "(NIR - Red) / (NIR + Red)",
+        "bands": [
+         "nir",
+         "red"
+        ],
+        "native_resolution_m": 10.0,
+        "value_range": [
+         -1.0,
+         1.0
+        ],
+        "description": "Normalised Difference Vegetation Index (Rouse et al. 1974)",
+        "legend_breaks": [
+         -0.6,
+         -0.35,
+         -0.12,
+         0.02,
+         0.16,
+         0.3,
+         0.5
+        ],
+        "analysis_resolution_m": 10.0,
+        "upsampled": false,
+        "resolution_note": "native 10 m band resolution",
+        "stats": {
+         "valid_count": 133262,
+         "total_count": 136808,
+         "valid_fraction": 0.97408,
+         "min": -0.175642,
+         "max": 0.62765,
+         "mean": -0.060139,
+         "std": 0.036815,
+         "quantiles": {
+          "p05": -0.099451,
+          "p25": -0.084137,
+          "p50": -0.068937,
+          "p75": -0.042261,
+          "p95": -0.001873
+         }
+        }
+       }
+      },
+      "anchor_single_observation": {
+       "item_id": "S2C_45RUM_20260928_0_L2A",
+       "date": "2026-09-28",
+       "indices": {
+        "ndsi": {
+         "valid_count": 133262,
+         "total_count": 136808,
+         "valid_fraction": 0.97408,
+         "min": -0.235857,
+         "max": 0.97243,
+         "mean": 0.862676,
+         "std": 0.069785,
+         "quantiles": {
+          "p05": 0.737597,
+          "p25": 0.839319,
+          "p50": 0.873957,
+          "p75": 0.903662,
+          "p95": 0.947518
+         }
+        },
+        "ndwi": {
+         "valid_count": 133262,
+         "total_count": 136808,
+         "valid_fraction": 0.97408,
+         "min": -0.299811,
+         "max": 0.193486,
+         "mean": 0.046604,
+         "std": 0.029122,
+         "quantiles": {
+          "p05": 0.0,
+          "p25": 0.029308,
+          "p50": 0.048187,
+          "p75": 0.065825,
+          "p95": 0.090587
+         }
+        },
+        "ndvi": {
+         "valid_count": 133262,
+         "total_count": 136808,
+         "valid_fraction": 0.97408,
+         "min": -0.161357,
+         "max": 0.146126,
+         "mean": -0.045985,
+         "std": 0.0227,
+         "quantiles": {
+          "p05": -0.079507,
+          "p25": -0.062295,
+          "p50": -0.047522,
+          "p75": -0.031565,
+          "p95": -0.007741
+         }
+        }
+       },
+       "note": "single-observation reconstruction used only to compare the M1 composite against the M0 two-scene baseline; it is not the headline M1 result"
+      },
+      "selection": {
+       "anchor_date": "2026-09-28",
+       "max_offset_days": 30,
+       "usable_candidate_total": 14,
+       "distinct_usable_dates": [
+        "2026-09-28",
+        "2026-10-01",
+        "2026-10-03",
+        "2026-10-06",
+        "2026-10-11",
+        "2026-10-13",
+        "2026-10-16",
+        "2026-10-18",
+        "2026-10-21",
+        "2026-10-23",
+        "2026-10-26",
+        "2026-10-28"
+       ],
+       "chosen_item_ids": [
+        "S2C_45RUM_20260928_0_L2A",
+        "S2C_45RUM_20261001_0_L2A",
+        "S2B_45RUM_20261003_0_L2A"
+       ],
+       "chosen_dates": [
+        "2026-09-28",
+        "2026-10-01",
+        "2026-10-03"
+       ],
+       "offset_days": {
+        "S2C_45RUM_20260928_0_L2A": 0,
+        "S2C_45RUM_20261001_0_L2A": 3,
+        "S2B_45RUM_20261003_0_L2A": 5
+       },
+       "within_anchor_window": true,
+       "fallback_used": false,
+       "single_observation_limitation": false
+      },
+      "stretch": {
+       "true_colour": {
+        "low": [
+         0.21459999680519104,
+         0.20430000126361847,
+         0.18869999051094055
+        ],
+        "high": [
+         1.2782999277114868,
+         1.3095999956130981,
+         1.3184000253677368
+        ],
+        "gamma": 1.0,
+        "method": "per-band 2-98 percentile linear stretch on valid pixels"
+       },
+       "false_colour": {
+        "low": [
+         0.21199999749660492,
+         0.21459999680519104,
+         0.20430000126361847
+        ],
+        "high": [
+         1.1464999914169312,
+         1.2782999277114868,
+         1.3095999956130981
+        ],
+        "gamma": 1.0,
+        "method": "per-band 2-98 percentile linear stretch on valid pixels"
+       }
+      },
+      "previews": {
+       "ndsi": "data/previews/m4/himalaya_langtang_2026_m4/later_2026-09-28_ndsi.png",
+       "ndwi": "data/previews/m4/himalaya_langtang_2026_m4/later_2026-09-28_ndwi.png",
+       "ndvi": "data/previews/m4/himalaya_langtang_2026_m4/later_2026-09-28_ndvi.png",
+       "true_colour": "data/previews/m4/himalaya_langtang_2026_m4/later_2026-09-28_true_colour.png",
+       "false_colour": "data/previews/m4/himalaya_langtang_2026_m4/later_2026-09-28_false_colour.png",
+       "valid_mask": "data/previews/m4/himalaya_langtang_2026_m4/later_2026-09-28_valid_mask.png",
+       "observation_count": "data/previews/m4/himalaya_langtang_2026_m4/later_2026-09-28_observation_count.png"
+      }
+     }
+    ],
+    "indices": {
+     "ndsi": {
+      "key": "ndsi",
+      "label": "NDSI",
+      "formula": "(Green - SWIR1) / (Green + SWIR1)",
+      "bands": [
+       "green",
+       "swir16"
+      ],
+      "native_resolution_m": 20.0,
+      "value_range": [
+       -1.0,
+       1.0
+      ],
+      "description": "Normalised Difference Snow Index, identical band algebra to MNDWI but a different physical interpretation; gated for cryosphere profiles only",
+      "legend_breaks": [
+       -0.1,
+       0.0,
+       0.2,
+       0.4
+      ],
+      "analysis_resolution_m": 10.0,
+      "upsampled": true,
+      "resolution_note": "computed on a 10 m grid from 20 m native bands; upsampled data contain no genuine 10 m detail"
+     },
+     "ndwi": {
+      "key": "ndwi",
+      "label": "NDWI",
+      "formula": "(Green - NIR) / (Green + NIR)",
+      "bands": [
+       "green",
+       "nir"
+      ],
+      "native_resolution_m": 10.0,
+      "value_range": [
+       -1.0,
+       1.0
+      ],
+      "description": "McFeeters Normalised Difference Water Index (1996)",
+      "legend_breaks": [
+       -0.3,
+       -0.1,
+       0.0,
+       0.1,
+       0.3
+      ],
+      "analysis_resolution_m": 10.0,
+      "upsampled": false,
+      "resolution_note": "native 10 m band resolution"
+     },
+     "ndvi": {
+      "key": "ndvi",
+      "label": "NDVI",
+      "formula": "(NIR - Red) / (NIR + Red)",
+      "bands": [
+       "nir",
+       "red"
+      ],
+      "native_resolution_m": 10.0,
+      "value_range": [
+       -1.0,
+       1.0
+      ],
+      "description": "Normalised Difference Vegetation Index (Rouse et al. 1974)",
+      "legend_breaks": [
+       -0.6,
+       -0.35,
+       -0.12,
+       0.02,
+       0.16,
+       0.3,
+       0.5
+      ],
+      "analysis_resolution_m": 10.0,
+      "upsampled": false,
+      "resolution_note": "native 10 m band resolution"
+     }
+    },
+    "change": {
+     "ndsi": {
+      "index": "ndsi",
+      "label": "observed index difference (later - earlier); not a land-cover verdict",
+      "common_valid_pixels": 93736,
+      "aoi_pixels": 133262,
+      "common_valid_fraction_of_aoi": 0.703396,
+      "common_valid_area_ha": 937.36,
+      "common_valid_area_km2": 9.3736,
+      "suitable_for_comparison": true,
+      "primary_threshold": 0.15,
+      "primary": {
+       "threshold": 0.15,
+       "valid_pixels": 93736,
+       "decrease_pixels": 47,
+       "increase_pixels": 84346,
+       "stable_pixels": 9343,
+       "valid_area_m2": 9373600.0,
+       "valid_area_ha": 937.36,
+       "valid_area_km2": 9.3736,
+       "decrease_area_ha": 0.47,
+       "increase_area_ha": 843.46,
+       "decrease_percent_of_common": 0.050141,
+       "increase_percent_of_common": 89.982504
+      },
+      "thresholds": [
+       {
+        "threshold": 0.1,
+        "valid_pixels": 93736,
+        "decrease_pixels": 132,
+        "increase_pixels": 86264,
+        "stable_pixels": 7340,
+        "valid_area_m2": 9373600.0,
+        "valid_area_ha": 937.36,
+        "valid_area_km2": 9.3736,
+        "decrease_area_ha": 1.32,
+        "increase_area_ha": 862.64,
+        "decrease_percent_of_common": 0.140821,
+        "increase_percent_of_common": 92.028676
+       },
+       {
+        "threshold": 0.15,
+        "valid_pixels": 93736,
+        "decrease_pixels": 47,
+        "increase_pixels": 84346,
+        "stable_pixels": 9343,
+        "valid_area_m2": 9373600.0,
+        "valid_area_ha": 937.36,
+        "valid_area_km2": 9.3736,
+        "decrease_area_ha": 0.47,
+        "increase_area_ha": 843.46,
+        "decrease_percent_of_common": 0.050141,
+        "increase_percent_of_common": 89.982504
+       },
+       {
+        "threshold": 0.2,
+        "valid_pixels": 93736,
+        "decrease_pixels": 13,
+        "increase_pixels": 82657,
+        "stable_pixels": 11066,
+        "valid_area_m2": 9373600.0,
+        "valid_area_ha": 937.36,
+        "valid_area_km2": 9.3736,
+        "decrease_area_ha": 0.13,
+        "increase_area_ha": 826.57,
+        "decrease_percent_of_common": 0.013869,
+        "increase_percent_of_common": 88.180635
+       }
+      ],
+      "delta_stats": {
+       "valid_count": 93736,
+       "total_count": 136808,
+       "valid_fraction": 0.685165,
+       "min": -0.451463,
+       "max": 1.750234,
+       "mean": 0.961249,
+       "std": 0.485701,
+       "quantiles": {
+        "p05": 0.025357,
+        "p25": 0.614998,
+        "p50": 1.103033,
+        "p75": 1.334314,
+        "p95": 1.570863
+       }
+      },
+      "pixel_area_m2": 100.0,
+      "area_convention": "planimetric pixel area on the projected analysis grid; hectares and square kilometres converted from square metres",
+      "delta_preview": "data/previews/m4/himalaya_langtang_2026_m4/delta_ndsi.png",
+      "common_valid_preview": "data/previews/m4/himalaya_langtang_2026_m4/common_valid_ndsi.png",
+      "delta_tif": "data/processed/m4/himalaya_langtang_2026_m4/delta_ndsi.tif",
+      "change_classes_tif": "data/processed/m4/himalaya_langtang_2026_m4/change_classes_ndsi.tif",
+      "common_valid_tif": "data/processed/m4/himalaya_langtang_2026_m4/common_valid_ndsi.tif",
+      "class_counts": {
+       "decrease": 47,
+       "stable": 9343,
+       "increase": 84346,
+       "invalid": 43072
+      },
+      "interpretation_guardrail": "observed index difference at the stated threshold; not a land-cover classification, deforestation/wetland-loss verdict, building count or causal attribution"
+     },
+     "ndwi": {
+      "index": "ndwi",
+      "label": "observed index difference (later - earlier); not a land-cover verdict",
+      "common_valid_pixels": 93736,
+      "aoi_pixels": 133262,
+      "common_valid_fraction_of_aoi": 0.703396,
+      "common_valid_area_ha": 937.36,
+      "common_valid_area_km2": 9.3736,
+      "suitable_for_comparison": true,
+      "primary_threshold": 0.15,
+      "primary": {
+       "threshold": 0.15,
+       "valid_pixels": 93736,
+       "decrease_pixels": 104,
+       "increase_pixels": 50048,
+       "stable_pixels": 43584,
+       "valid_area_m2": 9373600.0,
+       "valid_area_ha": 937.36,
+       "valid_area_km2": 9.3736,
+       "decrease_area_ha": 1.04,
+       "increase_area_ha": 500.48,
+       "decrease_percent_of_common": 0.11095,
+       "increase_percent_of_common": 53.392507
+      },
+      "thresholds": [
+       {
+        "threshold": 0.1,
+        "valid_pixels": 93736,
+        "decrease_pixels": 460,
+        "increase_pixels": 60767,
+        "stable_pixels": 32509,
+        "valid_area_m2": 9373600.0,
+        "valid_area_ha": 937.36,
+        "valid_area_km2": 9.3736,
+        "decrease_area_ha": 4.6,
+        "increase_area_ha": 607.67,
+        "decrease_percent_of_common": 0.49074,
+        "increase_percent_of_common": 64.827814
+       },
+       {
+        "threshold": 0.15,
+        "valid_pixels": 93736,
+        "decrease_pixels": 104,
+        "increase_pixels": 50048,
+        "stable_pixels": 43584,
+        "valid_area_m2": 9373600.0,
+        "valid_area_ha": 937.36,
+        "valid_area_km2": 9.3736,
+        "decrease_area_ha": 1.04,
+        "increase_area_ha": 500.48,
+        "decrease_percent_of_common": 0.11095,
+        "increase_percent_of_common": 53.392507
+       },
+       {
+        "threshold": 0.2,
+        "valid_pixels": 93736,
+        "decrease_pixels": 47,
+        "increase_pixels": 39683,
+        "stable_pixels": 54006,
+        "valid_area_m2": 9373600.0,
+        "valid_area_ha": 937.36,
+        "valid_area_km2": 9.3736,
+        "decrease_area_ha": 0.47,
+        "increase_area_ha": 396.83,
+        "decrease_percent_of_common": 0.050141,
+        "increase_percent_of_common": 42.334855
+       }
+      ],
+      "delta_stats": {
+       "valid_count": 93736,
+       "total_count": 136808,
+       "valid_fraction": 0.685165,
+       "min": -0.600081,
+       "max": 0.840215,
+       "mean": 0.210487,
+       "std": 0.198618,
+       "quantiles": {
+        "p05": -0.028116,
+        "p25": 0.055512,
+        "p50": 0.164169,
+        "p75": 0.317529,
+        "p95": 0.621387
+       }
+      },
+      "pixel_area_m2": 100.0,
+      "area_convention": "planimetric pixel area on the projected analysis grid; hectares and square kilometres converted from square metres",
+      "delta_preview": "data/previews/m4/himalaya_langtang_2026_m4/delta_ndwi.png",
+      "common_valid_preview": "data/previews/m4/himalaya_langtang_2026_m4/common_valid_ndwi.png",
+      "delta_tif": "data/processed/m4/himalaya_langtang_2026_m4/delta_ndwi.tif",
+      "change_classes_tif": "data/processed/m4/himalaya_langtang_2026_m4/change_classes_ndwi.tif",
+      "common_valid_tif": "data/processed/m4/himalaya_langtang_2026_m4/common_valid_ndwi.tif",
+      "class_counts": {
+       "decrease": 104,
+       "stable": 43584,
+       "increase": 50048,
+       "invalid": 43072
+      },
+      "interpretation_guardrail": "observed index difference at the stated threshold; not a land-cover classification, deforestation/wetland-loss verdict, building count or causal attribution"
+     },
+     "ndvi": {
+      "index": "ndvi",
+      "label": "observed index difference (later - earlier); not a land-cover verdict",
+      "common_valid_pixels": 93736,
+      "aoi_pixels": 133262,
+      "common_valid_fraction_of_aoi": 0.703396,
+      "common_valid_area_ha": 937.36,
+      "common_valid_area_km2": 9.3736,
+      "suitable_for_comparison": true,
+      "primary_threshold": 0.15,
+      "primary": {
+       "threshold": 0.15,
+       "valid_pixels": 93736,
+       "decrease_pixels": 38146,
+       "increase_pixels": 25,
+       "stable_pixels": 55565,
+       "valid_area_m2": 9373600.0,
+       "valid_area_ha": 937.36,
+       "valid_area_km2": 9.3736,
+       "decrease_area_ha": 381.46,
+       "increase_area_ha": 0.25,
+       "decrease_percent_of_common": 40.695144,
+       "increase_percent_of_common": 0.026671
+      },
+      "thresholds": [
+       {
+        "threshold": 0.1,
+        "valid_pixels": 93736,
+        "decrease_pixels": 49937,
+        "increase_pixels": 158,
+        "stable_pixels": 43641,
+        "valid_area_m2": 9373600.0,
+        "valid_area_ha": 937.36,
+        "valid_area_km2": 9.3736,
+        "decrease_area_ha": 499.37,
+        "increase_area_ha": 1.58,
+        "decrease_percent_of_common": 53.274089,
+        "increase_percent_of_common": 0.168559
+       },
+       {
+        "threshold": 0.15,
+        "valid_pixels": 93736,
+        "decrease_pixels": 38146,
+        "increase_pixels": 25,
+        "stable_pixels": 55565,
+        "valid_area_m2": 9373600.0,
+        "valid_area_ha": 937.36,
+        "valid_area_km2": 9.3736,
+        "decrease_area_ha": 381.46,
+        "increase_area_ha": 0.25,
+        "decrease_percent_of_common": 40.695144,
+        "increase_percent_of_common": 0.026671
+       },
+       {
+        "threshold": 0.2,
+        "valid_pixels": 93736,
+        "decrease_pixels": 30275,
+        "increase_pixels": 14,
+        "stable_pixels": 63447,
+        "valid_area_m2": 9373600.0,
+        "valid_area_ha": 937.36,
+        "valid_area_km2": 9.3736,
+        "decrease_area_ha": 302.75,
+        "increase_area_ha": 0.14,
+        "decrease_percent_of_common": 32.298157,
+        "increase_percent_of_common": 0.014936
+       }
+      ],
+      "delta_stats": {
+       "valid_count": 93736,
+       "total_count": 136808,
+       "valid_fraction": 0.685165,
+       "min": -0.911791,
+       "max": 0.362122,
+       "mean": -0.17374,
+       "std": 0.194628,
+       "quantiles": {
+        "p05": -0.603143,
+        "p25": -0.261069,
+        "p50": -0.111521,
+        "p75": -0.030642,
+        "p95": 0.031197
+       }
+      },
+      "pixel_area_m2": 100.0,
+      "area_convention": "planimetric pixel area on the projected analysis grid; hectares and square kilometres converted from square metres",
+      "delta_preview": "data/previews/m4/himalaya_langtang_2026_m4/delta_ndvi.png",
+      "common_valid_preview": "data/previews/m4/himalaya_langtang_2026_m4/common_valid_ndvi.png",
+      "delta_tif": "data/processed/m4/himalaya_langtang_2026_m4/delta_ndvi.tif",
+      "change_classes_tif": "data/processed/m4/himalaya_langtang_2026_m4/change_classes_ndvi.tif",
+      "common_valid_tif": "data/processed/m4/himalaya_langtang_2026_m4/common_valid_ndvi.tif",
+      "class_counts": {
+       "decrease": 38146,
+       "stable": 55565,
+       "increase": 25,
+       "invalid": 43072
+      },
+      "interpretation_guardrail": "observed index difference at the stated threshold; not a land-cover classification, deforestation/wetland-loss verdict, building count or causal attribution"
+     }
+    },
+    "area_cross_check": {
+     "method": "projected polygon area, independent geodesic area on the WGS84 ellipsoid, and rasterised pixel-count area on the analysis grid",
+     "analysis_crs": "EPSG:32645",
+     "pixel_area_m2": 100.0,
+     "aoi_polygon_projected_km2": 13.328037,
+     "aoi_polygon_geodesic_km2": 13.332011,
+     "aoi_raster_km2": 13.3262,
+     "grid_extent_km2": 13.6808,
+     "geodesic_vs_projected_relative_difference": 0.00029816,
+     "raster_vs_projected_relative_difference": 0.00013783,
+     "note": "the raster area differs from the polygon area by boundary rasterisation only; hectares and km2 are converted from projected square metres, not from degrees"
+    },
+    "verification": {
+     "all_passed": true,
+     "check_count": 26,
+     "failed_checks": []
+    },
+    "limitations": [
+     "Heavy monsoon cloud; snow/shadow confusion; optical only.",
+     "InSAR deformation is external literature, not reproduced here.",
+     "earlier: only 1 usable observation(s) contributed to the composite (requested up to 3); the two-scene baseline is preserved rather than extrapolated.",
+     "The following indices use 20 m SWIR bands resampled to the 10 m analysis grid and contain no genuine 10 m SWIR detail: ndsi.",
+     "Composites are robust within-period summaries of a few observations, not a dense time series; inter-annual change is represented by two period composites only.",
+     "Index differences are candidate spectral signals. They are not verified deforestation, wetland loss, construction, glacier damage or any other causal land-cover label.",
+     "Cloud, shadow and saturated-pixel exclusion relies on the provider SCL product; terrain shadow is not independently re-derived.",
+     "Surface reflectance is the provider L2A product; no independent atmospheric correction is performed.",
+     "Areas are planimetric on the documented projected grid; UTM scale distortion at this AOI is small but nonzero."
+    ],
+    "pipeline_version": "0.2.0-m1",
+    "generated_utc": "2026-11-07T13:17:45.045490+00:00",
+    "attribution": "Contains modified Copernicus Sentinel data, processed by ESA; L2A products distributed by the Element 84 Earth Search STAC catalogue (AWS Open Data).",
+    "outputs": {
+     "earlier_reflectance_tif": {
+      "kind": "raster",
+      "path": "data/processed/m4/himalaya_langtang_2026_m4/earlier_2026-08-12_reflectance_composite.tif",
+      "bytes": 1483648,
+      "sha256": "d9112c3bee726d35beb27e5ffa5ae980c203c8076604665dc8dd9cc2029808ac"
+     },
+     "earlier_valid_mask_tif": {
+      "kind": "mask",
+      "path": "data/processed/m4/himalaya_langtang_2026_m4/earlier_2026-08-12_valid_mask.tif",
+      "bytes": 3485,
+      "sha256": "048a296f21f98ac1d7fdee1f3e78d9107a2c92bc592729e5f716cdf585b8a2b1"
+     },
+     "earlier_observation_count_tif": {
+      "kind": "mask",
+      "path": "data/processed/m4/himalaya_langtang_2026_m4/earlier_2026-08-12_observation_count.tif",
+      "bytes": 4479,
+      "sha256": "eaf5e4a705a78bde684d38a6a686d414dfb6f4ec18c496e7de84cca1f84164b0"
+     },
+     "earlier_ndsi_tif": {
+      "kind": "raster",
+      "path": "data/processed/m4/himalaya_langtang_2026_m4/earlier_2026-08-12_ndsi.tif",
+      "bytes": 318776,
+      "sha256": "707ecb7ae39240c7e1a596acce35e29291f142907593a3460786d2998eb771d7"
+     },
+     "earlier_ndsi_png": {
+      "kind": "preview",
+      "path": "data/previews/m4/himalaya_langtang_2026_m4/earlier_2026-08-12_ndsi.png",
+      "bytes": 156705,
+      "sha256": "0bec7bb69c7254960087608ad9ab7d49728d075b21f602ac08a094e6983047fe"
+     },
+     "earlier_ndwi_tif": {
+      "kind": "raster",
+      "path": "data/processed/m4/himalaya_langtang_2026_m4/earlier_2026-08-12_ndwi.tif",
+      "bytes": 329270,
+      "sha256": "be78990f972416c2f244a9a591dfd955e606f7d8a6e5e3d0efaff3cb557e82e7"
+     },
+     "earlier_ndwi_png": {
+      "kind": "preview",
+      "path": "data/previews/m4/himalaya_langtang_2026_m4/earlier_2026-08-12_ndwi.png",
+      "bytes": 155076,
+      "sha256": "0221e50380037d0d88c2b4101c03edc73a9adc253f82e7237c4260eae47edb53"
+     },
+     "earlier_ndvi_tif": {
+      "kind": "raster",
+      "path": "data/processed/m4/himalaya_langtang_2026_m4/earlier_2026-08-12_ndvi.tif",
+      "bytes": 333392,
+      "sha256": "11e334e306a4469abf524ba5df7534c5131d04fcdd26a7618117d58e8e58a598"
+     },
+     "earlier_ndvi_png": {
+      "kind": "preview",
+      "path": "data/previews/m4/himalaya_langtang_2026_m4/earlier_2026-08-12_ndvi.png",
+      "bytes": 133413,
+      "sha256": "5fd4d2cf94c00453f5f3a7b750713bc1214a51a9521b104e052534d420fc2244"
+     },
+     "earlier_true_colour_png": {
+      "kind": "preview",
+      "path": "data/previews/m4/himalaya_langtang_2026_m4/earlier_2026-08-12_true_colour.png",
+      "bytes": 169311,
+      "sha256": "6ab962fe9b567ed2ab00300b2d2874d16d3431e76343acb1f9d9e5047b1c092b"
+     },
+     "earlier_false_colour_png": {
+      "kind": "preview",
+      "path": "data/previews/m4/himalaya_langtang_2026_m4/earlier_2026-08-12_false_colour.png",
+      "bytes": 169408,
+      "sha256": "d43e9f1b6109358db4b416c2cdbec94d5a22e10080d948a00a21565cbb3d750c"
+     },
+     "earlier_valid_mask_png": {
+      "kind": "preview",
+      "path": "data/previews/m4/himalaya_langtang_2026_m4/earlier_2026-08-12_valid_mask.png",
+      "bytes": 2371,
+      "sha256": "f26c75114eb14ada1a6acf6e02fa542dc9ba85bf632e3f0c253581a1f67b0811"
+     },
+     "earlier_observation_count_png": {
+      "kind": "preview",
+      "path": "data/previews/m4/himalaya_langtang_2026_m4/earlier_2026-08-12_observation_count.png",
+      "bytes": 2357,
+      "sha256": "c4f32a8eb1a3c8ece967ccdbe819300e6083e50be3def0e57fe87e7060f52602"
+     },
+     "later_reflectance_tif": {
+      "kind": "raster",
+      "path": "data/processed/m4/himalaya_langtang_2026_m4/later_2026-09-28_reflectance_composite.tif",
+      "bytes": 1984768,
+      "sha256": "8f09c4c1f4dc5e29eb3d18a85037bc0d7614ad9591156a8a041b91dcee869548"
+     },
+     "later_valid_mask_tif": {
+      "kind": "mask",
+      "path": "data/processed/m4/himalaya_langtang_2026_m4/later_2026-09-28_valid_mask.tif",
+      "bytes": 2381,
+      "sha256": "9cfeca691c6db7eebfd689bc6ab3ff22ed5a61a1988f72815fe0a7bc1d67de33"
+     },
+     "later_observation_count_tif": {
+      "kind": "mask",
+      "path": "data/processed/m4/himalaya_langtang_2026_m4/later_2026-09-28_observation_count.tif",
+      "bytes": 3215,
+      "sha256": "a21d648832db9dcba11429ead4a4c40ea685f925a511dbeb1af52c2913d7b371"
+     },
+     "later_ndsi_tif": {
+      "kind": "raster",
+      "path": "data/processed/m4/himalaya_langtang_2026_m4/later_2026-09-28_ndsi.tif",
+      "bytes": 378846,
+      "sha256": "fcd6f978b1939b2506aa8b63ad43b1e95b00828d826cbf1c63c506df19042c45"
+     },
+     "later_ndsi_png": {
+      "kind": "preview",
+      "path": "data/previews/m4/himalaya_langtang_2026_m4/later_2026-09-28_ndsi.png",
+      "bytes": 139313,
+      "sha256": "ea7274e1680395c419bc12cac19931e4b397e79fac4927309f5d820e3f0a641e"
+     },
+     "later_ndwi_tif": {
+      "kind": "raster",
+      "path": "data/processed/m4/himalaya_langtang_2026_m4/later_2026-09-28_ndwi.tif",
+      "bytes": 445156,
+      "sha256": "d1bad785d42ddb8b944df38c2c6e0b794bdbf54d2cc3ef642ac93edff604457f"
+     },
+     "later_ndwi_png": {
+      "kind": "preview",
+      "path": "data/previews/m4/himalaya_langtang_2026_m4/later_2026-09-28_ndwi.png",
+      "bytes": 196577,
+      "sha256": "00d314f73a9ec7f8d8dafd32b8ee4cd828ee313ecabf5417887cae91bceb4eb2"
+     },
+     "later_ndvi_tif": {
+      "kind": "raster",
+      "path": "data/processed/m4/himalaya_langtang_2026_m4/later_2026-09-28_ndvi.tif",
+      "bytes": 437364,
+      "sha256": "7be637fac0659b77eabc555a414cf4ffbe5e022ee53437483ebbf9b714fd81ec"
+     },
+     "later_ndvi_png": {
+      "kind": "preview",
+      "path": "data/previews/m4/himalaya_langtang_2026_m4/later_2026-09-28_ndvi.png",
+      "bytes": 142856,
+      "sha256": "65accd240bcb579229258ebb9d0d6c4e60ff586d953bb14096d178b62aea1548"
+     },
+     "later_true_colour_png": {
+      "kind": "preview",
+      "path": "data/previews/m4/himalaya_langtang_2026_m4/later_2026-09-28_true_colour.png",
+      "bytes": 288739,
+      "sha256": "5d4d5fa9becff1ff93a616e751f0c2179ae7bf0f3a069cec6198343892dd28c5"
+     },
+     "later_false_colour_png": {
+      "kind": "preview",
+      "path": "data/previews/m4/himalaya_langtang_2026_m4/later_2026-09-28_false_colour.png",
+      "bytes": 287144,
+      "sha256": "256af8e7d2746720decefd347aceae9828ee46add1fee7c12fee25ded69e865f"
+     },
+     "later_valid_mask_png": {
+      "kind": "preview",
+      "path": "data/previews/m4/himalaya_langtang_2026_m4/later_2026-09-28_valid_mask.png",
+      "bytes": 1131,
+      "sha256": "7a111e6b601444db20dd01b54a12af491ed76a7429bd5bc4ac6b1da290a0a967"
+     },
+     "later_observation_count_png": {
+      "kind": "preview",
+      "path": "data/previews/m4/himalaya_langtang_2026_m4/later_2026-09-28_observation_count.png",
+      "bytes": 1126,
+      "sha256": "8da78b8a4eafdcd956071c1fe17ca498b373ac4887a36807dfd5845c29b3e35c"
+     },
+     "delta_ndsi_tif": {
+      "kind": "raster",
+      "path": "data/processed/m4/himalaya_langtang_2026_m4/delta_ndsi.tif",
+      "bytes": 304179,
+      "sha256": "e487f862d76a2f811731a4a47a2c8d045131483adb800725dfb198ff3cc9355a"
+     },
+     "change_classes_ndsi_tif": {
+      "kind": "mask",
+      "path": "data/processed/m4/himalaya_langtang_2026_m4/change_classes_ndsi.tif",
+      "bytes": 6737,
+      "sha256": "1d92e625276fcca207ab7cff5660341db0921d6158a6cf8bf1f1aa3b78631ea8"
+     },
+     "common_valid_ndsi_tif": {
+      "kind": "mask",
+      "path": "data/processed/m4/himalaya_langtang_2026_m4/common_valid_ndsi.tif",
+      "bytes": 3492,
+      "sha256": "a8782beefaaa69722823e96e0e88be2207551c2fd9d5f6eb1a275aaa933b84d7"
+     },
+     "delta_ndsi_png": {
+      "kind": "preview",
+      "path": "data/previews/m4/himalaya_langtang_2026_m4/delta_ndsi.png",
+      "bytes": 39506,
+      "sha256": "e8205d40624fc92249375015e4e81e7c2fa8237a0838a265454956cf76cbb425"
+     },
+     "common_valid_ndsi_png": {
+      "kind": "preview",
+      "path": "data/previews/m4/himalaya_langtang_2026_m4/common_valid_ndsi.png",
+      "bytes": 2316,
+      "sha256": "4b073dc30ad9fb025aaaca184083f4dc227602085906d8de893629d7b121ec0e"
+     },
+     "delta_ndwi_tif": {
+      "kind": "raster",
+      "path": "data/processed/m4/himalaya_langtang_2026_m4/delta_ndwi.tif",
+      "bytes": 327409,
+      "sha256": "ed31c1313232f8dafcb1115f0fd9a831ad61b0fb8b0187b21ed49839a684091c"
+     },
+     "change_classes_ndwi_tif": {
+      "kind": "mask",
+      "path": "data/processed/m4/himalaya_langtang_2026_m4/change_classes_ndwi.tif",
+      "bytes": 11257,
+      "sha256": "c947205329255af956a2fcce9396e637b5c153a2a0ac976675e266bfd19832b4"
+     },
+     "common_valid_ndwi_tif": {
+      "kind": "mask",
+      "path": "data/processed/m4/himalaya_langtang_2026_m4/common_valid_ndwi.tif",
+      "bytes": 3492,
+      "sha256": "a8782beefaaa69722823e96e0e88be2207551c2fd9d5f6eb1a275aaa933b84d7"
+     },
+     "delta_ndwi_png": {
+      "kind": "preview",
+      "path": "data/previews/m4/himalaya_langtang_2026_m4/delta_ndwi.png",
+      "bytes": 161671,
+      "sha256": "a1036780e4441fc7d4100301d2332ee6ba55a3d00268b3cf5a612e1680088831"
+     },
+     "common_valid_ndwi_png": {
+      "kind": "preview",
+      "path": "data/previews/m4/himalaya_langtang_2026_m4/common_valid_ndwi.png",
+      "bytes": 2316,
+      "sha256": "4b073dc30ad9fb025aaaca184083f4dc227602085906d8de893629d7b121ec0e"
+     },
+     "delta_ndvi_tif": {
+      "kind": "raster",
+      "path": "data/processed/m4/himalaya_langtang_2026_m4/delta_ndvi.tif",
+      "bytes": 331531,
+      "sha256": "dbfca9b1c2994653efc350256a225b69cce5f338b9a0f0d2541184d6be286500"
+     },
+     "change_classes_ndvi_tif": {
+      "kind": "mask",
+      "path": "data/processed/m4/himalaya_langtang_2026_m4/change_classes_ndvi.tif",
+      "bytes": 10309,
+      "sha256": "6db049a0324af322a104ad4845b5c8509de5dbe8b5a8c66df090bfad6d0c4616"
+     },
+     "common_valid_ndvi_tif": {
+      "kind": "mask",
+      "path": "data/processed/m4/himalaya_langtang_2026_m4/common_valid_ndvi.tif",
+      "bytes": 3492,
+      "sha256": "a8782beefaaa69722823e96e0e88be2207551c2fd9d5f6eb1a275aaa933b84d7"
+     },
+     "delta_ndvi_png": {
+      "kind": "preview",
+      "path": "data/previews/m4/himalaya_langtang_2026_m4/delta_ndvi.png",
+      "bytes": 175112,
+      "sha256": "86fb6f667891ab38408ba2126974203b1c2aa2a059ffbb9922abeead0106b473"
+     },
+     "common_valid_ndvi_png": {
+      "kind": "preview",
+      "path": "data/previews/m4/himalaya_langtang_2026_m4/common_valid_ndvi.png",
+      "bytes": 2316,
+      "sha256": "4b073dc30ad9fb025aaaca184083f4dc227602085906d8de893629d7b121ec0e"
+     },
+     "ndsi_legend_png": {
+      "kind": "legend",
+      "path": "data/previews/m4/himalaya_langtang_2026_m4/ndsi_legend.png",
+      "bytes": 518,
+      "sha256": "88662de3771560dca3592598939692035663e6d95e2dc11b2b4f296f17e9ab62"
+     },
+     "ndsi_legend_json": {
+      "kind": "legend",
+      "path": "data/previews/m4/himalaya_langtang_2026_m4/ndsi_legend.json",
+      "bytes": 216,
+      "sha256": "d0ec5cff51ac935d84ee4511cf564b91e9866535d0453f755688bc9cfb2991bb"
+     },
+     "ndwi_legend_png": {
+      "kind": "legend",
+      "path": "data/previews/m4/himalaya_langtang_2026_m4/ndwi_legend.png",
+      "bytes": 519,
+      "sha256": "03c75ee6159dc50e49ad046fedddc218b1eafcce5f942b7dfc20dd343ce5d3d1"
+     },
+     "ndwi_legend_json": {
+      "kind": "legend",
+      "path": "data/previews/m4/himalaya_langtang_2026_m4/ndwi_legend.json",
+      "bytes": 223,
+      "sha256": "6fb48372f8d8705eda7be6ffccdf7c13d56c3370f65b19734bfe8c8c771aca3c"
+     },
+     "ndvi_legend_png": {
+      "kind": "legend",
+      "path": "data/previews/m4/himalaya_langtang_2026_m4/ndvi_legend.png",
+      "bytes": 518,
+      "sha256": "5ff7a3e36a62c76de428c373cbcecba761837c7ba7e4041391a433394cb11a35"
+     },
+     "ndvi_legend_json": {
+      "kind": "legend",
+      "path": "data/previews/m4/himalaya_langtang_2026_m4/ndvi_legend.json",
+      "bytes": 244,
+      "sha256": "a7b8d0eb9a68a5b6ec7d64e6c9fb35f7b2b30e834cf9d96c767a5c789c176dfd"
+     },
+     "change_legend_png": {
+      "kind": "legend",
+      "path": "data/previews/m4/himalaya_langtang_2026_m4/change_legend.png",
+      "bytes": 482,
+      "sha256": "fa81d27dfb1a4d6eac40959dd95a3be5158487c36008538cdbd498a432269e18"
+     },
+     "change_legend_json": {
+      "kind": "legend",
+      "path": "data/previews/m4/himalaya_langtang_2026_m4/change_legend.json",
+      "bytes": 364,
+      "sha256": "8b5f8fe845d10bba27cefd87eeac71266e07e23388801a3e3faec451d5d59793"
+     },
+     "observation_count_legend_png": {
+      "kind": "legend",
+      "path": "data/previews/m4/himalaya_langtang_2026_m4/observation_count_legend.png",
+      "bytes": 451,
+      "sha256": "1281d835bcda90a0ab8b0a4418a48073d57c4f3d373486f0f96212f27a9e8d44"
+     },
+     "observation_count_legend_json": {
+      "kind": "legend",
+      "path": "data/previews/m4/himalaya_langtang_2026_m4/observation_count_legend.json",
+      "bytes": 217,
+      "sha256": "f3ee3577533e91dd5dfd8a9cb117755b5fac1dc32efcffdee14a7643be3d5066"
+     }
+    }
+   }
+  }
+ ],
+ "charts": {
+  "threshold_series": [
+   {
+    "index": "ndsi",
+    "label": "observed index difference (later - earlier); not a land-cover verdict",
+    "primary_threshold": 0.15,
+    "common_valid_fraction_of_aoi": 0.703396,
+    "common_valid_pixels": 93736,
+    "interpretation_guardrail": "observed index difference at the stated threshold; not a land-cover classification, deforestation/wetland-loss verdict, building count or causal attribution",
+    "points": [
+     {
+      "threshold": 0.1,
+      "decrease_percent_of_common": 0.140821,
+      "increase_percent_of_common": 92.028676,
+      "decrease_area_ha": 1.32,
+      "increase_area_ha": 862.64,
+      "valid_pixels": 93736
+     },
+     {
+      "threshold": 0.15,
+      "decrease_percent_of_common": 0.050141,
+      "increase_percent_of_common": 89.982504,
+      "decrease_area_ha": 0.47,
+      "increase_area_ha": 843.46,
+      "valid_pixels": 93736
+     },
+     {
+      "threshold": 0.2,
+      "decrease_percent_of_common": 0.013869,
+      "increase_percent_of_common": 88.180635,
+      "decrease_area_ha": 0.13,
+      "increase_area_ha": 826.57,
+      "valid_pixels": 93736
+     }
+    ]
+   },
+   {
+    "index": "ndwi",
+    "label": "observed index difference (later - earlier); not a land-cover verdict",
+    "primary_threshold": 0.15,
+    "common_valid_fraction_of_aoi": 0.703396,
+    "common_valid_pixels": 93736,
+    "interpretation_guardrail": "observed index difference at the stated threshold; not a land-cover classification, deforestation/wetland-loss verdict, building count or causal attribution",
+    "points": [
+     {
+      "threshold": 0.1,
+      "decrease_percent_of_common": 0.49074,
+      "increase_percent_of_common": 64.827814,
+      "decrease_area_ha": 4.6,
+      "increase_area_ha": 607.67,
+      "valid_pixels": 93736
+     },
+     {
+      "threshold": 0.15,
+      "decrease_percent_of_common": 0.11095,
+      "increase_percent_of_common": 53.392507,
+      "decrease_area_ha": 1.04,
+      "increase_area_ha": 500.48,
+      "valid_pixels": 93736
+     },
+     {
+      "threshold": 0.2,
+      "decrease_percent_of_common": 0.050141,
+      "increase_percent_of_common": 42.334855,
+      "decrease_area_ha": 0.47,
+      "increase_area_ha": 396.83,
+      "valid_pixels": 93736
+     }
+    ]
+   },
+   {
+    "index": "ndvi",
+    "label": "observed index difference (later - earlier); not a land-cover verdict",
+    "primary_threshold": 0.15,
+    "common_valid_fraction_of_aoi": 0.703396,
+    "common_valid_pixels": 93736,
+    "interpretation_guardrail": "observed index difference at the stated threshold; not a land-cover classification, deforestation/wetland-loss verdict, building count or causal attribution",
+    "points": [
+     {
+      "threshold": 0.1,
+      "decrease_percent_of_common": 53.274089,
+      "increase_percent_of_common": 0.168559,
+      "decrease_area_ha": 499.37,
+      "increase_area_ha": 1.58,
+      "valid_pixels": 93736
+     },
+     {
+      "threshold": 0.15,
+      "decrease_percent_of_common": 40.695144,
+      "increase_percent_of_common": 0.026671,
+      "decrease_area_ha": 381.46,
+      "increase_area_ha": 0.25,
+      "valid_pixels": 93736
+     },
+     {
+      "threshold": 0.2,
+      "decrease_percent_of_common": 32.298157,
+      "increase_percent_of_common": 0.014936,
+      "decrease_area_ha": 302.75,
+      "increase_area_ha": 0.14,
+      "valid_pixels": 93736
+     }
+    ]
+   }
+  ],
+  "period_index_means": [
+   {
+    "period_id": "earlier",
+    "anchor_date": "2026-08-12",
+    "index": "ndsi",
+    "mean": -0.08495,
+    "std": 0.463974,
+    "valid_count": 93736,
+    "total_count": 136808,
+    "valid_fraction": 0.685165
+   },
+   {
+    "period_id": "earlier",
+    "anchor_date": "2026-08-12",
+    "index": "ndwi",
+    "mean": -0.138052,
+    "std": 0.185469,
+    "valid_count": 93736,
+    "total_count": 136808,
+    "valid_fraction": 0.685165
+   },
+   {
+    "period_id": "earlier",
+    "anchor_date": "2026-08-12",
+    "index": "ndvi",
+    "mean": 0.110994,
+    "std": 0.186981,
+    "valid_count": 93736,
+    "total_count": 136808,
+    "valid_fraction": 0.685165
+   },
+   {
+    "period_id": "later",
+    "anchor_date": "2026-09-28",
+    "index": "ndsi",
+    "mean": 0.867543,
+    "std": 0.149299,
+    "valid_count": 133262,
+    "total_count": 136808,
+    "valid_fraction": 0.97408
+   },
+   {
+    "period_id": "later",
+    "anchor_date": "2026-09-28",
+    "index": "ndwi",
+    "mean": 0.068257,
+    "std": 0.053551,
+    "valid_count": 133262,
+    "total_count": 136808,
+    "valid_fraction": 0.97408
+   },
+   {
+    "period_id": "later",
+    "anchor_date": "2026-09-28",
+    "index": "ndvi",
+    "mean": -0.060139,
+    "std": 0.036815,
+    "valid_count": 133262,
+    "total_count": 136808,
+    "valid_fraction": 0.97408
+   }
+  ],
+  "delta_stats": [
+   {
+    "index": "ndsi",
+    "mean": 0.961249,
+    "std": 0.485701,
+    "min": -0.451463,
+    "max": 1.750234,
+    "quantiles": {
+     "p05": 0.025357,
+     "p25": 0.614998,
+     "p50": 1.103033,
+     "p75": 1.334314,
+     "p95": 1.570863
+    },
+    "valid_count": 93736,
+    "common_valid_pixels": 93736
+   },
+   {
+    "index": "ndwi",
+    "mean": 0.210487,
+    "std": 0.198618,
+    "min": -0.600081,
+    "max": 0.840215,
+    "quantiles": {
+     "p05": -0.028116,
+     "p25": 0.055512,
+     "p50": 0.164169,
+     "p75": 0.317529,
+     "p95": 0.621387
+    },
+    "valid_count": 93736,
+    "common_valid_pixels": 93736
+   },
+   {
+    "index": "ndvi",
+    "mean": -0.17374,
+    "std": 0.194628,
+    "min": -0.911791,
+    "max": 0.362122,
+    "quantiles": {
+     "p05": -0.603143,
+     "p25": -0.261069,
+     "p50": -0.111521,
+     "p75": -0.030642,
+     "p95": 0.031197
+    },
+    "valid_count": 93736,
+    "common_valid_pixels": 93736
+   }
+  ]
+ },
+ "assets": {
+  "himalaya_langtang_2026_m4/change_legend.png": {
+   "path": "previews/himalaya_langtang_2026_m4__change_legend.png",
+   "sha256": "fa81d27dfb1a4d6eac40959dd95a3be5158487c36008538cdbd498a432269e18"
+  },
+  "himalaya_langtang_2026_m4/ndsi_legend.png": {
+   "path": "previews/himalaya_langtang_2026_m4__ndsi_legend.png",
+   "sha256": "88662de3771560dca3592598939692035663e6d95e2dc11b2b4f296f17e9ab62"
+  },
+  "himalaya_langtang_2026_m4/ndvi_legend.png": {
+   "path": "previews/himalaya_langtang_2026_m4__ndvi_legend.png",
+   "sha256": "5ff7a3e36a62c76de428c373cbcecba761837c7ba7e4041391a433394cb11a35"
+  },
+  "himalaya_langtang_2026_m4/ndwi_legend.png": {
+   "path": "previews/himalaya_langtang_2026_m4__ndwi_legend.png",
+   "sha256": "03c75ee6159dc50e49ad046fedddc218b1eafcce5f942b7dfc20dd343ce5d3d1"
+  },
+  "himalaya_langtang_2026_m4/observation_count_legend.png": {
+   "path": "previews/himalaya_langtang_2026_m4__observation_count_legend.png",
+   "sha256": "1281d835bcda90a0ab8b0a4418a48073d57c4f3d373486f0f96212f27a9e8d44"
+  },
+  "himalaya_langtang_2026_m4/common_valid_ndsi.png": {
+   "path": "previews/himalaya_langtang_2026_m4__common_valid_ndsi.png",
+   "sha256": "4b073dc30ad9fb025aaaca184083f4dc227602085906d8de893629d7b121ec0e"
+  },
+  "himalaya_langtang_2026_m4/common_valid_ndvi.png": {
+   "path": "previews/himalaya_langtang_2026_m4__common_valid_ndvi.png",
+   "sha256": "4b073dc30ad9fb025aaaca184083f4dc227602085906d8de893629d7b121ec0e"
+  },
+  "himalaya_langtang_2026_m4/common_valid_ndwi.png": {
+   "path": "previews/himalaya_langtang_2026_m4__common_valid_ndwi.png",
+   "sha256": "4b073dc30ad9fb025aaaca184083f4dc227602085906d8de893629d7b121ec0e"
+  },
+  "himalaya_langtang_2026_m4/delta_ndsi.png": {
+   "path": "previews/himalaya_langtang_2026_m4__delta_ndsi.png",
+   "sha256": "e8205d40624fc92249375015e4e81e7c2fa8237a0838a265454956cf76cbb425"
+  },
+  "himalaya_langtang_2026_m4/delta_ndvi.png": {
+   "path": "previews/himalaya_langtang_2026_m4__delta_ndvi.png",
+   "sha256": "86fb6f667891ab38408ba2126974203b1c2aa2a059ffbb9922abeead0106b473"
+  },
+  "himalaya_langtang_2026_m4/delta_ndwi.png": {
+   "path": "previews/himalaya_langtang_2026_m4__delta_ndwi.png",
+   "sha256": "a1036780e4441fc7d4100301d2332ee6ba55a3d00268b3cf5a612e1680088831"
+  },
+  "himalaya_langtang_2026_m4/earlier_2026-08-12_false_colour.png": {
+   "path": "previews/himalaya_langtang_2026_m4__earlier_2026-08-12_false_colour.png",
+   "sha256": "d43e9f1b6109358db4b416c2cdbec94d5a22e10080d948a00a21565cbb3d750c"
+  },
+  "himalaya_langtang_2026_m4/earlier_2026-08-12_ndsi.png": {
+   "path": "previews/himalaya_langtang_2026_m4__earlier_2026-08-12_ndsi.png",
+   "sha256": "0bec7bb69c7254960087608ad9ab7d49728d075b21f602ac08a094e6983047fe"
+  },
+  "himalaya_langtang_2026_m4/earlier_2026-08-12_ndvi.png": {
+   "path": "previews/himalaya_langtang_2026_m4__earlier_2026-08-12_ndvi.png",
+   "sha256": "5fd4d2cf94c00453f5f3a7b750713bc1214a51a9521b104e052534d420fc2244"
+  },
+  "himalaya_langtang_2026_m4/earlier_2026-08-12_ndwi.png": {
+   "path": "previews/himalaya_langtang_2026_m4__earlier_2026-08-12_ndwi.png",
+   "sha256": "0221e50380037d0d88c2b4101c03edc73a9adc253f82e7237c4260eae47edb53"
+  },
+  "himalaya_langtang_2026_m4/earlier_2026-08-12_observation_count.png": {
+   "path": "previews/himalaya_langtang_2026_m4__earlier_2026-08-12_observation_count.png",
+   "sha256": "c4f32a8eb1a3c8ece967ccdbe819300e6083e50be3def0e57fe87e7060f52602"
+  },
+  "himalaya_langtang_2026_m4/earlier_2026-08-12_true_colour.png": {
+   "path": "previews/himalaya_langtang_2026_m4__earlier_2026-08-12_true_colour.png",
+   "sha256": "6ab962fe9b567ed2ab00300b2d2874d16d3431e76343acb1f9d9e5047b1c092b"
+  },
+  "himalaya_langtang_2026_m4/earlier_2026-08-12_valid_mask.png": {
+   "path": "previews/himalaya_langtang_2026_m4__earlier_2026-08-12_valid_mask.png",
+   "sha256": "f26c75114eb14ada1a6acf6e02fa542dc9ba85bf632e3f0c253581a1f67b0811"
+  },
+  "himalaya_langtang_2026_m4/later_2026-09-28_false_colour.png": {
+   "path": "previews/himalaya_langtang_2026_m4__later_2026-09-28_false_colour.png",
+   "sha256": "256af8e7d2746720decefd347aceae9828ee46add1fee7c12fee25ded69e865f"
+  },
+  "himalaya_langtang_2026_m4/later_2026-09-28_ndsi.png": {
+   "path": "previews/himalaya_langtang_2026_m4__later_2026-09-28_ndsi.png",
+   "sha256": "ea7274e1680395c419bc12cac19931e4b397e79fac4927309f5d820e3f0a641e"
+  },
+  "himalaya_langtang_2026_m4/later_2026-09-28_ndvi.png": {
+   "path": "previews/himalaya_langtang_2026_m4__later_2026-09-28_ndvi.png",
+   "sha256": "65accd240bcb579229258ebb9d0d6c4e60ff586d953bb14096d178b62aea1548"
+  },
+  "himalaya_langtang_2026_m4/later_2026-09-28_ndwi.png": {
+   "path": "previews/himalaya_langtang_2026_m4__later_2026-09-28_ndwi.png",
+   "sha256": "00d314f73a9ec7f8d8dafd32b8ee4cd828ee313ecabf5417887cae91bceb4eb2"
+  },
+  "himalaya_langtang_2026_m4/later_2026-09-28_observation_count.png": {
+   "path": "previews/himalaya_langtang_2026_m4__later_2026-09-28_observation_count.png",
+   "sha256": "8da78b8a4eafdcd956071c1fe17ca498b373ac4887a36807dfd5845c29b3e35c"
+  },
+  "himalaya_langtang_2026_m4/later_2026-09-28_true_colour.png": {
+   "path": "previews/himalaya_langtang_2026_m4__later_2026-09-28_true_colour.png",
+   "sha256": "5d4d5fa9becff1ff93a616e751f0c2179ae7bf0f3a069cec6198343892dd28c5"
+  },
+  "himalaya_langtang_2026_m4/later_2026-09-28_valid_mask.png": {
+   "path": "previews/himalaya_langtang_2026_m4__later_2026-09-28_valid_mask.png",
+   "sha256": "7a111e6b601444db20dd01b54a12af491ed76a7429bd5bc4ac6b1da290a0a967"
+  }
+ },
+ "sources": {
+  "registry": {
+   "path": "studies/registry.yaml",
+   "sha256": "986c960755cffd846029ce031719e0519cbcc77b2ca66591aeb101fa48ffdf27"
+  },
+  "m2_experiment": null
+ },
+ "event": {
+  "event_date": "2026-08-26",
+  "event_mechanism": "rock-and-ice collapse and cascading debris-laden flood, explicitly not a conventional glacial lake outburst",
+  "external_references": [
+   {
+    "title": "ICIMOD preliminary synthesis on the Langtang Lirung rock-ice collapse of 26 August 2026",
+    "role": "external event context (cited literature, not a project measurement)"
+   }
+  ],
+  "observations_relative_to_event": [
+   {
+    "date": "2026-08-12",
+    "relative_days": -14,
+    "experiment_id": "himalaya_langtang_2026_m4",
+    "period_id": "earlier"
+   },
+   {
+    "date": "2026-09-28",
+    "relative_days": 33,
+    "experiment_id": "himalaya_langtang_2026_m4",
+    "period_id": "later"
+   },
+   {
+    "date": "2026-10-01",
+    "relative_days": 36,
+    "experiment_id": "himalaya_langtang_2026_m4",
+    "period_id": "later"
+   },
+   {
+    "date": "2026-10-03",
+    "relative_days": 38,
+    "experiment_id": "himalaya_langtang_2026_m4",
+    "period_id": "later"
+   }
+  ],
+  "known_unprocessed_observations": [
+   {
+    "item_id": "S2B_45RUM_20260916_0_L2A",
+    "date": "2026-09-16",
+    "relative_days": 21,
+    "in_aoi_valid_fraction": 0.791,
+    "status": "additional usable post-event observation; not part of the processed pair (2026-09-28 used instead)"
+   },
+   {
+    "item_id": "S2C_45RUM_20260918_0_L2A",
+    "date": "2026-09-18",
+    "relative_days": 23,
+    "in_aoi_valid_fraction": 0.167,
+    "status": "cloud-obscured; below the 0.60 validity threshold"
+   }
+  ],
+  "observation_gaps": [
+   {
+    "statement": "Nearest usable observation 14 days before the event"
+   },
+   {
+    "statement": "Nearest usable observation 38 days after the event"
+   }
+  ],
+  "insar_note": "Sentinel-1 InSAR findings discussed in external research remain external evidence; HabitatShift has not implemented or validated an InSAR workflow, and no radar product is used here."
+ },
+ "bundle_sha256_inputs": {
+  "previews": [
+   "himalaya_langtang_2026_m4/change_legend.png",
+   "himalaya_langtang_2026_m4/common_valid_ndsi.png",
+   "himalaya_langtang_2026_m4/common_valid_ndvi.png",
+   "himalaya_langtang_2026_m4/common_valid_ndwi.png",
+   "himalaya_langtang_2026_m4/delta_ndsi.png",
+   "himalaya_langtang_2026_m4/delta_ndvi.png",
+   "himalaya_langtang_2026_m4/delta_ndwi.png",
+   "himalaya_langtang_2026_m4/earlier_2026-08-12_false_colour.png",
+   "himalaya_langtang_2026_m4/earlier_2026-08-12_ndsi.png",
+   "himalaya_langtang_2026_m4/earlier_2026-08-12_ndvi.png",
+   "himalaya_langtang_2026_m4/earlier_2026-08-12_ndwi.png",
+   "himalaya_langtang_2026_m4/earlier_2026-08-12_observation_count.png",
+   "himalaya_langtang_2026_m4/earlier_2026-08-12_true_colour.png",
+   "himalaya_langtang_2026_m4/earlier_2026-08-12_valid_mask.png",
+   "himalaya_langtang_2026_m4/later_2026-09-28_false_colour.png",
+   "himalaya_langtang_2026_m4/later_2026-09-28_ndsi.png",
+   "himalaya_langtang_2026_m4/later_2026-09-28_ndvi.png",
+   "himalaya_langtang_2026_m4/later_2026-09-28_ndwi.png",
+   "himalaya_langtang_2026_m4/later_2026-09-28_observation_count.png",
+   "himalaya_langtang_2026_m4/later_2026-09-28_true_colour.png",
+   "himalaya_langtang_2026_m4/later_2026-09-28_valid_mask.png",
+   "himalaya_langtang_2026_m4/ndsi_legend.png",
+   "himalaya_langtang_2026_m4/ndvi_legend.png",
+   "himalaya_langtang_2026_m4/ndwi_legend.png",
+   "himalaya_langtang_2026_m4/observation_count_legend.png"
+  ]
+ }
+}
