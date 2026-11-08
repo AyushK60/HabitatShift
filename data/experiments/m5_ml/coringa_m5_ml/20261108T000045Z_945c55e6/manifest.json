@@ -1,0 +1,18 @@
+{
+  "schema": "habitatshift-m5ml-manifest/1",
+  "study": "coringa_m5_ml",
+  "generated_utc": "2026-11-08T00:00:45.981583+00:00",
+  "outputs": {
+    "model.joblib": {
+      "path": "data\\experiments\\m5_ml\\coringa_m5_ml\\20261108T000045Z_945c55e6\\model.joblib",
+      "bytes": 122749377,
+      "sha256": "e7d776c16eda4691e95058746b372541a98168b8d5de211836329ab28d9f9034"
+    },
+    "result.json": {
+      "path": "data\\experiments\\m5_ml\\coringa_m5_ml\\20261108T000045Z_945c55e6\\result.json",
+      "bytes": 9121,
+      "sha256": "e9079b10b862dfca7e9407cf87d2bfeff217c7b94bb36bc39049902dbf01cae1"
+    }
+  },
+  "git_commit": "a7f78f4190ecde862bb4e2288cf9c1795f3d03f2"
+}

@@ -1,0 +1,368 @@
+{
+  "manifest_schema": "habitatshift-m5ml-training/1",
+  "generated_utc": "2026-11-07T23:54:38.678292+00:00",
+  "study": "coringa_m5_ml",
+  "purpose": "2021-epoch training imagery for the M5 supervised experiments; label epoch = ESA WorldCover v200 (2021). NOT a change study.",
+  "inherited_config": {
+    "from_experiment": "coringa_m1",
+    "aoi": "AOI(study_id='coringa_coastal', polygon=<POLYGON ((82.285 16.71, 82.285 16.745, 82.245 16.745, 82.245 16.71, 82.285 ...>, description='hand-chosen rectangular working window', source='Manually placed over the mangrove/creek complex of Coringa Wildlife Sanctuary south of Kakinada; not the official sanctuary boundary.')",
+    "resolution_m": 10.0,
+    "indices": [
+      "ndvi",
+      "ndwi",
+      "mndwi"
+    ],
+    "composite_method": "median",
+    "max_observations": 3,
+    "min_observations": 1,
+    "max_cloud_cover": 60.0,
+    "min_scene_valid_fraction": 0.6
+  },
+  "training_period": {
+    "period_id": "training",
+    "anchor_date": "2021-03-26",
+    "search_start": "2021-02-26",
+    "search_end": "2021-04-25",
+    "max_offset_days": 30
+  },
+  "grid": {
+    "crs": "EPSG:32644",
+    "resolution_m": 10.0,
+    "width": 429,
+    "height": 390,
+    "transform": [
+      10.0,
+      0.0,
+      632700.0,
+      0.0,
+      -10.0,
+      1851790.0
+    ],
+    "signature": "ad1601d5620e5f23",
+    "pixel_area_m2": 100.0
+  },
+  "selection": {
+    "anchor_date": "2021-03-26",
+    "max_offset_days": 30,
+    "usable_candidate_total": 24,
+    "distinct_usable_dates": [
+      "2021-03-01",
+      "2021-03-06",
+      "2021-03-11",
+      "2021-03-16",
+      "2021-03-26",
+      "2021-03-31",
+      "2021-04-05",
+      "2021-04-10",
+      "2021-04-20",
+      "2021-04-25"
+    ],
+    "chosen_item_ids": [
+      "S2B_44QPD_20210326_0_L2A",
+      "S2A_44QPD_20210331_1_L2A",
+      "S2B_44QPD_20210316_1_L2A"
+    ],
+    "chosen_dates": [
+      "2021-03-26",
+      "2021-03-31",
+      "2021-03-16"
+    ],
+    "offset_days": {
+      "S2B_44QPD_20210326_0_L2A": 0,
+      "S2A_44QPD_20210331_1_L2A": 5,
+      "S2B_44QPD_20210316_1_L2A": 10
+    },
+    "within_anchor_window": true,
+    "fallback_used": false,
+    "single_observation_limitation": false
+  },
+  "observations": [
+    {
+      "item_id": "S2B_44QPD_20210326_0_L2A",
+      "acquisition_date": "2021-03-26",
+      "acquisition_utc": "2021-03-26T05:14:06.822000Z",
+      "scene_cloud_cover_percent": 14.28636,
+      "processing_baseline": "02.14",
+      "aoi_valid_fraction": 0.96337,
+      "grid_signature": "ad1601d5620e5f23",
+      "assets": {
+        "blue": {
+          "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/44/Q/PD/2021/3/S2B_44QPD_20210326_0_L2A/B02.tif",
+          "gsd_metres": 10.0
+        },
+        "green": {
+          "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/44/Q/PD/2021/3/S2B_44QPD_20210326_0_L2A/B03.tif",
+          "gsd_metres": 10.0
+        },
+        "red": {
+          "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/44/Q/PD/2021/3/S2B_44QPD_20210326_0_L2A/B04.tif",
+          "gsd_metres": 10.0
+        },
+        "nir": {
+          "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/44/Q/PD/2021/3/S2B_44QPD_20210326_0_L2A/B08.tif",
+          "gsd_metres": 10.0
+        },
+        "swir16": {
+          "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/44/Q/PD/2021/3/S2B_44QPD_20210326_0_L2A/B11.tif",
+          "gsd_metres": 20.0
+        }
+      },
+      "radiometry": {
+        "blue": {
+          "asset_key": "blue",
+          "scale": 0.0001,
+          "offset": 0.0,
+          "nodata": 0,
+          "gsd_metres": 10.0,
+          "source": "stac:item.S2B_44QPD_20210326_0_L2A.assets.blue.raster:bands (baseline 02.14; declared offset +0.0 (boa_offset_applied=False))",
+          "transform": "reflectance = DN * scale + offset"
+        },
+        "green": {
+          "asset_key": "green",
+          "scale": 0.0001,
+          "offset": 0.0,
+          "nodata": 0,
+          "gsd_metres": 10.0,
+          "source": "stac:item.S2B_44QPD_20210326_0_L2A.assets.green.raster:bands (baseline 02.14; declared offset +0.0 (boa_offset_applied=False))",
+          "transform": "reflectance = DN * scale + offset"
+        },
+        "nir": {
+          "asset_key": "nir",
+          "scale": 0.0001,
+          "offset": 0.0,
+          "nodata": 0,
+          "gsd_metres": 10.0,
+          "source": "stac:item.S2B_44QPD_20210326_0_L2A.assets.nir.raster:bands (baseline 02.14; declared offset +0.0 (boa_offset_applied=False))",
+          "transform": "reflectance = DN * scale + offset"
+        },
+        "red": {
+          "asset_key": "red",
+          "scale": 0.0001,
+          "offset": 0.0,
+          "nodata": 0,
+          "gsd_metres": 10.0,
+          "source": "stac:item.S2B_44QPD_20210326_0_L2A.assets.red.raster:bands (baseline 02.14; declared offset +0.0 (boa_offset_applied=False))",
+          "transform": "reflectance = DN * scale + offset"
+        },
+        "swir16": {
+          "asset_key": "swir16",
+          "scale": 0.0001,
+          "offset": 0.0,
+          "nodata": 0,
+          "gsd_metres": 20.0,
+          "source": "stac:item.S2B_44QPD_20210326_0_L2A.assets.swir16.raster:bands (baseline 02.14; declared offset +0.0 (boa_offset_applied=False))",
+          "transform": "reflectance = DN * scale + offset"
+        }
+      },
+      "radiometry_evidence": {}
+    },
+    {
+      "item_id": "S2A_44QPD_20210331_1_L2A",
+      "acquisition_date": "2021-03-31",
+      "acquisition_utc": "2021-03-31T05:14:04.966000Z",
+      "scene_cloud_cover_percent": 4.334502,
+      "processing_baseline": "03.00",
+      "aoi_valid_fraction": 0.999855,
+      "grid_signature": "ad1601d5620e5f23",
+      "assets": {
+        "blue": {
+          "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/44/Q/PD/2021/3/S2A_44QPD_20210331_1_L2A/B02.tif",
+          "gsd_metres": 10.0
+        },
+        "green": {
+          "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/44/Q/PD/2021/3/S2A_44QPD_20210331_1_L2A/B03.tif",
+          "gsd_metres": 10.0
+        },
+        "red": {
+          "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/44/Q/PD/2021/3/S2A_44QPD_20210331_1_L2A/B04.tif",
+          "gsd_metres": 10.0
+        },
+        "nir": {
+          "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/44/Q/PD/2021/3/S2A_44QPD_20210331_1_L2A/B08.tif",
+          "gsd_metres": 10.0
+        },
+        "swir16": {
+          "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/44/Q/PD/2021/3/S2A_44QPD_20210331_1_L2A/B11.tif",
+          "gsd_metres": 20.0
+        }
+      },
+      "radiometry": {
+        "blue": {
+          "asset_key": "blue",
+          "scale": 0.0001,
+          "offset": 0.0,
+          "nodata": 0,
+          "gsd_metres": 10.0,
+          "source": "stac:item.S2A_44QPD_20210331_1_L2A.assets.blue.raster:bands (baseline 03.00; declared offset +0.0 (boa_offset_applied=False))",
+          "transform": "reflectance = DN * scale + offset"
+        },
+        "green": {
+          "asset_key": "green",
+          "scale": 0.0001,
+          "offset": 0.0,
+          "nodata": 0,
+          "gsd_metres": 10.0,
+          "source": "stac:item.S2A_44QPD_20210331_1_L2A.assets.green.raster:bands (baseline 03.00; declared offset +0.0 (boa_offset_applied=False))",
+          "transform": "reflectance = DN * scale + offset"
+        },
+        "nir": {
+          "asset_key": "nir",
+          "scale": 0.0001,
+          "offset": 0.0,
+          "nodata": 0,
+          "gsd_metres": 10.0,
+          "source": "stac:item.S2A_44QPD_20210331_1_L2A.assets.nir.raster:bands (baseline 03.00; declared offset +0.0 (boa_offset_applied=False))",
+          "transform": "reflectance = DN * scale + offset"
+        },
+        "red": {
+          "asset_key": "red",
+          "scale": 0.0001,
+          "offset": 0.0,
+          "nodata": 0,
+          "gsd_metres": 10.0,
+          "source": "stac:item.S2A_44QPD_20210331_1_L2A.assets.red.raster:bands (baseline 03.00; declared offset +0.0 (boa_offset_applied=False))",
+          "transform": "reflectance = DN * scale + offset"
+        },
+        "swir16": {
+          "asset_key": "swir16",
+          "scale": 0.0001,
+          "offset": 0.0,
+          "nodata": 0,
+          "gsd_metres": 20.0,
+          "source": "stac:item.S2A_44QPD_20210331_1_L2A.assets.swir16.raster:bands (baseline 03.00; declared offset +0.0 (boa_offset_applied=False))",
+          "transform": "reflectance = DN * scale + offset"
+        }
+      },
+      "radiometry_evidence": {}
+    },
+    {
+      "item_id": "S2B_44QPD_20210316_1_L2A",
+      "acquisition_date": "2021-03-16",
+      "acquisition_utc": "2021-03-16T05:14:07.328000Z",
+      "scene_cloud_cover_percent": 6.559891,
+      "processing_baseline": "05.00",
+      "aoi_valid_fraction": 0.80926,
+      "grid_signature": "ad1601d5620e5f23",
+      "assets": {
+        "blue": {
+          "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/44/Q/PD/2021/3/S2B_44QPD_20210316_1_L2A/B02.tif",
+          "gsd_metres": 10.0
+        },
+        "green": {
+          "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/44/Q/PD/2021/3/S2B_44QPD_20210316_1_L2A/B03.tif",
+          "gsd_metres": 10.0
+        },
+        "red": {
+          "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/44/Q/PD/2021/3/S2B_44QPD_20210316_1_L2A/B04.tif",
+          "gsd_metres": 10.0
+        },
+        "nir": {
+          "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/44/Q/PD/2021/3/S2B_44QPD_20210316_1_L2A/B08.tif",
+          "gsd_metres": 10.0
+        },
+        "swir16": {
+          "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/44/Q/PD/2021/3/S2B_44QPD_20210316_1_L2A/B11.tif",
+          "gsd_metres": 20.0
+        }
+      },
+      "radiometry": {
+        "blue": {
+          "asset_key": "blue",
+          "scale": 0.0001,
+          "offset": 0.0,
+          "nodata": 0,
+          "gsd_metres": 10.0,
+          "source": "stac:item.S2B_44QPD_20210316_1_L2A.assets.blue.raster:bands (baseline 05.00; earthsearch:boa_offset_applied=true so the declared -0.1 is already baked into the DNs and is not applied again)",
+          "transform": "reflectance = DN * scale + offset"
+        },
+        "green": {
+          "asset_key": "green",
+          "scale": 0.0001,
+          "offset": 0.0,
+          "nodata": 0,
+          "gsd_metres": 10.0,
+          "source": "stac:item.S2B_44QPD_20210316_1_L2A.assets.green.raster:bands (baseline 05.00; earthsearch:boa_offset_applied=true so the declared -0.1 is already baked into the DNs and is not applied again)",
+          "transform": "reflectance = DN * scale + offset"
+        },
+        "nir": {
+          "asset_key": "nir",
+          "scale": 0.0001,
+          "offset": 0.0,
+          "nodata": 0,
+          "gsd_metres": 10.0,
+          "source": "stac:item.S2B_44QPD_20210316_1_L2A.assets.nir.raster:bands (baseline 05.00; earthsearch:boa_offset_applied=true so the declared -0.1 is already baked into the DNs and is not applied again)",
+          "transform": "reflectance = DN * scale + offset"
+        },
+        "red": {
+          "asset_key": "red",
+          "scale": 0.0001,
+          "offset": 0.0,
+          "nodata": 0,
+          "gsd_metres": 10.0,
+          "source": "stac:item.S2B_44QPD_20210316_1_L2A.assets.red.raster:bands (baseline 05.00; earthsearch:boa_offset_applied=true so the declared -0.1 is already baked into the DNs and is not applied again)",
+          "transform": "reflectance = DN * scale + offset"
+        },
+        "swir16": {
+          "asset_key": "swir16",
+          "scale": 0.0001,
+          "offset": 0.0,
+          "nodata": 0,
+          "gsd_metres": 20.0,
+          "source": "stac:item.S2B_44QPD_20210316_1_L2A.assets.swir16.raster:bands (baseline 05.00; earthsearch:boa_offset_applied=true so the declared -0.1 is already baked into the DNs and is not applied again)",
+          "transform": "reflectance = DN * scale + offset"
+        }
+      },
+      "radiometry_evidence": {}
+    }
+  ],
+  "reference_labels": {
+    "dataset": "ESA WorldCover v200",
+    "epoch": 2021,
+    "license": "CC-BY 4.0 (\u00a9 ESA WorldCover project 2022)",
+    "note": "reference-product labels, not independent ground truth"
+  },
+  "software": {
+    "m1_pipeline_version": "0.2.0-m1",
+    "radiometry_policy_version": "see composite module"
+  },
+  "outputs": {
+    "training_2021-03-26_reflectance_composite": {
+      "kind": "raster",
+      "path": "data/processed/m5_ml/coringa_m5_ml/training_2021-03-26_reflectance_composite.tif",
+      "bytes": 2480043,
+      "sha256": "dc8aefc56327017b5c52a5fbbfc590bdbfc0af4c74ffc5023e4f3d573f81ec67"
+    },
+    "training_2021-03-26_valid_mask": {
+      "kind": "mask",
+      "path": "data/processed/m5_ml/coringa_m5_ml/training_2021-03-26_valid_mask.tif",
+      "bytes": 2330,
+      "sha256": "f1c88eb378a9630064233be19c1bd8fa2ce9623b470af96163d4d96d278eb678"
+    },
+    "training_2021-03-26_observation_count": {
+      "kind": "mask",
+      "path": "data/processed/m5_ml/coringa_m5_ml/training_2021-03-26_observation_count.tif",
+      "bytes": 6172,
+      "sha256": "1bba96490ca7e97c271fb1972f45df845834054c0d81f82654aa4cc038fedcb3"
+    },
+    "training_2021-03-26_ndvi": {
+      "kind": "raster",
+      "path": "data/processed/m5_ml/coringa_m5_ml/training_2021-03-26_ndvi.tif",
+      "bytes": 525839,
+      "sha256": "7ab95db3d74695f443cc70b7fdc86b3039aea938ede8851f64f5ed2623085b80"
+    },
+    "training_2021-03-26_ndwi": {
+      "kind": "raster",
+      "path": "data/processed/m5_ml/coringa_m5_ml/training_2021-03-26_ndwi.tif",
+      "bytes": 524089,
+      "sha256": "691f01ea7fe289d3a104afc482337b1a02d4fa4d57fad944ebae76aa88d39f9e"
+    },
+    "training_2021-03-26_mndwi": {
+      "kind": "raster",
+      "path": "data/processed/m5_ml/coringa_m5_ml/training_2021-03-26_mndwi.tif",
+      "bytes": 527908,
+      "sha256": "bdcdd9e1f2e3a9a69b9ac36075b71005ed647bd4185bb868a01c99731d96ae59"
+    }
+  },
+  "started_utc": "2026-11-07T23:52:53.485152+00:00",
+  "radiometry_policy_version": "2026-11-07-empirical-boa-1"
+}

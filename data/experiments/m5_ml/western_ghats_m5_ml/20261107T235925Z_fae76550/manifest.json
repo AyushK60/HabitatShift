@@ -1,0 +1,18 @@
+{
+  "schema": "habitatshift-m5ml-manifest/1",
+  "study": "western_ghats_m5_ml",
+  "generated_utc": "2026-11-07T23:59:25.680237+00:00",
+  "outputs": {
+    "model.joblib": {
+      "path": "data\\experiments\\m5_ml\\western_ghats_m5_ml\\20261107T235925Z_fae76550\\model.joblib",
+      "bytes": 9022281,
+      "sha256": "1445e6fc83324d6fc84872bf9086e10be266b8ed5545a1b674d6fdf43a12a26d"
+    },
+    "result.json": {
+      "path": "data\\experiments\\m5_ml\\western_ghats_m5_ml\\20261107T235925Z_fae76550\\result.json",
+      "bytes": 6714,
+      "sha256": "e8108f1bcb9cb492e6444be2c885f9fefe2207a719273772618765b27eecce63"
+    }
+  },
+  "git_commit": "a7f78f4190ecde862bb4e2288cf9c1795f3d03f2"
+}

@@ -1,0 +1,18 @@
+{
+  "schema": "habitatshift-m5ml-manifest/1",
+  "study": "chilika_postmonsoon_m5_ml",
+  "generated_utc": "2026-11-07T23:59:13.492479+00:00",
+  "outputs": {
+    "model.joblib": {
+      "path": "data\\experiments\\m5_ml\\chilika_postmonsoon_m5_ml\\20261107T235913Z_fe67f300\\model.joblib",
+      "bytes": 26191401,
+      "sha256": "19ba32233a020f1cf449a4af7ae14c7eeee75f216a5fe88b8b6f591739517f22"
+    },
+    "result.json": {
+      "path": "data\\experiments\\m5_ml\\chilika_postmonsoon_m5_ml\\20261107T235913Z_fe67f300\\result.json",
+      "bytes": 6795,
+      "sha256": "34dfded5d63daaf889f2d9b6e2443c79f889c7be909901e1b9284e9a9fe2efad"
+    }
+  },
+  "git_commit": "a7f78f4190ecde862bb4e2288cf9c1795f3d03f2"
+}

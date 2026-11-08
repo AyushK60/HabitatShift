@@ -1,0 +1,43 @@
+{
+  "schema": "habitatshift-m5ml-manifest/1",
+  "study": "chilika_postmonsoon_m5_ml",
+  "generated_utc": "2026-11-08T00:02:12.936576+00:00",
+  "outputs": {
+    "feature_valid_training.npy": {
+      "path": "data\\experiments\\m5_ml\\chilika_postmonsoon_m5_ml\\20261108T000212Z_fe67f300\\feature_valid_training.npy",
+      "bytes": 355728,
+      "sha256": "ead376a91638b0a2067bb020af7186b9c5509136abb1d599c1fe89225a009233"
+    },
+    "folds.npy": {
+      "path": "data\\experiments\\m5_ml\\chilika_postmonsoon_m5_ml\\20261108T000212Z_fe67f300\\folds.npy",
+      "bytes": 355728,
+      "sha256": "8a5f6f06c092b9bfc9306b95d64f23a7c18fc11d27e1fb5bdbe62080781b603f"
+    },
+    "labels_worldcover.npy": {
+      "path": "data\\experiments\\m5_ml\\chilika_postmonsoon_m5_ml\\20261108T000212Z_fe67f300\\labels_worldcover.npy",
+      "bytes": 355728,
+      "sha256": "bbdc277a0b455bb9e1eab507e5f1bad18b45269885c8802629fa7d02c9df5cb4"
+    },
+    "model.joblib": {
+      "path": "data\\experiments\\m5_ml\\chilika_postmonsoon_m5_ml\\20261108T000212Z_fe67f300\\model.joblib",
+      "bytes": 26191401,
+      "sha256": "19ba32233a020f1cf449a4af7ae14c7eeee75f216a5fe88b8b6f591739517f22"
+    },
+    "prediction_earlier.npy": {
+      "path": "data\\experiments\\m5_ml\\chilika_postmonsoon_m5_ml\\20261108T000212Z_fe67f300\\prediction_earlier.npy",
+      "bytes": 355728,
+      "sha256": "ec6cdf235bf885257663791540aef9ada4fdd2fd31b5d4fb20ecfa460b5fa11c"
+    },
+    "prediction_later.npy": {
+      "path": "data\\experiments\\m5_ml\\chilika_postmonsoon_m5_ml\\20261108T000212Z_fe67f300\\prediction_later.npy",
+      "bytes": 355728,
+      "sha256": "531642b03097d7ca37ba60a1efb2603719fc9d1b5583e021d35dc26f2eabb164"
+    },
+    "result.json": {
+      "path": "data\\experiments\\m5_ml\\chilika_postmonsoon_m5_ml\\20261108T000212Z_fe67f300\\result.json",
+      "bytes": 8100,
+      "sha256": "aa5615bb243cfb93424a8322d6e8ced6e51b8efa735caadb8da575891b95251c"
+    }
+  },
+  "git_commit": "a7f78f4190ecde862bb4e2288cf9c1795f3d03f2"
+}

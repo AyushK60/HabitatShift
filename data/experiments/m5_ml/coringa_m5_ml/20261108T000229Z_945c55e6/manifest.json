@@ -1,0 +1,43 @@
+{
+  "schema": "habitatshift-m5ml-manifest/1",
+  "study": "coringa_m5_ml",
+  "generated_utc": "2026-11-08T00:02:29.170399+00:00",
+  "outputs": {
+    "feature_valid_training.npy": {
+      "path": "data\\experiments\\m5_ml\\coringa_m5_ml\\20261108T000229Z_945c55e6\\feature_valid_training.npy",
+      "bytes": 167438,
+      "sha256": "dfd4db0bc9435d5505753ad343ff067e64b54322db998ee4e975415a4670d587"
+    },
+    "folds.npy": {
+      "path": "data\\experiments\\m5_ml\\coringa_m5_ml\\20261108T000229Z_945c55e6\\folds.npy",
+      "bytes": 167438,
+      "sha256": "4cf47e3459b8cb98f4504b2fd98d9f322cd47acff9e184bd128f557f4aab7c96"
+    },
+    "labels_worldcover.npy": {
+      "path": "data\\experiments\\m5_ml\\coringa_m5_ml\\20261108T000229Z_945c55e6\\labels_worldcover.npy",
+      "bytes": 167438,
+      "sha256": "cdc61162855b27007b8367b162f876a4517b42f97b6b3e14ba9382f0c2ffb231"
+    },
+    "model.joblib": {
+      "path": "data\\experiments\\m5_ml\\coringa_m5_ml\\20261108T000229Z_945c55e6\\model.joblib",
+      "bytes": 122749377,
+      "sha256": "e7d776c16eda4691e95058746b372541a98168b8d5de211836329ab28d9f9034"
+    },
+    "prediction_earlier.npy": {
+      "path": "data\\experiments\\m5_ml\\coringa_m5_ml\\20261108T000229Z_945c55e6\\prediction_earlier.npy",
+      "bytes": 167438,
+      "sha256": "7121e05e0d7a795651a7755191f9c0ee06401ca244a08a55ffa2656107efbc45"
+    },
+    "prediction_later.npy": {
+      "path": "data\\experiments\\m5_ml\\coringa_m5_ml\\20261108T000229Z_945c55e6\\prediction_later.npy",
+      "bytes": 167438,
+      "sha256": "8e7312fb98429419900b46bd8e93f72df24324e036794a2836fa9669b52316c8"
+    },
+    "result.json": {
+      "path": "data\\experiments\\m5_ml\\coringa_m5_ml\\20261108T000229Z_945c55e6\\result.json",
+      "bytes": 9227,
+      "sha256": "e4e23d1350cca343f89c0ad65f02430197e41d58a6279bd906fb13a0a3e54daf"
+    }
+  },
+  "git_commit": "a7f78f4190ecde862bb4e2288cf9c1795f3d03f2"
+}

@@ -1,0 +1,18 @@
+{
+  "schema": "habitatshift-m5ml-manifest/1",
+  "study": "kathmandu_m5_ml",
+  "generated_utc": "2026-11-07T23:57:36.726258+00:00",
+  "outputs": {
+    "model.joblib": {
+      "path": "data\\experiments\\m5_ml\\kathmandu_m5_ml\\20261107T235736Z_ccb41cc6\\model.joblib",
+      "bytes": 62336377,
+      "sha256": "f5258d155c5e5646508529f6a2b78a568f4353507596b3bafabd99bcaa1d49b0"
+    },
+    "result.json": {
+      "path": "data\\experiments\\m5_ml\\kathmandu_m5_ml\\20261107T235736Z_ccb41cc6\\result.json",
+      "bytes": 7501,
+      "sha256": "eaabc8a5ef2ed59a9ffc2b35165c48e9548205ea0038710ea9de2ef7408542db"
+    }
+  },
+  "git_commit": "a7f78f4190ecde862bb4e2288cf9c1795f3d03f2"
+}

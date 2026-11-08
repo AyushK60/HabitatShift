@@ -1,0 +1,43 @@
+{
+  "schema": "habitatshift-m5ml-manifest/1",
+  "study": "western_ghats_m5_ml",
+  "generated_utc": "2026-11-08T00:02:52.794257+00:00",
+  "outputs": {
+    "feature_valid_training.npy": {
+      "path": "data\\experiments\\m5_ml\\western_ghats_m5_ml\\20261108T000252Z_fae76550\\feature_valid_training.npy",
+      "bytes": 239983,
+      "sha256": "86ad5756681296e85bc74ffb261ce02f5a5eabd82d3a206746716cea0bd2cbdd"
+    },
+    "folds.npy": {
+      "path": "data\\experiments\\m5_ml\\western_ghats_m5_ml\\20261108T000252Z_fae76550\\folds.npy",
+      "bytes": 239983,
+      "sha256": "5f856f1b77173556101f5400b925f4de2ed2dab33ddaea45788872af0dfd3aab"
+    },
+    "labels_worldcover.npy": {
+      "path": "data\\experiments\\m5_ml\\western_ghats_m5_ml\\20261108T000252Z_fae76550\\labels_worldcover.npy",
+      "bytes": 239983,
+      "sha256": "b5bb02fc1c6753024f293acb7e537e047379b4d7c51a79e4e24d7d69b34460aa"
+    },
+    "model.joblib": {
+      "path": "data\\experiments\\m5_ml\\western_ghats_m5_ml\\20261108T000252Z_fae76550\\model.joblib",
+      "bytes": 9022281,
+      "sha256": "1445e6fc83324d6fc84872bf9086e10be266b8ed5545a1b674d6fdf43a12a26d"
+    },
+    "prediction_earlier.npy": {
+      "path": "data\\experiments\\m5_ml\\western_ghats_m5_ml\\20261108T000252Z_fae76550\\prediction_earlier.npy",
+      "bytes": 239983,
+      "sha256": "2a73b83076a63945d56340e2ea23ed77db44879fa9cdcfcf48d8479cfcb890b0"
+    },
+    "prediction_later.npy": {
+      "path": "data\\experiments\\m5_ml\\western_ghats_m5_ml\\20261108T000252Z_fae76550\\prediction_later.npy",
+      "bytes": 239983,
+      "sha256": "63798ad00a4ba487dc7376c1ea0dc88232759ade7907c7350c092c75392e8a6f"
+    },
+    "result.json": {
+      "path": "data\\experiments\\m5_ml\\western_ghats_m5_ml\\20261108T000252Z_fae76550\\result.json",
+      "bytes": 8012,
+      "sha256": "9d83792f05ea140c26393c18996dd1e3474a9a395988b640e8000e6bc57a10e0"
+    }
+  },
+  "git_commit": "a7f78f4190ecde862bb4e2288cf9c1795f3d03f2"
+}

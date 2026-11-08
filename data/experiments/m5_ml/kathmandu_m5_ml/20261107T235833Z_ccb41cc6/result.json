@@ -1,0 +1,297 @@
+{
+  "schema": "habitatshift-m5ml-result/1",
+  "study": "kathmandu_m5_ml",
+  "generated_utc": "2026-11-07T23:58:33.027225+00:00",
+  "status": "complete",
+  "label_gate": "docs/M5_ML_LABEL_FEASIBILITY.md",
+  "reference": {
+    "dataset": "ESA WorldCover v200",
+    "epoch": 2021,
+    "url": "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/map/ESA_WorldCover_10m_2021_v200_N27E084_Map.tif",
+    "window_histogram": {
+      "10": 1723,
+      "30": 1823,
+      "40": 2943,
+      "50": 53612,
+      "60": 855,
+      "80": 300
+    },
+    "license": "CC-BY 4.0 (\u00a9 ESA WorldCover project 2022)",
+    "framing": "reference-product labels; agreement metrics are NOT ground-truth accuracy"
+  },
+  "training_imagery": "data/processed/m5_ml/kathmandu_m5_ml/training_2021-03-30_reflectance_composite.tif",
+  "class_mapping": {
+    "50": "built_up",
+    "10": "vegetation",
+    "30": "vegetation",
+    "40": "vegetation",
+    "60": "bare",
+    "80": "water"
+  },
+  "features": [
+    "reflectance_blue",
+    "reflectance_green",
+    "reflectance_red",
+    "reflectance_nir",
+    "reflectance_swir16",
+    "ndbi",
+    "ndvi",
+    "ndwi"
+  ],
+  "feature_resolution_note": "blue/green/red/nir native 10 m; swir16 native 20 m bilinearly resampled to the 10 m analysis grid by the audited pipeline (no native 10 m SWIR)",
+  "split_design": {
+    "method": "contiguous 100-px block row stripes: train/validation/test interleaved bands",
+    "block_px": 100,
+    "train_px": 11995,
+    "validation_px": 19573,
+    "test_px": 12160,
+    "labelled_px": 43728
+  },
+  "model": {
+    "type": "sklearn.ensemble.RandomForestClassifier",
+    "params": {
+      "n_estimators": 300,
+      "max_depth": null,
+      "min_samples_leaf": 2,
+      "max_features": "sqrt",
+      "class_weight": "balanced_subsample",
+      "random_state": 20261108,
+      "n_jobs": -1
+    }
+  },
+  "evaluation_test": {
+    "class_order": [
+      "built_up",
+      "vegetation",
+      "bare",
+      "water"
+    ],
+    "confusion_matrix_rows_true_cols_pred": [
+      [
+        9493,
+        468,
+        13,
+        0
+      ],
+      [
+        1144,
+        876,
+        8,
+        5
+      ],
+      [
+        153,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "per_class": {
+      "built_up": {
+        "precision": 0.8797961075069509,
+        "recall": 0.9517746139963906,
+        "f1": 0.9143710267771142,
+        "support": 9974,
+        "iou": 0.842250022180818,
+        "metrics_reported": true,
+        "support_note": null
+      },
+      "vegetation": {
+        "precision": 0.6517857142857143,
+        "recall": 0.4308903098868667,
+        "f1": 0.5188036718981345,
+        "support": 2033,
+        "iou": 0.35025989604158336,
+        "metrics_reported": true,
+        "support_note": null
+      },
+      "bare": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 153,
+        "iou": 0.0,
+        "metrics_reported": true,
+        "support_note": null
+      },
+      "water": {
+        "precision": null,
+        "recall": null,
+        "f1": null,
+        "support": 0,
+        "iou": null,
+        "metrics_reported": false,
+        "support_note": "test support 0 < 50: per-class metrics not interpretable and not reported (label-gate rule)"
+      }
+    },
+    "macro_f1_all_classes": 0.3582936746688122,
+    "macro_f1_supported_classes": 0.47772489955841624,
+    "supported_class_names": [
+      "built_up",
+      "vegetation",
+      "bare"
+    ],
+    "support_floor": 50,
+    "overall_agreement": 0.8527138157894737,
+    "balanced_accuracy": 0.46088830796108576,
+    "framing": "agreement with the ESA WorldCover v200 reference product on spatially separated test blocks; NOT independent ground-truth accuracy"
+  },
+  "evaluation_validation": {
+    "class_order": [
+      "built_up",
+      "vegetation",
+      "bare",
+      "water"
+    ],
+    "confusion_matrix_rows_true_cols_pred": [
+      [
+        16600,
+        575,
+        8,
+        13
+      ],
+      [
+        1179,
+        729,
+        13,
+        27
+      ],
+      [
+        254,
+        0,
+        0,
+        7
+      ],
+      [
+        15,
+        6,
+        0,
+        147
+      ]
+    ],
+    "per_class": {
+      "built_up": {
+        "precision": 0.9197695035460993,
+        "recall": 0.9653407769248662,
+        "f1": 0.9420043127908296,
+        "support": 17196,
+        "iou": 0.8903668740613602,
+        "metrics_reported": true,
+        "support_note": null
+      },
+      "vegetation": {
+        "precision": 0.5564885496183206,
+        "recall": 0.3742299794661191,
+        "f1": 0.44751381215469616,
+        "support": 1948,
+        "iou": 0.28825622775800713,
+        "metrics_reported": true,
+        "support_note": null
+      },
+      "bare": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 261,
+        "iou": 0.0,
+        "metrics_reported": true,
+        "support_note": null
+      },
+      "water": {
+        "precision": 0.7577319587628866,
+        "recall": 0.875,
+        "f1": 0.8121546961325967,
+        "support": 168,
+        "iou": 0.6837209302325581,
+        "metrics_reported": true,
+        "support_note": null
+      }
+    },
+    "macro_f1_all_classes": 0.5504182052695306,
+    "macro_f1_supported_classes": 0.5504182052695306,
+    "supported_class_names": [
+      "built_up",
+      "vegetation",
+      "bare",
+      "water"
+    ],
+    "support_floor": 50,
+    "overall_agreement": 0.8928626168701783,
+    "balanced_accuracy": 0.5536426890977464,
+    "framing": "agreement with the ESA WorldCover v200 reference product on spatially separated test blocks; NOT independent ground-truth accuracy"
+  },
+  "feature_importance": {
+    "reflectance_blue": 0.09809723143374488,
+    "reflectance_green": 0.1137330755707603,
+    "reflectance_red": 0.10314703293007674,
+    "reflectance_nir": 0.12096787888868976,
+    "reflectance_swir16": 0.20903224165701875,
+    "ndbi": 0.1034773983724981,
+    "ndvi": 0.12828704083514259,
+    "ndwi": 0.12325810031206902
+  },
+  "application": {
+    "earlier": {
+      "source_raster": "data/processed/m4/kathmandu_m4/earlier_2020-03-31_reflectance_composite.tif",
+      "date": "2020-03-31",
+      "valid_px": 43728,
+      "predicted_fractions": {
+        "built_up": 0.6945664105378705,
+        "vegetation": 0.2253247347237468,
+        "bare": 0.00045737285034760336,
+        "water": 0.07965148188803513
+      },
+      "mean_confidence_of_predicted_class": {
+        "built_up": 0.7803707658622322,
+        "vegetation": 0.7035341523518666,
+        "bare": 0.5177193075313439,
+        "water": 0.5894683830906585
+      },
+      "note": "model probabilities are confidences, not accuracy estimates"
+    },
+    "later": {
+      "source_raster": "data/processed/m4/kathmandu_m4/later_2025-03-29_reflectance_composite.tif",
+      "date": "2025-03-29",
+      "valid_px": 43728,
+      "predicted_fractions": {
+        "built_up": 0.8844218807171607,
+        "vegetation": 0.1066593487010611,
+        "bare": 0.0009147457006952067,
+        "water": 0.00800402488108306
+      },
+      "mean_confidence_of_predicted_class": {
+        "built_up": 0.851027950970084,
+        "vegetation": 0.6680008601040015,
+        "bare": 0.5301205661491777,
+        "water": 0.6571206596593993
+      },
+      "note": "model probabilities are confidences, not accuracy estimates"
+    }
+  },
+  "math_baseline_comparison": {
+    "available": true,
+    "note": "predicted class-fraction shifts between the two epochs compared against the mathematical \u0394-index finding; both are candidate signals, neither is treated as verification",
+    "math_finding_indices": [
+      "ndbi",
+      "ndvi",
+      "ndwi"
+    ],
+    "predicted_fraction_shift": {
+      "built_up": 0.18985547017929016,
+      "vegetation": -0.11866538602268571,
+      "bare": 0.00045737285034760336,
+      "water": -0.07164745700695208
+    }
+  },
+  "interpretation_guardrails": [
+    "No claim of independent ground-truth accuracy is permitted.",
+    "Predicted fractions are model outputs on reference-inherited class definitions.",
+    "Application to 2020/2025 assumes class-spectral stability across epochs (limitation, not verified)."
+  ]
+}
