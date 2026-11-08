@@ -1,0 +1,10 @@
+{
+  "schema": "habitatshift-m5-robustness-manifest/1",
+  "generated_utc": "2026-11-08T00:08:29.060457+00:00",
+  "outputs": {
+    "result.json": {
+      "bytes": 43918,
+      "sha256": "4a9ee9735810318e41dea0c88c4a1370a8bceb7aab6f1caa08e80dd9dc7a44ee"
+    }
+  }
+}
