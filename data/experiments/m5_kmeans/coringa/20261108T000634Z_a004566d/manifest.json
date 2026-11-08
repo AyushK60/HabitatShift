@@ -1,0 +1,16 @@
+{
+  "schema": "habitatshift-m5-kmeans-manifest/1",
+  "study": "coringa",
+  "outputs": {
+    "cluster_map.npy": {
+      "path": "data\\experiments\\m5_kmeans\\coringa\\20261108T000634Z_a004566d\\cluster_map.npy",
+      "bytes": 167438,
+      "sha256": "05eaa061873c45efddd9e2607a64ba36d4e63689768f854ca188250b381e172e"
+    },
+    "result.json": {
+      "path": "data\\experiments\\m5_kmeans\\coringa\\20261108T000634Z_a004566d\\result.json",
+      "bytes": 3981,
+      "sha256": "47f61eff54fe5cfbaf96a383397cb860591f49a3578d5607ec34e27f229cf577"
+    }
+  }
+}

@@ -1,0 +1,152 @@
+{
+  "schema": "habitatshift-m5-kmeans/1",
+  "study": "coringa",
+  "generated_utc": "2026-11-08T00:06:34.495369+00:00",
+  "source_composite": "data/processed/m1/coringa_coastal/later_2025-03-25_reflectance_composite.tif",
+  "features": [
+    "reflectance_blue",
+    "reflectance_green",
+    "reflectance_red",
+    "reflectance_nir",
+    "reflectance_swir16",
+    "ndvi",
+    "ndwi",
+    "mndwi"
+  ],
+  "scaling": "z-score (sklearn StandardScaler) over valid pixels",
+  "k": 6,
+  "init": "k-means++",
+  "n_init": 10,
+  "random_state": 20261108,
+  "inertia": 253831.203125,
+  "valid_pixels": 165136,
+  "cluster_statistics": [
+    {
+      "cluster": 1,
+      "pixels": 48338,
+      "fraction_of_valid": 0.2927,
+      "mean_raw_features": {
+        "reflectance_blue": 0.0255,
+        "reflectance_green": 0.0609,
+        "reflectance_red": 0.0354,
+        "reflectance_nir": 0.3698,
+        "reflectance_swir16": 0.1532,
+        "ndvi": 0.8221,
+        "ndwi": -0.7149,
+        "mndwi": -0.4309
+      }
+    },
+    {
+      "cluster": 3,
+      "pixels": 38488,
+      "fraction_of_valid": 0.2331,
+      "mean_raw_features": {
+        "reflectance_blue": 0.0221,
+        "reflectance_green": 0.0453,
+        "reflectance_red": 0.0381,
+        "reflectance_nir": 0.2009,
+        "reflectance_swir16": 0.1475,
+        "ndvi": 0.6663,
+        "ndwi": -0.6195,
+        "mndwi": -0.5245
+      }
+    },
+    {
+      "cluster": 2,
+      "pixels": 33931,
+      "fraction_of_valid": 0.2055,
+      "mean_raw_features": {
+        "reflectance_blue": 0.0461,
+        "reflectance_green": 0.0726,
+        "reflectance_red": 0.0793,
+        "reflectance_nir": 0.2024,
+        "reflectance_swir16": 0.2035,
+        "ndvi": 0.4259,
+        "ndwi": -0.4609,
+        "mndwi": -0.4581
+      }
+    },
+    {
+      "cluster": 0,
+      "pixels": 19409,
+      "fraction_of_valid": 0.1175,
+      "mean_raw_features": {
+        "reflectance_blue": 0.0626,
+        "reflectance_green": 0.0845,
+        "reflectance_red": 0.0659,
+        "reflectance_nir": 0.051,
+        "reflectance_swir16": 0.0431,
+        "ndvi": -0.1458,
+        "ndwi": 0.2649,
+        "mndwi": 0.3444
+      }
+    },
+    {
+      "cluster": 5,
+      "pixels": 16187,
+      "fraction_of_valid": 0.098,
+      "mean_raw_features": {
+        "reflectance_blue": 0.0317,
+        "reflectance_green": 0.0559,
+        "reflectance_red": 0.0417,
+        "reflectance_nir": 0.0687,
+        "reflectance_swir16": 0.0625,
+        "ndvi": 0.1947,
+        "ndwi": -0.0449,
+        "mndwi": -0.0287
+      }
+    },
+    {
+      "cluster": 4,
+      "pixels": 8783,
+      "fraction_of_valid": 0.0532,
+      "mean_raw_features": {
+        "reflectance_blue": 0.0812,
+        "reflectance_green": 0.1094,
+        "reflectance_red": 0.126,
+        "reflectance_nir": 0.2189,
+        "reflectance_swir16": 0.2404,
+        "ndvi": 0.2635,
+        "ndwi": -0.3264,
+        "mndwi": -0.3632
+      }
+    }
+  ],
+  "rf_prediction_crosstab_exploratory": {
+    "0": {
+      "rf_class_0": 665,
+      "rf_class_1": 18744,
+      "rf_class_2": 0
+    },
+    "1": {
+      "rf_class_0": 48322,
+      "rf_class_1": 16,
+      "rf_class_2": 0
+    },
+    "2": {
+      "rf_class_0": 32126,
+      "rf_class_1": 51,
+      "rf_class_2": 1754
+    },
+    "3": {
+      "rf_class_0": 38480,
+      "rf_class_1": 3,
+      "rf_class_2": 5
+    },
+    "4": {
+      "rf_class_0": 6509,
+      "rf_class_1": 132,
+      "rf_class_2": 2142
+    },
+    "5": {
+      "rf_class_0": 8595,
+      "rf_class_1": 7582,
+      "rf_class_2": 10
+    }
+  },
+  "interpretation_limits": [
+    "A cluster is a spectral-similarity group, not a named environmental class.",
+    "Cluster membership is not evidence of change; no change claim is made from it.",
+    "k was chosen for interpretability, not optimised; no cluster-quality metric is claimed as validation."
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "schema": "habitatshift-m5-kmeans-manifest/1",
+  "study": "kathmandu",
+  "outputs": {
+    "cluster_map.npy": {
+      "path": "data\\experiments\\m5_kmeans\\kathmandu\\20261108T000633Z_1aa2b2cd\\cluster_map.npy",
+      "bytes": 45353,
+      "sha256": "c51a4e0565fd3643cececb2504bd4bbae768a36a9d3ccc5a4cbd21c52490f52b"
+    },
+    "result.json": {
+      "path": "data\\experiments\\m5_kmeans\\kathmandu\\20261108T000633Z_1aa2b2cd\\result.json",
+      "bytes": 5126,
+      "sha256": "4d9e19f830ebfe1ef08519ab70bbaae631c29759280e5725a6c3748a310e0ca0"
+    }
+  }
+}

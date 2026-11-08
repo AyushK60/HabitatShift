@@ -1,0 +1,200 @@
+{
+  "schema": "habitatshift-m5-kmeans/1",
+  "study": "kathmandu",
+  "generated_utc": "2026-11-08T00:06:33.998890+00:00",
+  "source_composite": "data/processed/m4/kathmandu_m4/later_2025-03-29_reflectance_composite.tif",
+  "features": [
+    "reflectance_blue",
+    "reflectance_green",
+    "reflectance_red",
+    "reflectance_nir",
+    "reflectance_swir16",
+    "ndbi",
+    "ndvi",
+    "ndwi"
+  ],
+  "scaling": "z-score (sklearn StandardScaler) over valid pixels",
+  "k": 8,
+  "init": "k-means++",
+  "n_init": 10,
+  "random_state": 20261108,
+  "inertia": 99906.109375,
+  "valid_pixels": 43728,
+  "cluster_statistics": [
+    {
+      "cluster": 6,
+      "pixels": 11953,
+      "fraction_of_valid": 0.2733,
+      "mean_raw_features": {
+        "reflectance_blue": 0.0938,
+        "reflectance_green": 0.1093,
+        "reflectance_red": 0.1289,
+        "reflectance_nir": 0.1624,
+        "reflectance_swir16": 0.2157,
+        "ndbi": 0.1399,
+        "ndvi": 0.1148,
+        "ndwi": -0.1952
+      }
+    },
+    {
+      "cluster": 2,
+      "pixels": 9890,
+      "fraction_of_valid": 0.2262,
+      "mean_raw_features": {
+        "reflectance_blue": 0.0827,
+        "reflectance_green": 0.0939,
+        "reflectance_red": 0.1088,
+        "reflectance_nir": 0.1395,
+        "reflectance_swir16": 0.1984,
+        "ndbi": 0.1707,
+        "ndvi": 0.1228,
+        "ndwi": -0.1928
+      }
+    },
+    {
+      "cluster": 4,
+      "pixels": 6052,
+      "fraction_of_valid": 0.1384,
+      "mean_raw_features": {
+        "reflectance_blue": 0.1138,
+        "reflectance_green": 0.1293,
+        "reflectance_red": 0.1491,
+        "reflectance_nir": 0.1877,
+        "reflectance_swir16": 0.2368,
+        "ndbi": 0.1144,
+        "ndvi": 0.1139,
+        "ndwi": -0.183
+      }
+    },
+    {
+      "cluster": 3,
+      "pixels": 5900,
+      "fraction_of_valid": 0.1349,
+      "mean_raw_features": {
+        "reflectance_blue": 0.0813,
+        "reflectance_green": 0.0947,
+        "reflectance_red": 0.1055,
+        "reflectance_nir": 0.1762,
+        "reflectance_swir16": 0.2151,
+        "ndbi": 0.0986,
+        "ndvi": 0.2515,
+        "ndwi": -0.3001
+      }
+    },
+    {
+      "cluster": 0,
+      "pixels": 4227,
+      "fraction_of_valid": 0.0967,
+      "mean_raw_features": {
+        "reflectance_blue": 0.0938,
+        "reflectance_green": 0.1116,
+        "reflectance_red": 0.1355,
+        "reflectance_nir": 0.2031,
+        "reflectance_swir16": 0.2653,
+        "ndbi": 0.1316,
+        "ndvi": 0.1996,
+        "ndwi": -0.2897
+      }
+    },
+    {
+      "cluster": 1,
+      "pixels": 2680,
+      "fraction_of_valid": 0.0613,
+      "mean_raw_features": {
+        "reflectance_blue": 0.0742,
+        "reflectance_green": 0.0905,
+        "reflectance_red": 0.0917,
+        "reflectance_nir": 0.2182,
+        "reflectance_swir16": 0.2205,
+        "ndbi": 0.0051,
+        "ndvi": 0.4058,
+        "ndwi": -0.41
+      }
+    },
+    {
+      "cluster": 5,
+      "pixels": 1714,
+      "fraction_of_valid": 0.0392,
+      "mean_raw_features": {
+        "reflectance_blue": 0.1178,
+        "reflectance_green": 0.1407,
+        "reflectance_red": 0.1725,
+        "reflectance_nir": 0.2399,
+        "reflectance_swir16": 0.3814,
+        "ndbi": 0.2255,
+        "ndvi": 0.1634,
+        "ndwi": -0.2606
+      }
+    },
+    {
+      "cluster": 7,
+      "pixels": 1312,
+      "fraction_of_valid": 0.03,
+      "mean_raw_features": {
+        "reflectance_blue": 0.1391,
+        "reflectance_green": 0.1607,
+        "reflectance_red": 0.19,
+        "reflectance_nir": 0.2354,
+        "reflectance_swir16": 0.2797,
+        "ndbi": 0.0842,
+        "ndvi": 0.1063,
+        "ndwi": -0.1876
+      }
+    }
+  ],
+  "rf_prediction_crosstab_exploratory": {
+    "0": {
+      "rf_class_0": 3823,
+      "rf_class_1": 402,
+      "rf_class_2": 2,
+      "rf_class_3": 0
+    },
+    "1": {
+      "rf_class_0": 334,
+      "rf_class_1": 2345,
+      "rf_class_2": 0,
+      "rf_class_3": 1
+    },
+    "2": {
+      "rf_class_0": 9562,
+      "rf_class_1": 30,
+      "rf_class_2": 0,
+      "rf_class_3": 298
+    },
+    "3": {
+      "rf_class_0": 4435,
+      "rf_class_1": 1425,
+      "rf_class_2": 0,
+      "rf_class_3": 40
+    },
+    "4": {
+      "rf_class_0": 6030,
+      "rf_class_1": 5,
+      "rf_class_2": 17,
+      "rf_class_3": 0
+    },
+    "5": {
+      "rf_class_0": 1297,
+      "rf_class_1": 417,
+      "rf_class_2": 0,
+      "rf_class_3": 0
+    },
+    "6": {
+      "rf_class_0": 11936,
+      "rf_class_1": 2,
+      "rf_class_2": 4,
+      "rf_class_3": 11
+    },
+    "7": {
+      "rf_class_0": 1257,
+      "rf_class_1": 38,
+      "rf_class_2": 17,
+      "rf_class_3": 0
+    }
+  },
+  "interpretation_limits": [
+    "A cluster is a spectral-similarity group, not a named environmental class.",
+    "Cluster membership is not evidence of change; no change claim is made from it.",
+    "k was chosen for interpretability, not optimised; no cluster-quality metric is claimed as validation."
+  ]
+}
