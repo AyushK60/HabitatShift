@@ -6,14 +6,16 @@ rasterio==1.4.3
 numpy==2.2.6
 pyproj==3.7.1
 shapely==2.0.7
-requests==2.32.3
-Pillow==11.1.0
+requests==2.34.2
+Pillow==13.0.0
 PyYAML==6.0.2
-fastapi==0.115.11
+fastapi==0.162.2
 uvicorn==0.34.0
-pytest==8.3.5
+pytest==9.2.0
 # M5 supervised/unsupervised experiments (fixed random_state, recorded versions).
 scikit-learn==1.9.1
 joblib==1.6.0
 # Starlette TestClient used by the API route tests.
 httpx==0.28.1
+# starlette ships with fastapi; pinned because pip-audit flags older lines
+starlette==1.10.0

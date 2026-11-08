@@ -1,11 +1,11 @@
 {
  "audit": "m5_scientific",
- "passed": 3184,
+ "passed": 4111,
  "failed": 0,
  "failures": [],
  "radiometry_class_counts": {
-  "no_offset_declared": 8,
-  "offset_applied_scale_only": 26,
+  "no_offset_declared": 18,
+  "offset_applied_scale_only": 31,
   "declared_offset_applied": 0,
   "empirical_scale_only": 6,
   "unclassified": 0
@@ -330,6 +330,126 @@
    "acquisition_date": "2025-02-27",
    "processing_baseline": "05.11",
    "decision": "empirical_scale_only",
+   "grid_signature": "bd1413bd200c96cf"
+  },
+  {
+   "experiment": "chilika_dry_m5_ml",
+   "item_id": "S2A_45QUB_20210216_0_L2A",
+   "acquisition_date": "2021-02-16",
+   "processing_baseline": "02.14",
+   "decision": "no_offset_declared",
+   "grid_signature": "51a9da34666e1755"
+  },
+  {
+   "experiment": "chilika_dry_m5_ml",
+   "item_id": "S2B_45QUB_20210221_0_L2A",
+   "acquisition_date": "2021-02-21",
+   "processing_baseline": "02.14",
+   "decision": "no_offset_declared",
+   "grid_signature": "51a9da34666e1755"
+  },
+  {
+   "experiment": "chilika_dry_m5_ml",
+   "item_id": "S2B_45QUB_20210211_1_L2A",
+   "acquisition_date": "2021-02-11",
+   "processing_baseline": "05.00",
+   "decision": "offset_applied_scale_only",
+   "grid_signature": "51a9da34666e1755"
+  },
+  {
+   "experiment": "chilika_postmonsoon_m5_ml",
+   "item_id": "S2B_45QUB_20211108_0_L2A",
+   "acquisition_date": "2021-11-08",
+   "processing_baseline": "03.01",
+   "decision": "no_offset_declared",
+   "grid_signature": "51a9da34666e1755"
+  },
+  {
+   "experiment": "chilika_postmonsoon_m5_ml",
+   "item_id": "S2B_45QUB_20211118_0_L2A",
+   "acquisition_date": "2021-11-18",
+   "processing_baseline": "03.01",
+   "decision": "no_offset_declared",
+   "grid_signature": "51a9da34666e1755"
+  },
+  {
+   "experiment": "chilika_postmonsoon_m5_ml",
+   "item_id": "S2A_45QUB_20211024_0_L2A",
+   "acquisition_date": "2021-10-24",
+   "processing_baseline": "03.01",
+   "decision": "no_offset_declared",
+   "grid_signature": "51a9da34666e1755"
+  },
+  {
+   "experiment": "coringa_m5_ml",
+   "item_id": "S2B_44QPD_20210326_0_L2A",
+   "acquisition_date": "2021-03-26",
+   "processing_baseline": "02.14",
+   "decision": "no_offset_declared",
+   "grid_signature": "ad1601d5620e5f23"
+  },
+  {
+   "experiment": "coringa_m5_ml",
+   "item_id": "S2A_44QPD_20210331_1_L2A",
+   "acquisition_date": "2021-03-31",
+   "processing_baseline": "03.00",
+   "decision": "no_offset_declared",
+   "grid_signature": "ad1601d5620e5f23"
+  },
+  {
+   "experiment": "coringa_m5_ml",
+   "item_id": "S2B_44QPD_20210316_1_L2A",
+   "acquisition_date": "2021-03-16",
+   "processing_baseline": "05.00",
+   "decision": "offset_applied_scale_only",
+   "grid_signature": "ad1601d5620e5f23"
+  },
+  {
+   "experiment": "kathmandu_m5_ml",
+   "item_id": "S2A_45RUL_20210328_0_L2A",
+   "acquisition_date": "2021-03-28",
+   "processing_baseline": "02.14",
+   "decision": "no_offset_declared",
+   "grid_signature": "077db7532b5cf722"
+  },
+  {
+   "experiment": "kathmandu_m5_ml",
+   "item_id": "S2B_45RUL_20210402_1_L2A",
+   "acquisition_date": "2021-04-02",
+   "processing_baseline": "05.00",
+   "decision": "offset_applied_scale_only",
+   "grid_signature": "077db7532b5cf722"
+  },
+  {
+   "experiment": "kathmandu_m5_ml",
+   "item_id": "S2B_45RUL_20210326_1_L2A",
+   "acquisition_date": "2021-03-26",
+   "processing_baseline": "05.00",
+   "decision": "offset_applied_scale_only",
+   "grid_signature": "077db7532b5cf722"
+  },
+  {
+   "experiment": "western_ghats_m5_ml",
+   "item_id": "S2A_43PDS_20210218_0_L2A",
+   "acquisition_date": "2021-02-18",
+   "processing_baseline": "02.14",
+   "decision": "no_offset_declared",
+   "grid_signature": "bd1413bd200c96cf"
+  },
+  {
+   "experiment": "western_ghats_m5_ml",
+   "item_id": "S2B_43PDS_20210223_0_L2A",
+   "acquisition_date": "2021-02-23",
+   "processing_baseline": "02.14",
+   "decision": "no_offset_declared",
+   "grid_signature": "bd1413bd200c96cf"
+  },
+  {
+   "experiment": "western_ghats_m5_ml",
+   "item_id": "S2B_43PDS_20210213_1_L2A",
+   "acquisition_date": "2021-02-13",
+   "processing_baseline": "05.00",
+   "decision": "offset_applied_scale_only",
    "grid_signature": "bd1413bd200c96cf"
   }
  ],

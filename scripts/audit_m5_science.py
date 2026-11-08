@@ -65,6 +65,11 @@ M0_MANIFEST = "m0_primary_study"
 #: experiment_id -> processed raster directory (relative to data/processed)
 STUDY_DIR_BY_EXPERIMENT = {
     "coringa_m1": "m1/coringa_coastal",
+    "kathmandu_m5_ml": "m5_ml/kathmandu_m5_ml",
+    "western_ghats_m5_ml": "m5_ml/western_ghats_m5_ml",
+    "coringa_m5_ml": "m5_ml/coringa_m5_ml",
+    "chilika_dry_m5_ml": "m5_ml/chilika_dry_m5_ml",
+    "chilika_postmonsoon_m5_ml": "m5_ml/chilika_postmonsoon_m5_ml",
 }
 
 #: asset key -> (composite tif description prefix, expected native GSD)
@@ -164,7 +169,10 @@ def walk_observation_records(node: object) -> list[dict]:
 
 def iter_manifest_observations(manifest: dict) -> list[tuple[str, dict]]:
     """Yield (experiment_id, observation record) pairs from one manifest."""
-    experiment = manifest.get("experiment_id") or manifest.get("study", {}).get("id", "unknown")
+    study = manifest.get("study")
+    experiment = manifest.get("experiment_id") or (
+        study.get("id", "unknown") if isinstance(study, dict) else (study or "unknown")
+    )
     out = []
     for record in walk_observation_records(manifest):
         out.append((experiment, record))
@@ -689,6 +697,13 @@ def arrays_match(got: np.ndarray, want: np.ndarray, atol: float) -> tuple[bool, 
     return (not mismatched_nan.any()) and max_diff <= atol, max_diff
 
 
+def manifest_experiment(manifest: dict, fallback: str) -> str:
+    study = manifest.get("study")
+    return manifest.get("experiment_id") or (
+        study.get("id", fallback) if isinstance(study, dict) else (study or fallback)
+    )
+
+
 def audit_raster_processing(report: Report, manifests: dict[str, dict]) -> dict:
     print("\nC1. raster-level recomputation (indices, deltas, masks, classes, areas)")
     summary_stats = {}
@@ -696,7 +711,7 @@ def audit_raster_processing(report: Report, manifests: dict[str, dict]) -> dict:
         manifest = manifests[name]
         if name == M0_MANIFEST:
             continue
-        experiment = manifest.get("experiment_id", name)
+        experiment = manifest_experiment(manifest, name)
         processed = ROOT / "data" / "processed"
         study_dir = processed / STUDY_DIR_BY_EXPERIMENT.get(experiment, f"m4/{experiment}")
         if not report.check(study_dir.is_dir(), f"{experiment}: processed raster directory exists"):
@@ -874,7 +889,7 @@ def audit_composite_from_cache(report: Report, manifests: dict[str, dict], cache
         if name == M0_MANIFEST:
             continue
         manifest = manifests[name]
-        experiment = manifest.get("experiment_id", name)
+        experiment = manifest_experiment(manifest, name)
         study_dir = ROOT / "data" / "processed" / STUDY_DIR_BY_EXPERIMENT.get(experiment, f"m4/{experiment}")
         grid = manifest.get("grid") or {}
         if not grid.get("transform"):
@@ -947,7 +962,7 @@ def audit_output_checksums(report: Report, manifests: dict[str, dict]) -> None:
     print("\nC3. manifest output checksums")
     for name in sorted(manifests):
         manifest = manifests[name]
-        experiment = manifest.get("experiment_id", name)
+        experiment = manifest_experiment(manifest, name)
         outputs = manifest.get("outputs") or {}
         report.check(len(outputs) > 0, f"{experiment}: manifest records output files")
         verified = 0
@@ -976,6 +991,11 @@ def audit_area_cross_check(report: Report, manifests: dict[str, dict]) -> None:
         experiment = manifest.get("experiment_id", name)
         block = manifest.get("area_cross_check")
         if not block:
+            # training-imagery manifests (M5-ML) are single-period acquisitions
+            # and record no change-area cross-check by design
+            if manifest.get("manifest_schema") == "habitatshift-m5ml-training/1":
+                report.note(f"{experiment}: training acquisition records no change-area cross-check (by design)")
+                continue
             report.check(False, f"{experiment}: area cross-check recorded")
             continue
         for key, value in sorted(block.items()):

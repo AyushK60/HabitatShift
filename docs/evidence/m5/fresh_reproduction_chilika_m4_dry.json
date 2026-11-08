@@ -1,0 +1,82 @@
+{
+  "schema": "habitatshift-m5-fresh-reproduction/1",
+  "experiment": "chilika_m4_dry",
+  "generated_utc": "2026-11-08T00:28:59.053582+00:00",
+  "cache_dir": "C:\\Users\\Khana\\AppData\\Local\\Temp\\hs_fresh_cache_zt0n0d0r",
+  "out_dir": "C:\\Users\\Khana\\AppData\\Local\\Temp\\hs_fresh_out_ab8me5b3",
+  "change_statistics": {
+    "ndwi/decrease_pixels": {
+      "recorded": 14609,
+      "reproduced": 14609,
+      "match": true
+    },
+    "ndwi/increase_pixels": {
+      "recorded": 77789,
+      "reproduced": 77789,
+      "match": true
+    },
+    "ndwi/stable_pixels": {
+      "recorded": 255731,
+      "reproduced": 255731,
+      "match": true
+    },
+    "ndwi/common_valid_pixels": {
+      "recorded": 348129,
+      "reproduced": 348129,
+      "match": true
+    },
+    "mndwi/decrease_pixels": {
+      "recorded": 10528,
+      "reproduced": 10528,
+      "match": true
+    },
+    "mndwi/increase_pixels": {
+      "recorded": 18628,
+      "reproduced": 18628,
+      "match": true
+    },
+    "mndwi/stable_pixels": {
+      "recorded": 318973,
+      "reproduced": 318973,
+      "match": true
+    },
+    "mndwi/common_valid_pixels": {
+      "recorded": 348129,
+      "reproduced": 348129,
+      "match": true
+    },
+    "ndvi/decrease_pixels": {
+      "recorded": 114491,
+      "reproduced": 114491,
+      "match": true
+    },
+    "ndvi/increase_pixels": {
+      "recorded": 15745,
+      "reproduced": 15745,
+      "match": true
+    },
+    "ndvi/stable_pixels": {
+      "recorded": 217893,
+      "reproduced": 217893,
+      "match": true
+    },
+    "ndvi/common_valid_pixels": {
+      "recorded": 348129,
+      "reproduced": 348129,
+      "match": true
+    }
+  },
+  "raster_checks": {
+    "delta_ndwi.tif": "byte-identical",
+    "change_classes_ndwi.tif": "byte-identical",
+    "common_valid_ndwi.tif": "byte-identical",
+    "delta_mndwi.tif": "byte-identical",
+    "change_classes_mndwi.tif": "byte-identical",
+    "common_valid_mndwi.tif": "byte-identical",
+    "delta_ndvi.tif": "byte-identical",
+    "change_classes_ndvi.tif": "byte-identical",
+    "common_valid_ndvi.tif": "byte-identical"
+  },
+  "all_statistics_match": true,
+  "all_rasters_byte_identical": true
+}
