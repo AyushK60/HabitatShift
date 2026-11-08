@@ -9,6 +9,9 @@ import type { G0Quality, M1Summary, PixelSample, RoiResult } from "../api/types"
 import type { BundleFindings, StudyBundle } from "../api/bundle";
 import {
   buildEvidenceOverview,
+  mlRecordForExperiment,
+  type MlContainer,
+  type MlFindingsIndex,
   evidenceRecordToCsv,
   findingByEvidenceId,
   formatPercent,
@@ -44,6 +47,8 @@ interface InspectorProps {
   onOpenResearch: () => void;
   /** Generated top-five selection disclosure; null when unavailable. */
   selectionPolicy: SelectionPolicy | null;
+  /** M5 additive ML reference index; null when unavailable. */
+  mlFindings: MlFindingsIndex | null;
   pixel: PixelSample | null;
   pixelError: string | null;
   pixelLoading: boolean;
@@ -364,12 +369,15 @@ function ExploreFindingsPanel({
   onSelect,
   onOpenResearch,
   selectionPolicy,
+  mlContainer,
 }: {
   findings: BundleFindings | null;
   selectedId: string | null;
   onSelect: (id: string | null) => void;
   onOpenResearch: () => void;
   selectionPolicy: SelectionPolicy | null;
+  /** M5 additive ML reference experiment; null when unavailable. */
+  mlContainer: MlContainer | null;
 }) {
   const [filterDirection, setFilterDirection] = useState<"all" | "decrease" | "increase">("all");
   const [filterIndex, setFilterIndex] = useState<string>("all");
@@ -492,6 +500,38 @@ function ExploreFindingsPanel({
           : "The recorded rule keeps the largest components per index and direction (exact counts unavailable offline). "}
         This list is not a complete inventory of every qualifying region.
       </p>
+      {mlContainer && (
+        <div className="ml-block" data-testid="explore-ml-block">
+          <p className="insp-note insp-guardrail ml-plain">
+            <strong>Additional ML reference experiment (M5).</strong>{" "}
+            {mlContainer.ml_record.plain_language}
+          </p>
+          <dl className="insp-facts">
+            <div className="fact-row">
+              <dt>Reference labels</dt>
+              <dd>
+                {mlContainer.ml_record.reference.dataset} ({mlContainer.ml_record.reference.epoch} epoch)
+              </dd>
+            </div>
+            <div className="fact-row">
+              <dt>Agreement (held-out test blocks)</dt>
+              <dd>
+                {(mlContainer.ml_record.evaluation.overall_agreement * 100).toFixed(1)} % with the
+                reference product — not independent ground truth
+              </dd>
+            </div>
+            <div className="fact-row">
+              <dt>Status</dt>
+              <dd>Model output against reference labels — never a measured observation</dd>
+            </div>
+          </dl>
+        </div>
+      )}
+      {!mlContainer && (
+        <p className="insp-note mono-label">
+          ML reference experiment: no record is available for this study.
+        </p>
+      )}
       <p className="insp-note mono-label">
         Categories: candidate increase / candidate decrease / little measurable
         difference / insufficient evidence. "Insufficient evidence" is exactly
@@ -812,11 +852,14 @@ function EvidenceRecordPanel({
   selectedId,
   onSelect,
   onOpenExplore,
+  mlContainer,
 }: {
   findings: BundleFindings | null;
   selectedId: string | null;
   onSelect: (id: string | null) => void;
   onOpenExplore: () => void;
+  /** M5 additive ML reference experiment; null when unavailable. */
+  mlContainer: MlContainer | null;
 }) {
   const [showMethods, setShowMethods] = useState(true);
   if (!findings) {
@@ -1164,6 +1207,80 @@ function EvidenceRecordPanel({
         </>
       )}
 
+      {mlContainer ? (
+        <div className="ml-block" data-testid="research-ml-block">
+          <h4 className="insp-subheading">ML reference experiment (M5, additive)</h4>
+          <Facts
+            rows={[
+              ["Model", String(mlContainer.ml_record.model.type)],
+              ["Trees / seed", `${String(mlContainer.ml_record.model.params.n_estimators)} / ${String(mlContainer.ml_record.model.params.random_state)}`],
+              ["Reference", `${mlContainer.ml_record.reference.dataset} · ${mlContainer.ml_record.reference.epoch} epoch · ${mlContainer.ml_record.reference.license}`],
+              ["Split", `${mlContainer.ml_record.split_design.method} (${mlContainer.ml_record.split_design.block_px} px blocks; train ${mlContainer.ml_record.split_design.train_px} / validation ${mlContainer.ml_record.split_design.validation_px} / test ${mlContainer.ml_record.split_design.test_px} px)`],
+              ["Overall agreement", `${(mlContainer.ml_record.evaluation.overall_agreement * 100).toFixed(1)} %`],
+              ["Macro-F1 (supported classes)", mlContainer.ml_record.evaluation.macro_f1_supported_classes === null ? "not reported" : mlContainer.ml_record.evaluation.macro_f1_supported_classes.toFixed(3)],
+              ["Balanced accuracy", mlContainer.ml_record.evaluation.balanced_accuracy.toFixed(3)],
+            ]}
+          />
+          <table className="ml-eval-table">
+            <thead>
+              <tr>
+                <th>Class</th>
+                <th>Test support</th>
+                <th>Precision</th>
+                <th>Recall</th>
+                <th>F1</th>
+                <th>IoU</th>
+              </tr>
+            </thead>
+            <tbody>
+              {mlContainer.ml_record.evaluation.class_order.map((name) => {
+                const row = mlContainer.ml_record.evaluation.per_class[name];
+                return (
+                  <tr key={name}>
+                    <td>{name}</td>
+                    <td>{row.support}</td>
+                    {row.metrics_reported ? (
+                      <>
+                        <td>{(row.precision ?? 0).toFixed(3)}</td>
+                        <td>{(row.recall ?? 0).toFixed(3)}</td>
+                        <td>{(row.f1 ?? 0).toFixed(3)}</td>
+                        <td>{row.iou === null ? "—" : row.iou.toFixed(3)}</td>
+                      </>
+                    ) : (
+                      <td colSpan={4} className="ml-gated">not reported — support below the {mlContainer.ml_record.evaluation.support_floor}-px floor</td>
+                    )}
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+          <p className="insp-note mono-label">{mlContainer.ml_record.evaluation.framing}</p>
+          <Facts
+            rows={[
+              ["Features", mlContainer.ml_record.features.list.join(", ")],
+              ["Resolution note", mlContainer.ml_record.features.resolution_note],
+              ["Application epochs", Object.values(mlContainer.ml_record.application).map((app) => `${app.date}: ${Object.entries(app.predicted_fractions).map(([cls, frac]) => `${cls} ${(frac * 100).toFixed(1)} %`).join(", ")}`).join(" · ")],
+              ["Geographic stability", mlContainer.ml_record.geographic_stability.agreement_range ? `agreement ${mlContainer.ml_record.geographic_stability.agreement_range[0].toFixed(3)}-${mlContainer.ml_record.geographic_stability.agreement_range[1].toFixed(3)} across held-out blocks` : "not available"],
+              ["Label gate", mlContainer.label_gate],
+            ]}
+          />
+          <ul className="insp-note">
+            {mlContainer.ml_record.interpretation_guardrails.map((g) => (
+              <li key={g}>{g}</li>
+            ))}
+            {mlContainer.limitations.map((l) => (
+              <li key={l}>Limitation: {l}</li>
+            ))}
+          </ul>
+          <p className="insp-note mono-label">
+            The mathematical records on this page are untouched; this block is
+            additive provenance from {mlContainer.references.mathematical_findings_container.path}.
+          </p>
+        </div>
+      ) : (
+        <h4 className="insp-subheading">ML reference experiment (M5): no record available</h4>
+      )}
+
       <h4 className="insp-subheading">Method provenance</h4>
       <Facts
         rows={[
@@ -1304,6 +1421,7 @@ export function Inspector({
   onSelectRecord,
   onOpenResearch,
   selectionPolicy,
+  mlFindings,
   pixel,
   pixelError,
   pixelLoading,
@@ -1424,6 +1542,9 @@ export function Inspector({
             onSelect={onSelectFinding}
             onOpenResearch={onOpenResearch}
             selectionPolicy={selectionPolicy}
+            mlContainer={
+              findings ? mlRecordForExperiment(mlFindings, findings.experiment_id) : null
+            }
           />
         )}
 
@@ -1433,6 +1554,9 @@ export function Inspector({
             selectedId={selectedEvidenceId}
             onSelect={onSelectRecord}
             onOpenExplore={() => onTabChange("findings")}
+            mlContainer={
+              findings ? mlRecordForExperiment(mlFindings, findings.experiment_id) : null
+            }
           />
         )}
 

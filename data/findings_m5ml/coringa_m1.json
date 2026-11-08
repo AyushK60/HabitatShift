@@ -1,0 +1,250 @@
+{
+  "schema": "habitatshift-m5ml-findings/1",
+  "experiment_id": "coringa_m1",
+  "generated_utc": "2026-11-08T00:02:29.170399+00:00",
+  "references": {
+    "mathematical_findings_container": {
+      "schema": "habitatshift-findings/2",
+      "path": "data/findings/coringa_m1.json",
+      "sha256": "e0cfcf0cc7ff2f7ceeaf72bc56c1e32605715ecd59b5923c62083a0f62481556",
+      "note": "frozen mathematical evidence records; this container adds ML context and never modifies them"
+    },
+    "run_manifest": {
+      "path": "data/experiments/m5_ml/coringa_m5_ml/20261108T000229Z_945c55e6/manifest.json",
+      "git_commit": "a7f78f4190ecde862bb4e2288cf9c1795f3d03f2"
+    }
+  },
+  "label_gate": "docs/M5_ML_LABEL_FEASIBILITY.md",
+  "evidence_status": "MODEL_OUTPUT_AGAINST_REFERENCE",
+  "ml_record": {
+    "schema": "habitatshift-m5ml-record/1",
+    "identification": {
+      "experiment_id": "coringa_m1",
+      "ml_study": "coringa_m5_ml",
+      "source_run": "data\\experiments\\m5_ml\\coringa_m5_ml\\20261108T000229Z_945c55e6",
+      "source_result_sha256": "e4e23d1350cca343f89c0ad65f02430197e41d58a6279bd906fb13a0a3e54daf",
+      "status": "complete",
+      "evidence_status": "MODEL_OUTPUT_AGAINST_REFERENCE"
+    },
+    "reference": {
+      "dataset": "ESA WorldCover v200",
+      "epoch": 2021,
+      "url": "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/map/ESA_WorldCover_10m_2021_v200_N15E081_Map.tif",
+      "window_histogram": {
+        "10": 51268,
+        "20": 316,
+        "30": 4298,
+        "40": 113297,
+        "50": 4559,
+        "60": 1390,
+        "80": 26767,
+        "90": 4848,
+        "95": 293
+      },
+      "license": "CC-BY 4.0 (\u00a9 ESA WorldCover project 2022)",
+      "framing": "reference-product labels; agreement metrics are NOT ground-truth accuracy"
+    },
+    "model": {
+      "type": "sklearn.ensemble.RandomForestClassifier",
+      "params": {
+        "n_estimators": 300,
+        "max_depth": null,
+        "min_samples_leaf": 2,
+        "max_features": "sqrt",
+        "class_weight": "balanced_subsample",
+        "random_state": 20261108,
+        "n_jobs": -1
+      }
+    },
+    "features": {
+      "list": [
+        "reflectance_blue",
+        "reflectance_green",
+        "reflectance_red",
+        "reflectance_nir",
+        "reflectance_swir16",
+        "ndvi",
+        "ndwi",
+        "mndwi"
+      ],
+      "resolution_note": "blue/green/red/nir native 10 m; swir16 native 20 m bilinearly resampled to the 10 m analysis grid by the audited pipeline (no native 10 m SWIR)",
+      "importance": {
+        "reflectance_blue": 0.0648138417655597,
+        "reflectance_green": 0.04578254842054654,
+        "reflectance_red": 0.08942241552595473,
+        "reflectance_nir": 0.10835541129409901,
+        "reflectance_swir16": 0.1917646663975094,
+        "ndvi": 0.15615702632229092,
+        "ndwi": 0.1523290635730415,
+        "mndwi": 0.1913750267009981
+      }
+    },
+    "split_design": {
+      "method": "contiguous 100-px block row stripes: train/validation/test interleaved bands",
+      "block_px": 100,
+      "train_px": 60005,
+      "validation_px": 53810,
+      "test_px": 51321,
+      "labelled_px": 165136,
+      "design_note": "deterministic blocking concentrates rare classes unevenly across folds; per-class test support is reported and metrics are gated at support < 50 px"
+    },
+    "evaluation": {
+      "class_order": [
+        "vegetation",
+        "water",
+        "other"
+      ],
+      "overall_agreement": 0.8869078934549209,
+      "macro_f1_all_classes": 0.6175315353164721,
+      "macro_f1_supported_classes": 0.6175315353164721,
+      "balanced_accuracy": 0.6085882572851519,
+      "per_class": {
+        "vegetation": {
+          "precision": 0.9337216799697623,
+          "recall": 0.9390456598542104,
+          "f1": 0.9363761022976845,
+          "support": 44722,
+          "iou": 0.8803639184118399,
+          "metrics_reported": true,
+          "support_note": null
+        },
+        "water": {
+          "precision": 0.5788880540946657,
+          "recall": 0.6540747028862479,
+          "f1": 0.6141889198884017,
+          "support": 4712,
+          "iou": 0.44319815933275813,
+          "metrics_reported": true,
+          "support_note": null
+        },
+        "other": {
+          "precision": 0.4303921568627451,
+          "recall": 0.23264440911499734,
+          "f1": 0.3020295837633299,
+          "support": 1887,
+          "iou": 0.1778768233387358,
+          "metrics_reported": true,
+          "support_note": null
+        }
+      },
+      "support_floor": 50,
+      "confusion_matrix": [
+        [
+          41996,
+          2147,
+          579
+        ],
+        [
+          1628,
+          3082,
+          2
+        ],
+        [
+          1353,
+          95,
+          439
+        ]
+      ],
+      "framing": "agreement with the ESA WorldCover v200 reference product on spatially separated test blocks; NOT independent ground-truth accuracy"
+    },
+    "geographic_stability": {
+      "available": true,
+      "folds": [
+        {
+          "held_out_fold": 0,
+          "available": true,
+          "train_px": 53810,
+          "test_px": 60005,
+          "overall_agreement": 0.9243063078076827,
+          "macro_f1_supported_classes": 0.6923060895915842,
+          "balanced_accuracy": 0.6547169802378784
+        },
+        {
+          "held_out_fold": 1,
+          "available": true,
+          "train_px": 51321,
+          "test_px": 53810,
+          "overall_agreement": 0.8826240475748002,
+          "macro_f1_supported_classes": 0.6427775928418603,
+          "balanced_accuracy": 0.6285294692638933
+        },
+        {
+          "held_out_fold": 2,
+          "available": true,
+          "train_px": 60005,
+          "test_px": 51321,
+          "overall_agreement": 0.8869078934549209,
+          "macro_f1_supported_classes": 0.6175315353164721,
+          "balanced_accuracy": 0.6085882572851519
+        }
+      ],
+      "agreement_range": [
+        0.8826240475748002,
+        0.9243063078076827
+      ],
+      "note": "agreement spread across geographically different held-out blocks; a wide range means the classifier does not generalise uniformly over the AOI"
+    },
+    "application": {
+      "earlier": {
+        "source_raster": "data/processed/m1/coringa_coastal/earlier_2020-03-26_reflectance_composite.tif",
+        "date": "2020-03-26",
+        "valid_px": 165136,
+        "predicted_fractions": {
+          "vegetation": 0.8072679488421665,
+          "water": 0.1713678422633466,
+          "other": 0.02136420889448697
+        },
+        "mean_confidence_of_predicted_class": {
+          "vegetation": 0.9361020283617827,
+          "water": 0.7934590153307518,
+          "other": 0.6459404986129997
+        },
+        "note": "model probabilities are confidences, not accuracy estimates",
+        "prediction_raster": "prediction_earlier.npy"
+      },
+      "later": {
+        "source_raster": "data/processed/m1/coringa_coastal/later_2025-03-25_reflectance_composite.tif",
+        "date": "2025-03-25",
+        "valid_px": 165136,
+        "predicted_fractions": {
+          "vegetation": 0.8156731421373898,
+          "water": 0.160643348512741,
+          "other": 0.023683509349869198
+        },
+        "mean_confidence_of_predicted_class": {
+          "vegetation": 0.9395192168630309,
+          "water": 0.7139018998980513,
+          "other": 0.6645436445081483
+        },
+        "note": "model probabilities are confidences, not accuracy estimates",
+        "prediction_raster": "prediction_later.npy"
+      }
+    },
+    "math_baseline_comparison": {
+      "available": true,
+      "note": "predicted class-fraction shifts between the two epochs compared against the mathematical \u0394-index finding; both are candidate signals, neither is treated as verification",
+      "math_finding_indices": [
+        "mndwi",
+        "ndvi",
+        "ndwi"
+      ],
+      "predicted_fraction_shift": {
+        "vegetation": 0.008405193295223379,
+        "water": -0.01072449375060558,
+        "other": 0.0023193004553822283
+      }
+    },
+    "plain_language": "A Random Forest trained on 2021 reference labels (ESA WorldCover) reproduces that reference on held-out test blocks at 89% overall agreement. Applied to the two measured composites, the predicted class mix shifts: water \u22121.1 pp. These are model predictions against reference-product labels \u2014 not independent ground truth and not verified change.",
+    "interpretation_guardrails": [
+      "No claim of independent ground-truth accuracy is permitted.",
+      "Predicted fractions are model outputs on reference-inherited class definitions.",
+      "Application to 2020/2025 assumes class-spectral stability across epochs (limitation, not verified)."
+    ]
+  },
+  "limitations": [
+    "Reference labels are ESA WorldCover v200, itself a classification product; all metrics measure agreement with it, not ground truth.",
+    "Applying the 2021-trained classifier to 2020/2025 composites assumes class-spectral stability across epochs.",
+    "Rare classes below the 50-px test-support floor are not reported rather than estimated.",
+    "Class-prediction probabilities are confidences, never accuracy."
+  ]
+}

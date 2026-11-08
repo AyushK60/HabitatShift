@@ -1,0 +1,217 @@
+{
+  "schema": "habitatshift-m5ml-findings/1",
+  "experiment_id": "western_ghats_m4",
+  "generated_utc": "2026-11-08T00:02:52.794257+00:00",
+  "references": {
+    "mathematical_findings_container": {
+      "schema": "habitatshift-findings/2",
+      "path": "data/findings/western_ghats_m4.json",
+      "sha256": "42969d7be94e394df596bf49abb7e6c4a8e416873308ca793830799faadea58f",
+      "note": "frozen mathematical evidence records; this container adds ML context and never modifies them"
+    },
+    "run_manifest": {
+      "path": "data/experiments/m5_ml/western_ghats_m5_ml/20261108T000252Z_fae76550/manifest.json",
+      "git_commit": "a7f78f4190ecde862bb4e2288cf9c1795f3d03f2"
+    }
+  },
+  "label_gate": "docs/M5_ML_LABEL_FEASIBILITY.md",
+  "evidence_status": "MODEL_OUTPUT_AGAINST_REFERENCE",
+  "ml_record": {
+    "schema": "habitatshift-m5ml-record/1",
+    "identification": {
+      "experiment_id": "western_ghats_m4",
+      "ml_study": "western_ghats_m5_ml",
+      "source_run": "data\\experiments\\m5_ml\\western_ghats_m5_ml\\20261108T000252Z_fae76550",
+      "source_result_sha256": "9d83792f05ea140c26393c18996dd1e3474a9a395988b640e8000e6bc57a10e0",
+      "status": "complete",
+      "evidence_status": "MODEL_OUTPUT_AGAINST_REFERENCE"
+    },
+    "reference": {
+      "dataset": "ESA WorldCover v200",
+      "epoch": 2021,
+      "url": "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/map/ESA_WorldCover_10m_2021_v200_N15E072_Map.tif",
+      "window_histogram": {
+        "10": 279481,
+        "30": 10554,
+        "40": 1817
+      },
+      "license": "CC-BY 4.0 (\u00a9 ESA WorldCover project 2022)",
+      "framing": "reference-product labels; agreement metrics are NOT ground-truth accuracy"
+    },
+    "model": {
+      "type": "sklearn.ensemble.RandomForestClassifier",
+      "params": {
+        "n_estimators": 300,
+        "max_depth": null,
+        "min_samples_leaf": 2,
+        "max_features": "sqrt",
+        "class_weight": "balanced_subsample",
+        "random_state": 20261108,
+        "n_jobs": -1
+      }
+    },
+    "features": {
+      "list": [
+        "reflectance_blue",
+        "reflectance_green",
+        "reflectance_red",
+        "reflectance_nir",
+        "ndvi",
+        "ndwi"
+      ],
+      "resolution_note": "blue/green/red/nir native 10 m; swir16 native 20 m bilinearly resampled to the 10 m analysis grid by the audited pipeline (no native 10 m SWIR)",
+      "importance": {
+        "reflectance_blue": 0.22283376568115296,
+        "reflectance_green": 0.3135718539797637,
+        "reflectance_red": 0.18745176294252938,
+        "reflectance_nir": 0.012866287852485689,
+        "ndvi": 0.06878976917456084,
+        "ndwi": 0.19448656036950748
+      }
+    },
+    "split_design": {
+      "method": "contiguous 100-px block row stripes: train/validation/test interleaved bands",
+      "block_px": 100,
+      "train_px": 79482,
+      "validation_px": 82191,
+      "test_px": 76101,
+      "labelled_px": 237774,
+      "design_note": "deterministic blocking concentrates rare classes unevenly across folds; per-class test support is reported and metrics are gated at support < 50 px"
+    },
+    "evaluation": {
+      "class_order": [
+        "forest_vegetation",
+        "other"
+      ],
+      "overall_agreement": 0.9953614275765101,
+      "macro_f1_all_classes": 0.6520781160511905,
+      "macro_f1_supported_classes": 0.6520781160511905,
+      "balanced_accuracy": 0.599979702544835,
+      "per_class": {
+        "forest_vegetation": {
+          "precision": 0.9959068714547058,
+          "recall": 0.9994452662721893,
+          "f1": 0.9976729315129901,
+          "support": 75712,
+          "iou": 0.9953566683766755,
+          "metrics_reported": true,
+          "support_note": null
+        },
+        "other": {
+          "precision": 0.65,
+          "recall": 0.20051413881748073,
+          "f1": 0.30648330058939094,
+          "support": 389,
+          "iou": 0.18097447795823665,
+          "metrics_reported": true,
+          "support_note": null
+        }
+      },
+      "support_floor": 50,
+      "confusion_matrix": [
+        [
+          75670,
+          42
+        ],
+        [
+          311,
+          78
+        ]
+      ],
+      "framing": "agreement with the ESA WorldCover v200 reference product on spatially separated test blocks; NOT independent ground-truth accuracy"
+    },
+    "geographic_stability": {
+      "available": true,
+      "folds": [
+        {
+          "held_out_fold": 0,
+          "available": true,
+          "train_px": 82191,
+          "test_px": 79482,
+          "overall_agreement": 0.9948541808208148,
+          "macro_f1_supported_classes": 0.8854023711434751,
+          "balanced_accuracy": 0.965535947188092
+        },
+        {
+          "held_out_fold": 1,
+          "available": true,
+          "train_px": 76101,
+          "test_px": 82191,
+          "overall_agreement": 0.9982114830090886,
+          "macro_f1_supported_classes": 0.8712790553958594,
+          "balanced_accuracy": 0.8284838348920947
+        },
+        {
+          "held_out_fold": 2,
+          "available": true,
+          "train_px": 79482,
+          "test_px": 76101,
+          "overall_agreement": 0.9953614275765101,
+          "macro_f1_supported_classes": 0.6520781160511905,
+          "balanced_accuracy": 0.599979702544835
+        }
+      ],
+      "agreement_range": [
+        0.9948541808208148,
+        0.9982114830090886
+      ],
+      "note": "agreement spread across geographically different held-out blocks; a wide range means the classifier does not generalise uniformly over the AOI"
+    },
+    "application": {
+      "earlier": {
+        "source_raster": "data/processed/m4/western_ghats_m4/earlier_2020-02-19_reflectance_composite.tif",
+        "date": "2020-02-19",
+        "valid_px": 237774,
+        "predicted_fractions": {
+          "forest_vegetation": 0.9945578574612868,
+          "other": 0.005442142538713232
+        },
+        "mean_confidence_of_predicted_class": {
+          "forest_vegetation": 0.9989984358374581,
+          "other": 0.8964759430055598
+        },
+        "note": "model probabilities are confidences, not accuracy estimates",
+        "prediction_raster": "prediction_earlier.npy"
+      },
+      "later": {
+        "source_raster": "data/processed/m4/western_ghats_m4/later_2025-02-22_reflectance_composite.tif",
+        "date": "2025-02-22",
+        "valid_px": 237774,
+        "predicted_fractions": {
+          "forest_vegetation": 0.9958111484014232,
+          "other": 0.0041888515985768
+        },
+        "mean_confidence_of_predicted_class": {
+          "forest_vegetation": 0.9986968541935104,
+          "other": 0.8707427638626879
+        },
+        "note": "model probabilities are confidences, not accuracy estimates",
+        "prediction_raster": "prediction_later.npy"
+      }
+    },
+    "math_baseline_comparison": {
+      "available": true,
+      "note": "predicted class-fraction shifts between the two epochs compared against the mathematical \u0394-index finding; both are candidate signals, neither is treated as verification",
+      "math_finding_indices": [
+        "ndvi",
+        "ndwi"
+      ],
+      "predicted_fraction_shift": {
+        "forest_vegetation": 0.0012532909401363757,
+        "other": -0.001253290940136432
+      }
+    },
+    "plain_language": "A Random Forest trained on 2021 reference labels (ESA WorldCover) reproduces that reference on held-out test blocks at 100% overall agreement. Applied to the two measured composites, the predicted class mix shifts: no class shifted by more than 1 percentage point. These are model predictions against reference-product labels \u2014 not independent ground truth and not verified change.",
+    "interpretation_guardrails": [
+      "No claim of independent ground-truth accuracy is permitted.",
+      "Predicted fractions are model outputs on reference-inherited class definitions.",
+      "Application to 2020/2025 assumes class-spectral stability across epochs (limitation, not verified)."
+    ]
+  },
+  "limitations": [
+    "Reference labels are ESA WorldCover v200, itself a classification product; all metrics measure agreement with it, not ground truth.",
+    "Applying the 2021-trained classifier to 2020/2025 composites assumes class-spectral stability across epochs.",
+    "Rare classes below the 50-px test-support floor are not reported rather than estimated.",
+    "Class-prediction probabilities are confidences, never accuracy."
+  ]
+}

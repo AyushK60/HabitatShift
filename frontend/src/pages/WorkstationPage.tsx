@@ -37,7 +37,9 @@ import { StudyPicker } from "../workstation/StudyPicker";
 import { buildLayers, type Analysis, type AssetResolver, type LayerSpec } from "../workstation/layers";
 import {
   findingByEvidenceId,
+  loadMlFindings,
   loadSelectionPolicy,
+  type MlFindingsIndex,
   type SelectionPolicy,
 } from "../evidence/adapter";
 import "../styles/workstation.css";
@@ -222,6 +224,18 @@ function WorkstationForStudy({ studyId }: { studyId: string }) {
     let cancelled = false;
     loadSelectionPolicy().then((policy) => {
       if (!cancelled) setSelectionPolicy(policy);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+  // M5: additive ML reference-experiment index (generated artifact; null when
+  // unavailable — the panels then show it as explicitly unavailable).
+  const [mlFindings, setMlFindings] = useState<MlFindingsIndex | null>(null);
+  useEffect(() => {
+    let cancelled = false;
+    loadMlFindings().then((index) => {
+      if (!cancelled) setMlFindings(index);
     });
     return () => {
       cancelled = true;
@@ -671,6 +685,7 @@ function WorkstationForStudy({ studyId }: { studyId: string }) {
             onSelectRecord={handleFindingSelectKeepTab}
             onOpenResearch={handleOpenResearch}
             selectionPolicy={selectionPolicy}
+            mlFindings={mlFindings}
             pixel={pixel}
             pixelError={pixelError}
             pixelLoading={pixelLoading}

@@ -1252,3 +1252,29 @@
 .maplibregl-popup.findings-hover {
   pointer-events: none;
 }
+
+/* ------------------------------------------------- M5 ML reference --- */
+.ml-block {
+  margin-top: 0.75rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--line, #ddd);
+}
+.ml-plain strong {
+  font-weight: 600;
+}
+.ml-eval-table {
+  margin-top: 0.5rem;
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+.ml-eval-table th,
+.ml-eval-table td {
+  border: 1px solid var(--line, #ddd);
+  padding: 0.25rem 0.4rem;
+  text-align: left;
+}
+.ml-eval-table td.ml-gated {
+  color: var(--muted, #777);
+  font-style: italic;
+}
