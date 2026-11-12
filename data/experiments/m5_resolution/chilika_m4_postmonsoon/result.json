@@ -1,0 +1,44 @@
+{
+  "schema": "habitatshift-m5-resolution-sensitivity/1",
+  "experiment": "chilika_m4_postmonsoon",
+  "generated_utc": "2026-11-12T07:02:37.503527+00:00",
+  "resolution_m": 20.0,
+  "recorded_resolution_m": 10.0,
+  "framing": "sensitivity of the recorded change fractions to analysis-grid resolution; the 10 m run remains the recorded result",
+  "per_index": {
+    "ndwi": {
+      "primary_threshold": 0.15,
+      "decrease_percent_10m": 11.148166340638097,
+      "decrease_percent_20m": 11.254266898065673,
+      "increase_percent_10m": 3.495830568553611,
+      "increase_percent_20m": 3.291689174434241,
+      "common_valid_pixels_10m": 348129,
+      "common_valid_pixels_20m": 87007,
+      "decrease_difference_pp": 0.10610055742757574,
+      "increase_difference_pp": -0.20414139411936993
+    },
+    "mndwi": {
+      "primary_threshold": 0.15,
+      "decrease_percent_10m": 8.483349562949366,
+      "decrease_percent_20m": 8.340708218878941,
+      "increase_percent_10m": 4.021785027963772,
+      "increase_percent_20m": 3.991632857126438,
+      "common_valid_pixels_10m": 348129,
+      "common_valid_pixels_20m": 87007,
+      "decrease_difference_pp": -0.14264134407042484,
+      "increase_difference_pp": -0.030152170837334236
+    },
+    "ndvi": {
+      "primary_threshold": 0.15,
+      "decrease_percent_10m": 4.345228349261337,
+      "decrease_percent_20m": 4.214603422713115,
+      "increase_percent_10m": 14.735055108882053,
+      "increase_percent_20m": 14.386198811589873,
+      "common_valid_pixels_10m": 348129,
+      "common_valid_pixels_20m": 87007,
+      "decrease_difference_pp": -0.13062492654822222,
+      "increase_difference_pp": -0.3488562972921798
+    }
+  },
+  "sandbox": "C:\\Users\\Khana\\AppData\\Local\\Temp\\hs_res__vye4o3g"
+}

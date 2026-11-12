@@ -332,7 +332,7 @@ async function main() {
 
   /* --- 13: every study's interpretation is appropriate (§11.13) --- */
   // Per-study themes verified programmatically by
-  // scripts/audit_m4r3_disclosure.py (106/106, committed evidence); here we
+  // verification/audit_m4r3_disclosure.py (106/106, committed evidence); here we
   // verify each study's Explore overview renders its own recorded
   // limitations list in the UI.
   for (const studyId of ["coringa_coastal", "chilika_wetland", "western_ghats_forest", "himalaya_purepu_2025", "himalaya_langtang_2026", "kathmandu_urban"]) {

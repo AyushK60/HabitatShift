@@ -1,0 +1,47 @@
+{
+  "schema": "habitatshift-m5-component-inventory/1",
+  "experiment": "coringa_m1",
+  "rule": "4-connected components on the common-valid footprint at |delta| >= 0.15, MMU 25 px",
+  "components_at_or_above_mmu_total": 686,
+  "selection_policy_total": 686,
+  "matches_selection_policy": true,
+  "by_index": {
+    "mndwi": {
+      "decrease": {
+        "components_total": 2192,
+        "components_at_or_above_mmu": 129,
+        "area_ha_at_or_above_mmu": 155.73
+      },
+      "increase": {
+        "components_total": 892,
+        "components_at_or_above_mmu": 81,
+        "area_ha_at_or_above_mmu": 199.08
+      }
+    },
+    "ndvi": {
+      "decrease": {
+        "components_total": 1603,
+        "components_at_or_above_mmu": 146,
+        "area_ha_at_or_above_mmu": 146.39
+      },
+      "increase": {
+        "components_total": 1177,
+        "components_at_or_above_mmu": 88,
+        "area_ha_at_or_above_mmu": 106.82
+      }
+    },
+    "ndwi": {
+      "decrease": {
+        "components_total": 1088,
+        "components_at_or_above_mmu": 102,
+        "area_ha_at_or_above_mmu": 95.65
+      },
+      "increase": {
+        "components_total": 1386,
+        "components_at_or_above_mmu": 140,
+        "area_ha_at_or_above_mmu": 119.37
+      }
+    }
+  },
+  "note": "complete inventory; the sealed findings remain the curated top-five selection"
+}

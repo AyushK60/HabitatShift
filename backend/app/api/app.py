@@ -18,6 +18,8 @@ from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 
 from .. import config
+from ..catalog.availability import AvailabilityError, check_availability
+from ..catalog.stac_client import CatalogUnavailable
 
 app = FastAPI(
     title="HabitatShift proof API",
@@ -135,6 +137,78 @@ def health() -> dict[str, object]:
         "m1_pipeline_version": config.M1_PIPELINE_VERSION,
         "m1_studies": _available_m1_studies(),
     }
+
+
+# --------------------------------------------------------------------------- #
+# Custom-AOI scene availability (discovery only; no processing)
+# --------------------------------------------------------------------------- #
+@app.get("/api/aoi/availability")
+def aoi_availability(
+    west: float,
+    south: float,
+    east: float,
+    north: float,
+    start: str,
+    end: str,
+    max_cloud: float = 60.0,
+) -> dict:
+    import datetime as _dt
+
+    try:
+        return check_availability(
+            west=west, south=south, east=east, north=north,
+            start=_dt.date.fromisoformat(start), end=_dt.date.fromisoformat(end),
+            max_cloud=max_cloud,
+        )
+    except (AvailabilityError, ValueError) as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
+    except CatalogUnavailable as exc:
+        raise HTTPException(status_code=502, detail=f"scene catalogue unavailable: {exc}") from exc
+
+
+# --------------------------------------------------------------------------- #
+# Custom-AOI change analysis (bounded: one job at a time, small boxes only)
+# --------------------------------------------------------------------------- #
+@app.post("/api/aoi/run")
+def aoi_run(
+    west: float, south: float, east: float, north: float, earlier: str, later: str
+) -> dict:
+    import datetime as _dt
+
+    from ..pipeline import custom_run
+
+    try:
+        return custom_run.start_run(
+            west=west, south=south, east=east, north=north,
+            earlier=_dt.date.fromisoformat(earlier), later=_dt.date.fromisoformat(later),
+        )
+    except custom_run.CustomRunError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
+    except custom_run.CustomRunBusy as exc:
+        raise HTTPException(status_code=429, detail=str(exc)) from exc
+
+
+@app.get("/api/aoi/run/{run_id}")
+def aoi_run_status(run_id: str) -> dict:
+    from ..pipeline import custom_run
+
+    try:
+        return custom_run.job_status(run_id)
+    except KeyError as exc:
+        raise HTTPException(status_code=404, detail="unknown run id") from exc
+
+
+@app.get("/api/aoi/run/{run_id}/file/{name}")
+def aoi_run_file(run_id: str, name: str) -> FileResponse:
+    from ..pipeline import custom_run
+
+    try:
+        path = custom_run.preview_path(run_id, name)
+    except KeyError as exc:
+        raise HTTPException(status_code=404, detail="file not found") from exc
+    return FileResponse(path, media_type=_MEDIA_TYPES.get(path.suffix.lower(), "image/png"))
 
 
 @app.get("/api/study")

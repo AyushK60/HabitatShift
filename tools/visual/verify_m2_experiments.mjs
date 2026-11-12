@@ -219,13 +219,13 @@ async function main() {
   );
   await errorPage.goto(PAGE_URL, { waitUntil: "networkidle" });
   await errorPage.waitForFunction(
-    () => /not serving the recorded M2 run/i.test(document.body.innerText),
+    () => /not serving the recorded hypothesis-testing run/i.test(document.body.innerText),
     undefined,
     { timeout: 15000 },
   );
   const missingNote = (await errorPage
     .locator("p.exp-note")
-    .filter({ hasText: /not serving the recorded M2 run/i })
+    .filter({ hasText: /not serving the recorded hypothesis-testing run/i })
     .textContent()) || "";
   check(
     "missing-run state names the bundle fallback",

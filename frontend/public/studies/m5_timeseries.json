@@ -1,0 +1,537 @@
+{
+ "schema": "habitatshift-m5-scene-timeseries/1",
+ "note": "Mean index value over each scene's own valid pixels, from cached observations on the study grid. A per-scene description with 3 scenes per period; it is not a trend test.",
+ "studies": [
+  {
+   "key": "coringa_coastal",
+   "study_id": "coringa_coastal",
+   "experiment": "coringa_m1",
+   "scenes_expected": 6,
+   "scenes_found": 6,
+   "scenes": [
+    {
+     "date": "2020-03-21",
+     "item_id": "S2B_44QPD_20200321_0_L2A",
+     "period": "earlier",
+     "valid_pixels": 131388,
+     "mean": {
+      "ndvi": 0.5059,
+      "ndwi": -0.438,
+      "ndbi": -0.2409,
+      "mndwi": -0.2488
+     }
+    },
+    {
+     "date": "2020-03-26",
+     "item_id": "S2A_44QPD_20200326_1_L2A",
+     "period": "earlier",
+     "valid_pixels": 165109,
+     "mean": {
+      "ndvi": 0.5332,
+      "ndwi": -0.483,
+      "ndbi": -0.1867,
+      "mndwi": -0.3908
+     }
+    },
+    {
+     "date": "2020-03-31",
+     "item_id": "S2B_44QPD_20200331_0_L2A",
+     "period": "earlier",
+     "valid_pixels": 165100,
+     "mean": {
+      "ndvi": 0.5203,
+      "ndwi": -0.4584,
+      "ndbi": -0.2071,
+      "mndwi": -0.3128
+     }
+    },
+    {
+     "date": "2025-03-25",
+     "item_id": "S2B_44QPD_20250325_0_L2A",
+     "period": "later",
+     "valid_pixels": 158194,
+     "mean": {
+      "ndvi": 0.4433,
+      "ndwi": -0.3559,
+      "ndbi": -0.2315,
+      "mndwi": -0.155
+     }
+    },
+    {
+     "date": "2025-03-30",
+     "item_id": "S2C_44QPD_20250330_0_L2A",
+     "period": "later",
+     "valid_pixels": 165116,
+     "mean": {
+      "ndvi": 0.5184,
+      "ndwi": -0.4897,
+      "ndbi": -0.1196,
+      "mndwi": -0.4259
+     }
+    },
+    {
+     "date": "2025-04-01",
+     "item_id": "S2A_44QPD_20250401_1_L2A",
+     "period": "later",
+     "valid_pixels": 152012,
+     "mean": {
+      "ndvi": 0.5098,
+      "ndwi": -0.4404,
+      "ndbi": -0.1663,
+      "mndwi": -0.3246
+     }
+    }
+   ]
+  },
+  {
+   "key": "chilika_wetland_dry",
+   "study_id": "chilika_wetland",
+   "experiment": "chilika_m4_dry",
+   "scenes_expected": 6,
+   "scenes_found": 6,
+   "scenes": [
+    {
+     "date": "2020-02-12",
+     "item_id": "S2A_45QUB_20200212_1_L2A",
+     "period": "earlier",
+     "valid_pixels": 348129,
+     "mean": {
+      "ndvi": -0.3225,
+      "ndwi": 0.4674,
+      "ndbi": -0.5764,
+      "mndwi": 0.7928
+     }
+    },
+    {
+     "date": "2020-02-17",
+     "item_id": "S2B_45QUB_20200217_0_L2A",
+     "period": "earlier",
+     "valid_pixels": 347389,
+     "mean": {
+      "ndvi": -0.3098,
+      "ndwi": 0.4564,
+      "ndbi": -0.4647,
+      "mndwi": 0.7382
+     }
+    },
+    {
+     "date": "2020-02-22",
+     "item_id": "S2A_45QUB_20200222_0_L2A",
+     "period": "earlier",
+     "valid_pixels": 326833,
+     "mean": {
+      "ndvi": -0.2778,
+      "ndwi": 0.407,
+      "ndbi": -0.5288,
+      "mndwi": 0.7381
+     }
+    },
+    {
+     "date": "2025-02-10",
+     "item_id": "S2B_45QUB_20250210_0_L2A",
+     "period": "later",
+     "valid_pixels": 348129,
+     "mean": {
+      "ndvi": -0.4079,
+      "ndwi": 0.5234,
+      "ndbi": -0.5017,
+      "mndwi": 0.7896
+     }
+    },
+    {
+     "date": "2025-02-15",
+     "item_id": "S2C_45QUB_20250215_0_L2A",
+     "period": "later",
+     "valid_pixels": 348129,
+     "mean": {
+      "ndvi": -0.4423,
+      "ndwi": 0.5601,
+      "ndbi": -0.3861,
+      "mndwi": 0.7615
+     }
+    },
+    {
+     "date": "2025-02-20",
+     "item_id": "S2B_45QUB_20250220_0_L2A",
+     "period": "later",
+     "valid_pixels": 345873,
+     "mean": {
+      "ndvi": -0.3666,
+      "ndwi": 0.4429,
+      "ndbi": -0.2888,
+      "mndwi": 0.6418
+     }
+    }
+   ]
+  },
+  {
+   "key": "chilika_wetland_postmonsoon",
+   "study_id": "chilika_wetland",
+   "experiment": "chilika_m4_postmonsoon",
+   "scenes_expected": 6,
+   "scenes_found": 6,
+   "scenes": [
+    {
+     "date": "2020-11-03",
+     "item_id": "S2B_45QUB_20201103_0_L2A",
+     "period": "earlier",
+     "valid_pixels": 330950,
+     "mean": {
+      "ndvi": -0.2539,
+      "ndwi": 0.368,
+      "ndbi": -0.1421,
+      "mndwi": 0.4799
+     }
+    },
+    {
+     "date": "2020-11-08",
+     "item_id": "S2A_45QUB_20201108_1_L2A",
+     "period": "earlier",
+     "valid_pixels": 348128,
+     "mean": {
+      "ndvi": -0.4217,
+      "ndwi": 0.5146,
+      "ndbi": -0.4035,
+      "mndwi": 0.7468
+     }
+    },
+    {
+     "date": "2020-11-13",
+     "item_id": "S2B_45QUB_20201113_0_L2A",
+     "period": "earlier",
+     "valid_pixels": 348129,
+     "mean": {
+      "ndvi": -0.6518,
+      "ndwi": 0.7463,
+      "ndbi": -0.4012,
+      "mndwi": 0.8735
+     }
+    },
+    {
+     "date": "2025-11-12",
+     "item_id": "S2C_45QUB_20251112_0_L2A",
+     "period": "later",
+     "valid_pixels": 348129,
+     "mean": {
+      "ndvi": -0.3246,
+      "ndwi": 0.4855,
+      "ndbi": -0.4178,
+      "mndwi": 0.7389
+     }
+    },
+    {
+     "date": "2025-11-14",
+     "item_id": "S2A_45QUB_20251114_1_L2A",
+     "period": "later",
+     "valid_pixels": 348129,
+     "mean": {
+      "ndvi": -0.3635,
+      "ndwi": 0.4917,
+      "ndbi": -0.4187,
+      "mndwi": 0.7374
+     }
+    },
+    {
+     "date": "2025-11-17",
+     "item_id": "S2B_45QUB_20251117_1_L2A",
+     "period": "later",
+     "valid_pixels": 348106,
+     "mean": {
+      "ndvi": -0.4826,
+      "ndwi": 0.5948,
+      "ndbi": -0.3612,
+      "mndwi": 0.7723
+     }
+    }
+   ]
+  },
+  {
+   "key": "western_ghats_forest",
+   "study_id": "western_ghats_forest",
+   "experiment": "western_ghats_m4",
+   "scenes_expected": 6,
+   "scenes_found": 6,
+   "scenes": [
+    {
+     "date": "2020-02-14",
+     "item_id": "S2A_43PDS_20200214_1_L2A",
+     "period": "earlier",
+     "valid_pixels": 237774,
+     "mean": {
+      "ndvi": 0.8019,
+      "ndwi": -0.7185
+     }
+    },
+    {
+     "date": "2020-02-19",
+     "item_id": "S2B_43PDS_20200219_1_L2A",
+     "period": "earlier",
+     "valid_pixels": 237774,
+     "mean": {
+      "ndvi": 0.7997,
+      "ndwi": -0.7131
+     }
+    },
+    {
+     "date": "2020-02-24",
+     "item_id": "S2A_43PDS_20200224_1_L2A",
+     "period": "earlier",
+     "valid_pixels": 237774,
+     "mean": {
+      "ndvi": 0.7953,
+      "ndwi": -0.7154
+     }
+    },
+    {
+     "date": "2025-02-17",
+     "item_id": "S2C_43PDS_20250217_0_L2A",
+     "period": "later",
+     "valid_pixels": 237774,
+     "mean": {
+      "ndvi": 0.801,
+      "ndwi": -0.7203
+     }
+    },
+    {
+     "date": "2025-02-22",
+     "item_id": "S2B_43PDS_20250222_0_L2A",
+     "period": "later",
+     "valid_pixels": 237774,
+     "mean": {
+      "ndvi": 0.818,
+      "ndwi": -0.7396
+     }
+    },
+    {
+     "date": "2025-02-27",
+     "item_id": "S2C_43PDS_20250227_0_L2A",
+     "period": "later",
+     "valid_pixels": 237774,
+     "mean": {
+      "ndvi": 0.813,
+      "ndwi": -0.7313
+     }
+    }
+   ]
+  },
+  {
+   "key": "himalaya_purepu_2025",
+   "study_id": "himalaya_purepu_2025",
+   "experiment": "himalaya_purepu_2025_m4",
+   "scenes_expected": 6,
+   "scenes_found": 6,
+   "scenes": [
+    {
+     "date": "2025-04-18",
+     "item_id": "S2A_45RUM_20250418_0_L2A",
+     "period": "earlier",
+     "valid_pixels": 113644,
+     "mean": {
+      "ndvi": 0.0037,
+      "ndwi": -0.027,
+      "ndbi": -0.3829,
+      "mndwi": 0.3516
+     }
+    },
+    {
+     "date": "2025-04-21",
+     "item_id": "S2B_45RUM_20250421_0_L2A",
+     "period": "earlier",
+     "valid_pixels": 114067,
+     "mean": {
+      "ndvi": 0.0035,
+      "ndwi": -0.0273,
+      "ndbi": -0.3137,
+      "mndwi": 0.2788
+     }
+    },
+    {
+     "date": "2025-04-24",
+     "item_id": "S2B_45RUM_20250424_0_L2A",
+     "period": "earlier",
+     "valid_pixels": 114067,
+     "mean": {
+      "ndwi": -0.0386,
+      "ndbi": -0.2783,
+      "mndwi": 0.2372,
+      "ndvi": 0.0128
+     }
+    },
+    {
+     "date": "2025-10-18",
+     "item_id": "S2B_45RUM_20251018_0_L2A",
+     "period": "later",
+     "valid_pixels": 114067,
+     "mean": {
+      "ndwi": 0.069,
+      "ndbi": -0.719,
+      "mndwi": 0.7442,
+      "ndvi": -0.0613
+     }
+    },
+    {
+     "date": "2025-10-21",
+     "item_id": "S2B_45RUM_20251021_0_L2A",
+     "period": "later",
+     "valid_pixels": 114067,
+     "mean": {
+      "ndwi": 0.0699,
+      "ndbi": -0.6936,
+      "mndwi": 0.718,
+      "ndvi": -0.0613
+     }
+    },
+    {
+     "date": "2025-10-25",
+     "item_id": "S2A_45RUM_20251025_0_L2A",
+     "period": "later",
+     "valid_pixels": 114067,
+     "mean": {
+      "ndwi": 0.0594,
+      "ndbi": -0.6042,
+      "mndwi": 0.6278,
+      "ndvi": -0.0564
+     }
+    }
+   ]
+  },
+  {
+   "key": "himalaya_langtang_2026",
+   "study_id": "himalaya_langtang_2026",
+   "experiment": "himalaya_langtang_2026_m4",
+   "scenes_expected": 4,
+   "scenes_found": 4,
+   "scenes": [
+    {
+     "date": "2026-08-12",
+     "item_id": "S2C_45RUM_20260812_0_L2A",
+     "period": "earlier",
+     "valid_pixels": 93736,
+     "mean": {
+      "ndvi": 0.111,
+      "ndwi": -0.1381,
+      "ndbi": -0.0466,
+      "mndwi": -0.0849
+     }
+    },
+    {
+     "date": "2026-09-28",
+     "item_id": "S2C_45RUM_20260928_0_L2A",
+     "period": "later",
+     "valid_pixels": 133262,
+     "mean": {
+      "ndvi": -0.046,
+      "ndwi": 0.0466,
+      "ndbi": -0.853,
+      "mndwi": 0.8627
+     }
+    },
+    {
+     "date": "2026-10-01",
+     "item_id": "S2C_45RUM_20261001_0_L2A",
+     "period": "later",
+     "valid_pixels": 133262,
+     "mean": {
+      "ndvi": -0.0612,
+      "ndwi": 0.0677,
+      "ndbi": -0.8539,
+      "mndwi": 0.8613
+     }
+    },
+    {
+     "date": "2026-10-03",
+     "item_id": "S2B_45RUM_20261003_0_L2A",
+     "period": "later",
+     "valid_pixels": 133262,
+     "mean": {
+      "ndvi": -0.0545,
+      "ndwi": 0.0629,
+      "ndbi": -0.844,
+      "mndwi": 0.8472
+     }
+    }
+   ]
+  },
+  {
+   "key": "kathmandu_urban",
+   "study_id": "kathmandu_urban",
+   "experiment": "kathmandu_m4",
+   "scenes_expected": 6,
+   "scenes_found": 6,
+   "scenes": [
+    {
+     "date": "2020-03-26",
+     "item_id": "S2A_45RUL_20200326_0_L2A",
+     "period": "earlier",
+     "valid_pixels": 43708,
+     "mean": {
+      "ndvi": 0.1734,
+      "ndwi": -0.2197,
+      "ndbi": 0.1106,
+      "mndwi": -0.3234
+     }
+    },
+    {
+     "date": "2020-03-31",
+     "item_id": "S2B_45RUL_20200331_0_L2A",
+     "period": "earlier",
+     "valid_pixels": 43682,
+     "mean": {
+      "ndvi": 0.2124,
+      "ndwi": -0.2756,
+      "ndbi": 0.0967,
+      "mndwi": -0.3643
+     }
+    },
+    {
+     "date": "2020-04-02",
+     "item_id": "S2A_45RUL_20200402_1_L2A",
+     "period": "earlier",
+     "valid_pixels": 43728,
+     "mean": {
+      "ndvi": 0.2197,
+      "ndwi": -0.2914,
+      "ndbi": 0.0858,
+      "mndwi": -0.3703
+     }
+    },
+    {
+     "date": "2025-03-27",
+     "item_id": "S2C_45RUL_20250327_0_L2A",
+     "period": "later",
+     "valid_pixels": 43728,
+     "mean": {
+      "ndvi": 0.1434,
+      "ndwi": -0.193,
+      "ndbi": 0.1305,
+      "mndwi": -0.3154
+     }
+    },
+    {
+     "date": "2025-03-29",
+     "item_id": "S2A_45RUL_20250329_0_L2A",
+     "period": "later",
+     "valid_pixels": 43728,
+     "mean": {
+      "ndvi": 0.1904,
+      "ndwi": -0.2752,
+      "ndbi": 0.1078,
+      "mndwi": -0.3724
+     }
+    },
+    {
+     "date": "2025-03-30",
+     "item_id": "S2C_45RUL_20250330_0_L2A",
+     "period": "later",
+     "valid_pixels": 43728,
+     "mean": {
+      "ndvi": 0.1508,
+      "ndwi": -0.2093,
+      "ndbi": 0.1168,
+      "mndwi": -0.3183
+     }
+    }
+   ]
+  }
+ ]
+}

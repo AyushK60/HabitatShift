@@ -33,12 +33,15 @@ import { ErrorNote } from "../components/ui";
 import { MapCompare, type CompareMode, type RoiBox } from "../workstation/MapCompare";
 import { Inspector, type InspectorTab } from "../workstation/Inspector";
 import { Dock } from "../workstation/Dock";
+import { GuidedTour, type TourStep } from "../workstation/GuidedTour";
+import { exportStudyReport } from "../evidence/reportExport";
 import { StudyPicker } from "../workstation/StudyPicker";
 import { buildLayers, type Analysis, type AssetResolver, type LayerSpec } from "../workstation/layers";
 import {
   findingByEvidenceId,
   loadMlFindings,
   loadSelectionPolicy,
+  mlRecordForExperiment,
   type MlFindingsIndex,
   type SelectionPolicy,
 } from "../evidence/adapter";
@@ -127,6 +130,7 @@ function WorkstationForStudy({ studyId }: { studyId: string }) {
   const [opacity, setOpacity] = useState(0.55);
   const [overlay, setOverlay] = useState(false);
   const [dockOpen, setDockOpen] = useState(false);
+  const [tourOpen, setTourOpen] = useState(false);
 
   const [pixel, setPixel] = useState<PixelSample | null>(null);
   const [pixelLoading, setPixelLoading] = useState(false);
@@ -422,6 +426,51 @@ function WorkstationForStudy({ studyId }: { studyId: string }) {
   const later = summary.periods?.[1];
   const isHimalaya = Boolean(bundle.event);
 
+
+  const tourSteps: TourStep[] = [
+    {
+      title: "Two dates, one grid",
+      body: `This compares matched seasons in ${earlier?.anchor_date?.slice(0, 4) ?? "an earlier year"} and ${later?.anchor_date?.slice(0, 4) ?? "a later year"} on a single ${summary.grid.resolution_m} m pixel grid. Drag the handle to swipe between the two real satellite composites.`,
+      enter: () => {
+        setAnalysis("historical");
+        setDockOpen(false);
+      },
+    },
+    {
+      title: "Change is a measurement, not a verdict",
+      body: "The Change view shows the difference of a spectral index between the two dates. A large difference marks a candidate signal; it does not say what happened on the ground.",
+      enter: () => setAnalysis("change"),
+    },
+    {
+      title: "What was actually measured",
+      body: "The Quality view shows where clouds, shadow or snow masking removed pixels. Only pixels valid in both dates are measured.",
+      enter: () => setAnalysis("quality"),
+    },
+    {
+      title: "Candidate regions",
+      body: "What changed? lists the largest connected regions of index change. It is a curated top-five selection, not a complete inventory, and the product discloses how many qualifying regions were left out.",
+      enter: () => setAnalysis("what_changed"),
+    },
+    {
+      title: "How sensitive is the result?",
+      body: "The analysis dock shows threshold sensitivity and index distributions, so you can see how much the answer depends on the chosen cut-off.",
+      enter: () => {
+        setAnalysis("historical");
+        setDockOpen(true);
+      },
+    },
+    {
+      title: "What this cannot conclude",
+      body: bundle.interpretation.cannot_conclude[0]
+        ? `Recorded limit for this study: ${bundle.interpretation.cannot_conclude[0]}`
+        : "These are candidate spectral signals between two fixed past dates, not verified environmental change.",
+      enter: () => {
+        setDockOpen(false);
+        setInspectorTab("guide");
+      },
+    },
+  ];
+
   return (
     <main id="main" className="workstation">
       {/* ------------------------------------------------ study context bar */}
@@ -480,6 +529,28 @@ function WorkstationForStudy({ studyId }: { studyId: string }) {
               {live ? "Showcase + live probe" : "Portable showcase (bundled)"}
               {" · "}
               <Link to="/methods">Methods</Link>
+            </dd>
+          </div>
+          <div>
+            <dt>Export</dt>
+            <dd>
+              <button
+                type="button"
+                className="toggle-btn"
+                data-testid="export-report"
+                title="Download a Markdown study report and a machine-readable provenance manifest, assembled from the recorded artefacts"
+                onClick={() =>
+                  exportStudyReport({
+                    bundle,
+                    summary,
+                    experimentIndex,
+                    ml: mlRecordForExperiment(mlFindings, summary.experiment_id),
+                    generatedAtIso: new Date().toISOString(),
+                  })
+                }
+              >
+                Report + provenance
+              </button>
             </dd>
           </div>
         </dl>
@@ -617,6 +688,15 @@ function WorkstationForStudy({ studyId }: { studyId: string }) {
             >
               Fit Entire Study Area
             </button>
+            <button
+              type="button"
+              className="toggle-btn"
+              data-testid="start-tour"
+              onClick={() => setTourOpen(true)}
+              title="A short guided walkthrough of this study"
+            >
+              Guided tour
+            </button>
           </span>
         </div>
 
@@ -713,6 +793,7 @@ function WorkstationForStudy({ studyId }: { studyId: string }) {
         open={dockOpen}
         onToggle={() => setDockOpen((prev) => !prev)}
       />
+      {tourOpen && <GuidedTour steps={tourSteps} onClose={() => setTourOpen(false)} />}
     </main>
   );
 }

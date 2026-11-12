@@ -46,7 +46,7 @@ function estimatorShortLabel(estimatorId: string): string {
   if (estimatorId === "anchor_single") return "anchor";
   if (estimatorId === "composite_mean") return "mean";
   if (estimatorId === "composite_median") return "median";
-  if (estimatorId === "m0_anchor_single_scene") return "M0";
+  if (estimatorId === "m0_anchor_single_scene") return "single";
   const dates = estimatorId.match(/\d{8}/g) ?? [];
   const mmdd = (date: string) => `${date.slice(4, 6)}-${date.slice(6, 8)}`;
   if (estimatorId.startsWith("loo_")) {

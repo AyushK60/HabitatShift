@@ -1,0 +1,74 @@
+.availability {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
+}
+.availability-lede {
+  max-width: 62ch;
+  line-height: 1.55;
+}
+.availability-form {
+  display: grid;
+  gap: 1.25rem;
+  margin: 1.5rem 0;
+}
+.availability-form fieldset {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+  border: 1px solid var(--rule, #d9d6cd);
+  padding: 0.9rem 1rem;
+}
+.availability-form legend {
+  padding: 0 0.4rem;
+  font-weight: 600;
+}
+.availability-form label {
+  display: grid;
+  gap: 0.25rem;
+  font-size: 0.85rem;
+}
+.availability-form input,
+.availability-form select {
+  font: inherit;
+  padding: 0.35rem 0.5rem;
+  min-width: 7.5rem;
+}
+.availability-form button {
+  justify-self: start;
+}
+.availability-help {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #4a5a5f;
+}
+.availability-error {
+  border-left: 4px solid var(--copper, #c4733f);
+  background: #f6ece4;
+  padding: 0.7rem 1rem;
+}
+.availability-result table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  margin: 0.75rem 0;
+}
+.availability-result th,
+.availability-result td {
+  text-align: left;
+  padding: 0.35rem 0.5rem;
+  border-bottom: 1px solid var(--rule, #d9d6cd);
+}
+.availability-notes {
+  font-size: 0.85rem;
+  color: #3d4d52;
+  line-height: 1.5;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}

@@ -4,7 +4,7 @@
 M4-R3 requirement (brief §5): the product must state honestly that the
 recorded findings are a curated top-five-per-index-direction selection, and
 show how many qualifying components were not recorded.  Those counts are
-produced by the independent audit (scripts/audit_findings_m4r2.py) and are
+produced by the independent audit (verification/audit_findings_m4r2.py) and are
 NOT part of the findings containers, so this script derives the disclosure
 from the audit artifact programmatically — no hand-copied numbers.
 

@@ -17,5 +17,11 @@ export default defineConfig({
     outDir: "dist",
     sourcemap: false,
     chunkSizeWarningLimit: 1200,
+    rollupOptions: {
+      output: {
+        // MapLibre is the largest dependency; keep it in its own cacheable chunk.
+        manualChunks: { maplibre: ["maplibre-gl"] },
+      },
+    },
   },
 });

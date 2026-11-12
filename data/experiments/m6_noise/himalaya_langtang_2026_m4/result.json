@@ -1,0 +1,26 @@
+{
+ "schema": "habitatshift-m6-noise-aware-threshold/1",
+ "experiment": "himalaya_langtang_2026_m4",
+ "generated_utc": "2026-11-12T07:15:09.863160+00:00",
+ "method": "pixel is noise-supported when |delta| > k*SE; SE = sqrt(s_e^2/n_e + s_l^2/n_l), s floored at 0.02; s = per-pixel std across the period's scenes (ddof=1)",
+ "sigma_floor": 0.02,
+ "k_values": [
+  2.0,
+  3.0
+ ],
+ "framing": "Scene-to-scene spread measures acquisition noise only. It cannot see seasonal, tidal or phenological differences between the periods and is itself uncertain with 2-3 scenes per period. A noise-supported pixel is not proof of real change; an unsupported one is not proof of none.",
+ "per_index": {
+  "ndsi": {
+   "status": "not_computable",
+   "reason": "fewer than 2 scenes in a period"
+  },
+  "ndwi": {
+   "status": "not_computable",
+   "reason": "fewer than 2 scenes in a period"
+  },
+  "ndvi": {
+   "status": "not_computable",
+   "reason": "fewer than 2 scenes in a period"
+  }
+ }
+}

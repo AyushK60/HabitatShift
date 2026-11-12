@@ -42,7 +42,7 @@ predecessors (`M1_LIMITATIONS.md`, `M2_LIMITATIONS.md`, `M4_R3_HANDOFF.md`
   in blue) is retained by the SCL policy (class 11 snow/ice is valid) and
   bounded in the indices; this is a Sen2Cor/terrain/brightness artifact and a
   real measurement limitation for both Himalayan studies (audit issue I3).
-- **Grid-resolution sensitivity was deferred** (recorded rationale in
+- **(Update: completed post-M5 for Kathmandu at 20 m; see RESULTS.md.) Grid-resolution sensitivity was deferred** (recorded rationale in
   `data/experiments/m5_robustness/result.json`): the 10 m grid is the
   recorded measurement convention, and a 20 m reprocess would create a second
   set of frozen outputs. Available on demand via the engine.

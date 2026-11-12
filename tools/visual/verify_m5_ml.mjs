@@ -96,7 +96,7 @@ const run = async () => {
   await exploreBlock.waitFor({ state: "visible", timeout: 8000 });
   const exploreText = await exploreBlock.innerText();
   check(
-    exploreText.includes("Additional ML reference experiment (M5)"),
+    exploreText.includes("Additional ML reference experiment"),
     "explore: ML block labelled as an additional M5 experiment"
   );
   check(

@@ -43,7 +43,7 @@ const METHODS = [
   {
     title: "Composite generation",
     body: [
-      "Each period's valid observations are combined into a median composite (the M1 configuration for Coringa uses the median of up to three acquisitions). The observation count per pixel is exported alongside the composite, because a median of one observation is not the same evidence as a median of three — the quality layers expose this honestly.",
+      "Each period's valid observations are combined into a median composite (the Coringa configuration uses the median of up to three acquisitions). The observation count per pixel is exported alongside the composite, because a median of one observation is not the same evidence as a median of three — the quality layers expose this honestly.",
     ],
   },
   {
@@ -63,7 +63,7 @@ const METHODS = [
   {
     title: "Threshold sensitivity",
     body: [
-      "The M2 experiment re-measures candidate change areas across the recorded threshold sweep with an area-conservation check (decrease + stable + increase must equal the footprint exactly). The sweep is monotone by construction; the recorded response is published as a chart and CSV.",
+      "The hypothesis-testing run re-measures candidate change areas across the recorded threshold sweep with an area-conservation check (decrease + stable + increase must equal the footprint exactly). The sweep is monotone by construction; the recorded response is published as a chart and CSV.",
     ],
   },
   {
@@ -81,7 +81,7 @@ const METHODS = [
   {
     title: "Verification & audit",
     body: [
-      "The engine verifies itself after every run (26 checks for the Coringa M1 study: grid geometry, NDVI re-computation within tolerance, mask agreement, area cross-checks). An independent audit script re-derives key statistics directly from the rasters. The M2 run records its own verification plus a cross-pipeline anchor against the M0 implementation.",
+      "The engine verifies itself after every run (26 checks for the Coringa study: grid geometry, NDVI re-computation within tolerance, mask agreement, area cross-checks). An independent audit script re-derives key statistics directly from the rasters. The hypothesis-testing run records its own verification plus a cross-check against an independent single-scene implementation.",
     ],
   },
 ];
@@ -168,10 +168,10 @@ export function MethodsPage() {
         <p className="methods-note">
           A study is called <strong>Processed</strong> only when a verified
           bundle of real processed artefacts exists in the repository.{" "}
-          <strong>Feasibility</strong> means an M0 data-availability
+          <strong>Feasibility</strong> means a data-availability
           investigation was recorded and no processing has happened.{" "}
           <strong>Planned</strong> means the study is registered with an AOI and
-          question but processing belongs to a later milestone. The gallery
+          question but processing has not been done yet. The gallery
           statuses come from <code>studies/registry.yaml</code> served verbatim
           by the API
           {registry ? ` (version ${registry.registry_version}, ${registry.common.target_sensor}).` : "."}
@@ -179,9 +179,9 @@ export function MethodsPage() {
       </section>
 
       <section className="methods-sep" aria-labelledby="m4-title">
-        <h2 id="m4-title">M4 — five studies, radiometry honesty and the portable showcase</h2>
+        <h2 id="m4-title">Six studies, radiometry honesty and the offline showcase</h2>
         <p className="methods-note">
-          M4 extends the pipeline from the Coringa reference to six
+          The pipeline extends from the Coringa reference to six
           investigations: Chilika Lake (matched dry-season and matched
           post-monsoon experiments, read together as the documented
           seasonal-sensitivity investigation), a Western Ghats forest block
@@ -194,7 +194,7 @@ export function MethodsPage() {
           measurements are recorded in <code>docs/M4_FEASIBILITY.md</code>.
         </p>
         <p className="methods-note">
-          <strong>Radiometry.</strong> During M4 processing it was found that
+          <strong>Radiometry.</strong> While processing the later studies it was found that
           the 2025 Earth Search reprocessing stores baseline-05.11 DNs
           <em> without</em> the baked +1000 BOA offset while item metadata still
           declares −0.1 (<code>earthsearch:boa_offset_applied: false</code>).
@@ -203,8 +203,8 @@ export function MethodsPage() {
           transform empirically: any window whose mean reflectance falls below
           the physical floor retries the scale-only convention and records the
           full evidence in the manifest; if neither convention is plausible the
-          observation is refused. All M4 results use the corrected convention;
-          the frozen Coringa M0–M2 artefacts were checked and were never
+          observation is refused. All results after the correction use the corrected convention;
+          the frozen Coringa reference artefacts were checked and were never
           affected (their 2025 scenes carry the offset-applied flag and were
           processed scale-only throughout).
         </p>
@@ -235,17 +235,17 @@ export function MethodsPage() {
         <ul className="methods-exports">
           <li>
             <a href="/api/m1/study/coringa_coastal/manifest" target="_blank" rel="noopener noreferrer">
-              M1 run manifest — scenes, dates, grid, formulas, hashes
+              Run manifest — scenes, dates, grid, formulas, hashes
             </a>
           </li>
           <li>
             <a href="/api/m1/study/coringa_coastal" target="_blank" rel="noopener noreferrer">
-              M1 study summary — statistics as the engine wrote them
+              Study summary — statistics as the engine wrote them
             </a>
           </li>
           <li>
             <a href="/api/experiments/coringa_m2/latest" target="_blank" rel="noopener noreferrer">
-              M2 experiment summary — thresholds, estimators, bootstrap
+              Hypothesis-test summary — thresholds, estimators, bootstrap
             </a>
           </li>
           <li>
@@ -255,7 +255,7 @@ export function MethodsPage() {
           </li>
           <li>
             <a href="/studies/chilika_wetland/bundle.json" target="_blank" rel="noopener noreferrer">
-              Example M4 showcase bundle — Chilika (both experiments, checksums)
+              Example showcase bundle — Chilika (both experiments, checksums)
             </a>
           </li>
           <li>
@@ -265,7 +265,7 @@ export function MethodsPage() {
           </li>
           <li>
             <a href="/api/m1/study/coringa_coastal/presentation" target="_blank" rel="noopener noreferrer">
-              G0 presentation assets record (validity previews + SHA-256)
+              Presentation assets record (validity previews + SHA-256)
             </a>
           </li>
         </ul>

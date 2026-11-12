@@ -1,0 +1,960 @@
+{
+ "schema": "habitatshift-m5-inventory-bundle/1",
+ "note": "Complete inventory of every component at or above the minimum mapping unit. The sealed findings remain the curated top-five selection; this view is additive.",
+ "experiments": [
+  {
+   "experiment": "chilika_m4_dry",
+   "study_id": "chilika_wetland",
+   "rule": "4-connected components on the common-valid footprint at |delta| >= 0.15, MMU 25 px",
+   "total": 294,
+   "matches_selection_policy": true,
+   "by_index": {
+    "mndwi": {
+     "decrease": {
+      "components_total": 177,
+      "components_at_or_above_mmu": 21,
+      "area_ha_at_or_above_mmu": 100.35
+     },
+     "increase": {
+      "components_total": 237,
+      "components_at_or_above_mmu": 56,
+      "area_ha_at_or_above_mmu": 177.66
+     }
+    },
+    "ndvi": {
+     "decrease": {
+      "components_total": 2386,
+      "components_at_or_above_mmu": 78,
+      "area_ha_at_or_above_mmu": 1086.28
+     },
+     "increase": {
+      "components_total": 498,
+      "components_at_or_above_mmu": 32,
+      "area_ha_at_or_above_mmu": 142.39
+     }
+    },
+    "ndwi": {
+     "decrease": {
+      "components_total": 371,
+      "components_at_or_above_mmu": 28,
+      "area_ha_at_or_above_mmu": 134.57
+     },
+     "increase": {
+      "components_total": 1853,
+      "components_at_or_above_mmu": 79,
+      "area_ha_at_or_above_mmu": 733.15
+     }
+    }
+   },
+   "largest": [
+    {
+     "index": "ndvi",
+     "direction": "decrease",
+     "pixels": 48864,
+     "area_ha": 488.64,
+     "mean_delta": -0.3419,
+     "lon": 85.3157,
+     "lat": 19.700932
+    },
+    {
+     "index": "ndwi",
+     "direction": "increase",
+     "pixels": 23120,
+     "area_ha": 231.2,
+     "mean_delta": 0.3484,
+     "lon": 85.310718,
+     "lat": 19.695822
+    },
+    {
+     "index": "ndwi",
+     "direction": "increase",
+     "pixels": 21647,
+     "area_ha": 216.47,
+     "mean_delta": 0.3475,
+     "lon": 85.318281,
+     "lat": 19.705413
+    },
+    {
+     "index": "ndvi",
+     "direction": "decrease",
+     "pixels": 18128,
+     "area_ha": 181.28,
+     "mean_delta": -0.206,
+     "lon": 85.304685,
+     "lat": 19.728941
+    },
+    {
+     "index": "ndvi",
+     "direction": "decrease",
+     "pixels": 17885,
+     "area_ha": 178.85,
+     "mean_delta": -0.2129,
+     "lon": 85.315583,
+     "lat": 19.719891
+    },
+    {
+     "index": "ndwi",
+     "direction": "increase",
+     "pixels": 9919,
+     "area_ha": 99.19,
+     "mean_delta": 0.1998,
+     "lon": 85.304856,
+     "lat": 19.730802
+    },
+    {
+     "index": "ndwi",
+     "direction": "decrease",
+     "pixels": 9901,
+     "area_ha": 99.01,
+     "mean_delta": -0.4506,
+     "lon": 85.340293,
+     "lat": 19.699658
+    },
+    {
+     "index": "ndvi",
+     "direction": "increase",
+     "pixels": 9868,
+     "area_ha": 98.68,
+     "mean_delta": 0.4209,
+     "lon": 85.340206,
+     "lat": 19.699508
+    },
+    {
+     "index": "mndwi",
+     "direction": "decrease",
+     "pixels": 7705,
+     "area_ha": 77.05,
+     "mean_delta": -0.3502,
+     "lon": 85.34042,
+     "lat": 19.701072
+    },
+    {
+     "index": "ndwi",
+     "direction": "increase",
+     "pixels": 7574,
+     "area_ha": 75.74,
+     "mean_delta": 0.1908,
+     "lon": 85.314186,
+     "lat": 19.719279
+    }
+   ],
+   "csv": "studies/m5_inventory/chilika_m4_dry.csv"
+  },
+  {
+   "experiment": "chilika_m4_postmonsoon",
+   "study_id": "chilika_wetland",
+   "rule": "4-connected components on the common-valid footprint at |delta| >= 0.15, MMU 25 px",
+   "total": 230,
+   "matches_selection_policy": true,
+   "by_index": {
+    "mndwi": {
+     "decrease": {
+      "components_total": 408,
+      "components_at_or_above_mmu": 46,
+      "area_ha_at_or_above_mmu": 281.94
+     },
+     "increase": {
+      "components_total": 135,
+      "components_at_or_above_mmu": 16,
+      "area_ha_at_or_above_mmu": 135.01
+     }
+    },
+    "ndvi": {
+     "decrease": {
+      "components_total": 799,
+      "components_at_or_above_mmu": 34,
+      "area_ha_at_or_above_mmu": 127.03
+     },
+     "increase": {
+      "components_total": 2702,
+      "components_at_or_above_mmu": 74,
+      "area_ha_at_or_above_mmu": 449.83
+     }
+    },
+    "ndwi": {
+     "decrease": {
+      "components_total": 1220,
+      "components_at_or_above_mmu": 32,
+      "area_ha_at_or_above_mmu": 356.39
+     },
+     "increase": {
+      "components_total": 701,
+      "components_at_or_above_mmu": 28,
+      "area_ha_at_or_above_mmu": 102.36
+     }
+    }
+   },
+   "largest": [
+    {
+     "index": "ndvi",
+     "direction": "increase",
+     "pixels": 20748,
+     "area_ha": 207.48,
+     "mean_delta": 0.534,
+     "lon": 85.322025,
+     "lat": 19.705195
+    },
+    {
+     "index": "ndwi",
+     "direction": "decrease",
+     "pixels": 18709,
+     "area_ha": 187.09,
+     "mean_delta": -0.6005,
+     "lon": 85.321615,
+     "lat": 19.705241
+    },
+    {
+     "index": "ndwi",
+     "direction": "decrease",
+     "pixels": 14552,
+     "area_ha": 145.52,
+     "mean_delta": -0.3339,
+     "lon": 85.310263,
+     "lat": 19.697022
+    },
+    {
+     "index": "mndwi",
+     "direction": "decrease",
+     "pixels": 14056,
+     "area_ha": 140.56,
+     "mean_delta": -0.4049,
+     "lon": 85.322847,
+     "lat": 19.705582
+    },
+    {
+     "index": "mndwi",
+     "direction": "increase",
+     "pixels": 11273,
+     "area_ha": 112.73,
+     "mean_delta": 0.4078,
+     "lon": 85.322071,
+     "lat": 19.697234
+    },
+    {
+     "index": "ndvi",
+     "direction": "decrease",
+     "pixels": 9655,
+     "area_ha": 96.55,
+     "mean_delta": -0.4002,
+     "lon": 85.324649,
+     "lat": 19.696571
+    },
+    {
+     "index": "ndvi",
+     "direction": "increase",
+     "pixels": 8004,
+     "area_ha": 80.04,
+     "mean_delta": 0.3053,
+     "lon": 85.316502,
+     "lat": 19.696471
+    },
+    {
+     "index": "ndvi",
+     "direction": "increase",
+     "pixels": 7120,
+     "area_ha": 71.2,
+     "mean_delta": 0.3797,
+     "lon": 85.303742,
+     "lat": 19.697584
+    },
+    {
+     "index": "ndwi",
+     "direction": "increase",
+     "pixels": 5632,
+     "area_ha": 56.32,
+     "mean_delta": 0.3921,
+     "lon": 85.324851,
+     "lat": 19.695757
+    },
+    {
+     "index": "mndwi",
+     "direction": "decrease",
+     "pixels": 5483,
+     "area_ha": 54.83,
+     "mean_delta": -0.2805,
+     "lon": 85.302607,
+     "lat": 19.696753
+    }
+   ],
+   "csv": "studies/m5_inventory/chilika_m4_postmonsoon.csv"
+  },
+  {
+   "experiment": "coringa_m1",
+   "study_id": "coringa_coastal",
+   "rule": "4-connected components on the common-valid footprint at |delta| >= 0.15, MMU 25 px",
+   "total": 686,
+   "matches_selection_policy": true,
+   "by_index": {
+    "mndwi": {
+     "decrease": {
+      "components_total": 2192,
+      "components_at_or_above_mmu": 129,
+      "area_ha_at_or_above_mmu": 155.73
+     },
+     "increase": {
+      "components_total": 892,
+      "components_at_or_above_mmu": 81,
+      "area_ha_at_or_above_mmu": 199.08
+     }
+    },
+    "ndvi": {
+     "decrease": {
+      "components_total": 1603,
+      "components_at_or_above_mmu": 146,
+      "area_ha_at_or_above_mmu": 146.39
+     },
+     "increase": {
+      "components_total": 1177,
+      "components_at_or_above_mmu": 88,
+      "area_ha_at_or_above_mmu": 106.82
+     }
+    },
+    "ndwi": {
+     "decrease": {
+      "components_total": 1088,
+      "components_at_or_above_mmu": 102,
+      "area_ha_at_or_above_mmu": 95.65
+     },
+     "increase": {
+      "components_total": 1386,
+      "components_at_or_above_mmu": 140,
+      "area_ha_at_or_above_mmu": 119.37
+     }
+    }
+   },
+   "largest": [
+    {
+     "index": "mndwi",
+     "direction": "increase",
+     "pixels": 9576,
+     "area_ha": 95.76,
+     "mean_delta": 0.2711,
+     "lon": 82.256955,
+     "lat": 16.712869
+    },
+    {
+     "index": "mndwi",
+     "direction": "decrease",
+     "pixels": 1808,
+     "area_ha": 18.08,
+     "mean_delta": -0.2772,
+     "lon": 82.27222,
+     "lat": 16.741696
+    },
+    {
+     "index": "ndwi",
+     "direction": "increase",
+     "pixels": 1711,
+     "area_ha": 17.11,
+     "mean_delta": 0.2429,
+     "lon": 82.261373,
+     "lat": 16.713219
+    },
+    {
+     "index": "ndvi",
+     "direction": "decrease",
+     "pixels": 1230,
+     "area_ha": 12.3,
+     "mean_delta": -0.2453,
+     "lon": 82.261395,
+     "lat": 16.713739
+    },
+    {
+     "index": "mndwi",
+     "direction": "increase",
+     "pixels": 1183,
+     "area_ha": 11.83,
+     "mean_delta": 0.361,
+     "lon": 82.280223,
+     "lat": 16.731985
+    },
+    {
+     "index": "ndwi",
+     "direction": "decrease",
+     "pixels": 1177,
+     "area_ha": 11.77,
+     "mean_delta": -0.3803,
+     "lon": 82.273712,
+     "lat": 16.721173
+    },
+    {
+     "index": "ndvi",
+     "direction": "increase",
+     "pixels": 1171,
+     "area_ha": 11.71,
+     "mean_delta": 0.278,
+     "lon": 82.278427,
+     "lat": 16.74227
+    },
+    {
+     "index": "ndvi",
+     "direction": "increase",
+     "pixels": 907,
+     "area_ha": 9.07,
+     "mean_delta": 0.2826,
+     "lon": 82.28387,
+     "lat": 16.731132
+    },
+    {
+     "index": "mndwi",
+     "direction": "increase",
+     "pixels": 889,
+     "area_ha": 8.89,
+     "mean_delta": 0.2445,
+     "lon": 82.257228,
+     "lat": 16.743273
+    },
+    {
+     "index": "mndwi",
+     "direction": "decrease",
+     "pixels": 802,
+     "area_ha": 8.02,
+     "mean_delta": -0.2639,
+     "lon": 82.275809,
+     "lat": 16.742474
+    }
+   ],
+   "csv": "studies/m5_inventory/coringa_m1.csv"
+  },
+  {
+   "experiment": "himalaya_langtang_2026_m4",
+   "study_id": "himalaya_langtang_2026",
+   "rule": "4-connected components on the common-valid footprint at |delta| >= 0.15, MMU 25 px",
+   "total": 63,
+   "matches_selection_policy": true,
+   "by_index": {
+    "ndsi": {
+     "decrease": {
+      "components_total": 20,
+      "components_at_or_above_mmu": 0,
+      "area_ha_at_or_above_mmu": 0.0
+     },
+     "increase": {
+      "components_total": 22,
+      "components_at_or_above_mmu": 2,
+      "area_ha_at_or_above_mmu": 843.04
+     }
+    },
+    "ndvi": {
+     "decrease": {
+      "components_total": 501,
+      "components_at_or_above_mmu": 32,
+      "area_ha_at_or_above_mmu": 368.71
+     },
+     "increase": {
+      "components_total": 10,
+      "components_at_or_above_mmu": 0,
+      "area_ha_at_or_above_mmu": 0.0
+     }
+    },
+    "ndwi": {
+     "decrease": {
+      "components_total": 43,
+      "components_at_or_above_mmu": 0,
+      "area_ha_at_or_above_mmu": 0.0
+     },
+     "increase": {
+      "components_total": 575,
+      "components_at_or_above_mmu": 29,
+      "area_ha_at_or_above_mmu": 485.34
+     }
+    }
+   },
+   "largest": [
+    {
+     "index": "ndsi",
+     "direction": "increase",
+     "pixels": 84140,
+     "area_ha": 841.4,
+     "mean_delta": 1.0667,
+     "lon": 85.548191,
+     "lat": 28.172482
+    },
+    {
+     "index": "ndwi",
+     "direction": "increase",
+     "pixels": 27276,
+     "area_ha": 272.76,
+     "mean_delta": 0.4457,
+     "lon": 85.546558,
+     "lat": 28.185349
+    },
+    {
+     "index": "ndvi",
+     "direction": "decrease",
+     "pixels": 24918,
+     "area_ha": 249.18,
+     "mean_delta": -0.4331,
+     "lon": 85.546803,
+     "lat": 28.185898
+    },
+    {
+     "index": "ndwi",
+     "direction": "increase",
+     "pixels": 17543,
+     "area_ha": 175.43,
+     "mean_delta": 0.2496,
+     "lon": 85.557186,
+     "lat": 28.161236
+    },
+    {
+     "index": "ndvi",
+     "direction": "decrease",
+     "pixels": 5629,
+     "area_ha": 56.29,
+     "mean_delta": -0.2301,
+     "lon": 85.559501,
+     "lat": 28.157484
+    },
+    {
+     "index": "ndvi",
+     "direction": "decrease",
+     "pixels": 2049,
+     "area_ha": 20.49,
+     "mean_delta": -0.2405,
+     "lon": 85.563529,
+     "lat": 28.17042
+    },
+    {
+     "index": "ndvi",
+     "direction": "decrease",
+     "pixels": 1237,
+     "area_ha": 12.37,
+     "mean_delta": -0.2196,
+     "lon": 85.546285,
+     "lat": 28.156997
+    },
+    {
+     "index": "ndwi",
+     "direction": "increase",
+     "pixels": 1097,
+     "area_ha": 10.97,
+     "mean_delta": 0.2449,
+     "lon": 85.552149,
+     "lat": 28.179495
+    },
+    {
+     "index": "ndvi",
+     "direction": "decrease",
+     "pixels": 466,
+     "area_ha": 4.66,
+     "mean_delta": -0.2048,
+     "lon": 85.563982,
+     "lat": 28.165404
+    },
+    {
+     "index": "ndvi",
+     "direction": "decrease",
+     "pixels": 316,
+     "area_ha": 3.16,
+     "mean_delta": -0.2057,
+     "lon": 85.539203,
+     "lat": 28.174048
+    }
+   ],
+   "csv": "studies/m5_inventory/himalaya_langtang_2026_m4.csv"
+  },
+  {
+   "experiment": "himalaya_purepu_2025_m4",
+   "study_id": "himalaya_purepu_2025",
+   "rule": "4-connected components on the common-valid footprint at |delta| >= 0.15, MMU 25 px",
+   "total": 139,
+   "matches_selection_policy": true,
+   "by_index": {
+    "ndsi": {
+     "decrease": {
+      "components_total": 303,
+      "components_at_or_above_mmu": 30,
+      "area_ha_at_or_above_mmu": 44.8
+     },
+     "increase": {
+      "components_total": 341,
+      "components_at_or_above_mmu": 33,
+      "area_ha_at_or_above_mmu": 665.22
+     }
+    },
+    "ndvi": {
+     "decrease": {
+      "components_total": 633,
+      "components_at_or_above_mmu": 18,
+      "area_ha_at_or_above_mmu": 39.07
+     },
+     "increase": {
+      "components_total": 24,
+      "components_at_or_above_mmu": 0,
+      "area_ha_at_or_above_mmu": 0.0
+     }
+    },
+    "ndwi": {
+     "decrease": {
+      "components_total": 82,
+      "components_at_or_above_mmu": 0,
+      "area_ha_at_or_above_mmu": 0.0
+     },
+     "increase": {
+      "components_total": 1804,
+      "components_at_or_above_mmu": 58,
+      "area_ha_at_or_above_mmu": 189.56
+     }
+    }
+   },
+   "largest": [
+    {
+     "index": "ndsi",
+     "direction": "increase",
+     "pixels": 61600,
+     "area_ha": 616.0,
+     "mean_delta": 0.7309,
+     "lon": 85.636907,
+     "lat": 28.314605
+    },
+    {
+     "index": "ndwi",
+     "direction": "increase",
+     "pixels": 7481,
+     "area_ha": 74.81,
+     "mean_delta": 0.2175,
+     "lon": 85.635034,
+     "lat": 28.318789
+    },
+    {
+     "index": "ndwi",
+     "direction": "increase",
+     "pixels": 2348,
+     "area_ha": 23.48,
+     "mean_delta": 0.1828,
+     "lon": 85.635678,
+     "lat": 28.303886
+    },
+    {
+     "index": "ndsi",
+     "direction": "decrease",
+     "pixels": 2107,
+     "area_ha": 21.07,
+     "mean_delta": -0.4031,
+     "lon": 85.622372,
+     "lat": 28.305414
+    },
+    {
+     "index": "ndwi",
+     "direction": "increase",
+     "pixels": 1933,
+     "area_ha": 19.33,
+     "mean_delta": 0.3899,
+     "lon": 85.633296,
+     "lat": 28.309672
+    },
+    {
+     "index": "ndwi",
+     "direction": "increase",
+     "pixels": 1238,
+     "area_ha": 12.38,
+     "mean_delta": 0.212,
+     "lon": 85.629577,
+     "lat": 28.302527
+    },
+    {
+     "index": "ndsi",
+     "direction": "increase",
+     "pixels": 1215,
+     "area_ha": 12.15,
+     "mean_delta": 0.2615,
+     "lon": 85.616602,
+     "lat": 28.311704
+    },
+    {
+     "index": "ndvi",
+     "direction": "decrease",
+     "pixels": 891,
+     "area_ha": 8.91,
+     "mean_delta": -0.1896,
+     "lon": 85.637125,
+     "lat": 28.32157
+    },
+    {
+     "index": "ndvi",
+     "direction": "decrease",
+     "pixels": 689,
+     "area_ha": 6.89,
+     "mean_delta": -0.501,
+     "lon": 85.63376,
+     "lat": 28.30965
+    },
+    {
+     "index": "ndvi",
+     "direction": "decrease",
+     "pixels": 631,
+     "area_ha": 6.31,
+     "mean_delta": -0.1859,
+     "lon": 85.636343,
+     "lat": 28.317638
+    }
+   ],
+   "csv": "studies/m5_inventory/himalaya_purepu_2025_m4.csv"
+  },
+  {
+   "experiment": "kathmandu_m4",
+   "study_id": "kathmandu_urban",
+   "rule": "4-connected components on the common-valid footprint at |delta| >= 0.15, MMU 25 px",
+   "total": 95,
+   "matches_selection_policy": true,
+   "by_index": {
+    "ndbi": {
+     "decrease": {
+      "components_total": 113,
+      "components_at_or_above_mmu": 1,
+      "area_ha_at_or_above_mmu": 1.5
+     },
+     "increase": {
+      "components_total": 542,
+      "components_at_or_above_mmu": 20,
+      "area_ha_at_or_above_mmu": 13.0
+     }
+    },
+    "ndvi": {
+     "decrease": {
+      "components_total": 605,
+      "components_at_or_above_mmu": 45,
+      "area_ha_at_or_above_mmu": 28.63
+     },
+     "increase": {
+      "components_total": 98,
+      "components_at_or_above_mmu": 1,
+      "area_ha_at_or_above_mmu": 0.74
+     }
+    },
+    "ndwi": {
+     "decrease": {
+      "components_total": 153,
+      "components_at_or_above_mmu": 2,
+      "area_ha_at_or_above_mmu": 0.76
+     },
+     "increase": {
+      "components_total": 629,
+      "components_at_or_above_mmu": 26,
+      "area_ha_at_or_above_mmu": 17.35
+     }
+    }
+   },
+   "largest": [
+    {
+     "index": "ndvi",
+     "direction": "decrease",
+     "pixels": 372,
+     "area_ha": 3.72,
+     "mean_delta": -0.2508,
+     "lon": 85.315446,
+     "lat": 27.702823
+    },
+    {
+     "index": "ndbi",
+     "direction": "increase",
+     "pixels": 285,
+     "area_ha": 2.85,
+     "mean_delta": 0.1951,
+     "lon": 85.315677,
+     "lat": 27.702586
+    },
+    {
+     "index": "ndwi",
+     "direction": "increase",
+     "pixels": 253,
+     "area_ha": 2.53,
+     "mean_delta": 0.1921,
+     "lon": 85.315635,
+     "lat": 27.702684
+    },
+    {
+     "index": "ndvi",
+     "direction": "decrease",
+     "pixels": 208,
+     "area_ha": 2.08,
+     "mean_delta": -0.2776,
+     "lon": 85.322851,
+     "lat": 27.698702
+    },
+    {
+     "index": "ndwi",
+     "direction": "increase",
+     "pixels": 194,
+     "area_ha": 1.94,
+     "mean_delta": 0.3824,
+     "lon": 85.315411,
+     "lat": 27.7078
+    },
+    {
+     "index": "ndvi",
+     "direction": "decrease",
+     "pixels": 184,
+     "area_ha": 1.84,
+     "mean_delta": -0.2392,
+     "lon": 85.318776,
+     "lat": 27.701519
+    },
+    {
+     "index": "ndbi",
+     "direction": "decrease",
+     "pixels": 150,
+     "area_ha": 1.5,
+     "mean_delta": -0.3891,
+     "lon": 85.315425,
+     "lat": 27.707843
+    },
+    {
+     "index": "ndvi",
+     "direction": "decrease",
+     "pixels": 144,
+     "area_ha": 1.44,
+     "mean_delta": -0.3019,
+     "lon": 85.314551,
+     "lat": 27.712453
+    },
+    {
+     "index": "ndwi",
+     "direction": "increase",
+     "pixels": 136,
+     "area_ha": 1.36,
+     "mean_delta": 0.2018,
+     "lon": 85.318781,
+     "lat": 27.70155
+    },
+    {
+     "index": "ndwi",
+     "direction": "increase",
+     "pixels": 132,
+     "area_ha": 1.32,
+     "mean_delta": 0.223,
+     "lon": 85.314553,
+     "lat": 27.712481
+    }
+   ],
+   "csv": "studies/m5_inventory/kathmandu_m4.csv"
+  },
+  {
+   "experiment": "western_ghats_m4",
+   "study_id": "western_ghats_forest",
+   "rule": "4-connected components on the common-valid footprint at |delta| >= 0.15, MMU 25 px",
+   "total": 13,
+   "matches_selection_policy": true,
+   "by_index": {
+    "ndvi": {
+     "decrease": {
+      "components_total": 77,
+      "components_at_or_above_mmu": 3,
+      "area_ha_at_or_above_mmu": 1.22
+     },
+     "increase": {
+      "components_total": 98,
+      "components_at_or_above_mmu": 7,
+      "area_ha_at_or_above_mmu": 5.57
+     }
+    },
+    "ndwi": {
+     "decrease": {
+      "components_total": 52,
+      "components_at_or_above_mmu": 2,
+      "area_ha_at_or_above_mmu": 1.88
+     },
+     "increase": {
+      "components_total": 14,
+      "components_at_or_above_mmu": 1,
+      "area_ha_at_or_above_mmu": 0.31
+     }
+    }
+   },
+   "largest": [
+    {
+     "index": "ndvi",
+     "direction": "increase",
+     "pixels": 191,
+     "area_ha": 1.91,
+     "mean_delta": 0.377,
+     "lon": 74.378011,
+     "lat": 15.136088
+    },
+    {
+     "index": "ndwi",
+     "direction": "decrease",
+     "pixels": 163,
+     "area_ha": 1.63,
+     "mean_delta": -0.2266,
+     "lon": 74.378026,
+     "lat": 15.136078
+    },
+    {
+     "index": "ndvi",
+     "direction": "increase",
+     "pixels": 88,
+     "area_ha": 0.88,
+     "mean_delta": 0.2502,
+     "lon": 74.345481,
+     "lat": 15.134096
+    },
+    {
+     "index": "ndvi",
+     "direction": "increase",
+     "pixels": 81,
+     "area_ha": 0.81,
+     "mean_delta": 0.1902,
+     "lon": 74.373808,
+     "lat": 15.131989
+    },
+    {
+     "index": "ndvi",
+     "direction": "increase",
+     "pixels": 76,
+     "area_ha": 0.76,
+     "mean_delta": 0.2497,
+     "lon": 74.375396,
+     "lat": 15.13539
+    },
+    {
+     "index": "ndvi",
+     "direction": "increase",
+     "pixels": 62,
+     "area_ha": 0.62,
+     "mean_delta": 0.2232,
+     "lon": 74.345498,
+     "lat": 15.131084
+    },
+    {
+     "index": "ndvi",
+     "direction": "decrease",
+     "pixels": 47,
+     "area_ha": 0.47,
+     "mean_delta": -0.366,
+     "lon": 74.376299,
+     "lat": 15.135648
+    },
+    {
+     "index": "ndvi",
+     "direction": "decrease",
+     "pixels": 44,
+     "area_ha": 0.44,
+     "mean_delta": -0.2818,
+     "lon": 74.379626,
+     "lat": 15.144093
+    },
+    {
+     "index": "ndvi",
+     "direction": "increase",
+     "pixels": 33,
+     "area_ha": 0.33,
+     "mean_delta": 0.2516,
+     "lon": 74.344865,
+     "lat": 15.130264
+    },
+    {
+     "index": "ndvi",
+     "direction": "decrease",
+     "pixels": 31,
+     "area_ha": 0.31,
+     "mean_delta": -0.2805,
+     "lon": 74.37887,
+     "lat": 15.136405
+    }
+   ],
+   "csv": "studies/m5_inventory/western_ghats_m4.csv"
+  }
+ ]
+}

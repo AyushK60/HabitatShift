@@ -1,6 +1,6 @@
 {
   "base_url": "http://127.0.0.1:8098/",
-  "started_utc": "2026-11-07T21:10:33.724Z",
+  "started_utc": "2026-11-12T07:30:19.377Z",
   "console_errors": [],
   "page_errors": [],
   "failed_requests": [],
@@ -152,7 +152,7 @@
     {
       "name": "missing-run state names the bundle fallback",
       "passed": true,
-      "detail": "The backend is not serving the recorded M2 run right now — the sections below render the same recorded numbers from the portable showcase bundle."
+      "detail": "The backend is not serving the recorded hypothesis-testing run right now — the sections below render the same recorded numbers from the portable showcase bundle."
     },
     {
       "name": "no console errors",
@@ -170,7 +170,7 @@
       "detail": ""
     }
   ],
-  "completed_utc": "2026-11-07T21:10:36.871Z",
+  "completed_utc": "2026-11-12T07:30:23.047Z",
   "passed": 31,
   "failed": 0
 }

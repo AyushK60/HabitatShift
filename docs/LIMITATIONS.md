@@ -4,9 +4,9 @@ The complete limitation record lives with the work that produced it:
 
 | Document | Scope |
 |---|---|
-| [`M1_LIMITATIONS.md`](M1_LIMITATIONS.md) | first engine: single-scene deltas, mask policy limits |
-| [`M2_LIMITATIONS.md`](M2_LIMITATIONS.md) | threshold sweeps, estimator families, bootstrap assumptions |
-| [`M4_R3_HANDOFF.md` §6](M4_R3_HANDOFF.md) | product/experience limits (curated top-5 selection, export caveats) |
+| [`M1_LIMITATIONS.md`](archive/M1_LIMITATIONS.md) | first engine: single-scene deltas, mask policy limits |
+| [`M2_LIMITATIONS.md`](archive/M2_LIMITATIONS.md) | threshold sweeps, estimator families, bootstrap assumptions |
+| [`M4_R3_HANDOFF.md` §6](archive/M4_R3_HANDOFF.md) | product/experience limits (curated top-5 selection, export caveats) |
 | [`M5_LIMITATIONS.md`](M5_LIMITATIONS.md) | M5 findings: ML framing, cross-epoch assumption, bright-snow reflectance, cache orphans, deferred resolution sensitivity |
 
 ## The five statements that matter most

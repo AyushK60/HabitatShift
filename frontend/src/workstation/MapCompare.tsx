@@ -32,6 +32,7 @@ import maplibreWorkerUrl from "maplibre-gl/dist/maplibre-gl-worker.mjs?url";
 import type { Georef, M1Summary } from "../api/types";
 import type { AssetResolver, LayerSpec, PeriodKey } from "./layers";
 import { layerImageUrl } from "./layers";
+import { smoothUpscaledUrl } from "./upscale";
 
 export type CompareMode = "side" | "swipe" | "opacity";
 
@@ -148,11 +149,19 @@ const lastImageMemo: LastImageMemo = new WeakMap();
 function applyImageLayer(
   map: MapLibreMap,
   id: string,
-  url: string,
+  rawUrl: string,
   coordinates: CoordQuad,
-  opacity = 1
+  opacity = 1,
+  smooth = false
 ) {
-  const run = () => {
+  // Colour composites are enlarged with a bicubic kernel (display only);
+  // data layers stay as crisp native pixels via nearest-neighbour sampling.
+  const resampling = smooth ? "linear" : "nearest";
+  const tokens = applyToken.get(map) ?? {};
+  const token = (tokens[id] ?? 0) + 1;
+  tokens[id] = token;
+  applyToken.set(map, tokens);
+  const run = (url: string) => {
     const source = map.getSource(id) as ImageSource | undefined;
     if (!url) {
       if (source && map.getLayer(id)) {
@@ -169,6 +178,7 @@ function applyImageLayer(
       }
       map.setLayoutProperty(id, "visibility", "visible");
       map.setPaintProperty(id, "raster-opacity", opacity);
+      map.setPaintProperty(id, "raster-resampling", resampling);
       return;
     }
     map.addSource(id, { type: "image", url, coordinates });
@@ -177,7 +187,7 @@ function applyImageLayer(
         id,
         type: "raster",
         source: id,
-        paint: { "raster-opacity": opacity, "raster-resampling": "linear" },
+        paint: { "raster-opacity": opacity, "raster-resampling": resampling },
       },
       map.getLayer("aoi-line") ? "aoi-line" : undefined
     );
@@ -185,8 +195,24 @@ function applyImageLayer(
     memo[id] = url;
     lastImageMemo.set(map, memo);
   };
-  whenStyleReady(map, run);
+  if (smooth && rawUrl) {
+    // Show the original at once; swap in the sharpened copy when it is ready.
+    whenStyleReady(map, () => {
+      if (applyToken.get(map)?.[id] === token) run(rawUrl);
+    });
+    void smoothUpscaledUrl(rawUrl).then((url) => {
+      // Only the most recent request for this map may paint (rapid layer switching).
+      if (applyToken.get(map)?.[id] !== token) return;
+      whenStyleReady(map, () => run(url));
+    });
+  } else {
+    whenStyleReady(map, () => run(rawUrl));
+  }
 }
+
+/** Latest-request guard per map and layer id for the async smooth path:
+ *  stale smooth results from an older request are dropped. */
+const applyToken: WeakMap<MapLibreMap, Record<string, number>> = new WeakMap();
 
 /** Opacity mode (M4-R1 §7) composites on the PRIMARY map: the later raster
  *  is a second image source whose `raster-opacity` the slider drives. That
@@ -274,6 +300,9 @@ export function MapCompare({
   const layerUrlEarlier = layerImageUrl(layer, summary, resolver, "earlier");
   const layerUrlLater = layerImageUrl(layer, summary, resolver, "later");
   const singleMap = analysis !== "historical";
+  const smoothLayer =
+    layer.kind === "period" &&
+    (layer.previewKey === "true_colour" || layer.previewKey === "false_colour");
 
   const overlayUrl = useCallback(
     (period: PeriodKey) => {
@@ -675,17 +704,17 @@ export function MapCompare({
     const laterOverlay = overlayUrl("later");
 
     if (analysis === "historical") {
-      applyImageLayer(earlier, "layer-earlier", layerUrlEarlier, coordinates, 1);
+      applyImageLayer(earlier, "layer-earlier", layerUrlEarlier, coordinates, 1, smoothLayer);
       applyImageLayer(earlier, "validity-overlay", earlierOverlay, coordinates);
       if (later) {
         if (mode === "opacity") {
           // Single-map blend: the later raster lives on the primary map and
           // only its paint opacity changes with the slider (M4-R1 §7).
-          applyImageLayer(earlier, "layer-later", layerUrlLater, coordinates, opacity);
+          applyImageLayer(earlier, "layer-later", layerUrlLater, coordinates, opacity, smoothLayer);
           applyImageLayer(later, "layer-later", "", coordinates);
         } else {
           applyImageLayer(earlier, "layer-later", "", coordinates);
-          applyImageLayer(later, "layer-later", layerUrlLater, coordinates, 1);
+          applyImageLayer(later, "layer-later", layerUrlLater, coordinates, 1, smoothLayer);
           applyImageLayer(later, "validity-overlay", laterOverlay, coordinates);
         }
       }
@@ -714,6 +743,7 @@ export function MapCompare({
     coordinates,
     summary,
     resolver,
+    smoothLayer,
   ]);
 
   /* -------------------------------------------------------- ROI draw --- */

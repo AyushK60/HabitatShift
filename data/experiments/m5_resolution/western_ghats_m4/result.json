@@ -1,0 +1,33 @@
+{
+  "schema": "habitatshift-m5-resolution-sensitivity/1",
+  "experiment": "western_ghats_m4",
+  "generated_utc": "2026-11-12T06:58:33.678326+00:00",
+  "resolution_m": 20.0,
+  "recorded_resolution_m": 10.0,
+  "framing": "sensitivity of the recorded change fractions to analysis-grid resolution; the 10 m run remains the recorded result",
+  "per_index": {
+    "ndvi": {
+      "primary_threshold": 0.15,
+      "decrease_percent_10m": 0.14509576320371445,
+      "decrease_percent_20m": 0.09086014268407591,
+      "increase_percent_10m": 0.3780901191888095,
+      "increase_percent_20m": 0.2877237851662404,
+      "common_valid_pixels_10m": 237774,
+      "common_valid_pixels_20m": 59432,
+      "decrease_difference_pp": -0.05423562051963854,
+      "increase_difference_pp": -0.0903663340225691
+    },
+    "ndwi": {
+      "primary_threshold": 0.15,
+      "decrease_percent_10m": 0.14215179119668256,
+      "decrease_percent_20m": 0.0942253331538565,
+      "increase_percent_10m": 0.03574823151395863,
+      "increase_percent_20m": 0.023556333288464126,
+      "common_valid_pixels_10m": 237774,
+      "common_valid_pixels_20m": 59432,
+      "decrease_difference_pp": -0.04792645804282605,
+      "increase_difference_pp": -0.012191898225494505
+    }
+  },
+  "sandbox": "C:\\Users\\Khana\\AppData\\Local\\Temp\\hs_res_2xm87vrm"
+}

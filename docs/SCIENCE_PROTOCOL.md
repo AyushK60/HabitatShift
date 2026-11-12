@@ -192,7 +192,7 @@ A result without this record is not publishable.
 A run is acceptable only when:
 
 1. the engine's post-export verification passes every check;
-2. `scripts/audit_m1.py` independently re-derives the headline numbers and
+2. `verification/audit_m1.py` independently re-derives the headline numbers and
    passes every check;
 3. the offline rebuild produces byte-identical rasters on the same stack;
 4. the manifest hashes match the files on disk;

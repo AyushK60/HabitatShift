@@ -1,0 +1,100 @@
+{
+  "base": "http://127.0.0.1:8098/",
+  "checks": [
+    {
+      "name": "export: two files downloaded",
+      "passed": true,
+      "detail": "kathmandu_urban_kathmandu_m4_report.md, kathmandu_urban_kathmandu_m4_provenance.json"
+    },
+    {
+      "name": "export: report states candidate-signal framing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "export: report lists scene ids from the bundle",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "export: report has ML agreement framing, no accuracy claim",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "export: provenance has scene ids + sha256 + ML reference",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "tour: opens at step 1",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "tour: step 2 switches to Change",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "tour: step 3 switches to Quality",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "tour: Back returns to Change",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "tour: Escape closes",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "availability: live catalogue returns scenes for the preset box",
+      "passed": true,
+      "detail": "9 scenes"
+    },
+    {
+      "name": "availability: honest notes shown",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "availability: oversized box rejected with the limit message",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "a11y landing: no serious/critical WCAG A/AA violations",
+      "passed": true,
+      "detail": "0 minor"
+    },
+    {
+      "name": "a11y availability: no serious/critical WCAG A/AA violations",
+      "passed": true,
+      "detail": "0 minor"
+    },
+    {
+      "name": "a11y workstation: no serious/critical WCAG A/AA violations",
+      "passed": true,
+      "detail": "0 minor"
+    },
+    {
+      "name": "a11y experiments: no serious/critical WCAG A/AA violations",
+      "passed": true,
+      "detail": "0 minor"
+    },
+    {
+      "name": "a11y methods: no serious/critical WCAG A/AA violations",
+      "passed": true,
+      "detail": "0 minor"
+    },
+    {
+      "name": "no uncaught page errors",
+      "passed": true,
+      "detail": ""
+    }
+  ]
+}

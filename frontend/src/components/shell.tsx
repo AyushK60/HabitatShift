@@ -5,6 +5,7 @@ const NAV_ITEMS = [
   { to: "/", label: "Atlas", end: true },
   { to: "/workstation", label: "Workstation" },
   { to: "/experiments", label: "Experiments" },
+  { to: "/availability", label: "Scene check" },
   { to: "/methods", label: "Methods" },
 ];
 
@@ -60,7 +61,7 @@ export function Footer({ attribution }: { attribution?: string }) {
         <p className="foot-licence">
           Sentinel-2 data: free and open with attribution (ESA Copernicus).
           Methods, limitations and provenance:{" "}
-          <Link to="/methods">Methods &amp; exports</Link>. The legacy M0–M2
+          <Link to="/methods">Methods &amp; exports</Link>. The original
           proof viewer remains available at <code>/legacy</code>.
         </p>
       </div>

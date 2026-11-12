@@ -1,0 +1,85 @@
+{
+  "schema": "habitatshift-m5-gsw-crosscheck/1",
+  "study": "coringa",
+  "generated_utc": "2026-11-11T20:42:36.900717+00:00",
+  "framing": "reference-product vs reference-product consistency; neither is ground truth. GSW occurrence summarises 1984-2021 whereas WorldCover is a 2021 snapshot, so differences are expected in seasonally varying water.",
+  "grid": {
+    "crs": "EPSG:32644",
+    "transform": [
+      10.0,
+      0.0,
+      632700.0,
+      0.0,
+      -10.0,
+      1851790.0
+    ],
+    "width": 429,
+    "height": 390
+  },
+  "valid_pixels": 167310,
+  "worldcover_water_fraction": 0.150403442711135,
+  "interpretation_note": "Cohen's kappa is unstable when one class dominates (e.g. Chilika is almost all water, so kappa is ~0 whenever the 'neither' cell is empty); read agreement and water IoU together with the per-cell counts.",
+  "gsw_no_data_pixels": 0,
+  "sources": {
+    "worldcover": {
+      "url": "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/map/ESA_WorldCover_10m_2021_v200_N15E081_Map.tif",
+      "version": "v200 (2021)",
+      "licence": "CC-BY 4.0 (c) ESA WorldCover project 2022"
+    },
+    "jrc_gsw": {
+      "url": "https://storage.googleapis.com/global-surface-water/downloads2021/occurrence/occurrence_80E_20Nv1_4_2021.tif",
+      "version": "occurrence v1.4 (1984-2021)",
+      "licence": "CC-BY 4.0; Pekel et al. 2016, Nature 540, 418-422"
+    }
+  },
+  "worldcover_water_classes": [
+    80,
+    90
+  ],
+  "results_by_gsw_threshold": [
+    {
+      "gsw_occurrence_threshold_percent": 10,
+      "worldcover_water_and_gsw_water": 20099,
+      "worldcover_water_only": 5065,
+      "gsw_water_only": 6296,
+      "neither": 135850,
+      "overall_agreement": 0.9320961090191859,
+      "cohen_kappa": 0.7395413164030721,
+      "water_overlap_iou": 0.6388747616020344
+    },
+    {
+      "gsw_occurrence_threshold_percent": 25,
+      "worldcover_water_and_gsw_water": 17442,
+      "worldcover_water_only": 7722,
+      "gsw_water_only": 1501,
+      "neither": 140645,
+      "overall_agreement": 0.9448747833363218,
+      "cohen_kappa": 0.7598728323351963,
+      "water_overlap_iou": 0.6541158822426402
+    },
+    {
+      "gsw_occurrence_threshold_percent": 50,
+      "worldcover_water_and_gsw_water": 15150,
+      "worldcover_water_only": 10014,
+      "gsw_water_only": 16,
+      "neither": 142130,
+      "overall_agreement": 0.9400514015898631,
+      "cohen_kappa": 0.7195814572134889,
+      "water_overlap_iou": 0.6016679904686258
+    },
+    {
+      "gsw_occurrence_threshold_percent": 75,
+      "worldcover_water_and_gsw_water": 14661,
+      "worldcover_water_only": 10503,
+      "gsw_water_only": 2,
+      "neither": 142144,
+      "overall_agreement": 0.9372123602892833,
+      "cohen_kappa": 0.7033849018070689,
+      "water_overlap_iou": 0.5825717237542717
+    }
+  ],
+  "label_array_sha256": {
+    "worldcover": "e3a3c0ff23b99335af4bdda6f1fffb49b8319aa64276ca7e656ef83481a31fe3",
+    "gsw": "affd73370c2ce5b8f81afbbf5bc29318e12b4504952b15a4e931a4379b044902"
+  }
+}

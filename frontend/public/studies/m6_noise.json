@@ -1,0 +1,683 @@
+{
+ "schema": "habitatshift-m6-noise-bundle/1",
+ "experiments": [
+  {
+   "schema": "habitatshift-m6-noise-aware-threshold/1",
+   "experiment": "coringa_m1",
+   "generated_utc": "2026-11-12T07:15:07.625047+00:00",
+   "method": "pixel is noise-supported when |delta| > k*SE; SE = sqrt(s_e^2/n_e + s_l^2/n_l), s floored at 0.02; s = per-pixel std across the period's scenes (ddof=1)",
+   "sigma_floor": 0.02,
+   "k_values": [
+    2.0,
+    3.0
+   ],
+   "framing": "Scene-to-scene spread measures acquisition noise only. It cannot see seasonal, tidal or phenological differences between the periods and is itself uncertain with 2-3 scenes per period. A noise-supported pixel is not proof of real change; an unsupported one is not proof of none.",
+   "per_index": {
+    "ndvi": {
+     "status": "ok",
+     "primary_threshold": 0.15,
+     "scenes_earlier": 3,
+     "scenes_later": 3,
+     "common_valid_pixels": 165136,
+     "testable_pixels": 164926,
+     "testable_fraction": 0.9987,
+     "fixed_threshold_cross_check_matches_manifest": true,
+     "median_standard_error": 0.0545,
+     "fixed_rule": {
+      "decrease_pixels": 19291,
+      "increase_pixels": 14398
+     },
+     "by_k": {
+      "2.0": {
+       "noise_significant_pixels": 50610,
+       "noise_significant_percent_of_testable": 30.686,
+       "fixed_rule_pixels_testable": 33610,
+       "fixed_rule_pixels_also_noise_significant": 26926,
+       "fixed_rule_share_noise_supported": 0.8011,
+       "noise_significant_but_below_fixed_threshold": 23684
+      },
+      "3.0": {
+       "noise_significant_pixels": 30270,
+       "noise_significant_percent_of_testable": 18.354,
+       "fixed_rule_pixels_testable": 33610,
+       "fixed_rule_pixels_also_noise_significant": 20691,
+       "fixed_rule_share_noise_supported": 0.6156,
+       "noise_significant_but_below_fixed_threshold": 9579
+      }
+     }
+    },
+    "ndwi": {
+     "status": "ok",
+     "primary_threshold": 0.15,
+     "scenes_earlier": 3,
+     "scenes_later": 3,
+     "common_valid_pixels": 165136,
+     "testable_pixels": 164926,
+     "testable_fraction": 0.9987,
+     "fixed_threshold_cross_check_matches_manifest": true,
+     "median_standard_error": 0.0728,
+     "fixed_rule": {
+      "decrease_pixels": 12612,
+      "increase_pixels": 16245
+     },
+     "by_k": {
+      "2.0": {
+       "noise_significant_pixels": 30456,
+       "noise_significant_percent_of_testable": 18.466,
+       "fixed_rule_pixels_testable": 28775,
+       "fixed_rule_pixels_also_noise_significant": 19851,
+       "fixed_rule_share_noise_supported": 0.6899,
+       "noise_significant_but_below_fixed_threshold": 10605
+      },
+      "3.0": {
+       "noise_significant_pixels": 14372,
+       "noise_significant_percent_of_testable": 8.714,
+       "fixed_rule_pixels_testable": 28775,
+       "fixed_rule_pixels_also_noise_significant": 12044,
+       "fixed_rule_share_noise_supported": 0.4186,
+       "noise_significant_but_below_fixed_threshold": 2328
+      }
+     }
+    },
+    "mndwi": {
+     "status": "ok",
+     "primary_threshold": 0.15,
+     "scenes_earlier": 3,
+     "scenes_later": 3,
+     "common_valid_pixels": 165136,
+     "testable_pixels": 164926,
+     "testable_fraction": 0.9987,
+     "fixed_threshold_cross_check_matches_manifest": true,
+     "median_standard_error": 0.1072,
+     "fixed_rule": {
+      "decrease_pixels": 21897,
+      "increase_pixels": 22640
+     },
+     "by_k": {
+      "2.0": {
+       "noise_significant_pixels": 22076,
+       "noise_significant_percent_of_testable": 13.385,
+       "fixed_rule_pixels_testable": 44461,
+       "fixed_rule_pixels_also_noise_significant": 18561,
+       "fixed_rule_share_noise_supported": 0.4175,
+       "noise_significant_but_below_fixed_threshold": 3515
+      },
+      "3.0": {
+       "noise_significant_pixels": 8943,
+       "noise_significant_percent_of_testable": 5.422,
+       "fixed_rule_pixels_testable": 44461,
+       "fixed_rule_pixels_also_noise_significant": 8096,
+       "fixed_rule_share_noise_supported": 0.1821,
+       "noise_significant_but_below_fixed_threshold": 847
+      }
+     }
+    }
+   },
+   "study_id": "coringa_coastal"
+  },
+  {
+   "schema": "habitatshift-m6-noise-aware-threshold/1",
+   "experiment": "chilika_m4_dry",
+   "generated_utc": "2026-11-12T07:15:08.318520+00:00",
+   "method": "pixel is noise-supported when |delta| > k*SE; SE = sqrt(s_e^2/n_e + s_l^2/n_l), s floored at 0.02; s = per-pixel std across the period's scenes (ddof=1)",
+   "sigma_floor": 0.02,
+   "k_values": [
+    2.0,
+    3.0
+   ],
+   "framing": "Scene-to-scene spread measures acquisition noise only. It cannot see seasonal, tidal or phenological differences between the periods and is itself uncertain with 2-3 scenes per period. A noise-supported pixel is not proof of real change; an unsupported one is not proof of none.",
+   "per_index": {
+    "ndwi": {
+     "status": "ok",
+     "primary_threshold": 0.15,
+     "scenes_earlier": 3,
+     "scenes_later": 3,
+     "common_valid_pixels": 348129,
+     "testable_pixels": 348129,
+     "testable_fraction": 1.0,
+     "fixed_threshold_cross_check_matches_manifest": true,
+     "median_standard_error": 0.0488,
+     "fixed_rule": {
+      "decrease_pixels": 14609,
+      "increase_pixels": 77789
+     },
+     "by_k": {
+      "2.0": {
+       "noise_significant_pixels": 137357,
+       "noise_significant_percent_of_testable": 39.456,
+       "fixed_rule_pixels_testable": 92398,
+       "fixed_rule_pixels_also_noise_significant": 91537,
+       "fixed_rule_share_noise_supported": 0.9907,
+       "noise_significant_but_below_fixed_threshold": 45820
+      },
+      "3.0": {
+       "noise_significant_pixels": 91207,
+       "noise_significant_percent_of_testable": 26.199,
+       "fixed_rule_pixels_testable": 92398,
+       "fixed_rule_pixels_also_noise_significant": 78862,
+       "fixed_rule_share_noise_supported": 0.8535,
+       "noise_significant_but_below_fixed_threshold": 12345
+      }
+     }
+    },
+    "mndwi": {
+     "status": "ok",
+     "primary_threshold": 0.15,
+     "scenes_earlier": 3,
+     "scenes_later": 3,
+     "common_valid_pixels": 348129,
+     "testable_pixels": 348129,
+     "testable_fraction": 1.0,
+     "fixed_threshold_cross_check_matches_manifest": true,
+     "median_standard_error": 0.0539,
+     "fixed_rule": {
+      "decrease_pixels": 10528,
+      "increase_pixels": 18628
+     },
+     "by_k": {
+      "2.0": {
+       "noise_significant_pixels": 45102,
+       "noise_significant_percent_of_testable": 12.956,
+       "fixed_rule_pixels_testable": 29156,
+       "fixed_rule_pixels_also_noise_significant": 27046,
+       "fixed_rule_share_noise_supported": 0.9276,
+       "noise_significant_but_below_fixed_threshold": 18056
+      },
+      "3.0": {
+       "noise_significant_pixels": 27489,
+       "noise_significant_percent_of_testable": 7.896,
+       "fixed_rule_pixels_testable": 29156,
+       "fixed_rule_pixels_also_noise_significant": 23113,
+       "fixed_rule_share_noise_supported": 0.7927,
+       "noise_significant_but_below_fixed_threshold": 4376
+      }
+     }
+    },
+    "ndvi": {
+     "status": "ok",
+     "primary_threshold": 0.15,
+     "scenes_earlier": 3,
+     "scenes_later": 3,
+     "common_valid_pixels": 348129,
+     "testable_pixels": 348129,
+     "testable_fraction": 1.0,
+     "fixed_threshold_cross_check_matches_manifest": true,
+     "median_standard_error": 0.0375,
+     "fixed_rule": {
+      "decrease_pixels": 114491,
+      "increase_pixels": 15745
+     },
+     "by_k": {
+      "2.0": {
+       "noise_significant_pixels": 206553,
+       "noise_significant_percent_of_testable": 59.332,
+       "fixed_rule_pixels_testable": 130236,
+       "fixed_rule_pixels_also_noise_significant": 129660,
+       "fixed_rule_share_noise_supported": 0.9956,
+       "noise_significant_but_below_fixed_threshold": 76893
+      },
+      "3.0": {
+       "noise_significant_pixels": 160623,
+       "noise_significant_percent_of_testable": 46.139,
+       "fixed_rule_pixels_testable": 130236,
+       "fixed_rule_pixels_also_noise_significant": 124945,
+       "fixed_rule_share_noise_supported": 0.9594,
+       "noise_significant_but_below_fixed_threshold": 35678
+      }
+     }
+    }
+   },
+   "study_id": "chilika_wetland"
+  },
+  {
+   "schema": "habitatshift-m6-noise-aware-threshold/1",
+   "experiment": "chilika_m4_postmonsoon",
+   "generated_utc": "2026-11-12T07:15:09.011475+00:00",
+   "method": "pixel is noise-supported when |delta| > k*SE; SE = sqrt(s_e^2/n_e + s_l^2/n_l), s floored at 0.02; s = per-pixel std across the period's scenes (ddof=1)",
+   "sigma_floor": 0.02,
+   "k_values": [
+    2.0,
+    3.0
+   ],
+   "framing": "Scene-to-scene spread measures acquisition noise only. It cannot see seasonal, tidal or phenological differences between the periods and is itself uncertain with 2-3 scenes per period. A noise-supported pixel is not proof of real change; an unsupported one is not proof of none.",
+   "per_index": {
+    "ndwi": {
+     "status": "ok",
+     "primary_threshold": 0.15,
+     "scenes_earlier": 3,
+     "scenes_later": 3,
+     "common_valid_pixels": 348129,
+     "testable_pixels": 348129,
+     "testable_fraction": 1.0,
+     "fixed_threshold_cross_check_matches_manifest": true,
+     "median_standard_error": 0.1361,
+     "fixed_rule": {
+      "decrease_pixels": 38810,
+      "increase_pixels": 12170
+     },
+     "by_k": {
+      "2.0": {
+       "noise_significant_pixels": 25433,
+       "noise_significant_percent_of_testable": 7.306,
+       "fixed_rule_pixels_testable": 50980,
+       "fixed_rule_pixels_also_noise_significant": 25060,
+       "fixed_rule_share_noise_supported": 0.4916,
+       "noise_significant_but_below_fixed_threshold": 373
+      },
+      "3.0": {
+       "noise_significant_pixels": 16122,
+       "noise_significant_percent_of_testable": 4.631,
+       "fixed_rule_pixels_testable": 50980,
+       "fixed_rule_pixels_also_noise_significant": 16003,
+       "fixed_rule_share_noise_supported": 0.3139,
+       "noise_significant_but_below_fixed_threshold": 119
+      }
+     }
+    },
+    "mndwi": {
+     "status": "ok",
+     "primary_threshold": 0.15,
+     "scenes_earlier": 3,
+     "scenes_later": 3,
+     "common_valid_pixels": 348129,
+     "testable_pixels": 348129,
+     "testable_fraction": 1.0,
+     "fixed_threshold_cross_check_matches_manifest": true,
+     "median_standard_error": 0.1321,
+     "fixed_rule": {
+      "decrease_pixels": 29533,
+      "increase_pixels": 14001
+     },
+     "by_k": {
+      "2.0": {
+       "noise_significant_pixels": 24869,
+       "noise_significant_percent_of_testable": 7.144,
+       "fixed_rule_pixels_testable": 43534,
+       "fixed_rule_pixels_also_noise_significant": 24338,
+       "fixed_rule_share_noise_supported": 0.5591,
+       "noise_significant_but_below_fixed_threshold": 531
+      },
+      "3.0": {
+       "noise_significant_pixels": 13663,
+       "noise_significant_percent_of_testable": 3.925,
+       "fixed_rule_pixels_testable": 43534,
+       "fixed_rule_pixels_also_noise_significant": 13535,
+       "fixed_rule_share_noise_supported": 0.3109,
+       "noise_significant_but_below_fixed_threshold": 128
+      }
+     }
+    },
+    "ndvi": {
+     "status": "ok",
+     "primary_threshold": 0.15,
+     "scenes_earlier": 3,
+     "scenes_later": 3,
+     "common_valid_pixels": 348129,
+     "testable_pixels": 348129,
+     "testable_fraction": 1.0,
+     "fixed_threshold_cross_check_matches_manifest": true,
+     "median_standard_error": 0.1432,
+     "fixed_rule": {
+      "decrease_pixels": 15127,
+      "increase_pixels": 51297
+     },
+     "by_k": {
+      "2.0": {
+       "noise_significant_pixels": 28286,
+       "noise_significant_percent_of_testable": 8.125,
+       "fixed_rule_pixels_testable": 66424,
+       "fixed_rule_pixels_also_noise_significant": 27965,
+       "fixed_rule_share_noise_supported": 0.421,
+       "noise_significant_but_below_fixed_threshold": 321
+      },
+      "3.0": {
+       "noise_significant_pixels": 17856,
+       "noise_significant_percent_of_testable": 5.129,
+       "fixed_rule_pixels_testable": 66424,
+       "fixed_rule_pixels_also_noise_significant": 17738,
+       "fixed_rule_share_noise_supported": 0.267,
+       "noise_significant_but_below_fixed_threshold": 118
+      }
+     }
+    }
+   },
+   "study_id": "chilika_wetland"
+  },
+  {
+   "schema": "habitatshift-m6-noise-aware-threshold/1",
+   "experiment": "western_ghats_m4",
+   "generated_utc": "2026-11-12T07:15:09.282404+00:00",
+   "method": "pixel is noise-supported when |delta| > k*SE; SE = sqrt(s_e^2/n_e + s_l^2/n_l), s floored at 0.02; s = per-pixel std across the period's scenes (ddof=1)",
+   "sigma_floor": 0.02,
+   "k_values": [
+    2.0,
+    3.0
+   ],
+   "framing": "Scene-to-scene spread measures acquisition noise only. It cannot see seasonal, tidal or phenological differences between the periods and is itself uncertain with 2-3 scenes per period. A noise-supported pixel is not proof of real change; an unsupported one is not proof of none.",
+   "per_index": {
+    "ndvi": {
+     "status": "ok",
+     "primary_threshold": 0.15,
+     "scenes_earlier": 3,
+     "scenes_later": 3,
+     "common_valid_pixels": 237774,
+     "testable_pixels": 237774,
+     "testable_fraction": 1.0,
+     "fixed_threshold_cross_check_matches_manifest": true,
+     "median_standard_error": 0.0163,
+     "fixed_rule": {
+      "decrease_pixels": 345,
+      "increase_pixels": 899
+     },
+     "by_k": {
+      "2.0": {
+       "noise_significant_pixels": 45656,
+       "noise_significant_percent_of_testable": 19.201,
+       "fixed_rule_pixels_testable": 1244,
+       "fixed_rule_pixels_also_noise_significant": 1244,
+       "fixed_rule_share_noise_supported": 1.0,
+       "noise_significant_but_below_fixed_threshold": 44412
+      },
+      "3.0": {
+       "noise_significant_pixels": 15346,
+       "noise_significant_percent_of_testable": 6.454,
+       "fixed_rule_pixels_testable": 1244,
+       "fixed_rule_pixels_also_noise_significant": 1243,
+       "fixed_rule_share_noise_supported": 0.9992,
+       "noise_significant_but_below_fixed_threshold": 14103
+      }
+     }
+    },
+    "ndwi": {
+     "status": "ok",
+     "primary_threshold": 0.15,
+     "scenes_earlier": 3,
+     "scenes_later": 3,
+     "common_valid_pixels": 237774,
+     "testable_pixels": 237774,
+     "testable_fraction": 1.0,
+     "fixed_threshold_cross_check_matches_manifest": true,
+     "median_standard_error": 0.0163,
+     "fixed_rule": {
+      "decrease_pixels": 338,
+      "increase_pixels": 85
+     },
+     "by_k": {
+      "2.0": {
+       "noise_significant_pixels": 37169,
+       "noise_significant_percent_of_testable": 15.632,
+       "fixed_rule_pixels_testable": 423,
+       "fixed_rule_pixels_also_noise_significant": 423,
+       "fixed_rule_share_noise_supported": 1.0,
+       "noise_significant_but_below_fixed_threshold": 36746
+      },
+      "3.0": {
+       "noise_significant_pixels": 10742,
+       "noise_significant_percent_of_testable": 4.518,
+       "fixed_rule_pixels_testable": 423,
+       "fixed_rule_pixels_also_noise_significant": 423,
+       "fixed_rule_share_noise_supported": 1.0,
+       "noise_significant_but_below_fixed_threshold": 10319
+      }
+     }
+    }
+   },
+   "study_id": "western_ghats_forest"
+  },
+  {
+   "schema": "habitatshift-m6-noise-aware-threshold/1",
+   "experiment": "himalaya_purepu_2025_m4",
+   "generated_utc": "2026-11-12T07:15:09.688387+00:00",
+   "method": "pixel is noise-supported when |delta| > k*SE; SE = sqrt(s_e^2/n_e + s_l^2/n_l), s floored at 0.02; s = per-pixel std across the period's scenes (ddof=1)",
+   "sigma_floor": 0.02,
+   "k_values": [
+    2.0,
+    3.0
+   ],
+   "framing": "Scene-to-scene spread measures acquisition noise only. It cannot see seasonal, tidal or phenological differences between the periods and is itself uncertain with 2-3 scenes per period. A noise-supported pixel is not proof of real change; an unsupported one is not proof of none.",
+   "per_index": {
+    "ndwi": {
+     "status": "ok",
+     "primary_threshold": 0.15,
+     "scenes_earlier": 3,
+     "scenes_later": 3,
+     "common_valid_pixels": 114067,
+     "testable_pixels": 114067,
+     "testable_fraction": 1.0,
+     "fixed_threshold_cross_check_matches_manifest": true,
+     "median_standard_error": 0.0177,
+     "fixed_rule": {
+      "decrease_pixels": 129,
+      "increase_pixels": 23142
+     },
+     "by_k": {
+      "2.0": {
+       "noise_significant_pixels": 86358,
+       "noise_significant_percent_of_testable": 75.708,
+       "fixed_rule_pixels_testable": 23271,
+       "fixed_rule_pixels_also_noise_significant": 23197,
+       "fixed_rule_share_noise_supported": 0.9968,
+       "noise_significant_but_below_fixed_threshold": 63161
+      },
+      "3.0": {
+       "noise_significant_pixels": 69134,
+       "noise_significant_percent_of_testable": 60.608,
+       "fixed_rule_pixels_testable": 23271,
+       "fixed_rule_pixels_also_noise_significant": 22922,
+       "fixed_rule_share_noise_supported": 0.985,
+       "noise_significant_but_below_fixed_threshold": 46212
+      }
+     }
+    },
+    "ndsi": {
+     "status": "ok",
+     "primary_threshold": 0.15,
+     "scenes_earlier": 3,
+     "scenes_later": 3,
+     "common_valid_pixels": 114067,
+     "testable_pixels": 114067,
+     "testable_fraction": 1.0,
+     "fixed_threshold_cross_check_matches_manifest": true,
+     "median_standard_error": 0.0627,
+     "fixed_rule": {
+      "decrease_pixels": 5504,
+      "increase_pixels": 67680
+     },
+     "by_k": {
+      "2.0": {
+       "noise_significant_pixels": 89117,
+       "noise_significant_percent_of_testable": 78.127,
+       "fixed_rule_pixels_testable": 73184,
+       "fixed_rule_pixels_also_noise_significant": 67295,
+       "fixed_rule_share_noise_supported": 0.9195,
+       "noise_significant_but_below_fixed_threshold": 21822
+      },
+      "3.0": {
+       "noise_significant_pixels": 75426,
+       "noise_significant_percent_of_testable": 66.124,
+       "fixed_rule_pixels_testable": 73184,
+       "fixed_rule_pixels_also_noise_significant": 60770,
+       "fixed_rule_share_noise_supported": 0.8304,
+       "noise_significant_but_below_fixed_threshold": 14656
+      }
+     }
+    },
+    "ndvi": {
+     "status": "ok",
+     "primary_threshold": 0.15,
+     "scenes_earlier": 3,
+     "scenes_later": 3,
+     "common_valid_pixels": 114067,
+     "testable_pixels": 114067,
+     "testable_fraction": 1.0,
+     "fixed_threshold_cross_check_matches_manifest": true,
+     "median_standard_error": 0.0163,
+     "fixed_rule": {
+      "decrease_pixels": 5228,
+      "increase_pixels": 32
+     },
+     "by_k": {
+      "2.0": {
+       "noise_significant_pixels": 76412,
+       "noise_significant_percent_of_testable": 66.989,
+       "fixed_rule_pixels_testable": 5260,
+       "fixed_rule_pixels_also_noise_significant": 5213,
+       "fixed_rule_share_noise_supported": 0.9911,
+       "noise_significant_but_below_fixed_threshold": 71199
+      },
+      "3.0": {
+       "noise_significant_pixels": 56807,
+       "noise_significant_percent_of_testable": 49.801,
+       "fixed_rule_pixels_testable": 5260,
+       "fixed_rule_pixels_also_noise_significant": 5109,
+       "fixed_rule_share_noise_supported": 0.9713,
+       "noise_significant_but_below_fixed_threshold": 51698
+      }
+     }
+    }
+   },
+   "study_id": "himalaya_purepu_2025"
+  },
+  {
+   "schema": "habitatshift-m6-noise-aware-threshold/1",
+   "experiment": "himalaya_langtang_2026_m4",
+   "generated_utc": "2026-11-12T07:15:09.863160+00:00",
+   "method": "pixel is noise-supported when |delta| > k*SE; SE = sqrt(s_e^2/n_e + s_l^2/n_l), s floored at 0.02; s = per-pixel std across the period's scenes (ddof=1)",
+   "sigma_floor": 0.02,
+   "k_values": [
+    2.0,
+    3.0
+   ],
+   "framing": "Scene-to-scene spread measures acquisition noise only. It cannot see seasonal, tidal or phenological differences between the periods and is itself uncertain with 2-3 scenes per period. A noise-supported pixel is not proof of real change; an unsupported one is not proof of none.",
+   "per_index": {
+    "ndsi": {
+     "status": "not_computable",
+     "reason": "fewer than 2 scenes in a period"
+    },
+    "ndwi": {
+     "status": "not_computable",
+     "reason": "fewer than 2 scenes in a period"
+    },
+    "ndvi": {
+     "status": "not_computable",
+     "reason": "fewer than 2 scenes in a period"
+    }
+   },
+   "study_id": "himalaya_langtang_2026"
+  },
+  {
+   "schema": "habitatshift-m6-noise-aware-threshold/1",
+   "experiment": "kathmandu_m4",
+   "generated_utc": "2026-11-12T07:15:09.976681+00:00",
+   "method": "pixel is noise-supported when |delta| > k*SE; SE = sqrt(s_e^2/n_e + s_l^2/n_l), s floored at 0.02; s = per-pixel std across the period's scenes (ddof=1)",
+   "sigma_floor": 0.02,
+   "k_values": [
+    2.0,
+    3.0
+   ],
+   "framing": "Scene-to-scene spread measures acquisition noise only. It cannot see seasonal, tidal or phenological differences between the periods and is itself uncertain with 2-3 scenes per period. A noise-supported pixel is not proof of real change; an unsupported one is not proof of none.",
+   "per_index": {
+    "ndbi": {
+     "status": "ok",
+     "primary_threshold": 0.15,
+     "scenes_earlier": 3,
+     "scenes_later": 3,
+     "common_valid_pixels": 43728,
+     "testable_pixels": 43708,
+     "testable_fraction": 0.9995,
+     "fixed_threshold_cross_check_matches_manifest": true,
+     "median_standard_error": 0.0229,
+     "fixed_rule": {
+      "decrease_pixels": 395,
+      "increase_pixels": 2984
+     },
+     "by_k": {
+      "2.0": {
+       "noise_significant_pixels": 22445,
+       "noise_significant_percent_of_testable": 51.352,
+       "fixed_rule_pixels_testable": 3374,
+       "fixed_rule_pixels_also_noise_significant": 3364,
+       "fixed_rule_share_noise_supported": 0.997,
+       "noise_significant_but_below_fixed_threshold": 19081
+      },
+      "3.0": {
+       "noise_significant_pixels": 14445,
+       "noise_significant_percent_of_testable": 33.049,
+       "fixed_rule_pixels_testable": 3374,
+       "fixed_rule_pixels_also_noise_significant": 3281,
+       "fixed_rule_share_noise_supported": 0.9724,
+       "noise_significant_but_below_fixed_threshold": 11164
+      }
+     }
+    },
+    "ndvi": {
+     "status": "ok",
+     "primary_threshold": 0.15,
+     "scenes_earlier": 3,
+     "scenes_later": 3,
+     "common_valid_pixels": 43728,
+     "testable_pixels": 43708,
+     "testable_fraction": 0.9995,
+     "fixed_threshold_cross_check_matches_manifest": true,
+     "median_standard_error": 0.0263,
+     "fixed_rule": {
+      "decrease_pixels": 4924,
+      "increase_pixels": 249
+     },
+     "by_k": {
+      "2.0": {
+       "noise_significant_pixels": 16532,
+       "noise_significant_percent_of_testable": 37.824,
+       "fixed_rule_pixels_testable": 5173,
+       "fixed_rule_pixels_also_noise_significant": 4966,
+       "fixed_rule_share_noise_supported": 0.96,
+       "noise_significant_but_below_fixed_threshold": 11566
+      },
+      "3.0": {
+       "noise_significant_pixels": 9334,
+       "noise_significant_percent_of_testable": 21.355,
+       "fixed_rule_pixels_testable": 5173,
+       "fixed_rule_pixels_also_noise_significant": 4097,
+       "fixed_rule_share_noise_supported": 0.792,
+       "noise_significant_but_below_fixed_threshold": 5237
+      }
+     }
+    },
+    "ndwi": {
+     "status": "ok",
+     "primary_threshold": 0.15,
+     "scenes_earlier": 3,
+     "scenes_later": 3,
+     "common_valid_pixels": 43728,
+     "testable_pixels": 43708,
+     "testable_fraction": 0.9995,
+     "fixed_threshold_cross_check_matches_manifest": true,
+     "median_standard_error": 0.0378,
+     "fixed_rule": {
+      "decrease_pixels": 350,
+      "increase_pixels": 3722
+     },
+     "by_k": {
+      "2.0": {
+       "noise_significant_pixels": 13393,
+       "noise_significant_percent_of_testable": 30.642,
+       "fixed_rule_pixels_testable": 4071,
+       "fixed_rule_pixels_also_noise_significant": 3867,
+       "fixed_rule_share_noise_supported": 0.9499,
+       "noise_significant_but_below_fixed_threshold": 9526
+      },
+      "3.0": {
+       "noise_significant_pixels": 6666,
+       "noise_significant_percent_of_testable": 15.251,
+       "fixed_rule_pixels_testable": 4071,
+       "fixed_rule_pixels_also_noise_significant": 2906,
+       "fixed_rule_share_noise_supported": 0.7138,
+       "noise_significant_but_below_fixed_threshold": 3760
+      }
+     }
+    }
+   },
+   "study_id": "kathmandu_urban"
+  }
+ ]
+}

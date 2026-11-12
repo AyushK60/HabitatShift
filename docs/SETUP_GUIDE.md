@@ -40,11 +40,11 @@ node tools\visual\verify_m4_showcase.mjs                # 17 checks (backend STO
 ## Independent audit scripts (re-derive everything, import no production code)
 
 ```powershell
-.venv\Scripts\python.exe scripts\audit_m5_science.py     # 4111 checks (network for live sections; --no-live to skip)
-.venv\Scripts\python.exe scripts\audit_findings_m4r2.py  # 2837 checks
-.venv\Scripts\python.exe scripts\audit_m2.py             # 149 checks
-.venv\Scripts\python.exe scripts\audit_m5_ml.py          # 107 checks (offline)
-.venv\Scripts\python.exe scripts\audit_m5ml_disclosure.py# 96 checks (offline)
+.venv\Scripts\python.exe verification\audit_m5_science.py     # 4111 checks (network for live sections; --no-live to skip)
+.venv\Scripts\python.exe verification\audit_findings_m4r2.py  # 2837 checks
+.venv\Scripts\python.exe verification\audit_m2.py             # 149 checks
+.venv\Scripts\python.exe verification\audit_m5_ml.py          # 107 checks (offline)
+.venv\Scripts\python.exe verification\audit_m5ml_disclosure.py# 96 checks (offline)
 ```
 
 ## Reproduce a scientific result from original source data

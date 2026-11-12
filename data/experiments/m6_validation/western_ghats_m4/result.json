@@ -1,0 +1,114 @@
+{
+ "schema": "habitatshift-m6-validation/1",
+ "experiment": "western_ghats_m4",
+ "generated_utc": "2026-11-12T07:16:35.309846+00:00",
+ "reference": {
+  "name": "Hansen Global Forest Change v1.12 (2000-2024)",
+  "citation": "Hansen, M. C. et al. (2013) High-resolution global maps of 21st-century forest cover change. Science 342, 850-853.",
+  "licence": "CC-BY 4.0",
+  "source": "https://storage.googleapis.com/earthenginepartners-hansen/GFC-2024-v1.12",
+  "tile": "20N_070E",
+  "native_resolution_m": 30,
+  "window_cache": {
+   "file": "data/external/hansen_gfc_2024/western_ghats_m4_window.npz",
+   "sha256": "182395680cf91eb808aaacea2318c7754fad0120f947db5475c7dc9f8ff7aca1"
+  },
+  "retrieved_utc": "2026-11-12"
+ },
+ "design": {
+  "domain": "common-valid pixels with treecover2000 >= 30 %",
+  "reference_positive": "lossyear 21..24 (2021-2024)",
+  "prediction": "recorded NDVI decrease rule delta <= -0.15; and the subset passing the 3 x SE noise test",
+  "grid_note": "Hansen 30 m warped to the 10 m study grid by nearest neighbour"
+ },
+ "domain_pixels": 218020,
+ "forest_fraction_of_valid": 0.9169,
+ "reference_loss_pixels_in_domain": 45,
+ "reference_loss_cells_30m_approx": 5.0,
+ "predicted_decrease_pixels_in_domain": 219,
+ "predicted_decrease_pixels_outside_forest_domain": 126,
+ "main": {
+  "fixed_rule_ndvi_decrease": {
+   "tp": 28,
+   "fp": 191,
+   "fn": 17,
+   "tn": 217784,
+   "pixels_evaluated": 218020,
+   "precision": 0.1279,
+   "recall": 0.6222,
+   "f1": 0.2121,
+   "reference_base_rate": 0.00021,
+   "lift_over_chance": 619.44
+  },
+  "fixed_rule_and_noise_supported_3x": {
+   "tp": 28,
+   "fp": 191,
+   "fn": 17,
+   "tn": 217784,
+   "pixels_evaluated": 218020,
+   "precision": 0.1279,
+   "recall": 0.6222,
+   "f1": 0.2121,
+   "reference_base_rate": 0.00021,
+   "lift_over_chance": 619.44
+  }
+ },
+ "sensitivity_including_2020": {
+  "fixed_rule_ndvi_decrease": {
+   "tp": 34,
+   "fp": 185,
+   "fn": 26,
+   "tn": 217775,
+   "pixels_evaluated": 218020,
+   "precision": 0.1553,
+   "recall": 0.5667,
+   "f1": 0.2437,
+   "reference_base_rate": 0.00028,
+   "lift_over_chance": 564.13
+  },
+  "fixed_rule_and_noise_supported_3x": {
+   "tp": 34,
+   "fp": 185,
+   "fn": 26,
+   "tn": 217775,
+   "pixels_evaluated": 218020,
+   "precision": 0.1553,
+   "recall": 0.5667,
+   "f1": 0.2437,
+   "reference_base_rate": 0.00028,
+   "lift_over_chance": 564.13
+  }
+ },
+ "sensitivity_one_pixel_tolerance": {
+  "note": "reference dilated by 3 px (one 30 m cell) to absorb grid mismatch and registration error; recall is then not penalised for near misses, precision is evaluated against the dilated reference",
+  "fixed_rule_ndvi_decrease": {
+   "tp": 74,
+   "fp": 145,
+   "fn": 143,
+   "tn": 217658,
+   "pixels_evaluated": 218020,
+   "precision": 0.3379,
+   "recall": 0.341,
+   "f1": 0.3394,
+   "reference_base_rate": 0.001,
+   "lift_over_chance": 339.49
+  },
+  "fixed_rule_and_noise_supported_3x": {
+   "tp": 74,
+   "fp": 145,
+   "fn": 143,
+   "tn": 217658,
+   "pixels_evaluated": 218020,
+   "precision": 0.3379,
+   "recall": 0.341,
+   "f1": 0.3394,
+   "reference_base_rate": 0.001,
+   "lift_over_chance": 339.49
+  }
+ },
+ "interpretation_guardrails": [
+  "Hansen loss is annual stand-replacement disturbance; NDVI decrease also responds to leaf shedding, selective logging and moisture, so low precision is expected and not an error of either dataset.",
+  "Hansen is itself a model product with its own error; this is agreement with an independent product, not accuracy against ground truth.",
+  "One 24 km2 area with few loss pixels: treat the numbers as indicative, not as a general accuracy claim."
+ ]
+}

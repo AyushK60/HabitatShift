@@ -76,7 +76,7 @@ sources and are not claimed to be covered.
 2. **Sealed checksums.** Each record's `output_checksum` is the SHA-256 of
    the canonical JSON of its whole finding with the checksum field null —
    any later edit of any measurement invalidates it. The independent audit
-   (`scripts/audit_findings_m4r2.py`) re-verifies every checksum.
+   (`verification/audit_findings_m4r2.py`) re-verifies every checksum.
 3. **Geometry completeness.** `geometry_wgs84` is a full GeoJSON Polygon:
    ring 0 is the component exterior; interior rings are the masked pixels
    enclosed by the component (`hole_pixel_count` records their total area in

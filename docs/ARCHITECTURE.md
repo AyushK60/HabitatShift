@@ -78,6 +78,6 @@ flowchart LR
 3. **Frozen outputs are immutable.** Every milestone reads its predecessors'
    artifacts; the M5 fresh-environment reproduction regenerates a study into
    a sandbox and verifies byte-identical rasters.
-4. **Independence of audits.** The audit scripts (`scripts/audit_*.py`)
+4. **Independence of audits.** The audit scripts (`verification/audit_*.py`)
    deliberately do not import production code — they re-implement the
    documented spec.

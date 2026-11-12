@@ -54,7 +54,21 @@ findings — **consistency, never corroboration**.
 - Bootstrap block size 10→30 px: NDVI CI width 0.017→0.028 (recorded 15-px
   design measured inside the range).
 - ML feature groups largely redundant (withheld-group deltas ≤ 0.01).
-- Resolution sensitivity deferred with recorded rationale.
+- Resolution sensitivity (post-M5, Kathmandu, 20 m vs recorded 10 m): signs preserved but fractions shrink, e.g. NDBI increase 6.82 % → 4.75 %, NDVI decrease 11.26 % → 8.37 % (common-valid pixels 43,728 → 10,938). The recorded 10 m run remains the result; see `data/experiments/m5_resolution/`.
+
+## Post-M5 additions
+
+- **Water reference cross-check (WorldCover vs JRC GSW)**: the GSW endpoint that failed during the M5 feasibility
+  window is reachable; `scripts/run_m5_gsw_crosscheck.py` compares the two products (reference-vs-reference, not
+  accuracy). Water overlap (IoU) is 0.98–0.99 for Chilika at GSW occurrence thresholds up to 50 %, and 0.58–0.65
+  for Coringa, where the products disagree about tidal and aquaculture water. No sealed M5 result was changed.
+- **Complete-component inventory**: `scripts/build_component_inventory.py` lists every connected component at or
+  above the 25 px MMU (not just the curated top five). Totals equal the audited selection policy in all 7
+  experiments (e.g. Coringa 686, Chilika dry 294, Western Ghats 13).
+- **Two-method direction check**: directions agree in four of five ML experiments; Coringa disagrees (vegetation
+  index net share −2.96 vs predicted vegetation share +0.84 pp) and is reported as such
+  (`docs/figures/fig2_two_methods_direction.svg`).
+- Technical report: [`paper/HabitatShift_Technical_Report.pdf`](paper/HabitatShift_Technical_Report.pdf).
 
 ## Product surfaces
 

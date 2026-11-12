@@ -1278,3 +1278,36 @@
   color: var(--muted, #777);
   font-style: italic;
 }
+
+/* ---- guided tour (story mode) ---- */
+.guided-tour {
+  position: fixed;
+  left: 24px;
+  bottom: 24px;
+  z-index: 40;
+  width: min(380px, calc(100vw - 32px));
+  background: var(--surface, #fbfaf6);
+  border: 1px solid var(--rule, #d9d6cd);
+  border-left: 4px solid var(--copper, #c4733f);
+  box-shadow: 0 10px 30px rgba(20, 40, 46, 0.22);
+  padding: 14px 16px 12px;
+}
+.guided-tour h2 {
+  margin: 4px 0 6px;
+  font-size: 1.05rem;
+}
+.guided-tour p {
+  margin: 0 0 8px;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+.guided-tour-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+.guided-tour-actions button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}

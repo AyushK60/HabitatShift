@@ -17,7 +17,7 @@ replace the per-period bounds in the run summary and run manifest so the
 recorded provenance keeps describing the displayed artefacts.
 
 Coringa is deliberately excluded: its M0–M2 evidence is the frozen reference
-case verified by scripts/audit_m2.py.
+case verified by verification/audit_m2.py.
 
 After running, rebuild the showcase bundles
 (``python scripts/build_showcase_bundles.py``) so the bundled copies and their

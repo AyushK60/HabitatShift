@@ -503,7 +503,7 @@ function ExploreFindingsPanel({
       {mlContainer && (
         <div className="ml-block" data-testid="explore-ml-block">
           <p className="insp-note insp-guardrail ml-plain">
-            <strong>Additional ML reference experiment (M5).</strong>{" "}
+            <strong>Additional ML reference experiment.</strong>{" "}
             {mlContainer.ml_record.plain_language}
           </p>
           <dl className="insp-facts">
@@ -1209,7 +1209,7 @@ function EvidenceRecordPanel({
 
       {mlContainer ? (
         <div className="ml-block" data-testid="research-ml-block">
-          <h4 className="insp-subheading">ML reference experiment (M5, additive)</h4>
+          <h4 className="insp-subheading">ML reference experiment (additive)</h4>
           <Facts
             rows={[
               ["Model", String(mlContainer.ml_record.model.type)],
@@ -1278,7 +1278,7 @@ function EvidenceRecordPanel({
           </p>
         </div>
       ) : (
-        <h4 className="insp-subheading">ML reference experiment (M5): no record available</h4>
+        <h4 className="insp-subheading">ML reference experiment: no record available</h4>
       )}
 
       <h4 className="insp-subheading">Method provenance</h4>

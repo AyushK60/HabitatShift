@@ -1,6 +1,6 @@
 {
   "base_url": "http://127.0.0.1:8098/",
-  "started_utc": "2026-11-07T21:08:03.637Z",
+  "started_utc": "2026-11-12T07:30:23.320Z",
   "console_errors": [],
   "page_errors": [],
   "failed_requests": [],
@@ -36,7 +36,7 @@
     {
       "name": "6. a clickable recorded region is visible in the study view",
       "passed": true,
-      "detail": "{\"evidence_id\":\"ev-kathmandu_m4-ndvi-dec-333878-3065411\",\"x\":512.8443122237904,\"y\":553.0330822502237}"
+      "detail": "{\"evidence_id\":\"ev-kathmandu_m4-ndvi-dec-333878-3065411\",\"x\":512.8443122249291,\"y\":557.6424572511255}"
     },
     {
       "name": "6. clicking a region on the map selects that finding",
@@ -189,7 +189,7 @@
       "detail": ""
     }
   ],
-  "completed_utc": "2026-11-07T21:08:44.825Z",
+  "completed_utc": "2026-11-12T07:31:05.678Z",
   "passed": 35,
   "failed": 0
 }

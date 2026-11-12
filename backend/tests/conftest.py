@@ -193,3 +193,24 @@ def registry_yaml() -> dict:
     return yaml.safe_load(
         (PROJECT_ROOT / "studies" / "registry.yaml").read_text("utf-8")
     )
+
+
+# Tests that read the locally-generated analysis rasters. Those GeoTIFFs are
+# git-ignored (about 1 GB), so a fresh clone / CI runner cannot run them. They
+# are skipped there with an explicit reason; on a machine that has processed the
+# studies (or after `scripts/reproduce_m5_fresh.py`) they run as normal.
+_LOCAL_RASTER_TESTS = (
+    "test_g0_presentation.py",
+    "test_m4_r1_findings.py::test_findings_traceable_to_source_rasters",
+    "test_manifest_output_checksums.py",
+    "test_m3_api.py::test_pixel_returns_measured_values_inside_grid",
+)
+
+
+def pytest_collection_modifyitems(config, items):
+    if (PROJECT_ROOT / "data" / "processed" / "m1" / "coringa_coastal" / "earlier_2020-03-26_valid_mask.tif").exists():
+        return
+    skip = pytest.mark.skip(reason="needs locally generated rasters (data/processed is git-ignored)")
+    for item in items:
+        if any(key in item.nodeid for key in _LOCAL_RASTER_TESTS):
+            item.add_marker(skip)

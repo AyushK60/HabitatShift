@@ -352,6 +352,26 @@ export function LandingPage() {
         </div>
       </section>
 
+      {/* ------------------------------------------------------- why this project */}
+      <section className="why" id="why" aria-labelledby="why-title">
+        <div className="section-head">
+          <p className="eyebrow">Why this project exists</p>
+          <h2 id="why-title">It started with a flash flood in Nepal</h2>
+          <p className="section-lede">
+            In 2026 a flash flood in Nepal caused heavy damage, and I wanted to build something that could help people
+            understand events like it from space. While learning the tools I found that flash floods are hard to see
+            with optical satellites: monsoon cloud hides exactly the days that matter. The open, repeatable work was
+            mostly on slower change, so HabitatShift became a careful study of how far free Sentinel-2 data can be
+            trusted for wetlands, forest and urban change, and where it cannot.
+          </p>
+          <p className="section-lede">
+            The two Himalayan event studies (the 2025 Purepu lake drainage and the 2026 Langtang rock–ice collapse) are
+            the part closest to that first motivation, and they show plainly where optical imagery fails. The natural
+            next step is radar (Sentinel-1), which sees through cloud and is the standard tool for flood mapping.
+          </p>
+        </div>
+      </section>
+
       {/* ----------------------------------------------------- five studies */}
       <section className="studies" id="studies" aria-labelledby="studies-title">
         <div className="section-head">

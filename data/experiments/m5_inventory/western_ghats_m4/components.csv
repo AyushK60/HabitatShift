@@ -1,0 +1,14 @@
+experiment,index,direction,rank_by_size,pixels,area_ha,mean_delta,centroid_lon,centroid_lat
+western_ghats_m4,ndvi,decrease,1,47,0.47,-0.366,74.376299,15.135648
+western_ghats_m4,ndvi,decrease,2,44,0.44,-0.2818,74.379626,15.144093
+western_ghats_m4,ndvi,decrease,3,31,0.31,-0.2805,74.37887,15.136405
+western_ghats_m4,ndvi,increase,1,191,1.91,0.377,74.378011,15.136088
+western_ghats_m4,ndvi,increase,2,88,0.88,0.2502,74.345481,15.134096
+western_ghats_m4,ndvi,increase,3,81,0.81,0.1902,74.373808,15.131989
+western_ghats_m4,ndvi,increase,4,76,0.76,0.2497,74.375396,15.13539
+western_ghats_m4,ndvi,increase,5,62,0.62,0.2232,74.345498,15.131084
+western_ghats_m4,ndvi,increase,6,33,0.33,0.2516,74.344865,15.130264
+western_ghats_m4,ndvi,increase,7,26,0.26,0.1993,74.346936,15.138914
+western_ghats_m4,ndwi,decrease,1,163,1.63,-0.2266,74.378026,15.136078
+western_ghats_m4,ndwi,decrease,2,25,0.25,-0.1933,74.375788,15.135357
+western_ghats_m4,ndwi,increase,1,31,0.31,0.2264,74.376267,15.13566

@@ -1,0 +1,47 @@
+{
+  "schema": "habitatshift-m5-component-inventory/1",
+  "experiment": "himalaya_purepu_2025_m4",
+  "rule": "4-connected components on the common-valid footprint at |delta| >= 0.15, MMU 25 px",
+  "components_at_or_above_mmu_total": 139,
+  "selection_policy_total": 139,
+  "matches_selection_policy": true,
+  "by_index": {
+    "ndsi": {
+      "decrease": {
+        "components_total": 303,
+        "components_at_or_above_mmu": 30,
+        "area_ha_at_or_above_mmu": 44.8
+      },
+      "increase": {
+        "components_total": 341,
+        "components_at_or_above_mmu": 33,
+        "area_ha_at_or_above_mmu": 665.22
+      }
+    },
+    "ndvi": {
+      "decrease": {
+        "components_total": 633,
+        "components_at_or_above_mmu": 18,
+        "area_ha_at_or_above_mmu": 39.07
+      },
+      "increase": {
+        "components_total": 24,
+        "components_at_or_above_mmu": 0,
+        "area_ha_at_or_above_mmu": 0.0
+      }
+    },
+    "ndwi": {
+      "decrease": {
+        "components_total": 82,
+        "components_at_or_above_mmu": 0,
+        "area_ha_at_or_above_mmu": 0.0
+      },
+      "increase": {
+        "components_total": 1804,
+        "components_at_or_above_mmu": 58,
+        "area_ha_at_or_above_mmu": 189.56
+      }
+    }
+  },
+  "note": "complete inventory; the sealed findings remain the curated top-five selection"
+}

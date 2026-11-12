@@ -472,6 +472,7 @@ export function InteractiveChart({
             height={height}
             viewBox={`0 0 ${width} ${height}`}
             role="img"
+            aria-label={caption}
             aria-hidden={false}
           >
             {yTicks.map((tick) => (

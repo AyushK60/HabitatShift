@@ -1,0 +1,35 @@
+{
+  "schema": "habitatshift-m5-component-inventory/1",
+  "experiment": "western_ghats_m4",
+  "rule": "4-connected components on the common-valid footprint at |delta| >= 0.15, MMU 25 px",
+  "components_at_or_above_mmu_total": 13,
+  "selection_policy_total": 13,
+  "matches_selection_policy": true,
+  "by_index": {
+    "ndvi": {
+      "decrease": {
+        "components_total": 77,
+        "components_at_or_above_mmu": 3,
+        "area_ha_at_or_above_mmu": 1.22
+      },
+      "increase": {
+        "components_total": 98,
+        "components_at_or_above_mmu": 7,
+        "area_ha_at_or_above_mmu": 5.57
+      }
+    },
+    "ndwi": {
+      "decrease": {
+        "components_total": 52,
+        "components_at_or_above_mmu": 2,
+        "area_ha_at_or_above_mmu": 1.88
+      },
+      "increase": {
+        "components_total": 14,
+        "components_at_or_above_mmu": 1,
+        "area_ha_at_or_above_mmu": 0.31
+      }
+    }
+  },
+  "note": "complete inventory; the sealed findings remain the curated top-five selection"
+}
