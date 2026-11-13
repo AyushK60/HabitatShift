@@ -261,10 +261,10 @@ def build() -> None:
             pending_caption = None
             n = doc.labels.get(f"tab:{key}", ("", 0))[1]
             cols = "l" + "r" * (len(header) - 1)
-            t = ["\\begin{table}[t]\\centering\\small", f"\\caption{{{doc.tex_inline(cap)}}}\\label{{tab:{key}}}", f"\\begin{{tabular}}{{{cols}}}", "\\toprule",
+            t = ["\\begin{table}[t]\\centering\\small", f"\\caption{{{doc.tex_inline(cap)}}}\\label{{tab:{key}}}", "\\resizebox{\\linewidth}{!}{%", f"\\begin{{tabular}}{{{cols}}}", "\\toprule",
                  " & ".join(doc.tex_inline(c) for c in header) + " \\\\", "\\midrule"]
             t += [" & ".join(doc.tex_inline(c) for c in r) + " \\\\" for r in body]
-            t += ["\\bottomrule", "\\end{tabular}", "\\end{table}"]
+            t += ["\\bottomrule", "\\end{tabular}}", "\\end{table}"]
             tex_body.append("\n".join(t))
             h = [f'<table><caption><b>Table {n}.</b> {doc.html_inline(cap)}</caption><thead><tr>' + "".join(f"<th>{doc.html_inline(c)}</th>" for c in header) + "</tr></thead><tbody>"]
             h += ["<tr>" + "".join(f"<td>{doc.html_inline(c)}</td>" for c in r) + "</tr>" for r in body]
