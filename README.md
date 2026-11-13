@@ -2,6 +2,7 @@
 
 ![license](https://img.shields.io/badge/licence-MIT-blue)
 ![python](https://img.shields.io/badge/python-3.11-blue)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24201720.svg)](https://doi.org/10.5281/zenodo.24201720)
 
 **Do geospatial foundation models detect real surface change better than simple spectral indices, once both are judged
 against the same scene-to-scene noise, and does the answer hold across fields?** HabitatShift tests that on forest loss
@@ -105,6 +106,9 @@ Open <http://127.0.0.1:8098/>. On Windows, `start.bat` does all of this and `sto
 any static file server on `frontend/dist` serves the offline showcase (the custom-area page needs the backend).
 
 ## Reproducing version 3
+
+The 18 trained `model.joblib` files are stored with Git LFS. The Zenodo archive contains only their LFS pointer
+files, so for the real models clone from GitHub and run `git lfs pull` (about 800 MB).
 
 ```powershell
 .venv\Scripts\pip install -r backend\requirements-ml.txt   # torch (CUDA 12.8 build), einops, timm, matplotlib

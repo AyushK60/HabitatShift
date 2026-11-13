@@ -5,12 +5,12 @@
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{booktabs}
-\usepackage[numbers]{natbib}
+\usepackage{cite}
 \usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
 \setlength{\parskip}{0.5em}\setlength{\parindent}{0pt}
 \graphicspath{{./}}
 \title{Do geospatial foundation models detect surface change better than spectral indices? A noise-calibrated comparison on forest loss and Himalayan glacial lakes}
-\author{Ayush Khanal\\ \small [department, university]}
+\author{Ayush Khanal; Pragyan Kumar Singh\\ \small Andhra University}
 \date{}
 \begin{document}
 \maketitle
@@ -22,7 +22,7 @@ Foundation models pretrained on satellite imagery are promoted for change detect
 
 \section{Introduction}
 
-Detecting where a landscape has changed between two dates is a basic task in remote sensing, and foundation models trained on millions of Sentinel-2 scenes \cite{szwarcman2024,wang2022ssl4eo} are now offered as a general-purpose answer. Evidence that they beat the long-standing alternative, a spectral index such as NDVI thresholded on its difference, is thin and usually reported on benchmarks rather than against independent reference data, and almost never with the sampling noise between acquisitions taken into account. Two images of the same place never agree exactly: clouds, haze, sun angle and season change every pixel. A method that reports "change" without a notion of this noise cannot say how much of its output is real.
+Detecting where a landscape has changed between two dates is a basic task in remote sensing, and foundation models trained on millions of Sentinel-2 scenes \cite{szwarcman2024}, \cite{wang2022ssl4eo} are now offered as a general-purpose answer. Evidence that they beat the long-standing alternative, a spectral index such as NDVI thresholded on its difference, is thin and usually reported on benchmarks rather than against independent reference data, and almost never with the sampling noise between acquisitions taken into account. Two images of the same place never agree exactly: clouds, haze, sun angle and season change every pixel. A method that reports "change" without a notion of this noise cannot say how much of its output is real.
 
 We ask a narrow question: when every method is judged against the same scene-to-scene noise and the same reference data, do foundation-model embeddings detect real surface change more reliably than spectral indices, and does the answer hold across fields? We contribute (i) a noise-calibrated change score that applies to any feature vector, (ii) a pre-specified evaluation in two fields (five forest areas and three glacial lakes) with spatial block bootstrap intervals, including a placebo test that needs no reference, and (iii) a negative-leaning result reported as such. As a second, smaller contribution we study how far a radar water model and its conformal intervals can be trusted across glacial lakes.
 
@@ -58,7 +58,7 @@ One scene of a period is compared with the rest of the same period. Nothing has 
 
 \subsection{Radar water model and conformal intervals}
 
-A U-Net \cite{ronneberger2015} (four downsampling steps, 1.94 million weights, BCE plus Dice loss restricted to valid optical pixels) takes VV, VH, slope and a missing-radar flag on $256\times256$ crops around each lake. Pairs whose optical water was not at least 3 dB darker in radar than its surroundings were dropped. Whole lakes are split into train, calibration and test, and 2022 is held out in time on the training lakes. We then run 5-fold cross-validation over all 30 lakes, so every lake is predicted by a model that never saw it. Lake area is the predicted water patch touching a DEM-flat seed. Split conformal prediction \cite{vovk2005,angelopoulos2021} with relative error (floor 0.1 km$^2$) gives an area interval per scene, calibrated on the out-of-fold errors of the other four folds and checked on the fold left out.
+A U-Net \cite{ronneberger2015} (four downsampling steps, 1.94 million weights, BCE plus Dice loss restricted to valid optical pixels) takes VV, VH, slope and a missing-radar flag on $256\times256$ crops around each lake. Pairs whose optical water was not at least 3 dB darker in radar than its surroundings were dropped. Whole lakes are split into train, calibration and test, and 2022 is held out in time on the training lakes. We then run 5-fold cross-validation over all 30 lakes, so every lake is predicted by a model that never saw it. Lake area is the predicted water patch touching a DEM-flat seed. Split conformal prediction \cite{vovk2005}, \cite{angelopoulos2021} with relative error (floor 0.1 km$^2$) gives an area interval per scene, calibrated on the out-of-fold errors of the other four folds and checked on the fold left out.
 
 \section{Results}
 
@@ -72,6 +72,7 @@ Figure~\ref{fig:forest} and Table~\ref{tab:forest} show AP against Hansen loss i
 
 \begin{table}[t]\centering\small
 \caption{Forest loss in five areas, average precision (ROC-AUC). The signed NDVI-decrease score is the baseline; * means the paired difference from it, resampled on the same spatial blocks, has a 95\% interval that excludes zero (every such difference is negative, so the method is worse). Positive patches: 446, 301, 174, 427 and 273.}\label{tab:forest}
+\resizebox{\linewidth}{!}{%
 \begin{tabular}{lrrrrr}
 \toprule
 Score & Bastar & Odisha & Kodagu & Garo Hills & Shivalik \\
@@ -84,7 +85,7 @@ NDVI (unsigned) & 0.62 (0.78) * & 0.53 (0.73) * & 0.53 (0.92) * & 0.28 (0.54) * 
 NDWI & 0.61 (0.74) * & 0.71 (0.83) * & 0.51 (0.90) * & 0.20 (0.41) * & 0.12 (0.31) * \\
 Five indices & 0.47 (0.64) * & 0.56 (0.73) * & 0.52 (0.91) & 0.26 (0.52) * & 0.16 (0.44) * \\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 \end{table}
 
 \subsection{Glacial lakes: models beat the water index, and so do raw bands}
@@ -97,6 +98,7 @@ Figure~\ref{fig:lakes} and Table~\ref{tab:lakes} give the lake result against th
 
 \begin{table}[t]\centering\small
 \caption{Glacial lakes, average precision (ROC-AUC) and paired difference from MNDWI (95\% interval; * excludes zero). 44 positive and 754 clean patches.}\label{tab:lakes}
+\resizebox{\linewidth}{!}{%
 \begin{tabular}{lrr}
 \toprule
 Score & AP (AUC) & Paired diff. from MNDWI \\
@@ -108,7 +110,7 @@ MNDWI & 0.57 (0.86) & baseline \\
 Five indices & 0.57 (0.89) & -0.13 to +0.11 \\
 SSL4EO ResNet-50 (RGB) & 0.45 (0.86) & -0.32 to +0.23 \\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 \end{table}
 
 \begin{figure}[t]\centering\includegraphics[width=1.0\linewidth]{figures/fig_imja.png}
@@ -129,6 +131,7 @@ Over three training seeds the U-Net agrees with the optical water mask better th
 
 \begin{table}[t]\centering\small
 \caption{Radar water model, mean IoU with the optical mask (mean and standard deviation over three seeds for the U-Net).}\label{tab:unet}
+\resizebox{\linewidth}{!}{%
 \begin{tabular}{lrrr}
 \toprule
 Test set & Scenes & U-Net & Radar Otsu rule \\
@@ -136,11 +139,12 @@ Test set & Scenes & U-Net & Radar Otsu rule \\
 Same lakes, held-out year (2022) & 387 & 0.80 ($\pm$ 0.00) & 0.54 \\
 Six unseen lakes & 468 & 0.70 ($\pm$ 0.03) & 0.55 \\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 \end{table}
 
 \begin{table}[t]\centering\small
 \caption{Cross-validated conformal coverage of lake area over 2,421 scenes (all 30 lakes held out in turn).}\label{tab:cov}
+\resizebox{\linewidth}{!}{%
 \begin{tabular}{lrrr}
 \toprule
 Promised & Achieved & Folds (range) & Lakes more than 10 points short \\
@@ -149,7 +153,7 @@ Promised & Achieved & Folds (range) & Lakes more than 10 points short \\
 90\% & 87\% & 53\% to 98\% & 8 of 30 \\
 95\% & 94\% & 82\% to 99\% & 6 of 30 \\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 \end{table}
 
 \begin{figure}[t]\centering\includegraphics[width=1.0\linewidth]{figures/fig_coverage.png}
@@ -170,6 +174,6 @@ Under a common noise standard, foundation-model embeddings did not outperform a 
 
 \textbf{Reproducibility.} Code, scene lists, weight checksums and the exact numbers behind every table are in the project repository (\texttt{docs/V3\_RESULTS.md}, \texttt{data/experiments/}). Sentinel data are free and open (Copernicus); Hansen and Hi-MAG are CC-BY 4.0; Prithvi-EO-2.0 is Apache-2.0; the SSL4EO weights are CC-BY 4.0.
 
-\bibliographystyle{plainnat}
+\bibliographystyle{IEEEtran}
 \bibliography{refs}
 \end{document}

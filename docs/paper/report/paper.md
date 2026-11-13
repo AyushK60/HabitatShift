@@ -184,7 +184,7 @@ The chilika_dry study was also regenerated from source data in a fresh virtual e
 
 An earlier audit found 30 stale output checksums in six manifests left by a preview regeneration; they were corrected with backups, a root-cause fix and a regression test. A test (`backend/tests/test_report_numbers.py`) reads this report and fails if any result table disagrees with the recorded outputs, so the report and the repository cannot drift apart silently.
 
-**Reproducing.** The repository (code, manifests, sealed findings, audit scripts) is released under the MIT licence. `scripts/reproduce_m5_fresh.py` regenerates a study from source data in a clean environment and checks SHA-256 equality. `scripts/run_m5_gsw_crosscheck.py` and `scripts/build_portfolio_figures.py` regenerate Section 5.4 and the figures. Rasters (about 1 GB) are not stored in git; scene downloads need the internet, and the scripts are resumable.
+**Reproducing.** The repository (code, manifests, sealed findings, audit scripts) is released under the MIT licence. `scripts/reproduce_m5_fresh.py` regenerates a study from source data in a clean environment and checks SHA-256 equality. `scripts/run_m5_gsw_crosscheck.py` and `scripts/build_portfolio_figures.py` regenerate Section 5.4 and the figures. The release is archived on Zenodo (version DOI 10.5281/zenodo.24201720; all versions 10.5281/zenodo.24201719). Rasters (about 1 GB) are not stored in git; scene downloads need the internet, and the scripts are resumable.
 
 ## 8 Limitations
 

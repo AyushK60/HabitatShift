@@ -1,7 +1,7 @@
 # Do geospatial foundation models detect surface change better than spectral indices? A noise-calibrated comparison on forest loss and Himalayan glacial lakes
 
-Author: Ayush Khanal
-Affiliation: [department, university]
+Author: Ayush Khanal; Pragyan Kumar Singh
+Affiliation: Andhra University
 Status: draft for review; not yet submitted anywhere
 
 ## Abstract
