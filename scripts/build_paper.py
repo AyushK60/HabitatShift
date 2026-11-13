@@ -42,6 +42,75 @@ def parse_bib() -> dict[str, dict]:
     return out
 
 
+def ieee_name(name: str) -> str:
+    """'Given F. Family' or 'Family, G. F.' -> 'G. F. Family' (IEEE initials first)."""
+    if "," in name:
+        family, given = [x.strip() for x in name.split(",", 1)]
+    else:
+        toks = name.split()
+        family, given = toks[-1], " ".join(toks[:-1])
+    initials = []
+    for tok in given.split():
+        initials.append("-".join(part[0] + "." for part in tok.split("-") if part))
+    return " ".join(initials + [family])
+
+
+def ieee_authors(field: str) -> str:
+    """IEEE author list: 'A, B, and C'; more than six authors become the first author et al."""
+    parts = [p.strip() for p in re.split(r"\s+and\s+", plain(field)) if p.strip()]
+    others = bool(parts) and parts[-1].lower() == "others"
+    if others:
+        parts = parts[:-1]
+    names = [ieee_name(p) for p in parts]
+    if others or len(names) > 6:
+        return names[0] + " et al."
+    if len(names) <= 2:
+        return " and ".join(names)
+    return ", ".join(names[:-1]) + ", and " + names[-1]
+
+
+def ieee_entry(f: dict) -> str:
+    """One reference in IEEE form, as HTML. Uses the bib fields; no field is invented."""
+    authors = ieee_authors(f.get("author", ""))
+    title = plain(f.get("title", ""))
+    year = f.get("year", "")
+    pages = f.get("pages", "").replace("--", "–")
+    pages_txt = ("pp. " if "–" in pages or "-" in pages else "p. ") + pages if pages else ""
+    if f.get("journal", "").startswith("arXiv"):
+        head = f"{authors}, "
+        tail = f'"{title}," {plain(f["journal"])}, {year}.'
+    elif f.get("journal"):
+        parts = [f"<i>{plain(f['journal'])}</i>"]
+        if f.get("volume"):
+            parts.append(f"vol. {f['volume']}")
+        if f.get("number"):
+            parts.append(f"no. {f['number']}")
+        if pages_txt:
+            parts.append(pages_txt)
+        tail = f'"{title},"' + " " + ", ".join(parts) + f", {year}."
+        head = f"{authors}, "
+    elif f.get("booktitle"):
+        head = f"{authors}, "
+        tail = f'"{title}," in <i>{plain(f["booktitle"])}</i>, {year}' + (f", {pages_txt}" if pages_txt else "") + "."
+    elif f.get("address") and f.get("publisher"):
+        head = f"{authors}, "
+        tail = f"<i>{title}</i>. {plain(f['address'])}: {plain(f['publisher'])}, {year}."
+    else:
+        head = f"{authors}, "
+        tail = f'"{title}," {plain(f.get("publisher", ""))}, {year}.'
+    if f.get("doi") and "doi" not in tail:
+        tail += f" doi: {f['doi']}."
+    return html.escape(head) + _ieee_markup(tail)
+
+
+def _ieee_markup(s: str) -> str:
+    """Escape plain text but keep the <i> tags written by ieee_entry."""
+    out = []
+    for piece in re.split(r"(</?i>)", s):
+        out.append(piece if piece in ("<i>", "</i>") else html.escape(piece))
+    return "".join(out)
+
+
 def split_inline(text: str):
     """Split into ('math', tex) and ('text', str) parts so escaping never touches maths."""
     parts, pos = [], 0
@@ -87,7 +156,7 @@ class Doc:
         t = re.sub(r"\*(.+?)\*", "\x00I\x00\\1\x00/I\x00", t)
         t = "".join(TEX_SPECIAL.get(c, c) if c not in "\x00" else c for c in t)
         t = t.replace("\x00B\x00", r"\textbf{").replace("\x00/B\x00", "}").replace("\x00I\x00", r"\textit{").replace("\x00/I\x00", "}")
-        t = re.sub(r"\x00CITE:([\w,;]+)\x00", lambda m: r"\cite{" + m.group(1).replace(";", ",") + "}", t)
+        t = re.sub(r"\x00CITE:([\w,;]+)\x00", lambda m: ", ".join(r"\cite{" + k + "}" for k in re.split(r"[;,]", m.group(1)) if k), t)
         t = re.sub(r"\x00REF:(fig|tab):(\w+)\x00", lambda m: ("Figure~" if m.group(1) == "fig" else "Table~") + r"\ref{" + m.group(1) + ":" + m.group(2) + "}", t)
         t = re.sub(r"\x00CODE(\d+)\x00", lambda m: r"\texttt{" + "".join(TEX_SPECIAL.get(c, c) for c in codes[int(m.group(1))]) + "}", t)
         return t
@@ -105,7 +174,7 @@ class Doc:
 
     def html_text(self, t: str) -> str:
         t = html.escape(t, quote=False)
-        t = re.sub(r"\[@([\w;@ ]+)\]", lambda m: "[" + ", ".join(str(self.cite_no(k)) for k in m.group(1).replace("@", "").replace(" ", "").split(";")) + "]", t)
+        t = re.sub(r"\[@([\w;@ ]+)\]", lambda m: ", ".join(f"[{self.cite_no(k)}]" for k in m.group(1).replace("@", "").replace(" ", "").split(";")), t)
         t = re.sub(r"@(fig|tab):(\w+)", lambda m: ("Figure " if m.group(1) == "fig" else "Table ") + str(self.labels.get(f"{m.group(1)}:{m.group(2)}", ("", "?"))[1]), t)
         t = re.sub(r"`([^`]+)`", r"<code>\1</code>", t)
         t = re.sub(r"\*\*(.+?)\*\*", r"<b>\1</b>", t)
@@ -167,7 +236,7 @@ def build() -> None:
                 html_body.append("</section>")
             if name == "References":
                 html_body.append("<h2>References</h2>@@REFS@@")
-                tex_body.append("\\bibliographystyle{plainnat}\n\\bibliography{refs}")
+                tex_body.append("\\bibliographystyle{IEEEtran}\n\\bibliography{refs}")
                 continue
             sec += 1
             sub = 0
@@ -222,7 +291,7 @@ def build() -> None:
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{booktabs}
-\usepackage[numbers]{natbib}
+\usepackage{cite}
 \usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
 \setlength{\parskip}{0.5em}\setlength{\parindent}{0pt}
 \graphicspath{{./}}
@@ -231,14 +300,8 @@ def build() -> None:
            "\\begin{document}\n\\maketitle\n" + "\n\n".join(tex_body) + "\n\\end{document}\n")
     (DIR / "main.tex").write_text(tex, encoding="utf-8")
 
-    refs = []
-    for i, key in enumerate(doc.cite_order, 1):
-        f = doc.bib[key]
-        authors = plain(f.get("author", "")).replace(" and ", "; ").rstrip(".")
-        venue = f.get("journal") or f.get("booktitle") or f.get("publisher", "")
-        extra = ", ".join(x for x in [f.get("volume"), f.get("pages")] if x)
-        refs.append(f"<li>{html.escape(authors)}. {html.escape(plain(f.get('title', '')))}. <i>{html.escape(venue.replace('{', '').replace('}', ''))}</i>{', ' + html.escape(extra) if extra else ''} ({f.get('year', '')}).</li>")
-    body = "\n".join(html_body).replace("@@REFS@@", "<ol class=\"refs\">" + "".join(refs).replace("--", "–") + "</ol>")
+    refs = [f'<div class="ref">[{i}] {ieee_entry(doc.bib[key])}</div>' for i, key in enumerate(doc.cite_order, 1)]
+    body = "\n".join(html_body).replace("@@REFS@@", "<div class=\"refs\">" + "".join(refs).replace("--", "–") + "</div>")
     page = f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><title>{html.escape(title)}</title>
 <style>
 @page {{ size: A4; margin: 20mm 18mm; }}
@@ -249,7 +312,7 @@ h2, h3 {{ break-after: avoid; }} h2 {{ font-size: 13pt; margin: 16pt 0 4pt; }} h
 figure {{ margin: 8pt auto; break-inside: avoid; }} figure img {{ width: 100%; }} figcaption, caption {{ font-size: 9pt; text-align: left; margin-top: 3pt; }}
 table {{ border-collapse: collapse; margin: 8pt auto; font-size: 9pt; break-inside: avoid; }} caption {{ caption-side: top; margin-bottom: 4pt; }}
 th, td {{ padding: 2pt 8pt; text-align: right; }} th:first-child, td:first-child {{ text-align: left; }} thead tr {{ border-top: 1.2pt solid #111; border-bottom: 0.6pt solid #111; }} tbody tr:last-child {{ border-bottom: 1.2pt solid #111; }}
-code {{ font-size: 9pt; }} ol.refs {{ font-size: 9pt; padding-left: 16pt; }}
+code {{ font-size: 9pt; }} .refs {{ font-size: 9pt; }} .refs .ref {{ padding-left: 22pt; text-indent: -22pt; margin: 0 0 3pt; }}
 </style></head><body>
 <h1>{html.escape(title)}</h1><div class="meta">{html.escape(meta.get('Author', ''))}<br>{html.escape(meta.get('Affiliation', ''))}<br><i>{html.escape(meta.get('Status', ''))}</i></div>
 {body}

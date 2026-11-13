@@ -1,7 +1,7 @@
 # HabitatShift: a reproducible, audited pipeline for Sentinel-1/2 change analysis
 
-Author: Ayush Khanal
-Affiliation:
+Author: Ayush Khanal; Pragyan Kumar Singh
+Affiliation: Andhra University
 Status: Technical report, platform versions 1 to 3, November 2026
 
 ## Abstract

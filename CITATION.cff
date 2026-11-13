@@ -5,6 +5,10 @@ type: software
 authors:
   - family-names: Khanal
     given-names: Ayush
+    affiliation: Andhra University
+  - family-names: Singh
+    given-names: Pragyan Kumar
+    affiliation: Andhra University
 version: "3.0.0"
 date-released: "2026-11-13"
 license: MIT

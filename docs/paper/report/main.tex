@@ -5,12 +5,12 @@
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{booktabs}
-\usepackage[numbers]{natbib}
+\usepackage{cite}
 \usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
 \setlength{\parskip}{0.5em}\setlength{\parindent}{0pt}
 \graphicspath{{./}}
 \title{HabitatShift: a reproducible, audited pipeline for Sentinel-1/2 change analysis}
-\author{Ayush Khanal\\ \small }
+\author{Ayush Khanal; Pragyan Kumar Singh\\ \small Andhra University}
 \date{}
 \begin{document}
 \maketitle
@@ -48,7 +48,7 @@ Spectral indices (NDVI, NDWI, MNDWI, NDBI and, for mountains, NDSI) are differen
 
 \subsection{Label-gated machine learning}
 
-A feasibility gate probed every reference source live: three studies passed, one was partial, two were blocked (both Himalayan studies). Passing studies use a Random Forest \cite{breiman2001,pedregosa2011} (300 trees, balanced subsample class weights, fixed seed) on reflectance bands and indices from a 2021 training epoch produced by the same audited chain. Evaluation uses contiguous 1 km block folds so no pixel crosses a fold \cite{roberts2017}, plus a three-fold geographic hold-out analysis. Classes with fewer than 50 test pixels are reported as not reported. The trained model is then applied to the two study epochs; that cross-epoch application is a recorded assumption.
+A feasibility gate probed every reference source live: three studies passed, one was partial, two were blocked (both Himalayan studies). Passing studies use a Random Forest \cite{breiman2001}, \cite{pedregosa2011} (300 trees, balanced subsample class weights, fixed seed) on reflectance bands and indices from a 2021 training epoch produced by the same audited chain. Evaluation uses contiguous 1 km block folds so no pixel crosses a fold \cite{roberts2017}, plus a three-fold geographic hold-out analysis. Classes with fewer than 50 test pixels are reported as not reported. The trained model is then applied to the two study epochs; that cross-epoch application is a recorded assumption.
 
 \subsection{Noise-aware change test (version 2)}
 
@@ -166,7 +166,7 @@ The evaluation of foundation-model scores against Hansen loss in five areas (Bas
 
 \subsection{Radar water model and conformal lake-area intervals}
 
-For 30 Nepal lakes (Hi-MAG outlines of 0.3 to 6 km$^2$) we paired 3,227 Sentinel-1 scenes (VV, VH) with a Sentinel-2 water mask taken within three days (2020 to 2022), using the optical mask as a weak label. A U-Net \cite{ronneberger2015} with four downsampling steps and 1.94 million weights takes VV, VH, slope and a missing-radar flag on $256 \times 256$ crops, trained with binary cross-entropy plus Dice loss on valid optical pixels. Whole lakes are split into train, calibration and test sets, and 2022 is held out in time on the training lakes. Lake area is the predicted water patch touching a DEM-flat seed. Split conformal prediction \cite{vovk2005,angelopoulos2021} with relative error (floor 0.1 km$^2$) gives an area interval per scene.
+For 30 Nepal lakes (Hi-MAG outlines of 0.3 to 6 km$^2$) we paired 3,227 Sentinel-1 scenes (VV, VH) with a Sentinel-2 water mask taken within three days (2020 to 2022), using the optical mask as a weak label. A U-Net \cite{ronneberger2015} with four downsampling steps and 1.94 million weights takes VV, VH, slope and a missing-radar flag on $256 \times 256$ crops, trained with binary cross-entropy plus Dice loss on valid optical pixels. Whole lakes are split into train, calibration and test sets, and 2022 is held out in time on the training lakes. Lake area is the predicted water patch touching a DEM-flat seed. Split conformal prediction \cite{vovk2005}, \cite{angelopoulos2021} with relative error (floor 0.1 km$^2$) gives an area interval per scene.
 
 \begin{table}[t]\centering\small
 \caption{Radar water model, mean IoU with the optical mask (U-Net mean and standard deviation over three seeds) against a radar Otsu threshold \cite{otsu1979}.}\label{tab:unet}
@@ -240,6 +240,6 @@ An earlier audit found 30 stale output checksums in six manifests left by a prev
 
 Candidate signals only. No finding verifies environmental change; the platform does not predict events or monitor in real time. No independent ground truth: machine-learning metrics measure agreement with WorldCover, and two reference products can themselves disagree (Section 5.4). The top-five selection is not an inventory. The radiometry convention for 2025 reprocessed scenes is validated per read by an empirical test because metadata is inconsistent. Scene-to-scene noise from two or three scenes is a small sample. Scope is small areas between fixed past dates; bright snow and ice pixels can exceed reflectance 1.0 and are not corrected, and generalisation to other regions or operational use is not claimed. The radar water model inherits the bias of its optical labels, and its conformal intervals do not hold for every lake.
 
-\bibliographystyle{plainnat}
+\bibliographystyle{IEEEtran}
 \bibliography{refs}
 \end{document}
