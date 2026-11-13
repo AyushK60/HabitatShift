@@ -1,0 +1,71 @@
+{
+ "study_id": "uttarakhand_shivalik_forest",
+ "bbox": [
+  79.23,
+  29.205,
+  79.309,
+  29.278
+ ],
+ "grid": {
+  "crs": "EPSG:32644",
+  "transform": [
+   10.0,
+   0.0,
+   327920.0,
+   0.0,
+   -10.0,
+   3240090.0
+  ],
+  "width": 781,
+  "height": 821,
+  "resolution_m": 10.0
+ },
+ "periods": {
+  "earlier": {
+   "window": [
+    "2021-01-20",
+    "2021-03-20"
+   ],
+   "scenes": [
+    {
+     "item_id": "S2A_44RLT_20210225_1_L2A",
+     "date": "2021-02-25",
+     "valid_fraction": 1.0
+    },
+    {
+     "item_id": "S2A_44RLT_20210317_1_L2A",
+     "date": "2021-03-17",
+     "valid_fraction": 1.0
+    },
+    {
+     "item_id": "S2B_44RLT_20210302_1_L2A",
+     "date": "2021-03-02",
+     "valid_fraction": 1.0
+    }
+   ]
+  },
+  "later": {
+   "window": [
+    "2025-01-20",
+    "2025-03-20"
+   ],
+   "scenes": [
+    {
+     "item_id": "S2C_44RLT_20250306_0_L2A",
+     "date": "2025-03-06",
+     "valid_fraction": 1.0
+    },
+    {
+     "item_id": "S2C_44RLT_20250214_0_L2A",
+     "date": "2025-02-14",
+     "valid_fraction": 1.0
+    },
+    {
+     "item_id": "S2B_44RLT_20250130_0_L2A",
+     "date": "2025-01-30",
+     "valid_fraction": 1.0
+    }
+   ]
+  }
+ }
+}

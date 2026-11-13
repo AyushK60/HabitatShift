@@ -1,0 +1,71 @@
+{
+ "study_id": "garo_hills_forest",
+ "bbox": [
+  90.728,
+  25.511,
+  90.804,
+  25.584
+ ],
+ "grid": {
+  "crs": "EPSG:32646",
+  "transform": [
+   10.0,
+   0.0,
+   271650.0,
+   0.0,
+   -10.0,
+   2831580.0
+  ],
+  "width": 778,
+  "height": 823,
+  "resolution_m": 10.0
+ },
+ "periods": {
+  "earlier": {
+   "window": [
+    "2021-01-20",
+    "2021-03-20"
+   ],
+   "scenes": [
+    {
+     "item_id": "S2B_45RZJ_20210205_1_L2A",
+     "date": "2021-02-05",
+     "valid_fraction": 1.0
+    },
+    {
+     "item_id": "S2B_45RZJ_20210215_1_L2A",
+     "date": "2021-02-15",
+     "valid_fraction": 1.0
+    },
+    {
+     "item_id": "S2B_45RZJ_20210317_0_L2A",
+     "date": "2021-03-17",
+     "valid_fraction": 1.0
+    }
+   ]
+  },
+  "later": {
+   "window": [
+    "2025-01-20",
+    "2025-03-20"
+   ],
+   "scenes": [
+    {
+     "item_id": "S2B_45RZJ_20250214_0_L2A",
+     "date": "2025-02-14",
+     "valid_fraction": 1.0
+    },
+    {
+     "item_id": "S2B_46RBP_20250306_0_L2A",
+     "date": "2025-03-06",
+     "valid_fraction": 1.0
+    },
+    {
+     "item_id": "S2C_45RZJ_20250219_0_L2A",
+     "date": "2025-02-19",
+     "valid_fraction": 1.0
+    }
+   ]
+  }
+ }
+}
