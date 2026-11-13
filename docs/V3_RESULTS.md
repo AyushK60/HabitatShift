@@ -188,6 +188,24 @@ bands 0.203, Prithvi 0.347 and SSL4EO RGB 0.705 (highest of all; z was the pre-s
 Caveats: the lakes were chosen because radar shows change at them; the added lake uses 2020 as the earlier year, the
 pilot lakes 2018; per-lake scores were not examined; Prithvi AP 95% interval is 0.22 to 0.85.
 
+### Lakes one at a time (exploratory, 13 November 2026)
+
+`scripts/run_fm_lake_subsets.py` -> `data/experiments/v3_fm/lakes/subsets.json`. Same patches, labels and scores as the
+pooled evaluation, grouped differently. Run after the pooled result, in answer to a review point that 34 of 59 positives
+sit at Imja Tsho. The pilot-only group reproduces the recorded pilot numbers (Prithvi 0.75, raw bands 0.76, MNDWI 0.57).
+
+Average precision of z, MNDWI / raw bands / Prithvi / SSL4EO RGB (positives, spatial blocks holding positives):
+Imja Tsho 0.60 / 0.81 / 0.80 / 0.55 (34, 4); added lake 0.05 / 0.64 / 0.56 / 0.70 (15, 3); Thulagi 0.84 / 0.90 / 0.93 / 1.00
+(6, 2); Tsho Rolpa 0.01 / 0.04 / 0.04 / 0.13 (4, 2); all lakes except Imja 0.23 / 0.41 / 0.34 / 0.41 (25, 7).
+
+Paired difference from MNDWI (95% interval): Imja alone, Prithvi -0.16 to +0.27, raw bands -0.18 to +0.27 (both include
+zero). Without Imja: raw bands +0.01 to +0.37, Prithvi 0.00 to +0.25, SSL4EO RGB +0.06 to +0.35. Added lake alone: raw bands
++0.06 to +0.83, Prithvi +0.01 to +0.70.
+
+Reading: the pooled advantage over MNDWI is carried mainly by the added lake, where MNDWI is at chance (AUC 0.44). At
+Imja, models and MNDWI are not clearly different. The pooled set has only 11 spatial blocks with positives. Why MNDWI fails at
+the added lake was not examined.
+
 ## Linear probe on the frozen features (exploratory, 13 November 2026)
 
 `scripts/run_fm_probe.py`; design in `studies/probe_design.yaml` (written before the run); results in

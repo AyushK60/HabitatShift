@@ -82,3 +82,19 @@ def test_probe_table_matches_recorded_scores():
         assert cells[4] == r2(m["raw6:probe"]["average_precision"]), label
         lo, hi = probe["forest"]["groups"][key]["diff_vs_reference_ap_ci95"]["prithvi:probe"]
         assert cells[3].endswith("*") == (hi < 0 or lo > 0), label
+
+
+def test_lake_subset_table_matches_recorded_scores():
+    path = ROOT / "data" / "experiments" / "v3_fm" / "lakes" / "subsets.json"
+    if not path.exists():
+        pytest.skip("lake subset results missing")
+    text, groups = PAPER.read_text(encoding="utf-8"), json.loads(path.read_text())["groups"]
+    section = text[text.index("Table: Lakes one at a time"):]
+    names = {"Imja Tsho": "imja_only", "Added lake": "added_lake_only", "Thulagi": "thulagi_only",
+             "Tsho Rolpa": "tsho_rolpa_only", "All lakes except Imja Tsho": "without_imja"}
+    for label, key in names.items():
+        cells = [c.strip() for c in _table_row(section, label).strip("|").split("|")]
+        g = groups[key]
+        assert cells[1] == f"{g['positives']} ({g['blocks_with_positives']})", label
+        for cell, method in zip(cells[2:], ("mndwi:z", "raw6:z", "prithvi:z", "ssl4eo_rgb:z")):
+            assert cell == r2(g["metrics"][method]["average_precision"]), (label, method)
