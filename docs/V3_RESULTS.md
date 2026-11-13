@@ -244,6 +244,11 @@ readout does about as well, so pretraining is not shown to help.
   bands 1% to 6%. The within-period noise understates the between-year spread of the embeddings.
 - Sensitivity variants in each area's `evaluation.json`: signed NDVI matches or beats both embeddings in 13 of 15 variants;
   exceptions Bastar and Garo Hills with positives from 2021 (Prithvi +0.03 and +0.02 AP).
+- Sign gate (`scripts/run_fm_sign_gate.py` -> `data/experiments/v3_fm/sign_gate.json`, exploratory): each unsigned z zeroed where
+  NDVI did not fall, nothing trained. AP, Prithvi gated / raw bands gated / signed NDVI: Bastar 0.77 / 0.76 / 0.72, Odisha
+  0.72 / 0.73 / 0.76, Kodagu 0.54 / 0.55 / 0.54, Garo Hills 0.51 / 0.53 / 0.55, Shivalik 0.64 / 0.63 / 0.77. Prithvi gated minus
+  signed NDVI: Bastar +0.03 to +0.10, Odisha -0.07 to -0.01, Kodagu -0.07 to +0.07, Garo Hills -0.07 to -0.01, Shivalik
+  -0.18 to -0.08. Gated raw bands are within 0.02 of gated Prithvi in every area.
 - Five-indices probe (run with the others, previously unreported): AP 0.65, 0.66, 0.53, 0.54, 0.75 against signed NDVI 0.72,
   0.76, 0.54, 0.55, 0.77; worse in Bastar, Odisha, Garo Hills and Shivalik on the original grid.
 - Prithvi-EO-2.0 was pretrained on Harmonized Landsat and Sentinel-2 data at 30 m (arXiv:2412.02732); our pixels are 10 m.

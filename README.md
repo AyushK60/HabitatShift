@@ -7,8 +7,10 @@
 **Do geospatial foundation models detect real surface change better than simple spectral indices, once both are judged
 against the same scene-to-scene noise, and does the answer hold across fields?** HabitatShift tests that on forest loss
 and Himalayan glacial lakes with Sentinel-1 radar and Sentinel-2 optical data, reports the result even where it is
-negative, and keeps every number next to its uncertainty. Short answer so far: on forest loss no foundation model beat a
-signed NDVI baseline; on glacial lakes they beat the water index but not plain reflectance.
+negative, and keeps every number next to its uncertainty. Short answer so far: on forest loss no foundation model beat an
+unsupervised signed NDVI baseline, and a trained linear readout of the embeddings did no better than the same readout of raw
+reflectance; on glacial lakes Prithvi beat the water index in the pooled result but not plain reflectance, and individually
+clearly at only one of four lakes.
 
 Paper draft: [`docs/paper/v3/`](docs/paper/v3/) (LaTeX source and a PDF preview). Live demo: not hosted yet; run the
 static site locally (below).

@@ -131,3 +131,19 @@ def test_matched_false_positive_recall_claim():
         prithvi.append(r2(metrics["prithvi:z"]["tpr_at_fpr_5pct"]))
         assert metrics["ndvi_decrease:z"]["tpr_at_fpr_5pct"] > metrics["prithvi:z"]["tpr_at_fpr_5pct"], area
     assert f"signed NDVI ({', '.join(base)}) is higher than Prithvi's ({', '.join(prithvi)})" in text
+
+
+def test_sign_gate_numbers_match_recorded_scores():
+    path = ROOT / "data" / "experiments" / "v3_fm" / "sign_gate.json"
+    if not path.exists():
+        pytest.skip("sign gate results missing")
+    text, gate = PAPER.read_text(encoding="utf-8"), json.loads(path.read_text())
+    areas = ["bastar_forest", "odisha_forest", "kodagu_wayanad_forest", "garo_hills_forest", "uttarakhand_shivalik_forest"]
+    for method, label in (("prithvi_gated", "lifts Prithvi to"), ("raw6_gated", "and raw bands to")):
+        values = ", ".join(r2(gate[a]["metrics"][method]["average_precision"]) for a in areas)
+        assert f"{label} {values}" in text, method
+    for a in areas:
+        gap = abs(gate[a]["metrics"]["prithvi_gated"]["average_precision"] - gate[a]["metrics"]["raw6_gated"]["average_precision"])
+        assert gap <= 0.02 + 1e-9, a
+    lo, hi = gate["bastar_forest"]["diff_vs_signed_ndvi_ap_ci95"]["prithvi_gated"]
+    assert f"+{r2(lo)} to +{r2(hi)}" in text and lo > 0

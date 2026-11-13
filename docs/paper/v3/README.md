@@ -16,15 +16,19 @@ cd tools\visual; node render_paper_v3.mjs
 
 ## Before this goes anywhere public
 
-- [ ] Fill in the affiliation line in `paper.md`.
-- [ ] Check every entry in `refs.bib` against the publisher or arXiv page (they were written from memory: authors,
-      page numbers, arXiv ids). Add any related work you want to cite; the introduction cites only what it needs.
+- [x] Affiliation (Andhra University) and co-author (Pragyan Kumar Singh) are in `paper.md`.
+- [ ] Check every entry in `refs.bib` against the publisher or arXiv page. The five added in November 2026 (Singh 1989,
+      Bruzzone and Prieto 2000, Coppin et al. 2004, GEO-Bench, PANGAEA) were checked against Crossref or arXiv; the original
+      entries were checked earlier, but a second person should re-check them. The U-Net, Otsu and conformal entries are no
+      longer cited by the paper.
 - [ ] Compile `main.tex` on Overleaf once and fix any layout problem (it has not been compiled on this machine).
 - [ ] Re-read the limitations section as a sceptical reviewer would; the strongest objections are listed there.
 - [ ] Decide the venue. Deadlines and formats change every year, so check the current call: ML for Remote Sensing and
       Climate Change AI workshops, or an IGARSS student paper. Do not rely on any date written in the plan.
 - [ ] Preprint: EarthArXiv needs no endorsement. arXiv may require an endorser for a first submission in a category.
 - [ ] Your supervisor or a senior person should read it before submission.
+
+The long text from before the November 2026 trim is kept as `paper_long.md` (with its PDF preview) for comparison.
 
 ## Claims the paper does not make
 
