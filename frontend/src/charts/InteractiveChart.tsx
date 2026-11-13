@@ -629,7 +629,8 @@ export function InteractiveChart({
       </figcaption>
 
       {/* Screen-reader table of the recorded points (never rendered visually). */}
-      <table className="visually-hidden">
+      {/* The div does the clipping: a table ignores height and overflow, so a hidden table alone still stretched the page. */}
+      <div className="visually-hidden"><table>
         <caption>{caption}</caption>
         <thead>
           <tr>
@@ -649,7 +650,7 @@ export function InteractiveChart({
             ))
           )}
         </tbody>
-      </table>
+      </table></div>
     </figure>
   );
 }
