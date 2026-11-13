@@ -1,6 +1,6 @@
 # Version 3 results (working notes, preliminary)
 
-Status: two forest areas evaluated against a reference, with two foundation models, plus a noise check on nine areas.
+Status: five forest areas evaluated against a reference, with two foundation models, plus a noise check on twelve areas.
 This is a partial answer to the research question: forest loss only. Numbers come from `data/experiments/v3_fm/` and
 can be regenerated with the scripts named below.
 
@@ -60,8 +60,8 @@ Paired difference from the signed NDVI baseline (95% interval; * means the inter
 | Six raw bands | -0.082 to +0.056 | -0.294 to -0.106 * |
 
 Reading:
-- In neither area does a foundation model beat the signed NDVI baseline. In Bastar they are not distinguishable; in
-  Odisha both are clearly worse.
+- In neither of these first two areas does a foundation model beat the signed NDVI baseline. In Bastar they are not
+  distinguishable; in Odisha both are clearly worse. Three further areas follow below with the same result.
 - Prithvi is not better than plain raw bands in either area. The RGB-only ResNet is about as good as Prithvi, so the
   infrared bands and the larger model add little here.
 - Both models and both areas share a pattern at the fixed rule z > 3: embeddings catch more real loss but flag many
@@ -70,6 +70,53 @@ Reading:
 - Noise calibration (z against raw distance D) does not change the ranking. What it gives is a threshold that means
   the same thing across methods, and even that only partly holds in Odisha.
 - The ordering is stable when positives include 2021, or when the cut-off is 5% or 20%.
+
+
+### Three further forest areas (pre-registered)
+
+Added to test whether the Bastar and Odisha result holds in other forest types. The areas, the inclusion rule and the
+seasonal windows were written down in `studies/forest_expansion_prereg.yaml` before any score was computed; the
+evaluation script is unchanged.
+
+- Four regions were registered: Kodagu and Wayanad (moist evergreen forest and plantations, Western Ghats), Garo Hills
+  (hill forest with shifting cultivation, Meghalaya), Nepal Terai near Chitwan (sal forest) and the Shivalik foothills
+  (Uttarakhand).
+- An area is evaluated only if the Hansen labels alone give at least 150 positive and 300 clean-negative patches and
+  three fully valid scenes exist in each period.
+- The four boxes centred on the stated points all failed that screen (2, 29, 2 and 3 positives): an arbitrary 8 km box
+  of forest holds little recent clearing. The registration was then amended (Amendment 1), still before any scene or
+  score, so that each box is the one with the most positive patches in a 0.4 degree window, chosen from labels only
+  (`scripts/select_forest_boxes.py`, `studies/forest_expansion_selected.json`).
+- Kodagu (171), Garo Hills (426) and Shivalik (273) passed. Chitwan's best box had 40 positives, so it failed and is
+  not evaluated; it was not replaced.
+- Because of this selection the boxes, like Bastar and Odisha, over-represent active clearing.
+
+| Area | Eligible patches | Positive | Clean negative | Base rate |
+|---|---|---|---|---|
+| Kodagu | 2,276 | 174 | 1,951 | 0.082 |
+| Garo Hills | 2,415 | 427 | 1,410 | 0.232 |
+| Shivalik | 1,747 | 273 | 1,262 | 0.178 |
+
+Average precision of the noise-calibrated score (ROC-AUC in brackets) and the paired difference from the signed NDVI
+baseline (95% interval; * excludes zero):
+
+| Score | Kodagu, AP (AUC); paired difference | Garo Hills, AP (AUC); paired difference | Shivalik, AP (AUC); paired difference |
+|---|---|---|---|
+| NDVI decrease (signed) | 0.542 (0.915); baseline | 0.552 (0.782); baseline | 0.772 (0.902); baseline |
+| Six raw bands | 0.550 (0.925); -0.020 to +0.049 | 0.503 (0.726); -0.113 to +0.027 | 0.188 (0.471); -0.636 to -0.506 * |
+| Prithvi | 0.516 (0.911); -0.097 to +0.043 | 0.480 (0.776); -0.111 to -0.030 * | 0.638 (0.898); -0.226 to -0.043 * |
+| SSL4EO ResNet-50 RGB | 0.220 (0.758); -0.405 to -0.230 * | 0.307 (0.659); -0.276 to -0.209 * | 0.612 (0.893); -0.261 to -0.073 * |
+| NDVI (unsigned) | 0.534 (0.915); -0.018 to -0.001 * | 0.281 (0.536); -0.307 to -0.231 * | 0.124 (0.319); -0.707 to -0.544 * |
+| NDWI | 0.508 (0.897); -0.063 to -0.005 * | 0.203 (0.405); -0.386 to -0.302 * | 0.123 (0.309); -0.708 to -0.544 * |
+| Five indices | 0.518 (0.906); -0.066 to +0.015 | 0.261 (0.518); -0.330 to -0.244 * | 0.155 (0.442); -0.672 to -0.526 * |
+
+Reading:
+- No foundation model beats the signed NDVI baseline in any of the five areas. Prithvi ties it in Bastar and Kodagu and
+  is clearly worse in Odisha, Garo Hills and Shivalik. SSL4EO is clearly worse in four areas.
+- Prithvi is not better than raw bands in four of five areas. Shivalik is the exception, because raw bands and
+  indices score near chance there (raw bands AUC 0.47). A possible cause is that the leaf state of deciduous sal forest
+  in February to March differs between years; this was not tested.
+- Kodagu has a low base rate (0.082), so its AP values are low in absolute terms but well above chance.
 
 ## Glacial lakes against Sentinel-1 radar
 
@@ -116,11 +163,11 @@ Reading:
 - The ordering is not stable across scores (the RGB model's raw distance scores 0.799), which shows how loose a single
   lake is as a test.
 
-## Noise check without a reference (nine areas)
+## Noise check without a reference (twelve areas)
 
 `scripts/run_fm_noise_check.py`. One scene of a period is compared with the rest of the same period, so every flagged
 patch is a false alarm. Both embedding models flag almost nothing in this test (0 to 3.4% at z > 3), while indices and
-raw bands flag 0 to 41% (medians 3 to 15%; NDWI reaches 40.5% in one area).
+raw bands flag 0 to 41% (medians 3 to 13%; NDWI reaches 40.5% in one area).
 
 Do not read this as "embeddings are better calibrated". On Bastar, NDVI flags 23% of patches in the placebo test but
 only 1% of Hansen's clean negatives in the real comparison, so the placebo rate depends on how alike the noise is in
@@ -130,10 +177,10 @@ tested.
 
 ## What this does and does not show
 
-- For forest loss in two areas of central-east India, a simple signed NDVI baseline matches or beats Prithvi and a
-  small RGB model. This is a negative result for the foundation models on this task, and is reported as one.
+- For forest loss in five Indian areas, a simple signed NDVI baseline matches or beats Prithvi and a small RGB model
+  in every area. This is a negative result for the foundation models on this task, and is reported as one.
 - A foundation model gives no direction of change, which is a real limitation for loss detection.
-- Two forest areas, one effective lake, three scenes per period and one reference product per field do not settle the
+- Five forest areas (three chosen by a label-only search for active clearing), one effective lake, three scenes per period and one reference product per field do not settle the
   question. Urban and wetland fields are not yet tested.
 
 ## Still to do

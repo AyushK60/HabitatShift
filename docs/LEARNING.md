@@ -235,7 +235,7 @@ representation and not a tuned classifier. A trained head might do better; that 
 
 ### Placebo test
 Compare one scene with the rest of its own period. Nothing changed, so every flag is a false alarm. Prithvi raised
-0 to 3.4% false alarms at z > 3 across nine areas (median 0%), indices and raw bands up to 41% (medians 3 to 15%). This is calibration, not detection skill.
+0 to 3.4% false alarms at z > 3 across twelve areas (medians under 0.5%), indices and raw bands up to 41% (medians 3 to 13%). This is calibration, not detection skill.
 Real evaluation needs reference change data at a matched false-alarm rate.
 
 ## Version 3 concepts (filled in as each one is used)

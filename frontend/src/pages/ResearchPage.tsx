@@ -79,7 +79,7 @@ export function ResearchPage() {
         <article className="verdict">
           <p className="verdict-tag is-neg">Forest loss</p>
           <h2>No model beat a simple formula</h2>
-          <p>A signed vegetation-decrease formula matched or beat both AI models in two forest areas.</p>
+          <p>A signed vegetation-decrease formula matched or beat both AI models in five forest areas.</p>
           <a href="#forest">See the evidence</a>
         </article>
         <article className="verdict">
@@ -196,7 +196,7 @@ export function ResearchPage() {
       <section className="limits plate">
         <h2>What this does not show</h2>
         <ul>
-          <li>Two forest areas and effectively one changing lake do not settle the question; urban and wetland fields are not tested.</li>
+          <li>Five forest areas and effectively one changing lake do not settle the question; urban and wetland fields are not tested.</li>
           <li>Every reference (Hansen, radar water frequency, optical masks) is another model's output. Scores are agreement, not accuracy.</li>
           <li>A foundation model gives no direction of change, which is a real limit for loss detection.</li>
         </ul>

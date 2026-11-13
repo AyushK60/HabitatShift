@@ -23,15 +23,31 @@ def _table_row(text: str, label: str) -> str:
     return next(line for line in text.splitlines() if line.startswith("| " + label))
 
 
+FOREST_AREAS = ["bastar_forest", "odisha_forest", "kodagu_wayanad_forest", "garo_hills_forest", "uttarakhand_shivalik_forest"]
+
+
 def test_forest_table_matches_recorded_scores():
     text, data = PAPER.read_text(encoding="utf-8"), json.loads(DATA.read_text())
     names = {"ndvi_decrease": "NDVI decrease (signed)", "raw6": "Six raw bands", "prithvi": "Prithvi-EO-2.0",
              "ssl4eo_rgb": "SSL4EO ResNet-50 (RGB)", "ndvi": "NDVI (unsigned)", "ndwi": "NDWI", "indices5": "Five indices"}
     for key, label in names.items():
-        row = _table_row(text, label)
-        for area in ("bastar_forest", "odisha_forest"):
+        cells = [c.strip() for c in _table_row(text, label).strip("|").split("|")][1:]
+        assert len(cells) == len(FOREST_AREAS), (label, cells)
+        for area, cell in zip(FOREST_AREAS, cells):
             r = next(x for x in data["forest"][area]["rows"] if x["id"] == key)
-            assert f"{r2(r['ap'])} ({r2(r['auc'])})" in row, (label, area, row)
+            assert cell.startswith(f"{r2(r['ap'])} ({r2(r['auc'])})"), (label, area, cell)
+            lo, hi = r["vs_reference_ci"]
+            excludes_zero = key != "ndvi_decrease" and (hi < 0 or lo > 0)
+            assert cell.endswith("*") == excludes_zero, (label, area, cell)
+
+
+def test_forest_text_claims_match_recorded_scores():
+    text, data = PAPER.read_text(encoding="utf-8"), json.loads(DATA.read_text())
+    for area in FOREST_AREAS:
+        rows = {x["id"]: x for x in data["forest"][area]["rows"]}
+        assert rows["ndvi_decrease"]["ap"] >= max(rows[m]["ap"] for m in ("prithvi", "ssl4eo_rgb")) - 1e-9, area
+    positives = [data["forest"][a]["counts"]["positives"] for a in FOREST_AREAS]
+    assert "Positive patches: " + ", ".join(map(str, positives[:-1])) + " and " + str(positives[-1]) in text
 
 
 def test_lake_table_matches_recorded_scores():

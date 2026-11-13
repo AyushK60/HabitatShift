@@ -43,7 +43,10 @@ def method_rows(evaluation: dict, keep: list[str], reference: str) -> list[dict]
 
 def main() -> None:
     forest = {}
-    for study, title in (("bastar_forest", "Bastar, Chhattisgarh"), ("odisha_forest", "Odisha")):
+    for study, title in (("bastar_forest", "Bastar, Chhattisgarh"), ("odisha_forest", "Odisha"),
+                         ("kodagu_wayanad_forest", "Kodagu and Wayanad, Western Ghats"),
+                         ("garo_hills_forest", "Garo Hills, Meghalaya"),
+                         ("uttarakhand_shivalik_forest", "Shivalik foothills, Uttarakhand")):
         e = json.loads((EXP / "v3_fm" / study / "evaluation.json").read_text())
         forest[study] = {"title": title, "counts": e["counts"], "reference_method": "ndvi_decrease",
                          "scenes": e["scenes"], "rows": method_rows(

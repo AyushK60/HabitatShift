@@ -54,7 +54,7 @@ They show where optical imagery fails. The natural next step is radar (Sentinel-
 The question: can geospatial foundation-model embeddings detect real change better than spectral indices, once both are
 judged against the same scene-to-scene noise? Details and tables in [`docs/V3_RESULTS.md`](docs/V3_RESULTS.md).
 
-- **Forest loss (Hansen reference, two areas).** A signed NDVI-decrease score matched or beat Prithvi-EO-2.0 and an
+- **Forest loss (Hansen reference, five areas).** A signed NDVI-decrease score matched or beat Prithvi-EO-2.0 and an
   SSL4EO ResNet-50. No foundation model won.
 - **Glacial lakes (Sentinel-1 reference).** Prithvi and raw bands beat the MNDWI water index and tied each other.
 - **Radar water U-Net.** Trained on 3,227 radar and optical pairs from 30 Nepal lakes. It agrees with optical lake maps
@@ -71,7 +71,8 @@ Full tables: [`docs/RESULTS.md`](docs/RESULTS.md). What changed in version 2: [`
 
 - No ground-truth field data. Every reference (Hansen, radar water frequency, optical masks) is another satellite
   product, so scores are agreement, not accuracy.
-- Two forest areas and effectively one changing lake do not settle the research question. Urban and wetland fields are
+- Five forest areas (three picked by a label-only search for active clearing) and effectively one changing lake do not
+  settle the research question. Urban and wetland fields are
   not tested (they need Earth Engine reference data), and foundation models were compared as frozen embeddings, not
   fine-tuned.
 - The radar U-Net learns from optical labels, which under-detect turbid, icy water, and its conformal area intervals fail

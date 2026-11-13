@@ -387,7 +387,7 @@ export function LandingPage() {
                   chance={res.forest.bastar_forest.counts.base_rate}
                   caption="1 is perfect. The thin line is guessing."
                 />
-                <Link to="/research#forest" className="more">See both forest areas</Link>
+                <Link to="/research#forest" className="more">See all forest areas</Link>
               </div>
             </article>
 

@@ -57,11 +57,21 @@ def dots(ax, rows, base_rate, title):
 
 
 def fig_forest() -> None:
-    fig, axes = plt.subplots(1, 2, figsize=(7.0, 2.7), sharex=True)
+    fig, axes = plt.subplots(1, 5, figsize=(7.2, 2.7), sharex=True, sharey=True)
     order = ["ndvi_decrease", "raw6", "prithvi", "ssl4eo_rgb", "ndvi", "ndwi", "indices5"]
-    for ax, (key, f) in zip(axes, V3["forest"].items()):
-        rows = [next(r for r in f["rows"] if r["id"] == i) for i in order]
-        dots(ax, rows, f["counts"]["base_rate"], f"{f['title'].split(',')[0]} ({f['counts']['positives']} positives)")
+    short = {"Kodagu and Wayanad": "Kodagu", "Shivalik foothills": "Shivalik"}
+    for i, (ax, (key, f)) in enumerate(zip(axes, V3["forest"].items())):
+        rows = [next(r for r in f["rows"] if r["id"] == k) for k in order]
+        name = f["title"].split(",")[0]
+        dots(ax, rows, f["counts"]["base_rate"], f"{short.get(name, name)}" + chr(10) + f"n = {f['counts']['positives']}")
+        ax.title.set_fontsize(8)
+        ax.set_xticks([0, 0.5, 1])
+        ax.set_xlabel("")
+        for tx in ax.texts:
+            tx.set_fontsize(6.5)
+        if i:
+            ax.tick_params(axis="y", left=False)
+    fig.supxlabel("average precision", fontsize=8.5)
     fig.tight_layout()
     save(fig, "fig_forest_ap")
 
@@ -92,7 +102,7 @@ def fig_placebo() -> None:
         ax.plot([i - 0.28, i + 0.28], [np.median(v)] * 2, color=INK, lw=1.4)
     ax.set_xticks(range(len(methods)), [names[m] for m in methods], rotation=30, ha="right")
     ax.set_ylabel("false alarms at z > 3 (%)")
-    ax.set_title("Placebo test, nine areas (each dot one area; bar is the median)", loc="left", fontsize=9, fontweight="bold")
+    ax.set_title("Placebo test, twelve areas (each dot one area; bar is the median)", loc="left", fontsize=9, fontweight="bold")
     fig.tight_layout()
     save(fig, "fig_placebo")
 

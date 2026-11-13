@@ -22,7 +22,7 @@ uncertainty. Paper draft in `docs/paper/v3/`.
 
 **Short paragraph (statement of purpose)**
 My project asked a simple question honestly: do large pretrained satellite models detect real change better than a
-simple vegetation index once you account for ordinary noise between images? In two forest areas they did not, and at
+simple vegetation index once you account for ordinary noise between images? In five forest areas they did not, and at
 glacial lakes they matched plain reflectance. I built the evaluation so the answer could have gone the other way, kept
 the negative result, and measured how far my own radar model's error bars can be trusted: on average well, for a few
 lakes not at all. I want to continue this work on uncertainty in remote sensing.
