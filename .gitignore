@@ -55,9 +55,6 @@ frontend/dist/
 # Custom-area run outputs (generated, bounded, pruned automatically)
 data/custom_runs/
 
-# Local design-tool state
-.impeccable/
-
 # Lake pipeline: DEM/slope arrays are regenerated on demand
 data/lakes/**/*.npz
 

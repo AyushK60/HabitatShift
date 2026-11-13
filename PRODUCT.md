@@ -1,6 +1,5 @@
 # Product
 
-<!-- impeccable:product-schema 1 -->
 
 ## Platform
 
@@ -25,7 +24,7 @@ Used in a live meeting on a laptop projector or shared screen, and as a static s
 Existing pages: Explore, Experiments, Workstation, Methods, Scene check, Glacial lakes. All existing functionality and data must stay. Static data under `frontend/public/` (including `lakes/lakes.json`, extended with a radar U-Net series). Terminology to keep consistent: "agreement with a reference, not accuracy"; "noise test"; "foundation model"; "conformal interval".
 
 ## Brand Commitments
-No mention that an AI assistant helped build the project (owner's instruction). No invented numbers, customers or claims. Owner's name: Ayush Khanal.
+No invented numbers, customers or claims. Owner's name: Ayush Khanal.
 
 ## Evidence on Hand
 Study bundles under `studies/` and `frontend/public/`; V3 results in `docs/V3_RESULTS.md`; lake data `frontend/public/lakes/lakes.json`. No testimonials or external benchmarks exist; none may be invented.
