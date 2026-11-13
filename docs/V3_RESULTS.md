@@ -1,5 +1,8 @@
 # Version 3 results (working notes, preliminary)
 
+Terminology: these working notes say "noise-calibrated" for the score z. The paper calls it "noise-normalised", because
+between years its noise scale is not calibrated (see "Extra checks after review").
+
 Status: five forest areas evaluated against a reference, with two foundation models, plus a noise check on twelve areas.
 This is a partial answer to the research question: forest loss only. Numbers come from `data/experiments/v3_fm/` and
 can be regenerated with the scripts named below.
@@ -202,8 +205,9 @@ Paired difference from MNDWI (95% interval): Imja alone, Prithvi -0.16 to +0.27,
 zero). Without Imja: raw bands +0.01 to +0.37, Prithvi 0.00 to +0.25, SSL4EO RGB +0.06 to +0.35. Added lake alone: raw bands
 +0.06 to +0.83, Prithvi +0.01 to +0.70.
 
-Reading: the pooled advantage over MNDWI is carried mainly by the added lake, where MNDWI is at chance (AUC 0.44). At
-Imja, models and MNDWI are not clearly different. The pooled set has only 11 spatial blocks with positives. Why MNDWI fails at
+Reading: the advantage over MNDWI appears in point estimates at three of four lakes and in the pilot group alone (Prithvi
++0.02 to +0.23), but for Prithvi and raw bands it is individually clear only at the added lake, where MNDWI is at chance
+(AUC 0.44). At Imja, models and MNDWI are not clearly different. The pooled set has only 11 spatial blocks with positives. Why MNDWI fails at
 the added lake was not examined.
 
 ## Linear probe on the frozen features (exploratory, 13 November 2026)
@@ -226,7 +230,7 @@ Lakes (four lakes pooled, secondary): Prithvi probe 0.77 against six-band probe 
 0.39 on the wider grid; paired intervals +0.03 to +0.35 and -0.02 to +0.29. Not robust, not read as evidence.
 
 Reading: a trained readout recovers an advantage over the unsupervised signed baseline, but raw reflectance with the same
-readout does about as well, so the gain comes from labels and the sign of the change, not from pretraining.
+readout does about as well, so pretraining is not shown to help.
 
 ## Extra checks after review (exploratory, 13 November 2026)
 
@@ -241,7 +245,7 @@ readout does about as well, so the gain comes from labels and the sign of the ch
 - Sensitivity variants in each area's `evaluation.json`: signed NDVI matches or beats both embeddings in 13 of 15 variants;
   exceptions Bastar and Garo Hills with positives from 2021 (Prithvi +0.03 and +0.02 AP).
 - Five-indices probe (run with the others, previously unreported): AP 0.65, 0.66, 0.53, 0.54, 0.75 against signed NDVI 0.72,
-  0.76, 0.54, 0.55, 0.77; worse in Bastar, Odisha and Shivalik.
+  0.76, 0.54, 0.55, 0.77; worse in Bastar, Odisha, Garo Hills and Shivalik on the original grid.
 - Prithvi-EO-2.0 was pretrained on Harmonized Landsat and Sentinel-2 data at 30 m (arXiv:2412.02732); our pixels are 10 m.
 - Registration commits: `9fc28c3` registration, `163885b` label screen, `aa13ce3` amendment, `fb7e7c7` box selection,
   `d5ebab4` scoring scripts, `d020079` added-area scores. Lake amendment and probe design were committed with their results.
