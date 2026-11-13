@@ -2,11 +2,15 @@
 from __future__ import annotations
 
 import numpy as np
-import torch
+import pytest
 
 from backend.app.segmentation import conformal as C
 from backend.app.segmentation import data as D
-from backend.app.segmentation.unet import UNet, bce_dice_loss
+
+# The U-Net needs torch (requirements-ml.txt). The offline CI install does not
+# include it, so skip this module there instead of failing collection.
+torch = pytest.importorskip("torch")
+from backend.app.segmentation.unet import UNet, bce_dice_loss  # noqa: E402
 
 
 def test_crop_window_centres_on_seed_and_stays_inside():
