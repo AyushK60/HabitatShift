@@ -237,7 +237,7 @@ def build() -> None:
         authors = plain(f.get("author", "")).replace(" and ", "; ").rstrip(".")
         venue = f.get("journal") or f.get("booktitle") or f.get("publisher", "")
         extra = ", ".join(x for x in [f.get("volume"), f.get("pages")] if x)
-        refs.append(f"<li>{html.escape(authors)}. {html.escape(f.get('title', '').replace('{', '').replace('}', ''))}. <i>{html.escape(venue.replace('{', '').replace('}', ''))}</i>{', ' + html.escape(extra) if extra else ''} ({f.get('year', '')}).</li>")
+        refs.append(f"<li>{html.escape(authors)}. {html.escape(plain(f.get('title', '')))}. <i>{html.escape(venue.replace('{', '').replace('}', ''))}</i>{', ' + html.escape(extra) if extra else ''} ({f.get('year', '')}).</li>")
     body = "\n".join(html_body).replace("@@REFS@@", "<ol class=\"refs\">" + "".join(refs).replace("--", "–") + "</ol>")
     page = f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><title>{html.escape(title)}</title>
 <style>
