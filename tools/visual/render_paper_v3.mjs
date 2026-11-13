@@ -1,5 +1,5 @@
 /* Render docs/paper/v3/paper.html to a PDF preview, typesetting the maths with KaTeX.
- *   node tools/visual/render_paper_v3.mjs     (from any folder)
+ *   node tools/visual/render_paper_v3.mjs [paper-dir] [output.pdf]     (from any folder; defaults to the V3 paper)
  */
 import { chromium } from "playwright";
 import katex from "katex";
@@ -9,7 +9,8 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 
-const dir = path.resolve(here, "../../docs/paper/v3");
+const dir = path.resolve(process.argv[2] ?? path.join(here, "../../docs/paper/v3"));
+const pdfOut = path.resolve(process.argv[3] ?? path.join(dir, "HabitatShift_V3_paper_preview.pdf"));
 let html = fs.readFileSync(path.join(dir, "paper.html"), "utf8");
 const decode = (s) => s.replace(/&quot;/g, '"').replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&#x27;/g, "'");
 html = html.replace(/<span class="(math-[id])" data-tex="([^"]*)"><\/span>/g, (_, cls, tex) =>
@@ -22,7 +23,7 @@ fs.writeFileSync(out, html);
 const b = await chromium.launch();
 const p = await b.newPage();
 await p.goto(pathToFileURL(out).href, { waitUntil: "load" });
-await p.pdf({ path: path.join(dir, "HabitatShift_V3_paper_preview.pdf"), format: "A4", printBackground: true, margin: { top: "20mm", bottom: "20mm", left: "18mm", right: "18mm" } });
+await p.pdf({ path: pdfOut, format: "A4", printBackground: true, margin: { top: "20mm", bottom: "20mm", left: "18mm", right: "18mm" } });
 await b.close();
 if (process.env.PAPER_PNG) { const b2 = await chromium.launch(); const p2 = await b2.newPage({ viewport: { width: 820, height: 1160 } }); await p2.goto(pathToFileURL(out).href); await p2.screenshot({ path: process.env.PAPER_PNG, fullPage: true }); await b2.close(); }
 fs.unlinkSync(out);

@@ -1,0 +1,15 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "HabitatShift: a reproducible, audited pipeline for Sentinel-1/2 change analysis"
+type: software
+authors:
+  - family-names: Khanal
+    given-names: Ayush
+version: "3.0.0"
+date-released: "2026-11-13"
+license: MIT
+keywords:
+  - remote sensing
+  - change detection
+  - Sentinel-2
+  - reproducibility

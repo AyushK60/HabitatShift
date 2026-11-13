@@ -112,7 +112,7 @@ The evaluation scripts expect the study scenes to be prepared first (`scripts/fm
 ## Verification
 
 ```powershell
-.venv\Scripts\python.exe -m pytest        # 494 backend tests (some read local rasters and skip on a fresh clone)
+.venv\Scripts\python.exe -m pytest        # 502 backend tests (some read local rasters and skip on a fresh clone)
 cd frontend; npm run build                # type-checks and builds
 ```
 
@@ -130,7 +130,7 @@ code; browser suites are in `tools/visual/`. Setup details: [`docs/SETUP_GUIDE.m
 | [`docs/DATA_PROVENANCE.md`](docs/DATA_PROVENANCE.md) | data sources and licences |
 | [`docs/CHANGES_V2.md`](docs/CHANGES_V2.md) | version 2 changes |
 | [`docs/LEARNING.md`](docs/LEARNING.md) | plain-language study guide to every concept used |
-| [`docs/paper/`](docs/paper/) | technical report (HTML and PDF) |
+| [`docs/paper/`](docs/paper/) | technical report (PDF, built from `docs/paper/report/`) |
 | [`docs/archive/`](docs/archive/) | build history: milestone records, audits, handoffs |
 
 ## Data and licences

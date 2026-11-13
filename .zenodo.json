@@ -1,0 +1,9 @@
+{
+  "title": "HabitatShift: a reproducible, audited pipeline for Sentinel-1/2 change analysis",
+  "upload_type": "software",
+  "description": "Open research platform for measuring candidate surface changes between two dates from Sentinel-2 optical and Sentinel-1 radar imagery, with independent audit scripts, noise-aware change tests, foundation-model change scores and a radar glacial-lake water model. Includes the technical report (docs/paper) and the version 3 paper source (docs/paper/v3).",
+  "creators": [{"name": "Khanal, Ayush"}],
+  "license": "MIT",
+  "keywords": ["remote sensing", "change detection", "Sentinel-2", "Sentinel-1", "foundation models", "reproducibility", "glacial lakes", "forest loss"],
+  "access_right": "open"
+}

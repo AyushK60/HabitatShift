@@ -14,7 +14,9 @@ import html
 import re
 from pathlib import Path
 
-DIR = Path(__file__).resolve().parents[1] / "docs" / "paper" / "v3"
+import sys
+
+DIR = Path(sys.argv[1]).resolve() if len(sys.argv) > 1 else Path(__file__).resolve().parents[1] / "docs" / "paper" / "v3"
 SRC = DIR / "paper.md"
 BIB = DIR / "refs.bib"
 
