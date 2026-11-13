@@ -1,0 +1,65 @@
+{
+ "amendment": 1,
+ "areas": [
+  {
+   "id": "kodagu_wayanad_forest",
+   "region": "moist evergreen forest and plantations, Western Ghats",
+   "selected": true,
+   "bbox": [
+    75.707,
+    11.928,
+    75.776,
+    12.0
+   ],
+   "hansen_tile": "20N_070E",
+   "positives": 171,
+   "clean_negatives": 1943,
+   "passes_label_screen": true
+  },
+  {
+   "id": "garo_hills_forest",
+   "region": "hill forest with shifting cultivation, Meghalaya",
+   "selected": true,
+   "bbox": [
+    90.728,
+    25.511,
+    90.804,
+    25.584
+   ],
+   "hansen_tile": "30N_090E",
+   "positives": 426,
+   "clean_negatives": 1337,
+   "passes_label_screen": true
+  },
+  {
+   "id": "chitwan_terai_forest",
+   "region": "Terai and Chure sal forest, Nepal",
+   "selected": true,
+   "bbox": [
+    84.451,
+    27.753,
+    84.529,
+    27.827
+   ],
+   "hansen_tile": "30N_080E",
+   "positives": 40,
+   "clean_negatives": 1743,
+   "passes_label_screen": false
+  },
+  {
+   "id": "uttarakhand_shivalik_forest",
+   "region": "Shivalik foothill sal and mixed forest, Uttarakhand",
+   "selected": true,
+   "bbox": [
+    79.23,
+    29.205,
+    79.309,
+    29.278
+   ],
+   "hansen_tile": "30N_070E",
+   "positives": 273,
+   "clean_negatives": 1191,
+   "passes_label_screen": true
+  }
+ ]
+}
