@@ -10,7 +10,7 @@ Implements the experiments permitted by docs/M5_ML_LABEL_FEASIBILITY.md:
 
 Design (fixed, then documented verbatim in the run manifest):
 
-* Features: surface reflectance on the 10 m analysis grid — blue, green,
+* Features: surface reflectance on the 10 m analysis grid - blue, green,
   red, NIR (native 10 m) and SWIR1 (native 20 m, bilinearly resampled by the
   audited pipeline; recorded as upsampled, never claimed native) — plus the
   study's registered indices (NDVI/NDWI/MNDWI/NDBI per study config).

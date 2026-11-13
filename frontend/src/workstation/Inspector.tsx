@@ -1,4 +1,4 @@
-/** Research inspector — the right-hand analytical rail of the workstation.
+/** Research inspector - the right-hand analytical rail of the workstation.
  *
  * Sections: layer legend & meaning, the "What am I looking at?" layer guide
  * (M4-R1 §15.5), guided findings (§15.3), acquisition context, pixel probe
@@ -359,7 +359,7 @@ function RoiPanel({
   );
 }
 
-/** Explore the Evidence (M4-R3 §3) — the public-facing guided experience
+/** Explore the Evidence (M4-R3 §3) - the public-facing guided experience
  *  over the same evidence records Research Mode reads. Everything renders
  *  from the recorded findings payload through the shared adapter; no value
  *  is recomputed and no confidence score is invented. */
@@ -845,7 +845,7 @@ function ExploreFindingsPanel({
 }
 
 /** Research Mode: the full versioned evidence record for the selected
- *  finding (M4-R2 G7). Same record as the Findings view — both render from
+ *  finding (M4-R2 G7). Same record as the Findings view - both render from
  *  the same payload entry and carry the same evidence_id. */
 function EvidenceRecordPanel({
   findings,
@@ -923,7 +923,7 @@ function EvidenceRecordPanel({
     return other ? other.display_id : evidenceId;
   };
 
-  // Mathematical method (§4.2) — only the operations actually recorded for
+  // Mathematical method (§4.2) - only the operations actually recorded for
   // this finding; every line is read from the record or the container.
   const IUP = selected.index.toUpperCase();
   const dirTerm =
@@ -1349,7 +1349,7 @@ function EvidenceRecordPanel({
   );
 }
 
-/** "What am I looking at?" — plain-language guide to the selected layer. */
+/** "What am I looking at?" - plain-language guide to the selected layer. */
 function LayerGuidePanel({
   layer,
   summary,

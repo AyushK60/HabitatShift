@@ -1,7 +1,7 @@
 /** Methods & exports (M3-G4).
  *
- * Documents what the pipeline actually does — the same statements as
- * docs/SCIENCE_PROTOCOL.md and the M1/M2 manifests — with provenance
+ * Documents what the pipeline actually does - the same statements as
+ * docs/SCIENCE_PROTOCOL.md and the M1/M2 manifests - with provenance
  * exports resolved from the live backend, and a strict separation between
  * project-generated measurements, external references, interpretations and
  * limitations.

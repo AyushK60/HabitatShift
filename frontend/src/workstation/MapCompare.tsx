@@ -81,7 +81,7 @@ const EMPTY_FC: GeoJSON.FeatureCollection = { type: "FeatureCollection", feature
 /** Run a style mutation once the map's style is genuinely loaded.
  *
  * The map's `load` event can fire while `isStyleLoaded()` is still false,
- * and `once("load")` registered after that event never re-fires — so a
+ * and `once("load")` registered after that event never re-fires - so a
  * naive deferral deadlocks the layer pipeline.  `idle` fires after every
  * completed render, which makes it a safe retry tick.
  */
@@ -355,7 +355,7 @@ export function MapCompare({
     (window as unknown as { __hsMaps?: typeof mapsRef.current }).__hsMaps = mapsRef.current;
 
     // Benign MapLibre lifecycle errors (e.g. a style still loading while a
-    // study switch tears the map down) must not escape as page errors —
+    // study switch tears the map down) must not escape as page errors -
     // React 19 unmounts the whole tree on an uncaught one.  Anything else
     // is logged for the console-error hygiene check.
     const swallow = (map: MapLibreMap) => {

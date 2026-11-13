@@ -1,4 +1,4 @@
-/** The study research workstation — now the multi-study showcase (M4-G4).
+/** The study research workstation - now the multi-study showcase (M4-G4).
  *
  * Every completed study renders from its portable bundle: the same recorded
  * artefacts the backend serves, loaded as static files so the maps, layers,
@@ -7,7 +7,7 @@
  * Live enhancement: when the analysis backend is reachable AND the study has
  * frozen M1 outputs (today: the Coringa reference), the pixel probe, ROI
  * measurement and G0 validity overlays activate on top of the same bundle
- * numbers. Without the backend those controls degrade to honest notes — the
+ * numbers. Without the backend those controls degrade to honest notes - the
  * showcase itself never depends on them.
  *
  * Designed for ~1440×900: study context bar on top, geographic workspace
@@ -234,7 +234,7 @@ function WorkstationForStudy({ studyId }: { studyId: string }) {
     };
   }, []);
   // M5: additive ML reference-experiment index (generated artifact; null when
-  // unavailable — the panels then show it as explicitly unavailable).
+  // unavailable - the panels then show it as explicitly unavailable).
   const [mlFindings, setMlFindings] = useState<MlFindingsIndex | null>(null);
   useEffect(() => {
     let cancelled = false;
@@ -310,7 +310,7 @@ function WorkstationForStudy({ studyId }: { studyId: string }) {
   }, [findings]);
   useEffect(() => {
     // Wait until the deep link (if any) has been resolved before reflecting
-    // selection state into the URL — otherwise this effect would strip the
+    // selection state into the URL - otherwise this effect would strip the
     // ?finding=... parameter on mount, before the container has loaded.
     if (!appliedDeepLinkRef.current) return;
     const next = new URLSearchParams(searchParams);

@@ -1,4 +1,4 @@
-/** Landing / Atlas — the signature editorial entry to HabitatShift.
+/** Landing / Atlas - the signature editorial entry to HabitatShift.
  *
  * Scientific-integrity rules baked into this page:
  * - The hero imagery is the real processed Coringa comparison; its captions

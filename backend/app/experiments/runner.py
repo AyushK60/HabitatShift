@@ -195,7 +195,7 @@ def evaluate_hypotheses(
 
     verdicts: list[dict[str, Any]] = []
 
-    # H1 — monotone response (enforced by the sweep) and stable index ranking
+    # H1 - monotone response (enforced by the sweep) and stable index ranking
     # of decrease fractions between the loosest threshold and the primary one.
     loosest = min(config_.thresholds)
     ranking_at = {}
@@ -224,7 +224,7 @@ def evaluate_hypotheses(
         }
     )
 
-    # H2 — composite against single-pair mean-delta magnitude.
+    # H2 - composite against single-pair mean-delta magnitude.
     h2: dict[str, Any] = {}
     composite_wins = True
     for index in config_.indices:
@@ -256,7 +256,7 @@ def evaluate_hypotheses(
         }
     )
 
-    # H3 — leave-one-out shifts are smaller than the single-pair spread.
+    # H3 - leave-one-out shifts are smaller than the single-pair spread.
     h3: dict[str, Any] = {}
     loo_wins = True
     for index in config_.indices:
@@ -308,7 +308,7 @@ def evaluate_hypotheses(
         }
     )
 
-    # H4 — cross-pipeline agreement on the shared footprint.
+    # H4 - cross-pipeline agreement on the shared footprint.
     if cross_pipeline.get("available"):
         shared = int(cross_pipeline["shared_pixels"])
         identical = int(cross_pipeline["pixels_identical_within_1e_9"])
@@ -333,7 +333,7 @@ def evaluate_hypotheses(
         }
     )
 
-    # H5 — validity completeness explains estimator differences.
+    # H5 - validity completeness explains estimator differences.
     complete = bool(coverage["all_indices_suitable"]) and (
         coverage["minimum_common_valid_fraction_of_aoi"] >= 0.999
     )

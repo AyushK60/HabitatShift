@@ -2,7 +2,7 @@
  *
  * Interaction contract (M3 brief §6):
  * - Desktop mouse: the divider follows the cursor's horizontal position while
- *   it moves across the stage — no click needed.
+ *   it moves across the stage - no click needed.
  * - The split is NOT reset when the cursor exits.
  * - Touch/pen keep classic press-and-drag; hover tracking is mouse-only so it
  *   cannot interfere with touch.

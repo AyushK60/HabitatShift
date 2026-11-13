@@ -1,7 +1,7 @@
 /** Study-aware chart builders (M4-G5).
  *
  * Every chart here is assembled from recorded bundle data.  Interpretation
- * strings are fixed, method-based templates — the NUMBERS inside tooltips
+ * strings are fixed, method-based templates - the NUMBERS inside tooltips
  * come only from the recorded points, never from these templates.
  */
 import type { ReactNode } from "react";

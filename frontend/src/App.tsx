@@ -49,7 +49,7 @@ export default function App() {
     return () => window.removeEventListener("habitatshift:tour", open);
   }, []);
   // M4-R1 §2: /workstation without a study id is the study-selection
-  // experience — a normal scrolling page, not the fixed-height workstation.
+  // experience - a normal scrolling page, not the fixed-height workstation.
   const isWorkstation =
     pathname.startsWith("/workstation") && pathname !== "/workstation";
   return (

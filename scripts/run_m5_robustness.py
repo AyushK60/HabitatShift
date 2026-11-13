@@ -174,7 +174,7 @@ def resolution_sensitivity() -> dict:
     engine = engine_mod.M1Engine(cfg20)
     started = dt.datetime.now(dt.timezone.utc)
     result_summary = engine.run()
-    # engine.run writes into cfg's output dirs — redirect before running?
+    # engine.run writes into cfg's output dirs - redirect before running?
     return {"skipped": "see run at data/processed/m5_robustness", "summary": None}
 
 

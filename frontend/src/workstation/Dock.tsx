@@ -5,7 +5,7 @@
  * consumes map space. Only sections with genuine recorded data render.
  *
  * M4: the dock's charts are the interactive, explanatory chart system
- * (M4-G5) driven by the recorded bundle data — the same numbers the maps
+ * (M4-G5) driven by the recorded bundle data - the same numbers the maps
  * and inspector show, explorable point by point.
  */
 import { useState } from "react";

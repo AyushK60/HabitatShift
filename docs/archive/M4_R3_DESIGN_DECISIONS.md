@@ -261,7 +261,7 @@ G4 verification: verify_m4 **51/51**, showcase **11/11**, m2_experiments
     verified new construction/buildings, or a verified collapse footprint.
 - The interpretation content itself remains the deterministic,
   generation-time templates recorded in the evidence records (M4-R2 G5);
-  no AI-generated text was added at the interface layer.
+  no free-text generation is used at the interface layer.
 
 G5 verification: disclosure audit **106/106**, verify_m4 **51/51**,
 showcase **11/11**, m2_experiments **31/31**, build clean.

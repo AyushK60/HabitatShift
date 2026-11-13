@@ -2,13 +2,13 @@
 
 One bundle per study, written to ``frontend/public/studies/<study_id>/``:
 
-* ``bundle.json``  — schema ``habitatshift-m4-bundle/1``: study metadata, AOI,
+* ``bundle.json``  - schema ``habitatshift-m4-bundle/1``: study metadata, AOI,
   per-experiment M1 summaries (periods, index stats, change sweeps), georeferenced
   grid placement, distilled chart series (from recorded experiment results —
   never recomputed), event context for the Himalayan investigations, quality
   information, limitations, interpretation guardrails, provenance and
   SHA-256 checksums.
-* ``previews/*.png`` — copies of the georeferenced preview PNGs the map and
+* ``previews/*.png`` - copies of the georeferenced preview PNGs the map and
   inspector render.
 
 The bundle is self-contained: the website can render a completed study with no

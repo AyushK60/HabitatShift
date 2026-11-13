@@ -256,7 +256,7 @@ export interface BundleFindings {
 }
 
 /** Convert recorded findings to the GeoJSON the map overlay renders.
- *  The geometry comes verbatim from the findings payload — the browser never
+ *  The geometry comes verbatim from the findings payload - the browser never
  *  redraws or approximates a region. Feature identity is the stable
  *  content-derived evidence_id (M4-R3 §2): selection, navigation and exports
  *  all carry it. */

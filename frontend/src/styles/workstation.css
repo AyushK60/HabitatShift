@@ -1,4 +1,4 @@
-/* Research workstation layout — designed around ~1440×900.
+/* Research workstation layout - designed around ~1440×900.
  *
  * Structure: context bar / toolbar / layer groups / [map | inspector] / dock.
  * On desktop the composition fits one viewport: .ws-row flexes to the
@@ -1247,7 +1247,7 @@
   padding-left: 0.55rem;
 }
 
-/* The findings hover tooltip is purely informational — it must never
+/* The findings hover tooltip is purely informational - it must never
    intercept the click that selects the region beneath it (M4-R3 G7). */
 .maplibregl-popup.findings-hover {
   pointer-events: none;

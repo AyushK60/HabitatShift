@@ -7,11 +7,11 @@ inputs it names, so a run cannot start from a half-specified plan.
 
 The configuration separates:
 
-* **hypotheses** — stated before the sweep is executed;
-* **estimators** — which observation-selection families are compared;
-* **thresholds** — the default required sweep plus any additional values;
-* **uncertainty** — spatial block size, bootstrap iterations and seed;
-* **labels** — candidate independent label roots and whether they are required.
+* **hypotheses** - stated before the sweep is executed;
+* **estimators** - which observation-selection families are compared;
+* **thresholds** - the default required sweep plus any additional values;
+* **uncertainty** - spatial block size, bootstrap iterations and seed;
+* **labels** - candidate independent label roots and whether they are required.
 
 Nothing about a particular study is hardcoded here.
 """

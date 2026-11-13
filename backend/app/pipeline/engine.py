@@ -400,7 +400,7 @@ def read_observation(
     # Empirical acceptance test on the applied DN convention: a window mean
     # below the physical floor is only reachable when the declared offset
     # does not match the stored DNs (2025 Earth Search reprocessing).  The
-    # alternative Sentinel-2 convention — scale only, offset 0 — is then
+    # alternative Sentinel-2 convention - scale only, offset 0 - is then
     # tried and must itself be plausible, otherwise the observation is
     # refused outright.  The decision and its measured evidence are recorded.
     radiometry_evidence: dict[str, object] = {}

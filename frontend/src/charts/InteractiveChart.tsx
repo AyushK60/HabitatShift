@@ -1,7 +1,7 @@
 /** Reusable interactive, explanatory line chart (M4-G5, refined M4-R1-G10).
  *
  * One interaction system for every analytical graph in the product:
- * - hover snaps to the NEAREST RECORDED data point (no interpolation —
+ * - hover snaps to the NEAREST RECORDED data point (no interpolation -
  *   values that were never measured are never shown);
  * - hover shows ONLY the nearest series (vertical distance to the pointer);
  *   a "Details" control expands related series at the same x, the
@@ -18,7 +18,7 @@
  *   tooltip is mirrored into an aria-live region;
  * - the legend toggles series visibility.
  *
- * All displayed numbers come from the props' recorded data — this component
+ * All displayed numbers come from the props' recorded data - this component
  * has no sample data and no hardcoded values.
  */
 import {

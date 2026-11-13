@@ -67,7 +67,7 @@ the top bar changes how every graph is explained. The System page shows what the
 
 Full tables: [`docs/RESULTS.md`](docs/RESULTS.md). What changed in version 2: [`docs/CHANGES_V2.md`](docs/CHANGES_V2.md).
 
-## What is not done (honest list)
+## Limitations
 
 - No ground-truth field data. Every reference (Hansen, radar water frequency, optical masks) is another satellite
   product, so scores are agreement, not accuracy.
@@ -94,16 +94,13 @@ any static file server on `frontend/dist` serves the offline showcase (the custo
 ## Reproducing version 3
 
 ```powershell
-.venv\Scripts\pip install -r backend
-equirements-ml.txt   # torch (CUDA 12.8 build), einops, timm, matplotlib
-.venv\Scripts\python.exe scripts
-un_fm_evaluation.py          # forest loss against Hansen
-.venv\Scripts\python.exe scripts
-un_fm_lake_evaluation.py     # glacial lakes against radar
-.venv\Scripts\python.exe scriptsuild_lake_training_pairs.py  # radar and optical pairs, 30 lakes
-.venv\Scripts\python.exe scripts	rain_lake_unet.py            # U-Net, lake and time split
+.venv\Scripts\pip install -r backend\requirements-ml.txt   # torch (CUDA 12.8 build), einops, timm, matplotlib
+.venv\Scripts\python.exe scripts\run_fm_evaluation.py          # forest loss against Hansen
+.venv\Scripts\python.exe scripts\run_fm_lake_evaluation.py     # glacial lakes against radar
+.venv\Scripts\python.exe scripts\build_lake_training_pairs.py  # radar and optical pairs, 30 lakes
+.venv\Scripts\python.exe scripts\train_lake_unet.py            # U-Net, lake and time split
 .venv\Scripts\python.exe scripts\cv_lake_unet.py               # 5-fold lake cross-validation and conformal intervals
-.venv\Scripts\python.exe scripts\make_paper_figures.py         # paper figures; then scriptsuild_paper.py
+.venv\Scripts\python.exe scripts\make_paper_figures.py         # paper figures; then scripts\build_paper.py
 ```
 
 Scene downloads need the internet and take hours (the 30-lake pair build is about 5 hours); scripts are resumable.

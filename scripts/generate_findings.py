@@ -912,7 +912,7 @@ def generate(experiment_id: str, processed_rel: str) -> int:
         record["method_provenance"]["output_checksum"] = _finding_checksum(finding)
 
     # M4-R2 G6: overlap relationships within the experiment. Overlapping
-    # measurements are recorded as related — never merged, never discarded —
+    # measurements are recorded as related - never merged, never discarded -
     # so overlapping candidate regions are not misrepresented as independent
     # events. Rule: an equal-area UTM intersection ≥ 10 % of the smaller
     # region's area creates a link, strongest first (bounded per finding).

@@ -204,7 +204,7 @@ def audit_experiment(experiment_id: str, processed_rel: str, report: Report) -> 
             ok_mean = abs(rec_f["mean_delta"] - calc["mean"]) <= 1e-6
             ok_median = abs(rec_f["median_delta"] - calc["median"]) <= 1e-6
             ok_area = abs(rec_f["area_ha"] - rec_f["pixel_count"] * pixel_area_m2 / 1e4) <= 1e-9
-            # Recorded shares are rounded to 4 dp — compare at that precision.
+            # Recorded shares are rounded to 4 dp - compare at that precision.
             ok_share = round(rec_f["pixel_count"] / common_valid * 100.0, 4) == rec_f["share_of_common_valid_percent"]
             report.check(ok_dir and ok_cnt, f"{fid}: direction + pixel count match recomputation")
             report.check(ok_mean and ok_median, f"{fid}: mean/median Δ match recomputation")

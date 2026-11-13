@@ -242,7 +242,7 @@ export function layerImageUrl(
     const block = summary.change?.[layer.index];
     return block?.delta_preview ? resolver.previewUrl(block.delta_preview) : "";
   }
-  // Quality layers — each maps to its own recorded asset.
+  // Quality layers - each maps to its own recorded asset.
   switch (layer.quality) {
     case "count": {
       const relative = periodData?.previews?.observation_count;
@@ -307,7 +307,7 @@ export function periodLabel(period: PeriodKey): string {
 /* --------------------------------------------- layer guide (M4-R1 §15.5) --- */
 
 export interface LayerGuide {
-  /** What kind of product this is — the first thing a visitor needs. */
+  /** What kind of product this is - the first thing a visitor needs. */
   kind: string;
   /** Band composition for composites, formula otherwise; null when n/a. */
   composition: string | null;

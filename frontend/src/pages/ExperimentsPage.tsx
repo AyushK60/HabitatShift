@@ -2,12 +2,12 @@
  *
  * The page presents every investigation's GENUINE analytical outputs and
  * labels their status honestly:
- * - "Recorded experiment" — a full hypothesis-testing run exists (today only
+ * - "Recorded experiment" - a full hypothesis-testing run exists (today only
  *   Coringa's M2 run; served verbatim by the backend when reachable, and
  *   mirrored in the portable bundle otherwise).
- * - "Descriptive measurement" — recorded M1 outputs (threshold sweeps, period
+ * - "Descriptive measurement" - recorded M1 outputs (threshold sweeps, period
  *   means, change areas) that describe the data without testing hypotheses.
- * - "Planned / not available" — experiments that have NOT been run; the page
+ * - "Planned / not available" - experiments that have NOT been run; the page
  *   never invents numbers to fill them.
  *
  * Everything renders from the portable bundles, so the study selector works
