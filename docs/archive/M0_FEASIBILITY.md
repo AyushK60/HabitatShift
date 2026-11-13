@@ -149,7 +149,7 @@ true colour, NDVI and validity previews for both dates; the NDVI legend comes
 from the same fixed ramp used to render the pixels; "Swipe" clips the later
 image over the earlier one on the shared grid.
 
-Verified in the in-app browser at the M0 checkpoint:
+Verified in a browser at the M0 checkpoint:
 
 - `/api/health`, `/api/study`, `/api/manifest`, `/api/legend` and
   `/files/preview/ndvi_legend.png` return 200;

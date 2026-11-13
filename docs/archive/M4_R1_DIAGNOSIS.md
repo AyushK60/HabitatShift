@@ -156,7 +156,7 @@ finding" instead of an invented polygon.
 
 ## Evidence captured during G0
 
-Interactive browser session (in-app browser, 1440×900) against the running
+Interactive browser session (1440×900) against the running
 backend; measured states are quoted verbatim above. Formal screenshot
 evidence for the fixed build is produced per gate under `docs/evidence/m4-r1/`.
 

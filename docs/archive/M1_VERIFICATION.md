@@ -155,8 +155,8 @@ own output map.
 
 ## 6. Browser verification
 
-The M1 viewer was served from `http://127.0.0.1:8095/` and checked in the
-in-app browser.
+The M1 viewer was served from `http://127.0.0.1:8095/` and checked in a
+browser.
 
 | Check | Result |
 |---|---|
