@@ -23,6 +23,17 @@ BIB = DIR / "refs.bib"
 TEX_SPECIAL = {"&": r"\&", "%": r"\%", "#": r"\#", "_": r"\_", "{": r"\{", "}": r"\}", "~": r"\textasciitilde{}", "^": r"\textasciicircum{}", "\\": r"\textbackslash{}"}
 
 
+BS = chr(92)
+ACCENTS = {BS + "'e": "é", BS + "'E": "É", BS + '"e': "ë", BS + '"o': "ö", BS + "c{c}": "ç"}
+
+
+def plain(s: str) -> str:
+    """Plain text from a BibTeX field for the HTML preview: common accents mapped, protective braces dropped."""
+    for k, v in ACCENTS.items():
+        s = s.replace("{" + k + "}", v).replace(k, v)
+    return s.replace("{", "").replace("}", "")
+
+
 def parse_bib() -> dict[str, dict]:
     out = {}
     for m in re.finditer(r"@\w+\{(\w+),(.*?)\n\}", BIB.read_text(encoding="utf-8"), re.S):
@@ -223,7 +234,7 @@ def build() -> None:
     refs = []
     for i, key in enumerate(doc.cite_order, 1):
         f = doc.bib[key]
-        authors = f.get("author", "").replace(" and ", "; ")
+        authors = plain(f.get("author", "")).replace(" and ", "; ")
         venue = f.get("journal") or f.get("booktitle") or f.get("publisher", "")
         extra = ", ".join(x for x in [f.get("volume"), f.get("pages")] if x)
         refs.append(f"<li>{html.escape(authors)}. {html.escape(f.get('title', '').replace('{', '').replace('}', ''))}. <i>{html.escape(venue.replace('{', '').replace('}', ''))}</i>{', ' + html.escape(extra) if extra else ''} ({f.get('year', '')}).</li>")

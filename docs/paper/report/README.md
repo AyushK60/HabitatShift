@@ -15,5 +15,5 @@ audit script (`verification/`) and `pytest`; update it by hand from those runs w
 Before it goes anywhere public:
 
 - [ ] Fill in the `Affiliation:` line in `paper.md` (left empty on purpose).
-- [ ] Check every entry in `refs.bib` against the publisher or arXiv page (written from memory).
+- [x] Checked every entry in `refs.bib` on 13 November 2026 against Crossref, the publisher or arXiv. Corrected: SSL4EO-S12 now cites the 2023 IEEE GRSM paper, and full author lists were filled in. Not confirmed from a source: the U-Net page range (234 to 241, the LNCS volume) and the Otsu/Vovk/Breiman details beyond the Crossref or catalogue record.
 - [ ] After the Zenodo release, add the DOI to `paper.md` and rebuild.
