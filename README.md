@@ -12,7 +12,10 @@ signed NDVI baseline; on glacial lakes they beat the water index but not plain r
 Paper draft: [`docs/paper/v3/`](docs/paper/v3/) (LaTeX source and a PDF preview). Live demo: not hosted yet; run the
 static site locally (below).
 
-![HabitatShift demo: swipe comparison, change layer, quality layer, analysis dock, experiments](docs/screenshots/demo.gif)
+![HabitatShift demo: swipe comparison, change layer, quality layer, analysis dock, evidence page](docs/screenshots/demo.gif)
+
+*The demo above is recorded from the current build: landing page, Chilika Lake swipe, Change and Quality layers, the
+analysis dock, then the Evidence page.*
 
 ## Why this project exists
 
@@ -27,11 +30,20 @@ They show where optical imagery fails. The natural next step is radar (Sentinel-
 
 | Question | How it is answered | Where to see it |
 |---|---|---|
-| What changed between two seasons? | Index differences (NDVI, NDWI/MNDWI, NDBI, NDSI) on a shared valid footprint, with threshold sweeps | Workstation, Experiments |
-| Is the change bigger than noise? | Per-pixel scene-to-scene spread gives a standard error; a pixel counts only if the change exceeds it | Experiments, "Is the change bigger than the noise?" |
-| Does it agree with independent data? | Western Ghats NDVI decrease compared with Hansen forest loss (2021-2024) | Experiments (Western Ghats) |
-| Is a two-date comparison misleading? | Monthly series 2020-2026 with a seasonal fit, so the two-date difference can be read against the normal yearly swing | Experiments (Kathmandu, Western Ghats) |
-| Can I try my own area? | Draw a box (0.2-6 km2), pick two dates, run the same engine; one run at a time, about 2 minutes | "Your own area" page (needs the local backend) |
+| What changed between two seasons? | Index differences (NDVI, NDWI/MNDWI, NDBI, NDSI) on a shared valid footprint, with threshold sweeps | Workstation, Evidence |
+| Is the change bigger than noise? | Per-pixel scene-to-scene spread gives a standard error; a pixel counts only if the change exceeds it | Evidence, "Is the change bigger than the noise?" |
+| Does it agree with independent data? | Western Ghats NDVI decrease compared with Hansen forest loss (2021-2024) | Evidence (Western Ghats) |
+| Is a two-date comparison misleading? | Monthly series 2020-2026 with a seasonal fit, so the two-date difference can be read against the normal yearly swing | Evidence (Kathmandu, Western Ghats) |
+| Can I try my own area? | Draw a box (0.2-6 km2), pick two dates, run the same engine; one run at a time, roughly 1-2 minutes | Scene check (needs the local backend) |
+
+## Screens
+
+| Landing page | Workstation, Change layer |
+|---|---|
+| <img src="docs/screenshots/01_landing.png" alt="Landing page" width="480"> | <img src="docs/screenshots/03_workstation_chilika.png" alt="Chilika Lake, change layer" width="480"> |
+| **Landing page: two paths, plain-words switch** | **Workstation: Chilika Lake change layer** |
+| <img src="docs/screenshots/06_experiments.png" alt="Evidence page" width="480"> | <img src="docs/screenshots/10_research_mode_ml.png" alt="Research page" width="480"> |
+| **Evidence: every graph per study area** | **Research: forest loss and glacial lakes against references** |
 
 ## Findings worth knowing
 
@@ -43,7 +55,8 @@ They show where optical imagery fails. The natural next step is radar (Sentinel-
   indicative. Agreement with another satellite product, not ground truth.
 - **Time series.** Kathmandu NDVI drift is about zero (-0.0007 per year, 95% interval -0.0035 to +0.0020), the
   full seasonal swing is about 0.10 peak to peak, and the two-date difference (-0.066) is smaller than that swing, so
-  a two-date reading alone cannot separate it from normal seasonal variation. Western Ghats: drift also about zero; two-date difference +0.001.
+  a two-date reading alone cannot separate it from normal seasonal variation. Western Ghats: drift also about zero;
+  two-date difference +0.001.
 - **Resolution.** Re-running at 20 m changes urban Kathmandu and snowy Purepu results by up to a few percentage
   points; Western Ghats barely moves.
 - **Maps look soft because the data is 10 m.** Kathmandu is 201 x 225 pixels. Colour images are enlarged with a sharper
@@ -72,12 +85,11 @@ Full tables: [`docs/RESULTS.md`](docs/RESULTS.md). What changed in version 2: [`
 - No ground-truth field data. Every reference (Hansen, radar water frequency, optical masks) is another satellite
   product, so scores are agreement, not accuracy.
 - Five forest areas (three picked by a label-only search for active clearing) and effectively one changing lake do not
-  settle the research question. Urban and wetland fields are
-  not tested (they need Earth Engine reference data), and foundation models were compared as frozen embeddings, not
-  fine-tuned.
+  settle the research question. Urban and wetland fields are not tested (they need Earth Engine reference data), and
+  foundation models were compared as frozen embeddings, not fine-tuned.
 - The radar U-Net learns from optical labels, which under-detect turbid, icy water, and its conformal area intervals fail
   badly for a few lakes (see `docs/V3_RESULTS.md`).
-- Custom-area runs are descriptive, small and run locally; there is no hosted service.
+- Scene check runs on a custom area are descriptive, small and run locally; there is no hosted service.
 - The paper has not been submitted anywhere; references need a final check before submission.
 
 ## Run it
@@ -117,7 +129,8 @@ cd frontend; npm run build                # type-checks and builds
 ```
 
 Independent audits live in [`verification/`](verification/) and re-derive results without importing production
-code; browser suites are in `tools/visual/`. Setup details: [`docs/SETUP_GUIDE.md`](docs/SETUP_GUIDE.md).
+code; browser suites are in `tools/visual/`. The demo GIF frames come from `tools/visual/capture_demo_gif_frames.mjs`
+(Playwright, run against a started backend). Setup details: [`docs/SETUP_GUIDE.md`](docs/SETUP_GUIDE.md).
 
 ## Documentation
 
