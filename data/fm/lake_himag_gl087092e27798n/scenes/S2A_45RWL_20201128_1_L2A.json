@@ -1,0 +1,15 @@
+{
+ "item_id": "S2A_45RWL_20201128_1_L2A",
+ "period": "earlier",
+ "date": "2020-11-28",
+ "bands": [
+  "blue",
+  "green",
+  "red",
+  "nir08",
+  "swir16",
+  "swir22"
+ ],
+ "offset_corrected_empirically": false,
+ "valid_fraction": 0.9988
+}

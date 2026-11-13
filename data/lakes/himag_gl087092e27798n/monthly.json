@@ -1,0 +1,359 @@
+{
+ "lake": "himag_gl087092e27798n",
+ "name": "Lake GL087092E27798N",
+ "reference_years_for_orbit_screening": [
+  2019,
+  2020
+ ],
+ "s1_orbits": {
+  "asc12": {
+   "scenes": 61,
+   "basis": "reference_years",
+   "q25_contrast_db": -8.25,
+   "usable": true
+  },
+  "des121": {
+   "scenes": 70,
+   "basis": "reference_years",
+   "q25_contrast_db": -10.36,
+   "usable": true
+  }
+ },
+ "s1_monthly": [
+  {
+   "month": "2019-01",
+   "n": 2,
+   "excluded": {
+    "lake_not_dark": 3
+   },
+   "area_km2": 1.5284,
+   "min_km2": 1.5156,
+   "max_km2": 1.5413,
+   "change_vs_previous": null
+  },
+  {
+   "month": "2019-02",
+   "n": 4,
+   "excluded": {
+    "lake_not_dark": 1
+   },
+   "area_km2": 1.4365,
+   "min_km2": 1.4147,
+   "max_km2": 1.594,
+   "se_km2": 0.0415,
+   "change_vs_previous": null
+  },
+  {
+   "month": "2019-03",
+   "n": 5,
+   "excluded": {},
+   "area_km2": 1.6823,
+   "min_km2": 1.5901,
+   "max_km2": 3.9172,
+   "se_km2": 0.4432,
+   "change_vs_previous": {
+    "delta_km2": 0.2458,
+    "threshold_km2": 1.3354,
+    "exceeds_noise": false
+   }
+  },
+  {
+   "month": "2019-04",
+   "n": 3,
+   "excluded": {
+    "lake_not_dark": 2
+   },
+   "area_km2": 3.3702,
+   "min_km2": 1.6801,
+   "max_km2": 4.0492,
+   "se_km2": 0.7044,
+   "change_vs_previous": {
+    "delta_km2": 1.6879,
+    "threshold_km2": 2.4967,
+    "exceeds_noise": false
+   }
+  },
+  {
+   "month": "2019-05",
+   "n": 4,
+   "excluded": {},
+   "area_km2": 1.6082,
+   "min_km2": 1.1358,
+   "max_km2": 1.7439,
+   "se_km2": 0.134,
+   "change_vs_previous": {
+    "delta_km2": -1.762,
+    "threshold_km2": 2.1511,
+    "exceeds_noise": false
+   }
+  },
+  {
+   "month": "2019-06",
+   "n": 6,
+   "excluded": {},
+   "area_km2": 1.8529,
+   "min_km2": 1.7657,
+   "max_km2": 1.9311,
+   "se_km2": 0.028,
+   "change_vs_previous": {
+    "delta_km2": 0.2447,
+    "threshold_km2": 0.4107,
+    "exceeds_noise": false
+   }
+  },
+  {
+   "month": "2019-07",
+   "n": 4,
+   "excluded": {},
+   "area_km2": 1.8477,
+   "min_km2": 1.7374,
+   "max_km2": 1.89,
+   "se_km2": 0.0365,
+   "change_vs_previous": {
+    "delta_km2": -0.0052,
+    "threshold_km2": 0.138,
+    "exceeds_noise": false
+   }
+  },
+  {
+   "month": "2019-08",
+   "n": 7,
+   "excluded": {},
+   "area_km2": 1.8999,
+   "min_km2": 1.7996,
+   "max_km2": 1.9361,
+   "se_km2": 0.0231,
+   "change_vs_previous": {
+    "delta_km2": 0.0522,
+    "threshold_km2": 0.1296,
+    "exceeds_noise": false
+   }
+  },
+  {
+   "month": "2019-09",
+   "n": 5,
+   "excluded": {},
+   "area_km2": 1.8916,
+   "min_km2": 1.7606,
+   "max_km2": 1.9399,
+   "se_km2": 0.0327,
+   "change_vs_previous": {
+    "delta_km2": -0.0083,
+    "threshold_km2": 0.1201,
+    "exceeds_noise": false
+   }
+  },
+  {
+   "month": "2019-10",
+   "n": 8,
+   "excluded": {},
+   "area_km2": 1.8531,
+   "min_km2": 1.7584,
+   "max_km2": 1.9335,
+   "se_km2": 0.0201,
+   "change_vs_previous": {
+    "delta_km2": -0.0385,
+    "threshold_km2": 0.1152,
+    "exceeds_noise": false
+   }
+  },
+  {
+   "month": "2019-11",
+   "n": 7,
+   "excluded": {},
+   "area_km2": 1.8376,
+   "min_km2": 1.728,
+   "max_km2": 1.923,
+   "se_km2": 0.0261,
+   "change_vs_previous": {
+    "delta_km2": -0.0155,
+    "threshold_km2": 0.0988,
+    "exceeds_noise": false
+   }
+  },
+  {
+   "month": "2019-12",
+   "n": 8,
+   "excluded": {},
+   "area_km2": 1.7469,
+   "min_km2": 1.6052,
+   "max_km2": 1.8478,
+   "se_km2": 0.03,
+   "change_vs_previous": {
+    "delta_km2": -0.0907,
+    "threshold_km2": 0.1193,
+    "exceeds_noise": false
+   }
+  },
+  {
+   "month": "2020-01",
+   "n": 6,
+   "excluded": {},
+   "area_km2": 1.8659,
+   "min_km2": 1.6714,
+   "max_km2": 1.9143,
+   "se_km2": 0.0424,
+   "change_vs_previous": {
+    "delta_km2": 0.119,
+    "threshold_km2": 0.1558,
+    "exceeds_noise": false
+   }
+  },
+  {
+   "month": "2020-02",
+   "n": 5,
+   "excluded": {},
+   "area_km2": 1.7313,
+   "min_km2": 1.5556,
+   "max_km2": 1.8823,
+   "se_km2": 0.0554,
+   "change_vs_previous": {
+    "delta_km2": -0.1346,
+    "threshold_km2": 0.2093,
+    "exceeds_noise": false
+   }
+  },
+  {
+   "month": "2020-03",
+   "n": 4,
+   "excluded": {},
+   "area_km2": 1.5667,
+   "min_km2": 1.5521,
+   "max_km2": 3.857,
+   "se_km2": 0.5738,
+   "change_vs_previous": {
+    "delta_km2": -0.1646,
+    "threshold_km2": 1.7294,
+    "exceeds_noise": false
+   }
+  },
+  {
+   "month": "2020-04",
+   "n": 2,
+   "excluded": {
+    "lake_not_dark": 3
+   },
+   "area_km2": 3.878,
+   "min_km2": 3.5885,
+   "max_km2": 4.1676,
+   "change_vs_previous": null
+  },
+  {
+   "month": "2020-05",
+   "n": 6,
+   "excluded": {},
+   "area_km2": 1.8415,
+   "min_km2": 1.6851,
+   "max_km2": 2.6197,
+   "se_km2": 0.1471,
+   "change_vs_previous": null
+  },
+  {
+   "month": "2020-06",
+   "n": 4,
+   "excluded": {},
+   "area_km2": 1.8762,
+   "min_km2": 1.7935,
+   "max_km2": 1.9626,
+   "se_km2": 0.0393,
+   "change_vs_previous": {
+    "delta_km2": 0.0347,
+    "threshold_km2": 0.4568,
+    "exceeds_noise": false
+   }
+  },
+  {
+   "month": "2020-07",
+   "n": 7,
+   "excluded": {},
+   "area_km2": 1.8539,
+   "min_km2": 1.85,
+   "max_km2": 1.972,
+   "se_km2": 0.0232,
+   "change_vs_previous": {
+    "delta_km2": -0.0223,
+    "threshold_km2": 0.1369,
+    "exceeds_noise": false
+   }
+  },
+  {
+   "month": "2020-08",
+   "n": 5,
+   "excluded": {},
+   "area_km2": 1.9879,
+   "min_km2": 1.8875,
+   "max_km2": 1.9997,
+   "se_km2": 0.0243,
+   "change_vs_previous": {
+    "delta_km2": 0.134,
+    "threshold_km2": 0.1008,
+    "exceeds_noise": true
+   }
+  },
+  {
+   "month": "2020-09",
+   "n": 5,
+   "excluded": {},
+   "area_km2": 1.9192,
+   "min_km2": 1.8738,
+   "max_km2": 2.0094,
+   "se_km2": 0.0276,
+   "change_vs_previous": {
+    "delta_km2": -0.0687,
+    "threshold_km2": 0.1103,
+    "exceeds_noise": false
+   }
+  },
+  {
+   "month": "2020-10",
+   "n": 5,
+   "excluded": {},
+   "area_km2": 1.9461,
+   "min_km2": 1.8691,
+   "max_km2": 2.0079,
+   "se_km2": 0.0252,
+   "change_vs_previous": {
+    "delta_km2": 0.0269,
+    "threshold_km2": 0.1121,
+    "exceeds_noise": false
+   }
+  },
+  {
+   "month": "2020-11",
+   "n": 5,
+   "excluded": {},
+   "area_km2": 1.7121,
+   "min_km2": 1.4609,
+   "max_km2": 1.8599,
+   "se_km2": 0.0702,
+   "change_vs_previous": {
+    "delta_km2": -0.234,
+    "threshold_km2": 0.2238,
+    "exceeds_noise": true
+   }
+  },
+  {
+   "month": "2020-12",
+   "n": 5,
+   "excluded": {},
+   "area_km2": 1.4488,
+   "min_km2": 1.3675,
+   "max_km2": 1.5047,
+   "se_km2": 0.0254,
+   "change_vs_previous": {
+    "delta_km2": -0.2633,
+    "threshold_km2": 0.224,
+    "exceeds_noise": true
+   }
+  }
+ ],
+ "frozen_season_months": [
+  "2019-01",
+  "2020-04"
+ ],
+ "s2_monthly": [],
+ "scene_counts": {
+  "s1": 131,
+  "s2": 0
+ }
+}

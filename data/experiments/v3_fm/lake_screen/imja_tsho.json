@@ -1,0 +1,28 @@
+{
+ "lake": "imja_tsho",
+ "earlier": {
+  "found": 24,
+  "used": 15,
+  "area_km2": 1.079
+ },
+ "later": {
+  "found": 14,
+  "used": 14,
+  "area_km2": 1.662
+ },
+ "status": "ok",
+ "domain_patches": 329,
+ "positives": 34,
+ "negatives": 203,
+ "area_change_km2": 0.583,
+ "windows": {
+  "earlier": [
+   "2018-10-01",
+   "2018-11-30"
+  ],
+  "later": [
+   "2024-10-01",
+   "2024-11-30"
+  ]
+ }
+}

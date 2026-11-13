@@ -1,0 +1,28 @@
+{
+ "lake": "himag_gl082126e30067n",
+ "earlier": {
+  "found": 29,
+  "used": 29,
+  "area_km2": 0.55
+ },
+ "later": {
+  "found": 31,
+  "used": 30,
+  "area_km2": 0.555
+ },
+ "status": "ok",
+ "domain_patches": 259,
+ "positives": 0,
+ "negatives": 251,
+ "area_change_km2": 0.005,
+ "windows": {
+  "earlier": [
+   "2018-10-01",
+   "2018-11-30"
+  ],
+  "later": [
+   "2024-10-01",
+   "2024-11-30"
+  ]
+ }
+}

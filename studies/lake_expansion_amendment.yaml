@@ -1,0 +1,52 @@
+# Amendment: two more glacial lakes for the version 3 lake evaluation (13 November 2026).
+# Written BEFORE any optical scene was fetched or any model score was computed for these lakes.
+#
+# Why: the three pilot lakes (Tsho Rolpa, Imja Tsho, Thulagi) give 44 positive patches, 34 of them at one lake, so the
+# lake result rests on a single changing lake. A radar-only screen of all 30 lakes in studies/lakes.yaml
+# (scripts/screen_lake_change.py, output in data/experiments/v3_fm/lake_screen/) looked for lakes whose water state
+# changed between the same two windows. The screen read Sentinel-1 only: no optical scene, no embedding, no score.
+#
+# Selection rule, fixed now: add every lake outside the pilot three with at least 10 screen positives.
+# Result of the screen (positive patches, radar area change in km2):
+#   himag_gl087092e27798n   22 positives   +0.51
+#   himag_gl086611e27779n   14 positives   +0.19
+# The next lake has 5 positives, so exactly these two are added. No other lake is added, none is replaced.
+#
+# Consequence to state in the paper: these lakes were chosen because they changed (by the radar reference), as the
+# forest boxes were chosen for active clearing. The evaluation then measures how well each score agrees with that
+# radar change, so it over-represents changing lakes and says nothing about how often lakes change.
+#
+# Design unchanged from scripts/run_fm_lake_evaluation.py: windows October to November 2018 and 2024 (earlier window
+# +/-20 days for radar), 16 x 16 pixel patches within 6 patches of the lake seed, positive = water frequency changed by
+# at least 0.25, clean = under 0.05, same methods, same metrics, same bootstrap, MNDWI z as the paired reference.
+# Radar scenes are filtered to usable orbits computed from the 2019 to 2020 scenes of each new lake, as for the pilot
+# lakes. The screen's looser dark-lake filter is not used in the evaluation, so counts may differ from the screen.
+# Every lake that passes is reported whatever its result.
+earlier: ["2018-10-01", "2018-11-30"]
+later: ["2024-10-01", "2024-11-30"]
+added_lakes:
+  - himag_gl087092e27798n
+  - himag_gl086611e27779n
+
+# Scene availability, recorded after the amendment above and before any score (valid fraction = share of the lake box
+# that is clear in the scene classification; the study rule asks for a scene of at least 0.9):
+#   himag_gl087092e27798n  October-November 2018: best 0.31 (2018-10-20); widened to 15 Sep-31 Dec: best 0.55
+#                          (2018-12-04). October-November 2024: 1.0, three scenes. No 2018 scene reaches 0.9.
+#   himag_gl086611e27779n  October-November 2018: best 0.80 (2018-10-20); 2018-12-04 is 1.0 but outside the window.
+#                          October-November 2024: 1.0, three scenes.
+# Neither new lake meets the 0.9 rule for the earlier period, so neither has been evaluated yet. What to do about it
+# is decided and recorded here before any score is computed.
+
+# Decision (13 November 2026, before any score): the earlier period for the two added lakes moves from 2018 to 2020.
+# Evidence (valid fraction only, October-November windows, scenes at or above 0.9 on distinct dates):
+#   2017: none for either lake.  2019: two dates for gl087092, four for gl086611.  2020: six and seven.
+#   2021 and 2022 also qualify. Rule: the earliest year with three or more such dates for BOTH lakes, which is 2020,
+#   keeping the change window as long as the data allow. Later period unchanged: 2024 October-November.
+# The radar screen is repeated for 2020 against 2024 (output in data/experiments/v3_fm/lake_screen_2020/). A lake is kept
+# only if that screen still gives at least 10 positives; otherwise it is dropped and reported with its counts.
+# The pilot lakes keep their 2018 against 2024 windows. The paper must say the two new lakes use a different earlier year.
+
+# Result of the repeated screen, 2020 against 2024 (radar only, before any score):
+#   himag_gl087092e27798n  15 positives (radar area 1.87 to 2.18 km2)  -> kept, 2020 against 2024
+#   himag_gl086611e27779n   7 positives (radar area 1.22 to 1.29 km2)  -> dropped by the rule above, not evaluated
+# So one lake is added, not two. gl086611e27779n is reported as failing the screen with these counts.

@@ -1,0 +1,71 @@
+{
+ "study_id": "lake_himag_gl087092e27798n",
+ "bbox": [
+  87.05499999999999,
+  27.7624,
+  87.135,
+  27.834400000000002
+ ],
+ "grid": {
+  "crs": "EPSG:32645",
+  "transform": [
+   10.0,
+   0.0,
+   505410.0,
+   0.0,
+   -10.0,
+   3078870.0
+  ],
+  "width": 790,
+  "height": 799,
+  "resolution_m": 10.0
+ },
+ "periods": {
+  "earlier": {
+   "window": [
+    "2020-10-01",
+    "2020-11-30"
+   ],
+   "scenes": [
+    {
+     "item_id": "S2B_45RWL_20201113_1_L2A",
+     "date": "2020-11-13",
+     "valid_fraction": 1.0
+    },
+    {
+     "item_id": "S2A_45RWL_20201029_1_L2A",
+     "date": "2020-10-29",
+     "valid_fraction": 1.0
+    },
+    {
+     "item_id": "S2A_45RWL_20201128_1_L2A",
+     "date": "2020-11-28",
+     "valid_fraction": 0.9988
+    }
+   ]
+  },
+  "later": {
+   "window": [
+    "2024-10-01",
+    "2024-11-30"
+   ],
+   "scenes": [
+    {
+     "item_id": "S2A_45RWL_20241028_0_L2A",
+     "date": "2024-10-28",
+     "valid_fraction": 1.0
+    },
+    {
+     "item_id": "S2A_45RWL_20241117_0_L2A",
+     "date": "2024-11-17",
+     "valid_fraction": 0.9989
+    },
+    {
+     "item_id": "S2C_45RWL_20241107_1_L2A",
+     "date": "2024-11-07",
+     "valid_fraction": 0.9975
+    }
+   ]
+  }
+ }
+}
