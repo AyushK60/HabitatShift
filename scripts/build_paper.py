@@ -31,7 +31,7 @@ def plain(s: str) -> str:
     """Plain text from a BibTeX field for the HTML preview: common accents mapped, protective braces dropped."""
     for k, v in ACCENTS.items():
         s = s.replace("{" + k + "}", v).replace(k, v)
-    return s.replace("{", "").replace("}", "")
+    return s.replace("~", " ").replace("{", "").replace("}", "")
 
 
 def parse_bib() -> dict[str, dict]:
@@ -234,17 +234,17 @@ def build() -> None:
     refs = []
     for i, key in enumerate(doc.cite_order, 1):
         f = doc.bib[key]
-        authors = plain(f.get("author", "")).replace(" and ", "; ")
+        authors = plain(f.get("author", "")).replace(" and ", "; ").rstrip(".")
         venue = f.get("journal") or f.get("booktitle") or f.get("publisher", "")
         extra = ", ".join(x for x in [f.get("volume"), f.get("pages")] if x)
         refs.append(f"<li>{html.escape(authors)}. {html.escape(f.get('title', '').replace('{', '').replace('}', ''))}. <i>{html.escape(venue.replace('{', '').replace('}', ''))}</i>{', ' + html.escape(extra) if extra else ''} ({f.get('year', '')}).</li>")
-    body = "\n".join(html_body).replace("@@REFS@@", "<ol class=\"refs\">" + "".join(refs) + "</ol>")
+    body = "\n".join(html_body).replace("@@REFS@@", "<ol class=\"refs\">" + "".join(refs).replace("--", "–") + "</ol>")
     page = f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><title>{html.escape(title)}</title>
 <style>
 @page {{ size: A4; margin: 20mm 18mm; }}
 body {{ font: 10.5pt/1.45 "Source Serif 4", Georgia, serif; color: #111; max-width: 170mm; margin: 0 auto; }}
 h1 {{ font-size: 18pt; line-height: 1.2; margin: 0 0 6pt; }} .meta {{ font-size: 10pt; color: #333; margin-bottom: 14pt; }}
-h2 {{ font-size: 13pt; margin: 16pt 0 4pt; }} h3 {{ font-size: 11pt; margin: 10pt 0 2pt; }} p {{ margin: 0 0 6pt; text-align: justify; hyphens: auto; }}
+h2, h3 {{ break-after: avoid; }} h2 {{ font-size: 13pt; margin: 16pt 0 4pt; }} h3 {{ font-size: 11pt; margin: 10pt 0 2pt; }} p {{ margin: 0 0 6pt; text-align: left; hyphens: auto; }}
 .abstract {{ border-top: 1px solid #111; border-bottom: 1px solid #111; padding: 4pt 0 2pt; margin-bottom: 8pt; }} .abstract h2 {{ font-size: 11pt; margin-top: 2pt; }} .abstract p {{ font-size: 10pt; }}
 figure {{ margin: 8pt auto; break-inside: avoid; }} figure img {{ width: 100%; }} figcaption, caption {{ font-size: 9pt; text-align: left; margin-top: 3pt; }}
 table {{ border-collapse: collapse; margin: 8pt auto; font-size: 9pt; break-inside: avoid; }} caption {{ caption-side: top; margin-bottom: 4pt; }}
