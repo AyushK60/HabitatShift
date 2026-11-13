@@ -45,3 +45,29 @@ areas:
     bbox: [79.264, 29.364, 79.336, 29.436]
     hansen_tile: 30N_070E
     type: Shivalik foothill sal and mixed forest, Uttarakhand
+
+# ---------------------------------------------------------------------------------------------
+# AMENDMENT 1 (2026-11-13). Written after the label-only screen of the four point-centred boxes
+# (studies/forest_expansion_screen.json) and BEFORE any scene download or model score.
+#
+# What was seen: all four point-centred boxes failed the screen (positives 2, 29, 2, 3; minimum 150),
+# because an arbitrary 8 km box of forest contains almost no recent clearing. Hansen label counts for
+# those four boxes were therefore seen. No other label count and no score has been seen.
+#
+# Change: each region keeps its stated forest type, but its box is chosen by a fixed, label-only search
+# instead of being centred on the stated point:
+#   1. window: 0.4 x 0.4 degrees centred on the stated centre
+#   2. candidates: 760 x 800 pixel boxes (the size of the Bastar and Odisha boxes) at 10 m,
+#      moved in steps of 80 pixels
+#   3. choose the candidate with the most positive patches (Hansen labels only, rules above) among
+#      candidates that also have >= 300 clean-negative patches
+#   4. the chosen box is written to studies/forest_expansion_selected.json and fixed from then on
+# The inclusion rule is unchanged (>= 150 positives, >= 300 clean negatives, three fully valid scenes per
+# period). A region whose best box fails is reported as failed and is not replaced.
+# Stated limitation for the paper: selected boxes over-represent active forest clearing, as Bastar
+# and Odisha do; results describe areas where loss is occurring, not forest in general.
+amendment_1:
+  window_degrees: 0.4
+  box_pixels: [760, 800]
+  step_pixels: 80
+  selection: most positive patches, subject to >= 300 clean-negative patches
