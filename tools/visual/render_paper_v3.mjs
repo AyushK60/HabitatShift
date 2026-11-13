@@ -1,19 +1,21 @@
 /* Render docs/paper/v3/paper.html to a PDF preview, typesetting the maths with KaTeX.
- *   node tools/visual/render_paper_v3.mjs
+ *   node tools/visual/render_paper_v3.mjs     (from any folder)
  */
 import { chromium } from "playwright";
 import katex from "katex";
 import fs from "node:fs";
 import path from "node:path";
-import { pathToFileURL } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 
-const dir = path.resolve("../../docs/paper/v3");
+const here = path.dirname(fileURLToPath(import.meta.url));
+
+const dir = path.resolve(here, "../../docs/paper/v3");
 let html = fs.readFileSync(path.join(dir, "paper.html"), "utf8");
 const decode = (s) => s.replace(/&quot;/g, '"').replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&#x27;/g, "'");
 html = html.replace(/<span class="(math-[id])" data-tex="([^"]*)"><\/span>/g, (_, cls, tex) =>
   katex.renderToString(decode(tex), { displayMode: cls === "math-d", throwOnError: false }));
-const css = fs.readFileSync(path.resolve("node_modules/katex/dist/katex.min.css"), "utf8")
-  .replace(/url\(fonts\//g, `url(${pathToFileURL(path.resolve("node_modules/katex/dist/fonts")).href}/`);
+const css = fs.readFileSync(path.resolve(here, "node_modules/katex/dist/katex.min.css"), "utf8")
+  .replace(/url\(fonts\//g, `url(${pathToFileURL(path.resolve(here, "node_modules/katex/dist/fonts")).href}/`);
 html = html.replace("</head>", `<style>${css}</style></head>`);
 const out = path.join(dir, "paper_preview.html");
 fs.writeFileSync(out, html);
