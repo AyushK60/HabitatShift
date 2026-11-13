@@ -1,0 +1,166 @@
+{
+ "paired_prithvi_minus_raw6_ap_ci95": {
+  "bastar_forest": {
+   "prithvi": [
+    -0.06001546480641312,
+    0.020361769945828067
+   ],
+   "ssl4eo_rgb": [
+    -0.11305173284859023,
+    0.010221640231732727
+   ]
+  },
+  "odisha_forest": {
+   "prithvi": [
+    -0.08026146728704248,
+    0.05024198003388257
+   ],
+   "ssl4eo_rgb": [
+    -0.1550079376406183,
+    0.031889347904704685
+   ]
+  },
+  "kodagu_wayanad_forest": {
+   "prithvi": [
+    -0.08823255515681556,
+    0.020359707420293312
+   ],
+   "ssl4eo_rgb": [
+    -0.4005797023486165,
+    -0.25075130860240336
+   ]
+  },
+  "garo_hills_forest": {
+   "prithvi": [
+    -0.08591484967113885,
+    0.033233275255943086
+   ],
+   "ssl4eo_rgb": [
+    -0.26890186349971557,
+    -0.12285676430259124
+   ]
+  },
+  "uttarakhand_shivalik_forest": {
+   "prithvi": [
+    0.3451166450072399,
+    0.5163724690870238
+   ],
+   "ssl4eo_rgb": [
+    0.31043831045360415,
+    0.49854959881237937
+   ]
+  }
+ },
+ "clean_patch_z": {
+  "bastar_forest": {
+   "prithvi": {
+    "median_z": 1.5042823632886217,
+    "share_above_3": 0.05598320503848846,
+    "clean_patches": 1429
+   },
+   "ssl4eo_rgb": {
+    "median_z": 1.695921986159224,
+    "share_above_3": 0.05668299510146956,
+    "clean_patches": 1429
+   },
+   "raw6": {
+    "median_z": 0.728189208606857,
+    "share_above_3": 0.005598320503848845,
+    "clean_patches": 1429
+   },
+   "indices5": {
+    "median_z": 0.522350634795233,
+    "share_above_3": 0.005598320503848845,
+    "clean_patches": 1429
+   }
+  },
+  "odisha_forest": {
+   "prithvi": {
+    "median_z": 2.160419130357715,
+    "share_above_3": 0.19718309859154928,
+    "clean_patches": 781
+   },
+   "ssl4eo_rgb": {
+    "median_z": 2.4148003577282906,
+    "share_above_3": 0.24455825864276567,
+    "clean_patches": 781
+   },
+   "raw6": {
+    "median_z": 1.4761644432077958,
+    "share_above_3": 0.05761843790012804,
+    "clean_patches": 781
+   },
+   "indices5": {
+    "median_z": 2.0402213744208275,
+    "share_above_3": 0.147247119078105,
+    "clean_patches": 781
+   }
+  },
+  "kodagu_wayanad_forest": {
+   "prithvi": {
+    "median_z": 2.278571267874591,
+    "share_above_3": 0.15581752947206562,
+    "clean_patches": 1951
+   },
+   "ssl4eo_rgb": {
+    "median_z": 2.769349357308768,
+    "share_above_3": 0.37365453613531524,
+    "clean_patches": 1951
+   },
+   "raw6": {
+    "median_z": 0.8628889954722758,
+    "share_above_3": 0.016914402870322913,
+    "clean_patches": 1951
+   },
+   "indices5": {
+    "median_z": 1.0045523361728186,
+    "share_above_3": 0.032803690415171706,
+    "clean_patches": 1951
+   }
+  },
+  "garo_hills_forest": {
+   "prithvi": {
+    "median_z": 1.7697736116407856,
+    "share_above_3": 0.02553191489361702,
+    "clean_patches": 1410
+   },
+   "ssl4eo_rgb": {
+    "median_z": 1.98822541800367,
+    "share_above_3": 0.02695035460992908,
+    "clean_patches": 1410
+   },
+   "raw6": {
+    "median_z": 0.8163791219896488,
+    "share_above_3": 0.005673758865248227,
+    "clean_patches": 1410
+   },
+   "indices5": {
+    "median_z": 0.7052293778989469,
+    "share_above_3": 0.0,
+    "clean_patches": 1410
+   }
+  },
+  "uttarakhand_shivalik_forest": {
+   "prithvi": {
+    "median_z": 1.7802084721974372,
+    "share_above_3": 0.06656101426307448,
+    "clean_patches": 1262
+   },
+   "ssl4eo_rgb": {
+    "median_z": 2.0477813515607313,
+    "share_above_3": 0.11251980982567353,
+    "clean_patches": 1262
+   },
+   "raw6": {
+    "median_z": 1.229511500918577,
+    "share_above_3": 0.044374009508716325,
+    "clean_patches": 1262
+   },
+   "indices5": {
+    "median_z": 0.9636678579310147,
+    "share_above_3": 0.003961965134706815,
+    "clean_patches": 1262
+   }
+  }
+ }
+}

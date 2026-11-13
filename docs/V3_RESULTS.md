@@ -228,6 +228,24 @@ Lakes (four lakes pooled, secondary): Prithvi probe 0.77 against six-band probe 
 Reading: a trained readout recovers an advantage over the unsupervised signed baseline, but raw reflectance with the same
 readout does about as well, so the gain comes from labels and the sign of the change, not from pretraining.
 
+## Extra checks after review (exploratory, 13 November 2026)
+
+`scripts/run_fm_extra_checks.py` -> `data/experiments/v3_fm/extra_checks.json`.
+
+- Paired AP difference, Prithvi z minus six-raw-band z, forest: Bastar -0.06 to +0.02, Odisha -0.08 to +0.05, Kodagu -0.09
+  to +0.02, Garo Hills -0.09 to +0.03 (all include zero); Shivalik +0.35 to +0.52 (raw bands collapse there). RGB model minus
+  raw bands: clearly negative in Kodagu and Garo Hills, clearly positive in Shivalik.
+- Between-year z on Hansen clean patches (nothing lost), median z per area, range over five areas: raw bands 0.7 to 1.5,
+  five indices 0.5 to 2.0, Prithvi 1.5 to 2.3, SSL4EO RGB 1.7 to 2.8. Share above z>3: Prithvi 3% to 20%, RGB 3% to 37%, raw
+  bands 1% to 6%. The within-period noise understates the between-year spread of the embeddings.
+- Sensitivity variants in each area's `evaluation.json`: signed NDVI matches or beats both embeddings in 13 of 15 variants;
+  exceptions Bastar and Garo Hills with positives from 2021 (Prithvi +0.03 and +0.02 AP).
+- Five-indices probe (run with the others, previously unreported): AP 0.65, 0.66, 0.53, 0.54, 0.75 against signed NDVI 0.72,
+  0.76, 0.54, 0.55, 0.77; worse in Bastar, Odisha and Shivalik.
+- Prithvi-EO-2.0 was pretrained on Harmonized Landsat and Sentinel-2 data at 30 m (arXiv:2412.02732); our pixels are 10 m.
+- Registration commits: `9fc28c3` registration, `163885b` label screen, `aa13ce3` amendment, `fb7e7c7` box selection,
+  `d5ebab4` scoring scripts, `d020079` added-area scores. Lake amendment and probe design were committed with their results.
+
 ## Noise check without a reference (twelve areas)
 
 `scripts/run_fm_noise_check.py`. One scene of a period is compared with the rest of the same period, so every flagged

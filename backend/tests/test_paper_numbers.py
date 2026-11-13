@@ -98,3 +98,22 @@ def test_lake_subset_table_matches_recorded_scores():
         assert cells[1] == f"{g['positives']} ({g['blocks_with_positives']})", label
         for cell, method in zip(cells[2:], ("mndwi:z", "raw6:z", "prithvi:z", "ssl4eo_rgb:z")):
             assert cell == r2(g["metrics"][method]["average_precision"]), (label, method)
+
+
+def test_clean_patch_z_ranges_match_recorded_checks():
+    path = ROOT / "data" / "experiments" / "v3_fm" / "extra_checks.json"
+    if not path.exists():
+        pytest.skip("extra checks missing")
+    text, checks = PAPER.read_text(encoding="utf-8"), json.loads(path.read_text())
+    clean = checks["clean_patch_z"]
+
+    def r1(v):
+        return str(Decimal(str(v)).quantize(Decimal("0.1"), rounding=ROUND_HALF_UP))
+
+    for method in ("raw6", "indices5", "prithvi", "ssl4eo_rgb"):
+        values = [a[method]["median_z"] for a in clean.values()]
+        assert f"{r1(min(values))} to {r1(max(values))}" in text, method
+    shares = [a["prithvi"]["share_above_3"] for a in clean.values()]
+    assert f"{round(min(shares) * 100)}% to {round(max(shares) * 100)}% of Prithvi" in text
+    paired = checks["paired_prithvi_minus_raw6_ap_ci95"]["uttarakhand_shivalik_forest"]["prithvi"]
+    assert f"+{r2(paired[0])} to +{r2(paired[1])}" in text
