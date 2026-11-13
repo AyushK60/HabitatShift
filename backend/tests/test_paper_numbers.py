@@ -90,7 +90,7 @@ def test_lake_subset_table_matches_recorded_scores():
         pytest.skip("lake subset results missing")
     text, groups = PAPER.read_text(encoding="utf-8"), json.loads(path.read_text())["groups"]
     section = text[text.index("Table: Lakes one at a time"):]
-    names = {"Imja Tsho": "imja_only", "Added lake": "added_lake_only", "Thulagi": "thulagi_only",
+    names = {"Three pilot lakes (2018 against 2024)": "pilot_three_lakes", "Imja Tsho": "imja_only", "Added lake": "added_lake_only", "Thulagi": "thulagi_only",
              "Tsho Rolpa": "tsho_rolpa_only", "All lakes except Imja Tsho": "without_imja"}
     for label, key in names.items():
         cells = [c.strip() for c in _table_row(section, label).strip("|").split("|")]
@@ -117,3 +117,17 @@ def test_clean_patch_z_ranges_match_recorded_checks():
     assert f"{round(min(shares) * 100)}% to {round(max(shares) * 100)}% of Prithvi" in text
     paired = checks["paired_prithvi_minus_raw6_ap_ci95"]["uttarakhand_shivalik_forest"]["prithvi"]
     assert f"+{r2(paired[0])} to +{r2(paired[1])}" in text
+
+
+def test_matched_false_positive_recall_claim():
+    text = PAPER.read_text(encoding="utf-8")
+    base, prithvi = [], []
+    for area in FOREST_AREAS:
+        path = ROOT / "data" / "experiments" / "v3_fm" / area / "evaluation.json"
+        if not path.exists():
+            pytest.skip("forest evaluations missing")
+        metrics = json.loads(path.read_text())["metrics"]
+        base.append(r2(metrics["ndvi_decrease:z"]["tpr_at_fpr_5pct"]))
+        prithvi.append(r2(metrics["prithvi:z"]["tpr_at_fpr_5pct"]))
+        assert metrics["ndvi_decrease:z"]["tpr_at_fpr_5pct"] > metrics["prithvi:z"]["tpr_at_fpr_5pct"], area
+    assert f"signed NDVI ({', '.join(base)}) is higher than Prithvi's ({', '.join(prithvi)})" in text

@@ -185,7 +185,7 @@ average precision of the noise-calibrated score (ROC-AUC): six raw bands 0.644 (
 include zero. Raw bands and Prithvi are not distinguishable from each other, as before. The raw distance D gives raw
 bands 0.203, Prithvi 0.347 and SSL4EO RGB 0.705 (highest of all; z was the pre-specified score).
 
-Caveats: the lakes were chosen because radar shows change at them; the added lake uses 2020 as the earlier year, the
+Caveats: the added lake was chosen because radar shows change at it; the added lake uses 2020 as the earlier year, the
 pilot lakes 2018; per-lake scores were not examined; Prithvi AP 95% interval is 0.22 to 0.85.
 
 ### Lakes one at a time (exploratory, 13 November 2026)
