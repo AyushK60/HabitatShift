@@ -6,6 +6,8 @@ needs fontTools, whose compiled module is blocked by this machine's application-
 """
 from __future__ import annotations
 
+from decimal import ROUND_HALF_UP, Decimal
+
 import json
 import sys
 from pathlib import Path
@@ -46,7 +48,7 @@ def dots(ax, rows, base_rate, title):
         if r.get("ap_ci"):
             ax.plot(r["ap_ci"], [i, i], color=c, alpha=0.35, lw=3, solid_capstyle="round")
         ax.plot(r["ap"], i, "o", color=c, ms=6)
-        ax.text(1.02, i, f"{r['ap']:.2f}", va="center", fontsize=8, transform=ax.get_yaxis_transform())
+        ax.text(1.02, i, str(Decimal(str(r['ap'])).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)), va="center", fontsize=8, transform=ax.get_yaxis_transform())
     ref = next(r for r in rows if r["is_reference"])
     ax.axvline(ref["ap"], color=INK, ls="--", lw=1)
     ax.axvline(base_rate, color="#a9b4c8", ls=":", lw=1)
@@ -78,7 +80,7 @@ def fig_forest() -> None:
 
 def fig_lakes() -> None:
     fig, ax = plt.subplots(figsize=(4.6, 2.5))
-    dots(ax, V3["lakes"]["rows"], V3["lakes"]["counts"]["base_rate"], "Three Nepal lakes (44 positive patches)")
+    dots(ax, V3["lakes"]["rows"], V3["lakes"]["counts"]["base_rate"], "Four Nepal lakes (59 positive patches)")
     fig.tight_layout()
     save(fig, "fig_lakes_ap")
 
@@ -141,23 +143,17 @@ def fig_qualitative() -> None:
 
     a = comp("imja_2018.jpg", ["imja_outline_2018.png"])
     b = comp("imja_2024.jpg", ["imja_outline_2018.png", "imja_outline_2024.png"])
-    panels = [Image.open(pub / "figures" / n).convert("RGB").resize((470, 470)) for n in ("radar_input.jpg", "radar_model.jpg", "radar_optical.jpg")]
-    fig = plt.figure(figsize=(7.0, 4.2))
-    gs = fig.add_gridspec(2, 6, height_ratios=[0.85, 1])
-    top = [fig.add_subplot(gs[0, 0:3]), fig.add_subplot(gs[0, 3:6])]
-    bottom = [fig.add_subplot(gs[1, i:i + 2]) for i in (0, 2, 4)]
-    for ax in top + bottom:
+    fig, top = plt.subplots(1, 2, figsize=(7.0, 2.6))
+    for ax in top:
         ax.axis("off")
     top[0].imshow(a); top[0].set_title("(a) Oct 2018, with the 2018 shore", loc="left", fontsize=9)
     top[1].imshow(b); top[1].set_title("(b) Oct 2024: shore and lake gained", loc="left", fontsize=9)
-    for ax, im, t in zip(bottom, panels, ["(c) Sentinel-1 VV", "(d) U-Net lake (held out)", "(e) optical reference"]):
-        ax.imshow(im); ax.set_title(t, loc="left", fontsize=9)
     fig.tight_layout()
     save(fig, "fig_imja")
 
 
 def main() -> None:
-    fig_forest(); fig_lakes(); fig_placebo(); fig_coverage(); fig_qualitative()
+    fig_forest(); fig_lakes(); fig_placebo(); fig_qualitative()
 
 
 if __name__ == "__main__":

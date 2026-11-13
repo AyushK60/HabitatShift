@@ -163,6 +163,53 @@ Reading:
 - The ordering is not stable across scores (the RGB model's raw distance scores 0.799), which shows how loose a single
   lake is as a test.
 
+### Added lake and pooled result (amendment of 13 November 2026)
+
+The pilot result above rests on one changing lake. To widen it, a radar-only screen (`scripts/screen_lake_change.py`,
+outputs in `data/experiments/v3_fm/lake_screen/` and `lake_screen_2020/`) looked at all 30 lakes of `studies/lakes.yaml`
+before any optical scene or score was read. The rule and every later step are written in
+`studies/lake_expansion_amendment.yaml`: add each non-pilot lake with at least 10 radar positives.
+
+- 2018 against 2024: `himag_gl087092e27798n` 22 positives, `himag_gl086611e27779n` 14, next lake 5.
+- Neither has a clear 2018 optical scene (best valid fraction 0.31 and 0.80; the rule asks 0.9). The earlier period for
+  the added lakes moved to October to November 2020 (earliest year with three clear dates for both).
+- Screen repeated, 2020 against 2024: `gl087092` 15 positives (radar area 1.87 to 2.18 km2), kept;
+  `gl086611` 7 positives, dropped by the rule and not evaluated.
+- The added lake has three clear scenes in each period. Its radar reference uses usable orbits from its 2019 to 2020
+  scenes.
+
+Pooled over four lakes (59 positive, 1,037 clean patches; 34 Imja Tsho, 15 `gl087092`, 6 Thulagi, 4 Tsho Rolpa),
+average precision of the noise-calibrated score (ROC-AUC): six raw bands 0.644 (0.900), Prithvi 0.625 (0.880), NDVI
+0.477 (0.734), five indices 0.448 (0.747), MNDWI 0.445 (0.755), SSL4EO RGB 0.434 (0.872). Paired difference from MNDWI
+(95% interval): raw bands +0.06 to +0.24, Prithvi +0.06 to +0.22 (both exclude zero); NDVI, five indices and SSL4EO
+include zero. Raw bands and Prithvi are not distinguishable from each other, as before. The raw distance D gives raw
+bands 0.203, Prithvi 0.347 and SSL4EO RGB 0.705 (highest of all; z was the pre-specified score).
+
+Caveats: the lakes were chosen because radar shows change at them; the added lake uses 2020 as the earlier year, the
+pilot lakes 2018; per-lake scores were not examined; Prithvi AP 95% interval is 0.22 to 0.85.
+
+## Linear probe on the frozen features (exploratory, 13 November 2026)
+
+`scripts/run_fm_probe.py`; design in `studies/probe_design.yaml` (written before the run); results in
+`data/experiments/v3_fm/probe/evaluation.json` (original C grid) and `evaluation_wider_C.json` (sensitivity).
+
+L2 logistic regression on the signed noise-calibrated change vector, leave one forest area out, C chosen inside the
+training areas. Controls: a probe on six raw bands, one on five indices. Two analyses were added after the first run
+(paired Prithvi probe against six-band probe; wider C grid, because C sat at the lowest value) and are exploratory.
+
+Forest, average precision of the held-out area, signed NDVI / Prithvi probe / six-band probe:
+Bastar 0.72 / 0.77 / 0.81; Odisha 0.76 / 0.79 / 0.76; Kodagu 0.54 / 0.49 / 0.55; Garo Hills 0.55 / 0.57 / 0.59;
+Shivalik 0.77 / 0.85 / 0.80. The Prithvi probe beats signed NDVI in Bastar and Shivalik (paired intervals exclude zero)
+and, with the wider grid, only just in Odisha. The six-band probe is as good: Prithvi probe minus six-band probe is
+negative in Bastar and Kodagu on the original grid, and not clearly positive in any area under both grids. The SSL4EO RGB
+probe is worse than signed NDVI in four areas.
+
+Lakes (four lakes pooled, secondary): Prithvi probe 0.77 against six-band probe 0.61 on the original grid, 0.54 against
+0.39 on the wider grid; paired intervals +0.03 to +0.35 and -0.02 to +0.29. Not robust, not read as evidence.
+
+Reading: a trained readout recovers an advantage over the unsupervised signed baseline, but raw reflectance with the same
+readout does about as well, so the gain comes from labels and the sign of the change, not from pretraining.
+
 ## Noise check without a reference (twelve areas)
 
 `scripts/run_fm_noise_check.py`. One scene of a period is compared with the rest of the same period, so every flagged

@@ -61,12 +61,24 @@ def test_lake_table_matches_recorded_scores():
         assert f"{r2(r['ap'])} ({r2(r['auc'])})" in row, (label, row)
 
 
-def test_unet_and_coverage_numbers_match():
-    text, data = PAPER.read_text(encoding="utf-8"), json.loads(DATA.read_text())
-    sets = data["unet"]["sets"]
-    assert r2(sets['test_lakes']['unet_mean']) in text and r2(sets['test_lakes']['otsu']) in text
-    assert r2(sets['time_holdout_2022_same_lakes']['unet_mean']) in text
-    cov = data["unet"]["cv"]["coverage"]
-    for alpha, c in cov.items():
-        assert f"{round(c['achieved'] * 100)}%" in text, alpha
-        assert f"{c['lakes_below_target']} of 30" in text, alpha
+def test_unet_is_not_in_the_workshop_paper():
+    text = PAPER.read_text(encoding="utf-8")
+    assert "U-Net" not in text and "Radar water model" not in text.replace("A radar water model", "")
+
+
+def test_probe_table_matches_recorded_scores():
+    path = ROOT / "data" / "experiments" / "v3_fm" / "probe" / "evaluation.json"
+    if not path.exists():
+        pytest.skip("probe results missing")
+    text, probe = PAPER.read_text(encoding="utf-8"), json.loads(path.read_text())
+    names = {"bastar_forest": "Bastar", "odisha_forest": "Odisha", "kodagu_wayanad_forest": "Kodagu",
+             "garo_hills_forest": "Garo Hills", "uttarakhand_shivalik_forest": "Shivalik"}
+    section = text[text.index("Table: Linear probe on forest loss"):]
+    for key, label in names.items():
+        cells = [c.strip() for c in _table_row(section, label).strip("|").split("|")]
+        m = probe["forest"]["groups"][key]["metrics"]
+        assert cells[1] == r2(m["reference"]["average_precision"]), label
+        assert cells[2] == r2(m["prithvi:probe"]["average_precision"]), label
+        assert cells[4] == r2(m["raw6:probe"]["average_precision"]), label
+        lo, hi = probe["forest"]["groups"][key]["diff_vs_reference_ap_ci95"]["prithvi:probe"]
+        assert cells[3].endswith("*") == (hi < 0 or lo > 0), label
