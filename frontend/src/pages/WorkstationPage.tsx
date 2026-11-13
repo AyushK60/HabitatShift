@@ -145,7 +145,7 @@ function WorkstationForStudy({ studyId }: { studyId: string }) {
 
   const markerSetterRef = useRef<((lonLat: [number, number] | null) => void) | null>(null);
   const fitRef = useRef<(() => void) | null>(null);
-  const [inspectorTab, setInspectorTab] = useState<InspectorTab>("legend");
+  const [inspectorTab, setInspectorTab] = useState<InspectorTab>("guide");
 
   /* ----------------------------------------------------------- loading --- */
   useEffect(() => {
@@ -476,13 +476,12 @@ function WorkstationForStudy({ studyId }: { studyId: string }) {
       {/* ------------------------------------------------ study context bar */}
       <header className="ws-context">
         <div className="ws-title">
-          <p className="eyebrow">
-            {bundle.study.id ? `Study ${bundle.study.id} · ` : ""}
-            {String(bundle.study.study_type ?? "").replace(/_/g, " ")}
-            {bundle.evidence_status === "partial" ? " · PARTIAL evidence" : " · Processed"}
-            {isHimalaya ? ` · event ${bundle.event?.event_date}` : ""}
-          </p>
           <h1>{bundle.study.title}</h1>
+          <p className="ws-status">
+            {String(bundle.study.study_type ?? "").replace(/_/g, " ")}
+            {bundle.evidence_status === "partial" ? ", partial evidence" : ", processed"}
+            {isHimalaya ? `, event ${bundle.event?.event_date}` : ""}
+          </p>
           {bundle.experiments.length > 1 && (
             <div className="ws-experiment-switch" role="group" aria-label="Experiment">
               {bundle.experiments.map((item, index) => (
@@ -507,15 +506,19 @@ function WorkstationForStudy({ studyId }: { studyId: string }) {
             </dd>
           </div>
           <div>
-            <dt>Sensor</dt>
-            <dd>Sentinel-2 MSI L2A</dd>
-          </div>
-          <div>
             <dt>Valid coverage</dt>
             <dd>
               {(worstCommon * 100).toFixed(1)}%
               {worstCommon < 0.999 ? " of AOI shared-valid" : " of AOI common-valid"}
             </dd>
+          </div>
+        </dl>
+        <details className="ws-more">
+          <summary>Study details and export</summary>
+          <dl className="ws-facts">
+          <div>
+            <dt>Sensor</dt>
+            <dd>Sentinel-2 MSI L2A</dd>
           </div>
           <div>
             <dt>Method</dt>
@@ -553,7 +556,8 @@ function WorkstationForStudy({ studyId }: { studyId: string }) {
               </button>
             </dd>
           </div>
-        </dl>
+          </dl>
+        </details>
       </header>
 
       {/* ------------------------------------------------------- work row */}

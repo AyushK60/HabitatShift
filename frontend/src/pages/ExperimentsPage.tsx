@@ -13,6 +13,7 @@
  * Everything renders from the portable bundles, so the study selector works
  * in Showcase Mode with no Python backend.
  */
+import { Explain } from "../components/Explain";
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { api } from "../api/client";
@@ -291,7 +292,7 @@ function BundleExperiments({ bundle }: { bundle: StudyBundle }) {
         <ul className="exp-exports">
           <li>
             <a
-              href={`/studies/${encodeURIComponent(bundle.study_id)}/bundle.json`}
+              href={`studies/${encodeURIComponent(bundle.study_id)}/bundle.json`}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -960,19 +961,33 @@ export function ExperimentsPage() {
 
   const bundle = bundles[studyId];
   const isCoringa = studyId === "coringa_coastal";
+  const [tab, setTab] = useState<TabId>("overview");
+  const tabInfo = TABS.find((t) => t.id === tab)!;
 
   return (
     <main id="main" className="experiments-page">
-      <header className="exp-head">
-        <p className="eyebrow">Results &amp; experiments</p>
-        <h1>Recorded measurements per investigation</h1>
+      <header className="exp-head" data-tour="exp-pick">
+        <h1>The evidence behind each study area</h1>
         <p className="exp-lede">
-          Choose an investigation. Each one reports only its genuine analytical
-          outputs — recorded experiments where they exist, descriptive
-          measurements elsewhere, and explicit gaps where an experiment has not
-          been run.
+          Pick an area, then a question. Every graph has a plain-words note underneath; switch the top bar to
+          Technical for the method.
         </p>
         <StudySelector studies={studies} active={studyId} onSelect={setStudyId} />
+        <div className="exp-tabs" role="tablist" aria-label="Question">
+          {TABS.map((t) => (
+            <button
+              key={t.id}
+              type="button"
+              role="tab"
+              aria-selected={tab === t.id}
+              className={tab === t.id ? "is-on" : ""}
+              onClick={() => setTab(t.id)}
+            >
+              <strong>{t.label}</strong>
+              <span>{t.question}</span>
+            </button>
+          ))}
+        </div>
         {loadError && <ErrorNote message={`Registry unavailable: ${loadError}`} />}
       </header>
 
@@ -980,23 +995,67 @@ export function ExperimentsPage() {
 
       {bundle && (
         <>
-          {isCoringa && liveExperiment && <CoringaRecordedRun experiment={liveExperiment} />}
-          {isCoringa && !liveExperiment && (
-            <p className="exp-note">
-              The backend is not serving the recorded hypothesis-testing run right now — the
-              sections below render the same recorded numbers from the portable
-              showcase bundle.
-            </p>
+          <Explain plain={tabInfo.plain} technical={tabInfo.technical} />
+          {tab === "overview" && (
+            <>
+              {isCoringa && liveExperiment && <CoringaRecordedRun experiment={liveExperiment} />}
+              {isCoringa && !liveExperiment && (
+                <p className="exp-note">
+                  The backend is not serving the recorded hypothesis-testing run right now. The sections below show
+                  the same recorded numbers from the portable showcase bundle.
+                </p>
+              )}
+              <BundleExperiments bundle={bundle} />
+              <AvailabilityPanel bundle={bundle} />
+            </>
           )}
-          <BundleExperiments bundle={bundle} />
-          <AvailabilityPanel bundle={bundle} />
-          <ValidationPanel studyId={studyId} />
-          <NoisePanel studyId={studyId} />
-          <MonthlySeriesPanel studyId={studyId} />
-          <TimeSeriesPanel studyId={studyId} />
-          <InventoryPanel studyId={studyId} />
+          {tab === "real" && (
+            <>
+              <NoisePanel studyId={studyId} />
+              <ValidationPanel studyId={studyId} />
+            </>
+          )}
+          {tab === "time" && (
+            <>
+              <MonthlySeriesPanel studyId={studyId} />
+              <TimeSeriesPanel studyId={studyId} />
+            </>
+          )}
+          {tab === "parts" && <InventoryPanel studyId={studyId} />}
         </>
       )}
     </main>
   );
 }
+
+type TabId = "overview" | "real" | "time" | "parts";
+const TABS: { id: TabId; label: string; question: string; plain: string; technical: string }[] = [
+  {
+    id: "overview",
+    label: "What changed",
+    question: "How much land changed, and where?",
+    plain: "The amount of land that got greener, browner or wetter between the two periods, with the exact images and dates used.",
+    technical: "Descriptive measurements from median composites of clear scenes. Thresholds are fixed and stated; no claim of cause is made.",
+  },
+  {
+    id: "real",
+    label: "Is it real?",
+    question: "Is the change bigger than the noise, and does an independent map agree?",
+    plain: "Two checks. First, is the change larger than the normal scene-to-scene wobble? Second, does an independent dataset agree?",
+    technical: "Noise test: per-pixel standard error from same-period scenes, change flagged at 2 or 3 standard errors. Validation: agreement with Hansen forest-loss where it applies, reported as precision, recall and lift over chance.",
+  },
+  {
+    id: "time",
+    label: "Over time",
+    question: "How did it move month to month?",
+    plain: "How the measured value moved through the months and which clear scenes sit behind each point.",
+    technical: "Monthly medians of clear-scene index values with standard errors; the scene list shows every acquisition used.",
+  },
+  {
+    id: "parts",
+    label: "Parts of the change",
+    question: "What kinds of change add up to the total?",
+    plain: "The change split into its kinds, such as water gained or lost and vegetation gained or lost.",
+    technical: "Complete change-component inventory over the common valid area, so every pixel is counted once.",
+  },
+];

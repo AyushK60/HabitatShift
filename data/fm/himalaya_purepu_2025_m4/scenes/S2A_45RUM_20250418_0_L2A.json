@@ -1,0 +1,15 @@
+{
+ "item_id": "S2A_45RUM_20250418_0_L2A",
+ "period": "earlier",
+ "date": "2025-04-18",
+ "bands": [
+  "blue",
+  "green",
+  "red",
+  "nir08",
+  "swir16",
+  "swir22"
+ ],
+ "offset_corrected_empirically": false,
+ "valid_fraction": 0.9956
+}

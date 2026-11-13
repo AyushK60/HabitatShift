@@ -1,0 +1,662 @@
+{
+ "design": {
+  "split": {
+   "imja_tsho": "test",
+   "himag_gl083701e29218n": "test",
+   "himag_gl082126e30067n": "test",
+   "thulagi": "test",
+   "himag_gl086958e27754n": "test",
+   "himag_gl087081e27844n": "test",
+   "himag_gl081526e29772n": "cal",
+   "himag_gl082413e29754n": "cal",
+   "himag_gl086917e27832n": "cal",
+   "himag_gl081782e30128n": "cal",
+   "himag_gl083330e28787n": "train",
+   "tsho_rolpa": "train",
+   "himag_gl081688e30252n": "train",
+   "himag_gl082948e29196n": "train",
+   "himag_gl087831e27848n": "train",
+   "himag_gl086585e27874n": "train",
+   "himag_gl081571e30379n": "train",
+   "himag_gl082423e29384n": "train",
+   "himag_gl086928e27850n": "train",
+   "himag_gl086690e27951n": "train",
+   "himag_gl087092e27798n": "train",
+   "himag_gl082545e29193n": "train",
+   "himag_gl086958e27783n": "train",
+   "himag_gl083851e28691n": "train",
+   "himag_gl087866e27869n": "train",
+   "himag_gl086786e27923n": "train",
+   "himag_gl087805e27881n": "train",
+   "himag_gl086621e27790n": "train",
+   "himag_gl086681e27975n": "train",
+   "himag_gl086611e27779n": "train"
+  },
+  "min_contrast_db": -3.0,
+  "crop_px": 256,
+  "epochs": 40,
+  "seed": 1,
+  "best_val_iou": 0.8083264502167544
+ },
+ "history": [
+  {
+   "epoch": 1,
+   "train_loss": 1.2000017624943196,
+   "val_iou": 0.6700319721459244
+  },
+  {
+   "epoch": 2,
+   "train_loss": 1.0434436737990178,
+   "val_iou": 0.7194303487361093
+  },
+  {
+   "epoch": 3,
+   "train_loss": 0.9742615267008292,
+   "val_iou": 0.6797421886708783
+  },
+  {
+   "epoch": 4,
+   "train_loss": 0.8785449261424922,
+   "val_iou": 0.7306649414285821
+  },
+  {
+   "epoch": 5,
+   "train_loss": 0.7451411902403631,
+   "val_iou": 0.7122398506240954
+  },
+  {
+   "epoch": 6,
+   "train_loss": 0.5916894817552647,
+   "val_iou": 0.691768495447879
+  },
+  {
+   "epoch": 7,
+   "train_loss": 0.44707854976173206,
+   "val_iou": 0.7191812627146006
+  },
+  {
+   "epoch": 8,
+   "train_loss": 0.3572191455784966,
+   "val_iou": 0.7547515273920117
+  },
+  {
+   "epoch": 9,
+   "train_loss": 0.3263873776467908,
+   "val_iou": 0.7455546435237694
+  },
+  {
+   "epoch": 10,
+   "train_loss": 0.3044737344028569,
+   "val_iou": 0.6827043312461671
+  },
+  {
+   "epoch": 11,
+   "train_loss": 0.2871599674725733,
+   "val_iou": 0.7701157558085513
+  },
+  {
+   "epoch": 12,
+   "train_loss": 0.2749338646896747,
+   "val_iou": 0.767786891852199
+  },
+  {
+   "epoch": 13,
+   "train_loss": 0.2735112101090055,
+   "val_iou": 0.773393843891158
+  },
+  {
+   "epoch": 14,
+   "train_loss": 0.2605734776048099,
+   "val_iou": 0.7772674730498803
+  },
+  {
+   "epoch": 15,
+   "train_loss": 0.25829651245549945,
+   "val_iou": 0.7691630017762001
+  },
+  {
+   "epoch": 16,
+   "train_loss": 0.25063643175012923,
+   "val_iou": 0.7636321471046755
+  },
+  {
+   "epoch": 17,
+   "train_loss": 0.2516644128731319,
+   "val_iou": 0.7847715259505994
+  },
+  {
+   "epoch": 18,
+   "train_loss": 0.24738805754845883,
+   "val_iou": 0.7698807907657009
+  },
+  {
+   "epoch": 19,
+   "train_loss": 0.2379246571484734,
+   "val_iou": 0.7815692386500731
+  },
+  {
+   "epoch": 20,
+   "train_loss": 0.23399978167369587,
+   "val_iou": 0.7890413853421329
+  },
+  {
+   "epoch": 21,
+   "train_loss": 0.23737470302261224,
+   "val_iou": 0.7885170805415808
+  },
+  {
+   "epoch": 22,
+   "train_loss": 0.23132974542990453,
+   "val_iou": 0.7893238215656998
+  },
+  {
+   "epoch": 23,
+   "train_loss": 0.23292232621617678,
+   "val_iou": 0.7956069421887402
+  },
+  {
+   "epoch": 24,
+   "train_loss": 0.22546230499483957,
+   "val_iou": 0.7878091071513904
+  },
+  {
+   "epoch": 25,
+   "train_loss": 0.22152707411461517,
+   "val_iou": 0.7962927498922502
+  },
+  {
+   "epoch": 26,
+   "train_loss": 0.22133144328073293,
+   "val_iou": 0.7947203396649528
+  },
+  {
+   "epoch": 27,
+   "train_loss": 0.21692450239377864,
+   "val_iou": 0.7973097004409285
+  },
+  {
+   "epoch": 28,
+   "train_loss": 0.21503077915736607,
+   "val_iou": 0.8001424599522572
+  },
+  {
+   "epoch": 29,
+   "train_loss": 0.21257088544989836,
+   "val_iou": 0.8010619600729828
+  },
+  {
+   "epoch": 30,
+   "train_loss": 0.20871617498518039,
+   "val_iou": 0.8013545446695465
+  },
+  {
+   "epoch": 31,
+   "train_loss": 0.20728327727117457,
+   "val_iou": 0.8034926457312762
+  },
+  {
+   "epoch": 32,
+   "train_loss": 0.20396783391968543,
+   "val_iou": 0.8066829271828241
+  },
+  {
+   "epoch": 33,
+   "train_loss": 0.20490338018461435,
+   "val_iou": 0.8040486053278844
+  },
+  {
+   "epoch": 34,
+   "train_loss": 0.2008803511116685,
+   "val_iou": 0.805143201386514
+  },
+  {
+   "epoch": 35,
+   "train_loss": 0.1990032290961562,
+   "val_iou": 0.8068094352586854
+  },
+  {
+   "epoch": 36,
+   "train_loss": 0.1971507089478629,
+   "val_iou": 0.8073076133409408
+  },
+  {
+   "epoch": 37,
+   "train_loss": 0.19361583164760043,
+   "val_iou": 0.8080578505250172
+  },
+  {
+   "epoch": 38,
+   "train_loss": 0.19569963687608222,
+   "val_iou": 0.8078261371817765
+  },
+  {
+   "epoch": 39,
+   "train_loss": 0.19462230936819766,
+   "val_iou": 0.8083264502167544
+  },
+  {
+   "epoch": 40,
+   "train_loss": 0.1952911417273914,
+   "val_iou": 0.8080802269620389
+  }
+ ],
+ "val_random_holdout": {
+  "unet": {
+   "n_pairs": 132,
+   "mean_iou": 0.8083264502167544,
+   "median_iou": 0.875732282965191
+  },
+  "otsu_radar_rule": {
+   "n_pairs": 132,
+   "mean_iou": 0.5695307130821261,
+   "median_iou": 0.6056990031558693
+  }
+ },
+ "time_holdout_2022_same_lakes": {
+  "unet": {
+   "n_pairs": 387,
+   "mean_iou": 0.7962024813309434,
+   "median_iou": 0.8425093938898873
+  },
+  "otsu_radar_rule": {
+   "n_pairs": 387,
+   "mean_iou": 0.5412078920995378,
+   "median_iou": 0.5733284751320823
+  }
+ },
+ "calibration_lakes": {
+  "unet": {
+   "n_pairs": 244,
+   "mean_iou": 0.8231251752184989,
+   "median_iou": 0.8334738617200674
+  },
+  "otsu_radar_rule": {
+   "n_pairs": 244,
+   "mean_iou": 0.6798758702733834,
+   "median_iou": 0.7248747709107509
+  }
+ },
+ "test_lakes": {
+  "unet": {
+   "n_pairs": 468,
+   "mean_iou": 0.7079800049930329,
+   "median_iou": 0.7555163722944742
+  },
+  "otsu_radar_rule": {
+   "n_pairs": 468,
+   "mean_iou": 0.5519555245085609,
+   "median_iou": 0.597846212748864
+  }
+ },
+ "conformal_area": {
+  "alpha_0.2": {
+   "relative_half_width_q": 0.1338225771638246,
+   "test_lakes": {
+    "coverage": 0.6132478632478633,
+    "median_relative_error": 0.10161857706152536,
+    "median_interval_width_km2": 0.1549933088711417,
+    "n": 468,
+    "per_lake": {
+     "himag_gl082126e30067n": {
+      "coverage": 0.6595744680851063,
+      "n": 94
+     },
+     "himag_gl083701e29218n": {
+      "coverage": 0.5581395348837209,
+      "n": 129
+     },
+     "himag_gl086958e27754n": {
+      "coverage": 0.7454545454545455,
+      "n": 55
+     },
+     "himag_gl087081e27844n": {
+      "coverage": 0.9245283018867925,
+      "n": 53
+     },
+     "imja_tsho": {
+      "coverage": 0.6052631578947368,
+      "n": 38
+     },
+     "thulagi": {
+      "coverage": 0.40404040404040403,
+      "n": 99
+     }
+    }
+   },
+   "time_holdout_2022_same_lakes": {
+    "coverage": 0.7286821705426356,
+    "median_relative_error": 0.05342336951876228,
+    "median_interval_width_km2": 0.15839240233110274,
+    "n": 387,
+    "per_lake": {
+     "himag_gl081571e30379n": {
+      "coverage": 0.7142857142857143,
+      "n": 7
+     },
+     "himag_gl081688e30252n": {
+      "coverage": 0.36666666666666664,
+      "n": 30
+     },
+     "himag_gl082423e29384n": {
+      "coverage": 0.0,
+      "n": 1
+     },
+     "himag_gl082545e29193n": {
+      "coverage": 0.0,
+      "n": 3
+     },
+     "himag_gl082948e29196n": {
+      "coverage": 0.6875,
+      "n": 32
+     },
+     "himag_gl083330e28787n": {
+      "coverage": 0.3333333333333333,
+      "n": 6
+     },
+     "himag_gl083851e28691n": {
+      "coverage": 0.8461538461538461,
+      "n": 26
+     },
+     "himag_gl086585e27874n": {
+      "coverage": 0.8333333333333334,
+      "n": 12
+     },
+     "himag_gl086611e27779n": {
+      "coverage": 0.8571428571428571,
+      "n": 14
+     },
+     "himag_gl086621e27790n": {
+      "coverage": 0.8333333333333334,
+      "n": 12
+     },
+     "himag_gl086681e27975n": {
+      "coverage": 0.5333333333333333,
+      "n": 30
+     },
+     "himag_gl086690e27951n": {
+      "coverage": 0.9259259259259259,
+      "n": 54
+     },
+     "himag_gl086786e27923n": {
+      "coverage": 0.25,
+      "n": 4
+     },
+     "himag_gl086928e27850n": {
+      "coverage": 0.6666666666666666,
+      "n": 9
+     },
+     "himag_gl086958e27783n": {
+      "coverage": 0.3333333333333333,
+      "n": 9
+     },
+     "himag_gl087092e27798n": {
+      "coverage": 0.5,
+      "n": 12
+     },
+     "himag_gl087805e27881n": {
+      "coverage": 0.5333333333333333,
+      "n": 15
+     },
+     "himag_gl087831e27848n": {
+      "coverage": 1.0,
+      "n": 50
+     },
+     "himag_gl087866e27869n": {
+      "coverage": 0.75,
+      "n": 52
+     },
+     "tsho_rolpa": {
+      "coverage": 1.0,
+      "n": 9
+     }
+    }
+   }
+  },
+  "alpha_0.1": {
+   "relative_half_width_q": 0.17870778267254042,
+   "test_lakes": {
+    "coverage": 0.7478632478632479,
+    "median_relative_error": 0.10161857706152536,
+    "median_interval_width_km2": 0.20697935389133632,
+    "n": 468,
+    "per_lake": {
+     "himag_gl082126e30067n": {
+      "coverage": 0.8404255319148937,
+      "n": 94
+     },
+     "himag_gl083701e29218n": {
+      "coverage": 0.751937984496124,
+      "n": 129
+     },
+     "himag_gl086958e27754n": {
+      "coverage": 0.8545454545454545,
+      "n": 55
+     },
+     "himag_gl087081e27844n": {
+      "coverage": 0.9245283018867925,
+      "n": 53
+     },
+     "imja_tsho": {
+      "coverage": 0.6052631578947368,
+      "n": 38
+     },
+     "thulagi": {
+      "coverage": 0.5555555555555556,
+      "n": 99
+     }
+    }
+   },
+   "time_holdout_2022_same_lakes": {
+    "coverage": 0.8165374677002584,
+    "median_relative_error": 0.05342336951876228,
+    "median_interval_width_km2": 0.21151853157121886,
+    "n": 387,
+    "per_lake": {
+     "himag_gl081571e30379n": {
+      "coverage": 0.8571428571428571,
+      "n": 7
+     },
+     "himag_gl081688e30252n": {
+      "coverage": 0.4666666666666667,
+      "n": 30
+     },
+     "himag_gl082423e29384n": {
+      "coverage": 0.0,
+      "n": 1
+     },
+     "himag_gl082545e29193n": {
+      "coverage": 0.0,
+      "n": 3
+     },
+     "himag_gl082948e29196n": {
+      "coverage": 0.75,
+      "n": 32
+     },
+     "himag_gl083330e28787n": {
+      "coverage": 0.3333333333333333,
+      "n": 6
+     },
+     "himag_gl083851e28691n": {
+      "coverage": 0.8461538461538461,
+      "n": 26
+     },
+     "himag_gl086585e27874n": {
+      "coverage": 1.0,
+      "n": 12
+     },
+     "himag_gl086611e27779n": {
+      "coverage": 1.0,
+      "n": 14
+     },
+     "himag_gl086621e27790n": {
+      "coverage": 1.0,
+      "n": 12
+     },
+     "himag_gl086681e27975n": {
+      "coverage": 0.7333333333333333,
+      "n": 30
+     },
+     "himag_gl086690e27951n": {
+      "coverage": 0.9629629629629629,
+      "n": 54
+     },
+     "himag_gl086786e27923n": {
+      "coverage": 0.25,
+      "n": 4
+     },
+     "himag_gl086928e27850n": {
+      "coverage": 0.7777777777777778,
+      "n": 9
+     },
+     "himag_gl086958e27783n": {
+      "coverage": 0.4444444444444444,
+      "n": 9
+     },
+     "himag_gl087092e27798n": {
+      "coverage": 0.6666666666666666,
+      "n": 12
+     },
+     "himag_gl087805e27881n": {
+      "coverage": 0.8,
+      "n": 15
+     },
+     "himag_gl087831e27848n": {
+      "coverage": 1.0,
+      "n": 50
+     },
+     "himag_gl087866e27869n": {
+      "coverage": 0.8653846153846154,
+      "n": 52
+     },
+     "tsho_rolpa": {
+      "coverage": 1.0,
+      "n": 9
+     }
+    }
+   }
+  },
+  "alpha_0.05": {
+   "relative_half_width_q": 0.23026666666666662,
+   "test_lakes": {
+    "coverage": 0.8269230769230769,
+    "median_relative_error": 0.10161857706152536,
+    "median_interval_width_km2": 0.2666948533333333,
+    "n": 468,
+    "per_lake": {
+     "himag_gl082126e30067n": {
+      "coverage": 0.9042553191489362,
+      "n": 94
+     },
+     "himag_gl083701e29218n": {
+      "coverage": 0.8217054263565892,
+      "n": 129
+     },
+     "himag_gl086958e27754n": {
+      "coverage": 0.8545454545454545,
+      "n": 55
+     },
+     "himag_gl087081e27844n": {
+      "coverage": 0.9245283018867925,
+      "n": 53
+     },
+     "imja_tsho": {
+      "coverage": 0.7105263157894737,
+      "n": 38
+     },
+     "thulagi": {
+      "coverage": 0.7373737373737373,
+      "n": 99
+     }
+    }
+   },
+   "time_holdout_2022_same_lakes": {
+    "coverage": 0.8604651162790697,
+    "median_relative_error": 0.05342336951876228,
+    "median_interval_width_km2": 0.27254362666666654,
+    "n": 387,
+    "per_lake": {
+     "himag_gl081571e30379n": {
+      "coverage": 0.8571428571428571,
+      "n": 7
+     },
+     "himag_gl081688e30252n": {
+      "coverage": 0.5333333333333333,
+      "n": 30
+     },
+     "himag_gl082423e29384n": {
+      "coverage": 0.0,
+      "n": 1
+     },
+     "himag_gl082545e29193n": {
+      "coverage": 0.0,
+      "n": 3
+     },
+     "himag_gl082948e29196n": {
+      "coverage": 0.78125,
+      "n": 32
+     },
+     "himag_gl083330e28787n": {
+      "coverage": 0.3333333333333333,
+      "n": 6
+     },
+     "himag_gl083851e28691n": {
+      "coverage": 0.8461538461538461,
+      "n": 26
+     },
+     "himag_gl086585e27874n": {
+      "coverage": 1.0,
+      "n": 12
+     },
+     "himag_gl086611e27779n": {
+      "coverage": 1.0,
+      "n": 14
+     },
+     "himag_gl086621e27790n": {
+      "coverage": 1.0,
+      "n": 12
+     },
+     "himag_gl086681e27975n": {
+      "coverage": 0.9,
+      "n": 30
+     },
+     "himag_gl086690e27951n": {
+      "coverage": 0.9814814814814815,
+      "n": 54
+     },
+     "himag_gl086786e27923n": {
+      "coverage": 0.25,
+      "n": 4
+     },
+     "himag_gl086928e27850n": {
+      "coverage": 0.8888888888888888,
+      "n": 9
+     },
+     "himag_gl086958e27783n": {
+      "coverage": 0.4444444444444444,
+      "n": 9
+     },
+     "himag_gl087092e27798n": {
+      "coverage": 0.6666666666666666,
+      "n": 12
+     },
+     "himag_gl087805e27881n": {
+      "coverage": 1.0,
+      "n": 15
+     },
+     "himag_gl087831e27848n": {
+      "coverage": 1.0,
+      "n": 50
+     },
+     "himag_gl087866e27869n": {
+      "coverage": 0.9423076923076923,
+      "n": 52
+     },
+     "tsho_rolpa": {
+      "coverage": 1.0,
+      "n": 9
+     }
+    }
+   }
+  }
+ }
+}

@@ -1,54 +1,53 @@
-# HabitatShift — architecture
+# Architecture
 
-HabitatShift is a local, single-machine scientific research platform. The
-server binds `127.0.0.1` only; there is no deployment, no external service
-and no credential anywhere.
+HabitatShift runs on one machine. The server listens on `127.0.0.1` only, and there is no hosted service and no
+stored credential.
 
 ```mermaid
 flowchart LR
-    subgraph Sources["External data (read-only, anonymous)"]
+    subgraph Sources["External data (read-only, no login)"]
         STAC["Earth Search STAC API\n(sentinel-2-l2a)"]
         COG["Sentinel-2 L2A COGs\n(AWS Open Data)"]
-        WC["ESA WorldCover v200 COGs\n(2021 reference labels)"]
+        WC["ESA WorldCover v200\n(2021 reference labels)"]
     end
 
     subgraph Acquisition["backend/app/acquisition + catalog"]
-        SEARCH["catalog search\n(AOI ∩ date, cloud filter)"]
-        READ["bounded COG window reads\n(WarpedVRT, budgeted bytes)"]
-        RADIOMETRY["radiometry verification\nempirical acceptance test"]
+        SEARCH["catalog search\n(area and date, cloud filter)"]
+        READ["bounded COG window reads"]
+        RADIOMETRY["radiometry check"]
     end
 
     subgraph Science["backend/app/preprocess + analysis + experiments"]
-        MASKS["SCL masking\n(common-valid grid)"]
-        COMPOSITE["median compositing\n(indices NDVI/NDWI/MNDWI/NDSI/NDBI)"]
-        CHANGE["change detection\nthresholds + connected components\n(MMU 25 px, top-5 per index/direction)"]
-        M2["M2 experiments\nthreshold sweeps · estimator families\nspatial block bootstrap"]
-        ML["M5 ML\nRandom Forest vs WorldCover\n(1 km block folds)"]
+        MASKS["cloud masking (SCL)\nshared valid footprint"]
+        COMPOSITE["median composites and indices\nNDVI NDWI MNDWI NDSI NDBI"]
+        CHANGE["change detection\nthresholds + connected patches"]
+        EXP["experiments\nthreshold sweeps, estimators,\nblock bootstrap"]
+        ML["Random Forest vs WorldCover\n(1 km block folds)"]
     end
 
-    subgraph Evidence["Sealed evidence layer"]
-        MANIFESTS["data/manifests/*.json\n(full provenance + SHA-256)"]
-        FINDINGS["data/findings/*.json\nhabitatshift-findings/2\n+ evidence-record/1"]
-        M5ML["data/findings_m5ml/*.json\n(additive ML layer)"]
+    subgraph Evidence["Recorded results"]
+        MANIFESTS["data/manifests/*.json\n(provenance + SHA-256)"]
+        FINDINGS["data/findings/*.json"]
+        MLF["data/findings_m5ml/*.json\n(ML layer, kept separate)"]
     end
 
-    subgraph Product["Frontend (React + TS + MapLibre)"]
-        EXPLORE["Explore the Evidence"]
-        RESEARCH["Research Mode"]
-        ADAPTER["Shared Evidence Adapter\n(one read path, no recomputation)"]
-        SHOWCASE["Offline Showcase\n(frontend/public/studies)"]
+    subgraph Product["Frontend (React + TypeScript + MapLibre)"]
+        EXPLORE["Explore"]
+        RESEARCH["Research mode"]
+        ADAPTER["one shared reader\n(no recomputation)"]
+        SHOWCASE["offline showcase\n(frontend/public/studies)"]
     end
 
     STAC --> SEARCH --> READ --> RADIOMETRY --> MASKS --> COMPOSITE --> CHANGE
     COG --> READ
     WC --> ML
     CHANGE --> MANIFESTS --> FINDINGS
-    COMPOSITE --> M2
+    COMPOSITE --> EXP
     COMPOSITE --> ML
-    M2 --> MANIFESTS
-    ML --> M5ML
+    EXP --> MANIFESTS
+    ML --> MLF
     FINDINGS --> ADAPTER
-    M5ML --> ADAPTER
+    MLF --> ADAPTER
     ADAPTER --> EXPLORE
     ADAPTER --> RESEARCH
     ADAPTER --> SHOWCASE
@@ -56,28 +55,24 @@ flowchart LR
 
 ## Components
 
-| Layer | Location | Responsibility |
+| Layer | Location | Job |
 |---|---|---|
-| Catalog & acquisition | `backend/app/catalog`, `backend/app/acquisition` | STAC search, bounded windowed COG reads, radiometric convention verification with the empirical acceptance test |
-| Preprocessing | `backend/app/preprocess` | SCL mask policy, grid definition (auto UTM, 10 m), median compositing, previews |
-| Analysis | `backend/app/analysis`, `backend/app/indices` | Δ-index change detection, threshold classification, area arithmetic (planimetric UTM pixel area) |
-| Experiments | `backend/app/experiments` | M2 threshold sweeps, estimator families, spatial block bootstrap |
-| ML (M5) | `scripts/run_m5_ml.py`, `scripts/run_m5_training_imagery.py` | label-gated Random Forest experiments, trained on 2021-epoch imagery, evaluated as agreement with WorldCover |
-| Evidence | `backend/app/provenance`, `scripts/generate_findings.py` | schema-validated manifests, sealed evidence records (output checksums, git commit, software versions) |
-| API | `backend/app/api/app.py` | FastAPI on 127.0.0.1, id-sanitised routes, path-traversal guards |
-| Frontend | `frontend/src` | Explore the Evidence, Research Mode, pixel probe, offline Showcase; one shared Evidence Adapter (`frontend/src/evidence/adapter.ts`) so both experiences render the same records |
+| Catalog and acquisition | `backend/app/catalog`, `backend/app/acquisition` | STAC search, bounded windowed reads, radiometry check |
+| Preprocessing | `backend/app/preprocess` | cloud-mask policy, 10 m UTM grid, median composites, previews |
+| Analysis | `backend/app/analysis`, `backend/app/indices` | index differences, thresholds, area from UTM pixel area |
+| Experiments | `backend/app/experiments` | threshold sweeps, estimator families, block bootstrap, noise test |
+| Machine learning | `scripts/run_m5_ml.py`, `scripts/run_m5_training_imagery.py` | Random Forests trained on 2021 imagery, reported as agreement with WorldCover |
+| Provenance | `backend/app/provenance`, `scripts/generate_findings.py` | validated manifests, records with output checksums, git commit and software versions |
+| API | `backend/app/api/app.py` | FastAPI on 127.0.0.1, sanitised ids, path-traversal guards |
+| Frontend | `frontend/src` | Explore, Research mode, pixel probe, offline showcase, one shared reader in `frontend/src/evidence/adapter.ts` |
 
-## Invariants worth knowing
+## Rules the code keeps
 
-1. **No recomputation in the UI.** Every displayed number is read from a
-   sealed record through the adapter; browser suites assert UI numbers equal
-   the records at recorded precision.
-2. **Content-addressed, policy-versioned caches.** Observation cache keys
-   embed the radiometry policy version; records written under a superseded
-   policy cannot be loaded.
-3. **Frozen outputs are immutable.** Every milestone reads its predecessors'
-   artifacts; the M5 fresh-environment reproduction regenerates a study into
-   a sandbox and verifies byte-identical rasters.
-4. **Independence of audits.** The audit scripts (`verification/audit_*.py`)
-   deliberately do not import production code — they re-implement the
-   documented spec.
+1. **The UI never recomputes.** Every number on screen is read from a recorded result. Browser tests check that UI
+   numbers equal the records.
+2. **Caches are keyed by content and policy version.** A record written under an older radiometry policy cannot be
+   loaded.
+3. **Recorded outputs are not edited.** New work reads earlier results; the fresh-environment reproduction
+   regenerates a study in a sandbox and checks the rasters are byte-identical.
+4. **Audits are independent.** The scripts in `verification/audit_*.py` re-implement the documented method without
+   importing production code.

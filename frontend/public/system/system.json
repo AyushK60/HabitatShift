@@ -1,0 +1,23 @@
+{
+ "schema": "habitatshift-system/1",
+ "counts": {
+  "lakes": 30,
+  "radar_scenes": 2308,
+  "optical_scenes": 1232,
+  "training_pairs": 3227,
+  "pairs_examined": 10620,
+  "study_areas": 6,
+  "tests": 494,
+  "unet_fold_models": 5,
+  "cv_scored_pairs": 2421
+ },
+ "size": {
+  "training_tiles_gb": 6.82,
+  "foundation_weights_gb": 1.33
+ },
+ "code": {
+  "python_lines": 26717,
+  "frontend_lines": 14058,
+  "doc_pages": 13
+ }
+}

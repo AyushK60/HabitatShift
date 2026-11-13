@@ -1,0 +1,185 @@
+# Glacial lakes for the version 3 time series.
+# lon/lat must fall on or within a few hundred metres of the lake; half_deg is the half-width of the
+# analysis box in degrees (about 111 km per degree). Coordinates were checked visually on radar and
+# DEM images, not copied from a catalogue, so treat them as search anchors, not survey points.
+lakes:
+  - id: tsho_rolpa
+    name: Tsho Rolpa
+    lon: 86.476
+    lat: 27.862
+    half_deg: 0.045
+    note: Moraine-dammed lake in the Rolwaling valley; partly in radar layover for one orbit.
+  - id: imja_tsho
+    name: Imja Tsho
+    lon: 86.930
+    lat: 27.900
+    half_deg: 0.04
+    note: Fast-growing lake below the Imja glacier; floating ice near the glacier front.
+  - id: thulagi
+    name: Thulagi
+    lon: 84.487
+    lat: 28.491
+    half_deg: 0.05
+    note: Moraine-dammed lake in the Marsyangdi basin with large dark shadow areas around it.
+  - id: himag_gl081526e29772n
+    name: Lake GL081526E29772N
+    lon: 81.5252
+    lat: 29.7735
+    half_deg: 0.04
+    note: "Hi-MAG 2017: proglacial lake, 0.465 km2, 4582 m."
+  - id: himag_gl081571e30379n
+    name: Lake GL081571E30379N
+    lon: 81.5702
+    lat: 30.3819
+    half_deg: 0.04
+    note: "Hi-MAG 2017: unconnected glacial lake, 0.336 km2, 5096 m."
+  - id: himag_gl081688e30252n
+    name: Lake GL081688E30252N
+    lon: 81.6887
+    lat: 30.2524
+    half_deg: 0.04
+    note: "Hi-MAG 2017: unconnected glacial lake, 0.327 km2, 4257 m."
+  - id: himag_gl081782e30128n
+    name: Lake GL081782E30128N
+    lon: 81.7796
+    lat: 30.1298
+    half_deg: 0.04
+    note: "Hi-MAG 2017: proglacial lake, 0.604 km2, 5015 m."
+  - id: himag_gl082126e30067n
+    name: Lake GL082126E30067N
+    lon: 82.1269
+    lat: 30.067
+    half_deg: 0.04
+    note: "Hi-MAG 2017: proglacial lake, 0.553 km2, 4829 m."
+  - id: himag_gl082413e29754n
+    name: Lake GL082413E29754N
+    lon: 82.4145
+    lat: 29.7533
+    half_deg: 0.04
+    note: "Hi-MAG 2017: proglacial lake, 0.386 km2, 4690 m."
+  - id: himag_gl082423e29384n
+    name: Lake GL082423E29384N
+    lon: 82.4234
+    lat: 29.3835
+    half_deg: 0.04
+    note: "Hi-MAG 2017: proglacial lake, 0.417 km2, 4435 m."
+  - id: himag_gl082545e29193n
+    name: Lake GL082545E29193N
+    lon: 82.5455
+    lat: 29.1935
+    half_deg: 0.04
+    note: "Hi-MAG 2017: proglacial lake, 0.345 km2, 4692 m."
+  - id: himag_gl082948e29196n
+    name: Lake GL082948E29196N
+    lon: 82.9521
+    lat: 29.1966
+    half_deg: 0.04
+    note: "Hi-MAG 2017: unconnected glacial lake, 4.365 km2, 3619 m."
+  - id: himag_gl083330e28787n
+    name: Lake GL083330E28787N
+    lon: 83.3302
+    lat: 28.7873
+    half_deg: 0.04
+    note: "Hi-MAG 2017: proglacial lake, 0.39 km2, 4445 m."
+  - id: himag_gl083701e29218n
+    name: Lake GL083701E29218N
+    lon: 83.7016
+    lat: 29.2177
+    half_deg: 0.04
+    note: "Hi-MAG 2017: proglacial lake, 0.37 km2, 5424 m."
+  - id: himag_gl083851e28691n
+    name: Lake GL083851E28691N
+    lon: 83.8521
+    lat: 28.6922
+    half_deg: 0.04
+    note: "Hi-MAG 2017: proglacial lake, 3.284 km2, 4910 m."
+  - id: himag_gl086585e27874n
+    name: Lake GL086585E27874N
+    lon: 86.5858
+    lat: 27.8743
+    half_deg: 0.04
+    note: "Hi-MAG 2017: proglacial lake, 0.353 km2, 4368 m."
+  - id: himag_gl086611e27779n
+    name: Lake GL086611E27779N
+    lon: 86.6184
+    lat: 27.778
+    half_deg: 0.04
+    note: "Hi-MAG 2017: proglacial lake, 1.212 km2, 4831 m."
+  - id: himag_gl086621e27790n
+    name: Lake GL086621E27790N
+    lon: 86.62
+    lat: 27.7902
+    half_deg: 0.04
+    note: "Hi-MAG 2017: proglacial lake, 0.337 km2, 5156 m."
+  - id: himag_gl086681e27975n
+    name: Lake GL086681E27975N
+    lon: 86.6806
+    lat: 27.975
+    half_deg: 0.04
+    note: "Hi-MAG 2017: ice-marginal lake, 0.534 km2, 4834 m."
+  - id: himag_gl086690e27951n
+    name: Lake GL086690E27951N
+    lon: 86.6898
+    lat: 27.9516
+    half_deg: 0.04
+    note: "Hi-MAG 2017: ice-marginal lake, 0.404 km2, 4745 m."
+  - id: himag_gl086786e27923n
+    name: Lake GL086786E27923N
+    lon: 86.7866
+    lat: 27.9242
+    half_deg: 0.04
+    note: "Hi-MAG 2017: proglacial lake, 0.526 km2, 4515 m."
+  - id: himag_gl086917e27832n
+    name: Lake GL086917E27832N
+    lon: 86.9173
+    lat: 27.8327
+    half_deg: 0.04
+    note: "Hi-MAG 2017: proglacial lake, 0.317 km2, 5370 m."
+  - id: himag_gl086928e27850n
+    name: Lake GL086928E27850N
+    lon: 86.9293
+    lat: 27.8498
+    half_deg: 0.04
+    note: "Hi-MAG 2017: proglacial lake, 0.458 km2, 5407 m."
+  - id: himag_gl086958e27754n
+    name: Lake GL086958E27754N
+    lon: 86.9586
+    lat: 27.7554
+    half_deg: 0.04
+    note: "Hi-MAG 2017: proglacial lake, 0.816 km2, 4952 m."
+  - id: himag_gl086958e27783n
+    name: Lake GL086958E27783N
+    lon: 86.9592
+    lat: 27.7825
+    half_deg: 0.04
+    note: "Hi-MAG 2017: proglacial lake, 0.775 km2, 5206 m."
+  - id: himag_gl087081e27844n
+    name: Lake GL087081E27844N
+    lon: 87.0819
+    lat: 27.8449
+    half_deg: 0.04
+    note: "Hi-MAG 2017: proglacial lake, 0.365 km2, 4839 m."
+  - id: himag_gl087092e27798n
+    name: Lake GL087092E27798N
+    lon: 87.095
+    lat: 27.7984
+    half_deg: 0.04
+    note: "Hi-MAG 2017: proglacial lake, 1.637 km2, 4544 m."
+  - id: himag_gl087805e27881n
+    name: Lake GL087805E27881N
+    lon: 87.8054
+    lat: 27.8811
+    half_deg: 0.04
+    note: "Hi-MAG 2017: proglacial lake, 0.337 km2, 4696 m."
+  - id: himag_gl087831e27848n
+    name: Lake GL087831E27848N
+    lon: 87.8308
+    lat: 27.8489
+    half_deg: 0.04
+    note: "Hi-MAG 2017: unconnected glacial lake, 0.304 km2, 4437 m."
+  - id: himag_gl087866e27869n
+    name: Lake GL087866E27869N
+    lon: 87.8661
+    lat: 27.8692
+    half_deg: 0.04
+    note: "Hi-MAG 2017: proglacial lake, 0.625 km2, 4908 m."

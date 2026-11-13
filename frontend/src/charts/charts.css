@@ -1,274 +1,67 @@
-/* Interactive analytical charts (M4-G5, refined M4-R1-G10) —
-   Midnight Teal & Copper identity. */
+/* Interactive analytical charts.
+   The readout is a quiet one-line bar above the plot, in normal page flow, so nothing ever covers the data.
+   Long measurement text lives behind the Details button, which opens below the readout, not over the plot. */
 
-/* G10: the screen-reader data table under each chart must stay invisible —
-   the class had no definition, so the table rendered under every chart. */
 .visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  border: 0;
-  clip: rect(0 0 0 0);
-  clip-path: inset(50%);
-  overflow: hidden;
-  /* Tables ignore overflow:hidden and would otherwise keep their min-content
-     width in the layout — pin the box instead. */
-  table-layout: fixed;
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; border: 0;
+  clip: rect(0 0 0 0); clip-path: inset(50%); overflow: hidden; table-layout: fixed;
 }
 
-.ichart {
-  margin: 0;
-  width: 100%;
-  /* G10: charts use the text column efficiently — full width on narrow
-     layouts, a sensible cap on wide screens (no overly wide plots). */
-  max-width: 860px;
-}
+.ichart { margin: 0; width: 100%; max-width: 1040px; }
+.ichart--empty { padding: 0.75rem 0; }
 
-.ichart--empty {
-  padding: 0.75rem 0;
+/* ---- readout ---- */
+.ichart-readout { margin-bottom: 0.6rem; min-height: 2.6rem; }
+.ichart-hint {
+  margin: 0; height: 2.6rem; display: flex; align-items: center; padding: 0 0.9rem;
+  font-size: 0.86rem; color: var(--text-muted); border: 1px dashed var(--rule-strong);
 }
-
-.ichart-plot {
-  position: relative;
-  cursor: crosshair;
-}
-
-/* The SVG keeps its clipped, rounded frame; the tooltip overlay is a sibling
-   so it can never be cut off by the plot edges. */
-.ichart-svg {
-  border: 1px solid rgba(25, 60, 67, 0.14);
-  border-radius: 8px;
-  background: #fdfcfa;
-  overflow: hidden;
-  line-height: 0;
-}
-
-.ichart-svg svg {
-  display: block;
-  /* Breaks the ResizeObserver feedback loop: the svg's intrinsic width must
-     never propagate through flex/grid ancestors and inflate the page (the
-     measured container width always wins). */
-  max-width: 100%;
-}
-
-.ichart-plot:focus-visible {
-  outline: 2px solid var(--copper, #d68a5d);
-  outline-offset: 1px;
-}
-
-.ichart-gridline {
-  stroke: rgba(25, 60, 67, 0.12);
-  stroke-width: 1;
-}
-
-.ichart-tick {
-  font-family: var(--mono, monospace);
-  font-size: 10.5px;
-  fill: #47606a;
-}
-
-.ichart-axis {
-  font-family: var(--mono, monospace);
-  font-size: 11px;
-  fill: #193c43;
-}
-
-.ichart-guide {
-  stroke: rgba(24, 39, 45, 0.4);
-  stroke-width: 1;
-  stroke-dasharray: 3 3;
-  pointer-events: none;
-}
-
-.ichart-dot {
-  pointer-events: none;
-}
-
-/* G10: halo that marks the currently selected recorded point. */
-.ichart-halo {
-  pointer-events: none;
-  opacity: 0.22;
-}
-
 .ichart-tooltip {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-  width: max-content;
-  max-width: min(320px, calc(100% - 20px));
-  padding: 9px 11px;
-  background: #18272d;
-  color: #f2f0eb;
-  border-radius: 8px;
-  box-shadow: 0 6px 18px rgba(24, 39, 45, 0.35);
-  /* The body never intercepts chart pointer events; the details toggle does. */
-  pointer-events: none;
-  z-index: 5;
-  /* Long technical identifiers (scene ids, estimator ids) must wrap instead
-     of bleeding past the tooltip edge. */
-  overflow-wrap: anywhere;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 0.15rem 0.9rem;
+  padding: 0.5rem 0.9rem; background: var(--plate); border: 1px solid var(--ink); border-top-width: 2px;
+  color: var(--text); min-height: 2.6rem;
 }
-
-.ichart-tooltip.is-expanded {
-  pointer-events: auto;
-}
-
-.ichart-tooltip-row {
-  display: grid;
-  grid-template-columns: 10px auto;
-  gap: 2px 6px;
-  align-items: baseline;
-}
-
-.ichart-tooltip-row strong {
-  grid-column: 2;
-  font-size: 12.5px;
-  color: #f2f0eb;
-}
-
-.ichart-tooltip-row .mono-label {
-  grid-column: 2;
-  color: rgba(242, 240, 235, 0.85);
-}
-
-.ichart-tooltip-row .ichart-value {
-  font-size: 11.5px;
-}
-
-.ichart-fact {
-  font-size: 10.5px;
-}
-
-.ichart-interpretation {
-  grid-column: 2;
-  font-size: 11.5px;
-  line-height: 1.45;
-  color: #f2f0eb;
-  border-top: 1px solid rgba(242, 240, 235, 0.2);
-  padding-top: 4px;
-  margin-top: 3px;
-}
-
+.ichart-tooltip-row { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.1rem 0.8rem; flex: 1 1 auto; min-width: 0; }
+.ichart-tooltip-row strong { font: 650 0.95rem var(--sans); color: var(--text); }
+.ichart-tooltip-row .mono-label { font: 500 0.84rem var(--sans); color: var(--text-muted); }
+.ichart-tooltip-row .ichart-value { color: var(--text); }
+.ichart-tooltip-row .ichart-value:last-of-type { font: 600 1.25rem var(--display); letter-spacing: -0.01em; }
+.ichart-swatch { display: inline-block; width: 10px; height: 10px; flex: 0 0 auto; transform: translateY(1px); }
+/* the long text is only for the expanded view */
+.ichart-fact, .ichart-interpretation { display: none; }
+.ichart-tooltip.is-expanded .ichart-fact { display: inline; font-size: 0.8rem; }
+.ichart-tooltip.is-expanded .ichart-interpretation { display: block; flex-basis: 100%; font-size: 0.86rem; line-height: 1.5; color: var(--text-soft); }
 .ichart-details-toggle {
-  grid-column: 1 / -1;
-  justify-self: start;
-  /* The toggle stays interactive even while the tooltip body lets pointer
-     events pass through to the plot. */
-  pointer-events: auto;
-  border: 1px solid rgba(214, 138, 93, 0.55);
-  background: transparent;
-  color: #d68a5d;
-  border-radius: 999px;
-  font-family: var(--mono, monospace);
-  font-size: 10.5px;
-  padding: 2px 9px;
-  cursor: pointer;
-  margin-top: 3px;
+  margin-left: auto; font: 600 0.78rem var(--sans); padding: 0.25rem 0.7rem; cursor: pointer;
+  border: 1px solid var(--rule-strong); background: transparent; color: var(--text-soft);
 }
+.ichart-details-toggle:hover, .ichart-details-toggle:focus-visible { border-color: var(--accent); color: var(--ink); outline: none; }
+.ichart-details { flex-basis: 100%; border-top: 1px solid var(--rule); padding-top: 0.6rem; margin-top: 0.3rem; display: grid; gap: 0.3rem; }
+.ichart-details h4 { margin: 0.4rem 0 0; font: 700 0.78rem var(--sans); color: var(--accent-deep); }
+.ichart-details p { margin: 0; }
+.ichart-context, .ichart-limitations { font: 400 0.82rem/1.5 var(--sans) !important; color: var(--text-soft) !important; }
+.ichart-related .mono-label { font-size: 0.82rem; }
+.ichart-pin-hint { font-size: 0.74rem; color: var(--text-muted); }
 
-.ichart-details-toggle:hover,
-.ichart-details-toggle:focus-visible {
-  background: rgba(214, 138, 93, 0.18);
-  outline: none;
-}
+/* ---- plot ---- */
+.ichart-plot { position: relative; cursor: crosshair; }
+.ichart-plot:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.ichart-svg { background: var(--plate); border: 1px solid var(--rule); overflow: hidden; line-height: 0; }
+.ichart-svg svg { display: block; max-width: 100%; }
+.ichart-gridline { stroke: var(--rule); stroke-width: 1; stroke-dasharray: none; opacity: 0.7; }
+.ichart-tick { font: 500 12px var(--sans); fill: var(--text-muted); font-variant-numeric: tabular-nums; }
+.ichart-axis { font: 600 12.5px var(--sans); fill: var(--text-soft); }
+.ichart-guide { stroke: var(--ink); stroke-opacity: 0.28; stroke-width: 1; pointer-events: none; }
+.ichart-dot { pointer-events: none; }
+.ichart-halo { display: none; }
 
-.ichart-details {
-  border-top: 1px solid rgba(242, 240, 235, 0.2);
-  margin-top: 4px;
-  padding-top: 4px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.ichart-details h4 {
-  margin: 0;
-  font-size: 10px;
-  font-family: var(--mono, monospace);
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: rgba(242, 240, 235, 0.6);
-}
-
-.ichart-details p {
-  margin: 0;
-}
-
-.ichart-related {
-  grid-template-columns: 10px auto;
-}
-
-.ichart-related .mono-label {
-  font-size: 10.5px;
-}
-
-.ichart-context {
-  grid-column: 1 / -1;
-  font-size: 10px;
-  line-height: 1.5;
-  color: rgba(242, 240, 235, 0.66);
-}
-
-.ichart-limitations {
-  font-size: 10.5px;
-  line-height: 1.5;
-  color: rgba(242, 240, 235, 0.75);
-}
-
-.ichart-pin-hint {
-  grid-column: 1 / -1;
-  font-size: 10px;
-  color: #d68a5d;
-}
-
-.ichart-swatch {
-  display: inline-block;
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  transform: translateY(0.5px);
-}
-
-.ichart-legend {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 8px;
-}
-
+/* ---- legend and notes ---- */
+.ichart-legend { display: flex; flex-wrap: wrap; gap: 0.4rem 0.5rem; margin-top: 0.8rem; }
 .ichart-legend-item {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  border: 1px solid rgba(25, 60, 67, 0.22);
-  background: #fff;
-  color: #193c43;
-  border-radius: 999px;
-  font-size: 11px;
-  font-family: var(--mono, monospace);
-  padding: 3px 9px;
-  cursor: pointer;
+  display: inline-flex; align-items: center; gap: 0.5rem; font: 600 0.82rem var(--sans); padding: 0.3rem 0.7rem;
+  border: 1px solid var(--rule-strong); background: var(--plate); color: var(--text); cursor: pointer;
 }
-
-.ichart-legend-item.is-off {
-  opacity: 0.45;
-  text-decoration: line-through;
-}
-
-.ichart-caption {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  margin-top: 8px;
-  font-size: 11.5px;
-  line-height: 1.5;
-  color: #56686d;
-}
-
-.ichart-caption strong {
-  color: #193c43;
-}
+.ichart-legend-item:hover { border-color: var(--accent); }
+.ichart-legend-item.is-off { opacity: 0.45; text-decoration: line-through; }
+.ichart-caption { display: flex; flex-direction: column; gap: 0.25rem; margin-top: 0.8rem; font-size: 0.86rem; line-height: 1.5; color: var(--text-muted); }
+.ichart-caption strong { color: var(--text-soft); }

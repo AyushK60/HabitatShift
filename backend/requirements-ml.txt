@@ -1,0 +1,9 @@
+# Deep-learning dependencies for version 3 (kept apart from the core pipeline).
+# Install with the CUDA 12.8 index, which supports the RTX 5050 (compute capability 12.0):
+#   pip install -r backend/requirements-ml.txt --index-url https://download.pytorch.org/whl/cu128
+# Checked 2026-11-12: fp16 matmul on the RTX 5050 ran at about 29 TFLOPS after warm-up.
+torch==2.11.0
+torchvision==0.26.0
+einops==0.8.2
+timm==1.0.31
+matplotlib==3.9.2

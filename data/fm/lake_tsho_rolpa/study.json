@@ -1,0 +1,61 @@
+{
+ "study_id": "lake_tsho_rolpa",
+ "bbox": [
+  86.431,
+  27.821499999999997,
+  86.521,
+  27.9025
+ ],
+ "grid": {
+  "crs": "EPSG:32645",
+  "transform": [
+   10.0,
+   0.0,
+   443960.0,
+   0.0,
+   -10.0,
+   3086540.0
+  ],
+  "width": 891,
+  "height": 902,
+  "resolution_m": 10.0
+ },
+ "periods": {
+  "earlier": {
+   "window": [
+    "2018-10-01",
+    "2018-11-30"
+   ],
+   "scenes": [
+    {
+     "item_id": "S2A_45RVL_20181020_1_L2A",
+     "date": "2018-10-20",
+     "valid_fraction": 0.9872
+    }
+   ]
+  },
+  "later": {
+   "window": [
+    "2024-10-01",
+    "2024-11-30"
+   ],
+   "scenes": [
+    {
+     "item_id": "S2A_45RVL_20241028_0_L2A",
+     "date": "2024-10-28",
+     "valid_fraction": 1.0
+    },
+    {
+     "item_id": "S2B_45RVL_20241013_0_L2A",
+     "date": "2024-10-13",
+     "valid_fraction": 1.0
+    },
+    {
+     "item_id": "S2C_45RVL_20241107_1_L2A",
+     "date": "2024-11-07",
+     "valid_fraction": 0.9962
+    }
+   ]
+  }
+ }
+}

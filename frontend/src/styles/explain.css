@@ -1,0 +1,20 @@
+.explain {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin: 0.9rem 0 0;
+  padding: 0.9rem 1.1rem;
+  background: var(--accent-soft);
+  border-top: 2px solid var(--accent);
+}
+.explain.is-technical { background: var(--plate-2); border-top-color: var(--ink); }
+.explain-label { margin: 0 0 0.2rem; font-size: 0.76rem; font-weight: 700; color: var(--accent-deep); }
+.explain.is-technical .explain-label { color: var(--ink-3); }
+.explain-text { font-size: 0.95rem; color: var(--text); max-width: 74ch; }
+.explain-text p { margin: 0 0 0.5rem; }
+.explain-text p:last-child { margin: 0; }
+.explain-how { margin: 0.4rem 0 0; font-size: 0.84rem; color: var(--text-muted); }
+.explain-flip { flex: 0 0 auto; font: inherit; font-size: 0.78rem; font-weight: 650; padding: 0.3rem 0.8rem; border: 1px solid var(--rule-strong); background: var(--plate); color: var(--text-soft); cursor: pointer; white-space: nowrap; }
+.explain-flip:hover { border-color: var(--accent); color: var(--ink); }
+@media (max-width: 640px) { .explain { flex-direction: column; } }

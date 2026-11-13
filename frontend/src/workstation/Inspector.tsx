@@ -1445,16 +1445,16 @@ export function Inspector({
   );
 
   const tabs: { id: InspectorTab; label: string }[] = [
-    { id: "legend", label: "Layer & legend" },
-    { id: "guide", label: "What am I looking at?" },
+    { id: "guide", label: "Guide" },
+    { id: "legend", label: "Legend" },
     ...(analysis === "what_changed"
       ? ([
-          { id: "findings", label: "Explore the Evidence" },
-          { id: "evidence", label: "Research Mode" },
+          { id: "findings", label: "Evidence" },
+          { id: "evidence", label: "Research" },
         ] as { id: InspectorTab; label: string }[])
       : []),
-    { id: "context", label: "Acquisition" },
-    { id: "pixel", label: "Pixel probe" },
+    { id: "context", label: "Scenes" },
+    { id: "pixel", label: "Probe" },
     { id: "roi", label: "ROI" },
   ];
 
@@ -1609,7 +1609,7 @@ export function Inspector({
                 <>
                   <li>
                     <a
-                      href={`/studies/${encodeURIComponent(studyId)}/bundle.json`}
+                      href={`studies/${encodeURIComponent(studyId)}/bundle.json`}
                       target="_blank"
                       rel="noopener noreferrer"
                     >

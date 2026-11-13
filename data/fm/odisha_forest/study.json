@@ -1,0 +1,71 @@
+{
+ "study_id": "odisha_forest",
+ "bbox": [
+  83.834,
+  19.794,
+  83.906,
+  19.866
+ ],
+ "grid": {
+  "crs": "EPSG:32644",
+  "transform": [
+   10.0,
+   0.0,
+   796790.0,
+   0.0,
+   -10.0,
+   2199280.0
+  ],
+  "width": 769,
+  "height": 811,
+  "resolution_m": 10.0
+ },
+ "periods": {
+  "earlier": {
+   "window": [
+    "2021-01-20",
+    "2021-03-20"
+   ],
+   "scenes": [
+    {
+     "item_id": "S2B_44QQH_20210221_2_L2A",
+     "date": "2021-02-21",
+     "valid_fraction": 1.0
+    },
+    {
+     "item_id": "S2A_44QQG_20210226_1_L2A",
+     "date": "2021-02-26",
+     "valid_fraction": 1.0
+    },
+    {
+     "item_id": "S2A_44QQH_20210216_1_L2A",
+     "date": "2021-02-16",
+     "valid_fraction": 1.0
+    }
+   ]
+  },
+  "later": {
+   "window": [
+    "2025-01-20",
+    "2025-03-20"
+   ],
+   "scenes": [
+    {
+     "item_id": "S2B_44QQG_20250312_0_L2A",
+     "date": "2025-03-12",
+     "valid_fraction": 1.0
+    },
+    {
+     "item_id": "S2B_44QQH_20250210_0_L2A",
+     "date": "2025-02-10",
+     "valid_fraction": 1.0
+    },
+    {
+     "item_id": "S2C_44QQG_20250215_0_L2A",
+     "date": "2025-02-15",
+     "valid_fraction": 1.0
+    }
+   ]
+  }
+ }
+}

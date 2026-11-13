@@ -1,0 +1,15 @@
+{
+ "item_id": "S2C_45QUB_20250215_0_L2A",
+ "period": "later",
+ "date": "2025-02-15",
+ "bands": [
+  "blue",
+  "green",
+  "red",
+  "nir08",
+  "swir16",
+  "swir22"
+ ],
+ "offset_corrected_empirically": true,
+ "valid_fraction": 1.0
+}

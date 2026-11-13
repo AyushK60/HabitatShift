@@ -1,0 +1,152 @@
+{
+ "experiment": "odisha_forest",
+ "scenes": {
+  "earlier": 3,
+  "later": 3
+ },
+ "patches": 2499,
+ "methods": {
+  "ndvi": {
+   "between_period_flagged": {
+    "2.0": 0.3533,
+    "3.0": 0.2029
+   },
+   "between_period_median_z": 1.349,
+   "evaluated_patches": 2400,
+   "placebo_false_alarm": {
+    "2.0": 0.2461,
+    "3.0": 0.1182
+   },
+   "placebo_median_z": 0.749,
+   "placebo_comparisons": 6
+  },
+  "ndwi": {
+   "between_period_flagged": {
+    "2.0": 0.4421,
+    "3.0": 0.2904
+   },
+   "between_period_median_z": 1.787,
+   "evaluated_patches": 2400,
+   "placebo_false_alarm": {
+    "2.0": 0.118,
+    "3.0": 0.0331
+   },
+   "placebo_median_z": 0.774,
+   "placebo_comparisons": 6
+  },
+  "mndwi": {
+   "between_period_flagged": {
+    "2.0": 0.6033,
+    "3.0": 0.2946
+   },
+   "between_period_median_z": 2.306,
+   "evaluated_patches": 2400,
+   "placebo_false_alarm": {
+    "2.0": 0.0967,
+    "3.0": 0.0285
+   },
+   "placebo_median_z": 0.776,
+   "placebo_comparisons": 6
+  },
+  "ndbi": {
+   "between_period_flagged": {
+    "2.0": 0.4233,
+    "3.0": 0.27
+   },
+   "between_period_median_z": 1.608,
+   "evaluated_patches": 2400,
+   "placebo_false_alarm": {
+    "2.0": 0.3433,
+    "3.0": 0.2514
+   },
+   "placebo_median_z": 0.545,
+   "placebo_comparisons": 6
+  },
+  "indices5": {
+   "between_period_flagged": {
+    "2.0": 0.6133,
+    "3.0": 0.265
+   },
+   "between_period_median_z": 2.279,
+   "evaluated_patches": 2400,
+   "placebo_false_alarm": {
+    "2.0": 0.1309,
+    "3.0": 0.0318
+   },
+   "placebo_median_z": 0.888,
+   "placebo_comparisons": 6
+  },
+  "raw6": {
+   "between_period_flagged": {
+    "2.0": 0.315,
+    "3.0": 0.1292
+   },
+   "between_period_median_z": 1.582,
+   "evaluated_patches": 2400,
+   "placebo_false_alarm": {
+    "2.0": 0.4165,
+    "3.0": 0.2042
+   },
+   "placebo_median_z": 0.993,
+   "placebo_comparisons": 6
+  },
+  "prithvi": {
+   "between_period_flagged": {
+    "2.0": 0.8158,
+    "3.0": 0.3812
+   },
+   "between_period_median_z": 2.704,
+   "evaluated_patches": 2400,
+   "placebo_false_alarm": {
+    "2.0": 0.0808,
+    "3.0": 0.0098
+   },
+   "placebo_median_z": 0.928,
+   "placebo_comparisons": 6
+  },
+  "ssl4eo_rgb": {
+   "between_period_flagged": {
+    "2.0": 0.8854,
+    "3.0": 0.4471
+   },
+   "between_period_median_z": 2.892,
+   "evaluated_patches": 2400,
+   "placebo_false_alarm": {
+    "2.0": 0.0697,
+    "3.0": 0.0069
+   },
+   "placebo_median_z": 0.943,
+   "placebo_comparisons": 6
+  }
+ },
+ "rank_correlation_of_z": {
+  "ndvi~ndwi": 0.399,
+  "ndvi~raw6": 0.684,
+  "ndvi~prithvi": 0.592,
+  "ndvi~ssl4eo_rgb": 0.444,
+  "ndwi~raw6": 0.656,
+  "ndwi~prithvi": 0.426,
+  "ndwi~ssl4eo_rgb": 0.338,
+  "mndwi~ndvi": 0.004,
+  "mndwi~ndwi": 0.138,
+  "mndwi~ndbi": 0.033,
+  "mndwi~raw6": 0.145,
+  "mndwi~prithvi": 0.052,
+  "mndwi~ssl4eo_rgb": 0.04,
+  "ndbi~ndvi": 0.779,
+  "ndbi~ndwi": 0.375,
+  "ndbi~raw6": 0.585,
+  "ndbi~prithvi": 0.53,
+  "ndbi~ssl4eo_rgb": 0.365,
+  "indices5~ndvi": 0.556,
+  "indices5~ndwi": 0.615,
+  "indices5~mndwi": 0.654,
+  "indices5~ndbi": 0.595,
+  "indices5~raw6": 0.658,
+  "indices5~prithvi": 0.472,
+  "indices5~ssl4eo_rgb": 0.33,
+  "raw6~ssl4eo_rgb": 0.384,
+  "prithvi~raw6": 0.565,
+  "prithvi~ssl4eo_rgb": 0.723
+ }
+}

@@ -195,7 +195,7 @@
   letter-spacing: 0.06em;
   text-transform: uppercase;
   padding: 0.06rem 0.5rem;
-  border-radius: 999px;
+  border-radius: var(--radius);
   margin-right: 0.45rem;
   vertical-align: 1px;
 }

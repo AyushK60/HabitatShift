@@ -71,6 +71,7 @@ ASSET_RED = "red"
 ASSET_NIR = "nir"
 ASSET_SWIR1 = "swir16"          # B11, native 20 m
 ASSET_SWIR2 = "swir22"          # B12, native 20 m
+ASSET_NIR08 = "nir08"          # B8A, narrow NIR, native 20 m (Prithvi input; version 3)
 ASSET_SCL = "scl"
 
 #: Required assets for the M0 pipeline (NDVI + true colour + quality mask).
@@ -97,6 +98,7 @@ EXPECTED_GSD = {
     ASSET_NIR: 10.0,
     ASSET_SWIR1: 20.0,
     ASSET_SWIR2: 20.0,
+    ASSET_NIR08: 20.0,
     ASSET_SCL: 20.0,
 }
 

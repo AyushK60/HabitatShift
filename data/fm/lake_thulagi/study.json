@@ -1,0 +1,61 @@
+{
+ "study_id": "lake_thulagi",
+ "bbox": [
+  84.437,
+  28.445999999999998,
+  84.53699999999999,
+  28.536
+ ],
+ "grid": {
+  "crs": "EPSG:32645",
+  "transform": [
+   10.0,
+   0.0,
+   248990.0,
+   0.0,
+   -10.0,
+   3159270.0
+  ],
+  "width": 1001,
+  "height": 1019,
+  "resolution_m": 10.0
+ },
+ "periods": {
+  "earlier": {
+   "window": [
+    "2018-10-01",
+    "2018-11-30"
+   ],
+   "scenes": [
+    {
+     "item_id": "S2B_45RTM_20181028_1_L2A",
+     "date": "2018-10-28",
+     "valid_fraction": 0.9745
+    }
+   ]
+  },
+  "later": {
+   "window": [
+    "2024-10-01",
+    "2024-11-30"
+   ],
+   "scenes": [
+    {
+     "item_id": "S2A_45RTM_20241130_0_L2A",
+     "date": "2024-11-30",
+     "valid_fraction": 1.0
+    },
+    {
+     "item_id": "S2B_45RTM_20241026_0_L2A",
+     "date": "2024-10-26",
+     "valid_fraction": 1.0
+    },
+    {
+     "item_id": "S2B_45RTM_20241115_0_L2A",
+     "date": "2024-11-15",
+     "valid_fraction": 1.0
+    }
+   ]
+  }
+ }
+}

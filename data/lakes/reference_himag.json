@@ -1,0 +1,182 @@
+{
+ "reference": "Hi-MAG v3.0 (Zenodo 4275164, CC-BY 4.0)",
+ "lakes": {
+  "tsho_rolpa": {
+   "name": "Tsho Rolpa",
+   "years": {
+    "2016": {
+     "himag": {
+      "year": 2016,
+      "area_km2": 1.4284,
+      "distance_m": 0.0,
+      "attributes": {
+       "Distance": 0.0,
+       "GL_Type": "proglacial lake",
+       "GL_Area": 1428380.48249,
+       "GL_Year": 2016,
+       "GL_Elev": 4550,
+       "GL_SubR": "Central Himalaya",
+       "GL_Peri": 9992.6205273,
+       "GL_ID": "GL086476E27861N"
+      }
+     },
+     "s1": {
+      "months": 0
+     },
+     "s2": {
+      "months": 0
+     }
+    },
+    "2017": {
+     "himag": {
+      "year": 2017,
+      "area_km2": 1.4284,
+      "distance_m": 0.0,
+      "attributes": {
+       "Distance": 0.0,
+       "GL_Type": "proglacial lake",
+       "GL_Area": 1428380.48249,
+       "GL_Year": 2017,
+       "GL_Elev": 4550,
+       "GL_SubR": "Central Himalaya",
+       "GL_Peri": 9992.6205273,
+       "GL_ID": "GL086476E27861N"
+      }
+     },
+     "s1": {
+      "months": 5,
+      "median_km2": 1.3434,
+      "min_km2": 1.271,
+      "max_km2": 1.4445,
+      "difference_vs_himag_pct": -6.0
+     },
+     "s2": {
+      "months": 1,
+      "median_km2": 1.4787,
+      "min_km2": 1.4787,
+      "max_km2": 1.4787,
+      "difference_vs_himag_pct": 3.5
+     }
+    }
+   }
+  },
+  "imja_tsho": {
+   "name": "Imja Tsho",
+   "years": {
+    "2016": {
+     "himag": {
+      "year": 2016,
+      "area_km2": 1.1775,
+      "distance_m": 0.0,
+      "attributes": {
+       "Distance": 0.0,
+       "GL_Type": "proglacial lake",
+       "GL_Area": 1177497.94256,
+       "GL_Year": 2016,
+       "GL_Elev": 5003,
+       "GL_SubR": "Central Himalaya",
+       "GL_Peri": 6590.01789433,
+       "GL_ID": "GL086925E27898N"
+      }
+     },
+     "s1": {
+      "months": 0
+     },
+     "s2": {
+      "months": 0
+     }
+    },
+    "2017": {
+     "himag": {
+      "year": 2017,
+      "area_km2": 1.3475,
+      "distance_m": 0.0,
+      "attributes": {
+       "Distance": 0.0,
+       "GL_Type": "proglacial lake",
+       "GL_Area": 1347528.39787,
+       "GL_Year": 2017,
+       "GL_Elev": 5003,
+       "GL_SubR": "Central Himalaya",
+       "GL_Peri": 6956.90078981,
+       "GL_ID": "GL086925E27898N"
+      }
+     },
+     "s1": {
+      "months": 5,
+      "median_km2": 1.3655,
+      "min_km2": 1.3385,
+      "max_km2": 1.3883,
+      "difference_vs_himag_pct": 1.3
+     },
+     "s2": {
+      "months": 1,
+      "median_km2": 0.9836,
+      "min_km2": 0.9836,
+      "max_km2": 0.9836,
+      "difference_vs_himag_pct": -27.0
+     }
+    }
+   }
+  },
+  "thulagi": {
+   "name": "Thulagi",
+   "years": {
+    "2016": {
+     "himag": {
+      "year": 2016,
+      "area_km2": 0.9468,
+      "distance_m": 97.9,
+      "attributes": {
+       "Distance": 0.0,
+       "GL_Type": "proglacial lake",
+       "GL_Area": 946798.068236,
+       "GL_Year": 2016,
+       "GL_Elev": 4034,
+       "GL_SubR": "Central Himalaya",
+       "GL_Peri": 5542.7172463,
+       "GL_ID": "GL084485E28488N"
+      }
+     },
+     "s1": {
+      "months": 0
+     },
+     "s2": {
+      "months": 0
+     }
+    },
+    "2017": {
+     "himag": {
+      "year": 2017,
+      "area_km2": 0.9468,
+      "distance_m": 97.9,
+      "attributes": {
+       "Distance": 0.0,
+       "GL_Type": "proglacial lake",
+       "GL_Area": 946798.068236,
+       "GL_Year": 2017,
+       "GL_Elev": 4034,
+       "GL_SubR": "Central Himalaya",
+       "GL_Peri": 5542.7172463,
+       "GL_ID": "GL084485E28488N"
+      }
+     },
+     "s1": {
+      "months": 5,
+      "median_km2": 0.5645,
+      "min_km2": 0.5368,
+      "max_km2": 0.6932,
+      "difference_vs_himag_pct": -40.4
+     },
+     "s2": {
+      "months": 1,
+      "median_km2": 0.8636,
+      "min_km2": 0.8636,
+      "max_km2": 0.8636,
+      "difference_vs_himag_pct": -8.8
+     }
+    }
+   }
+  }
+ }
+}

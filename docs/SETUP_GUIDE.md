@@ -64,7 +64,7 @@ are never written.
 ## Re-run the ML experiments (network required)
 
 ```powershell
-.venv\Scripts\python.exe scripts\run_m5_training_imagery.py  # 2021 imagery via the audited M1 chain
+.venv\Scripts\python.exe scripts\run_m5_training_imagery.py  # 2021 imagery through the same audited preparation chain
 .venv\Scripts\python.exe scripts\run_m5_ml.py                # train/evaluate/apply + artifacts
 .venv\Scripts\python.exe scripts\build_m5ml_findings.py      # regenerate the additive disclosure layer
 ```
@@ -72,7 +72,7 @@ are never written.
 Determinism: fixed seeds everywhere (ML 20261108, bootstrap 20260326,
 verify 20261106); software versions pinned in `backend/requirements.txt`.
 
-## Regenerating showcase bundles (only if evidence changes — frozen in M5)
+## Regenerating showcase bundles (only if the recorded results change)
 
 ```powershell
 .venv\Scripts\python.exe scripts\build_showcase_bundles.py

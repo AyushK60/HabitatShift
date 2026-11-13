@@ -24,8 +24,11 @@ import {
 import { useMemo } from "react";
 import type { M1Summary, Registry } from "../api/types";
 import { SwipeStage } from "../components/SwipeStage";
-import { ErrorNote, MonoFact, StatusChip } from "../components/ui";
+import { HeroChange } from "../components/HeroChange";
+import { BeforeAfter, ScoreBars, YearToggle, type Bar } from "../components/Figures";
+import { StatusChip } from "../components/ui";
 import "../styles/landing.css";
+import "../styles/research.css";
 
 const CORINGA = "coringa_coastal";
 
@@ -245,224 +248,255 @@ function GalleryCard({
   );
 }
 
+interface Figures {
+  imja: { area_2018_km2: number; area_2024_km2: number; growth_centre: [number, number]; size: [number, number] };
+  rolpa: { area_2018_km2: number; area_2024_km2: number };
+  thulagi: { area_2018_km2: number; area_2024_km2: number };
+  forest: { loss_share_pct: number };
+  unet: { iou: number; model_km2: number; optical_km2: number; date: string };
+}
+interface Row { id: string; label: string; ap: number }
+interface Research {
+  forest: Record<string, { counts: { base_rate: number }; rows: Row[] }>;
+  lakes: { counts: { base_rate: number }; rows: Row[] };
+  unet: { sets: Record<string, { unet_mean: number; otsu: number }> };
+}
+
+const pick = (rows: Row[], ids: string[], names: Record<string, string>): Bar[] =>
+  ids.map((id) => {
+    const r = rows.find((x) => x.id === id)!;
+    return { label: names[id] ?? r.label, value: r.ap, kind: id === "prithvi" || id === "ssl4eo_rgb" ? "strong" : id === "ndvi_decrease" || id === "mndwi" ? "ref" : "plain" } as Bar;
+  });
+
+function LakeTrio({ figs }: { figs: Figures }) {
+  const [v, setV] = useState<0 | 1>(0);
+  const lakes = [
+    { tag: "imja", name: "Imja Tsho", note: `${figs.imja.area_2018_km2.toFixed(1)} to ${figs.imja.area_2024_km2.toFixed(1)} km²`, grew: true },
+    { tag: "rolpa", name: "Tsho Rolpa", note: "about the same", grew: false },
+    { tag: "thulagi", name: "Thulagi", note: "about the same", grew: false },
+  ];
+  return (
+    <figure className="trio">
+      <div className="trio-grid">
+        {lakes.map((l) => (
+          <div key={l.tag} className="trio-cell">
+            <div className="trio-frame">
+              <img src={`./figures/${l.tag}_2018.jpg`} alt={`${l.name}, October 2018`} loading="lazy" />
+              <img src={`./figures/${l.tag}_2024.jpg`} alt={`${l.name}, October 2024`} className="ba-top" style={{ opacity: v }} loading="lazy" />
+              <img src={`./figures/${l.tag}_outline_2018.png`} alt="" aria-hidden="true" className="ba-ov" />
+              <img src={`./figures/${l.tag}_outline_2024.png`} alt="" aria-hidden="true" className="ba-ov" style={{ opacity: v }} />
+            </div>
+            <p><b>{l.name}</b><span>{l.note}</span></p>
+          </div>
+        ))}
+      </div>
+      <figcaption><YearToggle labels={["Oct 2018", "Oct 2024"]} value={v} onChange={setV} /><span className="ba-note">White line: 2018 shore. Blue: new lake.</span></figcaption>
+    </figure>
+  );
+}
+
 export function LandingPage() {
   const { summary, registry, bundles, error } = useLandingData();
+  const [figs, setFigs] = useState<Figures | null>(null);
+  const [res, setRes] = useState<Research | null>(null);
+  const [sys, setSys] = useState<{ counts: Record<string, number> } | null>(null);
   const earlierPeriod = summary?.periods?.[0];
   const laterPeriod = summary?.periods?.[1];
-  const attribution = summary
-    ? typeof summary.attribution === "string"
-      ? summary.attribution
-      : (summary.attribution?.text ?? "")
-    : "";
+
+  useEffect(() => {
+    const get = (url: string, set: (d: never) => void) =>
+      fetch(url).then((r) => (r.ok ? r.json() : null)).then((d) => d && set(d as never)).catch(() => undefined);
+    get("./figures/figures.json", setFigs as never);
+    get("./research/v3.json", setRes as never);
+    get("./system/system.json", setSys as never);
+  }, []);
 
   return (
-    <main id="main">
-      {/* ------------------------------------------------------------- hero */}
-      <section className="hero">
+    <main id="main" className="landing">
+      <header className="hero" data-tour="hero">
+        {figs ? <HeroChange fig={figs.imja} /> : <div className="hero-empty" />}
         <div className="hero-copy">
-          <p className="eyebrow">Geospatial research platform</p>
-          <h1>
-            Read the landscape.
-            <br />
-            Trace what changed.
-          </h1>
+          <h1>Is that change real, or just noise?</h1>
           <p className="lede">
-            HabitatShift investigates coastal, wetland, forest, cryospheric-disaster
-            and urban landscape change through reproducible open satellite data —
-            real Sentinel-2 acquisitions, explicit masking, documented methods,
-            and measurements you can re-run.
+            HabitatShift compares satellite pictures taken months apart and says honestly when a difference is bigger than
+            the normal wobble between two scenes. This year it also tested whether AI models do the job better than simple
+            formulas.
           </p>
           <div className="hero-actions">
-            {/* M4-R1 §2: the Atlas action presents the study gallery here on
-                the landing page instead of dropping the visitor into a
-                specific investigation. The hash router owns location.hash, so
-                the anchor is handled as a controlled smooth scroll. */}
-            <a
-              href="#studies"
-              className="button button--primary"
-              onClick={(event) => {
-                event.preventDefault();
-                document
-                  .getElementById("studies")
-                  ?.scrollIntoView({ behavior: "smooth", block: "start" });
-              }}
-            >
-              Explore the Atlas
-            </a>
-            <Link to="/methods" className="button button--secondary">
-              Read the Methods
-            </Link>
+            <button type="button" className="btn btn--fill" onClick={() => window.dispatchEvent(new Event("habitatshift:tour"))}>
+              Take the 3-minute tour
+            </button>
+            <Link to="/research" className="btn btn--line">Open the research view</Link>
           </div>
-          {summary && (
-            <dl className="hero-facts">
-              <MonoFact label="Study sensor" value="Sentinel-2 MSI L2A" />
-              <MonoFact
-                label="Analysis grid"
-                value={`${summary.grid.width} × ${summary.grid.height} px @ ${summary.grid.resolution_m} m`}
-              />
-              <MonoFact label="Analysis CRS" value={summary.grid.crs} />
-              <MonoFact
-                label="Engine verification"
-                value={`${summary.verification.check_count}/${summary.verification.check_count} checks passed`}
-              />
-            </dl>
+        </div>
+      </header>
+
+      {sys && (
+        <section className="ribbon" aria-label="What the project covers">
+          <div><b>{sys.counts.lakes}</b><span>glacial lakes mapped across Nepal</span></div>
+          <div><b>{sys.counts.training_pairs.toLocaleString("en-GB")}</b><span>radar and optical image pairs</span></div>
+          <div><b>2</b><span>foundation models tested against simple formulas</span></div>
+          <div><b>{sys.counts.study_areas}</b><span>study areas, from coast to glacier</span></div>
+        </section>
+      )}
+
+      <section className="band-section">
+        <div className="page question" data-tour="question">
+          <h2>Two pictures of the same place never match exactly</h2>
+          <div className="q-text">
+            <p>
+              Clouds, haze, sun angle and the season all change a picture. A good change test first measures that everyday
+              wobble, then asks whether the change it found is bigger. If it is not, the honest answer is that the change
+              cannot be told apart from noise.
+            </p>
+            <p>
+              The question this year was whether AI models trained on millions of satellite images can do this better than
+              simple formulas. Every number below is shown with its uncertainty, and every score is agreement with a
+              reference product, not measured accuracy.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="page found" aria-label="What the tests found">
+        {figs && res && (
+          <>
+            <article className="fig-row">
+              <div className="fig-media">
+                <BeforeAfter
+                  before="./figures/forest_2021.jpg"
+                  after="./figures/forest_2025.jpg"
+                  overlay="./figures/forest_loss_outline.png"
+                  labels={["Feb-Mar 2021", "Feb-Mar 2025"]}
+                  alt="Forest in Bastar, central India"
+                  note="White outlines: forest cleared 2022 to 2024"
+                />
+              </div>
+              <div className="fig-text">
+                <h3>Forest loss: a plain greenness score was as good as AI</h3>
+                <p>
+                  In Bastar, central India, {figs.forest.loss_share_pct}% of this 4 km window was cleared between 2022 and 2024
+                  (white outlines). Each method was asked to rank cleared patches above untouched ones. A simple "did it get
+                  less green" score did about as well as two AI models.
+                </p>
+                <ScoreBars
+                  title="How well each method finds cleared patches"
+                  bars={pick(res.forest.bastar_forest.rows, ["ndvi_decrease", "raw6", "prithvi", "ssl4eo_rgb"], {
+                    ndvi_decrease: "Plain greenness drop", raw6: "Raw colour bands", prithvi: "AI model: Prithvi", ssl4eo_rgb: "AI model: SSL4EO",
+                  })}
+                  chance={res.forest.bastar_forest.counts.base_rate}
+                  caption="1 is perfect. The thin line is guessing."
+                />
+                <Link to="/research#forest" className="more">See both forest areas</Link>
+              </div>
+            </article>
+
+            <article className="fig-row fig-row--flip">
+              <div className="fig-media"><LakeTrio figs={figs} /></div>
+              <div className="fig-text">
+                <h3>Glacial lakes: AI beat the standard water formula, and so did plain colours</h3>
+                <p>
+                  Imja Tsho grew toward its glacier while Tsho Rolpa and Thulagi stayed put. Radar water maps are the
+                  reference. The AI model found the changed shoreline better than the standard water index, but plain colour
+                  values did just as well, so the gain is not from the AI.
+                </p>
+                <ScoreBars
+                  title="How well each method finds changed shoreline"
+                  bars={pick(res.lakes.rows, ["raw6", "prithvi", "ndvi", "mndwi"], {
+                    raw6: "Raw colour bands", prithvi: "AI model: Prithvi", ndvi: "Greenness index", mndwi: "Standard water index",
+                  })}
+                  chance={res.lakes.counts.base_rate}
+                  caption="Mostly one lake changed, so the ranges are wide."
+                />
+                <Link to="/research#lakes" className="more">See the lake scores</Link>
+              </div>
+            </article>
+
+            <article className="fig-row">
+              <div className="fig-media">
+                <figure className="tri">
+                  <div className="tri-grid">
+                    <div><img src="./figures/radar_input.jpg" alt="Radar picture of Imja Tsho; water is black" loading="lazy" /><p><b>1 Radar</b>Water shows black, in any weather</p></div>
+                    <div><img src="./figures/radar_model.jpg" alt="Radar picture with the trained model's lake shaded blue" loading="lazy" /><p><b>2 Model</b>The trained model draws the lake</p></div>
+                    <div><img src="./figures/radar_optical.jpg" alt="Radar picture with the optical reference lake shaded orange" loading="lazy" /><p><b>3 Optical map</b>The reference it learned from</p></div>
+                  </div>
+                  <figcaption>Imja Tsho, {figs.unet.date}. This lake was held out when its model was trained. Agreement {figs.unet.iou.toFixed(2)}; {figs.unet.model_km2.toFixed(1)} km² drawn against {figs.unet.optical_km2.toFixed(1)} km² in the reference.</figcaption>
+                </figure>
+              </div>
+              <div className="fig-text">
+                <h3>A small radar model can draw lakes through cloud</h3>
+                <p>
+                  Optical pictures fail in the monsoon; radar does not. A small model trained on 30 Nepal lakes learned to draw
+                  lake outlines from radar. On lakes it never saw it agrees with the optical map better than a plain radar
+                  threshold. Its area ranges hold on average but fail badly for a few lakes.
+                </p>
+                <ScoreBars
+                  title="Agreement with the optical lake map, unseen lakes"
+                  bars={[
+                    { label: "Trained radar model", value: res.unet.sets.test_lakes.unet_mean, kind: "strong" },
+                    { label: "Plain radar rule", value: res.unet.sets.test_lakes.otsu, kind: "plain" },
+                  ]}
+                  caption="1 is a perfect match."
+                />
+                <Link to="/research#unet" className="more">See the radar model results</Link>
+              </div>
+            </article>
+          </>
+        )}
+      </section>
+
+      <section className="page seeit" aria-labelledby="seeit-title">
+        <div className="seeit-copy">
+          <h2 id="seeit-title">Slide between before and after</h2>
+          <p className="page-lede">Drag the handle across the Coringa mangrove delta in India. Left is earlier, right is later.</p>
+          <Link to="/workstation/coringa_coastal" className="button button--primary">Open this study</Link>
+          {earlierPeriod && laterPeriod && (
+            <p className="mono-label seeit-meta">
+              {earlierPeriod.anchor_date} to {laterPeriod.anchor_date}. Median of {earlierPeriod.observation_count} and{" "}
+              {laterPeriod.observation_count} clear observations.
+            </p>
           )}
         </div>
-
-        <div className="hero-media">
+        <div className="seeit-media">
           {summary && earlierPeriod && laterPeriod ? (
-            <>
-              <SwipeStage
-                earlier={{
-                  src: bundlePreviewUrl(CORINGA, earlierPeriod.previews.true_colour),
-                  alt: `True-colour composite, ${earlierPeriod.anchor_date}`,
-                }}
-                later={{
-                  src: bundlePreviewUrl(CORINGA, laterPeriod.previews.true_colour),
-                  alt: `True-colour composite, ${laterPeriod.anchor_date}`,
-                }}
-                aspectRatio={`${summary.grid.width} / ${summary.grid.height}`}
-                showTools={false}
-              />
-              <div className="hero-media-caption">
-                <span className="mono-label">
-                  Coringa / Godavari delta · {earlierPeriod.anchor_date} →{" "}
-                  {laterPeriod.anchor_date} · median composites of{" "}
-                  {earlierPeriod.observation_count} / {laterPeriod.observation_count}{" "}
-                  valid observations
-                </span>
-                <span className="mono-label hero-scenes">
-                  Earlier scenes: {earlierPeriod.item_ids.join(" · ")}
-                </span>
-                <span className="mono-label hero-scenes">
-                  Later scenes: {laterPeriod.item_ids.join(" · ")}
-                </span>
-                {attribution && (
-                  <span className="mono-label hero-attr">{attribution}</span>
-                )}
-              </div>
-            </>
+            <SwipeStage
+              earlier={{ src: bundlePreviewUrl(CORINGA, earlierPeriod.previews.true_colour), alt: `True-colour composite, ${earlierPeriod.anchor_date}` }}
+              later={{ src: bundlePreviewUrl(CORINGA, laterPeriod.previews.true_colour), alt: `True-colour composite, ${laterPeriod.anchor_date}` }}
+              aspectRatio={`${summary.grid.width} / ${summary.grid.height}`}
+              showTools={false}
+            />
           ) : (
             <div className="hero-media-empty" aria-live="polite">
-              {error
-                ? "Processed imagery could not be loaded. Build the showcase bundles with `python scripts/build_showcase_bundles.py` and reload."
-                : "Loading the processed Coringa comparison…"}
+              {error ? "Processed imagery could not be loaded." : "Loading the Coringa comparison…"}
             </div>
           )}
         </div>
       </section>
 
-      {/* ------------------------------------------------------- why this project */}
-      <section className="why" id="why" aria-labelledby="why-title">
-        <div className="section-head">
-          <p className="eyebrow">Why this project exists</p>
-          <h2 id="why-title">It started with a flash flood in Nepal</h2>
-          <p className="section-lede">
-            In 2026 a flash flood in Nepal caused heavy damage, and I wanted to build something that could help people
-            understand events like it from space. While learning the tools I found that flash floods are hard to see
-            with optical satellites: monsoon cloud hides exactly the days that matter. The open, repeatable work was
-            mostly on slower change, so HabitatShift became a careful study of how far free Sentinel-2 data can be
-            trusted for wetlands, forest and urban change, and where it cannot.
-          </p>
-          <p className="section-lede">
-            The two Himalayan event studies (the 2025 Purepu lake drainage and the 2026 Langtang rock–ice collapse) are
-            the part closest to that first motivation, and they show plainly where optical imagery fails. The natural
-            next step is radar (Sentinel-1), which sees through cloud and is the standard tool for flood mapping.
-          </p>
-        </div>
-      </section>
-
-      {/* ----------------------------------------------------- five studies */}
-      <section className="studies" id="studies" aria-labelledby="studies-title">
-        <div className="section-head">
-          <p className="eyebrow">Study areas</p>
-          <h2 id="studies-title">Five landscapes, six investigations, one standard of evidence</h2>
-          <p className="section-lede">
-            Statuses below are the repository's own record. Every card that links
-            to an investigation shows real processed composites from its bundle;
-            the 2025 Himalayan event carries its recorded PARTIAL status instead
-            of a cleaner story.
-          </p>
-        </div>
-
-        {error && <ErrorNote message={`Registry unavailable: ${error}`} />}
-        {!registry && !error && <p className="mono-label">Loading registry…</p>}
-        {registry && (
-          <div className="study-grid">
-            {registry.studies.map((study) => (
-              <GalleryCard
-                key={study.id}
-                study={study}
-                bundle={bundles[study.study_id]}
-              />
-            ))}
+      <section className="band-section">
+        <div className="studies page" id="studies" aria-labelledby="studies-title">
+          <div className="section-head">
+            <h2 id="studies-title">Where we looked</h2>
+            <p className="section-lede">
+              Coastal, forest, wetland, urban and glacial-lake studies, each with its own before and after pictures and a stated question.
+            </p>
           </div>
-        )}
-      </section>
-
-      {/* ------------------------------------------------------- narrative */}
-      <section className="method-strip" aria-labelledby="method-title">
-        <div className="section-head">
-          <p className="eyebrow">How evidence is made</p>
-          <h2 id="method-title">Acquisition → masking → evidence</h2>
+          {!registry && !error && <p className="mono-label">Loading registry…</p>}
+          {registry && (
+            <div className="study-grid">
+              {registry.studies.map((study) => (
+                <GalleryCard key={study.study_id} study={study} bundle={bundles[study.study_id]} />
+              ))}
+            </div>
+          )}
         </div>
-        <ol className="method-steps">
-          <li>
-            <h3>Acquisition</h3>
-            <p>
-              Scenes are discovered on the Sentinel-2 L2A STAC catalogue and
-              read as windowed COG byte ranges — never whole-scene downloads.
-              Every scene ID and date is recorded in the run manifest, and the
-              radiometric DN convention of every scene is validated against the
-              pixels actually read.
-            </p>
-          </li>
-          <li>
-            <h3>Masking</h3>
-            <p>
-              Cloud, cloud shadow, cirrus, saturated and nodata pixels are
-              excluded with the scene classification layer. Masked pixels are
-              never interpolated; validity is carried through every product.
-            </p>
-          </li>
-          <li>
-            <h3>Evidence</h3>
-            <p>
-              Indices, composites and difference maps are computed on one
-              co-registered grid, thresholded at stated values, and checked by
-              an independent audit before anything reaches this interface.
-            </p>
-          </li>
-        </ol>
-        <p className="method-note">
-          The result is a workstation where a reviewer can trace any displayed
-          number back to a scene, a mask and a formula — or reproduce the whole
-          run from the manifests. Completed studies are explorable as portable
-          bundles even when no processing backend is running.
-        </p>
       </section>
 
-      {/* ---------------------------------------------------- credibility */}
-      <section className="credibility" aria-label="Why the results can be trusted">
-        <ul>
-          <li>
-            <strong>Open data.</strong> Copernicus Sentinel-2 L2A, free and
-            open with attribution.
-          </li>
-          <li>
-            <strong>Documented scenes.</strong> Every acquisition date and
-            scene ID is in the manifests, not in a caption's memory.
-          </li>
-          <li>
-            <strong>Repeatable.</strong> Fixed thresholds, recorded seeds and
-            grid signatures; runs are verified by an independent audit script.
-          </li>
-          <li>
-            <strong>Honest limits.</strong> Where evidence is partial — the 2025
-            Rasuwa event's monsoon gap, Kathmandu's missing reference labels —
-            the interface says so instead of papering over it.
-          </li>
-        </ul>
+      <section className="page nextsteps" aria-label="Where to go next">
+        <Link to="/lakes"><strong>Glacial lakes</strong><span>Monthly lake area from radar, optical and the trained model, 2017 to 2026.</span></Link>
+        <Link to="/experiments"><strong>Evidence</strong><span>Every graph per study area, with plain-words notes.</span></Link>
+        <Link to="/availability"><strong>Scene check</strong><span>Which clear images exist for any place and date.</span></Link>
+        <Link to="/system"><strong>System</strong><span>What the pipeline behind the site has processed.</span></Link>
       </section>
     </main>
   );

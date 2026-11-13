@@ -9,7 +9,6 @@
 import { useEffect, useState } from "react";
 import { api } from "../api/client";
 import type { M1Summary, Registry } from "../api/types";
-import { ErrorNote } from "../components/ui";
 import "../styles/methods.css";
 
 const METHODS = [
@@ -125,7 +124,7 @@ export function MethodsPage() {
       </header>
 
       {error && (
-        <ErrorNote message={`Live provenance values could not be loaded (${error}); the methods text below is static documentation.`} />
+        <p className="exp-note">Live provenance values come from the analysis backend and are not shown in this offline copy; the text below is the static documentation.</p>
       )}
 
       <section className="methods-grid" aria-label="Method steps">
@@ -191,7 +190,7 @@ export function MethodsPage() {
           26 August 2026 Langtang Lirung rock–ice collapse), and the Kathmandu
           Valley built-up pilot (NDBI as a candidate signal with an explicit
           no-labels guardrail). Scene selections and per-window validity
-          measurements are recorded in <code>docs/M4_FEASIBILITY.md</code>.
+          measurements are recorded in <code>docs/archive/M4_FEASIBILITY.md</code>.
         </p>
         <p className="methods-note">
           <strong>Radiometry.</strong> While processing the later studies it was found that
@@ -249,12 +248,12 @@ export function MethodsPage() {
             </a>
           </li>
           <li>
-            <a href="/studies/registry.json" target="_blank" rel="noopener noreferrer">
+            <a href="studies/registry.json" target="_blank" rel="noopener noreferrer">
               Static study registry (bundle copy, verbatim from YAML)
             </a>
           </li>
           <li>
-            <a href="/studies/chilika_wetland/bundle.json" target="_blank" rel="noopener noreferrer">
+            <a href="studies/chilika_wetland/bundle.json" target="_blank" rel="noopener noreferrer">
               Example showcase bundle — Chilika (both experiments, checksums)
             </a>
           </li>

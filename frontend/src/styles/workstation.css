@@ -1146,7 +1146,7 @@
 
 /* Curated-selection disclosure (§5): visible guardrail, never decorative. */
 .selection-disclosure {
-  border-left: 3px solid var(--copper);
+  border: 1px solid var(--copper);
   padding-left: 0.55rem;
 }
 
@@ -1190,7 +1190,7 @@
 .math-block {
   margin-top: 0.5rem;
   border: 1px solid var(--rule);
-  border-left: 3px solid var(--teal);
+  border: 1px solid var(--rule-strong);
   background: var(--panel);
   padding: 0.55rem 0.65rem;
   display: flex;
@@ -1243,7 +1243,7 @@
 
 /* PARTIAL evidence status (M4-R3 §6/§14): prominent, never decorative. */
 .partial-note {
-  border-left: 3px solid var(--copper-deep);
+  border: 1px solid var(--copper-deep);
   padding-left: 0.55rem;
 }
 
@@ -1288,7 +1288,7 @@
   width: min(380px, calc(100vw - 32px));
   background: var(--surface, #fbfaf6);
   border: 1px solid var(--rule, #d9d6cd);
-  border-left: 4px solid var(--copper, #c4733f);
+  border: 1px solid var(--copper);
   box-shadow: 0 10px 30px rgba(20, 40, 46, 0.22);
   padding: 14px 16px 12px;
 }

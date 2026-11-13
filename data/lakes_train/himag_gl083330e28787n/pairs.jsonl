@@ -1,0 +1,566 @@
+{"pair": "S2A_44RQT_20201221_1_L2A__S1A_IW_GRDH_1SDV_20201219T123033_20201219T123058_035755_042F37_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20201216_1_L2A__S1A_IW_GRDH_1SDV_20201215T002730_20201215T002755_035689_042CFB_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20201216_1_L2A__S1A_IW_GRDH_1SDV_20201219T123033_20201219T123058_035755_042F37_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20201216_0_L2A__S1A_IW_GRDH_1SDV_20201215T002730_20201215T002755_035689_042CFB_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20201216_0_L2A__S1A_IW_GRDH_1SDV_20201219T123033_20201219T123058_035755_042F37_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20201221_0_L2A__S1A_IW_GRDH_1SDV_20201219T123033_20201219T123058_035755_042F37_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20201221_1_L2A__S1A_IW_GRDH_1SDV_20201219T123033_20201219T123058_035755_042F37_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20201219_0_L2A__S1A_IW_GRDH_1SDV_20201219T123033_20201219T123058_035755_042F37_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20201219_1_L2A__S1A_IW_GRDH_1SDV_20201219T123033_20201219T123058_035755_042F37_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20201214_1_L2A__S1A_IW_GRDH_1SDV_20201215T002730_20201215T002755_035689_042CFB_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20201209_1_L2A__S1A_IW_GRDH_1SDV_20201207T123034_20201207T123059_035580_042933_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20201214_0_L2A__S1A_IW_GRDH_1SDV_20201215T002730_20201215T002755_035689_042CFB_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20201206_1_L2A__S1A_IW_GRDH_1SDV_20201207T123034_20201207T123059_035580_042933_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20201206_1_L2A__S1A_IW_GRDH_1SDV_20201203T002731_20201203T002756_035514_0426F6_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20201206_0_L2A__S1A_IW_GRDH_1SDV_20201207T123034_20201207T123059_035580_042933_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20201206_0_L2A__S1A_IW_GRDH_1SDV_20201203T002731_20201203T002756_035514_0426F6_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20201204_1_L2A__S1A_IW_GRDH_1SDV_20201203T002731_20201203T002756_035514_0426F6_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20201204_1_L2A__S1A_IW_GRDH_1SDV_20201207T123034_20201207T123059_035580_042933_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20201201_1_L2A__S1A_IW_GRDH_1SDV_20201203T002731_20201203T002756_035514_0426F6_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20201201_1_L2A__S1A_IW_GRDH_1SDV_20201203T002731_20201203T002756_035514_0426F6_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20201201_0_L2A__S1A_IW_GRDH_1SDV_20201203T002731_20201203T002756_035514_0426F6_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20201219_1_L2A__S1A_IW_GRDH_1SDV_20201219T123033_20201219T123058_035755_042F37_rtc", "status": "skipped_ok"}
+{"pair": "S2A_44RQS_20201214_1_L2A__S1A_IW_GRDH_1SDV_20201215T002730_20201215T002755_035689_042CFB_rtc", "status": "skipped_ok"}
+{"pair": "S2B_44RQS_20201209_1_L2A__S1A_IW_GRDH_1SDV_20201207T123034_20201207T123059_035580_042933_rtc", "status": "ok", "s2_date": "2020-12-09", "s1_datetime": "2020-12-07T12:30:46.508216Z", "gap_days": 2, "orbit": "asc158", "s2_cloud": 0.0409138, "seed_ice_fraction": 0.0, "water_pixels": 74432, "water_km2": 1.5776, "radar_contrast_db": 0.91}
+{"pair": "S2A_44RQT_20201124_2_L2A__S1A_IW_GRDH_1SDV_20201125T123034_20201125T123059_035405_04232A_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20201124_2_L2A__S1A_IW_GRDH_1SDV_20201121T002731_20201121T002756_035339_0420EC_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20201124_1_L2A__S1A_IW_GRDH_1SDV_20201125T123034_20201125T123059_035405_04232A_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20201124_1_L2A__S1A_IW_GRDH_1SDV_20201121T002731_20201121T002756_035339_0420EC_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20201216_1_L2A__S1A_IW_GRDH_1SDV_20201215T002730_20201215T002755_035689_042CFB_rtc", "status": "skipped_ok"}
+{"pair": "S2B_44RQS_20201216_1_L2A__S1A_IW_GRDH_1SDV_20201219T123033_20201219T123058_035755_042F37_rtc", "status": "skipped_ok"}
+{"pair": "S2A_44RQS_20201121_1_L2A__S1A_IW_GRDH_1SDV_20201121T002731_20201121T002756_035339_0420EC_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20201206_1_L2A__S1A_IW_GRDH_1SDV_20201207T123034_20201207T123059_035580_042933_rtc", "status": "ok", "s2_date": "2020-12-06", "s1_datetime": "2020-12-07T12:30:46.508216Z", "gap_days": 1, "orbit": "asc158", "s2_cloud": 0.19760349000000002, "seed_ice_fraction": 0.0, "water_pixels": 50762, "water_km2": 0.2971, "radar_contrast_db": 1.76}
+{"pair": "S2B_44RQS_20201206_1_L2A__S1A_IW_GRDH_1SDV_20201203T002731_20201203T002756_035514_0426F6_rtc", "status": "ok", "s2_date": "2020-12-06", "s1_datetime": "2020-12-03T00:27:43.862383Z", "gap_days": 3, "orbit": "des92", "s2_cloud": 0.19760349000000002, "seed_ice_fraction": 0.0, "water_pixels": 50762, "water_km2": 0.2971, "radar_contrast_db": 0.22}
+{"pair": "S2A_44RQT_20201121_1_L2A__S1A_IW_GRDH_1SDV_20201121T002731_20201121T002756_035339_0420EC_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20201119_2_L2A__S1A_IW_GRDH_1SDV_20201121T002731_20201121T002756_035339_0420EC_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20201119_1_L2A__S1A_IW_GRDH_1SDV_20201121T002731_20201121T002756_035339_0420EC_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20201201_0_L2A__S1A_IW_GRDH_1SDV_20201203T002731_20201203T002756_035514_0426F6_rtc", "status": "ok", "s2_date": "2020-12-01", "s1_datetime": "2020-12-03T00:27:43.862383Z", "gap_days": 2, "orbit": "des92", "s2_cloud": 0.07571933, "seed_ice_fraction": 0.0, "water_pixels": 51279, "water_km2": 0.0845, "radar_contrast_db": 0.32}
+{"pair": "S2B_44RQT_20201119_2_L2A__S1A_IW_GRDH_1SDV_20201121T002731_20201121T002756_035339_0420EC_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20201119_1_L2A__S1A_IW_GRDH_1SDV_20201121T002731_20201121T002756_035339_0420EC_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20201206_0_L2A__S1A_IW_GRDH_1SDV_20201207T123034_20201207T123059_035580_042933_rtc", "status": "ok", "s2_date": "2020-12-06", "s1_datetime": "2020-12-07T12:30:46.508216Z", "gap_days": 1, "orbit": "asc158", "s2_cloud": 0.21451177000000002, "seed_ice_fraction": 0.0, "water_pixels": 45669, "water_km2": 0.2673, "radar_contrast_db": 1.83}
+{"pair": "S2B_44RQS_20201206_0_L2A__S1A_IW_GRDH_1SDV_20201203T002731_20201203T002756_035514_0426F6_rtc", "status": "ok", "s2_date": "2020-12-06", "s1_datetime": "2020-12-03T00:27:43.862383Z", "gap_days": 3, "orbit": "des92", "s2_cloud": 0.21451177000000002, "seed_ice_fraction": 0.0, "water_pixels": 45669, "water_km2": 0.2673, "radar_contrast_db": 0.63}
+{"pair": "S2A_44RQT_20201114_1_L2A__S1A_IW_GRDH_1SDV_20201113T123034_20201113T123059_035230_041D22_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20201124_1_L2A__S1A_IW_GRDH_1SDV_20201125T123034_20201125T123059_035405_04232A_rtc", "status": "ok", "s2_date": "2020-11-24", "s1_datetime": "2020-11-25T12:30:46.773371Z", "gap_days": 1, "orbit": "asc158", "s2_cloud": 0.08224937, "seed_ice_fraction": 0.0, "water_pixels": 81163, "water_km2": 1.6655, "radar_contrast_db": -0.98}
+{"pair": "S2A_44RQS_20201124_1_L2A__S1A_IW_GRDH_1SDV_20201121T002731_20201121T002756_035339_0420EC_rtc", "status": "ok", "s2_date": "2020-11-24", "s1_datetime": "2020-11-21T00:27:44.325634Z", "gap_days": 3, "orbit": "des92", "s2_cloud": 0.08224937, "seed_ice_fraction": 0.0, "water_pixels": 81163, "water_km2": 1.6655, "radar_contrast_db": -1.61}
+{"pair": "S2A_44RQS_20201204_1_L2A__S1A_IW_GRDH_1SDV_20201203T002731_20201203T002756_035514_0426F6_rtc", "status": "ok", "s2_date": "2020-12-04", "s1_datetime": "2020-12-03T00:27:43.862383Z", "gap_days": 1, "orbit": "des92", "s2_cloud": 0.28562933, "seed_ice_fraction": 0.0, "water_pixels": 62391, "water_km2": 1.2585, "radar_contrast_db": -0.02}
+{"pair": "S2A_44RQS_20201204_1_L2A__S1A_IW_GRDH_1SDV_20201207T123034_20201207T123059_035580_042933_rtc", "status": "ok", "s2_date": "2020-12-04", "s1_datetime": "2020-12-07T12:30:46.508216Z", "gap_days": 3, "orbit": "asc158", "s2_cloud": 0.28562933, "seed_ice_fraction": 0.0, "water_pixels": 62391, "water_km2": 1.2585, "radar_contrast_db": 0.84}
+{"pair": "S2A_44RQT_20201111_1_L2A__S1A_IW_GRDH_1SDV_20201109T002732_20201109T002757_035164_041AD2_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20201111_1_L2A__S1A_IW_GRDH_1SDV_20201113T123034_20201113T123059_035230_041D22_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20201121_0_L2A__S1A_IW_GRDH_1SDV_20201121T002731_20201121T002756_035339_0420EC_rtc", "status": "ok", "s2_date": "2020-11-21", "s1_datetime": "2020-11-21T00:27:44.325634Z", "gap_days": 0, "orbit": "des92", "s2_cloud": 0.33641396999999995, "seed_ice_fraction": 0.0, "water_pixels": 66297, "water_km2": 0.6219, "radar_contrast_db": -1.18}
+{"pair": "S2B_44RQS_20201209_0_L2A__S1A_IW_GRDH_1SDV_20201207T123034_20201207T123059_035580_042933_rtc", "status": "ok", "s2_date": "2020-12-09", "s1_datetime": "2020-12-07T12:30:46.508216Z", "gap_days": 2, "orbit": "asc158", "s2_cloud": 0.1265266, "seed_ice_fraction": 0.0, "water_pixels": 56867, "water_km2": 0.3087, "radar_contrast_db": 1.2}
+{"pair": "S2B_44RQS_20201119_0_L2A__S1A_IW_GRDH_1SDV_20201121T002731_20201121T002756_035339_0420EC_rtc", "status": "ok", "s2_date": "2020-11-19", "s1_datetime": "2020-11-21T00:27:44.325634Z", "gap_days": 2, "orbit": "des92", "s2_cloud": 0.18451637, "seed_ice_fraction": 0.0, "water_pixels": 37557, "water_km2": 0.2878, "radar_contrast_db": -1.31}
+{"pair": "S2B_44RQT_20201109_1_L2A__S1A_IW_GRDH_1SDV_20201109T002732_20201109T002757_035164_041AD2_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20201124_0_L2A__S1A_IW_GRDH_1SDV_20201125T123034_20201125T123059_035405_04232A_rtc", "status": "ok", "s2_date": "2020-11-24", "s1_datetime": "2020-11-25T12:30:46.773371Z", "gap_days": 1, "orbit": "asc158", "s2_cloud": 0.19061115999999997, "seed_ice_fraction": 0.0, "water_pixels": 70095, "water_km2": 1.4868, "radar_contrast_db": -1.1}
+{"pair": "S2A_44RQS_20201124_0_L2A__S1A_IW_GRDH_1SDV_20201121T002731_20201121T002756_035339_0420EC_rtc", "status": "ok", "s2_date": "2020-11-24", "s1_datetime": "2020-11-21T00:27:44.325634Z", "gap_days": 3, "orbit": "des92", "s2_cloud": 0.19061115999999997, "seed_ice_fraction": 0.0, "water_pixels": 70095, "water_km2": 1.4868, "radar_contrast_db": -1.11}
+{"pair": "S2B_44RQT_20201106_1_L2A__S1A_IW_GRDH_1SDV_20201109T002732_20201109T002757_035164_041AD2_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20201124_2_L2A__S1A_IW_GRDH_1SDV_20201125T123034_20201125T123059_035405_04232A_rtc", "status": "ok", "s2_date": "2020-11-24", "s1_datetime": "2020-11-25T12:30:46.773371Z", "gap_days": 1, "orbit": "asc158", "s2_cloud": 0.08224251, "seed_ice_fraction": 0.0, "water_pixels": 81163, "water_km2": 1.6655, "radar_contrast_db": -0.98}
+{"pair": "S2A_44RQS_20201124_2_L2A__S1A_IW_GRDH_1SDV_20201121T002731_20201121T002756_035339_0420EC_rtc", "status": "ok", "s2_date": "2020-11-24", "s1_datetime": "2020-11-21T00:27:44.325634Z", "gap_days": 3, "orbit": "des92", "s2_cloud": 0.08224251, "seed_ice_fraction": 0.0, "water_pixels": 81163, "water_km2": 1.6655, "radar_contrast_db": -1.61}
+{"pair": "S2A_44RQS_20201111_0_L2A__S1A_IW_GRDH_1SDV_20201109T002732_20201109T002757_035164_041AD2_rtc", "status": "ok", "s2_date": "2020-11-11", "s1_datetime": "2020-11-09T00:27:44.616063Z", "gap_days": 2, "orbit": "des92", "s2_cloud": 0.12526655, "seed_ice_fraction": 0.0, "water_pixels": 40582, "water_km2": 0.1388, "radar_contrast_db": -1.44}
+{"pair": "S2A_44RQS_20201111_0_L2A__S1A_IW_GRDH_1SDV_20201113T123034_20201113T123059_035230_041D22_rtc", "status": "ok", "s2_date": "2020-11-11", "s1_datetime": "2020-11-13T12:30:47.302340Z", "gap_days": 2, "orbit": "asc158", "s2_cloud": 0.12526655, "seed_ice_fraction": 0.0, "water_pixels": 40582, "water_km2": 0.1388, "radar_contrast_db": -0.46}
+{"pair": "S2A_44RQS_20201114_0_L2A__S1A_IW_GRDH_1SDV_20201113T123034_20201113T123059_035230_041D22_rtc", "status": "ok", "s2_date": "2020-11-14", "s1_datetime": "2020-11-13T12:30:47.302340Z", "gap_days": 1, "orbit": "asc158", "s2_cloud": 0.15895206, "seed_ice_fraction": 0.0, "water_pixels": 46148, "water_km2": 0.2862, "radar_contrast_db": -0.9}
+{"pair": "S2A_44RQT_20201104_1_L2A__S1A_IW_GRDH_1SDV_20201101T123035_20201101T123100_035055_041700_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20201114_1_L2A__S1A_IW_GRDH_1SDV_20201113T123034_20201113T123059_035230_041D22_rtc", "status": "ok", "s2_date": "2020-11-14", "s1_datetime": "2020-11-13T12:30:47.302340Z", "gap_days": 1, "orbit": "asc158", "s2_cloud": 0.00049869, "seed_ice_fraction": 0.0, "water_pixels": 54240, "water_km2": 0.5672, "radar_contrast_db": -1.04}
+{"pair": "S2B_44RQS_20201109_1_L2A__S1A_IW_GRDH_1SDV_20201109T002732_20201109T002757_035164_041AD2_rtc", "status": "ok", "s2_date": "2020-11-09", "s1_datetime": "2020-11-09T00:27:44.616063Z", "gap_days": 0, "orbit": "des92", "s2_cloud": 0.00019773, "seed_ice_fraction": 0.0, "water_pixels": 45237, "water_km2": 0.4318, "radar_contrast_db": -2.07}
+{"pair": "S2A_44RQT_20201101_0_L2A__S1A_IW_GRDH_1SDV_20201101T123035_20201101T123100_035055_041700_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20201101_1_L2A__S1A_IW_GRDH_1SDV_20201101T123035_20201101T123100_035055_041700_rtc", "status": "skipped_cloudy"}
+{"pair": "?", "status": "error", "error": "cannot open s3://sentinel-s2-l2a/tiles/44/R/QS/2020/10/27/0/R20m/SCL.jp2: '/vsis3/sentinel-s2-l2a/tiles/44/R/QS/2020/10/27/0/R20m/SCL.jp2' does not ex"}
+{"pair": "S2B_44RQT_20201030_1_L2A__S1A_IW_GRDH_1SDV_20201028T002732_20201028T002757_034989_0414CB_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20201030_1_L2A__S1A_IW_GRDH_1SDV_20201101T123035_20201101T123100_035055_041700_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20201027_1_L2A__S1A_IW_GRDH_1SDV_20201028T002732_20201028T002757_034989_0414CB_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20201106_1_L2A__S1A_IW_GRDH_1SDV_20201109T002732_20201109T002757_035164_041AD2_rtc", "status": "ok", "s2_date": "2020-11-06", "s1_datetime": "2020-11-09T00:27:44.616063Z", "gap_days": 3, "orbit": "des92", "s2_cloud": 0.04431488, "seed_ice_fraction": 0.0, "water_pixels": 38417, "water_km2": 0.0454, "radar_contrast_db": -1.84}
+{"pair": "S2A_44RQS_20201111_1_L2A__S1A_IW_GRDH_1SDV_20201109T002732_20201109T002757_035164_041AD2_rtc", "status": "ok", "s2_date": "2020-11-11", "s1_datetime": "2020-11-09T00:27:44.616063Z", "gap_days": 2, "orbit": "des92", "s2_cloud": 0.00011622000000000001, "seed_ice_fraction": 0.0, "water_pixels": 46453, "water_km2": 0.4611, "radar_contrast_db": -2.01}
+{"pair": "S2A_44RQS_20201111_1_L2A__S1A_IW_GRDH_1SDV_20201113T123034_20201113T123059_035230_041D22_rtc", "status": "ok", "s2_date": "2020-11-11", "s1_datetime": "2020-11-13T12:30:47.302340Z", "gap_days": 2, "orbit": "asc158", "s2_cloud": 0.00011622000000000001, "seed_ice_fraction": 0.0, "water_pixels": 46453, "water_km2": 0.4611, "radar_contrast_db": -0.96}
+{"pair": "S2A_44RQT_20201025_1_L2A__S1A_IW_GRDH_1SDV_20201028T002732_20201028T002757_034989_0414CB_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20201106_0_L2A__S1A_IW_GRDH_1SDV_20201109T002732_20201109T002757_035164_041AD2_rtc", "status": "ok", "s2_date": "2020-11-06", "s1_datetime": "2020-11-09T00:27:44.616063Z", "gap_days": 3, "orbit": "des92", "s2_cloud": 0.24010933999999998, "seed_ice_fraction": 0.0, "water_pixels": 36411, "water_km2": 0.1675, "radar_contrast_db": -1.8}
+{"pair": "S2B_44RQS_20201109_0_L2A__S1A_IW_GRDH_1SDV_20201109T002732_20201109T002757_035164_041AD2_rtc", "status": "ok", "s2_date": "2020-11-09", "s1_datetime": "2020-11-09T00:27:44.616063Z", "gap_days": 0, "orbit": "des92", "s2_cloud": 0.18441268, "seed_ice_fraction": 0.0, "water_pixels": 40472, "water_km2": 0.359, "radar_contrast_db": -1.99}
+{"pair": "S2A_44RQT_20201022_1_L2A__S1A_IW_GRDH_1SDV_20201020T123034_20201020T123059_034880_041110_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20201025_0_L2A__S1A_IW_GRDH_1SDV_20201028T002732_20201028T002757_034989_0414CB_rtc", "status": "ok", "s2_date": "2020-10-25", "s1_datetime": "2020-10-28T00:27:44.843353Z", "gap_days": 3, "orbit": "des92", "s2_cloud": 0.21801687, "seed_ice_fraction": 0.0, "water_pixels": 27647, "water_km2": 0.4245, "radar_contrast_db": -2.48}
+{"pair": "S2A_44RQS_20201104_0_L2A__S1A_IW_GRDH_1SDV_20201101T123035_20201101T123100_035055_041700_rtc", "status": "ok", "s2_date": "2020-11-04", "s1_datetime": "2020-11-01T12:30:47.529265Z", "gap_days": 3, "orbit": "asc158", "s2_cloud": 0.28151, "seed_ice_fraction": 0.0, "water_pixels": 27281, "water_km2": 0.4687, "radar_contrast_db": -0.39}
+{"pair": "S2B_44RQT_20201020_1_L2A__S1A_IW_GRDH_1SDV_20201020T123034_20201020T123059_034880_041110_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20201030_1_L2A__S1A_IW_GRDH_1SDV_20201028T002732_20201028T002757_034989_0414CB_rtc", "status": "ok", "s2_date": "2020-10-30", "s1_datetime": "2020-10-28T00:27:44.843353Z", "gap_days": 2, "orbit": "des92", "s2_cloud": 0.00105154, "seed_ice_fraction": 0.0, "water_pixels": 31659, "water_km2": 0.5274, "radar_contrast_db": -2.8}
+{"pair": "S2B_44RQS_20201030_1_L2A__S1A_IW_GRDH_1SDV_20201101T123035_20201101T123100_035055_041700_rtc", "status": "ok", "s2_date": "2020-10-30", "s1_datetime": "2020-11-01T12:30:47.529265Z", "gap_days": 2, "orbit": "asc158", "s2_cloud": 0.00105154, "seed_ice_fraction": 0.0, "water_pixels": 31659, "water_km2": 0.5274, "radar_contrast_db": -1.62}
+{"pair": "S2A_44RQS_20201022_0_L2A__S1A_IW_GRDH_1SDV_20201020T123034_20201020T123059_034880_041110_rtc", "status": "ok", "s2_date": "2020-10-22", "s1_datetime": "2020-10-20T12:30:47.494684Z", "gap_days": 2, "orbit": "asc158", "s2_cloud": 0.12398052, "seed_ice_fraction": 0.0, "water_pixels": 15088, "water_km2": 0.1651, "radar_contrast_db": -0.08}
+{"pair": "S2A_44RQS_20201025_1_L2A__S1A_IW_GRDH_1SDV_20201028T002732_20201028T002757_034989_0414CB_rtc", "status": "ok", "s2_date": "2020-10-25", "s1_datetime": "2020-10-28T00:27:44.843353Z", "gap_days": 3, "orbit": "des92", "s2_cloud": 0.0016311600000000002, "seed_ice_fraction": 0.0, "water_pixels": 28077, "water_km2": 0.4248, "radar_contrast_db": -2.91}
+{"pair": "S2B_44RQT_20201017_1_L2A__S1A_IW_GRDH_1SDV_20201016T002732_20201016T002757_034814_040EC0_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20201017_1_L2A__S1A_IW_GRDH_1SDV_20201020T123034_20201020T123059_034880_041110_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20201022_1_L2A__S1A_IW_GRDH_1SDV_20201020T123034_20201020T123059_034880_041110_rtc", "status": "ok", "s2_date": "2020-10-22", "s1_datetime": "2020-10-20T12:30:47.494684Z", "gap_days": 2, "orbit": "asc158", "s2_cloud": 0.019336469999999998, "seed_ice_fraction": 0.0, "water_pixels": 16407, "water_km2": 0.3031, "radar_contrast_db": -1.46}
+{"pair": "S2B_44RQS_20201027_1_L2A__S1A_IW_GRDH_1SDV_20201028T002732_20201028T002757_034989_0414CB_rtc", "status": "ok", "s2_date": "2020-10-27", "s1_datetime": "2020-10-28T00:27:44.843353Z", "gap_days": 1, "orbit": "des92", "s2_cloud": 0.05177395, "seed_ice_fraction": 0.0, "water_pixels": 32244, "water_km2": 0.4035, "radar_contrast_db": -2.51}
+{"pair": "S2B_44RQS_20201030_0_L2A__S1A_IW_GRDH_1SDV_20201028T002732_20201028T002757_034989_0414CB_rtc", "status": "ok", "s2_date": "2020-10-30", "s1_datetime": "2020-10-28T00:27:44.843353Z", "gap_days": 2, "orbit": "des92", "s2_cloud": 0.23639352, "seed_ice_fraction": 0.0, "water_pixels": 29838, "water_km2": 0.4291, "radar_contrast_db": -2.75}
+{"pair": "S2B_44RQS_20201030_0_L2A__S1A_IW_GRDH_1SDV_20201101T123035_20201101T123100_035055_041700_rtc", "status": "ok", "s2_date": "2020-10-30", "s1_datetime": "2020-11-01T12:30:47.529265Z", "gap_days": 2, "orbit": "asc158", "s2_cloud": 0.23639352, "seed_ice_fraction": 0.0, "water_pixels": 29838, "water_km2": 0.4291, "radar_contrast_db": -1.75}
+{"pair": "S2A_44RQT_20201015_1_L2A__S1A_IW_GRDH_1SDV_20201016T002732_20201016T002757_034814_040EC0_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20201104_1_L2A__S1A_IW_GRDH_1SDV_20201101T123035_20201101T123100_035055_041700_rtc", "status": "ok", "s2_date": "2020-11-04", "s1_datetime": "2020-11-01T12:30:47.529265Z", "gap_days": 3, "orbit": "asc158", "s2_cloud": 0.23058854, "seed_ice_fraction": 0.0, "water_pixels": 27755, "water_km2": 0.6064, "radar_contrast_db": -1.74}
+{"pair": "S2B_44RQT_20201010_1_L2A__S1A_IW_GRDH_1SDV_20201008T123035_20201008T123100_034705_040AE4_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20201020_0_L2A__S1A_IW_GRDH_1SDV_20201020T123034_20201020T123059_034880_041110_rtc", "status": "ok", "s2_date": "2020-10-20", "s1_datetime": "2020-10-20T12:30:47.494684Z", "gap_days": 0, "orbit": "asc158", "s2_cloud": 0.24577877999999997, "seed_ice_fraction": 0.0, "water_pixels": 17887, "water_km2": 0.4197, "radar_contrast_db": -1.27}
+{"pair": "S2B_44RQT_20201007_1_L2A__S1A_IW_GRDH_1SDV_20201008T123035_20201008T123100_034705_040AE4_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20201007_1_L2A__S1A_IW_GRDH_1SDV_20201004T002732_20201004T002757_034639_0408AD_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20201015_0_L2A__S1A_IW_GRDH_1SDV_20201016T002732_20201016T002757_034814_040EC0_rtc", "status": "ok", "s2_date": "2020-10-15", "s1_datetime": "2020-10-16T00:27:44.866602Z", "gap_days": 1, "orbit": "des92", "s2_cloud": 0.16539181, "seed_ice_fraction": 0.0, "water_pixels": 16804, "water_km2": 0.4178, "radar_contrast_db": -3.22}
+{"pair": "S2B_44RQS_20201020_1_L2A__S1A_IW_GRDH_1SDV_20201020T123034_20201020T123059_034880_041110_rtc", "status": "ok", "s2_date": "2020-10-20", "s1_datetime": "2020-10-20T12:30:47.494684Z", "gap_days": 0, "orbit": "asc158", "s2_cloud": 0.09696147, "seed_ice_fraction": 0.0, "water_pixels": 18802, "water_km2": 0.4227, "radar_contrast_db": -1.71}
+{"pair": "S2A_44RQT_20201005_1_L2A__S1A_IW_GRDH_1SDV_20201004T002732_20201004T002757_034639_0408AD_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20201005_1_L2A__S1A_IW_GRDH_1SDV_20201008T123035_20201008T123100_034705_040AE4_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20201015_1_L2A__S1A_IW_GRDH_1SDV_20201016T002732_20201016T002757_034814_040EC0_rtc", "status": "ok", "s2_date": "2020-10-15", "s1_datetime": "2020-10-16T00:27:44.866602Z", "gap_days": 1, "orbit": "des92", "s2_cloud": 0.10759372, "seed_ice_fraction": 0.0, "water_pixels": 17900, "water_km2": 0.4296, "radar_contrast_db": -3.17}
+{"pair": "S2B_44RQS_20201017_0_L2A__S1A_IW_GRDH_1SDV_20201016T002732_20201016T002757_034814_040EC0_rtc", "status": "ok", "s2_date": "2020-10-17", "s1_datetime": "2020-10-16T00:27:44.866602Z", "gap_days": 1, "orbit": "des92", "s2_cloud": 0.20931803999999998, "seed_ice_fraction": 0.0, "water_pixels": 15810, "water_km2": 0.3758, "radar_contrast_db": -3.21}
+{"pair": "S2B_44RQS_20201017_0_L2A__S1A_IW_GRDH_1SDV_20201020T123034_20201020T123059_034880_041110_rtc", "status": "ok", "s2_date": "2020-10-17", "s1_datetime": "2020-10-20T12:30:47.494684Z", "gap_days": 3, "orbit": "asc158", "s2_cloud": 0.20931803999999998, "seed_ice_fraction": 0.0, "water_pixels": 15810, "water_km2": 0.3758, "radar_contrast_db": -1.59}
+{"pair": "S2B_44RQS_20201017_1_L2A__S1A_IW_GRDH_1SDV_20201016T002732_20201016T002757_034814_040EC0_rtc", "status": "ok", "s2_date": "2020-10-17", "s1_datetime": "2020-10-16T00:27:44.866602Z", "gap_days": 1, "orbit": "des92", "s2_cloud": 0.20969884, "seed_ice_fraction": 0.0, "water_pixels": 15454, "water_km2": 0.3898, "radar_contrast_db": -3.09}
+{"pair": "S2B_44RQS_20201017_1_L2A__S1A_IW_GRDH_1SDV_20201020T123034_20201020T123059_034880_041110_rtc", "status": "ok", "s2_date": "2020-10-17", "s1_datetime": "2020-10-20T12:30:47.494684Z", "gap_days": 3, "orbit": "asc158", "s2_cloud": 0.20969884, "seed_ice_fraction": 0.0, "water_pixels": 15454, "water_km2": 0.3898, "radar_contrast_db": -2.07}
+{"pair": "S2A_44RQT_20201002_1_L2A__S1A_IW_GRDH_1SDV_20201004T002732_20201004T002757_034639_0408AD_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20201002_0_L2A__S1A_IW_GRDH_1SDV_20201004T002732_20201004T002757_034639_0408AD_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20200927_1_L2A__S1A_IW_GRDH_1SDV_20200926T123034_20200926T123059_034530_0404C8_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20200927_0_L2A__S1A_IW_GRDH_1SDV_20200926T123034_20200926T123059_034530_0404C8_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20200927_1_L2A__S1A_IW_GRDH_1SDV_20200926T123034_20200926T123059_034530_0404C8_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20200927_0_L2A__S1A_IW_GRDH_1SDV_20200926T123034_20200926T123059_034530_0404C8_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20200925_1_L2A__S1A_IW_GRDH_1SDV_20200926T123034_20200926T123059_034530_0404C8_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20200925_1_L2A__S1A_IW_GRDH_1SDV_20200922T002731_20200922T002756_034464_04028A_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20200925_0_L2A__S1A_IW_GRDH_1SDV_20200926T123034_20200926T123059_034530_0404C8_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20200925_0_L2A__S1A_IW_GRDH_1SDV_20200922T002731_20200922T002756_034464_04028A_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20201010_1_L2A__S1A_IW_GRDH_1SDV_20201008T123035_20201008T123100_034705_040AE4_rtc", "status": "ok", "s2_date": "2020-10-10", "s1_datetime": "2020-10-08T12:30:47.572536Z", "gap_days": 2, "orbit": "asc158", "s2_cloud": 0.0298694, "seed_ice_fraction": 0.0, "water_pixels": 16495, "water_km2": 0.4379, "radar_contrast_db": -2.36}
+{"pair": "S2B_44RQT_20200917_1_L2A__S1A_IW_GRDH_1SDV_20200914T123034_20200914T123059_034355_03FEA1_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20200917_0_L2A__S1A_IW_GRDH_1SDV_20200914T123034_20200914T123059_034355_03FEA1_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20200915_1_L2A__S1A_IW_GRDH_1SDV_20200914T123034_20200914T123059_034355_03FEA1_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20200915_0_L2A__S1A_IW_GRDH_1SDV_20200914T123034_20200914T123059_034355_03FEA1_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20200912_1_L2A__S1A_IW_GRDH_1SDV_20200910T002731_20200910T002756_034289_03FC44_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20200912_1_L2A__S1A_IW_GRDH_1SDV_20200914T123034_20200914T123059_034355_03FEA1_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20201007_1_L2A__S1A_IW_GRDH_1SDV_20201008T123035_20201008T123100_034705_040AE4_rtc", "status": "ok", "s2_date": "2020-10-07", "s1_datetime": "2020-10-08T12:30:47.572536Z", "gap_days": 1, "orbit": "asc158", "s2_cloud": 0.09536225999999999, "seed_ice_fraction": 0.0, "water_pixels": 9526, "water_km2": 0.4362, "radar_contrast_db": -5.06}
+{"pair": "S2B_44RQS_20201007_1_L2A__S1A_IW_GRDH_1SDV_20201004T002732_20201004T002757_034639_0408AD_rtc", "status": "ok", "s2_date": "2020-10-07", "s1_datetime": "2020-10-04T00:27:44.663386Z", "gap_days": 3, "orbit": "des92", "s2_cloud": 0.09536225999999999, "seed_ice_fraction": 0.0, "water_pixels": 9526, "water_km2": 0.4362, "radar_contrast_db": -6.22}
+{"pair": "S2B_44RQT_20200907_1_L2A__S1A_IW_GRDH_1SDV_20200910T002731_20200910T002756_034289_03FC44_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20200912_0_L2A__S1A_IW_GRDH_1SDV_20200910T002731_20200910T002756_034289_03FC44_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20200912_0_L2A__S1A_IW_GRDH_1SDV_20200914T123034_20200914T123059_034355_03FEA1_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20201007_0_L2A__S1A_IW_GRDH_1SDV_20201008T123035_20201008T123100_034705_040AE4_rtc", "status": "ok", "s2_date": "2020-10-07", "s1_datetime": "2020-10-08T12:30:47.572536Z", "gap_days": 1, "orbit": "asc158", "s2_cloud": 0.21344069000000002, "seed_ice_fraction": 0.0, "water_pixels": 9804, "water_km2": 0.3968, "radar_contrast_db": -3.74}
+{"pair": "S2B_44RQS_20201007_0_L2A__S1A_IW_GRDH_1SDV_20201004T002732_20201004T002757_034639_0408AD_rtc", "status": "ok", "s2_date": "2020-10-07", "s1_datetime": "2020-10-04T00:27:44.663386Z", "gap_days": 3, "orbit": "des92", "s2_cloud": 0.21344069000000002, "seed_ice_fraction": 0.0, "water_pixels": 9804, "water_km2": 0.3968, "radar_contrast_db": -3.81}
+{"pair": "S2A_44RQT_20200905_0_L2A__S1A_IW_GRDH_1SDV_20200902T123033_20200902T123058_034180_03F87C_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20200905_1_L2A__S1A_IW_GRDH_1SDV_20200902T123033_20200902T123058_034180_03F87C_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20200831_1_L2A__S1A_IW_GRDH_1SDV_20200829T002731_20200829T002756_034114_03F626_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20200831_1_L2A__S1A_IW_GRDH_1SDV_20200902T123033_20200902T123058_034180_03F87C_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20200831_0_L2A__S1A_IW_GRDH_1SDV_20200829T002731_20200829T002756_034114_03F626_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20200831_0_L2A__S1A_IW_GRDH_1SDV_20200902T123033_20200902T123058_034180_03F87C_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20200818_1_L2A__S1A_IW_GRDH_1SDV_20200817T002730_20200817T002755_033939_03EFF9_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20200818_1_L2A__S1A_IW_GRDH_1SDV_20200821T123033_20200821T123058_034005_03F250_rtc", "status": "skipped_cloudy"}
+{"pair": "?", "status": "error", "error": "cannot open s3://sentinel-s2-l2a/tiles/44/R/QT/2020/8/16/0/R20m/SCL.jp2: '/vsis3/sentinel-s2-l2a/tiles/44/R/QT/2020/8/16/0/R20m/SCL.jp2' does not exis"}
+{"pair": "S2B_44RQT_20200818_0_L2A__S1A_IW_GRDH_1SDV_20200817T002730_20200817T002755_033939_03EFF9_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20200818_0_L2A__S1A_IW_GRDH_1SDV_20200821T123033_20200821T123058_034005_03F250_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20200808_1_L2A__S1A_IW_GRDH_1SDV_20200809T123032_20200809T123057_033830_03EC2A_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20200808_1_L2A__S1A_IW_GRDH_1SDV_20200805T002729_20200805T002754_033764_03E9E5_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20200808_0_L2A__S1A_IW_GRDH_1SDV_20200809T123032_20200809T123057_033830_03EC2A_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20200808_0_L2A__S1A_IW_GRDH_1SDV_20200805T002729_20200805T002754_033764_03E9E5_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20200722_1_L2A__S1A_IW_GRDH_1SDV_20200724T002728_20200724T002753_033589_03E48B_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20200722_0_L2A__S1A_IW_GRDH_1SDV_20200724T002728_20200724T002753_033589_03E48B_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20200712_1_L2A__S1A_IW_GRDH_1SDV_20200712T002728_20200712T002753_033414_03DF2A_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20201005_1_L2A__S1A_IW_GRDH_1SDV_20201004T002732_20201004T002757_034639_0408AD_rtc", "status": "ok", "s2_date": "2020-10-05", "s1_datetime": "2020-10-04T00:27:44.663386Z", "gap_days": 1, "orbit": "des92", "s2_cloud": 0.07984397, "seed_ice_fraction": 0.0, "water_pixels": 16141, "water_km2": 0.573, "radar_contrast_db": -3.35}
+{"pair": "S2A_44RQS_20201005_1_L2A__S1A_IW_GRDH_1SDV_20201008T123035_20201008T123100_034705_040AE4_rtc", "status": "ok", "s2_date": "2020-10-05", "s1_datetime": "2020-10-08T12:30:47.572536Z", "gap_days": 3, "orbit": "asc158", "s2_cloud": 0.07984397, "seed_ice_fraction": 0.0, "water_pixels": 16141, "water_km2": 0.573, "radar_contrast_db": -2.59}
+{"pair": "S2A_44RQS_20201002_0_L2A__S1A_IW_GRDH_1SDV_20201004T002732_20201004T002757_034639_0408AD_rtc", "status": "ok", "s2_date": "2020-10-02", "s1_datetime": "2020-10-04T00:27:44.663386Z", "gap_days": 2, "orbit": "des92", "s2_cloud": 0.25552553, "seed_ice_fraction": 0.0, "water_pixels": 9911, "water_km2": 0.4029, "radar_contrast_db": -4.6}
+{"pair": "S2B_44RQT_20200712_0_L2A__S1A_IW_GRDH_1SDV_20200712T002728_20200712T002753_033414_03DF2A_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20201002_1_L2A__S1A_IW_GRDH_1SDV_20201004T002732_20201004T002757_034639_0408AD_rtc", "status": "ok", "s2_date": "2020-10-02", "s1_datetime": "2020-10-04T00:27:44.663386Z", "gap_days": 2, "orbit": "des92", "s2_cloud": 0.3295505, "seed_ice_fraction": 0.0, "water_pixels": 9849, "water_km2": 0.5519, "radar_contrast_db": -5.81}
+{"pair": "S2B_44RQT_20200702_1_L2A__S1A_IW_GRDH_1SDV_20200630T002727_20200630T002752_033239_03D9DA_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20200612_1_L2A__S1A_IW_GRDH_1SDV_20200610T123029_20200610T123054_032955_03D133_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20200702_0_L2A__S1A_IW_GRDH_1SDV_20200630T002727_20200630T002752_033239_03D9DA_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20200612_0_L2A__S1A_IW_GRDH_1SDV_20200610T123029_20200610T123054_032955_03D133_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20200612_0_L2A__S1A_IW_GRDH_1SDV_20200610T123029_20200610T123054_032955_03D133_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20200609_0_L2A__S1A_IW_GRDH_1SDV_20200610T123029_20200610T123054_032955_03D133_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20200609_0_L2A__S1A_IW_GRDH_1SDV_20200606T002725_20200606T002750_032889_03CF43_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20200607_1_L2A__S1A_IW_GRDH_1SDV_20200606T002725_20200606T002750_032889_03CF43_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20200607_1_L2A__S1A_IW_GRDH_1SDV_20200610T123029_20200610T123054_032955_03D133_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20200607_0_L2A__S1A_IW_GRDH_1SDV_20200606T002725_20200606T002750_032889_03CF43_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20200607_0_L2A__S1A_IW_GRDH_1SDV_20200610T123029_20200610T123054_032955_03D133_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20200609_1_L2A__S1A_IW_GRDH_1SDV_20200610T123029_20200610T123054_032955_03D133_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20200609_1_L2A__S1A_IW_GRDH_1SDV_20200606T002725_20200606T002750_032889_03CF43_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20200528_0_L2A__S1A_IW_GRDH_1SDV_20200529T123028_20200529T123053_032780_03CC0A_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20200528_0_L2A__S1A_IW_GRDH_1SDV_20200525T002725_20200525T002750_032714_03CA18_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20200525_1_L2A__S1A_IW_GRDH_1SDV_20200525T002725_20200525T002750_032714_03CA18_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20200525_0_L2A__S1A_IW_GRDH_1SDV_20200525T002725_20200525T002750_032714_03CA18_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20200523_1_L2A__S1A_IW_GRDH_1SDV_20200525T002725_20200525T002750_032714_03CA18_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20200523_0_L2A__S1A_IW_GRDH_1SDV_20200525T002725_20200525T002750_032714_03CA18_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20200520_1_L2A__S1A_IW_GRDH_1SDV_20200517T123027_20200517T123052_032605_03C6C2_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20201005_0_L2A__S1A_IW_GRDH_1SDV_20201004T002732_20201004T002757_034639_0408AD_rtc", "status": "ok", "s2_date": "2020-10-05", "s1_datetime": "2020-10-04T00:27:44.663386Z", "gap_days": 1, "orbit": "des92", "s2_cloud": 0.17977013, "seed_ice_fraction": 0.0, "water_pixels": 15040, "water_km2": 0.4477, "radar_contrast_db": -3.09}
+{"pair": "S2A_44RQS_20201005_0_L2A__S1A_IW_GRDH_1SDV_20201008T123035_20201008T123100_034705_040AE4_rtc", "status": "ok", "s2_date": "2020-10-05", "s1_datetime": "2020-10-08T12:30:47.572536Z", "gap_days": 3, "orbit": "asc158", "s2_cloud": 0.17977013, "seed_ice_fraction": 0.0, "water_pixels": 15040, "water_km2": 0.4477, "radar_contrast_db": -2.03}
+{"pair": "S2B_44RQS_20211221_0_L2A__S1A_IW_GRDH_1SDV_20211222T002736_20211222T002801_041114_04E284_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20211221_1_L2A__S1A_IW_GRDH_1SDV_20211222T002736_20211222T002801_041114_04E284_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20211219_0_L2A__S1A_IW_GRDH_1SDV_20211222T002736_20211222T002801_041114_04E284_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20200905_0_L2A__S1A_IW_GRDH_1SDV_20200902T123033_20200902T123058_034180_03F87C_rtc", "status": "ok", "s2_date": "2020-09-05", "s1_datetime": "2020-09-02T12:30:46.423234Z", "gap_days": 3, "orbit": "asc158", "s2_cloud": 0.38383036, "seed_ice_fraction": 0.0, "water_pixels": 14712, "water_km2": 0.5735, "radar_contrast_db": -1.48}
+{"pair": "S2A_44RQT_20211219_1_L2A__S1A_IW_GRDH_1SDV_20211222T002736_20211222T002801_041114_04E284_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20200831_0_L2A__S1A_IW_GRDH_1SDV_20200829T002731_20200829T002756_034114_03F626_rtc", "status": "ok", "s2_date": "2020-08-31", "s1_datetime": "2020-08-29T00:27:43.552717Z", "gap_days": 2, "orbit": "des92", "s2_cloud": 0.22246135, "seed_ice_fraction": 0.0, "water_pixels": 14332, "water_km2": 0.4499, "radar_contrast_db": -2.92}
+{"pair": "S2B_44RQS_20200831_0_L2A__S1A_IW_GRDH_1SDV_20200902T123033_20200902T123058_034180_03F87C_rtc", "status": "ok", "s2_date": "2020-08-31", "s1_datetime": "2020-09-02T12:30:46.423234Z", "gap_days": 2, "orbit": "asc158", "s2_cloud": 0.22246135, "seed_ice_fraction": 0.0, "water_pixels": 14332, "water_km2": 0.4499, "radar_contrast_db": -1.28}
+{"pair": "S2B_44RQS_20201010_0_L2A__S1A_IW_GRDH_1SDV_20201008T123035_20201008T123100_034705_040AE4_rtc", "status": "ok", "s2_date": "2020-10-10", "s1_datetime": "2020-10-08T12:30:47.572536Z", "gap_days": 2, "orbit": "asc158", "s2_cloud": 0.18437687, "seed_ice_fraction": 0.0, "water_pixels": 14700, "water_km2": 0.4345, "radar_contrast_db": -2.45}
+{"pair": "S2A_44RQT_20211216_1_L2A__S1A_IW_GRDH_1SDV_20211214T123039_20211214T123104_041005_04DEEE_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20211221_1_L2A__S1A_IW_GRDH_1SDV_20211222T002736_20211222T002801_041114_04E284_rtc", "status": "skipped_ok"}
+{"pair": "S2B_44RQS_20200520_1_L2A__S1A_IW_GRDH_1SDV_20200517T123027_20200517T123052_032605_03C6C2_rtc", "status": "ok", "s2_date": "2020-05-20", "s1_datetime": "2020-05-17T12:30:40.158537Z", "gap_days": 3, "orbit": "asc158", "s2_cloud": 0.33267549, "seed_ice_fraction": 0.0, "water_pixels": 1284, "water_km2": 0.1126, "radar_contrast_db": -9.53}
+{"pair": "S2A_44RQS_20200525_1_L2A__S1A_IW_GRDH_1SDV_20200525T002725_20200525T002750_032714_03CA18_rtc", "status": "ok", "s2_date": "2020-05-25", "s1_datetime": "2020-05-25T00:27:37.859237Z", "gap_days": 0, "orbit": "des92", "s2_cloud": 0.29996929, "seed_ice_fraction": 0.0, "water_pixels": 3787, "water_km2": 0.359, "radar_contrast_db": -11.13}
+{"pair": "S2B_44RQS_20211211_0_L2A__S1A_IW_GRDH_1SDV_20211210T002736_20211210T002801_040939_04DCA7_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20211211_0_L2A__S1A_IW_GRDH_1SDV_20211214T123039_20211214T123104_041005_04DEEE_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20211211_1_L2A__S1A_IW_GRDH_1SDV_20211210T002736_20211210T002801_040939_04DCA7_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20211211_1_L2A__S1A_IW_GRDH_1SDV_20211214T123039_20211214T123104_041005_04DEEE_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20211209_0_L2A__S1A_IW_GRDH_1SDV_20211210T002736_20211210T002801_040939_04DCA7_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20200609_0_L2A__S1A_IW_GRDH_1SDV_20200610T123029_20200610T123054_032955_03D133_rtc", "status": "ok", "s2_date": "2020-06-09", "s1_datetime": "2020-06-10T12:30:41.629799Z", "gap_days": 1, "orbit": "asc158", "s2_cloud": 0.39876314, "seed_ice_fraction": 0.0, "water_pixels": 1756, "water_km2": 0.124, "radar_contrast_db": -6.35}
+{"pair": "S2B_44RQS_20200609_0_L2A__S1A_IW_GRDH_1SDV_20200606T002725_20200606T002750_032889_03CF43_rtc", "status": "ok", "s2_date": "2020-06-09", "s1_datetime": "2020-06-06T00:27:38.465739Z", "gap_days": 3, "orbit": "des92", "s2_cloud": 0.39876314, "seed_ice_fraction": 0.0, "water_pixels": 1756, "water_km2": 0.124, "radar_contrast_db": -7.46}
+{"pair": "S2A_44RQT_20211209_1_L2A__S1A_IW_GRDH_1SDV_20211210T002736_20211210T002801_040939_04DCA7_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20211204_0_L2A__S1A_IW_GRDH_1SDV_20211202T123039_20211202T123104_040830_04D8E4_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20211204_1_L2A__S1A_IW_GRDH_1SDV_20211202T123039_20211202T123104_040830_04D8E4_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20211216_0_L2A__S1A_IW_GRDH_1SDV_20211214T123039_20211214T123104_041005_04DEEE_rtc", "status": "skipped_ok"}
+{"pair": "S2A_44RQS_20200525_0_L2A__S1A_IW_GRDH_1SDV_20200525T002725_20200525T002750_032714_03CA18_rtc", "status": "ok", "s2_date": "2020-05-25", "s1_datetime": "2020-05-25T00:27:37.859237Z", "gap_days": 0, "orbit": "des92", "s2_cloud": 0.3036538, "seed_ice_fraction": 0.0, "water_pixels": 4668, "water_km2": 0.3857, "radar_contrast_db": -9.56}
+{"pair": "S2A_44RQS_20211216_1_L2A__S1A_IW_GRDH_1SDV_20211214T123039_20211214T123104_041005_04DEEE_rtc", "status": "skipped_ok"}
+{"pair": "S2B_44RQT_20211201_0_L2A__S1A_IW_GRDH_1SDV_20211202T123039_20211202T123104_040830_04D8E4_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20211201_0_L2A__S1A_IW_GRDH_1SDV_20211128T002737_20211128T002802_040764_04D697_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20200831_1_L2A__S1A_IW_GRDH_1SDV_20200829T002731_20200829T002756_034114_03F626_rtc", "status": "ok", "s2_date": "2020-08-31", "s1_datetime": "2020-08-29T00:27:43.552717Z", "gap_days": 2, "orbit": "des92", "s2_cloud": 0.29714617, "seed_ice_fraction": 0.0, "water_pixels": 14545, "water_km2": 0.5997, "radar_contrast_db": -2.45}
+{"pair": "S2B_44RQS_20200831_1_L2A__S1A_IW_GRDH_1SDV_20200902T123033_20200902T123058_034180_03F87C_rtc", "status": "ok", "s2_date": "2020-08-31", "s1_datetime": "2020-09-02T12:30:46.423234Z", "gap_days": 2, "orbit": "asc158", "s2_cloud": 0.29714617, "seed_ice_fraction": 0.0, "water_pixels": 14545, "water_km2": 0.5997, "radar_contrast_db": -1.03}
+{"pair": "S2B_44RQT_20211201_1_L2A__S1A_IW_GRDH_1SDV_20211202T123039_20211202T123104_040830_04D8E4_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20211201_1_L2A__S1A_IW_GRDH_1SDV_20211128T002737_20211128T002802_040764_04D697_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20211129_1_L2A__S1A_IW_GRDH_1SDV_20211128T002737_20211128T002802_040764_04D697_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20211129_1_L2A__S1A_IW_GRDH_1SDV_20211202T123039_20211202T123104_040830_04D8E4_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20211126_1_L2A__S1A_IW_GRDH_1SDV_20211128T002737_20211128T002802_040764_04D697_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20211219_1_L2A__S1A_IW_GRDH_1SDV_20211222T002736_20211222T002801_041114_04E284_rtc", "status": "skipped_ok"}
+{"pair": "S2B_44RQT_20211121_1_L2A__S1A_IW_GRDH_1SDV_20211120T123040_20211120T123105_040655_04D2C9_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20211119_0_L2A__S1A_IW_GRDH_1SDV_20211120T123040_20211120T123105_040655_04D2C9_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20211119_0_L2A__S1A_IW_GRDH_1SDV_20211116T002737_20211116T002802_040589_04D094_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20211209_1_L2A__S1A_IW_GRDH_1SDV_20211210T002736_20211210T002801_040939_04DCA7_rtc", "status": "skipped_ok"}
+{"pair": "S2B_44RQS_20211211_1_L2A__S1A_IW_GRDH_1SDV_20211210T002736_20211210T002801_040939_04DCA7_rtc", "status": "skipped_ok"}
+{"pair": "S2B_44RQS_20211211_1_L2A__S1A_IW_GRDH_1SDV_20211214T123039_20211214T123104_041005_04DEEE_rtc", "status": "skipped_ok"}
+{"pair": "S2A_44RQT_20211119_1_L2A__S1A_IW_GRDH_1SDV_20211120T123040_20211120T123105_040655_04D2C9_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20211119_1_L2A__S1A_IW_GRDH_1SDV_20211116T002737_20211116T002802_040589_04D094_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20211116_1_L2A__S1A_IW_GRDH_1SDV_20211116T002737_20211116T002802_040589_04D094_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20211204_1_L2A__S1A_IW_GRDH_1SDV_20211202T123039_20211202T123104_040830_04D8E4_rtc", "status": "skipped_ok"}
+{"pair": "S2B_44RQS_20211201_0_L2A__S1A_IW_GRDH_1SDV_20211202T123039_20211202T123104_040830_04D8E4_rtc", "status": "ok", "s2_date": "2021-12-01", "s1_datetime": "2021-12-02T12:30:52.255530Z", "gap_days": 1, "orbit": "asc158", "s2_cloud": 0.25116057999999997, "seed_ice_fraction": 0.0, "water_pixels": 23323, "water_km2": 0.0739, "radar_contrast_db": -1.16}
+{"pair": "S2B_44RQS_20211201_0_L2A__S1A_IW_GRDH_1SDV_20211128T002737_20211128T002802_040764_04D697_rtc", "status": "ok", "s2_date": "2021-12-01", "s1_datetime": "2021-11-28T00:27:49.759238Z", "gap_days": 3, "orbit": "des92", "s2_cloud": 0.25116057999999997, "seed_ice_fraction": 0.0, "water_pixels": 23323, "water_km2": 0.0739, "radar_contrast_db": -1.41}
+{"pair": "S2B_44RQT_20211114_1_L2A__S1A_IW_GRDH_1SDV_20211116T002737_20211116T002802_040589_04D094_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20211121_0_L2A__S1A_IW_GRDH_1SDV_20211120T123040_20211120T123105_040655_04D2C9_rtc", "status": "ok", "s2_date": "2021-11-21", "s1_datetime": "2021-11-20T12:30:52.848961Z", "gap_days": 1, "orbit": "asc158", "s2_cloud": 0.21847698000000002, "seed_ice_fraction": 0.0, "water_pixels": 15715, "water_km2": 0.389, "radar_contrast_db": -2.4}
+{"pair": "S2A_44RQS_20211129_1_L2A__S1A_IW_GRDH_1SDV_20211128T002737_20211128T002802_040764_04D697_rtc", "status": "ok", "s2_date": "2021-11-29", "s1_datetime": "2021-11-28T00:27:49.759238Z", "gap_days": 1, "orbit": "des92", "s2_cloud": 0.00102341, "seed_ice_fraction": 0.0, "water_pixels": 38796, "water_km2": 0.3356, "radar_contrast_db": -1.75}
+{"pair": "S2A_44RQS_20211129_1_L2A__S1A_IW_GRDH_1SDV_20211202T123039_20211202T123104_040830_04D8E4_rtc", "status": "ok", "s2_date": "2021-11-29", "s1_datetime": "2021-12-02T12:30:52.255530Z", "gap_days": 3, "orbit": "asc158", "s2_cloud": 0.00102341, "seed_ice_fraction": 0.0, "water_pixels": 38796, "water_km2": 0.3356, "radar_contrast_db": 0.09}
+{"pair": "S2A_44RQS_20211129_0_L2A__S1A_IW_GRDH_1SDV_20211128T002737_20211128T002802_040764_04D697_rtc", "status": "ok", "s2_date": "2021-11-29", "s1_datetime": "2021-11-28T00:27:49.759238Z", "gap_days": 1, "orbit": "des92", "s2_cloud": 0.25142557, "seed_ice_fraction": 0.0, "water_pixels": 51054, "water_km2": 0.5514, "radar_contrast_db": -1.43}
+{"pair": "S2A_44RQS_20211129_0_L2A__S1A_IW_GRDH_1SDV_20211202T123039_20211202T123104_040830_04D8E4_rtc", "status": "ok", "s2_date": "2021-11-29", "s1_datetime": "2021-12-02T12:30:52.255530Z", "gap_days": 3, "orbit": "asc158", "s2_cloud": 0.25142557, "seed_ice_fraction": 0.0, "water_pixels": 51054, "water_km2": 0.5514, "radar_contrast_db": -1.1}
+{"pair": "S2B_44RQT_20211111_1_L2A__S1A_IW_GRDH_1SDV_20211108T123040_20211108T123105_040480_04CCC7_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20211121_1_L2A__S1A_IW_GRDH_1SDV_20211120T123040_20211120T123105_040655_04D2C9_rtc", "status": "ok", "s2_date": "2021-11-21", "s1_datetime": "2021-11-20T12:30:52.848961Z", "gap_days": 1, "orbit": "asc158", "s2_cloud": 0.043600589999999995, "seed_ice_fraction": 0.0, "water_pixels": 6094, "water_km2": 0.1006, "radar_contrast_db": 0.92}
+{"pair": "S2A_44RQT_20211106_1_L2A__S1A_IW_GRDH_1SDV_20211104T002737_20211104T002802_040414_04CA78_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20211106_1_L2A__S1A_IW_GRDH_1SDV_20211108T123040_20211108T123105_040480_04CCC7_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20211114_1_L2A__S1A_IW_GRDH_1SDV_20211116T002737_20211116T002802_040589_04D094_rtc", "status": "ok", "s2_date": "2021-11-14", "s1_datetime": "2021-11-16T00:27:50.230040Z", "gap_days": 2, "orbit": "des92", "s2_cloud": 0.02656955, "seed_ice_fraction": 0.0, "water_pixels": 22567, "water_km2": 0.401, "radar_contrast_db": -2.93}
+{"pair": "S2B_44RQS_20211114_0_L2A__S1A_IW_GRDH_1SDV_20211116T002737_20211116T002802_040589_04D094_rtc", "status": "ok", "s2_date": "2021-11-14", "s1_datetime": "2021-11-16T00:27:50.230040Z", "gap_days": 2, "orbit": "des92", "s2_cloud": 0.25723556, "seed_ice_fraction": 0.0, "water_pixels": 32157, "water_km2": 0.5437, "radar_contrast_db": -1.87}
+{"pair": "S2B_44RQS_20211201_1_L2A__S1A_IW_GRDH_1SDV_20211202T123039_20211202T123104_040830_04D8E4_rtc", "status": "ok", "s2_date": "2021-12-01", "s1_datetime": "2021-12-02T12:30:52.255530Z", "gap_days": 1, "orbit": "asc158", "s2_cloud": 0.21129321999999998, "seed_ice_fraction": 0.0, "water_pixels": 15471, "water_km2": 0.054, "radar_contrast_db": -0.46}
+{"pair": "S2B_44RQS_20211201_1_L2A__S1A_IW_GRDH_1SDV_20211128T002737_20211128T002802_040764_04D697_rtc", "status": "ok", "s2_date": "2021-12-01", "s1_datetime": "2021-11-28T00:27:49.759238Z", "gap_days": 3, "orbit": "des92", "s2_cloud": 0.21129321999999998, "seed_ice_fraction": 0.0, "water_pixels": 15471, "water_km2": 0.054, "radar_contrast_db": -1.77}
+{"pair": "S2A_44RQS_20211116_0_L2A__S1A_IW_GRDH_1SDV_20211116T002737_20211116T002802_040589_04D094_rtc", "status": "ok", "s2_date": "2021-11-16", "s1_datetime": "2021-11-16T00:27:50.230040Z", "gap_days": 0, "orbit": "des92", "s2_cloud": 0.2366165, "seed_ice_fraction": 0.0, "water_pixels": 31843, "water_km2": 0.5171, "radar_contrast_db": -1.59}
+{"pair": "S2B_44RQT_20211104_1_L2A__S1A_IW_GRDH_1SDV_20211104T002737_20211104T002802_040414_04CA78_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20211101_2_L2A__S1A_IW_GRDH_1SDV_20211104T002737_20211104T002802_040414_04CA78_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20211106_1_L2A__S1A_IW_GRDH_1SDV_20211104T002737_20211104T002802_040414_04CA78_rtc", "status": "ok", "s2_date": "2021-11-06", "s1_datetime": "2021-11-04T00:27:50.276106Z", "gap_days": 2, "orbit": "des92", "s2_cloud": 0.08156791000000001, "seed_ice_fraction": 0.0, "water_pixels": 10712, "water_km2": 0.118, "radar_contrast_db": -2.42}
+{"pair": "S2A_44RQS_20211106_1_L2A__S1A_IW_GRDH_1SDV_20211108T123040_20211108T123105_040480_04CCC7_rtc", "status": "ok", "s2_date": "2021-11-06", "s1_datetime": "2021-11-08T12:30:52.979971Z", "gap_days": 2, "orbit": "asc158", "s2_cloud": 0.08156791000000001, "seed_ice_fraction": 0.0, "water_pixels": 10712, "water_km2": 0.118, "radar_contrast_db": 0.09}
+{"pair": "S2B_44RQS_20211111_1_L2A__S1A_IW_GRDH_1SDV_20211108T123040_20211108T123105_040480_04CCC7_rtc", "status": "ok", "s2_date": "2021-11-11", "s1_datetime": "2021-11-08T12:30:52.979971Z", "gap_days": 3, "orbit": "asc158", "s2_cloud": 0.00029124, "seed_ice_fraction": 0.0, "water_pixels": 18696, "water_km2": 0.324, "radar_contrast_db": 0.0}
+{"pair": "S2A_44RQS_20211116_1_L2A__S1A_IW_GRDH_1SDV_20211116T002737_20211116T002802_040589_04D094_rtc", "status": "ok", "s2_date": "2021-11-16", "s1_datetime": "2021-11-16T00:27:50.230040Z", "gap_days": 0, "orbit": "des92", "s2_cloud": 0.02622745, "seed_ice_fraction": 0.0, "water_pixels": 21476, "water_km2": 0.1718, "radar_contrast_db": -1.95}
+{"pair": "S2A_44RQT_20211030_1_L2A__S1A_IW_GRDH_1SDV_20211027T123040_20211027T123105_040305_04C6AC_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20211111_0_L2A__S1A_IW_GRDH_1SDV_20211108T123040_20211108T123105_040480_04CCC7_rtc", "status": "ok", "s2_date": "2021-11-11", "s1_datetime": "2021-11-08T12:30:52.979971Z", "gap_days": 3, "orbit": "asc158", "s2_cloud": 0.17280942, "seed_ice_fraction": 0.0, "water_pixels": 28310, "water_km2": 0.5179, "radar_contrast_db": -1.52}
+{"pair": "S2A_44RQS_20211106_0_L2A__S1A_IW_GRDH_1SDV_20211104T002737_20211104T002802_040414_04CA78_rtc", "status": "ok", "s2_date": "2021-11-06", "s1_datetime": "2021-11-04T00:27:50.276106Z", "gap_days": 2, "orbit": "des92", "s2_cloud": 0.27853788, "seed_ice_fraction": 0.0, "water_pixels": 16880, "water_km2": 0.4784, "radar_contrast_db": -2.54}
+{"pair": "S2A_44RQS_20211106_0_L2A__S1A_IW_GRDH_1SDV_20211108T123040_20211108T123105_040480_04CCC7_rtc", "status": "ok", "s2_date": "2021-11-06", "s1_datetime": "2021-11-08T12:30:52.979971Z", "gap_days": 2, "orbit": "asc158", "s2_cloud": 0.27853788, "seed_ice_fraction": 0.0, "water_pixels": 16880, "water_km2": 0.4784, "radar_contrast_db": -3.28}
+{"pair": "S2A_44RQT_20211027_1_L2A__S1A_IW_GRDH_1SDV_20211027T123040_20211027T123105_040305_04C6AC_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20211104_1_L2A__S1A_IW_GRDH_1SDV_20211104T002737_20211104T002802_040414_04CA78_rtc", "status": "ok", "s2_date": "2021-11-04", "s1_datetime": "2021-11-04T00:27:50.276106Z", "gap_days": 0, "orbit": "des92", "s2_cloud": 0.03135999, "seed_ice_fraction": 0.0, "water_pixels": 13931, "water_km2": 0.4047, "radar_contrast_db": -5.08}
+{"pair": "S2B_44RQS_20211101_1_L2A__S1A_IW_GRDH_1SDV_20211104T002737_20211104T002802_040414_04CA78_rtc", "status": "ok", "s2_date": "2021-11-01", "s1_datetime": "2021-11-04T00:27:50.276106Z", "gap_days": 3, "orbit": "des92", "s2_cloud": 0.25770298, "seed_ice_fraction": 0.0, "water_pixels": 10084, "water_km2": 0.0102, "radar_contrast_db": -2.2}
+{"pair": "S2B_44RQT_20211025_1_L2A__S1A_IW_GRDH_1SDV_20211023T002738_20211023T002803_040239_04C461_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20211025_1_L2A__S1A_IW_GRDH_1SDV_20211027T123040_20211027T123105_040305_04C6AC_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20211022_1_L2A__S1A_IW_GRDH_1SDV_20211023T002738_20211023T002803_040239_04C461_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20211020_0_L2A__S1A_IW_GRDH_1SDV_20211023T002738_20211023T002803_040239_04C461_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20211104_0_L2A__S1A_IW_GRDH_1SDV_20211104T002737_20211104T002802_040414_04CA78_rtc", "status": "ok", "s2_date": "2021-11-04", "s1_datetime": "2021-11-04T00:27:50.276106Z", "gap_days": 0, "orbit": "des92", "s2_cloud": 0.26250949, "seed_ice_fraction": 0.0, "water_pixels": 18796, "water_km2": 0.5027, "radar_contrast_db": -2.91}
+{"pair": "S2A_44RQT_20211017_1_L2A__S1A_IW_GRDH_1SDV_20211015T123040_20211015T123105_040130_04C08F_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20211020_1_L2A__S1A_IW_GRDH_1SDV_20211023T002738_20211023T002803_040239_04C461_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20211030_0_L2A__S1A_IW_GRDH_1SDV_20211027T123040_20211027T123105_040305_04C6AC_rtc", "status": "ok", "s2_date": "2021-10-30", "s1_datetime": "2021-10-27T12:30:53.232560Z", "gap_days": 3, "orbit": "asc158", "s2_cloud": 0.27969284, "seed_ice_fraction": 0.0, "water_pixels": 14145, "water_km2": 0.4769, "radar_contrast_db": -3.02}
+{"pair": "S2A_44RQT_20211017_0_L2A__S1A_IW_GRDH_1SDV_20211015T123040_20211015T123105_040130_04C08F_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20211015_1_L2A__S1A_IW_GRDH_1SDV_20211015T123040_20211015T123105_040130_04C08F_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20211101_0_L2A__S1A_IW_GRDH_1SDV_20211104T002737_20211104T002802_040414_04CA78_rtc", "status": "ok", "s2_date": "2021-11-01", "s1_datetime": "2021-11-04T00:27:50.276106Z", "gap_days": 3, "orbit": "des92", "s2_cloud": 0.38295509000000005, "seed_ice_fraction": 0.0, "water_pixels": 13701, "water_km2": 0.1275, "radar_contrast_db": -1.27}
+{"pair": "S2A_44RQS_20211030_1_L2A__S1A_IW_GRDH_1SDV_20211027T123040_20211027T123105_040305_04C6AC_rtc", "status": "ok", "s2_date": "2021-10-30", "s1_datetime": "2021-10-27T12:30:53.232560Z", "gap_days": 3, "orbit": "asc158", "s2_cloud": 0.05043722, "seed_ice_fraction": 0.0, "water_pixels": 11674, "water_km2": 0.3708, "radar_contrast_db": -1.94}
+{"pair": "S2B_44RQS_20211012_0_L2A__S1A_IW_GRDH_1SDV_20211011T002737_20211011T002802_040064_04BE46_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20211012_0_L2A__S1A_IW_GRDH_1SDV_20211015T123040_20211015T123105_040130_04C08F_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20211012_0_L2A__S1A_IW_GRDH_1SDV_20211011T002737_20211011T002802_040064_04BE46_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20211012_0_L2A__S1A_IW_GRDH_1SDV_20211015T123040_20211015T123105_040130_04C08F_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20211012_1_L2A__S1A_IW_GRDH_1SDV_20211011T002737_20211011T002802_040064_04BE46_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20211012_1_L2A__S1A_IW_GRDH_1SDV_20211015T123040_20211015T123105_040130_04C08F_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20211012_1_L2A__S1A_IW_GRDH_1SDV_20211011T002737_20211011T002802_040064_04BE46_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20211012_1_L2A__S1A_IW_GRDH_1SDV_20211015T123040_20211015T123105_040130_04C08F_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20211027_0_L2A__S1A_IW_GRDH_1SDV_20211027T123040_20211027T123105_040305_04C6AC_rtc", "status": "ok", "s2_date": "2021-10-27", "s1_datetime": "2021-10-27T12:30:53.232560Z", "gap_days": 0, "orbit": "asc158", "s2_cloud": 0.22530566, "seed_ice_fraction": 0.0, "water_pixels": 10085, "water_km2": 0.2671, "radar_contrast_db": -2.32}
+{"pair": "S2A_44RQT_20211010_1_L2A__S1A_IW_GRDH_1SDV_20211011T002737_20211011T002802_040064_04BE46_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20211005_1_L2A__S1A_IW_GRDH_1SDV_20211003T123040_20211003T123105_039955_04BA84_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20211005_0_L2A__S1A_IW_GRDH_1SDV_20211003T123040_20211003T123105_039955_04BA84_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20210930_0_L2A__S1A_IW_GRDH_1SDV_20210929T002737_20210929T002802_039889_04B840_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20210930_0_L2A__S1A_IW_GRDH_1SDV_20211003T123040_20211003T123105_039955_04BA84_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20210930_1_L2A__S1A_IW_GRDH_1SDV_20210929T002737_20210929T002802_039889_04B840_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20210930_1_L2A__S1A_IW_GRDH_1SDV_20211003T123040_20211003T123105_039955_04BA84_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20210927_1_L2A__S1A_IW_GRDH_1SDV_20210929T002737_20210929T002802_039889_04B840_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20211025_0_L2A__S1A_IW_GRDH_1SDV_20211023T002738_20211023T002803_040239_04C461_rtc", "status": "ok", "s2_date": "2021-10-25", "s1_datetime": "2021-10-23T00:27:50.624072Z", "gap_days": 2, "orbit": "des92", "s2_cloud": 0.18928844, "seed_ice_fraction": 0.0, "water_pixels": 11433, "water_km2": 0.4205, "radar_contrast_db": -6.14}
+{"pair": "S2B_44RQS_20211025_0_L2A__S1A_IW_GRDH_1SDV_20211027T123040_20211027T123105_040305_04C6AC_rtc", "status": "ok", "s2_date": "2021-10-25", "s1_datetime": "2021-10-27T12:30:53.232560Z", "gap_days": 2, "orbit": "asc158", "s2_cloud": 0.18928844, "seed_ice_fraction": 0.0, "water_pixels": 11433, "water_km2": 0.4205, "radar_contrast_db": -3.84}
+{"pair": "S2A_44RQT_20210927_0_L2A__S1A_IW_GRDH_1SDV_20210929T002737_20210929T002802_039889_04B840_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20210922_0_L2A__S1A_IW_GRDH_1SDV_20210921T123040_20210921T123105_039780_04B477_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20210922_1_L2A__S1A_IW_GRDH_1SDV_20210921T123040_20210921T123105_039780_04B477_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20210920_0_L2A__S1A_IW_GRDH_1SDV_20210921T123040_20210921T123105_039780_04B477_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20210920_0_L2A__S1A_IW_GRDH_1SDV_20210917T002737_20210917T002802_039714_04B23D_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20210920_1_L2A__S1A_IW_GRDH_1SDV_20210921T123040_20210921T123105_039780_04B477_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20210920_1_L2A__S1A_IW_GRDH_1SDV_20210917T002737_20210917T002802_039714_04B23D_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20211025_1_L2A__S1A_IW_GRDH_1SDV_20211023T002738_20211023T002803_040239_04C461_rtc", "status": "ok", "s2_date": "2021-10-25", "s1_datetime": "2021-10-23T00:27:50.624072Z", "gap_days": 2, "orbit": "des92", "s2_cloud": 0.04438225, "seed_ice_fraction": 0.0, "water_pixels": 8426, "water_km2": 0.2962, "radar_contrast_db": -6.24}
+{"pair": "S2B_44RQS_20211025_1_L2A__S1A_IW_GRDH_1SDV_20211027T123040_20211027T123105_040305_04C6AC_rtc", "status": "ok", "s2_date": "2021-10-25", "s1_datetime": "2021-10-27T12:30:53.232560Z", "gap_days": 2, "orbit": "asc158", "s2_cloud": 0.04438225, "seed_ice_fraction": 0.0, "water_pixels": 8426, "water_km2": 0.2962, "radar_contrast_db": -2.55}
+{"pair": "S2B_44RQS_20211015_0_L2A__S1A_IW_GRDH_1SDV_20211015T123040_20211015T123105_040130_04C08F_rtc", "status": "ok", "s2_date": "2021-10-15", "s1_datetime": "2021-10-15T12:30:53.299749Z", "gap_days": 0, "orbit": "asc158", "s2_cloud": 0.15680894, "seed_ice_fraction": 0.0, "water_pixels": 18033, "water_km2": 0.4655, "radar_contrast_db": -1.39}
+{"pair": "S2A_44RQS_20211010_1_L2A__S1A_IW_GRDH_1SDV_20211011T002737_20211011T002802_040064_04BE46_rtc", "status": "ok", "s2_date": "2021-10-10", "s1_datetime": "2021-10-11T00:27:50.479896Z", "gap_days": 1, "orbit": "des92", "s2_cloud": 0.22029772, "seed_ice_fraction": 0.0, "water_pixels": 14869, "water_km2": 0.5911, "radar_contrast_db": -3.48}
+{"pair": "S2B_44RQS_20211015_1_L2A__S1A_IW_GRDH_1SDV_20211015T123040_20211015T123105_040130_04C08F_rtc", "status": "ok", "s2_date": "2021-10-15", "s1_datetime": "2021-10-15T12:30:53.299749Z", "gap_days": 0, "orbit": "asc158", "s2_cloud": 0.00923487, "seed_ice_fraction": 0.0, "water_pixels": 15883, "water_km2": 0.457, "radar_contrast_db": -1.27}
+{"pair": "S2B_44RQT_20210905_1_L2A__S1A_IW_GRDH_1SDV_20210905T002736_20210905T002801_039539_04AC43_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20210905_0_L2A__S1A_IW_GRDH_1SDV_20210905T002736_20210905T002801_039539_04AC43_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20211027_1_L2A__S1A_IW_GRDH_1SDV_20211027T123040_20211027T123105_040305_04C6AC_rtc", "status": "ok", "s2_date": "2021-10-27", "s1_datetime": "2021-10-27T12:30:53.232560Z", "gap_days": 0, "orbit": "asc158", "s2_cloud": 0.11210454, "seed_ice_fraction": 0.0, "water_pixels": 6568, "water_km2": 0.0, "radar_contrast_db": 0.63}
+{"pair": "S2B_44RQT_20210902_0_L2A__S1A_IW_GRDH_1SDV_20210905T002736_20210905T002801_039539_04AC43_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20210818_0_L2A__S1A_IW_GRDH_1SDV_20210816T123038_20210816T123103_039255_04A27B_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20210704_1_L2A__S1A_IW_GRDH_1SDV_20210707T002733_20210707T002758_038664_049005_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20210629_1_L2A__S1A_IW_GRDH_1SDV_20210629T123036_20210629T123101_038555_048CAF_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20210704_0_L2A__S1A_IW_GRDH_1SDV_20210707T002733_20210707T002758_038664_049005_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20210627_0_L2A__S1A_IW_GRDH_1SDV_20210625T002732_20210625T002757_038489_048ABF_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20210627_0_L2A__S1A_IW_GRDH_1SDV_20210629T123036_20210629T123101_038555_048CAF_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20210927_1_L2A__S1A_IW_GRDH_1SDV_20210929T002737_20210929T002802_039889_04B840_rtc", "status": "ok", "s2_date": "2021-09-27", "s1_datetime": "2021-09-29T00:27:50.352709Z", "gap_days": 2, "orbit": "des92", "s2_cloud": 0.29161432000000004, "seed_ice_fraction": 0.0, "water_pixels": 8595, "water_km2": 0.633, "radar_contrast_db": -4.94}
+{"pair": "S2B_44RQS_20210627_0_L2A__S1A_IW_GRDH_1SDV_20210625T002732_20210625T002757_038489_048ABF_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20210627_0_L2A__S1A_IW_GRDH_1SDV_20210629T123036_20210629T123101_038555_048CAF_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20210622_1_L2A__S1A_IW_GRDH_1SDV_20210625T002732_20210625T002757_038489_048ABF_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20210622_0_L2A__S1A_IW_GRDH_1SDV_20210625T002732_20210625T002757_038489_048ABF_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20210927_0_L2A__S1A_IW_GRDH_1SDV_20210929T002737_20210929T002802_039889_04B840_rtc", "status": "ok", "s2_date": "2021-09-27", "s1_datetime": "2021-09-29T00:27:50.352709Z", "gap_days": 2, "orbit": "des92", "s2_cloud": 0.25796281, "seed_ice_fraction": 0.0, "water_pixels": 9286, "water_km2": 0.6098, "radar_contrast_db": -3.93}
+{"pair": "S2B_44RQS_20210607_1_L2A__S1A_IW_GRDH_1SDV_20210605T123034_20210605T123059_038205_048241_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20210607_0_L2A__S1A_IW_GRDH_1SDV_20210605T123034_20210605T123059_038205_048241_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20210607_0_L2A__S1A_IW_GRDH_1SDV_20210605T123034_20210605T123059_038205_048241_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20210607_1_L2A__S1A_IW_GRDH_1SDV_20210605T123034_20210605T123059_038205_048241_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20211010_0_L2A__S1A_IW_GRDH_1SDV_20211011T002737_20211011T002802_040064_04BE46_rtc", "status": "ok", "s2_date": "2021-10-10", "s1_datetime": "2021-10-11T00:27:50.479896Z", "gap_days": 1, "orbit": "des92", "s2_cloud": 0.31049277, "seed_ice_fraction": 0.0, "water_pixels": 16640, "water_km2": 0.6032, "radar_contrast_db": -3.47}
+{"pair": "S2B_44RQT_20210604_1_L2A__S1A_IW_GRDH_1SDV_20210605T123034_20210605T123059_038205_048241_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20210604_1_L2A__S1A_IW_GRDH_1SDV_20210601T002731_20210601T002756_038139_048058_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20210604_0_L2A__S1A_IW_GRDH_1SDV_20210605T123034_20210605T123059_038205_048241_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20210604_0_L2A__S1A_IW_GRDH_1SDV_20210601T002731_20210601T002756_038139_048058_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20210602_0_L2A__S1A_IW_GRDH_1SDV_20210601T002731_20210601T002756_038139_048058_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20210602_0_L2A__S1A_IW_GRDH_1SDV_20210605T123034_20210605T123059_038205_048241_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20210602_2_L2A__S1A_IW_GRDH_1SDV_20210601T002731_20210601T002756_038139_048058_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20210602_2_L2A__S1A_IW_GRDH_1SDV_20210605T123034_20210605T123059_038205_048241_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20210602_1_L2A__S1A_IW_GRDH_1SDV_20210601T002731_20210601T002756_038139_048058_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20210602_1_L2A__S1A_IW_GRDH_1SDV_20210605T123034_20210605T123059_038205_048241_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20210530_1_L2A__S1A_IW_GRDH_1SDV_20210601T002731_20210601T002756_038139_048058_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20210530_0_L2A__S1A_IW_GRDH_1SDV_20210601T002731_20210601T002756_038139_048058_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20210530_0_L2A__S1A_IW_GRDH_1SDV_20210601T002731_20210601T002756_038139_048058_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20210912_0_L2A__S1A_IW_GRDH_1SDV_20210909T123040_20210909T123105_039605_04AE7F_rtc", "status": "ok", "s2_date": "2021-09-12", "s1_datetime": "2021-09-09T12:30:52.501968Z", "gap_days": 3, "orbit": "asc158", "s2_cloud": 0.23796365000000003, "seed_ice_fraction": 0.0, "water_pixels": 9606, "water_km2": 0.5788, "radar_contrast_db": -3.21}
+{"pair": "S2B_44RQT_20210525_2_L2A__S1A_IW_GRDH_1SDV_20210524T123033_20210524T123058_038030_047D0B_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20210530_1_L2A__S1A_IW_GRDH_1SDV_20210601T002731_20210601T002756_038139_048058_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20210525_1_L2A__S1A_IW_GRDH_1SDV_20210524T123033_20210524T123058_038030_047D0B_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20210920_0_L2A__S1A_IW_GRDH_1SDV_20210921T123040_20210921T123105_039780_04B477_rtc", "status": "ok", "s2_date": "2021-09-20", "s1_datetime": "2021-09-21T12:30:52.899681Z", "gap_days": 1, "orbit": "asc158", "s2_cloud": 0.38252227, "seed_ice_fraction": 0.0, "water_pixels": 12544, "water_km2": 0.6243, "radar_contrast_db": -3.47}
+{"pair": "S2A_44RQS_20210920_0_L2A__S1A_IW_GRDH_1SDV_20210917T002737_20210917T002802_039714_04B23D_rtc", "status": "ok", "s2_date": "2021-09-20", "s1_datetime": "2021-09-17T00:27:49.956119Z", "gap_days": 3, "orbit": "des92", "s2_cloud": 0.38252227, "seed_ice_fraction": 0.0, "water_pixels": 12544, "water_km2": 0.6243, "radar_contrast_db": -3.54}
+{"pair": "S2B_44RQS_20210905_0_L2A__S1A_IW_GRDH_1SDV_20210905T002736_20210905T002801_039539_04AC43_rtc", "status": "ok", "s2_date": "2021-09-05", "s1_datetime": "2021-09-05T00:27:49.472058Z", "gap_days": 0, "orbit": "des92", "s2_cloud": 0.32096434, "seed_ice_fraction": 0.0, "water_pixels": 18148, "water_km2": 0.5673, "radar_contrast_db": -1.47}
+{"pair": "S2A_44RQS_20210523_1_L2A__S1A_IW_GRDH_1SDV_20210524T123033_20210524T123058_038030_047D0B_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20210523_1_L2A__S1A_IW_GRDH_1SDV_20210520T002730_20210520T002755_037964_047B17_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20210523_0_L2A__S1A_IW_GRDH_1SDV_20210524T123033_20210524T123058_038030_047D0B_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20210523_0_L2A__S1A_IW_GRDH_1SDV_20210520T002730_20210520T002755_037964_047B17_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20210523_1_L2A__S1A_IW_GRDH_1SDV_20210524T123033_20210524T123058_038030_047D0B_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20210523_1_L2A__S1A_IW_GRDH_1SDV_20210520T002730_20210520T002755_037964_047B17_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20210523_0_L2A__S1A_IW_GRDH_1SDV_20210524T123033_20210524T123058_038030_047D0B_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20210523_0_L2A__S1A_IW_GRDH_1SDV_20210520T002730_20210520T002755_037964_047B17_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20210515_1_L2A__S1A_IW_GRDH_1SDV_20210512T123033_20210512T123058_037855_0477C4_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20210428_2_L2A__S1A_IW_GRDH_1SDV_20210426T002729_20210426T002754_037614_046FDA_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20210428_1_L2A__S1A_IW_GRDH_1SDV_20210426T002729_20210426T002754_037614_046FDA_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20210425_0_L2A__S1A_IW_GRDH_1SDV_20210426T002729_20210426T002754_037614_046FDA_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20210604_0_L2A__S1A_IW_GRDH_1SDV_20210605T123034_20210605T123059_038205_048241_rtc", "status": "ok", "s2_date": "2021-06-04", "s1_datetime": "2021-06-05T12:30:47.076656Z", "gap_days": 1, "orbit": "asc158", "s2_cloud": 0.2479838, "seed_ice_fraction": 0.0, "water_pixels": 4421, "water_km2": 0.3735, "radar_contrast_db": -6.17}
+{"pair": "S2B_44RQS_20210604_0_L2A__S1A_IW_GRDH_1SDV_20210601T002731_20210601T002756_038139_048058_rtc", "status": "ok", "s2_date": "2021-06-04", "s1_datetime": "2021-06-01T00:27:44.005456Z", "gap_days": 3, "orbit": "des92", "s2_cloud": 0.2479838, "seed_ice_fraction": 0.0, "water_pixels": 4421, "water_km2": 0.3735, "radar_contrast_db": -6.48}
+{"pair": "S2B_44RQS_20210428_0_L2A__S1A_IW_GRDH_1SDV_20210426T002729_20210426T002754_037614_046FDA_rtc", "status": "skipped_ok"}
+{"pair": "S2B_44RQS_20210428_2_L2A__S1A_IW_GRDH_1SDV_20210426T002729_20210426T002754_037614_046FDA_rtc", "status": "skipped_ok"}
+{"pair": "S2A_44RQS_20210423_0_L2A__S1A_IW_GRDH_1SDV_20210426T002729_20210426T002754_037614_046FDA_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20210425_1_L2A__S1A_IW_GRDH_1SDV_20210426T002729_20210426T002754_037614_046FDA_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20210423_1_L2A__S1A_IW_GRDH_1SDV_20210426T002729_20210426T002754_037614_046FDA_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20210912_1_L2A__S1A_IW_GRDH_1SDV_20210909T123040_20210909T123105_039605_04AE7F_rtc", "status": "ok", "s2_date": "2021-09-12", "s1_datetime": "2021-09-09T12:30:52.501968Z", "gap_days": 3, "orbit": "asc158", "s2_cloud": 0.28774044, "seed_ice_fraction": 0.0, "water_pixels": 8018, "water_km2": 0.5121, "radar_contrast_db": -4.82}
+{"pair": "S2B_44RQS_20210515_1_L2A__S1A_IW_GRDH_1SDV_20210512T123033_20210512T123058_037855_0477C4_rtc", "status": "ok", "s2_date": "2021-05-15", "s1_datetime": "2021-05-12T12:30:45.751287Z", "gap_days": 3, "orbit": "asc158", "s2_cloud": 0.27191168, "seed_ice_fraction": 0.0, "water_pixels": 1004, "water_km2": 0.0611, "radar_contrast_db": -10.69}
+{"pair": "S2A_44RQT_20210420_1_L2A__S1A_IW_GRDH_1SDV_20210418T123032_20210418T123057_037505_046C0B_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20210428_1_L2A__S1A_IW_GRDH_1SDV_20210426T002729_20210426T002754_037614_046FDA_rtc", "status": "skipped_ok"}
+{"pair": "S2B_44RQT_20210418_1_L2A__S1A_IW_GRDH_1SDV_20210418T123032_20210418T123057_037505_046C0B_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20210515_0_L2A__S1A_IW_GRDH_1SDV_20210512T123033_20210512T123058_037855_0477C4_rtc", "status": "ok", "s2_date": "2021-05-15", "s1_datetime": "2021-05-12T12:30:45.751287Z", "gap_days": 3, "orbit": "asc158", "s2_cloud": 0.33041284, "seed_ice_fraction": 0.0, "water_pixels": 2591, "water_km2": 0.2285, "radar_contrast_db": -9.92}
+{"pair": "S2B_44RQS_20210627_1_L2A__S1A_IW_GRDH_1SDV_20210625T002732_20210625T002757_038489_048ABF_rtc", "status": "ok", "s2_date": "2021-06-27", "s1_datetime": "2021-06-25T00:27:45.447375Z", "gap_days": 2, "orbit": "des92", "s2_cloud": 0.35874769, "seed_ice_fraction": 0.0, "water_pixels": 508, "water_km2": 0.0, "radar_contrast_db": 4.31}
+{"pair": "S2B_44RQS_20210627_1_L2A__S1A_IW_GRDH_1SDV_20210629T123036_20210629T123101_038555_048CAF_rtc", "status": "ok", "s2_date": "2021-06-27", "s1_datetime": "2021-06-29T12:30:48.613253Z", "gap_days": 2, "orbit": "asc158", "s2_cloud": 0.35874769, "seed_ice_fraction": 0.0, "water_pixels": 508, "water_km2": 0.0, "radar_contrast_db": -0.6}
+{"pair": "S2B_44RQS_20210425_1_L2A__S1A_IW_GRDH_1SDV_20210426T002729_20210426T002754_037614_046FDA_rtc", "status": "skipped_ok"}
+{"pair": "S2B_44RQT_20210415_2_L2A__S1A_IW_GRDH_1SDV_20210414T002729_20210414T002754_037439_0469D1_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20210415_2_L2A__S1A_IW_GRDH_1SDV_20210418T123032_20210418T123057_037505_046C0B_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20210423_1_L2A__S1A_IW_GRDH_1SDV_20210426T002729_20210426T002754_037614_046FDA_rtc", "status": "skipped_ok"}
+{"pair": "S2B_44RQT_20210415_1_L2A__S1A_IW_GRDH_1SDV_20210414T002729_20210414T002754_037439_0469D1_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20210415_1_L2A__S1A_IW_GRDH_1SDV_20210418T123032_20210418T123057_037505_046C0B_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20221216_0_L2A__S1A_IW_GRDH_1SDV_20221217T002745_20221217T002810_046364_058DB3_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20221214_0_L2A__S1A_IW_GRDH_1SDV_20221217T002745_20221217T002810_046364_058DB3_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20210604_1_L2A__S1A_IW_GRDH_1SDV_20210605T123034_20210605T123059_038205_048241_rtc", "status": "ok", "s2_date": "2021-06-04", "s1_datetime": "2021-06-05T12:30:47.076656Z", "gap_days": 1, "orbit": "asc158", "s2_cloud": 0.30921179, "seed_ice_fraction": 0.0, "water_pixels": 3885, "water_km2": 0.3769, "radar_contrast_db": -7.8}
+{"pair": "S2B_44RQS_20210604_1_L2A__S1A_IW_GRDH_1SDV_20210601T002731_20210601T002756_038139_048058_rtc", "status": "ok", "s2_date": "2021-06-04", "s1_datetime": "2021-06-01T00:27:44.005456Z", "gap_days": 3, "orbit": "des92", "s2_cloud": 0.30921179, "seed_ice_fraction": 0.0, "water_pixels": 3885, "water_km2": 0.3769, "radar_contrast_db": -8.21}
+{"pair": "S2A_44RQT_20221211_0_L2A__S1A_IW_GRDH_1SDV_20221209T123045_20221209T123110_046255_0589F6_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20210418_0_L2A__S1A_IW_GRDH_1SDV_20210418T123032_20210418T123057_037505_046C0B_rtc", "status": "skipped_ok"}
+{"pair": "S2B_44RQS_20210418_1_L2A__S1A_IW_GRDH_1SDV_20210418T123032_20210418T123057_037505_046C0B_rtc", "status": "skipped_ok"}
+{"pair": "S2B_44RQT_20221209_0_L2A__S1A_IW_GRDH_1SDV_20221209T123045_20221209T123110_046255_0589F6_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20210420_0_L2A__S1A_IW_GRDH_1SDV_20210418T123032_20210418T123057_037505_046C0B_rtc", "status": "skipped_ok"}
+{"pair": "S2B_44RQT_20221206_0_L2A__S1A_IW_GRDH_1SDV_20221205T002746_20221205T002811_046189_0587BB_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20221206_0_L2A__S1A_IW_GRDH_1SDV_20221209T123045_20221209T123110_046255_0589F6_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20210420_1_L2A__S1A_IW_GRDH_1SDV_20210418T123032_20210418T123057_037505_046C0B_rtc", "status": "skipped_ok"}
+{"pair": "S2A_44RQT_20221204_0_L2A__S1A_IW_GRDH_1SDV_20221205T002746_20221205T002811_046189_0587BB_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20221129_0_L2A__S1A_IW_GRDH_1SDV_20221127T123046_20221127T123111_046080_0583FB_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20221214_0_L2A__S1A_IW_GRDH_1SDV_20221217T002745_20221217T002810_046364_058DB3_rtc", "status": "ok", "s2_date": "2022-12-14", "s1_datetime": "2022-12-17T00:27:58.361015Z", "gap_days": 3, "orbit": "des92", "s2_cloud": 0.045746669999999996, "seed_ice_fraction": 0.049, "water_pixels": 57761, "water_km2": 0.4565, "radar_contrast_db": -0.86}
+{"pair": "S2B_44RQT_20221126_0_L2A__S1A_IW_GRDH_1SDV_20221127T123046_20221127T123111_046080_0583FB_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20221126_0_L2A__S1A_IW_GRDH_1SDV_20221123T002747_20221123T002812_046014_0581C6_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20221209_0_L2A__S1A_IW_GRDH_1SDV_20221209T123045_20221209T123110_046255_0589F6_rtc", "status": "skipped_ok"}
+{"pair": "S2A_44RQT_20221124_0_L2A__S1A_IW_GRDH_1SDV_20221123T002747_20221123T002812_046014_0581C6_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20221124_0_L2A__S1A_IW_GRDH_1SDV_20221127T123046_20221127T123111_046080_0583FB_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20221121_0_L2A__S1A_IW_GRDH_1SDV_20221123T002747_20221123T002812_046014_0581C6_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20221216_0_L2A__S1A_IW_GRDH_1SDV_20221217T002745_20221217T002810_046364_058DB3_rtc", "status": "ok", "s2_date": "2022-12-16", "s1_datetime": "2022-12-17T00:27:58.361015Z", "gap_days": 1, "orbit": "des92", "s2_cloud": 0.03385473, "seed_ice_fraction": 0.021, "water_pixels": 71352, "water_km2": 0.886, "radar_contrast_db": -0.73}
+{"pair": "S2A_44RQT_20221121_0_L2A__S1A_IW_GRDH_1SDV_20221123T002747_20221123T002812_046014_0581C6_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20221116_0_L2A__S1A_IW_GRDH_1SDV_20221115T123046_20221115T123111_045905_057E11_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20221114_0_L2A__S1A_IW_GRDH_1SDV_20221115T123046_20221115T123111_045905_057E11_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20221114_0_L2A__S1A_IW_GRDH_1SDV_20221111T002747_20221111T002812_045839_057BD9_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20221206_0_L2A__S1A_IW_GRDH_1SDV_20221205T002746_20221205T002811_046189_0587BB_rtc", "status": "ok", "s2_date": "2022-12-06", "s1_datetime": "2022-12-05T00:27:59.188513Z", "gap_days": 1, "orbit": "des92", "s2_cloud": 0.01928449, "seed_ice_fraction": 0.023, "water_pixels": 45179, "water_km2": 0.5889, "radar_contrast_db": -1.18}
+{"pair": "S2B_44RQS_20221206_0_L2A__S1A_IW_GRDH_1SDV_20221209T123045_20221209T123110_046255_0589F6_rtc", "status": "ok", "s2_date": "2022-12-06", "s1_datetime": "2022-12-09T12:30:58.080036Z", "gap_days": 3, "orbit": "asc158", "s2_cloud": 0.01928449, "seed_ice_fraction": 0.023, "water_pixels": 45179, "water_km2": 0.5889, "radar_contrast_db": -0.54}
+{"pair": "S2B_44RQS_20221129_0_L2A__S1A_IW_GRDH_1SDV_20221127T123046_20221127T123111_046080_0583FB_rtc", "status": "skipped_ok"}
+{"pair": "S2A_44RQT_20221111_0_L2A__S1A_IW_GRDH_1SDV_20221111T002747_20221111T002812_045839_057BD9_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20221109_0_L2A__S1A_IW_GRDH_1SDV_20221111T002747_20221111T002812_045839_057BD9_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20221211_0_L2A__S1A_IW_GRDH_1SDV_20221209T123045_20221209T123110_046255_0589F6_rtc", "status": "ok", "s2_date": "2022-12-11", "s1_datetime": "2022-12-09T12:30:58.080036Z", "gap_days": 2, "orbit": "asc158", "s2_cloud": 0.02432311, "seed_ice_fraction": 0.045, "water_pixels": 47499, "water_km2": 0.4508, "radar_contrast_db": -0.23}
+{"pair": "S2B_44RQS_20210415_2_L2A__S1A_IW_GRDH_1SDV_20210414T002729_20210414T002754_037439_0469D1_rtc", "status": "ok", "s2_date": "2021-04-15", "s1_datetime": "2021-04-14T00:27:41.610580Z", "gap_days": 1, "orbit": "des92", "s2_cloud": 0.38394779, "seed_ice_fraction": 0.0, "water_pixels": 4922, "water_km2": 0.4121, "radar_contrast_db": -6.08}
+{"pair": "S2B_44RQS_20210415_2_L2A__S1A_IW_GRDH_1SDV_20210418T123032_20210418T123057_037505_046C0B_rtc", "status": "ok", "s2_date": "2021-04-15", "s1_datetime": "2021-04-18T12:30:44.675867Z", "gap_days": 3, "orbit": "asc158", "s2_cloud": 0.38394779, "seed_ice_fraction": 0.0, "water_pixels": 4922, "water_km2": 0.4121, "radar_contrast_db": -6.23}
+{"pair": "S2B_44RQT_20221106_0_L2A__S1A_IW_GRDH_1SDV_20221103T123046_20221103T123111_045730_057821_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20221104_0_L2A__S1A_IW_GRDH_1SDV_20221103T123046_20221103T123111_045730_057821_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20221116_0_L2A__S1A_IW_GRDH_1SDV_20221115T123046_20221115T123111_045905_057E11_rtc", "status": "ok", "s2_date": "2022-11-16", "s1_datetime": "2022-11-15T12:30:58.694293Z", "gap_days": 1, "orbit": "asc158", "s2_cloud": 0.22934767999999997, "seed_ice_fraction": 0.0, "water_pixels": 18303, "water_km2": 0.023, "radar_contrast_db": -0.2}
+{"pair": "S2B_44RQS_20210415_5_L2A__S1A_IW_GRDH_1SDV_20210414T002729_20210414T002754_037439_0469D1_rtc", "status": "ok", "s2_date": "2021-04-15", "s1_datetime": "2021-04-14T00:27:41.610580Z", "gap_days": 1, "orbit": "des92", "s2_cloud": 0.38370302, "seed_ice_fraction": 0.0, "water_pixels": 4894, "water_km2": 0.4095, "radar_contrast_db": -6.04}
+{"pair": "S2B_44RQS_20210415_5_L2A__S1A_IW_GRDH_1SDV_20210418T123032_20210418T123057_037505_046C0B_rtc", "status": "ok", "s2_date": "2021-04-15", "s1_datetime": "2021-04-18T12:30:44.675867Z", "gap_days": 3, "orbit": "asc158", "s2_cloud": 0.38370302, "seed_ice_fraction": 0.0, "water_pixels": 4894, "water_km2": 0.4095, "radar_contrast_db": -6.27}
+{"pair": "S2A_44RQT_20221101_0_L2A__S1A_IW_GRDH_1SDV_20221030T002747_20221030T002812_045664_0575F3_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20221101_0_L2A__S1A_IW_GRDH_1SDV_20221103T123046_20221103T123111_045730_057821_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20221030_0_L2A__S1A_IW_GRDH_1SDV_20221030T002747_20221030T002812_045664_0575F3_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20221124_0_L2A__S1A_IW_GRDH_1SDV_20221123T002747_20221123T002812_046014_0581C6_rtc", "status": "ok", "s2_date": "2022-11-24", "s1_datetime": "2022-11-23T00:27:59.962505Z", "gap_days": 1, "orbit": "des92", "s2_cloud": 0.0386749, "seed_ice_fraction": 0.0, "water_pixels": 26925, "water_km2": 0.2307, "radar_contrast_db": -1.39}
+{"pair": "S2A_44RQS_20221124_0_L2A__S1A_IW_GRDH_1SDV_20221127T123046_20221127T123111_046080_0583FB_rtc", "status": "ok", "s2_date": "2022-11-24", "s1_datetime": "2022-11-27T12:30:58.695431Z", "gap_days": 3, "orbit": "asc158", "s2_cloud": 0.0386749, "seed_ice_fraction": 0.0, "water_pixels": 26925, "water_km2": 0.2307, "radar_contrast_db": -0.18}
+{"pair": "S2B_44RQS_20221027_0_L2A__S1A_IW_GRDH_1SDV_20221030T002747_20221030T002812_045664_0575F3_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20221027_0_L2A__S1A_IW_GRDH_1SDV_20221030T002747_20221030T002812_045664_0575F3_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20221106_0_L2A__S1A_IW_GRDH_1SDV_20221103T123046_20221103T123111_045730_057821_rtc", "status": "ok", "s2_date": "2022-11-06", "s1_datetime": "2022-11-03T12:30:58.801222Z", "gap_days": 3, "orbit": "asc158", "s2_cloud": 0.00781478, "seed_ice_fraction": 0.0, "water_pixels": 9072, "water_km2": 0.1912, "radar_contrast_db": -0.9}
+{"pair": "S2A_44RQT_20221025_0_L2A__S1A_IW_GRDH_1SDV_20221022T123046_20221022T123111_045555_05723D_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20221022_0_L2A__S1A_IW_GRDH_1SDV_20221022T123046_20221022T123111_045555_05723D_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20221022_0_L2A__S1A_IW_GRDH_1SDV_20221022T123046_20221022T123111_045555_05723D_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20221020_0_L2A__S1A_IW_GRDH_1SDV_20221022T123046_20221022T123111_045555_05723D_rtc", "status": "skipped_cloudy"}
+{"pair": "?", "status": "error", "error": "cannot open s3://sentinel-s2-l2a/tiles/44/R/QS/2022/10/12/0/R20m/SCL.jp2: '/vsis3/sentinel-s2-l2a/tiles/44/R/QS/2022/10/12/0/R20m/SCL.jp2' does not ex"}
+{"pair": "S2B_44RQT_20221020_0_L2A__S1A_IW_GRDH_1SDV_20221022T123046_20221022T123111_045555_05723D_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20221012_1_L2A__S1A_IW_GRDH_1SDV_20221010T123046_20221010T123111_045380_056D10_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20221109_0_L2A__S1A_IW_GRDH_1SDV_20221111T002747_20221111T002812_045839_057BD9_rtc", "status": "ok", "s2_date": "2022-11-09", "s1_datetime": "2022-11-11T00:27:59.601258Z", "gap_days": 2, "orbit": "des92", "s2_cloud": 0.16347363999999998, "seed_ice_fraction": 0.0, "water_pixels": 11607, "water_km2": 0.0896, "radar_contrast_db": -1.31}
+{"pair": "S2B_44RQT_20220930_0_L2A__S1A_IW_GRDH_1SDV_20220928T123046_20220928T123111_045205_05672F_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20221204_0_L2A__S1A_IW_GRDH_1SDV_20221205T002746_20221205T002811_046189_0587BB_rtc", "status": "ok", "s2_date": "2022-12-04", "s1_datetime": "2022-12-05T00:27:59.188513Z", "gap_days": 1, "orbit": "des92", "s2_cloud": 0.00067979, "seed_ice_fraction": 0.044, "water_pixels": 42720, "water_km2": 0.4586, "radar_contrast_db": -1.07}
+{"pair": "S2A_44RQT_20220922_0_L2A__S1A_IW_GRDH_1SDV_20220924T002746_20220924T002811_045139_056501_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20220927_0_L2A__S1A_IW_GRDH_1SDV_20220928T123046_20220928T123111_045205_05672F_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20220927_0_L2A__S1A_IW_GRDH_1SDV_20220924T002746_20220924T002811_045139_056501_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20221126_0_L2A__S1A_IW_GRDH_1SDV_20221127T123046_20221127T123111_046080_0583FB_rtc", "status": "ok", "s2_date": "2022-11-26", "s1_datetime": "2022-11-27T12:30:58.695431Z", "gap_days": 1, "orbit": "asc158", "s2_cloud": 0.00837718, "seed_ice_fraction": 0.004, "water_pixels": 30840, "water_km2": 0.4857, "radar_contrast_db": -0.67}
+{"pair": "S2B_44RQS_20221126_0_L2A__S1A_IW_GRDH_1SDV_20221123T002747_20221123T002812_046014_0581C6_rtc", "status": "ok", "s2_date": "2022-11-26", "s1_datetime": "2022-11-23T00:27:59.962505Z", "gap_days": 3, "orbit": "des92", "s2_cloud": 0.00837718, "seed_ice_fraction": 0.004, "water_pixels": 30840, "water_km2": 0.4857, "radar_contrast_db": -1.62}
+{"pair": "S2B_44RQT_20220907_0_L2A__S1A_IW_GRDH_1SDV_20220904T123046_20220904T123111_044855_055B71_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20220823_0_L2A__S1A_IW_GRDH_1SDV_20220823T123045_20220823T123110_044680_055589_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20220813_0_L2A__S1A_IW_GRDH_1SDV_20220811T123044_20220811T123109_044505_054F9A_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20220816_0_L2A__S1A_IW_GRDH_1SDV_20220819T002746_20220819T002811_044614_055352_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20220813_0_L2A__S1A_IW_GRDH_1SDV_20220811T123044_20220811T123109_044505_054F9A_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20220717_0_L2A__S1A_IW_GRDH_1SDV_20220718T123043_20220718T123108_044155_054537_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20220717_0_L2A__S1A_IW_GRDH_1SDV_20220714T002740_20220714T002805_044089_054346_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20220704_0_L2A__S1A_IW_GRDH_1SDV_20220702T002739_20220702T002804_043914_053E0E_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20220704_0_L2A__S1A_IW_GRDH_1SDV_20220706T123042_20220706T123107_043980_053FF3_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20220624_0_L2A__S1A_IW_GRDH_1SDV_20220624T123041_20220624T123106_043805_053AC3_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20220617_0_L2A__S1A_IW_GRDH_1SDV_20220620T002738_20220620T002803_043739_0538D3_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20220614_0_L2A__S1A_IW_GRDH_1SDV_20220612T123041_20220612T123106_043630_053584_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20220612_0_L2A__S1A_IW_GRDH_1SDV_20220612T123041_20220612T123106_043630_053584_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20220609_0_L2A__S1A_IW_GRDH_1SDV_20220608T002738_20220608T002803_043564_0533A0_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20220609_0_L2A__S1A_IW_GRDH_1SDV_20220612T123041_20220612T123106_043630_053584_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20221030_0_L2A__S1A_IW_GRDH_1SDV_20221030T002747_20221030T002812_045664_0575F3_rtc", "status": "ok", "s2_date": "2022-10-30", "s1_datetime": "2022-10-30T00:28:00.174180Z", "gap_days": 0, "orbit": "des92", "s2_cloud": 0.0072156799999999995, "seed_ice_fraction": 0.0, "water_pixels": 11896, "water_km2": 0.2902, "radar_contrast_db": -2.6}
+{"pair": "S2A_44RQS_20221111_0_L2A__S1A_IW_GRDH_1SDV_20221111T002747_20221111T002812_045839_057BD9_rtc", "status": "ok", "s2_date": "2022-11-11", "s1_datetime": "2022-11-11T00:27:59.601258Z", "gap_days": 0, "orbit": "des92", "s2_cloud": 0.11889929, "seed_ice_fraction": 0.0, "water_pixels": 10063, "water_km2": 0.0079, "radar_contrast_db": -1.72}
+{"pair": "S2A_44RQT_20220607_0_L2A__S1A_IW_GRDH_1SDV_20220608T002738_20220608T002803_043564_0533A0_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20220602_0_L2A__S1A_IW_GRDH_1SDV_20220531T123040_20220531T123105_043455_053058_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20220515_0_L2A__S1A_IW_GRDH_1SDV_20220515T002736_20220515T002801_043214_05293F_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20220530_0_L2A__S1A_IW_GRDH_1SDV_20220531T123040_20220531T123105_043455_053058_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20220530_0_L2A__S1A_IW_GRDH_1SDV_20220527T002736_20220527T002801_043389_052E6F_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20220513_0_L2A__S1A_IW_GRDH_1SDV_20220515T002736_20220515T002801_043214_05293F_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20220503_0_L2A__S1A_IW_GRDH_1SDV_20220503T002735_20220503T002800_043039_05239E_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20220430_0_L2A__S1A_IW_GRDH_1SDV_20220503T002735_20220503T002800_043039_05239E_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20220423_0_L2A__S1A_IW_GRDH_1SDV_20220421T002734_20220421T002759_042864_051DDB_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20220930_0_L2A__S1A_IW_GRDH_1SDV_20220928T123046_20220928T123111_045205_05672F_rtc", "status": "ok", "s2_date": "2022-09-30", "s1_datetime": "2022-09-28T12:30:59.155535Z", "gap_days": 2, "orbit": "asc158", "s2_cloud": 0.14293218, "seed_ice_fraction": 0.0, "water_pixels": 9933, "water_km2": 0.5191, "radar_contrast_db": -4.2}
+{"pair": "S2B_44RQT_20220420_0_L2A__S1A_IW_GRDH_1SDV_20220421T002734_20220421T002759_042864_051DDB_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20220418_0_L2A__S1A_IW_GRDH_1SDV_20220421T002734_20220421T002759_042864_051DDB_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20221104_0_L2A__S1A_IW_GRDH_1SDV_20221103T123046_20221103T123111_045730_057821_rtc", "status": "ok", "s2_date": "2022-11-04", "s1_datetime": "2022-11-03T12:30:58.801222Z", "gap_days": 1, "orbit": "asc158", "s2_cloud": 0.08889284, "seed_ice_fraction": 0.002, "water_pixels": 9077, "water_km2": 0.1549, "radar_contrast_db": -0.96}
+{"pair": "S2A_44RQT_20220415_0_L2A__S1A_IW_GRDH_1SDV_20220413T123037_20220413T123102_042755_051A34_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20220823_0_L2A__S1A_IW_GRDH_1SDV_20220823T123045_20220823T123110_044680_055589_rtc", "status": "ok", "s2_date": "2022-08-23", "s1_datetime": "2022-08-23T12:30:57.878906Z", "gap_days": 0, "orbit": "asc158", "s2_cloud": 0.37991157000000003, "seed_ice_fraction": 0.0, "water_pixels": 11552, "water_km2": 0.566, "radar_contrast_db": -1.39}
+{"pair": "S2A_44RQS_20221101_0_L2A__S1A_IW_GRDH_1SDV_20221030T002747_20221030T002812_045664_0575F3_rtc", "status": "ok", "s2_date": "2022-11-01", "s1_datetime": "2022-10-30T00:28:00.174180Z", "gap_days": 2, "orbit": "des92", "s2_cloud": 0.01450073, "seed_ice_fraction": 0.0, "water_pixels": 7571, "water_km2": 0.2122, "radar_contrast_db": -2.47}
+{"pair": "S2A_44RQS_20221101_0_L2A__S1A_IW_GRDH_1SDV_20221103T123046_20221103T123111_045730_057821_rtc", "status": "ok", "s2_date": "2022-11-01", "s1_datetime": "2022-11-03T12:30:58.801222Z", "gap_days": 2, "orbit": "asc158", "s2_cloud": 0.01450073, "seed_ice_fraction": 0.0, "water_pixels": 7571, "water_km2": 0.2122, "radar_contrast_db": -1.74}
+{"pair": "S2B_44RQT_20220413_0_L2A__S1A_IW_GRDH_1SDV_20220413T123037_20220413T123102_042755_051A34_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20220410_0_L2A__S1A_IW_GRDH_1SDV_20220409T002734_20220409T002759_042689_0517FD_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20220410_0_L2A__S1A_IW_GRDH_1SDV_20220413T123037_20220413T123102_042755_051A34_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20221025_0_L2A__S1A_IW_GRDH_1SDV_20221022T123046_20221022T123111_045555_05723D_rtc", "status": "ok", "s2_date": "2022-10-25", "s1_datetime": "2022-10-22T12:30:59.231635Z", "gap_days": 3, "orbit": "asc158", "s2_cloud": 0.00021028000000000003, "seed_ice_fraction": 0.0, "water_pixels": 9921, "water_km2": 0.4115, "radar_contrast_db": -5.33}
+{"pair": "S2B_44RQS_20220808_0_L2A__S1A_IW_GRDH_1SDV_20220811T123044_20220811T123109_044505_054F9A_rtc", "status": "ok", "s2_date": "2022-08-08", "s1_datetime": "2022-08-11T12:30:57.308911Z", "gap_days": 3, "orbit": "asc158", "s2_cloud": 0.3248769, "seed_ice_fraction": 0.0, "water_pixels": 11895, "water_km2": 0.5911, "radar_contrast_db": -0.99}
+{"pair": "S2A_44RQT_20220408_0_L2A__S1A_IW_GRDH_1SDV_20220409T002734_20220409T002759_042689_0517FD_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20220607_0_L2A__S1A_IW_GRDH_1SDV_20220608T002738_20220608T002803_043564_0533A0_rtc", "status": "ok", "s2_date": "2022-06-07", "s1_datetime": "2022-06-08T00:27:50.789695Z", "gap_days": 1, "orbit": "des92", "s2_cloud": 0.33220652, "seed_ice_fraction": 0.0, "water_pixels": 3920, "water_km2": 0.0, "radar_contrast_db": -1.15}
+{"pair": "S2B_44RQT_20220403_0_L2A__S1A_IW_GRDH_1SDV_20220401T123037_20220401T123102_042580_051446_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20220331_0_L2A__S1A_IW_GRDH_1SDV_20220401T123037_20220401T123102_042580_051446_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20220331_0_L2A__S1A_IW_GRDH_1SDV_20220328T002734_20220328T002759_042514_051218_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20220329_0_L2A__S1A_IW_GRDH_1SDV_20220328T002734_20220328T002759_042514_051218_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20220329_0_L2A__S1A_IW_GRDH_1SDV_20220401T123037_20220401T123102_042580_051446_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20220418_0_L2A__S1A_IW_GRDH_1SDV_20220421T002734_20220421T002759_042864_051DDB_rtc", "status": "ok", "s2_date": "2022-04-18", "s1_datetime": "2022-04-21T00:27:47.469841Z", "gap_days": 3, "orbit": "des92", "s2_cloud": 0.04277654, "seed_ice_fraction": 0.004, "water_pixels": 1263, "water_km2": 0.0585, "radar_contrast_db": -6.62}
+{"pair": "S2A_44RQT_20220326_0_L2A__S1A_IW_GRDH_1SDV_20220328T002734_20220328T002759_042514_051218_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20220420_0_L2A__S1A_IW_GRDH_1SDV_20220421T002734_20220421T002759_042864_051DDB_rtc", "status": "ok", "s2_date": "2022-04-20", "s1_datetime": "2022-04-21T00:27:47.469841Z", "gap_days": 1, "orbit": "des92", "s2_cloud": 0.27572742, "seed_ice_fraction": 0.0, "water_pixels": 657, "water_km2": 0.024, "radar_contrast_db": -2.05}
+{"pair": "S2B_44RQT_20220321_1_L2A__S1A_IW_GRDH_1SDV_20220320T123036_20220320T123101_042405_050E5B_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20220321_0_L2A__S1A_IW_GRDH_1SDV_20220320T123036_20220320T123101_042405_050E5B_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20220403_0_L2A__S1A_IW_GRDH_1SDV_20220401T123037_20220401T123102_042580_051446_rtc", "status": "skipped_ok"}
+{"pair": "S2A_44RQS_20220326_0_L2A__S1A_IW_GRDH_1SDV_20220328T002734_20220328T002759_042514_051218_rtc", "status": "skipped_ok"}
+{"pair": "S2B_44RQS_20220413_0_L2A__S1A_IW_GRDH_1SDV_20220413T123037_20220413T123102_042755_051A34_rtc", "status": "ok", "s2_date": "2022-04-13", "s1_datetime": "2022-04-13T12:30:49.683441Z", "gap_days": 0, "orbit": "asc158", "s2_cloud": 0.15837234, "seed_ice_fraction": 0.009, "water_pixels": 10239, "water_km2": 0.369, "radar_contrast_db": -3.34}
+{"pair": "S2B_44RQS_20220423_0_L2A__S1A_IW_GRDH_1SDV_20220421T002734_20220421T002759_042864_051DDB_rtc", "status": "ok", "s2_date": "2022-04-23", "s1_datetime": "2022-04-21T00:27:47.469841Z", "gap_days": 2, "orbit": "des92", "s2_cloud": 0.05858266, "seed_ice_fraction": 0.0, "water_pixels": 1175, "water_km2": 0.0361, "radar_contrast_db": -3.42}
+{"pair": "S2A_44RQT_20220319_1_L2A__S1A_IW_GRDH_1SDV_20220320T123036_20220320T123101_042405_050E5B_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20220319_1_L2A__S1A_IW_GRDH_1SDV_20220316T002733_20220316T002758_042339_050C26_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20220316_0_L2A__S1A_IW_GRDH_1SDV_20220316T002733_20220316T002758_042339_050C26_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20220319_0_L2A__S1A_IW_GRDH_1SDV_20220320T123036_20220320T123101_042405_050E5B_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20220319_0_L2A__S1A_IW_GRDH_1SDV_20220316T002733_20220316T002758_042339_050C26_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20220415_0_L2A__S1A_IW_GRDH_1SDV_20220413T123037_20220413T123102_042755_051A34_rtc", "status": "ok", "s2_date": "2022-04-15", "s1_datetime": "2022-04-13T12:30:49.683441Z", "gap_days": 2, "orbit": "asc158", "s2_cloud": 0.10909098, "seed_ice_fraction": 0.069, "water_pixels": 2912, "water_km2": 0.204, "radar_contrast_db": -4.41}
+{"pair": "S2B_44RQT_20220314_0_L2A__S1A_IW_GRDH_1SDV_20220316T002733_20220316T002758_042339_050C26_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20220311_0_L2A__S1A_IW_GRDH_1SDV_20220308T123036_20220308T123101_042230_05086E_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20220321_1_L2A__S1A_IW_GRDH_1SDV_20220320T123036_20220320T123101_042405_050E5B_rtc", "status": "skipped_ok"}
+{"pair": "S2A_44RQT_20220309_0_L2A__S1A_IW_GRDH_1SDV_20220308T123036_20220308T123101_042230_05086E_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20220408_0_L2A__S1A_IW_GRDH_1SDV_20220409T002734_20220409T002759_042689_0517FD_rtc", "status": "ok", "s2_date": "2022-04-08", "s1_datetime": "2022-04-09T00:27:46.966898Z", "gap_days": 1, "orbit": "des92", "s2_cloud": 0.14872621, "seed_ice_fraction": 0.029, "water_pixels": 7254, "water_km2": 0.3089, "radar_contrast_db": -2.08}
+{"pair": "S2A_44RQT_20220306_0_L2A__S1A_IW_GRDH_1SDV_20220304T002733_20220304T002758_042164_050630_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20220306_0_L2A__S1A_IW_GRDH_1SDV_20220308T123036_20220308T123101_042230_05086E_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20220410_0_L2A__S1A_IW_GRDH_1SDV_20220409T002734_20220409T002759_042689_0517FD_rtc", "status": "skipped_ok"}
+{"pair": "S2B_44RQS_20220410_0_L2A__S1A_IW_GRDH_1SDV_20220413T123037_20220413T123102_042755_051A34_rtc", "status": "skipped_ok"}
+{"pair": "S2A_44RQS_20220319_0_L2A__S1A_IW_GRDH_1SDV_20220320T123036_20220320T123101_042405_050E5B_rtc", "status": "skipped_ok"}
+{"pair": "S2A_44RQS_20220319_0_L2A__S1A_IW_GRDH_1SDV_20220316T002733_20220316T002758_042339_050C26_rtc", "status": "skipped_ok"}
+{"pair": "S2B_44RQS_20220321_0_L2A__S1A_IW_GRDH_1SDV_20220320T123036_20220320T123101_042405_050E5B_rtc", "status": "skipped_ok"}
+{"pair": "S2B_44RQT_20220304_0_L2A__S1A_IW_GRDH_1SDV_20220304T002733_20220304T002758_042164_050630_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20220301_0_L2A__S1A_IW_GRDH_1SDV_20220304T002733_20220304T002758_042164_050630_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20220227_0_L2A__S1A_IW_GRDH_1SDV_20220224T123036_20220224T123101_042055_05027A_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20220224_0_L2A__S1A_IW_GRDH_1SDV_20220224T123036_20220224T123101_042055_05027A_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20220309_0_L2A__S1A_IW_GRDH_1SDV_20220308T123036_20220308T123101_042230_05086E_rtc", "status": "skipped_ok"}
+{"pair": "S2B_44RQS_20220314_0_L2A__S1A_IW_GRDH_1SDV_20220316T002733_20220316T002758_042339_050C26_rtc", "status": "skipped_ok"}
+{"pair": "S2A_44RQS_20220316_0_L2A__S1A_IW_GRDH_1SDV_20220316T002733_20220316T002758_042339_050C26_rtc", "status": "skipped_ok"}
+{"pair": "S2B_44RQT_20220222_0_L2A__S1A_IW_GRDH_1SDV_20220220T002734_20220220T002759_041989_05003B_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20220222_0_L2A__S1A_IW_GRDH_1SDV_20220224T123036_20220224T123101_042055_05027A_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20220219_0_L2A__S1A_IW_GRDH_1SDV_20220220T002734_20220220T002759_041989_05003B_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20220319_1_L2A__S1A_IW_GRDH_1SDV_20220320T123036_20220320T123101_042405_050E5B_rtc", "status": "skipped_ok"}
+{"pair": "S2A_44RQS_20220319_1_L2A__S1A_IW_GRDH_1SDV_20220316T002733_20220316T002758_042339_050C26_rtc", "status": "skipped_ok"}
+{"pair": "S2B_44RQS_20220304_0_L2A__S1A_IW_GRDH_1SDV_20220304T002733_20220304T002758_042164_050630_rtc", "status": "skipped_ok"}
+{"pair": "S2A_44RQT_20220217_0_L2A__S1A_IW_GRDH_1SDV_20220220T002734_20220220T002759_041989_05003B_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20220214_0_L2A__S1A_IW_GRDH_1SDV_20220212T123036_20220212T123101_041880_04FC64_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20220212_0_L2A__S1A_IW_GRDH_1SDV_20220212T123036_20220212T123101_041880_04FC64_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20220301_0_L2A__S1A_IW_GRDH_1SDV_20220304T002733_20220304T002758_042164_050630_rtc", "status": "skipped_ok"}
+{"pair": "S2A_44RQS_20220306_0_L2A__S1A_IW_GRDH_1SDV_20220304T002733_20220304T002758_042164_050630_rtc", "status": "skipped_ok"}
+{"pair": "S2A_44RQS_20220306_0_L2A__S1A_IW_GRDH_1SDV_20220308T123036_20220308T123101_042230_05086E_rtc", "status": "skipped_ok"}
+{"pair": "S2B_44RQS_20220311_0_L2A__S1A_IW_GRDH_1SDV_20220308T123036_20220308T123101_042230_05086E_rtc", "status": "skipped_ok"}
+{"pair": "S2B_44RQT_20220202_0_L2A__S1A_IW_GRDH_1SDV_20220131T123036_20220131T123101_041705_04F658_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20220130_0_L2A__S1A_IW_GRDH_1SDV_20220131T123036_20220131T123101_041705_04F658_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20220130_0_L2A__S1A_IW_GRDH_1SDV_20220127T002734_20220127T002759_041639_04F419_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20220224_0_L2A__S1A_IW_GRDH_1SDV_20220224T123036_20220224T123101_042055_05027A_rtc", "status": "skipped_ok"}
+{"pair": "S2A_44RQS_20220217_0_L2A__S1A_IW_GRDH_1SDV_20220220T002734_20220220T002759_041989_05003B_rtc", "status": "skipped_ok"}
+{"pair": "S2A_44RQT_20220128_0_L2A__S1A_IW_GRDH_1SDV_20220127T002734_20220127T002759_041639_04F419_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20220128_0_L2A__S1A_IW_GRDH_1SDV_20220131T123036_20220131T123101_041705_04F658_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20220214_0_L2A__S1A_IW_GRDH_1SDV_20220212T123036_20220212T123101_041880_04FC64_rtc", "status": "skipped_ok"}
+{"pair": "S2A_44RQT_20220125_0_L2A__S1A_IW_GRDH_1SDV_20220127T002734_20220127T002759_041639_04F419_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20220118_0_L2A__S1A_IW_GRDH_1SDV_20220119T123037_20220119T123102_041530_04F05F_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20220118_0_L2A__S1A_IW_GRDH_1SDV_20220115T002735_20220115T002800_041464_04EE2B_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20220115_0_L2A__S1A_IW_GRDH_1SDV_20220115T002735_20220115T002800_041464_04EE2B_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20220113_0_L2A__S1A_IW_GRDH_1SDV_20220115T002735_20220115T002800_041464_04EE2B_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20220103_0_L2A__S1A_IW_GRDH_1SDV_20220103T002735_20220103T002800_041289_04E863_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20220128_0_L2A__S1A_IW_GRDH_1SDV_20220127T002734_20220127T002759_041639_04F419_rtc", "status": "skipped_ok"}
+{"pair": "S2A_44RQS_20220128_0_L2A__S1A_IW_GRDH_1SDV_20220131T123036_20220131T123101_041705_04F658_rtc", "status": "skipped_ok"}
+{"pair": "S2A_44RQS_20220207_0_L2A__S1A_IW_GRDH_1SDV_20220208T002734_20220208T002759_041814_04FA24_rtc", "status": "skipped_ok"}
+{"pair": "S2B_44RQS_20211231_0_L2A__S1A_IW_GRDH_1SDV_20220103T002735_20220103T002800_041289_04E863_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20220222_0_L2A__S1A_IW_GRDH_1SDV_20220220T002734_20220220T002759_041989_05003B_rtc", "status": "skipped_ok"}
+{"pair": "S2B_44RQS_20220222_0_L2A__S1A_IW_GRDH_1SDV_20220224T123036_20220224T123101_042055_05027A_rtc", "status": "skipped_ok"}
+{"pair": "S2B_44RQT_20211231_1_L2A__S1A_IW_GRDH_1SDV_20220103T002735_20220103T002800_041289_04E863_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20211226_1_L2A__S1A_IW_GRDH_1SDV_20211226T123038_20211226T123103_041180_04E4AE_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20221231_0_L2A__S1A_IW_GRDH_1SDV_20221229T002745_20221229T002810_046539_0593A6_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20221231_0_L2A__S1A_IW_GRDH_1SDV_20230102T123044_20230102T123109_046605_0595E0_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20220125_0_L2A__S1A_IW_GRDH_1SDV_20220127T002734_20220127T002759_041639_04F419_rtc", "status": "skipped_ok"}
+{"pair": "S2B_44RQS_20221229_0_L2A__S1A_IW_GRDH_1SDV_20221229T002745_20221229T002810_046539_0593A6_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20221229_0_L2A__S1A_IW_GRDH_1SDV_20221229T002745_20221229T002810_046539_0593A6_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20220219_0_L2A__S1A_IW_GRDH_1SDV_20220220T002734_20220220T002759_041989_05003B_rtc", "status": "skipped_ok"}
+{"pair": "S2B_44RQT_20221226_0_L2A__S1A_IW_GRDH_1SDV_20221229T002745_20221229T002810_046539_0593A6_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20221226_0_L2A__S1A_IW_GRDH_1SDV_20221229T002745_20221229T002810_046539_0593A6_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQT_20221224_0_L2A__S1A_IW_GRDH_1SDV_20221221T123044_20221221T123109_046430_058FF4_rtc", "status": "skipped_cloudy"}
+{"pair": "S2A_44RQS_20221224_0_L2A__S1A_IW_GRDH_1SDV_20221221T123044_20221221T123109_046430_058FF4_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20220130_0_L2A__S1A_IW_GRDH_1SDV_20220131T123036_20220131T123101_041705_04F658_rtc", "status": "skipped_ok"}
+{"pair": "S2B_44RQS_20220130_0_L2A__S1A_IW_GRDH_1SDV_20220127T002734_20220127T002759_041639_04F419_rtc", "status": "skipped_ok"}
+{"pair": "S2A_44RQT_20221221_0_L2A__S1A_IW_GRDH_1SDV_20221221T123044_20221221T123109_046430_058FF4_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20220202_0_L2A__S1A_IW_GRDH_1SDV_20220131T123036_20220131T123101_041705_04F658_rtc", "status": "skipped_ok"}
+{"pair": "S2B_44RQT_20221219_0_L2A__S1A_IW_GRDH_1SDV_20221217T002745_20221217T002810_046364_058DB3_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQT_20221219_0_L2A__S1A_IW_GRDH_1SDV_20221221T123044_20221221T123109_046430_058FF4_rtc", "status": "skipped_cloudy"}
+{"pair": "S2B_44RQS_20220212_0_L2A__S1A_IW_GRDH_1SDV_20220212T123036_20220212T123101_041880_04FC64_rtc", "status": "skipped_ok"}
+{"pair": "S2B_44RQS_20220110_0_L2A__S1A_IW_GRDH_1SDV_20220107T123038_20220107T123103_041355_04EAA7_rtc", "status": "skipped_ok"}
+{"pair": "S2B_44RQS_20211231_1_L2A__S1A_IW_GRDH_1SDV_20220103T002735_20220103T002800_041289_04E863_rtc", "status": "skipped_ok"}
+{"pair": "S2A_44RQS_20221221_0_L2A__S1A_IW_GRDH_1SDV_20221221T123044_20221221T123109_046430_058FF4_rtc", "status": "ok", "s2_date": "2022-12-21", "s1_datetime": "2022-12-21T12:30:57.107541Z", "gap_days": 0, "orbit": "asc158", "s2_cloud": 0.04096229, "seed_ice_fraction": 0.099, "water_pixels": 77122, "water_km2": 0.5647, "radar_contrast_db": 0.05}
+{"pair": "S2B_44RQS_20221219_0_L2A__S1A_IW_GRDH_1SDV_20221217T002745_20221217T002810_046364_058DB3_rtc", "status": "ok", "s2_date": "2022-12-19", "s1_datetime": "2022-12-17T00:27:58.361015Z", "gap_days": 2, "orbit": "des92", "s2_cloud": 0.11913667, "seed_ice_fraction": 0.013, "water_pixels": 66560, "water_km2": 0.5489, "radar_contrast_db": -0.81}
+{"pair": "S2B_44RQS_20221219_0_L2A__S1A_IW_GRDH_1SDV_20221221T123044_20221221T123109_046430_058FF4_rtc", "status": "ok", "s2_date": "2022-12-19", "s1_datetime": "2022-12-21T12:30:57.107541Z", "gap_days": 2, "orbit": "asc158", "s2_cloud": 0.11913667, "seed_ice_fraction": 0.013, "water_pixels": 66560, "water_km2": 0.5489, "radar_contrast_db": -0.11}
+{"pair": "S2A_44RQS_20221231_0_L2A__S1A_IW_GRDH_1SDV_20221229T002745_20221229T002810_046539_0593A6_rtc", "status": "ok", "s2_date": "2022-12-31", "s1_datetime": "2022-12-29T00:27:57.714218Z", "gap_days": 2, "orbit": "des92", "s2_cloud": 0.24390934, "seed_ice_fraction": 0.079, "water_pixels": 120028, "water_km2": 3.6545, "radar_contrast_db": -0.55}
+{"pair": "S2A_44RQS_20221231_0_L2A__S1A_IW_GRDH_1SDV_20230102T123044_20230102T123109_046605_0595E0_rtc", "status": "ok", "s2_date": "2022-12-31", "s1_datetime": "2023-01-02T12:30:56.745106Z", "gap_days": 2, "orbit": "asc158", "s2_cloud": 0.24390934, "seed_ice_fraction": 0.079, "water_pixels": 120028, "water_km2": 3.6545, "radar_contrast_db": 0.52}

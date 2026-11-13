@@ -108,19 +108,16 @@ export function StudyPicker() {
   return (
     <main id="main" className="picker-page">
       <header className="picker-head">
-        <p className="eyebrow">Research workstation</p>
-        <h1>Choose an investigation</h1>
+        <h1>Choose a study area to explore</h1>
         <p className="picker-lede">
-          Six investigations across five landscapes, each rendered from its
-          recorded bundle: real Sentinel-2 acquisitions, explicit masking and
-          documented thresholds. Coringa is the reference investigation with the
-          full experiment framework; the 2025 Himalayan event carries its
-          recorded PARTIAL status.
+          Open any area to slide between before and after pictures on a map, switch layers, and see which
+          changes are bigger than the noise. Coringa is the full reference study; the 2025 Himalayan event is
+          marked partial because no clean picture right after it exists.
         </p>
       </header>
       {!registry && <p className="mono-label">Loading the study registry…</p>}
       {registry && (
-        <div className="picker-grid">
+        <div className="picker-grid" data-tour="ws-pick">
           {registry.studies.map((study) => (
             <PickerCard
               key={study.id}

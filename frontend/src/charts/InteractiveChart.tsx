@@ -24,7 +24,6 @@
 import {
   useCallback,
   useEffect,
-  useLayoutEffect,
   useMemo,
   useRef,
   useState,
@@ -86,14 +85,7 @@ interface HoverState {
   pinned: boolean;
 }
 
-interface TooltipPos {
-  left: number;
-  top: number;
-}
-
 const MARGIN = { top: 18, right: 24, bottom: 52, left: 68 };
-const TOOLTIP_GAP = 16;
-const TOOLTIP_PAD = 10;
 
 export function InteractiveChart({
   series,
@@ -112,13 +104,12 @@ export function InteractiveChart({
 }: InteractiveChartProps) {
   const wrapRef = useRef<HTMLDivElement | null>(null);
   const plotRef = useRef<HTMLDivElement>(null);
-  const tooltipRef = useRef<HTMLDivElement>(null);
+  const svgBoxRef = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(640);
   const [hidden, setHidden] = useState<Set<string>>(new Set());
   const [hover, setHover] = useState<HoverState | null>(null);
   const [focusIndex, setFocusIndex] = useState<number | null>(null);
   const [expanded, setExpanded] = useState(false);
-  const [tooltipPos, setTooltipPos] = useState<TooltipPos | null>(null);
 
   useEffect(() => {
     const element = wrapRef.current;
@@ -219,8 +210,8 @@ export function InteractiveChart({
   /** Nearest recorded x AND nearest series under the pointer. */
   const pickNearest = useCallback(
     (clientX: number, clientY: number): { pointIndex: number; seriesId: string } | null => {
-      if (!domain || !xValues.length || !plotRef.current) return null;
-      const rect = plotRef.current.getBoundingClientRect();
+      if (!domain || !xValues.length || !svgBoxRef.current) return null;
+      const rect = svgBoxRef.current.getBoundingClientRect();
       const px = clientX - rect.left;
       const py = clientY - rect.top;
       let best = 0;
@@ -355,20 +346,6 @@ export function InteractiveChart({
     setExpanded(false);
   }, [hover?.pointIndex, hover?.seriesId, focusIndex]);
 
-  // Scrolling (or viewport changes) re-runs the tooltip placement so the
-  // overlay is re-clamped against the visible viewport — a pinned tooltip
-  // must stay readable while the user scrolls the chart.
-  const [placementTick, setPlacementTick] = useState(0);
-  useEffect(() => {
-    const onScroll = () => setPlacementTick((tick) => tick + 1);
-    window.addEventListener("scroll", onScroll, { capture: true, passive: true });
-    window.addEventListener("resize", onScroll, { passive: true });
-    return () => {
-      window.removeEventListener("scroll", onScroll, { capture: true });
-      window.removeEventListener("resize", onScroll);
-    };
-  }, []);
-
   const activeIndex = hover?.pointIndex ?? focusIndex ?? null;
   const activeX = activeIndex !== null ? xValues[activeIndex] : null;
 
@@ -390,50 +367,6 @@ export function InteractiveChart({
     : [];
 
   const guidePx = activeX !== null ? scaleX(activeX) : 0;
-  const activePointY = activeRow ? scaleY(activeRow.point.y) : MARGIN.top + plotHeight / 2;
-
-  // Tooltip placement (M4-R1-G10): the overlay is measured after render and
-  // positioned relative to the plot container and the viewport — flipped to
-  // the left of the guide when the right side lacks room, clamped inside the
-  // plot and the visible viewport so no text is ever clipped.  The effect
-  // runs before paint, so the move is never seen mid-frame.
-  useLayoutEffect(() => {
-    const tip = tooltipRef.current;
-    const plot = plotRef.current;
-    if (!tip || !plot) {
-      setTooltipPos(null);
-      return;
-    }
-    const tw = tip.offsetWidth;
-    const th = tip.offsetHeight;
-    let left = guidePx + TOOLTIP_GAP;
-    if (left + tw > width - MARGIN.right) {
-      left = guidePx - TOOLTIP_GAP - tw;
-    }
-    // Horizontal clamp: never cross the plot edges.
-    left = Math.min(Math.max(left, TOOLTIP_PAD), Math.max(TOOLTIP_PAD, width - tw - TOOLTIP_PAD));
-    // Vertical: anchor just above the active point, then clamp inside the
-    // plot and the viewport.
-    let top = activePointY - 12;
-    const maxTopPlot = height - th - TOOLTIP_PAD;
-    if (top > maxTopPlot) top = activePointY - th - TOOLTIP_GAP;
-    top = Math.min(Math.max(top, TOOLTIP_PAD), Math.max(TOOLTIP_PAD, maxTopPlot));
-    const rect = plot.getBoundingClientRect();
-    if (rect) {
-      const viewportBottom = window.innerHeight - 8;
-      const overflowBottom = rect.top + top + th - viewportBottom;
-      if (overflowBottom > 0) {
-        top = Math.max(TOOLTIP_PAD, top - overflowBottom);
-      }
-      const viewportTop = 8;
-      if (rect.top + top < viewportTop) {
-        top = Math.max(TOOLTIP_PAD, viewportTop - rect.top);
-      }
-    }
-    setTooltipPos((prev) =>
-      prev && prev.left === left && prev.top === top ? prev : { left, top }
-    );
-  }, [guidePx, activePointY, activeX, hover?.seriesId, expanded, width, height, hover?.pinned, placementTick]);
 
   const yTicks = niceTicks(domain?.yMin ?? 0, domain?.yMax ?? 1, 5);
 
@@ -455,6 +388,77 @@ export function InteractiveChart({
 
   return (
     <figure className="ichart" ref={wrapRef as unknown as React.Ref<HTMLDivElement>}>
+      <div className="ichart-readout">
+        {activeRow && (
+          <div
+            className={`ichart-tooltip${expanded ? " is-expanded" : ""}`}
+            role="status"
+          >
+            <div className="ichart-tooltip-row">
+              <span className="ichart-swatch" style={{ background: activeRow.series.color }} aria-hidden="true" />
+              <strong>{activeRow.series.label}</strong>
+              <span className="mono-label ichart-value">
+                {activeRow.point.label ?? fmtX(activeRow.point.x)}
+                {xUnit ? ` ${xUnit}` : ""}
+              </span>
+              <span className="mono-label ichart-value">
+                → {fmtY(activeRow.point.y)}
+                {yUnit ? ` ${yUnit}` : ""}
+              </span>
+              {activeRow.point.facts?.map(([label, value]) => (
+                <span key={label} className="mono-label ichart-fact">
+                  {label}: {value}
+                </span>
+              ))}
+              {activeRow.point.interpretation && (
+                <span className="ichart-interpretation">{activeRow.point.interpretation}</span>
+              )}
+            </div>
+            <button
+              type="button"
+              className="ichart-details-toggle"
+              aria-expanded={expanded}
+              onClick={(event) => {
+                event.stopPropagation();
+                setExpanded((prev) => !prev);
+              }}
+            >
+              {expanded ? "Hide details ▴" : "Details ▾"}
+            </button>
+            {expanded && (
+              <div className="ichart-details">
+                {relatedRows.length > 0 && (
+                  <>
+                    <h4>Other series at this x value</h4>
+                    {relatedRows.map(({ series: item, point }) => (
+                      <div key={item.id} className="ichart-tooltip-row ichart-related">
+                        <span className="ichart-swatch" style={{ background: item.color }} aria-hidden="true" />
+                        <span className="mono-label">
+                          {item.label}: {fmtY(point.y)}
+                          {yUnit ? ` ${yUnit}` : ""}
+                          {point.label ? ` · ${point.label}` : ""}
+                        </span>
+                      </div>
+                    ))}
+                  </>
+                )}
+                <h4>Measurement context</h4>
+                <p className="mono-label ichart-context">{context}</p>
+                {cannotConclude && cannotConclude.length > 0 && (
+                  <>
+                    <h4>Limitations</h4>
+                    <p className="mono-label ichart-limitations">{cannotConclude.join(" ")}</p>
+                  </>
+                )}
+              </div>
+            )}
+            {hover?.pinned && (
+              <span className="mono-label ichart-pin-hint">Pinned — press Esc to dismiss</span>
+            )}
+          </div>
+        )}
+        {!activeRow && <p className="ichart-hint">Hover, tap or use the arrow keys to read a point</p>}
+      </div>
       <div
         className="ichart-plot"
         ref={plotRef}
@@ -466,7 +470,7 @@ export function InteractiveChart({
         onClick={onClick}
         onKeyDown={onKeyDown}
       >
-        <div className="ichart-svg">
+        <div className="ichart-svg" ref={svgBoxRef}>
           <svg
             width={width}
             height={height}
@@ -538,8 +542,11 @@ export function InteractiveChart({
                     d={path}
                     fill="none"
                     stroke={item.color}
-                    strokeWidth={2}
-                    strokeDasharray={item.dashed ? "5 4" : undefined}
+                    strokeWidth={activeRow && activeRow.series.id === item.id ? 2.6 : 2}
+                    strokeLinejoin="round"
+                    strokeLinecap="round"
+                    opacity={activeRow && activeRow.series.id !== item.id ? 0.35 : 1}
+                    strokeDasharray={item.dashed ? "6 5" : undefined}
                   />
                   {item.points.map((point, i) => {
                     const isActive =
@@ -548,23 +555,14 @@ export function InteractiveChart({
                       item.id === activeRow?.series.id;
                     return (
                       <g key={i}>
-                        {isActive && (
-                          <circle
-                            cx={scaleX(point.x)}
-                            cy={scaleY(point.y)}
-                            r={9}
-                            className="ichart-halo"
-                            fill={item.color}
-                          />
-                        )}
                         <circle
                           cx={scaleX(point.x)}
                           cy={scaleY(point.y)}
-                          r={isActive ? 4.5 : 2.8}
+                          r={isActive ? 5.5 : 2.4}
                           className={`ichart-dot${isActive ? " is-active" : ""}`}
-                          fill={item.color}
-                          stroke={isActive ? "#18272d" : "none"}
-                          strokeWidth={1.5}
+                          fill={isActive ? "#fff" : item.color}
+                          stroke={isActive ? item.color : "none"}
+                          strokeWidth={2.5}
                         />
                       </g>
                     );
@@ -587,80 +585,6 @@ export function InteractiveChart({
           </svg>
         </div>
 
-        {activeRow && (
-          <div
-            ref={tooltipRef}
-            className={`ichart-tooltip${expanded ? " is-expanded" : ""}`}
-            style={{
-              left: tooltipPos?.left ?? -9999,
-              top: tooltipPos?.top ?? -9999,
-              visibility: tooltipPos ? "visible" : "hidden",
-            }}
-            role="status"
-          >
-            <div className="ichart-tooltip-row">
-              <span className="ichart-swatch" style={{ background: activeRow.series.color }} aria-hidden="true" />
-              <strong>{activeRow.series.label}</strong>
-              <span className="mono-label ichart-value">
-                {activeRow.point.label ?? fmtX(activeRow.point.x)}
-                {xUnit ? ` ${xUnit}` : ""}
-              </span>
-              <span className="mono-label ichart-value">
-                → {fmtY(activeRow.point.y)}
-                {yUnit ? ` ${yUnit}` : ""}
-              </span>
-              {activeRow.point.facts?.map(([label, value]) => (
-                <span key={label} className="mono-label ichart-fact">
-                  {label}: {value}
-                </span>
-              ))}
-              {activeRow.point.interpretation && (
-                <span className="ichart-interpretation">{activeRow.point.interpretation}</span>
-              )}
-            </div>
-            <button
-              type="button"
-              className="ichart-details-toggle"
-              aria-expanded={expanded}
-              onClick={(event) => {
-                event.stopPropagation();
-                setExpanded((prev) => !prev);
-              }}
-            >
-              {expanded ? "Hide details ▴" : "Details ▾"}
-            </button>
-            {expanded && (
-              <div className="ichart-details">
-                {relatedRows.length > 0 && (
-                  <>
-                    <h4>Other series at this x value</h4>
-                    {relatedRows.map(({ series: item, point }) => (
-                      <div key={item.id} className="ichart-tooltip-row ichart-related">
-                        <span className="ichart-swatch" style={{ background: item.color }} aria-hidden="true" />
-                        <span className="mono-label">
-                          {item.label}: {fmtY(point.y)}
-                          {yUnit ? ` ${yUnit}` : ""}
-                          {point.label ? ` · ${point.label}` : ""}
-                        </span>
-                      </div>
-                    ))}
-                  </>
-                )}
-                <h4>Measurement context</h4>
-                <p className="mono-label ichart-context">{context}</p>
-                {cannotConclude && cannotConclude.length > 0 && (
-                  <>
-                    <h4>Limitations</h4>
-                    <p className="mono-label ichart-limitations">{cannotConclude.join(" ")}</p>
-                  </>
-                )}
-              </div>
-            )}
-            {hover?.pinned && (
-              <span className="mono-label ichart-pin-hint">Pinned — press Esc to dismiss</span>
-            )}
-          </div>
-        )}
       </div>
 
       {series.length > 1 && (

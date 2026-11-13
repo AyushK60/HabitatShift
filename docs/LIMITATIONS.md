@@ -1,29 +1,26 @@
-# HabitatShift — limitations
-
-The complete limitation record lives with the work that produced it:
-
-| Document | Scope |
-|---|---|
-| [`M1_LIMITATIONS.md`](archive/M1_LIMITATIONS.md) | first engine: single-scene deltas, mask policy limits |
-| [`M2_LIMITATIONS.md`](archive/M2_LIMITATIONS.md) | threshold sweeps, estimator families, bootstrap assumptions |
-| [`M4_R3_HANDOFF.md` §6](archive/M4_R3_HANDOFF.md) | product/experience limits (curated top-5 selection, export caveats) |
-| [`M5_LIMITATIONS.md`](M5_LIMITATIONS.md) | M5 findings: ML framing, cross-epoch assumption, bright-snow reflectance, cache orphans, deferred resolution sensitivity |
+# Limitations
 
 ## The five statements that matter most
 
-1. **Candidate signals only.** Every finding is a measured spectral change
-   candidate. The platform does not verify environmental change, does not
-   predict disasters, and does not monitor in real time.
-2. **No independent ground truth exists in this project.** ML metrics are
-   agreement with the ESA WorldCover v200 reference product. Agreement is
-   consistency, never accuracy against reality.
-3. **The curated top-5 selection is not an inventory.** Audited counts of
-   unrecorded qualifying components are disclosed in-product per experiment.
-4. **The radiometry convention for the 2025 Earth Search reprocessing is
-   empirically validated per read** (metadata still declares an offset the
-   stored DNs do not carry); the physical floor test plus the baseline guard
-   are the recorded defence, and the decision evidence is stored per
-   observation.
-5. **Scope is five small AOIs between fixed past dates.** Generalisation
-   beyond them — other regions, other years, operational use — is neither
-   designed for nor claimed.
+1. **Candidate signals only.** Every finding is a measured spectral change that might be real. The project does not
+   verify environmental change, does not predict disasters and does not monitor in real time.
+2. **No independent ground truth.** The machine learning numbers are agreement with the ESA WorldCover v200 map,
+   which is another satellite product with its own errors. Agreement is consistency, not accuracy against reality.
+3. **The curated top-5 list is not a full inventory.** The app shows the five largest changed patches per index and
+   direction. The counts of patches not shown are disclosed per experiment, and a complete component inventory
+   exists in `data/experiments/m5_inventory/`.
+4. **Sentinel-2 radiometry needed care for 2025 data.** The 2025 Earth Search reprocessing declares a reflectance
+   offset that its stored values do not carry. Each read is checked against a physical floor test, and the decision
+   evidence is stored per observation.
+5. **Small areas, fixed dates.** The studies cover a handful of small areas between fixed past dates. Other regions, other years and operational use are not claimed.
+
+## More detail
+
+Older limitation records are kept as written at the time:
+
+| Document | Scope |
+|---|---|
+| [`archive/M1_LIMITATIONS.md`](archive/M1_LIMITATIONS.md) | first engine: single-scene differences, mask policy limits |
+| [`archive/M2_LIMITATIONS.md`](archive/M2_LIMITATIONS.md) | threshold sweeps, estimator families, bootstrap assumptions |
+| [`archive/M4_R3_HANDOFF.md`](archive/M4_R3_HANDOFF.md) (section 6) | product limits: curated selection, export caveats |
+| [`archive/M5_LIMITATIONS.md`](archive/M5_LIMITATIONS.md) | machine learning framing, cross-epoch assumption, bright-snow reflectance, cache orphans |

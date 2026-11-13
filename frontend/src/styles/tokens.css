@@ -1,52 +1,82 @@
-/* HabitatShift design tokens — "Midnight Teal & Copper".
+/* HabitatShift design tokens: "Survey Sheet".
  *
- * Single source of truth: docs/DESIGN_SPEC.md §1. Values match the spec and
- * the legacy proof viewer so M0–M2 surfaces and the M3 product share one
- * identity. Data-semantic colours (NDVI ramp, validity tones) live with the
- * spec and are never re-used as brand decoration.
+ * A research publication in cool, very light tones with one deep-blue accent. Satellite imagery carries the
+ * colour; the interface stays quiet. Chart series use shades of the blue plus slate grey, with red only for warnings.
+ * Older variable names (--teal, --copper, --ivory ...) are kept and remapped so legacy pages inherit this world.
  */
 :root {
-  /* Brand */
-  --teal: #193c43;
-  --teal-soft: #24545c;
-  --teal-deep: #10262b;
-  --copper: #d68a5d;
-  --copper-deep: #8a4d2a; /* copper-family text tone with AA contrast on ivory */
-  --ivory: #f2f0eb;
-  --sea-glass: #7faba7;
-  --sea-glass-soft: #cfe0dd;
-  --charcoal: #18272d;
+  /* Ink */
+  --ink: #0d1320;
+  --ink-2: #1b2438;
+  --ink-3: #2a3550;
+  --ink-line: #3a4766;
+  --on-ink: #f1f4fa;
+  --on-ink-soft: #b4bdd0;
 
-  /* Surfaces and rules */
-  --rule: #d8d3c8;
-  --rule-strong: #b9b4a7;
-  --paper: #fbfaf6;
-  --panel: #f7f5ef;
-  --hatch: #e8e5dc;
-  --hatch-alt: #dedbd1;
+  /* One accent: deep blue */
+  --accent: #1b4f9c;
+  --accent-deep: #123a75;
+  --accent-soft: #dbe6f6;
+  --accent-light: #6ea8ff;
+  --alert: #b3261e;
 
-  /* Validity / quality tones (data-semantic, see DESIGN_SPEC §1) */
-  --valid: #8fb0aa;
-  --valid-deep: #5f706c;
+  /* Light tones: page, bands, plates */
+  --page: #f3f6fa;
+  --band: #e8eef7;
+  --plate: #fbfcfe;
+  --plate-2: #eef2f8;
+  --rule: #d3dae6;
+  --rule-strong: #a9b4c8;
 
-  /* Measured text tones (contrast documented in DESIGN_SPEC §1) */
-  --text: var(--charcoal);
-  --text-soft: #33454b;
-  --text-muted: #56686d;
-  --text-note: #4a5c61;
-  --eyebrow: #6d5a44;
+  /* Data series (kept names so older components map cleanly) */
+  --radar: var(--accent);
+  --radar-deep: var(--accent-deep);
+  --optical: #6b7690;        /* slate grey */
+  --optical-deep: #4b556b;
+  --model: #5b8bd6;          /* lighter blue */
+  --model-deep: #2b5aa6;
 
-  /* Typography */
-  --serif: "Newsreader Variable", "Iowan Old Style", "Palatino Linotype", Georgia,
-    serif;
-  --sans: "IBM Plex Sans", "Segoe UI", system-ui, -apple-system,
-    "Helvetica Neue", sans-serif;
-  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", "Cascadia Mono",
-    Consolas, monospace;
+  /* Legacy names, remapped */
+  --ice: var(--page);
+  --teal: var(--ink-2);
+  --teal-soft: var(--accent-deep);
+  --teal-deep: var(--ink);
+  --copper: var(--optical);
+  --copper-deep: var(--optical-deep);
+  --ivory: var(--page);
+  --sea-glass: var(--accent);
+  --sea-glass-soft: var(--accent-soft);
+  --charcoal: var(--ink);
+  --paper: var(--plate);
+  --panel: var(--plate);
+  --hatch: #e3e9f2;
+  --hatch-alt: #d6deea;
+  --valid: #8da6cf;
+  --valid-deep: #4a6491;
 
-  /* Layout rhythm */
-  --shell-max: 1240px;
-  --radius: 4px;
-  --radius-lg: 10px;
-  --shadow-soft: 0 1px 2px rgba(24, 39, 45, 0.06), 0 4px 14px rgba(24, 39, 45, 0.08);
+  --text: #0d1320;
+  --text-soft: #354057;
+  --text-muted: #55617a;
+  --text-note: #4a566e;
+  --eyebrow: #55617a;
+
+  /* Type */
+  --display: "Source Serif 4 Variable", "Georgia", "Times New Roman", serif;
+  --serif: var(--display);
+  --sans: "Hanken Grotesk Variable", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+
+  /* Layout */
+  --shell-max: 1280px;
+  --gutter: clamp(1rem, 4vw, 3.5rem);
+  --edge: max(var(--gutter), calc((100vw - var(--shell-max)) / 2 + var(--gutter)));
+  --radius: 2px;
+  --radius-lg: 2px;
+  --shadow-soft: 0 1px 2px rgba(13, 19, 32, 0.06), 0 10px 28px rgba(13, 19, 32, 0.08);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+::selection {
+  background: var(--accent);
+  color: #fff;
 }

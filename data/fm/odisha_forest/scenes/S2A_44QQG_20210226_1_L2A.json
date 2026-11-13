@@ -1,0 +1,15 @@
+{
+ "item_id": "S2A_44QQG_20210226_1_L2A",
+ "period": "earlier",
+ "date": "2021-02-26",
+ "bands": [
+  "blue",
+  "green",
+  "red",
+  "nir08",
+  "swir16",
+  "swir22"
+ ],
+ "offset_corrected_empirically": false,
+ "valid_fraction": 1.0
+}

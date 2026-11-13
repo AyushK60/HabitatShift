@@ -19,3 +19,5 @@ joblib==1.6.0
 httpx==0.28.1
 # starlette ships with fastapi; pinned because pip-audit flags older lines
 starlette==1.10.0
+# Reads the Hi-MAG reference shapefiles in the lake comparison
+pyshp==3.1.8

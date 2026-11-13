@@ -336,7 +336,7 @@ export interface StudyBundle {
 /* ---------------------------------------------------------------- loading */
 
 export async function loadStudyBundle(studyId: string): Promise<StudyBundle> {
-  const response = await fetch(`/studies/${encodeURIComponent(studyId)}/bundle.json`);
+  const response = await fetch(`studies/${encodeURIComponent(studyId)}/bundle.json`);
   if (!response.ok) {
     throw new Error(
       response.status === 404
@@ -348,7 +348,7 @@ export async function loadStudyBundle(studyId: string): Promise<StudyBundle> {
 }
 
 export async function loadRegistryJson(): Promise<import("./types").Registry> {
-  const response = await fetch("/studies/registry.json");
+  const response = await fetch("studies/registry.json");
   if (!response.ok) throw new Error("Static study registry unavailable");
   return (await response.json()) as import("./types").Registry;
 }
@@ -395,7 +395,7 @@ export function liveResolver(studyId: string) {
 
 /** Bundle asset URL (previews are copied flat under the bundle directory). */
 export function bundlePreviewUrl(studyId: string, assetPath: string): string {
-  return `/studies/${encodeURIComponent(studyId)}/${assetPath}`;
+  return `studies/${encodeURIComponent(studyId)}/${assetPath}`;
 }
 
 /** Rewrite recorded `data/previews/...` paths to bundle asset paths

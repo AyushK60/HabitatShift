@@ -1,0 +1,60 @@
+{
+ "imja": {
+  "area_2018_km2": 1.11,
+  "area_2024_km2": 1.71,
+  "growth_km2": 0.63,
+  "loss_km2": 0.0,
+  "growth_centre": [
+   0.601,
+   0.528
+  ],
+  "size": [
+   1576,
+   1598
+  ]
+ },
+ "rolpa": {
+  "area_2018_km2": 1.55,
+  "area_2024_km2": 1.54,
+  "growth_km2": 0.07,
+  "loss_km2": 0.03,
+  "growth_centre": [
+   0.661,
+   0.678
+  ],
+  "size": [
+   1782,
+   1804
+  ],
+  "earlier_date": "2018-10-20",
+  "later_date": "2024-10-28"
+ },
+ "thulagi": {
+  "area_2018_km2": 0.82,
+  "area_2024_km2": 0.81,
+  "growth_km2": 0.0,
+  "loss_km2": 0.0,
+  "growth_centre": [
+   0.5,
+   0.5
+  ],
+  "size": [
+   2002,
+   2038
+  ],
+  "earlier_date": "2018-10-28",
+  "later_date": "2024-11-30"
+ },
+ "forest": {
+  "loss_share_pct": 10.8,
+  "window_km": 4.0
+ },
+ "unet": {
+  "pair": "S2B_45RVL_20221024_0_L2A__S1A_IW_GRDH_1SDV_20221024T121404_20221024T121429_045584_05733B_rtc",
+  "date": "2022-10-24",
+  "iou": 0.8,
+  "model_km2": 1.78,
+  "optical_km2": 1.98,
+  "fold": 2
+ }
+}

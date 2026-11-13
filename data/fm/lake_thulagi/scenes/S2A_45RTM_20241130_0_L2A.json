@@ -1,0 +1,15 @@
+{
+ "item_id": "S2A_45RTM_20241130_0_L2A",
+ "period": "later",
+ "date": "2024-11-30",
+ "bands": [
+  "blue",
+  "green",
+  "red",
+  "nir08",
+  "swir16",
+  "swir22"
+ ],
+ "offset_corrected_empirically": false,
+ "valid_fraction": 1.0
+}

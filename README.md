@@ -3,9 +3,14 @@
 ![license](https://img.shields.io/badge/licence-MIT-blue)
 ![python](https://img.shields.io/badge/python-3.11-blue)
 
-**How far can free Sentinel-2 satellite data be trusted to show landscape change, and how do you tell real
-change from noise?** HabitatShift measures change between two seasons in six study areas, checks it against
-scene-to-scene noise and an independent dataset, and says plainly where the answer is "not reliably".
+**Do geospatial foundation models detect real surface change better than simple spectral indices, once both are judged
+against the same scene-to-scene noise, and does the answer hold across fields?** HabitatShift tests that on forest loss
+and Himalayan glacial lakes with Sentinel-1 radar and Sentinel-2 optical data, reports the result even where it is
+negative, and keeps every number next to its uncertainty. Short answer so far: on forest loss no foundation model beat a
+signed NDVI baseline; on glacial lakes they beat the water index but not plain reflectance.
+
+Paper draft: [`docs/paper/v3/`](docs/paper/v3/) (LaTeX source and a PDF preview). Live demo: not hosted yet; run the
+static site locally (below).
 
 ![HabitatShift demo: swipe comparison, change layer, quality layer, analysis dock, experiments](docs/screenshots/demo.gif)
 
@@ -44,15 +49,35 @@ They show where optical imagery fails. The natural next step is radar (Sentinel-
 - **Maps look soft because the data is 10 m.** Kathmandu is 201 x 225 pixels. Colour images are enlarged with a sharper
   filter and data layers show crisp native pixels; no detail is invented.
 
+## Version 3: do foundation models beat simple formulas?
+
+The question: can geospatial foundation-model embeddings detect real change better than spectral indices, once both are
+judged against the same scene-to-scene noise? Details and tables in [`docs/V3_RESULTS.md`](docs/V3_RESULTS.md).
+
+- **Forest loss (Hansen reference, two areas).** A signed NDVI-decrease score matched or beat Prithvi-EO-2.0 and an
+  SSL4EO ResNet-50. No foundation model won.
+- **Glacial lakes (Sentinel-1 reference).** Prithvi and raw bands beat the MNDWI water index and tied each other.
+- **Radar water U-Net.** Trained on 3,227 radar and optical pairs from 30 Nepal lakes. It agrees with optical lake maps
+  better than the plain radar rule (IoU 0.70 against 0.55 on unseen lakes, three seeds). Cross-validated area intervals
+  cover 87% of scenes at a 90% target but fail badly for a few lakes.
+- **Glacial lake time series.** Monthly lake area 2017 to 2026 from radar, optical and the U-Net, three pilot lakes.
+
+The site opens with two paths, a quick tour for newcomers and a research view, and a Plain words / Technical switch in
+the top bar changes how every graph is explained. The System page shows what the pipeline has processed.
+
 Full tables: [`docs/RESULTS.md`](docs/RESULTS.md). What changed in version 2: [`docs/CHANGES_V2.md`](docs/CHANGES_V2.md).
 
 ## What is not done (honest list)
 
-- No ground-truth field data. Validation is against other satellite products only.
-- Two-date study design: seasonal, tidal and phenological differences can look like change.
-- Optical only, so monsoon cloud limits event studies. Radar (Sentinel-1) is not integrated.
+- No ground-truth field data. Every reference (Hansen, radar water frequency, optical masks) is another satellite
+  product, so scores are agreement, not accuracy.
+- Two forest areas and effectively one changing lake do not settle the research question. Urban and wetland fields are
+  not tested (they need Earth Engine reference data), and foundation models were compared as frozen embeddings, not
+  fine-tuned.
+- The radar U-Net learns from optical labels, which under-detect turbid, icy water, and its conformal area intervals fail
+  badly for a few lakes (see `docs/V3_RESULTS.md`).
 - Custom-area runs are descriptive, small and run locally; there is no hosted service.
-- The ML experiment is kept as a reference layer and reported as agreement with ESA WorldCover, not accuracy.
+- The paper has not been submitted anywhere; references need a final check before submission.
 
 ## Run it
 
@@ -66,10 +91,30 @@ cd frontend; npm ci; npm run build; cd ..
 Open <http://127.0.0.1:8098/>. On Windows, `start.bat` does all of this and `stop.bat` stops it. Without the backend,
 any static file server on `frontend/dist` serves the offline showcase (the custom-area page needs the backend).
 
+## Reproducing version 3
+
+```powershell
+.venv\Scripts\pip install -r backend
+equirements-ml.txt   # torch (CUDA 12.8 build), einops, timm, matplotlib
+.venv\Scripts\python.exe scripts
+un_fm_evaluation.py          # forest loss against Hansen
+.venv\Scripts\python.exe scripts
+un_fm_lake_evaluation.py     # glacial lakes against radar
+.venv\Scripts\python.exe scriptsuild_lake_training_pairs.py  # radar and optical pairs, 30 lakes
+.venv\Scripts\python.exe scripts	rain_lake_unet.py            # U-Net, lake and time split
+.venv\Scripts\python.exe scripts\cv_lake_unet.py               # 5-fold lake cross-validation and conformal intervals
+.venv\Scripts\python.exe scripts\make_paper_figures.py         # paper figures; then scriptsuild_paper.py
+```
+
+Scene downloads need the internet and take hours (the 30-lake pair build is about 5 hours); scripts are resumable.
+The evaluation scripts expect the study scenes to be prepared first (`scripts/fm_make_study.py`, then
+`scripts/fm_prepare_scenes.py`). The model weights (Prithvi-EO-2.0, SSL4EO) are downloaded separately into
+`data/models/`; their SHA-256 is recorded in each evaluation output.
+
 ## Verification
 
 ```powershell
-.venv\Scripts\python.exe -m pytest        # 443 backend tests (some read local rasters and skip on a fresh clone)
+.venv\Scripts\python.exe -m pytest        # 494 backend tests (some read local rasters and skip on a fresh clone)
 cd frontend; npm run build                # type-checks and builds
 ```
 
@@ -86,6 +131,7 @@ code; browser suites are in `tools/visual/`. Setup details: [`docs/SETUP_GUIDE.m
 | [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) | system design |
 | [`docs/DATA_PROVENANCE.md`](docs/DATA_PROVENANCE.md) | data sources and licences |
 | [`docs/CHANGES_V2.md`](docs/CHANGES_V2.md) | version 2 changes |
+| [`docs/LEARNING.md`](docs/LEARNING.md) | plain-language study guide to every concept used |
 | [`docs/paper/`](docs/paper/) | technical report (HTML and PDF) |
 | [`docs/archive/`](docs/archive/) | build history: milestone records, audits, handoffs |
 

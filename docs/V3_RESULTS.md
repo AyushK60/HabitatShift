@@ -1,0 +1,227 @@
+# Version 3 results (working notes, preliminary)
+
+Status: two forest areas evaluated against a reference, with two foundation models, plus a noise check on nine areas.
+This is a partial answer to the research question: forest loss only. Numbers come from `data/experiments/v3_fm/` and
+can be regenerated with the scripts named below.
+
+## Question
+
+Do change scores from a geospatial foundation model detect real surface change better than spectral indices, when
+every method is judged against the same scene-to-scene noise?
+
+## How scores are made
+
+Each scene becomes one feature vector per 16 x 16 pixel patch (160 m): a single index, five indices together, six raw
+bands, or an embedding from one of two models. Change is the distance between the earlier and later period means. The
+noise comes from pairs of scenes in the same period, so the same calibration works for vectors of any length
+(`backend/app/foundation/compare.py`). Unsigned scores cannot say whether a change is a gain or a loss, so a signed
+NDVI-decrease baseline is added for forest loss.
+
+Models:
+- **Prithvi-EO-2.0-300M** (NASA/IBM, Apache-2.0), six bands, 1024 numbers per patch.
+- **SSL4EO-S12 ResNet-50, RGB only** (CC-BY 4.0), layer-3 features, 1024 numbers per patch. A deliberately light
+  baseline: it sees no infrared bands. The 13-band SSL4EO models were not used because only six L2A bands were
+  fetched.
+
+## Forest loss against Hansen
+
+Reference: Hansen Global Forest Change v1.12 (2000-2024), CC-BY 4.0. Agreement with another satellite product, not
+accuracy. Plantation clearing, thinning and burning can all appear as "loss".
+
+Design fixed before any score was seen (`scripts/run_fm_evaluation.py`): eligible patch = at least 50% forest;
+positive = at least 10% of the patch lost in 2022-2024; clean negative = under 2% lost in 2021-2024; patches between
+are set aside. Uncertainty: spatial block bootstrap (1.28 km blocks, 500 resamples), paired against the signed NDVI
+baseline. Earlier scenes February to March 2021, later scenes February to March 2025, three scenes each, all fully
+valid.
+
+| | Bastar, Chhattisgarh (19.22 N, 81.17 E) | Odisha (19.83 N, 83.87 E) |
+|---|---|---|
+| Eligible / positive / clean negative patches | 2,239 / 446 / 1,429 | 1,308 / 301 / 781 |
+| Base rate (random score) | 0.238 | 0.278 |
+
+Average precision of the noise-calibrated score (ROC-AUC in brackets):
+
+| Score | Bastar | Odisha |
+|---|---|---|
+| NDVI decrease (signed) | 0.716 (0.835) | 0.758 (0.839) |
+| Six raw bands | 0.708 (0.851) | 0.563 (0.761) |
+| Prithvi | 0.689 (0.876) | 0.555 (0.795) |
+| SSL4EO ResNet-50 RGB | 0.658 (0.834) | 0.506 (0.748) |
+| NDVI (unsigned) | 0.617 (0.784) | 0.533 (0.734) |
+| NDWI | 0.608 (0.737) | 0.707 (0.830) |
+| Five indices together | 0.468 (0.642) | 0.556 (0.730) |
+
+Paired difference from the signed NDVI baseline (95% interval; * means the interval excludes zero):
+
+| Score | Bastar, average precision | Odisha, average precision |
+|---|---|---|
+| Prithvi | -0.105 to +0.050 | -0.308 to -0.116 * |
+| SSL4EO ResNet-50 RGB | -0.135 to +0.017 | -0.351 to -0.155 * |
+| Six raw bands | -0.082 to +0.056 | -0.294 to -0.106 * |
+
+Reading:
+- In neither area does a foundation model beat the signed NDVI baseline. In Bastar they are not distinguishable; in
+  Odisha both are clearly worse.
+- Prithvi is not better than plain raw bands in either area. The RGB-only ResNet is about as good as Prithvi, so the
+  infrared bands and the larger model add little here.
+- Both models and both areas share a pattern at the fixed rule z > 3: embeddings catch more real loss but flag many
+  more clean patches (Bastar: Prithvi 48% recall at 5.6% false positives, signed NDVI 24% at 0.6%; Odisha: Prithvi
+  60% at 20%, signed NDVI 37% at 1.8%). At a matched false-positive rate the signed NDVI baseline is at least as good.
+- Noise calibration (z against raw distance D) does not change the ranking. What it gives is a threshold that means
+  the same thing across methods, and even that only partly holds in Odisha.
+- The ordering is stable when positives include 2021, or when the cut-off is 5% or 20%.
+
+## Glacial lakes against Sentinel-1 radar
+
+`scripts/fm_make_study.py --lake`, `scripts/fm_lake_reference.py`, `scripts/run_fm_lake_evaluation.py`.
+
+Areas: Tsho Rolpa, Imja Tsho and Thulagi (the pilot lakes). Optical scenes October to November 2018 against 2024. The
+2018 window had only one clear scene per lake, so the noise scale comes from the three later scenes only.
+
+Reference: change in Sentinel-1 water frequency per 160 m patch between the two periods (radar scenes within 20 days of
+each window, usable orbits only). Radar is a different sensor from the optical data under test, so this is not
+circular, but it has its own errors (it underestimates some lakes). Agreement, not accuracy.
+
+Design fixed before scores were seen: patches within about 1 km of the lake; positive = at least 25% of the patch
+changed water state; clean negative = under 5%; patches between set aside; unsigned scores, because lakes can grow or
+shrink; spatial block bootstrap, paired against MNDWI.
+
+Radar shows real change at only one lake: Imja Tsho grew from about 1.09 to 1.66 km2 between the periods, while
+Tsho Rolpa (1.38 to 1.42) and Thulagi (0.71 to 0.69) stayed put. The 44 positives are 34 at Imja, 6 at Thulagi and 4
+at Rolpa, so this is effectively a test on one growing lake, and the intervals are wide.
+
+Average precision (ROC-AUC) of the noise-calibrated score, base rate 0.055:
+
+| Score | Average precision | ROC-AUC |
+|---|---|---|
+| Six raw bands | 0.755 | 0.905 |
+| Prithvi | 0.750 | 0.920 |
+| NDVI | 0.614 | 0.912 |
+| MNDWI (water index) | 0.569 | 0.855 |
+| Five indices together | 0.569 | 0.886 |
+| SSL4EO ResNet-50 RGB | 0.449 | 0.856 |
+
+Paired difference from MNDWI (95% interval; * excludes zero): Prithvi +0.02 to +0.23 average precision *, raw bands
++0.01 to +0.23 *, SSL4EO -0.32 to +0.23 (unclear), NDVI -0.15 to +0.14 (unclear).
+
+Reading:
+- Prithvi beats the MNDWI baseline, but so do raw bands, and the two are indistinguishable. There is no sign that the
+  foundation model adds anything beyond plain reflectance here.
+- MNDWI is a weak baseline at this site. It assumes clear dark water, and earlier in this project optical water area
+  at Imja was 27% below the Hi-MAG outline. Part of the gap is the baseline failing, not the models succeeding.
+- Noise calibration matters here, unlike forest: raw bands score 0.755 with the noise-calibrated z and only 0.183 with
+  the raw distance; Prithvi 0.750 against 0.336. Patches with high scene-to-scene noise (shadow, snow, glacier
+  surface) are down-weighted. This was not tested with a paired interval, and the single-lake design limits how far to
+  trust it.
+- The ordering is not stable across scores (the RGB model's raw distance scores 0.799), which shows how loose a single
+  lake is as a test.
+
+## Noise check without a reference (nine areas)
+
+`scripts/run_fm_noise_check.py`. One scene of a period is compared with the rest of the same period, so every flagged
+patch is a false alarm. Both embedding models flag almost nothing in this test (0 to 3.4% at z > 3), while indices and
+raw bands flag 0 to 41% (medians 3 to 15%; NDWI reaches 40.5% in one area).
+
+Do not read this as "embeddings are better calibrated". On Bastar, NDVI flags 23% of patches in the placebo test but
+only 1% of Hansen's clean negatives in the real comparison, so the placebo rate depends on how alike the noise is in
+the two periods. A more likely reading is that embeddings vary little between scenes taken days apart but respond to
+differences between years (season, illumination, phenology) that Hansen does not count as loss. That has not been
+tested.
+
+## What this does and does not show
+
+- For forest loss in two areas of central-east India, a simple signed NDVI baseline matches or beats Prithvi and a
+  small RGB model. This is a negative result for the foundation models on this task, and is reported as one.
+- A foundation model gives no direction of change, which is a real limitation for loss detection.
+- Two forest areas, one effective lake, three scenes per period and one reference product per field do not settle the
+  question. Urban and wetland fields are not yet tested.
+
+## Still to do
+
+- Urban and wetland fields, which need Dynamic World or JRC monthly data through Earth Engine.
+- Check the explanation for the extra embedding flags (where do they fall, and what is there?).
+- A third forest area in a different climate, and Clay as a third model if its code can be used safely.
+
+## Radar water model (small U-Net) and conformal area intervals
+
+`backend/app/segmentation/`, `scripts/train_lake_unet.py`; numbers in `data/experiments/v3_unet/evaluation.json`.
+
+Data: 3,227 pairs of a Sentinel-1 scene (VV, VH) and a clear Sentinel-2 water mask within 3 days, 30 Nepal lakes,
+2020-2022. After dropping pairs whose optical water is not at least 3 dB darker in radar than its surroundings (and
+labels under 20 pixels), 2,421 pairs remain. Inputs: VV, VH, slope, a missing-radar flag, 256 x 256 crop around each lake.
+Model: U-Net, 1.94 million weights, BCE + Dice, 40 epochs, about 8 minutes on the laptop GPU, one seed.
+
+Split, fixed before training: 20 lakes train, 4 calibrate, 6 test (chosen by a hash of the lake id). On the training
+lakes, 2020-2021 trains and 2022 is a time test. The label is the optical water rule, so every number is agreement with
+that rule, not accuracy against the ground.
+
+Mean intersection-over-union (IoU) with the optical mask, against the Otsu radar rule already used in the lake series:
+
+| Set | U-Net | Otsu rule |
+|---|---|---|
+| Random 10% of training pairs (epoch choice) | 0.82 | 0.58 |
+| Same lakes, 2022 (time hold-out) | 0.80 | 0.54 |
+| 4 calibration lakes | 0.77 | 0.68 |
+| 6 unseen test lakes | 0.67 | 0.55 |
+
+Reading:
+- The U-Net agrees with the optical mask better than the plain radar rule everywhere, by 0.1 to 0.25 IoU.
+- It drops from 0.80 on new dates to 0.67 on new lakes. Generalising to unseen lakes is the harder part, and 6 lakes is a small test.
+- Part of the gain may be that the model learns the optical rule's quirks (for example, how it treats shadow) rather
+  than true water. Without a hand-mapped reference this cannot be separated.
+
+Conformal intervals for lake area (split conformal, relative error, calibrated on the 4 calibration lakes):
+
+| Target coverage | Time test, same lakes | Unseen test lakes |
+|---|---|---|
+| 80% | 82% | 58% |
+| 90% | 90% | 74% |
+| 95% | 95% | 80% |
+
+- On new dates at known lakes the intervals hold their promised coverage. On unseen lakes they do not: 90% intervals
+  covered 74%, because the calibration lakes were easier than the test lakes (IoU 0.77 against 0.67). Conformal
+  prediction assumes the calibration and test data are exchangeable, and lake-to-lake difference breaks that.
+- Coverage by test lake at 90%: from 100% down to 44% (Thulagi), so it is lake-dependent, not noise.
+- Median relative area error is 5% on the time test and 14% on unseen lakes. With only 4 calibration lakes, a wider
+  calibration set or lake-level cross-validation is the obvious fix and has not been tried.
+- Do not describe these intervals as 90% intervals for a new lake. They are for new dates at lakes like the training lakes.
+
+Three training seeds on the same split (U-Net mean IoU, sd): new year at known lakes 0.797 (0.001), 6 unseen lakes
+0.698 (0.025), against 0.541 and 0.552 for the radar rule. The advantage holds in every seed. Single-split coverage of
+90% intervals on unseen lakes was 74%, 75% and 78% in the three seeds.
+
+### Cross-validated intervals (all 30 lakes held out in turn)
+
+`scripts/cv_lake_unet.py`. Five folds of whole lakes; each fold's model never saw its lakes. Lake area is the water
+patch touching the lake seed on the whole tile, optical-valid pixels only. Intervals are calibrated on the out-of-fold
+errors of the other four folds and checked on the fold left out. 2,421 scenes, 30 epochs per fold, median relative area
+error 9%.
+
+| Promised | Achieved, all lakes | Folds (range) | Lakes more than 10 points short |
+|---|---|---|---|
+| 80% | 81% | 36% to 97% | 9 of 30 |
+| 90% | 87% | 53% to 98% | 8 of 30 |
+| 95% | 94% | 82% to 99% | 6 of 30 |
+
+- Pooled over lakes the coverage is close to the promise, which the single 4-lake calibration set could not give.
+- It is not uniform: two lakes have 0% coverage and two folds fall well short at 90% (53% and 75%). Most lakes are at
+  90 to 100%. The intervals are right on average and wrong for a minority of lakes, which a user cannot tell in
+  advance.
+- The cause was not investigated. Small, partly ice-covered or shadowed lakes are the likely candidates, since area
+  errors there are large relative to the lake.
+- Whole-tile IoU is 0.49 because the model also marks other dark ground in the 8 km tile as water; area is measured on
+  the lake patch only.
+
+### Radar series from the model
+
+`scripts/run_unet_lake_series.py` applies each lake's held-out model to its Sentinel-1 scenes (usable orbits only) and
+writes `monthly_unet.json` with a conformal interval (90%, relative half-width from all folds) and a flag for months
+that have no optical value. These are model output, shown in purple on the Glacial lakes page.
+
+The model series and the Otsu radar series do not agree everywhere. At Imja Tsho the radar rule grows from about 1.1 to
+1.7 km2 while the model stays near 1.0 to 1.3 km2 in every year. The model was trained on optical labels, and the
+optical rule is known to under-detect turbid, icy water at Imja (earlier work found it 27% below the Hi-MAG outline), so
+the model has probably learned that bias. Neither series is ground truth. The model's 90% intervals are wide (about
+plus or minus 54% of the area) because they are scene-level and cover all 30 lakes.
+
+Not done: a hand-mapped or Sen1Floods11 check, explaining the badly covered lakes.

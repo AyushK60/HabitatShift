@@ -5,6 +5,9 @@ import react from "@vitejs/plugin-react";
 // frontend/dist; `npm run dev` proxies API and artifact routes to a locally
 // running uvicorn instance so no CORS handling is needed.
 export default defineConfig({
+  // Relative base so one build works at a domain root (FastAPI) and under a
+  // GitHub Pages project path such as /HabitatShift/.
+  base: "./",
   plugins: [react()],
   server: {
     port: 5173,

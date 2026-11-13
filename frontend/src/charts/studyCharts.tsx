@@ -14,7 +14,7 @@ import type {
 } from "../api/bundle";
 import { InteractiveChart, type ChartSeries } from "./InteractiveChart";
 
-const PALETTE = ["#193c43", "#d68a5d", "#7faba7", "#8a4d2a", "#5f706c"];
+const PALETTE = ["#1b4f9c", "#6b7690", "#5b8bd6", "#0d1320", "#a9b4c8", "#b3261e"];
 
 /** G10: threshold-series legends must be distinguishable.  When several
  *  estimator configurations feed the same index, the display label carries a
