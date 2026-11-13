@@ -159,7 +159,7 @@ Reading:
   foundation model adds anything beyond plain reflectance here.
 - MNDWI is a weak baseline at this site. It assumes clear dark water, and earlier in this project optical water area
   at Imja was 27% below the Hi-MAG outline. Part of the gap is the baseline failing, not the models succeeding.
-- Noise calibration matters here, unlike forest: raw bands score 0.755 with the noise-calibrated z and only 0.183 with
+- In point estimates z beats the raw distance here, unlike forest (pilot lakes only; see the pooled result below): raw bands score 0.755 with the noise-calibrated z and only 0.183 with
   the raw distance; Prithvi 0.750 against 0.336. Patches with high scene-to-scene noise (shadow, snow, glacier
   surface) are down-weighted. This was not tested with a paired interval, and the single-lake design limits how far to
   trust it.
@@ -189,7 +189,7 @@ include zero. Raw bands and Prithvi are not distinguishable from each other, as 
 bands 0.203, Prithvi 0.347 and SSL4EO RGB 0.705 (highest of all; z was the pre-specified score).
 
 Caveats: the added lake was chosen because radar shows change at it; the added lake uses 2020 as the earlier year, the
-pilot lakes 2018; per-lake scores were not examined; Prithvi AP 95% interval is 0.22 to 0.85.
+pilot lakes 2018; per-lake scores are in the next section; Prithvi AP 95% interval is 0.22 to 0.85.
 
 ### Lakes one at a time (exploratory, 13 November 2026)
 
