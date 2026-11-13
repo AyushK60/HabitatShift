@@ -1,0 +1,26 @@
+# Pre-specified design: linear-probe baseline on frozen embeddings (13 November 2026).
+# Written BEFORE the probe was run on any area. Motivation: the main comparison scores frozen embeddings with an
+# unsupervised noise-calibrated distance, which gives no direction of change and uses no labels. A reviewer can fairly ask
+# whether a simple trained readout of the same frozen features does better. This tests that and nothing more.
+#
+# Features (per 16 x 16 patch, same patches and eligibility as the main evaluation):
+#   u = (mean_later - mean_earlier) / sqrt(sigma2 * (1/n_earlier + 1/n_later))     a signed vector whose length is z
+# for prithvi (1024), ssl4eo_rgb (1024) and two controls that get the same treatment, raw6 (6) and indices5 (5).
+# Model: L2-regularised logistic regression, balanced class weights, features standardised with training statistics only.
+# Regularisation strength C chosen from {0.001, 0.01, 0.1, 1} by leave-one-training-area-out average precision inside the
+# training areas only; the held-out area is never used to choose anything.
+# Outer evaluation, forest loss: leave one of the five areas out, train on the other four, score the held-out area.
+#   Compared per area with the signed NDVI-decrease z (unsupervised, the main baseline) by average precision and ROC-AUC,
+#   with the same spatial block bootstrap (8 x 8 patches, 500 resamples) and paired difference from that baseline.
+# Outer evaluation, glacial lakes (secondary): leave one lake out over the four lakes, pooled out-of-fold predictions,
+#   compared with MNDWI z. Only 59 positives, 49 of them in two lakes, so this is reported with that caveat.
+# Nothing is tuned after seeing a held-out result. Every probe result is reported, whatever it shows.
+# Caveat to state: the probe sees the sign of the change and Hansen labels from other areas; the main scores see neither.
+
+# Addendum, written after the first run and before the second (13 November 2026). The first run showed two things the design
+# did not anticipate, so these two analyses are exploratory and are labelled as such in the paper:
+#   1. The raw6 control probe is close to the Prithvi probe, so the comparison that matters is Prithvi probe against raw6
+#      probe, paired on the same blocks. It is added (diff_vs_raw6_probe_ap_ci95). The main design above is unchanged.
+#   2. The chosen C sat at the lowest grid value (0.001) in almost every fold, so the grid may be too narrow. A sensitivity
+#      run with the grid extended downwards to 1e-5 is added (evaluation_wider_C.json). The primary result stays the one
+#      with the original grid, whichever way the sensitivity run goes.
