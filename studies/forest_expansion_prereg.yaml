@@ -1,0 +1,47 @@
+# Pre-registration: four additional forest-loss areas for the version 3 evaluation.
+# Written and committed BEFORE any Hansen count, scene download or model score was
+# computed for these areas. Bastar and Odisha were chosen earlier (see docs/V3_RESULTS.md).
+#
+# Design is unchanged from scripts/run_fm_evaluation.py: 16 x 16 pixel patches, eligible =
+# >= 50% forest (treecover2000 >= 30%), positive = >= 10% of patch lost in 2022-2024,
+# clean negative = < 2% lost in 2021-2024, same methods, same metrics, same bootstrap.
+# Same seasonal windows as Bastar and Odisha: earlier 2021-01-20..2021-03-20,
+# later 2025-01-20..2025-03-20, three scenes per period, fully valid in every scene.
+#
+# Boxes are 0.072 x 0.072 degrees (about 8 km), centred on the stated point, and are
+# NOT to be moved after any label count or score has been seen.
+#
+# Inclusion rule (labels and scene availability only, never model scores):
+#   an area is evaluated if the Hansen labels give >= 150 positive and >= 300 clean-negative
+#   patches AND three fully valid scenes exist in each period.
+#   Every area that passes is reported, whatever its result. Any area that fails is
+#   reported with the reason; it is not replaced by a different box.
+#
+# Forest-type rationale: Bastar and Odisha are both dry-season central-eastern India forest.
+# These four add moist evergreen/plantation, shifting cultivation, Terai sal, Shivalik foothills.
+earlier: ["2021-01-20", "2021-03-20"]
+later: ["2025-01-20", "2025-03-20"]
+scenes_per_period: 3
+min_positive_patches: 150
+min_clean_negative_patches: 300
+areas:
+  - id: kodagu_wayanad_forest
+    centre: [11.9, 75.9]          # lat, lon
+    bbox: [75.864, 11.864, 75.936, 11.936]   # west south east north
+    hansen_tile: 20N_070E
+    type: moist evergreen forest and plantations, Western Ghats
+  - id: garo_hills_forest
+    centre: [25.5, 90.6]
+    bbox: [90.564, 25.464, 90.636, 25.536]
+    hansen_tile: 30N_090E
+    type: hill forest with shifting cultivation, Meghalaya
+  - id: chitwan_terai_forest
+    centre: [27.7, 84.4]
+    bbox: [84.364, 27.664, 84.436, 27.736]
+    hansen_tile: 30N_080E
+    type: Terai and Chure sal forest, Nepal
+  - id: uttarakhand_shivalik_forest
+    centre: [29.4, 79.3]
+    bbox: [79.264, 29.364, 79.336, 29.436]
+    hansen_tile: 30N_070E
+    type: Shivalik foothill sal and mixed forest, Uttarakhand
