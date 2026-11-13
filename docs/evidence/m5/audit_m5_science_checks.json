@@ -1,6 +1,6 @@
 {
  "audit": "m5_scientific",
- "passed": 4132,
+ "passed": 5552,
  "failed": 0,
  "failures": [],
  "radiometry_class_counts": {
@@ -453,5 +453,30 @@
    "grid_signature": "bd1413bd200c96cf"
   }
  ],
- "live_radiometry_spot_checks": []
+ "live_radiometry_spot_checks": [
+  {
+   "item_id": "S2C_45QUB_20250215_0_L2A",
+   "decision": "empirical_scale_only",
+   "declared_mean": -0.029504,
+   "scale_only_mean": 0.070496,
+   "negative_pixels": 0,
+   "negative_min": null
+  },
+  {
+   "item_id": "S2B_44QPD_20200321_0_L2A",
+   "decision": "no_offset_declared",
+   "declared_mean": -0.000643,
+   "scale_only_mean": 0.099358,
+   "negative_pixels": 0,
+   "negative_min": null
+  },
+  {
+   "item_id": "S2A_44QPD_20200326_1_L2A",
+   "decision": "offset_applied_scale_only",
+   "declared_mean": -0.073859,
+   "scale_only_mean": 0.026141,
+   "negative_pixels": 0,
+   "negative_min": null
+  }
+ ]
 }
