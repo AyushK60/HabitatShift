@@ -1,0 +1,36 @@
+{
+ "rule": {
+  "min_positive_patches": 150,
+  "min_clean_negative_patches": 300
+ },
+ "areas": [
+  {
+   "id": "kodagu_wayanad_forest",
+   "eligible": 2460,
+   "positives": 2,
+   "clean_negatives": 2451,
+   "passes_label_screen": false
+  },
+  {
+   "id": "garo_hills_forest",
+   "eligible": 1923,
+   "positives": 29,
+   "clean_negatives": 1773,
+   "passes_label_screen": false
+  },
+  {
+   "id": "chitwan_terai_forest",
+   "eligible": 713,
+   "positives": 2,
+   "clean_negatives": 707,
+   "passes_label_screen": false
+  },
+  {
+   "id": "uttarakhand_shivalik_forest",
+   "eligible": 1332,
+   "positives": 3,
+   "clean_negatives": 1327,
+   "passes_label_screen": false
+  }
+ ]
+}
